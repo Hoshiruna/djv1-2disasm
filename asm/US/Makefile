@@ -8,7 +8,7 @@ all: game.gbc
 %.1bpp: %.png
 	rgbgfx -d 1 -o $@ $<
 
-game.o: game.asm hardware.inc bank_*.asm
+game.o: game.asm hardware.inc bank_*.asm ../../res/US/gfx/font.bin
 	rgbasm -o game.o game.asm
 
 game.gbc: game.o
