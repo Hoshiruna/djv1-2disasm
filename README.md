@@ -9,16 +9,6 @@ The original ROMs are:
 
 Rebuilt ROMs have not yet been confirmed to match the originals byte for byte.
 
-## Layout
-
-| Path | Purpose |
-| --- | --- |
-| `asm/JP/` | Japanese source and its Makefile |
-| `asm/US/` | US source and its Makefile |
-| `Makefile` | Build and cleanup entry point for both versions |
-| `notes/rom-info-JP.txt` | Original Japanese ROM metadata and checksums |
-| `notes/rom-info-US.txt` | Original US ROM metadata and checksums |
-
 ## Building
 
 See [BUILD.md](BUILD.md) for dependencies, build and cleanup commands, and ROM comparison instructions.
