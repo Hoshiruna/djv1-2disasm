@@ -6,6 +6,8 @@
 *.map
 *.1bpp
 *.2bpp
+__pycache__/
+*.py[cod]
 
 # Local development tools and their installers
 /tools/

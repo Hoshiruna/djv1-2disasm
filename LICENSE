@@ -1,9 +1,9 @@
 Licensing and rights notice
 
-Project documentation and configuration
---------------------------------------
+Project documentation, configuration, and tools
+----------------------------------------------
 The MIT License below applies solely to README.md, BUILD.md, .gitignore,
-and the Makefile at the repository root.
+the Makefile at the repository root, and Python files under scripts/ and tests/.
 It does not license any other file in this repository.
 
 Game-derived content
@@ -34,8 +34,8 @@ RGBDS is an external build dependency:
 https://github.com/gbdev/rgbds
 Tool licenses do not grant rights in the original game's content.
 
-MIT License (README.md, BUILD.md, .gitignore, and root Makefile)
--------------------------------------------------------------
+MIT License (project files listed above)
+---------------------------------------
 Copyright (c) 2026 djv1-2disasm contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

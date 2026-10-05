@@ -32,7 +32,7 @@ Jump_009_401a:
     ld b, b
     xor b
     ld b, d
-    ld e, $44
+    dw Resource_JP_009_441e ; $03: HUD initialization tilemap
     rlca
     ld b, l
     push hl
@@ -1000,231 +1000,16 @@ Jump_009_43c1:
     dec sp
     rlca
     sbc a
-    rla
-    inc d
-    jr nz, jr_009_4422
-
+; HUD initialization map: 20x32 tile IDs and CGB attributes.
+Resource_JP_009_441e:
+    INCBIN "../../res/JP/tilemaps/hud.bin", $0, $4
 jr_009_4422:
-    nop
-    rst RST_38
-    ld hl, $7776
-    ld a, b
-    ld [hl], a
-    ld a, b
-    ld [hl], a
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    ld a, [hl-]
-    dec sp
-    ld a, a
-    inc a
-    dec a
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    ld c, d
-
+    INCBIN "../../res/JP/tilemaps/hud.bin", $4, $17
 Jump_009_4439:
-    ld c, e
-    ld a, a
-    ld c, h
-    ld c, l
-    nop
-    rst RST_38
-    dec c
-    ld a, d
-    nop
-    ld a, e
-    inc b
-    nop
-    rst RST_38
-    dec c
-    halt
-    ld [hl], a
-    ld a, b
-    ld [hl], a
-    ld a, b
-    ld [hl], a
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    nop
-    ld [hl], b
-    inc b
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    nop
-    ld [hl], b
-    inc b
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    nop
-    ld [hl], b
-    inc b
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    nop
-    ld [hl], b
-    inc b
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    nop
-    ld [hl], b
-    inc b
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    ld a, a
-    ld a, a
-    ld a, $3f
-    ld a, a
-    nop
-    rst RST_38
-    dec c
-    ld a, c
-    ld a, a
-    ld a, a
-    ld c, [hl]
-    ld c, a
-    ld a, a
-    nop
-    rst RST_38
-    dec c
-    ld a, d
-    nop
-    ld a, e
-    inc b
-    ld a, b
-    ld [hl], a
-    nop
-    ld a, b
-    inc b
-    ld [hl], a
-    nop
-    ld a, b
-    inc bc
-    ld [hl], a
-    nop
-    ld a, b
-    inc b
-    ld [hl], a
-    ld a, b
-    ld a, a
-    ld d, b
-    ld d, c
-    ld d, d
-    ld d, e
-    ld d, h
-    ld d, l
-    ld a, a
-    ld d, [hl]
-    ld d, a
-    ld e, b
-    ld e, c
-    ld a, a
-    ld e, d
-    ld e, e
-    ld e, h
-    ld e, l
-    ld e, [hl]
-    ld e, a
-    ld a, a
-    ld a, a
-    ld h, b
-    ld h, c
-    ld h, d
-    ld h, e
-    ld h, h
-    ld h, l
-    ld a, a
-    ld h, [hl]
-    ld h, a
-    ld l, b
-    ld l, c
-    ld a, a
-    ld l, d
-    ld l, e
-    ld l, h
-    ld l, l
-    ld l, [hl]
-    ld l, a
-    ld a, a
-    nop
-    ld a, h
-    inc de
-    nop
-
+    INCBIN "../../res/JP/tilemaps/hud.bin", $1b, $8b
 Call_009_44c4:
-    ld a, a
-    inc de
-    ld [hl], c
-    ld [hl], h
-    ld a, l
-    nop
-    ld a, a
-    rlca
-    ld a, [hl]
-    ld [hl], l
-    ld [hl], c
-    nop
-    ld a, a
-    dec b
-    nop
-    ld a, h
-    inc de
-    nop
-    ld a, a
-    inc de
-    ld [hl], c
-    nop
-    ld a, a
-    ld [$0071], sp
-    ld a, a
-    inc e
-    ld [hl], c
-    nop
-    ld a, a
-    ld [$0071], sp
-    ld a, a
-    inc e
-    ld [hl], c
-    nop
-    ld a, a
-    ld [$0071], sp
-    ld a, a
-    inc e
-    ld [hl], c
-    nop
-    ld a, a
-    ld [$0071], sp
-    ld a, a
-    ld [$7b00], sp
-    inc de
-    nop
-    rst RST_38
-    daa
-    nop
-    rlca
-    rst RST_38
-    nop
-    rlca
-    rst RST_38
-    nop
-    rlca
-    ld a, a
+    INCBIN "../../res/JP/tilemaps/hud.bin", $a6, $43
+
     rla
     inc d
     ld [de], a

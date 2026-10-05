@@ -1,0 +1,158 @@
+Resource: dialogue and object names (extraction phase)
+
+Source ROMs: asm/US/game.gbc and asm/JP/game.gbc
+Exports: res/US/text/ and res/JP/text/
+Extractor: scripts/extract_text.py
+Parser: scripts/game_text.py
+
+Inventory
+---------
+                                      US             JP
+Dialogue pointer slots                1536           1536
+Distinct dialogue addresses           1490           1469
+One-byte empty messages               1              1
+Dialogue bytes, including endings     117578         70229
+Pointer table bytes                   3072           3072
+Object name slots, Case I             240            240
+Object name slots, Case II            256            256
+Nonblank names, both cases            373            383
+Fixed-width name table bytes          7936           3968
+Unconfirmed codes in these exports    0              0
+
+These counts cover the identified banked dialogue and name tables.
+They are not a count of every string in the ROM. Title screens, menus,
+inline system strings, and text drawn as graphics are outside this phase.
+
+Files
+-----
+charmap.json: UTF-8 glyph readings for each case, control operand lengths,
+             and reader behavior. Null readings remain as [BYTE:XX].
+dialogue.json: pointer slots, unique messages, name records, raw bytes,
+               addresses, explicit text controls, and decoded text.
+dialogue.txt: readable dialogue followed by the two object name tables.
+
+JSON text retains only explicit line controls as newlines. The TXT view
+also inserts the reader's automatic 18-column wraps for static text.
+Wrapping after a variable name or number is unknown until the next
+explicit line or page; those insertions remain as visible tags.
+
+Every pointer slot is retained even when it shares a message address.
+Message IDs use bank:CPU-address, such as 0C:4100. All addresses, codes,
+indices, and tag operands are hexadecimal. Two-byte operands retain
+little-endian ROM order: [OBJECT_WRAM:37C5] reads the index at WRAM $C537.
+The case-specific name tables supply the text for object insertions.
+
+Raw message bytes include the final END or WAIT_END code. Name records
+retain the whole fixed slot, including prefix and padding. Raw data and
+pointer slots are the extraction reference; TXT is a reading view.
+No text has been replaced by INCBIN or connected to the build yet.
+Re-extraction replaces both dialogue files; preserve manual edits before
+running it again. A text encoder and pointer handling are the next phase.
+
+Bank layout
+-----------
+US Case I: banks $0C-$11. Banks $0F and $10 each contain 64 pointers;
+           the others contain 128.
+JP Case I: banks $0C-$10, each with 128 pointers. Bank $11 is unused.
+Both Case II: banks $12-$18, each with 128 pointers.
+
+Each table starts at $4000 and contains little-endian 16-bit CPU addresses.
+64-entry tables occupy $4000-$407F; 128-entry tables occupy $4000-$40FF.
+The file offset for bank B and address A is B * $4000 + A - $4000.
+
+Name table        ROM bank  CPU address  Slots  Bytes per slot
+US Case I         $11       $58EC        240    16
+US Case II        $18       $54F0        256    16
+JP Case I         $10       $5018        240    8
+JP Case II        $18       $4D03        256    8
+
+The US name reader skips byte 0, then reads glyph codes until $1F.
+The JP name reader reads at most eight glyphs, stopping early at $FF.
+An eight-glyph JP name can fill its entire slot without an ending byte.
+US and JP name indices and message order should be kept region-specific.
+
+US encoding and reader
+----------------------
+Bank 0, $1122 reads dialogue; $1135 dispatches controls.
+$1461 converts glyph codes below $D0 using the table at $14A5.
+The used basic alphabet is $00-$19 = A-Z, $1A = space, $30-$39 = 0-9.
+These are game codes, not ASCII. Font tile IDs are a separate numbering.
+
+Code      Tag / meaning                      Operand bytes
+$1B       FLUSH                              0
+$1C       PAGE                               0
+$1D       LINE                               0
+$1F       END                                0
+$3C/$3D   OBJECT / OBJECT_ALT                1 (object index)
+$3E       OBJECT_WRAM                        2 (WRAM address)
+$3F       NUM8_WRAM                          2 (WRAM address)
+$50/$51   SET_X / SET_Y                      1 (column / row)
+$52/$53   BG / WINDOW                        0
+$54       NUM16_WRAM                         2 (WRAM address)
+$55       FLAG_80                            0
+$5F       WAIT_END                           0
+
+$1F ends normal dialogue. $5F waits for input and returns from the reader;
+it also ends the exported record. Five records use this wait ending.
+
+JP encoding and reader
+----------------------
+Bank 0, $10B8 reads dialogue; $113D dispatches controls through the
+32-entry address table at $1144. $1414 renders glyphs.
+$FF ends normal dialogue; $0F waits for input and returns from the reader.
+Five records use the wait ending.
+
+JP glyphs include hiragana, katakana, digits, punctuation, and a few
+Latin letters. Dakuten and handakuten are separate upper tiles in the
+renderer. For example, $16 selects lower tile $96 (ka) plus dakuten;
+the exported UTF-8 reading is U+304C (ga). Precomposed readings are used
+where available. The raw byte remains $16.
+
+Both cases load their 128 upper font tiles from resource $00, at $4020
+in bank $33 (Case I) or $2A (Case II), through $0A2B. Six tile readings
+differ between these fonts:
+
+Tile ID    Case I              Case II
+$A6        colon              A
+$A7        small katakana a   B
+$A9        small katakana u   D
+$C7        J                  M
+$CD        S                  Y
+$FE        unused pattern     slash
+
+Case II also loads 128 lower HUD tiles from bank $2A, resource $01.
+The reader passes raw $01 and $02 to the renderer; those lower tile
+IDs supply ampersand and T. They are glyphs, not text controls.
+The exported readings retain the ROM's mixture of hiragana and katakana,
+including hiragana used in otherwise katakana words. A single glyph
+at $A5 is a middle dot; repeated dots remain separate characters.
+
+Code      Tag / meaning                      Operand bytes
+$00       OBJECT                             1 (object index)
+$04       NUM8_WRAM                          2 (WRAM address)
+$05       NUM16_WRAM                         2 (WRAM address)
+$06/$07   SET_X / SET_Y                      1 (column / row)
+$0A       WAIT_LINE                          0
+$0B       WAIT                               0
+$0C       PAGE                               0
+$0D       LINE                               0
+$0F       WAIT_END                           0
+$12       OBJECT_WRAM                        2 (WRAM address)
+$14/$15   BG / WINDOW                        0
+$FF       END                                0
+
+Other dispatched codes that call $1103 retain FINISH_STATE tags.
+$20-$2F are ignored by $113D and retain NOOP tags if encountered.
+Operand bytes are consumed before looking for an ending, so $FF or
+$1F inside a WRAM address cannot prematurely end an exported message.
+
+Verification
+------------
+Exported pointers, message bytes, and whole name records were compared
+with the existing local ROM files at their recorded offsets. Controls
+were checked against the ASM reader and glyphs against decoded tiles.
+Parser tests cover control operands containing ending bytes, regional
+glyph differences, voiced kana, full name slots, automatic wrapping,
+pointer aliases, and malformed/truncated input.
+This verifies extraction from those files; it does not establish that
+the local ROM files match the original dumps. No ROM build was run.

@@ -4,11 +4,12 @@
 
 Install these tools outside the repository and add their executable directories to the build terminal's `PATH`:
 
-- [RGBDS](https://github.com/gbdev/rgbds): the build uses `rgbasm`, `rgblink`, and `rgbfix`. See the [installation instructions](https://rgbds.gbdev.io/install) or download a prebuilt package from the [releases page](https://github.com/gbdev/rgbds/releases).
+- [RGBDS](https://github.com/gbdev/rgbds): the build uses `rgbasm`, `rgblink`, `rgbfix`, and `rgbgfx`. See the [installation instructions](https://rgbds.gbdev.io/install) or download a prebuilt package from the [releases page](https://github.com/gbdev/rgbds/releases).
+- Python 3.7 or later. The resource scripts use only the standard library.
 - GNU Make and Bash.
 - `rm`, `find`, `which`, and either `md5sum` or `md5`. The version-specific Makefiles use these commands for cleanup and checksum output.
 
-Both versions of `hardware.inc` require RGBDS 0.5.0 or later. The project has not pinned a verified RGBDS version. The version-specific Makefiles also have PNG conversion rules that require RGBDS's `rgbgfx`; the current source does not reference any PNG files.
+Both versions of `hardware.inc` require RGBDS 0.5.0 or later. The project has not pinned a verified RGBDS version.
 
 On Windows, build in MSYS2 Bash or another terminal environment that provides the commands above. The `tools/` directory is reserved for local tools and is ignored by Git.
 
@@ -51,6 +52,17 @@ Each version writes its outputs to its own source directory:
 
 The outputs are ignored by Git. Development tools and installation packages are kept outside version control.
 
+## Build tool options
+
+Make defaults to `python3` and `rgbgfx`. If your Windows Python installation provides the `py` launcher, select it when building:
+
+```sh
+make US SHELL=bash PYTHON="py -3"
+make JP SHELL=bash PYTHON="py -3"
+```
+
+Use `RGBGFX="/path/to/rgbgfx"` with Make if the executable is outside `PATH`.
+
 ## Clean and rebuild
 
 To remove generated files from both versions:
@@ -65,8 +77,6 @@ To clean only one version:
 make clean-JP SHELL=bash
 make clean-US SHELL=bash
 ```
-
-Both version-specific Makefiles list `hardware.inc` as a dependency of `game.o`, so editing it triggers reassembly on the next build.
 
 ## Comparing ROMs
 
