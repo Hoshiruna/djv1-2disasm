@@ -1,0 +1,28 @@
+# djv1-2disasm
+
+A disassembly of the Game Boy Color game *Deja Vu I & II - The Casebooks of Ace Harding*, with separate source directories for the Japanese and US versions.
+
+The original ROMs are:
+
+- [Deja Vu I & II (Japan).gbc](https://datomatic.no-intro.org/?page=show_record&s=47&n=0242) (SHA-1: `4f3af0a47de674531c0fede3783f8c6cc7f31cca`)
+- [Deja Vu I & II - The Casebooks of Ace Harding (USA).gbc](https://datomatic.no-intro.org/?page=show_record&s=47&n=0243) (SHA-1: `63266fc1f0a14678d5cd5dd1c5e3658ef4a944c3`)
+
+Rebuilt ROMs have not yet been confirmed to match the originals byte for byte.
+
+## Layout
+
+| Path | Purpose |
+| --- | --- |
+| `asm/JP/` | Japanese source and its Makefile |
+| `asm/US/` | US source and its Makefile |
+| `Makefile` | Build and cleanup entry point for both versions |
+| `notes/rom-info-JP.txt` | Original Japanese ROM metadata and checksums |
+| `notes/rom-info-US.txt` | Original US ROM metadata and checksums |
+
+## Building
+
+See [BUILD.md](BUILD.md) for dependencies, build and cleanup commands, and ROM comparison instructions.
+
+## Licensing
+
+See [LICENSE](LICENSE) for the scope of the MIT license and the rights notices for game-derived content and third-party hardware definitions.

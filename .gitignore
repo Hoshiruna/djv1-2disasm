@@ -1,0 +1,22 @@
+# Generated ROMs and build outputs
+*.gb
+*.gbc
+*.o
+*.sym
+*.map
+*.1bpp
+*.2bpp
+
+# Local development tools and their installers
+/tools/
+*.exe
+*.dll
+*.msi
+
+# Editor and operating system files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
