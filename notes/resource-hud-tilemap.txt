@@ -1,0 +1,76 @@
+Resource: HUD initialization tilemap and CGB attributes
+Resource ID: $03
+ROM bank: $09
+Pointer table: US $4000 (entry at $4006), JP $401D (entry at $4023)
+
+Region  CPU range (inclusive)  ROM offset  Stored size
+US      $4403-$44E3            $024403     225 bytes
+JP      $441E-$4506            $02441E     233 bytes
+
+Source files: asm/US/game.gbc and asm/JP/game.gbc
+Stored resources: res/<region>/tilemaps/hud.bin
+Editable tile IDs: res/<region>/tilemaps/hud.tilemap
+Editable attributes: res/<region>/tilemaps/hud.attrmap
+Colored layout: res/<region>/tilemaps/hud.png
+
+Header: $17 $14 $20 $00
+- $17 selects the two-plane RLE loader at Call_000_05ce.
+- $14 is the width: 20 cells.
+- $20 is the height: 32 rows.
+- $00 is the RLE marker.
+
+The loader at $062D/$065C writes 640 tile IDs to VRAM bank 0, then
+640 attributes to bank 1, starting at $9800 in each bank. It advances
+32 bytes per VRAM row while writing only the 20 stored columns.
+The exported planes contain 640 bytes each in row order, without the
+12 skipped columns. Cell (x, y) is at offset y * 20 + x.
+
+RLE tokens are handled by Call_000_05b0:
+- A byte other than the marker is a literal value.
+- Marker, value, count emits the value count + 1 times (1-256 bytes).
+- A marker value must itself use a run token, even for one occurrence.
+- Run state continues across rows and between the two planes.
+- Decoding stops after both 640-byte planes; there is no terminator.
+The original streams consume their entire 225/233-byte stored blocks.
+
+All extracted attributes are $07: palette 7, VRAM bank 0, no flips.
+Attribute bits 0-2 select the palette, bit 3 selects the tile data bank,
+bits 5/6 apply horizontal/vertical flips, and bit 7 controls BG priority.
+The preview renders the background alone and therefore ignores priority.
+
+Tile IDs use signed BG addressing in this initialization context.
+The $1D $80 font header loads 128 tiles at $8800: IDs $80-$FF.
+The $1D $10 HUD header loads 112 tiles at $9100: IDs $10-$7F.
+Every ID used by these maps is present in the extracted graphics.
+ID $FF is a blank font tile. The preview reads the current compressed
+font/HUD resources and complete 64-byte hud.pal palette set.
+
+The PNG is 160x256 pixels and shows the full initialization layout,
+including rows outside the 144-pixel-high display. Runtime scene data
+and text are written separately. The regional maps differ in the text
+area from row 19 onward, so their original data remain separate.
+
+ASM integration:
+- bank_009.asm uses a symbolic pointer for entry $03.
+- INCBIN slices preserve every label within the original resource.
+- US retains jr_009_4407 and Jump_009_4439.
+- JP retains jr_009_4422, Jump_009_4439, and Call_009_44c4.
+- The next resources remain at US $44E4 and JP $4507.
+- Both Makefiles include hud.bin as a dependency of game.o.
+- Changes to hud.tilemap/hud.attrmap trigger recompression first.
+
+scripts/hud_tilemap.py supports decode, rebuild, and preview actions.
+Decode replaces the editable planes with the values from hud.bin.
+Rebuild preserves unchanged bytes, the header, and the fixed block size;
+it pads shorter edited streams with $FF. A stream that exceeds its slot
+causes an error before hud.bin is replaced. The original encoding fills
+the available slot in both regions.
+
+Validation covered decoding, unchanged byte preservation, edited map
+round-trips, overflow handling, signed tile IDs, palette colors, flips,
+and PNG pixel data. Static checks covered INCBIN ranges and labels.
+No ROM build verification was run.
+
+Hardware references:
+https://github.com/gbdev/pandocs/blob/master/src/Tile_Data.md
+https://github.com/gbdev/pandocs/blob/master/src/Tile_Maps.md

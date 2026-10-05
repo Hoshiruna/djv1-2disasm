@@ -1,0 +1,68 @@
+; Case 2 dialogue. Keep block IDs and control tags.
+; Physical newlines are visual. Use [LINE] for a game line break.
+
+[18:4B19]
+じむいんは いった。[PAGE]
+「これは したいの もちものだ![LINE]
+ けいかんいがいは さわっては[LINE]
+ いけない!」[END]
+
+[18:4B4D]
+ああ・・・。[LINE]
+ほかにも やらなければ いけない[LINE]
+ことが あったようだ・・・。[END]
+
+[18:4B74]
+ああ・・・。[LINE]
+ざんねんながら[LINE]
+にげおくれたようだ・・・。[END]
+
+[18:4B91]
+[OBJECT_WRAM:37C5]は なにも[LINE]
+つけていない。[END]
+
+[18:4BA2]
+じょうはんしんは [OBJECT_WRAM:37C5]を[LINE]
+きている。[END]
+
+[18:4BB6]
+「わたしと しょうぶしたいときは[LINE]
+ チップを つかってください![PAGE]
+ チップは りょうがえしょで[LINE]
+ おかねと こうかんします。」[END]
+
+[18:4BF6]
+でんとうを とらなければ できない。
+[END]
+
+[18:4C09]
+[OBJECT_WRAM:37C5]は いった。[PAGE]
+「ブラックジャックの ルールは[LINE]
+ しっていますか?」[LINE]
+         は い[LINE]
+         いいえ[WAIT_END]
+
+[18:4C48]
+すなの うえに タイヤの[LINE]
+あとが つづいている。[END]
+
+[18:4C61]
+ルーディーは こまったように[LINE]
+ささやいた。[PAGE]
+「・・・エース。[LINE]
+ ボスが さっきから こっちを[LINE]
+ にらんでいるんだ。[PAGE]
+ ひょっとして ボスに[LINE]
+ かんづかれたかな?[PAGE]
+ どうやら これいじょう[LINE]
+ おまえに かたせるわけには[LINE]
+ いかないようだ・・・。」[END]
+
+[18:4CDC]
+いたが うちつけられて[LINE]
+いるために はいれない。[PAGE]
+いたさえなければ・・・。[END]
+
+[18:4D02]
+[END]
+

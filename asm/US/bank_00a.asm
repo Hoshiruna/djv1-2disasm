@@ -616,68 +616,15 @@ jr_00a_425d:
     ld [hl], $f3
     ld a, a
     ldh [$ff5f], a
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    inc e
-    ld d, a
-    add e
-    inc c
-    adc h
-    dec a
-    di
-    add hl, bc
-    db $dd
-    ld a, a
-    rlca
-    ld [$354a], sp
-    inc d
-    inc b
-    dec e
-    inc a
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    inc d
-    nop
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    ld b, b
-    ld a, h
-    jr nz, @+$03
 
-    jr nz, jr_00a_430e
-
-    ldh [$ff03], a
-
+; HUD initialization background palettes: 8 groups of 4 RGB555 colors.
+Resource_US_00a_42e0:
+    INCBIN "../../res/US/palettes/hud.pal", $0, $2e
 jr_00a_430e:
-    rst RST_38
-    ccf
-    jr nz, jr_00a_4313
-
-    ld h, c
-
+    INCBIN "../../res/US/palettes/hud.pal", $2e, $5
 jr_00a_4313:
-    jr jr_00a_433d
+    INCBIN "../../res/US/palettes/hud.pal", $33, $d
 
-    ld sp, $41ce
-    nop
-    nop
-    ld [bc], a
-    ld a, [hl]
-    ld e, $00
-    ld a, a
-    inc bc
     ld d, b
     halt
     rst RST_38

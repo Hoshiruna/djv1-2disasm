@@ -1,0 +1,40 @@
+Resource: HUD icons and border tiles
+Resource ID: $01
+ROM bank: $33
+Pointer table: $4000, entry $01 at $4002
+
+Region  CPU range (inclusive)  ROM offset  Stored size
+US      $4398-$4871            $0CC398     1242 bytes
+JP      $4547-$4A20            $0CC547     1242 bytes
+
+Source files: asm/US/game.gbc and asm/JP/game.gbc
+Stored ROM data: res/US/gfx/hud_tiles.bin and res/JP/gfx/hud_tiles.bin
+Local decoded tiles (ignored by Git):
+res/US/gfx/hud_tiles.2bpp and res/JP/gfx/hud_tiles.2bpp
+PNG files: res/US/gfx/hud_tiles.png and res/JP/gfx/hud_tiles.png
+
+The .bin files retain the original three-byte header ($1D $10 $70)
+and compressed stream. Both decode to 1792 bytes: 112 8x8 2bpp tiles.
+The PNG files arrange the tiles in 16 columns. Edit the PNG files in
+these regional resource directories. The Makefiles regenerate local
+.2bpp files with rgbgfx --colors embedded and recompress the .bin files
+through scripts/rebuild_gfx.py before assembly.
+
+The original compressed stream, including its header, occupies 1242
+bytes in each region and ends at the next resource pointer
+(US: $4872; JP: $4A21).
+The raw and decoded data are identical between the two regions.
+
+The initialization tilemap uses background palette $07 throughout.
+The PNG files embed its four colors from bytes 56-63 of the complete
+palette set in res/<region>/palettes/hud.pal.
+The selection and original palette set are recorded in
+notes/resource-hud-palettes.txt.
+
+ASM integration: asm/US/bank_033.asm and asm/JP/bank_033.asm include
+hud_tiles.bin through INCBIN, retaining the original label addresses.
+Both regional Makefiles list the resource as a dependency of game.o.
+The converter preserves unchanged .bin bytes and retains the original
+header and 1242-byte block size for edits. A compressed stream that does
+not fit this space causes an error without replacing the .bin file.
+No build verification was run.

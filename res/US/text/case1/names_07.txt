@@ -1,0 +1,51 @@
+; Case 1 object names. Keep block IDs and spaces.
+; Text controls are not allowed in names.
+
+[NAME:E0]
+TRASH CAN
+
+[NAME:E1]
+TRASH CAN
+
+[NAME:E2]
+TRASH CAN
+
+[NAME:E3]
+TRASH CAN
+
+[NAME:E4]
+SEWER
+
+[NAME:E5]
+
+
+[NAME:E6]
+
+
+[NAME:E7]
+
+
+[NAME:E8]
+
+
+[NAME:E9]
+
+
+[NAME:EA]
+
+
+[NAME:EB]
+
+
+[NAME:EC]
+
+
+[NAME:ED]
+
+
+[NAME:EE]
+
+
+[NAME:EF]
+
+

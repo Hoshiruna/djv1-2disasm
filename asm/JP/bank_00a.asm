@@ -612,68 +612,15 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
     ld [hl], $f3
     ld a, a
     ldh [$ff5f], a
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    inc e
-    ld d, a
-    add e
-    inc c
-    adc h
-    dec a
-    di
-    add hl, bc
-    db $dd
-    ld a, a
-    rlca
-    ld [$354a], sp
-    inc d
-    inc b
-    dec e
-    inc a
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    inc d
-    nop
-    nop
-    nop
-    dec l
-    dec b
-    di
-    add hl, bc
-    ld b, b
-    ld a, h
-    jr nz, @+$03
 
-    jr nz, jr_00a_430c
-
-    ldh [$ff03], a
-
+; HUD initialization background palettes: 8 groups of 4 RGB555 colors.
+Resource_JP_00a_42de:
+    INCBIN "../../res/JP/palettes/hud.pal", $0, $2e
 jr_00a_430c:
-    rst RST_38
-    ccf
-    jr nz, jr_00a_4311
-
-    ld h, c
-
+    INCBIN "../../res/JP/palettes/hud.pal", $2e, $5
 jr_00a_4311:
-    jr jr_00a_433b
+    INCBIN "../../res/JP/palettes/hud.pal", $33, $d
 
-    ld sp, $41ce
-    nop
-    nop
-    ld [bc], a
-    ld a, [hl]
-    ld e, $00
-    ld a, a
-    inc bc
     ld d, b
     halt
     rst RST_38

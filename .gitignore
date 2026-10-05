@@ -6,6 +6,9 @@
 *.map
 *.1bpp
 *.2bpp
+__pycache__/
+*.py[cod]
+/res/*/text/.rebuild-stamp
 
 # Local development tools and their installers
 /tools/

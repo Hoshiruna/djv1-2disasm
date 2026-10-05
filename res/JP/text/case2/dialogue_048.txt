@@ -1,0 +1,85 @@
+; Case 2 dialogue. Keep block IDs and control tags.
+; Physical newlines are visual. Use [LINE] for a game line break.
+
+[18:410A]
+[OBJECT_WRAM:37C5]は われている。[END]
+
+[18:4116]
+[OBJECT_WRAM:37C5]を あけた。[END]
+
+[18:4120]
+[OBJECT_WRAM:37C5]を しめた。[END]
+
+[18:412A]
+おれは [OBJECT_WRAM:37C5]で[LINE]
+つみもないひとを ころしてしまった!
+[END]
+
+[18:4146]
+おんなは いっしゅん おどろいたが[LINE]
+さしだした [OBJECT_WRAM:37C5]をみて[LINE]
+ニコリと わらった。[PAGE]
+「すばらしい プレゼントを[LINE]
+ ありがとう。[LINE]
+ でも これは うけとれません。」[END]
+
+[18:4198]
+おんなは あいそわらいをして[LINE]
+[OBJECT_WRAM:37C5]を つきかえした。[PAGE]
+「これは チップに[LINE]
+ かえられませんよ。」[END]
+
+[18:41CA]
+グレーの まるい ボタンだ。[LINE]
+これを おせば [NUM8_WRAM:87C5]かいに[LINE]
+いくことができる。[END]
+
+[18:41F2]
+かんばんには 「[NUM8_WRAM:87C5]ばんせん」と[LINE]
+かいてある。[END]
+
+[18:420B]
+[NUM8_WRAM:87C5]ばんせんへの いりぐちだ。[END]
+
+[18:421C]
+「[NUM8_WRAM:87C5]ばんせん」と かかれた[LINE]
+かんばんが つるされている。[END]
+
+[18:423B]
+「この れっしゃは[LINE]
+ [OBJECT_WRAM:37C5]いきです。[PAGE]
+ ごりようのかたは りょうきん[LINE]
+ [NUM8_WRAM:87C5]ドルを わたしに[LINE]
+ はらってください。」[END]
+
+[18:4278]
+おれが きりかかろうとすると[LINE]
+しゃしょうが ものすごいちからで[LINE]
+おれの てから [OBJECT_WRAM:37C5]を[LINE]
+とりあげた![PAGE]
+そして おれを れっしゃから[LINE]
+けりおろして いった。[END]
+
+[18:42C7]
+[OBJECT_WRAM:37C5]えきに ついた。[END]
+
+[18:42D3]
+おれは [OBJECT_WRAM:37C5]を[LINE]
+ころしてしまった・・・。[PAGE]
+ひとを ころすなんて まともな[LINE]
+にんげんが やることではない。[PAGE]
+せいとうぼうえいなら まだしも[LINE]
+つみの ない ぜんりょうな しみんを
+ころしてしまったのだ。[END]
+
+[18:4337]
+[OBJECT_WRAM:37C5]を つくえのなかに[LINE]
+いれた。[END]
+
+[18:4349]
+えいがで けいかんが はんにんに[LINE]
+はくじょうさせるとき するように[LINE]
+あかりを [OBJECT_WRAM:37C5]の かおに[LINE]
+むけて あてた。[PAGE]
+だが はくじょうしない。[END]
+

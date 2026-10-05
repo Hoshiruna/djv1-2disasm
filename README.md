@@ -9,6 +9,18 @@ The original ROMs are:
 
 Rebuilt ROMs have not yet been confirmed to match the originals byte for byte.
 
+## Progress
+
+This project is currently in progress.
+
+| Stage | US | JP |
+| --- | :---: | :---: |
+| Reverse-engineered | 100% | 100% |
+| Resources extracted | 1% | 1% |
+| Position dependence | 1% | 1% |
+| Documented | 1% | 1% |
+
+
 ## Building
 
 See [BUILD.md](BUILD.md) for dependencies, build and cleanup commands, and ROM comparison instructions.

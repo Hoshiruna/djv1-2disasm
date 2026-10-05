@@ -1,0 +1,12 @@
+; Case 1 dialogue. Keep block IDs and control tags.
+; Physical newlines are visual. Use [LINE] for a game line break.
+
+[10:4FAF]
+さつじんを おかしてしまった[LINE]
+あなたは きびしい とりしらべを[LINE]
+うけた・・・。[PAGE]
+・・・そして さいばんに かけられ[LINE]
+しけいの はんけつを うけた。[PAGE]
+ざんねんながら あなたの じんせいは
+これまでとなった・・・。[END]
+

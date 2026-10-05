@@ -1,0 +1,58 @@
+Resource: background palette set loaded during HUD initialization
+ROM bank: $0A
+Pointer table: $4210, entry $03 at $4216
+Format: 8 palettes of 4 little-endian RGB555 colors (64 bytes total)
+
+Region  CPU range (inclusive)  ROM offset
+US      $42E0-$431F            $0282E0
+JP      $42DE-$431D            $0282DE
+
+Raw files: res/US/palettes/hud.pal and res/JP/palettes/hud.pal
+Source files: asm/US/game.gbc and asm/JP/game.gbc
+The two raw files are identical.
+
+Loading path:
+- US: bank $03 startup loads A=$03 and calls Call_000_19e9,
+  which calls Call_000_1996 before the font/HUD load (Call_000_0a0b).
+- JP: bank $03 startup loads A=$03 and calls Call_000_1b39,
+  which calls Call_000_1ae6 before the font/HUD load (Call_000_0a00).
+- The palette loader reads the selected bank $0A pointer and copies
+  64 bytes to WRAM $DBC0. The fade code transfers the target colors
+  to $DB40, and bank $01 uploads $DB40-$DB7F through rBCPS/rBCPD.
+
+Palette  Color 0  Color 1  Color 2  Color 3 (RGB555 words)
+$00      $0000    $052D    $09F3    $571C
+$01      $0C83    $3D8C    $09F3    $7FDD
+$02      $0807    $354A    $0414    $3C1D
+$03      $0000    $052D    $09F3    $0014
+$04      $0000    $052D    $09F3    $7C40
+$05      $0120    $0220    $03E0    $3FFF
+$06      $0120    $1861    $3128    $41CE
+$07      $0000    $7E02    $001E    $037F
+
+HUD palette selection:
+- The initialization tilemap is entry $03 in bank $09. Its pointer
+  table starts at $4000 in US and $401D in JP.
+- The map starts at US $09:$4403 (ROM $024403) and JP $09:$441E
+  (ROM $02441E). Both use the $17 RLE format handled by Call_000_05ce.
+- The decoded maps are 20 columns by 32 rows. All 640 attribute bytes
+  are $07: VRAM bank 0, background palette 7, and no tile flips.
+- The extracted planes and colored layouts are in res/<region>/tilemaps/.
+  See notes/resource-hud-tilemap.txt for the RLE format and regional layouts.
+- hud.pal contains the complete 64-byte background palette set.
+  Bytes 56-63 hold the four colors of background palette 7, in their
+  original order. Select these bytes when rendering the tile atlases.
+- font.png and hud_tiles.png are indexed PNGs rendered with palette 7
+  for this initialization context. Other screens can load different
+  palettes for the same tiles.
+- Converting each PNG back with rgbgfx --colors embedded reproduces
+  its existing .2bpp data byte for byte.
+
+Hardware reference:
+https://github.com/gbdev/pandocs/blob/master/src/Palettes.md
+https://github.com/gbdev/pandocs/blob/master/src/Tile_Maps.md
+
+ASM integration: asm/US/bank_00a.asm and asm/JP/bank_00a.asm include
+the complete hud.pal files through INCBIN, retaining the original labels.
+Both regional Makefiles list hud.pal as a dependency of game.o.
+No build verification was run.
