@@ -1,9 +1,10 @@
-Resource: dialogue and object names (extraction phase)
+Resource: dialogue and object names
 
 Source ROMs: asm/US/game.gbc and asm/JP/game.gbc
 Exports: res/US/text/ and res/JP/text/
 Extractor: scripts/extract_text.py
 Parser: scripts/game_text.py
+Encoder: scripts/text_resources.py and scripts/text_codec.py
 
 Inventory
 ---------
@@ -30,6 +31,9 @@ charmap.json: UTF-8 glyph readings for each case, control operand lengths,
 dialogue.json: pointer slots, unique messages, name records, raw bytes,
                addresses, explicit text controls, and decoded text.
 dialogue.txt: readable dialogue followed by the two object name tables.
+editor.json: index of the split editable text files.
+case1/ and case2/: up to 16 dialogue blocks or 32 names per UTF-8 file.
+banks/: 16384-byte text bank resources included by regional ASM files.
 
 JSON text retains only explicit line controls as newlines. The TXT view
 also inserts the reader's automatic 18-column wraps for static text.
@@ -45,9 +49,15 @@ The case-specific name tables supply the text for object insertions.
 Raw message bytes include the final END or WAIT_END code. Name records
 retain the whole fixed slot, including prefix and padding. Raw data and
 pointer slots are the extraction reference; TXT is a reading view.
-No text has been replaced by INCBIN or connected to the build yet.
-Re-extraction replaces both dialogue files; preserve manual edits before
-running it again. A text encoder and pointer handling are the next phase.
+The split case files use explicit control tags, including [LINE]. Their
+physical line endings are presentation and do not encode line controls.
+Text banks use INCBIN, retaining their original labels and addresses.
+The encoder keeps dialogue within its original byte slot, preserves
+shared pointers and ending codes, and rejects edits that do not fit.
+US name edits allow 14 glyph bytes after the prefix and before $1F;
+JP name edits allow eight glyph bytes. Unchanged records retain all bytes.
+Make regenerates text banks from the split files before assembly.
+Re-extraction replaces the original dialogue exports, not the split files.
 
 Bank layout
 -----------

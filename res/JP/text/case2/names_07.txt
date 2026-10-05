@@ -1,0 +1,99 @@
+; Case 2 object names. Keep block IDs and spaces.
+; Text controls are not allowed in names.
+
+[NAME:E0]
+   ラスべガス
+
+[NAME:E1]
+     シカゴ
+
+[NAME:E2]
+  ニューヨーク
+
+[NAME:E3]
+  ロサンゼルス
+
+[NAME:E4]
+  セントルイス
+
+[NAME:E5]
+  みとうちゃく
+
+[NAME:E6]
+   とうちゃく
+
+[NAME:E7]
+じょうしゃかのう
+
+[NAME:E8]
+はっしゃじゅんび
+
+[NAME:E9]
+    はっしゃ
+
+[NAME:EA]
+ホーム
+
+[NAME:EB]
+いきさき
+
+[NAME:EC]
+じょうたい
+
+[NAME:ED]
+
+
+[NAME:EE]
+
+
+[NAME:EF]
+
+
+[NAME:F0]
+
+
+[NAME:F1]
+
+
+[NAME:F2]
+
+
+[NAME:F3]
+
+
+[NAME:F4]
+
+
+[NAME:F5]
+
+
+[NAME:F6]
+
+
+[NAME:F7]
+
+
+[NAME:F8]
+
+
+[NAME:F9]
+
+
+[NAME:FA]
+
+
+[NAME:FB]
+
+
+[NAME:FC]
+
+
+[NAME:FD]
+
+
+[NAME:FE]
+        
+
+[NAME:FF]
+
+

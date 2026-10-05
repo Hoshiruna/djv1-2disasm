@@ -1,0 +1,67 @@
+; Case 2 dialogue. Keep block IDs and control tags.
+; Physical newlines are visual. Use [LINE] for a game line break.
+
+[18:438F]
+[OBJECT_WRAM:37C5]を みにつけるために[LINE]
+[OBJECT_WRAM:38C5]を ぬぐ[LINE]
+ひつようがある。[END]
+
+[18:43AE]
+[OBJECT_WRAM:37C5]を ぬいだ。[END]
+
+[18:43B8]
+かねで できた じゃぐちだ。[LINE]
+[OBJECT_WRAM:37C5] ふちどりが してある。[END]
+
+[18:43D7]
+[OBJECT_WRAM:37C5]で てくびを[LINE]
+きった。[END]
+
+[18:43E6]
+[OBJECT_WRAM:37C5]に たまが あたって[LINE]
+はねかえった。[PAGE]
+あぶない![LINE]
+もうすこしで おれに あたる[LINE]
+ところだった・・・。[END]
+
+[18:441C]
+[OBJECT_WRAM:37C5]を せんたくきの[LINE]
+なかに いれた。[END]
+
+[18:4431]
+[OBJECT_WRAM:37C5]に なげるなんて[LINE]
+あまりにも むいみな ことだ。[END]
+
+[18:444D]
+「[NUM8_WRAM:87C5]」と ばんごうの かいてある[LINE]
+プレートだ。[END]
+
+[18:4467]
+[OBJECT_WRAM:37C5]は あいている。[END]
+
+[18:4473]
+[OBJECT_WRAM:37C5]は しまっている。[END]
+
+[18:4480]
+[OBJECT_WRAM:37C5]は こわれている。[END]
+
+[18:448D]
+[OBJECT_WRAM:37C5]を てにいれた。[END]
+
+[18:4499]
+スカッ![PAGE]
+おれの ては [OBJECT_WRAM:37C5]に[LINE]
+とどかなかった。[PAGE]
+だが [OBJECT_WRAM:37C5]を[LINE]
+おこらせてしまったようだ。[END]
+
+[18:44C9]
+[OBJECT_WRAM:37C5]は おおごえで[LINE]
+ようじんぼうを よんだ![END]
+
+[18:44E1]
+[NUM8_WRAM:87C5]かいの ボタンを おした。[END]
+
+[18:44F2]
+[NUM8_WRAM:87C5]かいに ついた。[END]
+

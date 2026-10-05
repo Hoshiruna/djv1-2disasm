@@ -1,0 +1,68 @@
+; Case 1 dialogue. Keep block IDs and control tags.
+; Physical newlines are visual. Use [LINE] for a game line break.
+
+[10:412D]
+[OBJECT_WRAM:37C5]を とった。[END]
+
+[10:4137]
+[OBJECT_WRAM:37C5]を すてた。[END]
+
+[10:4141]
+[OBJECT_WRAM:37C5]を[LINE]
+ちゅうしゃきに いれた。[END]
+
+[10:4153]
+[OBJECT_WRAM:37C5]の クスリビンだ。[LINE]
+なかみは はいっていない。[END]
+
+[10:416E]
+[OBJECT_WRAM:37C5]の クスリビンだ。[END]
+
+[10:417B]
+ちゅうしゃきだ。[LINE]
+なかに [OBJECT_WRAM:37C5]が[LINE]
+はいっている。[END]
+
+[10:4195]
+[OBJECT_WRAM:37C5]を あけた。[LINE]
+なかは カラッポだ。[END]
+
+[10:41AA]
+ぺオリアどおりだ。[LINE]
+[OBJECT_WRAM:37C5]が とまっている。[END]
+
+[10:41C1]
+[OBJECT_WRAM:37C5]だ。[LINE]
+うんてんしゅが のっている。[LINE]
+きゃくを まっているようだ。[END]
+
+[10:41E5]
+・・・・なにも おこらない・・・?[LINE]
+どうやら かのじょには めんえきが[LINE]
+あって クスリが きかないらしい。[END]
+
+[10:421B]
+[OBJECT_WRAM:37C5]を すてた。[LINE]
+あっというまに ふかく しずんで[LINE]
+みえなくなった。[END]
+
+[10:423F]
+[OBJECT_WRAM:37C5]に ライターで[LINE]
+ひを つけた・・・。[PAGE]
+いきおいよく もえて はいに[LINE]
+なってしまった・・・。[END]
+
+[10:4270]
+カギが こわれて [OBJECT_WRAM:37C5]が[LINE]
+あいた。[END]
+
+[10:4283]
+・・・カチッ![PAGE]
+[OBJECT_WRAM:37C5]の カギを[OBJECT_WRAM:38C5][END]
+
+[10:4297]
+コイン [NUM8_WRAM:38C5]まいを とった。[END]
+
+[10:42A7]
+だんがん [NUM8_WRAM:38C5]こを とった。[END]
+
