@@ -17,7 +17,9 @@ This project is currently in progress.
 | --- | :---: | :---: |
 | Reverse-engineered | 100% | 100% |
 | Resources extracted | 1% | 1% |
+| Position dependence | 1% | 1% |
 | Documented | 1% | 1% |
+
 
 ## Building
 
