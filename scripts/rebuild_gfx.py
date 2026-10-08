@@ -12,7 +12,8 @@ from gb_lz import rebuild_resource
 def rebuild_png(png, output, rgbgfx="rgbgfx"):
     """Write local 2bpp tiles, then replace the .bin only if compression fits."""
     template = output.read_bytes()
-    tiles_path = png.with_suffix(".2bpp")
+    # Shared PNGs can feed separate regional resources in parallel.
+    tiles_path = output.with_suffix(".2bpp")
     subprocess.run([
         rgbgfx, "--colors", "embedded", "-d", "2",
         "-o", str(tiles_path), str(png),

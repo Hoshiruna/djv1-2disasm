@@ -14,6 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from gb_rle import decode_resource, encode, rebuild_resource
 from hud_tilemap import encode_png, load_tiles, palette_colors, process, render_pixels
+from bathroom_preview import apply_door, render as render_bathroom
 
 
 class RleTests(unittest.TestCase):
@@ -80,6 +81,42 @@ class RleTests(unittest.TestCase):
 
 
 class RendererTests(unittest.TestCase):
+    def test_bank_one_tiles_require_matching_attributes(self):
+        tiles = {0: b"\x80\x00" + bytes(14)}
+        colors = [bytes((index, index, index)) for index in range(32)]
+        pixels = render_pixels(1, 1, b"\x00", b"\x0A", tiles, colors, tile_bank=1)
+        self.assertEqual(pixels[:3], colors[9])
+        with self.assertRaisesRegex(ValueError, "VRAM bank 0"):
+            render_pixels(1, 1, b"\x00", b"\x02", tiles, colors, tile_bank=1)
+
+    def test_bathroom_preview_matches_both_regions(self):
+        png = (ROOT / "res/shared/tilemaps/case2_bathroom.png").read_bytes()
+        self.assertEqual(struct.unpack_from(">II", png, 16), (112, 112))
+        for region in ("US", "JP"):
+            with self.subTest(region=region):
+                self.assertEqual(render_bathroom(ROOT / "res" / region), png)
+
+    def test_door_patch_replaces_only_its_rectangle(self):
+        shared = ROOT / "res" / "shared"
+        tiles = (shared / "tilemaps/case2_bathroom.tilemap").read_bytes()
+        attributes = (shared / "tilemaps/case2_bathroom.attrmap").read_bytes()
+        self.assertEqual(apply_door(tiles, attributes, shared, "closed"), (tiles, attributes))
+        opened_tiles, opened_attributes = apply_door(tiles, attributes, shared, "open")
+        rectangle = {(y + 2) * 14 + x + 5 for y in range(8) for x in range(4)}
+        for index in range(196):
+            if index not in rectangle:
+                self.assertEqual(opened_tiles[index], tiles[index])
+                self.assertEqual(opened_attributes[index], attributes[index])
+        self.assertEqual(sum(a != b for a, b in zip(opened_tiles, tiles)), 32)
+        self.assertEqual(sum(a != b for a, b in zip(opened_attributes, attributes)), 25)
+        self.assertEqual(opened_tiles[2 * 14 + 6:2 * 14 + 8], b"\xFF\xFF")
+
+    def test_open_door_preview_matches_both_regions(self):
+        png = (ROOT / "res/shared/tilemaps/case2_bathroom_open.png").read_bytes()
+        for region in ("US", "JP"):
+            with self.subTest(region=region):
+                self.assertEqual(render_bathroom(ROOT / "res" / region, "open"), png)
+
     def test_signed_tile_ids(self):
         tiles = load_tiles(ROOT / "res" / "US")
         self.assertEqual(len(tiles), 240)

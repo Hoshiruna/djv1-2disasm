@@ -2212,10 +2212,10 @@ jr_005_48c2:
     nop
     ld l, $ff
     rst RST_38
-    inc de
-
+Case2RoomObjects:
+    db LOW(Case2BathroomObjects)
 jr_005_48d2:
-    ld c, d
+    db HIGH(Case2BathroomObjects)
     ld h, c
     ld c, d
     cp l
@@ -2556,89 +2556,26 @@ jr_005_4a0d:
     ld c, [hl]
 
 jr_005_4a13:
-    ld c, [hl]
-    ld e, b
-    dec l
-    inc a
-    add e
-    dec b
-    nop
-    add hl, hl
-
+Case2BathroomObjects:
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $0, $8
 jr_005_4a1b:
-    jr c, jr_005_4a34
-
-    ld a, $84
-    nop
-    ld bc, $4539
-    rla
-    dec [hl]
-    add h
-    ld bc, $6602
-    ld l, a
-    inc de
-    jr z, jr_005_49ad
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $8, $12
 jr_005_4a2d:
-    inc bc
-    inc bc
-    ld h, [hl]
-    ld l, a
-    inc de
-    jr z, jr_005_4a34
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $1a, $7
 jr_005_4a34:
-    inc bc
-    rst RST_38
-    db $10
-    ld a, [de]
-    dec a
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $21, $5
 jr_005_4a39:
-    ld b, a
-    add b
-    dec b
-    inc b
-    nop
-    dec h
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $26, $6
 jr_005_4a3f:
-    jr c, jr_005_4ab0
-
-    nop
-    nop
-    rst RST_38
-    dec de
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $2c, $6
 jr_005_4a45:
-    ld [hl+], a
-    ld sp, $0037
-    ld bc, $10ff
-    rla
-    ld sp, $0037
-    ld [bc], a
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $32, $c
 jr_005_4a51:
-    rst RST_38
-    ld c, c
-    ld e, a
-    dec l
-    ld [hl-], a
-    nop
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $3e, $6
 jr_005_4a57:
-    inc b
-    rst RST_38
-    jr z, jr_005_4aa3
-
-    db $10
-    ld c, a
-
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $44, $6
 jr_005_4a5d:
-    dec b
-    nop
-    rst RST_38
-    rst RST_38
+    INCBIN "../../res/shared/objects/case2_bathroom.hitboxes", $4a, $4
     ld b, a
     ld e, b
 

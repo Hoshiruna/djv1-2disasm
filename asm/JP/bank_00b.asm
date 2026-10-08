@@ -5,273 +5,47 @@
 
 SECTION "ROM Bank $00b", ROMX[$4000], BANK[$b]
 
-    sbc b
-    ld b, b
-    ret c
-
-    ld b, b
-    jr jr_00b_4047
-
-    ld e, b
-    ld b, c
-    sbc b
-    ld b, c
-    ret c
-
-    ld b, c
-    jr jr_00b_4050
-
-    ld e, b
-    ld b, d
-    sbc b
-    ld b, d
-    ret c
-
-    ld b, d
-    jr jr_00b_4059
-
-    ld e, b
-    ld b, e
-    sbc b
-    ld b, e
-    ret c
-
-    ld b, e
-    jr jr_00b_4062
-
-    ld e, b
-    ld b, h
-    sbc b
-    ld b, h
-    ret c
-
-    ld b, h
-    jr jr_00b_406b
-
-    ld e, b
-    ld b, l
-    sbc b
-    ld b, l
-    ret c
-
-    ld b, l
-    jr jr_00b_4074
-
-    ld e, b
-    ld b, [hl]
-    sbc b
-    ld b, [hl]
-    ret c
-
-    ld b, [hl]
-    jr @+$49
-
-    ld e, b
-    ld b, a
-    sbc b
-    ld b, a
-    ret c
-
-    ld b, a
-    jr jr_00b_4086
-
-    ld e, b
-    ld c, b
-    sbc b
-    ld c, b
-    ret c
-
-    ld c, b
-    jr jr_00b_408f
-
-    ld e, b
-
+    dw Case2BathroomPalette ; scene/palette index $00
+    db $d8, $40, $18, $41, $58, $41, $98, $41, $d8, $41, $18, $42, $58, $42, $98, $42
+    db $d8, $42, $18, $43, $58, $43, $98, $43, $d8, $43, $18, $44, $58, $44, $98, $44
+    db $d8, $44, $18, $45, $58, $45, $98, $45, $d8, $45, $18, $46, $58, $46, $98, $46
+    db $d8, $46, $18, $47, $58, $47, $98, $47, $d8, $47, $18, $48, $58, $48, $98, $48
+    db $d8, $48, $18, $49, $58
 jr_00b_4047:
-    ld c, c
-    sbc b
-    ld c, c
-    ret c
-
-    ld c, c
-    jr jr_00b_4098
-
-    ld e, b
-    ld c, d
-
+    db $49, $98, $49, $d8, $49, $18, $4a, $58, $4a
 jr_00b_4050:
-    sbc b
-    ld c, d
-    ret c
-
-    ld c, d
-    jr jr_00b_40a1
-
-    ld e, b
-    ld c, e
-    sbc b
-
+    db $98, $4a, $d8, $4a, $18, $4b, $58, $4b, $98
 jr_00b_4059:
-    ld c, e
-    ret c
-
-    ld c, e
-    jr jr_00b_40aa
-
-    ld e, b
-    ld c, h
-    sbc b
-    ld c, h
-
+    db $4b, $d8, $4b, $18, $4c, $58, $4c, $98, $4c
 jr_00b_4062:
-    ret c
-
-    ld c, h
-    jr jr_00b_40b3
-
-    ld e, b
-    ld c, l
-    sbc b
-    ld c, l
-    ret c
-
+    db $d8, $4c, $18, $4d, $58, $4d, $98, $4d, $d8
 jr_00b_406b:
-    ld c, l
-    jr jr_00b_40bc
-
-    ld e, b
-    ld c, [hl]
-    sbc b
-    ld c, [hl]
-    ret c
-
-    ld c, [hl]
-
+    db $4d, $18, $4e, $58, $4e, $98, $4e, $d8, $4e
 jr_00b_4074:
-    jr jr_00b_40c5
-
-    ld e, b
-    ld c, a
-    sbc b
-    ld c, a
-    ret c
-
-    ld c, a
-    jr jr_00b_40ce
-
-    ld e, b
-    ld d, b
-    sbc b
-    ld d, b
-    ret c
-
-    ld d, b
-    jr jr_00b_40d7
-
+    db $18, $4f, $58, $4f, $98, $4f, $d8, $4f, $18, $50, $58, $50, $98, $50, $d8, $50
+    db $18, $51
 jr_00b_4086:
-    ld e, b
-    ld d, c
-    sbc b
-    ld d, c
-    ret c
-
-    ld d, c
-    jr jr_00b_40e0
-
-    ld e, b
-
+    db $58, $51, $98, $51, $d8, $51, $18, $52, $58
 jr_00b_408f:
-    ld d, d
-    sbc b
-    ld d, d
-    ret c
-
-    ld d, d
-    jr jr_00b_40e9
-
-    ld e, b
-    ld d, e
-
+    db $52, $98, $52, $d8, $52, $18, $53, $58, $53
 jr_00b_4098:
-    nop
-    nop
-    ld a, [hl+]
-    dec h
-    or l
-    ld d, [hl]
-    rst RST_38
-    ld a, a
-    nop
-
+Case2BathroomPalette:
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $0, $9
 jr_00b_40a1:
-    nop
-    nop
-    dec h
-    ldh [rSTAT], a
-    ld b, b
-    ld l, a
-    nop
-    nop
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $9, $9
 jr_00b_40aa:
-    db $e3
-    jr nz, @-$1e
-
-    ld b, c
-    rst RST_38
-    ld a, a
-    nop
-    nop
-    ld a, [hl+]
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $12, $9
 jr_00b_40b3:
-    dec h
-    db $10
-    ld b, d
-    or l
-    ld d, [hl]
-    nop
-    nop
-    ld l, d
-    nop
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $1b, $9
 jr_00b_40bc:
-    ld a, a
-    ld bc, $7fff
-    nop
-    nop
-    ld b, b
-    ld l, a
-    xor [hl]
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $24, $9
 jr_00b_40c5:
-    dec [hl]
-    ld a, e
-    ld l, a
-    nop
-    nop
-    ldh [rSTAT], a
-    db $ed
-    dec [hl]
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $2d, $9
 jr_00b_40ce:
-    ld a, e
-    ld l, a
-    nop
-    nop
-    ld [bc], a
-    ld a, [hl]
-    ld e, $00
-    ld a, a
-
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $36, $9
 jr_00b_40d7:
-    inc bc
-    nop
-    nop
-    sub $00
-    ret nz
-
-    ld e, $ee
-    ld l, a
+    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $3f, $1
+    db $00, $00, $d6, $00, $c0, $1e, $ee, $6f
 
 jr_00b_40e0:
     nop
@@ -4665,92 +4439,26 @@ jr_00b_5424:
     or b
 
 jr_00b_542d:
-    ld h, [hl]
-    ldh a, [$ff66]
-    ldh [$ff7f], a
-    nop
-    nop
-    add hl, hl
-    add hl, sp
-
+    db $66, $f0, $66
+; Case II scene $00 object palette set: eight RGB555 palettes.
+Case2BathroomObjectPalettes:
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $0, $6
 jr_00b_5436:
-    ld sp, $e062
-    ld a, a
-    nop
-    nop
-    ld l, [hl]
-    dec d
-    cp c
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $6, $9
 jr_00b_543f:
-    ld b, d
-    ldh [$ff7f], a
-    nop
-    nop
-    adc d
-    dec [hl]
-    ld [hl], c
-    ld c, [hl]
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $f, $9
 jr_00b_5448:
-    ldh [$ff7f], a
-    nop
-    nop
-    db $ed
-    dec [hl]
-    rst RST_38
-    ld a, a
-    rra
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $18, $9
 jr_00b_5451:
-    ld a, h
-    nop
-    nop
-    ld h, e
-    ld a, l
-    rst RST_30
-    ld a, [hl]
-    ldh [$ff7f], a
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $21, $9
 jr_00b_545a:
-    ld bc, $1200
-    ld c, b
-    rra
-    ld a, h
-    ldh [$ff7f], a
-    db $eb
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $2a, $9
 jr_00b_5463:
-    inc c
-    ld [hl], b
-    dec e
-    dec [hl]
-    ld [hl], $e0
-    ld a, a
-    nop
-    nop
-
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $33, $9
 jr_00b_546c:
-    rra
-    nop
-    cp a
-    ld bc, $7fe0
-    nop
-    nop
-    sub $5a
-    rst RST_38
-    ld a, a
-    ldh [$ff7f], a
-    nop
-    nop
-    xor a
-    ld bc, $037f
-    ldh [$ff7f], a
-    jr nz, jr_00b_54d9
-
-    ld h, b
-    ld a, [hl]
-    rst RST_38
+    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $3c, $4
+    db $e0, $7f, $00, $00, $d6, $5a, $ff, $7f, $e0, $7f, $00, $00, $af, $01, $7f, $03
+    db $e0, $7f, $20, $55, $60, $7e, $ff
 
 jr_00b_5487:
     ld a, a

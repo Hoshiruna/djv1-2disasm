@@ -3477,7 +3477,7 @@ Jump_000_0ee1:
 
 jr_000_0ee3:
     ld a, $05
-    ld de, $48d1
+    ld de, Case2RoomObjects
 
 jr_000_0ee8:
     call Call_000_0781

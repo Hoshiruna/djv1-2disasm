@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-"""Codec for the game's $0D compressed tile resources (bank 0, $0680)."""
+"""Codec for the game's $0C/$0D compressed tile resources (bank 0, $0680)."""
 
 from collections import defaultdict
 
@@ -124,8 +124,8 @@ def encode(data):
 
 def rebuild_resource(template, tiles):
     """Preserve the header and fixed ROM slot; keep unchanged resources verbatim."""
-    if len(template) < 3 or (template[0] & 0xEF) != 0x0D or template[2] == 0:
-        raise ValueError("Expected a three-byte $0D compressed tile header")
+    if len(template) < 3 or template[0] not in (0x0C, 0x0D, 0x1C, 0x1D) or template[2] == 0:
+        raise ValueError("Expected a three-byte $0C/$0D compressed tile header")
     output_size = template[2] * 16
     if len(tiles) != output_size:
         raise ValueError("Expected {} decoded bytes, got {}; keep the tile count".format(

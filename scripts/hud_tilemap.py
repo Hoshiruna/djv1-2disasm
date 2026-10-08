@@ -14,7 +14,8 @@ from gb_rle import decode_resource, rebuild_resource
 def load_tiles(region):
     """Map signed BG tile IDs to the font and HUD data loaded into VRAM bank 0."""
     tiles = {}
-    for name in ("font", "hud_tiles"):
+    font = "case1_font" if region.name == "JP" else "font"
+    for name in (font, "hud_tiles"):
         resource = (region / "gfx" / (name + ".bin")).read_bytes()
         raw, _ = decode_tiles(resource[3:], resource[2] * 16)
         address = 0x8000 + resource[1] * 16
@@ -37,7 +38,7 @@ def palette_colors(palette):
     return colors
 
 
-def render_pixels(width, height, tilemap, attributes, tiles, colors):
+def render_pixels(width, height, tilemap, attributes, tiles, colors, tile_bank=0):
     """Render all map rows with per-cell palettes and horizontal/vertical flips."""
     if len(tilemap) != width * height or len(attributes) != width * height:
         raise ValueError("Tilemap planes do not match the header dimensions")
@@ -45,8 +46,9 @@ def render_pixels(width, height, tilemap, attributes, tiles, colors):
     pixel_width = width * 8
     for cell, tile_id in enumerate(tilemap):
         attribute = attributes[cell]
-        if attribute & 8:
-            raise ValueError("Cell {} uses VRAM bank 1, whose tiles are not extracted".format(cell))
+        bank = (attribute >> 3) & 1
+        if bank != tile_bank:
+            raise ValueError("Cell {} uses VRAM bank {}, whose tiles are not extracted".format(cell, bank))
         if tile_id not in tiles:
             raise ValueError("Cell {} uses unextracted tile ${:02X}".format(cell, tile_id))
         tile = tiles[tile_id]

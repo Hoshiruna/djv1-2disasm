@@ -42,7 +42,8 @@ HUD palette selection:
 - hud.pal contains the complete 64-byte background palette set.
   Bytes 56-63 hold the four colors of background palette 7, in their
   original order. Select these bytes when rendering the tile atlases.
-- font.png and hud_tiles.png are indexed PNGs rendered with palette 7
+- The Case I font (US font.png, JP case1_font.png) and hud_tiles.png
+  are indexed PNGs rendered with palette 7
   for this initialization context. Other screens can load different
   palettes for the same tiles.
 - Converting each PNG back with rgbgfx --colors embedded reproduces

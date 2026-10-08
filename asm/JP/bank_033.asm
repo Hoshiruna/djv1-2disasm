@@ -26,31 +26,31 @@ ResourcePointers_033:
 
 ; Compressed font data: 128 tiles, decoded to 2048 bytes.
 Resource_JP_033_4020:
-    INCBIN "../../res/JP/gfx/font.bin", $0, $22
+    INCBIN "../../res/JP/gfx/case1_font.bin", $0, $22
 jr_033_4042:
-    INCBIN "../../res/JP/gfx/font.bin", $22, $a
+    INCBIN "../../res/JP/gfx/case1_font.bin", $22, $a
 jr_033_404c:
-    INCBIN "../../res/JP/gfx/font.bin", $2c, $20
+    INCBIN "../../res/JP/gfx/case1_font.bin", $2c, $20
 jr_033_406c:
-    INCBIN "../../res/JP/gfx/font.bin", $4c, $4
+    INCBIN "../../res/JP/gfx/case1_font.bin", $4c, $4
 jr_033_4070:
-    INCBIN "../../res/JP/gfx/font.bin", $50, $1b0
+    INCBIN "../../res/JP/gfx/case1_font.bin", $50, $1b0
 jr_033_4220:
-    INCBIN "../../res/JP/gfx/font.bin", $200, $18
+    INCBIN "../../res/JP/gfx/case1_font.bin", $200, $18
 jr_033_4238:
-    INCBIN "../../res/JP/gfx/font.bin", $218, $2e
+    INCBIN "../../res/JP/gfx/case1_font.bin", $218, $2e
 jr_033_4266:
-    INCBIN "../../res/JP/gfx/font.bin", $246, $23
+    INCBIN "../../res/JP/gfx/case1_font.bin", $246, $23
 jr_033_4289:
-    INCBIN "../../res/JP/gfx/font.bin", $269, $1d
+    INCBIN "../../res/JP/gfx/case1_font.bin", $269, $1d
 jr_033_42a6:
-    INCBIN "../../res/JP/gfx/font.bin", $286, $d0
+    INCBIN "../../res/JP/gfx/case1_font.bin", $286, $d0
 jr_033_4376:
-    INCBIN "../../res/JP/gfx/font.bin", $356, $72
+    INCBIN "../../res/JP/gfx/case1_font.bin", $356, $72
 jr_033_43e8:
-    INCBIN "../../res/JP/gfx/font.bin", $3c8, $142
+    INCBIN "../../res/JP/gfx/case1_font.bin", $3c8, $142
 jr_033_452a:
-    INCBIN "../../res/JP/gfx/font.bin", $50a, $1d
+    INCBIN "../../res/JP/gfx/case1_font.bin", $50a, $1d
 
 ; Compressed HUD graphics: 112 tiles, decoded to 1792 bytes.
 Resource_JP_033_4547:

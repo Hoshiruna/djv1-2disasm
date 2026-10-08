@@ -218,7 +218,7 @@ jr_003_4175:
     push hl
 
 jr_003_417d:
-    ld hl, $4196
+    ld hl, Case2InitialObjectFlags
 
 jr_003_4180:
     ld a, [hl+]
@@ -241,93 +241,14 @@ jr_003_418c:
     ret
 
 
-    nop
-    ld bc, $0802
-
+Case2InitialObjectFlags:
+    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $0, $4
 jr_003_419a:
-    add hl, bc
-    ld a, [bc]
-    dec bc
-    inc c
-    dec d
-    ld d, $17
-    ld a, [de]
-    dec de
-    inc e
-    inc h
-    dec h
-    ld h, $27
-    jr z, jr_003_41d3
-
-    ld a, [hl+]
-    dec hl
-    inc l
-    dec l
-    ld l, $2f
-    jr nc, jr_003_41e5
-
-    inc [hl]
-    dec [hl]
-    ld [hl], $38
-    add hl, sp
-    ld a, [hl-]
-    dec sp
-    inc a
-    ld a, $3f
-    ld b, h
-    ld b, a
-    ld c, b
-    ld c, c
-    ld c, d
-    ld c, a
-    ld d, b
-    ld d, c
-    ld d, e
-    ld d, l
-    ld d, [hl]
-    ld d, a
-    ld e, b
-    ld e, c
-    ld e, d
-    ld e, h
-    ld e, l
-    ld e, [hl]
-    ld e, a
-    ld h, b
-    ld h, c
-    ld h, d
-    ld h, e
-
+    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $4, $39
 jr_003_41d3:
-    ld h, h
-    ld h, l
-    dec c
-    add b
-    add d
-    add h
-    add [hl]
-    adc b
-    adc c
-    adc d
-    adc e
-    adc h
-    adc [hl]
-    adc a
-    sub b
-    sub c
-    sub d
-    sub e
-
+    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $3d, $12
 jr_003_41e5:
-    sub l
-    sbc b
-    sbc e
-    sbc l
-    sbc [hl]
-    sbc a
-    and d
-    and h
-    rst RST_38
+    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $4f, $9
 
 Call_003_41ee:
     call Call_003_4236

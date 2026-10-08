@@ -1,0 +1,129 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+"""Render the Case II bathroom, door state, and initial scene objects."""
+
+import argparse
+from pathlib import Path
+
+from gb_lz import decode
+from gb_sprites import color_index, decode_metasprites, emit_oam, overlay
+from hud_tilemap import encode_png, palette_colors, render_pixels
+
+
+def apply_door(tilemap, attributes, shared, state):
+    """Replace the 4x8 door rectangle at tile position (5, 2)."""
+    folder = shared / "tilemaps"
+    name = "case2_bathroom_door_" + state
+    patch_tiles = (folder / (name + ".tilemap")).read_bytes()
+    patch_attributes = (folder / (name + ".attrmap")).read_bytes()
+    if len(patch_tiles) != 32 or len(patch_attributes) != 32:
+        raise ValueError("Door patches must contain 4x8 cells in each plane")
+    tilemap, attributes = bytearray(tilemap), bytearray(attributes)
+    for row in range(8):
+        target = (row + 2) * 14 + 5
+        source = row * 4
+        tilemap[target:target + 4] = patch_tiles[source:source + 4]
+        attributes[target:target + 4] = patch_attributes[source:source + 4]
+    return bytes(tilemap), bytes(attributes)
+
+
+def initial_objects(shared):
+    """Select room-zero objects using the Case II initial visibility flags."""
+    folder = shared / "objects"
+    definitions = decode_metasprites((folder / "case2_bathroom.sprites").read_bytes())
+    positions = (folder / "case2_bathroom.positions").read_bytes()
+    animations = (folder / "case2_bathroom.animations").read_bytes()
+    hitboxes = (folder / "case2_bathroom.hitboxes").read_bytes()
+    flags = (folder / "case2_initial_flags.bin").read_bytes()
+    if len(positions) != len(definitions) * 2 or len(animations) != len(definitions) * 5:
+        raise ValueError("Bathroom positions and animations must match the sprite records")
+    if not flags or flags[-1] != 0xFF or len(hitboxes) % 7 != 1 or hitboxes[-1] != 0xFF:
+        raise ValueError("Initial flags and room hitboxes must end with $FF")
+    visible = set(flags[:-1])
+    objects = []
+    for offset in range(0, len(hitboxes) - 1, 7):
+        record = hitboxes[offset:offset + 7]
+        object_id = record[6]
+        # $C420 starts with all bits set; $C438 controls initial visibility.
+        if not record[4] & 0x80 or object_id not in visible:
+            continue
+        if object_id >= len(definitions):
+            raise ValueError("Room references an unextracted object")
+        animation = animations[object_id * 5:object_id * 5 + 5]
+        if animation[0] != 0xFE or animation[2:] != b"\xff\xff\x00":
+            raise ValueError("Bathroom preview requires static object animations")
+        sprite = animation[1]
+        if sprite >= len(definitions):
+            raise ValueError("Animation references an unextracted sprite")
+        x, y = positions[object_id * 2:object_id * 2 + 2]
+        objects.append((x, y, definitions[sprite]))
+    return objects
+
+
+def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
+    """Add the initial room's OAM using its object tiles and palette."""
+    shared = region.parent / "shared"
+    resource = (region / "gfx" / "case2_bathroom_object_tiles.bin").read_bytes()
+    raw, _ = decode(resource[3:], resource[2] * 16)
+    sprite_tiles = {resource[1] + index: raw[index * 16:(index + 1) * 16]
+                    for index in range(resource[2])}
+    indices = bytearray(112 * 112)
+    priorities = bytearray(112 * 112)
+    for cell, tile_id in enumerate(tilemap):
+        attribute = attributes[cell]
+        for y in range(8):
+            for x in range(8):
+                offset = (cell // 14 * 8 + y) * 112 + cell % 14 * 8 + x
+                indices[offset] = color_index(background_tiles[tile_id], x, y, attribute)
+                priorities[offset] = attribute & 0x80
+    colors = palette_colors((shared / "palettes" / "case2_bathroom_objects.pal").read_bytes())
+    oam = emit_oam(initial_objects(shared))
+    return overlay(112, 112, pixels, indices, priorities, oam, sprite_tiles, colors)
+
+
+def render(region, door="closed", objects=False):
+    """Use shared map/palette data and one region's compressed graphics."""
+    shared = region.parent / "shared"
+    tiles = {}
+    for name in ("case2_bathroom_tiles", "case2_bathroom_extra_tiles"):
+        resource = (region / "gfx" / (name + ".bin")).read_bytes()
+        raw, _ = decode(resource[3:], resource[2] * 16)
+        for index in range(resource[2]):
+            tiles[resource[1] + index] = raw[index * 16:(index + 1) * 16]
+    tilemap = (shared / "tilemaps" / "case2_bathroom.tilemap").read_bytes()
+    attributes = (shared / "tilemaps" / "case2_bathroom.attrmap").read_bytes()
+    if door != "base":
+        if door not in ("closed", "open"):
+            raise ValueError("Door state must be base, closed, or open")
+        tilemap, attributes = apply_door(tilemap, attributes, shared, door)
+        # Startup graphics leave a blank $FF tile in the background staging bank.
+        tiles[0xFF] = bytes(16)
+    palette = (shared / "palettes" / "case2_bathroom.pal").read_bytes()
+    pixels = render_pixels(14, 14, tilemap, attributes, tiles,
+                           palette_colors(palette), tile_bank=1)
+    if objects:
+        pixels = overlay_objects(region, pixels, tilemap, attributes, tiles)
+    return encode_png(112, 112, pixels)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("region", type=Path, help="Regional resources, e.g. res/US")
+    parser.add_argument("--door", choices=("base", "closed", "open"), default="closed")
+    parser.add_argument("--objects", action="store_true", help="Overlay the initial visible objects")
+    args = parser.parse_args()
+    try:
+        png = render(args.region, args.door, args.objects)
+        name = "case2_bathroom" + ("_objects" if args.objects else "")
+        if args.door != "closed":
+            name += "_" + args.door
+        output = args.region.parent / "shared" / "tilemaps" / (name + ".png")
+        output.write_bytes(png)
+    except (OSError, ValueError) as error:
+        parser.exit(1, "error: {}\n".format(error))
+    layer = "initial objects" if args.objects else "background"
+    print("Rendered {} (112x112, door {}, {})".format(output, args.door, layer))
+
+
+if __name__ == "__main__":
+    main()

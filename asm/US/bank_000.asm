@@ -3453,7 +3453,7 @@ Call_000_0ee0:
 
 jr_000_0eee:
     ld a, $05
-    ld de, $48d1
+    ld de, Case2RoomObjects
 
 jr_000_0ef3:
     call Call_000_0781

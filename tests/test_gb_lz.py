@@ -51,7 +51,12 @@ class CodecTests(unittest.TestCase):
 
     def test_original_resources_stay_byte_exact(self):
         for region in ("US", "JP"):
-            for name, expected_size in (("font", 2048), ("hud_tiles", 1792)):
+            font = "case1_font" if region == "JP" else "font"
+            for name, expected_size in ((font, 2048), ("hud_tiles", 1792),
+                                        ("case2_font", 2048), ("case2_hud_tiles", 2048),
+                                        ("case2_bathroom_tiles", 2048),
+                                        ("case2_bathroom_extra_tiles", 544),
+                                        ("case2_bathroom_object_tiles", 1024)):
                 with self.subTest(region=region, name=name):
                     path = ROOT / "res" / region / "gfx" / (name + ".bin")
                     template = path.read_bytes()
@@ -61,7 +66,10 @@ class CodecTests(unittest.TestCase):
 
     def test_edited_resources_keep_header_size_and_pixels(self):
         for region in ("US", "JP"):
-            for name in ("font", "hud_tiles"):
+            font = "case1_font" if region == "JP" else "font"
+            for name in (font, "hud_tiles", "case2_font", "case2_hud_tiles",
+                         "case2_bathroom_tiles", "case2_bathroom_extra_tiles",
+                         "case2_bathroom_object_tiles"):
                 with self.subTest(region=region, name=name):
                     path = ROOT / "res" / region / "gfx" / (name + ".bin")
                     template = path.read_bytes()
@@ -82,6 +90,26 @@ class CodecTests(unittest.TestCase):
 
 
 class ConversionTests(unittest.TestCase):
+    def test_shared_png_uses_separate_output_tiles(self):
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            png = folder / "shared.png"
+            tiles = bytes(16)
+            template = b"\x1D\x00\x01" + encode(tiles)
+
+            def write_tiles(command, **kwargs):
+                Path(command[command.index("-o") + 1]).write_bytes(tiles)
+
+            with patch("rebuild_gfx.subprocess.run", side_effect=write_tiles):
+                for region in ("US", "JP"):
+                    output = folder / region / "scene.bin"
+                    output.parent.mkdir()
+                    output.write_bytes(template)
+                    rebuild_png(png, output)
+                    self.assertEqual(output.with_suffix(".2bpp").read_bytes(), tiles)
+                    self.assertEqual(output.read_bytes(), template)
+            self.assertFalse(png.with_suffix(".2bpp").exists())
+
     def test_overflow_keeps_existing_bin(self):
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory) / "hud_tiles.bin"

@@ -1,0 +1,184 @@
+Resource: Case II opening bathroom background tiles
+Resource IDs: $02 and $03
+ROM bank: $2A, pointer entries at $4004 and $4006
+
+Region  CPU range (inclusive)  ROM offset  Stored bytes
+US      $48B3-$4EBB            $0A88B3     1545
+JP      $4A5A-$5062            $0A8A5A     1545
+
+Additional tiles ($03):
+US      $4EBC-$5018            $0A8EBC      349
+JP      $5063-$51BF            $0A9063      349
+
+Sources: asm/US/game.gbc and asm/JP/game.gbc
+Editable source: res/shared/gfx/case2_bathroom_tiles.png
+ROM blocks: res/<region>/gfx/case2_bathroom_tiles.bin
+Additional editable source: res/shared/gfx/case2_bathroom_extra_tiles.png
+Additional ROM blocks: res/<region>/gfx/case2_bathroom_extra_tiles.bin
+
+Both regions contain identical compressed bytes. One indexed PNG supplies
+both regional blocks. Its 16-column atlas contains 128 8x8 tiles and uses
+grayscale to display color indices; these are not the runtime palettes.
+The tiles show the bathroom's tub, sink, and floor. This is a tile atlas,
+not a reconstruction of the complete scene.
+Resource $03 is also identical between regions. Its shared PNG contains
+34 additional tiles arranged in 17 columns and two rows, with no padding.
+
+Loading path
+------------
+WRAM $C599 selects the case; $C522 selects the scene. The scene graphics
+routine uses a two-pointer table at US $01:$46AF / JP $01:$46A4.
+Its Case II table is at US $01:$47E5 / JP $01:$47DA. Scene index $00
+starts with $02 $81, copied to HRAM $FFA4/$FFA5.
+
+US $00:$0A76 / JP $00:$0A6B checks the cached graphics IDs. For the
+background ID in $FFA4, US $0ACC / JP $0AC1 loads that resource and
+the next one. Thus this scene uses $02 together with $03.
+
+US $0AA7 / JP $0A9C resolves an ID: its upper nibble is added to the
+case's base bank ($33 or $2A), and its lower nibble indexes the word
+table at $4000. The base-bank bytes are at US $0ACA / JP $0ABF.
+ID $02 in Case II therefore selects bank $2A, pointer $4004.
+
+US $0B62/$0B7E and JP $0B57/$0B73 dispatch the graphics header and
+decompress into WRAM bank 2. Header $1D $00 $80 selects the existing
+compressed-tile format, destination $D000, and 128 tiles (2048 bytes).
+The scene loader later transfers the staged background graphics to VRAM
+bank 1, starting at $9000. Resource $03 has header $1D $80 $22, which
+loads 34 tiles (544 bytes) into WRAM $D800. The later transfer places
+these tiles at VRAM bank 1, $8800-$8A1F (signed BG IDs $80-$A1).
+
+Editing and integration
+-----------------------
+Edit the shared PNG to change both versions. Each regional Makefile
+uses rebuild_gfx.py with its own compressed block as the size/header
+template. Generated .2bpp files sit beside the output .bin so parallel
+regional conversions do not share an intermediate file.
+
+The original compressed stream consumes all 1545 stored bytes. Edits
+must keep 128 tiles and compress into that space. Unchanged pixels keep
+the original compressed bytes. Both ASM files use Case2BathroomTiles
+for pointer $02 and retain existing address labels with INCBIN slices.
+Resource $03 uses Case2BathroomExtraTiles and the same sliced INCBIN
+approach. Its compressed stream fills its 349-byte slot; edits must keep
+34 tiles and fit that space. Bytes before the next label in resource $04
+remain inline. Both resources are dependencies of each regional game.o.
+
+Game-derived graphics retain the rights described in LICENSE. No new
+dependencies or codecs were added. No ROM build verification was run.
+
+Verification
+------------
+The 12 gb_lz tests passed, including unchanged/edited bathroom resources
+and separate intermediate files for outputs sharing a PNG. Converting
+the shared PNGs with rgbgfx and rebuilding each regional block preserved
+all 1545 bytes of $02 and all 349 bytes of $03. The tests also cover
+unchanged and edited $03 resources. Static expansion of the ASM prefixes
+matched the local ROMs (US: 4210 bytes; JP: 4633 bytes). Original labels stayed at their
+recorded addresses, and assembly after those prefixes was unchanged.
+These checks cover the extracted data, not whole-ROM equivalence.
+
+Base scene map and palette
+--------------------------
+The two regions have identical map and palette data:
+
+Data            Bank:CPU range    ROM offset  Size
+Tile IDs        $27:$4050-$4113    $09C050     196 bytes
+Attributes      $27:$4114-$41D7    $09C114     196 bytes
+BG palette set  $0B:$4098-$40D7    $02C098      64 bytes
+
+Shared editable files:
+res/shared/tilemaps/case2_bathroom.tilemap
+res/shared/tilemaps/case2_bathroom.attrmap
+res/shared/palettes/case2_bathroom.pal
+
+The first pointer at $27:$4000 selects the bathroom map at $4050.
+It contains 196 tile IDs followed by 196 CGB attributes, both in 14x14
+row order. These planes are raw bytes without a compression header.
+US $0CB1 selects scene-map bank $27 for Case II scenes below $28;
+$0D18 resolves the pointer and $0D37 copies both planes to WRAM.
+The renderer uses signed BG tile IDs and VRAM bank 1. Attributes select
+palettes 0-6; some cells use horizontal or vertical flips.
+
+For the ordinary scene palette path, bank 3 routine $556F uses $C522
+as the palette index. Scene $00 selects the first background palette.
+US $18F8 reads the case bank/table selectors at $1A0B/$1A0D; JP $1A48
+reads $1B5B/$1B5D. Case II selects bank $0B, table $4000, whose first
+pointer is $4098. The loader copies 64 bytes to $DBC0. Colors are eight
+sets of four little-endian RGB555 words. State-dependent branches in
+$556F can choose a different palette; the preview uses scene index zero.
+
+Both regional ASM files include the shared planes and palette directly,
+retaining original labels. Keep each plane at 196 bytes and the palette
+at 64 bytes. Changes update both versions through game.o dependencies.
+
+Run make bathroom-preview SHELL=bash from the repository root to refresh
+res/shared/tilemaps/case2_bathroom.png. The target uses US compressed tile
+blocks and does not assemble a ROM. The PNG is a 112x112 background with
+the closed-door patch applied. Other runtime object overlays and
+state-dependent palette changes are outside this preview.
+The separate bathroom-objects-preview target adds the initial visible
+objects; see notes/resource-case2-bathroom-objects.txt for its data and
+generation commands.
+
+The 14 tilemap/renderer tests passed, covering bank selection, palettes,
+flips, existing HUD previews, and identical bathroom output for US/JP.
+Static expansion matched the local ROM prefixes in both regions: 605
+bytes in bank $27 and 224 bytes in bank $0B. All original labels and
+the remaining assembly text were retained. No ROM build was run.
+
+Door state patches
+------------------
+Bank $29 contains two identical regional patches for the bathroom door:
+
+State   Index  CPU range     ROM offset  Size
+Closed  $00    $4114-$4156   $0A4114     67 bytes
+Open    $01    $4157-$4199   $0A4157     67 bytes
+
+Each patch starts with $2F $04 $08, followed by eight rows of four tile
+IDs and four attributes. The position pairs at $29:$6758/$675A are both
+$05 $02, placing the patch at column 5, row 2 of the 14x14 scene.
+The replacement routine at $29:$66BB writes tile IDs and attributes
+into the interleaved WRAM map, advancing 14 bytes between row planes.
+
+The room-zero record at $03:$479B is $20 $00 $02 $00, then $FF. Bank 3
+$4236 chooses patch $00 or $01 according to object flag $00. New-game
+initialization clears the object flag block at $C420-$C59F, and the
+initial flag list at $03:$4138 does not set $00, so the door starts closed.
+The closed patch matches the original base map rectangle exactly.
+The open patch changes 32 tile IDs and 25 attributes.
+
+The open patch uses tile $FF. Startup menu resource $03 in bank $09
+(US $5777, JP $56CC) has header $1D $80 $80 and a zero-filled final tile.
+Call_000_09D4 (US) loads that menu graphics pair before gameplay. The
+background staging bank retains the blank final tile when bathroom
+resources $02/$03 replace only the first 162 tiles. The preview supplies
+that confirmed blank tile as sixteen zero bytes.
+
+Shared editable planes (32 bytes each, 4x8 row order):
+res/shared/tilemaps/case2_bathroom_door_closed.tilemap
+res/shared/tilemaps/case2_bathroom_door_closed.attrmap
+res/shared/tilemaps/case2_bathroom_door_open.tilemap
+res/shared/tilemaps/case2_bathroom_door_open.attrmap
+
+Both bank_029.asm files retain patch headers and interleave INCBIN row
+slices from these shared planes. Their pointer entries $00/$01 use
+Case2BathroomDoorClosed/Case2BathroomDoorOpen. Existing labels remain
+at their original addresses. Plane edits update both ROM versions.
+
+make bathroom-preview SHELL=bash refreshes the closed-door background.
+make bathroom-door-open-preview SHELL=bash refreshes the open-door PNG
+at res/shared/tilemaps/case2_bathroom_open.png. Both targets process
+resources without assembling a ROM. For the unpatched base map, run
+python scripts/bathroom_preview.py res/US --door base.
+
+These previews cover the door state. Object sprite graphics selected by
+resource $81, interactions, and other runtime overlays remain separate
+work. Graphic-source PNGs stay shared wherever both regions match.
+
+The 16 tilemap/renderer tests passed, including door rectangle placement,
+unchanged cells outside the door, and matching US/JP open-door output.
+Static expansion of both bank $29 prefixes matched the local ROMs for
+2320 bytes, preserving all original labels and the remaining assembly.
+The two 67-byte patches remain byte exact after splitting their planes.
+No ROM build verification was run.

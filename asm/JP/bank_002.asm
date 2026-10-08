@@ -2418,15 +2418,12 @@ jr_002_4af8:
 
 
     ld e, e
-    adc b
-    ld c, h
-    sbc c
-    ld c, h
-    jp nz, $e34c
-
-    ld c, h
-    db $ec
-    ld c, h
+Case2SpriteDefinitions:
+    dw Case2BathroomSprite00
+    dw Case2BathroomSprite01
+    dw Case2BathroomSprite02
+    dw Case2BathroomSprite03
+    dw Case2BathroomSprite04
     ld sp, hl
     ld c, h
     ld c, $4d
@@ -2670,74 +2667,19 @@ jr_002_4bd9:
     ld e, e
     cp a
     ld e, e
-    call nz, Call_000_045b
-    nop
-    nop
-    ld [de], a
-    nop
-    nop
-    ld [$0013], sp
-    ld [$1400], sp
-    nop
-    ld [$1508], sp
-    nop
-    ld a, [bc]
-    nop
-    nop
-    nop
-    ld bc, $0800
-    ld bc, $0801
-    nop
-    ld [bc], a
-    ld bc, $0808
-    inc bc
-    ld bc, $0010
-    inc b
-    ld bc, $0810
-    dec b
-    ld bc, $0018
-    ld b, $01
-    jr @+$0a
-
-    rlca
-    ld bc, $0020
-    ld [$2001], sp
-    ld [$0109], sp
-    ld [$0000], sp
-    ld a, [bc]
-    ld [bc], a
-    nop
-    ld [$020b], sp
-    ld [$0c00], sp
-    ld [bc], a
-    ld [$0d08], sp
-    ld [bc], a
-    stop
-    ld c, $02
-    db $10
-    ld [$020f], sp
-    jr jr_002_4cdd
-
+    db $c4, $5b
+Case2BathroomSprite00:
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $0, $11
+Case2BathroomSprite01:
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $11, $29
+Case2BathroomSprite02:
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $3a, $1b
 jr_002_4cdd:
-    db $10
-    ld [bc], a
-    jr @+$0a
-
-    ld de, $0202
-    nop
-    nop
-    add hl, de
-    inc bc
-    ld [$1a00], sp
-    inc bc
-    inc bc
-    nop
-    nop
-    ld d, $04
-    ld [$1800], sp
-    inc b
-    nop
-    ld [$0417], sp
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $55, $6
+Case2BathroomSprite03:
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $5b, $9
+Case2BathroomSprite04:
+    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $64, $d
     dec b
     nop
     nop
@@ -5790,13 +5732,12 @@ jr_002_5b1d:
     nop
     ld a, h
     rlca
-    rst RST_08
-    ld e, h
-    call nc, $d95c
-    ld e, h
-    sbc $5c
-    db $e3
-    ld e, h
+Case2ObjectAnimations:
+    dw Case2BathroomAnimation00
+    dw Case2BathroomAnimation01
+    dw Case2BathroomAnimation02
+    dw Case2BathroomAnimation03
+    dw Case2BathroomAnimation04
     add sp, $5c
     db $ed
     ld e, h
@@ -6037,26 +5978,16 @@ jr_002_5cb7:
     ld e, a
     ld a, [hl-]
     ld e, a
-    cp $00
-    rst RST_38
-    rst RST_38
-    nop
-    cp $01
-    rst RST_38
-    rst RST_38
-    nop
-    cp $02
-    rst RST_38
-    rst RST_38
-    nop
-    cp $03
-    rst RST_38
-    rst RST_38
-    nop
-    cp $04
-    rst RST_38
-    rst RST_38
-    nop
+Case2BathroomAnimation00:
+    INCBIN "../../res/shared/objects/case2_bathroom.animations", $0, $5
+Case2BathroomAnimation01:
+    INCBIN "../../res/shared/objects/case2_bathroom.animations", $5, $5
+Case2BathroomAnimation02:
+    INCBIN "../../res/shared/objects/case2_bathroom.animations", $a, $5
+Case2BathroomAnimation03:
+    INCBIN "../../res/shared/objects/case2_bathroom.animations", $f, $5
+Case2BathroomAnimation04:
+    INCBIN "../../res/shared/objects/case2_bathroom.animations", $14, $5
     cp $05
     rst RST_38
     rst RST_38
@@ -6568,7 +6499,7 @@ jr_002_5ebc:
     jr jr_002_5f62
 
 jr_002_5f5f:
-    ld bc, $4b7a
+    ld bc, Case2SpriteDefinitions
 
 jr_002_5f62:
     add hl, bc
@@ -6590,7 +6521,7 @@ jr_002_5f62:
     jr jr_002_5f7f
 
 jr_002_5f7c:
-    ld bc, $4b7a
+    ld bc, Case2SpriteDefinitions
 
 jr_002_5f7f:
     add hl, bc
@@ -6754,7 +6685,7 @@ jr_002_6037:
     jr jr_002_6050
 
 jr_002_604d:
-    ld bc, $5bc9
+    ld bc, Case2ObjectAnimations
 
 jr_002_6050:
     add hl, bc
@@ -6789,7 +6720,7 @@ jr_002_605e:
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $5bc9
+    ld bc, Case2ObjectAnimations
     add hl, bc
     ld a, [hl+]
     ld [$c5c3], a
@@ -6852,7 +6783,7 @@ Call_002_60c7:
     jr jr_002_60d7
 
 jr_002_60d4:
-    ld bc, $5bc9
+    ld bc, Case2ObjectAnimations
 
 jr_002_60d7:
     pop af
@@ -9973,7 +9904,7 @@ Call_002_7289:
     jr jr_002_729f
 
 jr_002_729c:
-    ld bc, $7366
+    ld bc, Case2ObjectPositions
 
 jr_002_729f:
     add hl, bc
@@ -10177,15 +10108,8 @@ jr_002_734b:
     add b
     db $10
     add b
-    ld c, [hl]
-    dec l
-    add hl, hl
-    rla
-    add hl, sp
-    rla
-    ld l, c
-    ld d, $10
-    dec a
+Case2ObjectPositions:
+    INCBIN "../../res/shared/objects/case2_bathroom.positions", $0, $a
 
 jr_002_7370:
     ld c, d
