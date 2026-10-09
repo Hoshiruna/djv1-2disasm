@@ -7,17 +7,22 @@ from pathlib import Path
 import subprocess
 
 from gb_lz import rebuild_resource
+from scene_tiles import decode_atlas
 
 
-def rebuild_png(png, output, rgbgfx="rgbgfx"):
+def rebuild_png(png, output, rgbgfx="rgbgfx", scene_atlas=False):
     """Write local 2bpp tiles, then replace the .bin only if compression fits."""
     template = output.read_bytes()
     # Shared PNGs can feed separate regional resources in parallel.
     tiles_path = output.with_suffix(".2bpp")
-    subprocess.run([
-        rgbgfx, "--colors", "embedded", "-d", "2",
-        "-o", str(tiles_path), str(png),
-    ], check=True)
+    if scene_atlas:
+        # The low two index bits preserve pixel IDs across all eight palettes.
+        tiles_path.write_bytes(decode_atlas(png.read_bytes()))
+    else:
+        subprocess.run([
+            rgbgfx, "--colors", "embedded", "-d", "2",
+            "-o", str(tiles_path), str(png),
+        ], check=True)
     rebuilt = rebuild_resource(template, tiles_path.read_bytes())
     changed = rebuilt != template
     if changed:
@@ -30,12 +35,14 @@ def rebuild_png(png, output, rgbgfx="rgbgfx"):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("png", type=Path, help="Indexed PNG using color IDs 0-3")
+    parser.add_argument("png", type=Path, help="Indexed PNG; scene atlases use indices 0-31")
     parser.add_argument("output", type=Path, help="Existing .bin used as the header/size template")
     parser.add_argument("--rgbgfx", default="rgbgfx", help="Path to the RGBDS rgbgfx executable")
+    parser.add_argument("--scene-atlas", action="store_true",
+                        help="Read colored scene indices as palette * 4 + color ID")
     args = parser.parse_args()
     try:
-        changed, size = rebuild_png(args.png, args.output, args.rgbgfx)
+        changed, size = rebuild_png(args.png, args.output, args.rgbgfx, args.scene_atlas)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         parser.exit(1, "error: {}\n".format(error))
     action = "Updated" if changed else "Kept unchanged"

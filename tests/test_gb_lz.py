@@ -52,13 +52,15 @@ class CodecTests(unittest.TestCase):
     def test_original_resources_stay_byte_exact(self):
         for region in ("US", "JP"):
             font = "case1_font" if region == "JP" else "font"
-            for name, expected_size in (("gfx/" + font, 2048), ("gfx/hud_tiles", 1792),
-                                        ("gfx/case2_font", 2048), ("gfx/case2_hud_tiles", 2048),
-                                        ("case2/scenes/00-bathroom/background", 2048),
-                                        ("case2/scenes/00-bathroom/background-extra", 544),
-                                        ("case2/scenes/00-bathroom/objects", 1024)):
+            graphics = region + "/gfx/"
+            bathroom = "scene/case2/00-bathroom/" + region + "/"
+            for name, expected_size in ((graphics + font, 2048), (graphics + "hud_tiles", 1792),
+                                        (graphics + "case2_font", 2048), (graphics + "case2_hud_tiles", 2048),
+                                        (bathroom + "s00-bg", 2048),
+                                        (bathroom + "s00-bg-extra", 544),
+                                        (bathroom + "s00-objects", 1024)):
                 with self.subTest(region=region, name=name):
-                    path = ROOT / "res" / region / (name + ".bin")
+                    path = ROOT / "res" / (name + ".bin")
                     template = path.read_bytes()
                     tiles, _ = decode(template[3:], expected_size)
                     self.assertEqual(template[2] * 16, expected_size)
@@ -67,11 +69,14 @@ class CodecTests(unittest.TestCase):
     def test_edited_resources_keep_header_size_and_pixels(self):
         for region in ("US", "JP"):
             font = "case1_font" if region == "JP" else "font"
-            for name in ("gfx/" + font, "gfx/hud_tiles", "gfx/case2_font", "gfx/case2_hud_tiles",
-                         "case2/scenes/00-bathroom/background", "case2/scenes/00-bathroom/background-extra",
-                         "case2/scenes/00-bathroom/objects"):
+            graphics = region + "/gfx/"
+            bathroom = "scene/case2/00-bathroom/" + region + "/"
+            for name in (graphics + font, graphics + "hud_tiles", graphics + "case2_font", graphics + "case2_hud_tiles",
+                         bathroom + "s00-bg",
+                         bathroom + "s00-bg-extra",
+                         bathroom + "s00-objects"):
                 with self.subTest(region=region, name=name):
-                    path = ROOT / "res" / region / (name + ".bin")
+                    path = ROOT / "res" / (name + ".bin")
                     template = path.read_bytes()
                     tiles, _ = decode(template[3:], template[2] * 16)
                     edited = bytearray(tiles)

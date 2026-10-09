@@ -2,6 +2,28 @@
 """Codec for $17 tilemaps loaded by bank 0, $05CE/$065C."""
 
 
+def decode_runs(stream, output_size, marker):
+    """Expand literal bytes and marker/value/repeat runs to the requested size."""
+    output = bytearray()
+    cursor = 0
+    while len(output) < output_size:
+        if cursor >= len(stream):
+            raise ValueError("Truncated RLE stream")
+        value = stream[cursor]
+        cursor += 1
+        count = 1
+        if value == marker:
+            if cursor + 2 > len(stream):
+                raise ValueError("Truncated RLE run")
+            value, repeats = stream[cursor:cursor + 2]
+            cursor += 2
+            count += repeats
+        # The engine keeps run state across rows and plane boundaries.
+        count = min(count, output_size - len(output))
+        output.extend([value] * count)
+    return bytes(output), cursor
+
+
 def decode_resource(resource):
     """Return width, height, tile IDs, attributes, and bytes consumed."""
     if len(resource) < 4 or resource[0] != 0x17:
@@ -10,24 +32,8 @@ def decode_resource(resource):
     if not 1 <= width <= 32 or not 1 <= height <= 32:
         raise ValueError("Tilemap dimensions must be between 1 and 32")
     plane_size = width * height
-    output = bytearray()
-    cursor = 4
-    while len(output) < plane_size * 2:
-        if cursor >= len(resource):
-            raise ValueError("Truncated tilemap stream")
-        value = resource[cursor]
-        cursor += 1
-        count = 1
-        if value == marker:
-            if cursor + 2 > len(resource):
-                raise ValueError("Truncated tilemap run")
-            value, repeats = resource[cursor:cursor + 2]
-            cursor += 2
-            count += repeats
-        # Runs can span rows and the boundary between tile IDs and attributes.
-        count = min(count, plane_size * 2 - len(output))
-        output.extend([value] * count)
-    return width, height, bytes(output[:plane_size]), bytes(output[plane_size:]), cursor
+    output, cursor = decode_runs(resource[4:], plane_size * 2, marker)
+    return width, height, output[:plane_size], output[plane_size:], cursor + 4
 
 
 def encode(data, marker):

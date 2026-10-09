@@ -82,7 +82,7 @@ class SpriteTests(unittest.TestCase):
             self.draw([(16, 8, 0, 8)], {0: bytes(16)})
 
     def test_bathroom_initial_selection_and_regional_previews(self):
-        objects = scene_objects(ROOT / "res" / "shared")
+        objects = scene_objects(ROOT / "res")
         self.assertEqual([(x, y, len(parts)) for x, y, parts in objects],
                          [(78, 45, 4), (41, 23, 10), (57, 23, 8)])
         oam = emit_oam(objects)
@@ -96,11 +96,11 @@ class SpriteTests(unittest.TestCase):
                 self.assertNotEqual(us, render(ROOT / "res" / "US", door))
 
     def test_presence_and_visibility_are_independent(self):
-        shared = ROOT / "res" / "shared"
+        resources = ROOT / "res"
         # An enabled visibility flag cannot resurrect an absent object.
-        present = scene_objects(shared, visible={0, 1, 2, 3, 4}, present={1, 2})
+        present = scene_objects(resources, visible={0, 1, 2, 3, 4}, present={1, 2})
         self.assertEqual([(x, y) for x, y, _ in present], [(41, 23), (57, 23)])
-        hidden = scene_objects(shared, visible=set(), present={0, 1, 2})
+        hidden = scene_objects(resources, visible=set(), present={0, 1, 2})
         self.assertEqual(hidden, [])
 
 

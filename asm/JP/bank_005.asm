@@ -2557,25 +2557,25 @@ jr_005_4a0d:
 
 jr_005_4a13:
 Case2BathroomObjects:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $0, $8
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $0, $8
 jr_005_4a1b:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $8, $12
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $8, $12
 jr_005_4a2d:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $1a, $7
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $1a, $7
 jr_005_4a34:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $21, $5
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $21, $5
 jr_005_4a39:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $26, $6
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $26, $6
 jr_005_4a3f:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $2c, $6
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $2c, $6
 jr_005_4a45:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $32, $c
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $32, $c
 jr_005_4a51:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $3e, $6
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $3e, $6
 jr_005_4a57:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $44, $6
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $44, $6
 jr_005_4a5d:
-    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.hitboxes", $4a, $4
+    INCBIN "../../res/scene/case2/00-bathroom/s00-objects.hitboxes", $4a, $4
     ld b, a
     ld e, b
 
