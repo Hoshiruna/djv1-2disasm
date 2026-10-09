@@ -242,13 +242,13 @@ jr_003_418c:
 
 
 Case2InitialObjectFlags:
-    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $0, $4
+    INCBIN "../../res/shared/case2/common/initial-visibility.bin", $0, $4
 jr_003_419a:
-    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $4, $39
+    INCBIN "../../res/shared/case2/common/initial-visibility.bin", $4, $39
 jr_003_41d3:
-    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $3d, $12
+    INCBIN "../../res/shared/case2/common/initial-visibility.bin", $3d, $12
 jr_003_41e5:
-    INCBIN "../../res/shared/objects/case2_initial_flags.bin", $4f, $9
+    INCBIN "../../res/shared/case2/common/initial-visibility.bin", $4f, $9
 
 Call_003_41ee:
     call Call_003_4236

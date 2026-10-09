@@ -10,6 +10,9 @@ __pycache__/
 *.py[cod]
 /res/*/text/.rebuild-stamp
 
+# Local research and handoff notes
+/locate_notes/
+
 # Local development tools and their installers
 /tools/
 *.exe

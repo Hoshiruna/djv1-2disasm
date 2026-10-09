@@ -2669,17 +2669,17 @@ jr_002_4bd9:
     ld e, e
     db $c4, $5b
 Case2BathroomSprite00:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $0, $11
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $0, $11
 Case2BathroomSprite01:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $11, $29
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $11, $29
 Case2BathroomSprite02:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $3a, $1b
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $3a, $1b
 jr_002_4cdd:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $55, $6
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $55, $6
 Case2BathroomSprite03:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $5b, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $5b, $9
 Case2BathroomSprite04:
-    INCBIN "../../res/shared/objects/case2_bathroom.sprites", $64, $d
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.sprites", $64, $d
     dec b
     nop
     nop
@@ -5979,15 +5979,15 @@ jr_002_5cb7:
     ld a, [hl-]
     ld e, a
 Case2BathroomAnimation00:
-    INCBIN "../../res/shared/objects/case2_bathroom.animations", $0, $5
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.animations", $0, $5
 Case2BathroomAnimation01:
-    INCBIN "../../res/shared/objects/case2_bathroom.animations", $5, $5
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.animations", $5, $5
 Case2BathroomAnimation02:
-    INCBIN "../../res/shared/objects/case2_bathroom.animations", $a, $5
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.animations", $a, $5
 Case2BathroomAnimation03:
-    INCBIN "../../res/shared/objects/case2_bathroom.animations", $f, $5
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.animations", $f, $5
 Case2BathroomAnimation04:
-    INCBIN "../../res/shared/objects/case2_bathroom.animations", $14, $5
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.animations", $14, $5
     cp $05
     rst RST_38
     rst RST_38
@@ -10109,7 +10109,7 @@ jr_002_734b:
     db $10
     add b
 Case2ObjectPositions:
-    INCBIN "../../res/shared/objects/case2_bathroom.positions", $0, $a
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.positions", $0, $a
 
 jr_002_7370:
     ld c, d

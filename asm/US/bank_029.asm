@@ -29,42 +29,42 @@ jr_029_410d:
     db $5b, $51, $5b, $60, $5b, $73, $5b
 Case2BathroomDoorClosed: ; $2F, width 4, height 8
     db $2f, $04, $08
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $0, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $0, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $4, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $4, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $8, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $8, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $10, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $10, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $14, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $14, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $18, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $18, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap", $1c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap", $1c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $0, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $0, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $4, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $4, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $8, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $8, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $10, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $10, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $14, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $14, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $18, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $18, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap", $1c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap", $1c, $4
 Case2BathroomDoorOpen: ; $2F, width 4, height 8
     db $2f, $04, $08
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $0, $2
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $0, $2
 jr_029_415c:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $2, $2
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $0, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $4, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $4, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $8, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $8, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $10, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $10, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $14, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $14, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $18, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $18, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.tilemap", $1c, $4
-    INCBIN "../../res/shared/tilemaps/case2_bathroom_door_open.attrmap", $1c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $2, $2
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $0, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $4, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $4, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $8, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $8, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $10, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $10, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $14, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $14, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $18, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $18, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.tilemap", $1c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/door-open.attrmap", $1c, $4
     db $2f, $01, $08, $6c, $0d, $6d, $0d, $6d, $0d, $6e, $0d, $6d, $0d, $6d, $0d, $6f
     db $0d, $70, $0a, $2f, $01, $08, $71, $08, $71, $08, $71, $08, $71, $08, $71, $08
     db $71, $08, $71, $08, $72, $08, $2f, $04, $05, $96, $97, $98, $99, $0c, $0c, $0c

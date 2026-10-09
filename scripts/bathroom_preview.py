@@ -11,10 +11,13 @@ from gb_sprites import color_index, decode_metasprites, emit_oam, overlay
 from hud_tilemap import encode_png, palette_colors, render_pixels
 
 
+BATHROOM = Path("case2/scenes/00-bathroom")
+
+
 def apply_door(tilemap, attributes, shared, state):
     """Replace the 4x8 door rectangle at tile position (5, 2)."""
-    folder = shared / "tilemaps"
-    name = "case2_bathroom_door_" + state
+    folder = shared / BATHROOM
+    name = "door-" + state
     patch_tiles = (folder / (name + ".tilemap")).read_bytes()
     patch_attributes = (folder / (name + ".attrmap")).read_bytes()
     if len(patch_tiles) != 32 or len(patch_attributes) != 32:
@@ -30,7 +33,7 @@ def apply_door(tilemap, attributes, shared, state):
 
 def initial_visibility(shared):
     """Read the object IDs enabled by Case II initialization."""
-    flags = (shared / "objects" / "case2_initial_flags.bin").read_bytes()
+    flags = (shared / "case2/common/initial-visibility.bin").read_bytes()
     if not flags or flags[-1] != 0xFF:
         raise ValueError("Initial visibility flags must end with $FF")
     return set(flags[:-1])
@@ -38,11 +41,11 @@ def initial_visibility(shared):
 
 def scene_objects(shared, visible=None, present=None):
     """Select room-zero sprites whose presence and visibility flags are both set."""
-    folder = shared / "objects"
-    definitions = decode_metasprites((folder / "case2_bathroom.sprites").read_bytes())
-    positions = (folder / "case2_bathroom.positions").read_bytes()
-    animations = (folder / "case2_bathroom.animations").read_bytes()
-    hitboxes = (folder / "case2_bathroom.hitboxes").read_bytes()
+    folder = shared / BATHROOM
+    definitions = decode_metasprites((folder / "objects.sprites").read_bytes())
+    positions = (folder / "objects.positions").read_bytes()
+    animations = (folder / "objects.animations").read_bytes()
+    hitboxes = (folder / "objects.hitboxes").read_bytes()
     if len(positions) != len(definitions) * 2 or len(animations) != len(definitions) * 5:
         raise ValueError("Bathroom positions and animations must match the sprite records")
     if len(hitboxes) % 7 != 1 or hitboxes[-1] != 0xFF:
@@ -74,7 +77,7 @@ def scene_objects(shared, visible=None, present=None):
 def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
     """Add the initial room objects using their tiles and palette."""
     shared = region.parent / "shared"
-    resource = (region / "gfx" / "case2_bathroom_object_tiles.bin").read_bytes()
+    resource = (region / BATHROOM / "objects.bin").read_bytes()
     raw, _ = decode(resource[3:], resource[2] * 16)
     sprite_tiles = {resource[1] + index: raw[index * 16:(index + 1) * 16]
                     for index in range(resource[2])}
@@ -87,7 +90,7 @@ def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
                 offset = (cell // 14 * 8 + y) * 112 + cell % 14 * 8 + x
                 indices[offset] = color_index(background_tiles[tile_id], x, y, attribute)
                 priorities[offset] = attribute & 0x80
-    colors = palette_colors((shared / "palettes" / "case2_bathroom_objects.pal").read_bytes())
+    colors = palette_colors((shared / BATHROOM / "objects.pal").read_bytes())
     oam = emit_oam(scene_objects(shared))
     return overlay(112, 112, pixels, indices, priorities, oam, sprite_tiles, colors)
 
@@ -96,20 +99,20 @@ def render(region, door="closed", objects=False):
     """Use shared map/palette data and one region's compressed graphics."""
     shared = region.parent / "shared"
     tiles = {}
-    for name in ("case2_bathroom_tiles", "case2_bathroom_extra_tiles"):
-        resource = (region / "gfx" / (name + ".bin")).read_bytes()
+    for name in ("background", "background-extra"):
+        resource = (region / BATHROOM / (name + ".bin")).read_bytes()
         raw, _ = decode(resource[3:], resource[2] * 16)
         for index in range(resource[2]):
             tiles[resource[1] + index] = raw[index * 16:(index + 1) * 16]
-    tilemap = (shared / "tilemaps" / "case2_bathroom.tilemap").read_bytes()
-    attributes = (shared / "tilemaps" / "case2_bathroom.attrmap").read_bytes()
+    tilemap = (shared / BATHROOM / "layout.tilemap").read_bytes()
+    attributes = (shared / BATHROOM / "layout.attrmap").read_bytes()
     if door != "base":
         if door not in ("closed", "open"):
             raise ValueError("Door state must be base, closed, or open")
         tilemap, attributes = apply_door(tilemap, attributes, shared, door)
         # Startup graphics leave a blank $FF tile in the background staging bank.
         tiles[0xFF] = bytes(16)
-    palette = (shared / "palettes" / "case2_bathroom.pal").read_bytes()
+    palette = (shared / BATHROOM / "background.pal").read_bytes()
     pixels = render_pixels(14, 14, tilemap, attributes, tiles,
                            palette_colors(palette), tile_bank=1)
     if objects:
@@ -128,11 +131,11 @@ def main():
     try:
         objects = args.objects
         png = render(args.region, args.door, objects)
-        name = "case2_bathroom" + ("_objects" if objects else "")
+        name = "00-bathroom" + ("-objects" if objects else "")
         if args.door != "closed":
-            name += "_" + args.door
+            name += "-" + args.door
         folder = (Path(gettempdir()) if objects or args.door != "closed"
-                  else args.region.parent / "shared" / "tilemaps")
+                  else args.region.parent / "shared/case2/previews")
         output = args.output or folder / (name + ".png")
         output.write_bytes(png)
     except (OSError, ValueError) as error:

@@ -459,41 +459,41 @@ jr_032_4224:
     db $0f, $17, $00, $05, $03, $03, $17, $00, $02, $5e, $7e, $5e, $17, $00, $19
 ; Resource $81: 64 Case II bathroom object tiles.
 Case2BathroomObjectTiles:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $0, $74
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $0, $74
 jr_032_42e7:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $74, $12b
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $74, $12b
 jr_032_4412:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $19f, $1c
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $19f, $1c
 jr_032_442e:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $1bb, $8
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $1bb, $8
 jr_032_4436:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $1c3, $d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $1c3, $d
 jr_032_4443:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $1d0, $5e
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $1d0, $5e
 jr_032_44a1:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $22e, $1
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $22e, $1
 jr_032_44a2:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $22f, $9
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $22f, $9
 jr_032_44ab:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $238, $11
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $238, $11
 jr_032_44bc:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $249, $2f
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $249, $2f
 jr_032_44eb:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $278, $6
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $278, $6
 jr_032_44f1:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $27e, $2a
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $27e, $2a
 jr_032_451b:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $2a8, $14
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $2a8, $14
 jr_032_452f:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $2bc, $3b
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $2bc, $3b
 jr_032_456a:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $2f7, $2
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $2f7, $2
 jr_032_456c:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $2f9, $1a
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $2f9, $1a
 jr_032_4586:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $313, $4
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $313, $4
 jr_032_458a:
-    INCBIN "../../res/US/gfx/case2_bathroom_object_tiles.bin", $317, $f
+    INCBIN "../../res/US/case2/scenes/00-bathroom/objects.bin", $317, $f
     db $1c, $00, $40, $ff, $08, $07, $18, $27, $19, $27, $3b, $67, $ff, $5e, $23, $7c
     db $03, $fd, $02, $fd, $02, $ff, $00, $00, $00, $c0, $40, $80, $60, $80, $df, $e0
     db $00, $e0, $00, $f0, $1b, $00, $ff, $00, $ff, $df, $30, $bf, $70, $3f, $e0, $1e

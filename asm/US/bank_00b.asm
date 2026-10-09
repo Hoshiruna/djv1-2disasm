@@ -30,21 +30,21 @@ jr_00b_408f:
     db $52, $98, $52, $d8, $52, $18, $53, $58, $53
 jr_00b_4098:
 Case2BathroomPalette:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $0, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $0, $9
 jr_00b_40a1:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $9, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $9, $9
 jr_00b_40aa:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $12, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $12, $9
 jr_00b_40b3:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $1b, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $1b, $9
 jr_00b_40bc:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $24, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $24, $9
 jr_00b_40c5:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $2d, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $2d, $9
 jr_00b_40ce:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $36, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $36, $9
 jr_00b_40d7:
-    INCBIN "../../res/shared/palettes/case2_bathroom.pal", $3f, $1
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/background.pal", $3f, $1
     db $00, $00, $d6, $00, $c0, $1e, $ee, $6f
 
 jr_00b_40e0:
@@ -4442,21 +4442,21 @@ jr_00b_542d:
     db $66, $f0, $66
 ; Case II scene $00 object palette set: eight RGB555 palettes.
 Case2BathroomObjectPalettes:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $0, $6
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $0, $6
 jr_00b_5436:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $6, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $6, $9
 jr_00b_543f:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $f, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $f, $9
 jr_00b_5448:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $18, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $18, $9
 jr_00b_5451:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $21, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $21, $9
 jr_00b_545a:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $2a, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $2a, $9
 jr_00b_5463:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $33, $9
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $33, $9
 jr_00b_546c:
-    INCBIN "../../res/shared/palettes/case2_bathroom_objects.pal", $3c, $4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/objects.pal", $3c, $4
     db $e0, $7f, $00, $00, $d6, $5a, $ff, $7f, $e0, $7f, $00, $00, $af, $01, $7f, $03
     db $e0, $7f, $20, $55, $60, $7e, $ff
 

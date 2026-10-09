@@ -3,11 +3,11 @@
 PYTHON ?= python3
 RGBGFX ?= rgbgfx
 
-BATHROOM_OBJECT_DATA := ../../res/shared/objects/case2_bathroom.sprites \
-    ../../res/shared/objects/case2_bathroom.animations \
-    ../../res/shared/objects/case2_bathroom.positions \
-    ../../res/shared/objects/case2_bathroom.hitboxes \
-    ../../res/shared/objects/case2_initial_flags.bin
+BATHROOM_OBJECT_DATA := ../../res/shared/case2/scenes/00-bathroom/objects.sprites \
+    ../../res/shared/case2/scenes/00-bathroom/objects.animations \
+    ../../res/shared/case2/scenes/00-bathroom/objects.positions \
+    ../../res/shared/case2/scenes/00-bathroom/objects.hitboxes \
+    ../../res/shared/case2/common/initial-visibility.bin
 
 TEXT_BANKS := $(wildcard ../../res/JP/text/banks/*.bin)
 TEXT_FILES := $(wildcard ../../res/JP/text/case1/*.txt ../../res/JP/text/case2/*.txt)
@@ -26,15 +26,15 @@ $(TEXT_STAMP): $(TEXT_FILES) ../../res/JP/text/editor.json \
 ../../res/JP/gfx/%.bin: ../../res/JP/gfx/%.png ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
-../../res/JP/gfx/case2_bathroom_tiles.bin: ../../res/shared/gfx/case2_bathroom_tiles.png \
+../../res/JP/case2/scenes/00-bathroom/background.bin: ../../res/shared/case2/scenes/00-bathroom/background.png \
     ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
-../../res/JP/gfx/case2_bathroom_extra_tiles.bin: ../../res/shared/gfx/case2_bathroom_extra_tiles.png \
+../../res/JP/case2/scenes/00-bathroom/background-extra.bin: ../../res/shared/case2/scenes/00-bathroom/background-extra.png \
     ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
-../../res/JP/gfx/case2_bathroom_object_tiles.bin: ../../res/shared/gfx/case2_bathroom_object_tiles.png \
+../../res/JP/case2/scenes/00-bathroom/objects.bin: ../../res/shared/case2/scenes/00-bathroom/objects.png \
     ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
@@ -58,18 +58,18 @@ hud-preview: ../../res/JP/tilemaps/hud.png
 game.o: game.asm hardware.inc bank_*.asm ../../res/JP/gfx/case1_font.bin \
     ../../res/JP/gfx/hud_tiles.bin ../../res/JP/palettes/hud.pal ../../res/JP/tilemaps/hud.bin \
     ../../res/JP/gfx/case2_font.bin ../../res/JP/gfx/case2_hud_tiles.bin \
-    ../../res/JP/gfx/case2_bathroom_tiles.bin \
-    ../../res/JP/gfx/case2_bathroom_extra_tiles.bin \
-    ../../res/shared/tilemaps/case2_bathroom.tilemap \
-    ../../res/shared/tilemaps/case2_bathroom.attrmap ../../res/shared/palettes/case2_bathroom.pal \
-    ../../res/shared/tilemaps/case2_bathroom_door_closed.tilemap \
-    ../../res/shared/tilemaps/case2_bathroom_door_closed.attrmap \
-    ../../res/shared/tilemaps/case2_bathroom_door_open.tilemap \
-    ../../res/shared/tilemaps/case2_bathroom_door_open.attrmap \
-    ../../res/JP/gfx/case2_bathroom_object_tiles.bin ../../res/shared/palettes/case2_bathroom_objects.pal \
-    ../../res/JP/scripts/case2_bathroom_towel_take.bin \
-    ../../res/shared/scripts/case2_bathroom_mirror_break.bin \
-    ../../res/JP/scripts/case2_bathroom_cold_tap_open.bin \
+    ../../res/JP/case2/scenes/00-bathroom/background.bin \
+    ../../res/JP/case2/scenes/00-bathroom/background-extra.bin \
+    ../../res/shared/case2/scenes/00-bathroom/layout.tilemap \
+    ../../res/shared/case2/scenes/00-bathroom/layout.attrmap ../../res/shared/case2/scenes/00-bathroom/background.pal \
+    ../../res/shared/case2/scenes/00-bathroom/door-closed.tilemap \
+    ../../res/shared/case2/scenes/00-bathroom/door-closed.attrmap \
+    ../../res/shared/case2/scenes/00-bathroom/door-open.tilemap \
+    ../../res/shared/case2/scenes/00-bathroom/door-open.attrmap \
+    ../../res/JP/case2/scenes/00-bathroom/objects.bin ../../res/shared/case2/scenes/00-bathroom/objects.pal \
+    ../../res/JP/case2/scenes/00-bathroom/towel-take.bin \
+    ../../res/shared/case2/scenes/00-bathroom/mirror-break.bin \
+    ../../res/JP/case2/scenes/00-bathroom/cold-tap-open.bin \
     $(BATHROOM_OBJECT_DATA) $(TEXT_BANKS) $(TEXT_STAMP)
 	rgbasm -o game.o game.asm
 
@@ -84,7 +84,7 @@ clean:
 	rm -f "$(TEXT_STAMP)"
 	rm -f ../../res/JP/gfx/case1_font.2bpp ../../res/JP/gfx/hud_tiles.2bpp
 	rm -f ../../res/JP/gfx/case2_font.2bpp ../../res/JP/gfx/case2_hud_tiles.2bpp
-	rm -f ../../res/JP/gfx/case2_bathroom_tiles.2bpp
-	rm -f ../../res/JP/gfx/case2_bathroom_extra_tiles.2bpp
-	rm -f ../../res/JP/gfx/case2_bathroom_object_tiles.2bpp
+	rm -f ../../res/JP/case2/scenes/00-bathroom/background.2bpp
+	rm -f ../../res/JP/case2/scenes/00-bathroom/background-extra.2bpp
+	rm -f ../../res/JP/case2/scenes/00-bathroom/objects.2bpp
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' \) -exec rm {} +

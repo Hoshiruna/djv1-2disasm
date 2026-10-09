@@ -122,117 +122,117 @@ jr_02a_4868:
 
 ; Case II opening bathroom, resource $02: 128 background tiles.
 Case2BathroomTiles:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $0, $7b
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $0, $7b
 jr_02a_492e:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $7b, $7f
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $7b, $7f
 jr_02a_49ad:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $fa, $6
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $fa, $6
 jr_02a_49b3:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $100, $14
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $100, $14
 jr_02a_49c7:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $114, $44
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $114, $44
 jr_02a_4a0b:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $158, $4d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $158, $4d
 jr_02a_4a58:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $1a5, $18
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $1a5, $18
 jr_02a_4a70:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $1bd, $9
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $1bd, $9
 jr_02a_4a79:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $1c6, $23
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $1c6, $23
 jr_02a_4a9c:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $1e9, $4
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $1e9, $4
 jr_02a_4aa0:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $1ed, $54
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $1ed, $54
 jr_02a_4af4:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $241, $44
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $241, $44
 jr_02a_4b38:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $285, $21
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $285, $21
 jr_02a_4b59:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $2a6, $5
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $2a6, $5
 jr_02a_4b5e:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $2ab, $3
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $2ab, $3
 jr_02a_4b61:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $2ae, $9
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $2ae, $9
 jr_02a_4b6a:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $2b7, $63
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $2b7, $63
 jr_02a_4bcd:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $31a, $d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $31a, $d
 jr_02a_4bda:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $327, $2d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $327, $2d
 jr_02a_4c07:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $354, $e
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $354, $e
 jr_02a_4c15:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $362, $19
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $362, $19
 jr_02a_4c2e:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $37b, $22
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $37b, $22
 jr_02a_4c50:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $39d, $3
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $39d, $3
 jr_02a_4c53:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $3a0, $11
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $3a0, $11
 jr_02a_4c64:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $3b1, $2c
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $3b1, $2c
 jr_02a_4c90:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $3dd, $d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $3dd, $d
 jr_02a_4c9d:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $3ea, $7
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $3ea, $7
 jr_02a_4ca4:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $3f1, $10
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $3f1, $10
 jr_02a_4cb4:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $401, $20
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $401, $20
 jr_02a_4cd4:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $421, $16
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $421, $16
 jr_02a_4cea:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $437, $33
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $437, $33
 jr_02a_4d1d:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $46a, $50
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $46a, $50
 jr_02a_4d6d:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $4ba, $18
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $4ba, $18
 jr_02a_4d85:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $4d2, $9
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $4d2, $9
 jr_02a_4d8e:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $4db, $1
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $4db, $1
 jr_02a_4d8f:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $4dc, $32
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $4dc, $32
 jr_02a_4dc1:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $50e, $9
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $50e, $9
 jr_02a_4dca:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $517, $1c
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $517, $1c
 jr_02a_4de6:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $533, $31
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $533, $31
 jr_02a_4e17:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $564, $c
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $564, $c
 jr_02a_4e23:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $570, $41
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $570, $41
 jr_02a_4e64:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $5b1, $14
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $5b1, $14
 jr_02a_4e78:
-    INCBIN "../../res/US/gfx/case2_bathroom_tiles.bin", $5c5, $44
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background.bin", $5c5, $44
 
 ; Case II opening bathroom, resource $03: 34 additional background tiles.
 Case2BathroomExtraTiles:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $0, $16
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $0, $16
 jr_02a_4ed2:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $16, $25
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $16, $25
 jr_02a_4ef7:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $3b, $b
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $3b, $b
 jr_02a_4f02:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $46, $16
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $46, $16
 jr_02a_4f18:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $5c, $c
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $5c, $c
 jr_02a_4f24:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $68, $15
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $68, $15
 jr_02a_4f39:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $7d, $7d
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $7d, $7d
 jr_02a_4fb6:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $fa, $5
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $fa, $5
 jr_02a_4fbb:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $ff, $16
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $ff, $16
 jr_02a_4fd1:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $115, $a
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $115, $a
 jr_02a_4fdb:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $11f, $28
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $11f, $28
 Jump_02a_5003:
-    INCBIN "../../res/US/gfx/case2_bathroom_extra_tiles.bin", $147, $16
+    INCBIN "../../res/US/case2/scenes/00-bathroom/background-extra.bin", $147, $16
 
 ; Beginning of resource $04, retained through the next original label.
     db $1d, $00, $74, $dd, $ff, $00, $05, $fe, $fe, $fc, $0b, $01, $5f, $7f, $ff, $5e

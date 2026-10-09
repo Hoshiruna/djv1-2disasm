@@ -14,25 +14,25 @@ Call_027_403f:
     db $6f, $50, $71, $d8, $72, $60, $74, $e8, $75, $70, $77, $f8, $78, $80, $7a, $08
     db $7c
 Case2BathroomMap:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $0, $12
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $0, $12
 jr_027_4062:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $12, $7
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $12, $7
 jr_027_4069:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $19, $7
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $19, $7
 jr_027_4070:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $20, $2e
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $20, $2e
 jr_027_409e:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $4e, $1b
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $4e, $1b
 jr_027_40b9:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $69, $14
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $69, $14
 jr_027_40cd:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $7d, $a
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $7d, $a
 jr_027_40d7:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $87, $14
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $87, $14
 jr_027_40eb:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.tilemap", $9b, $29
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.tilemap", $9b, $29
 Case2BathroomAttributes:
-    INCBIN "../../res/shared/tilemaps/case2_bathroom.attrmap", $0, $c4
+    INCBIN "../../res/shared/case2/scenes/00-bathroom/layout.attrmap", $0, $c4
     db $5d, $49, $4a, $4b, $4c, $4a, $4b, $4c, $4a, $4b, $4c, $73, $68, $6c, $5d, $49
     db $0d, $0e, $0f, $4a, $4b, $4c, $4a, $40, $41, $73, $69, $6d, $5d, $49, $1d, $1e
     db $1f, $4a, $4b, $4c, $52, $50, $51, $53, $69, $6d, $00, $01, $02, $03, $04, $05

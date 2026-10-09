@@ -90,7 +90,7 @@ class RendererTests(unittest.TestCase):
             render_pixels(1, 1, b"\x00", b"\x02", tiles, colors, tile_bank=1)
 
     def test_bathroom_preview_matches_both_regions(self):
-        png = (ROOT / "res/shared/tilemaps/case2_bathroom.png").read_bytes()
+        png = (ROOT / "res/shared/case2/previews/00-bathroom.png").read_bytes()
         self.assertEqual(struct.unpack_from(">II", png, 16), (112, 112))
         for region in ("US", "JP"):
             with self.subTest(region=region):
@@ -98,8 +98,8 @@ class RendererTests(unittest.TestCase):
 
     def test_door_patch_replaces_only_its_rectangle(self):
         shared = ROOT / "res" / "shared"
-        tiles = (shared / "tilemaps/case2_bathroom.tilemap").read_bytes()
-        attributes = (shared / "tilemaps/case2_bathroom.attrmap").read_bytes()
+        tiles = (shared / "case2/scenes/00-bathroom/layout.tilemap").read_bytes()
+        attributes = (shared / "case2/scenes/00-bathroom/layout.attrmap").read_bytes()
         self.assertEqual(apply_door(tiles, attributes, shared, "closed"), (tiles, attributes))
         opened_tiles, opened_attributes = apply_door(tiles, attributes, shared, "open")
         rectangle = {(y + 2) * 14 + x + 5 for y in range(8) for x in range(4)}
