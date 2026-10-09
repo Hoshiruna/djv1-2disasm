@@ -28,3 +28,31 @@ DEF wBgPalNext    EQU $dbc0
 DEF wObjPalNext   EQU $dc00
 DEF wBgPal        EQU $db40
 DEF wObjPal       EQU $db80
+
+; Scene selection and Case II map patches; scratch bytes are reused by other paths.
+DEF wRoomDataPtr     EQU $c85e
+DEF wStateResult     EQU $c523
+DEF wPatchId         EQU $c868
+DEF wPatchList       EQU $c869 ; Nine entries; $fe ends the list.
+DEF wPatchBase       EQU $c873
+DEF wPatchBits       EQU $c874
+DEF wPatchDst        EQU $c5c3
+DEF wPatchWidth      EQU $c5c5
+DEF wPatchHeight     EQU $c5c6
+DEF wSceneMap        EQU $c902
+
+; Masked scene drawing and map transfer queue; these scratch bytes have other uses.
+DEF wSceneFx         EQU $c640
+DEF wDrawSteps       EQU $c5c3
+DEF wDrawRow         EQU $c877
+DEF wDrawStep        EQU $c878
+DEF wDrawMask        EQU $c883
+DEF wDrawMaskPtr     EQU $c857
+DEF wCellRect        EQU $c19e
+DEF wCellTile        EQU $c1a0
+DEF wCellAttr        EQU $c1a1
+DEF wMapQueue        EQU $c0a0
+DEF hMapQueueLen     EQU $ff90
+DEF hMapWidth        EQU $ff92
+DEF hMapHeight       EQU $ff93
+DEF hMapRunLeft      EQU $ff95

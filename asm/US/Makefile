@@ -75,7 +75,7 @@ bathroom-door-open-preview: ../../res/scene/case2/previews/00-lucky-bath.png \
 %.1bpp: %.png
 	"$(RGBGFX)" -d 1 -o $@ $<
 
-game.o: game.asm hardware.inc ../scene.inc bank_*.asm ../../res/ui/US/font.bin \
+game.o: $(wildcard *.asm) hardware.inc ../scene.inc ../../res/ui/US/font.bin \
     ../../res/ui/US/hud_tiles.bin ../../res/ui/US/hud.pal ../../res/ui/US/hud.bin \
     ../../res/ui/US/case2_font.bin ../../res/ui/US/case2_hud_tiles.bin \
     ../../res/scene/case2/00-lucky-bath/US/s00-bg.bin \

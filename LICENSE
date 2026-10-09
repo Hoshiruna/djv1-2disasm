@@ -8,7 +8,7 @@ It does not license any other file in this repository.
 
 Game-derived content
 --------------------
-game.asm and bank_*.asm under asm/JP/ and asm/US/ contain disassemblies of
+The .asm files under asm/JP/ and asm/US/ contain disassemblies of
 "Deja Vu I & II - The Casebooks of Ace Harding" (Japan and USA).
 Rights in the original game's code, text, graphics, audio, and other data
 remain with their respective rights

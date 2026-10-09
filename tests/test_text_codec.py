@@ -187,7 +187,7 @@ class ResourceTests(unittest.TestCase):
             document = read_json(ROOT / "res" / "text" / region / "dialogue.json")
             for table in document["pointer_tables"]:
                 bank = int(table["bank"], 16)
-                source = (ROOT / "asm" / region / ("bank_{:03x}.asm".format(bank))).read_text(encoding="utf-8")
+                source = (ROOT / "asm" / region / ("text_{:02x}.asm".format(bank))).read_text(encoding="utf-8")
                 cursor = 0
                 for line in source.splitlines():
                     include = re.match(r'\s*INCBIN "([^\"]+)", \$([0-9a-f]+), \$([0-9a-f]+)$', line)

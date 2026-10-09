@@ -664,7 +664,7 @@ Jump_000_01fe:
 
 Call_000_0200:
 Jump_000_0200:
-    call Call_000_03d3
+    call SubmitMapQueue
 
 Jump_000_0203:
     jr jr_000_01e0
@@ -678,7 +678,7 @@ Call_000_0207:
 Call_000_0209:
     jr c, jr_000_020e
 
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_000_020e:
     pop de
@@ -774,7 +774,7 @@ jr_000_0250:
     cp $80
     jr c, jr_000_0250
 
-    call Call_000_03d3
+    call SubmitMapQueue
     jr jr_000_0246
 
 jr_000_026b:
@@ -782,7 +782,7 @@ jr_000_026b:
     cp $80
     jr c, jr_000_0274
 
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_000_0274:
     pop de
@@ -844,156 +844,7 @@ jr_000_028b:
     ld c, a
     ld a, [hl+]
     ld b, a
-
-Call_000_02a5:
-    push af
-    push de
-    ld a, [hl+]
-    ldh [$ff92], a
-    ld a, [hl+]
-
-Call_000_02ab:
-    ldh [$ff93], a
-
-jr_000_02ad:
-    ldh a, [$ff90]
-    add $a0
-    ld e, a
-    ld a, $00
-    adc $c0
-    ld d, a
-
-jr_000_02b7:
-    ldh a, [$ff92]
-
-Jump_000_02b9:
-    ldh [$ff95], a
-    call Call_000_02df
-    ldh a, [$ff93]
-
-Call_000_02c0:
-    sub $01
-
-Jump_000_02c2:
-    ldh [$ff93], a
-    cp $00
-    jr z, jr_000_02d3
-
-    ldh a, [$ff90]
-    cp $80
-    jr c, jr_000_02b7
-
-    call Call_000_03d3
-    jr jr_000_02ad
-
-jr_000_02d3:
-    ldh a, [$ff90]
-    cp $80
-    jr c, jr_000_02dc
-
-Jump_000_02d9:
-    call Call_000_03d3
-
-jr_000_02dc:
-    pop de
-    pop af
-
-Jump_000_02de:
-    ret
-
-
-Call_000_02df:
-    call Call_000_02fe
-    call Call_000_0305
-    call Call_000_0327
-    ldh a, [$ff92]
-    ldh [$ff95], a
-    call Call_000_02fe
-    call Call_000_0314
-    call Call_000_0327
-    ld a, $20
-    add c
-    ld c, a
-    ld a, $00
-    adc b
-
-Call_000_02fc:
-Jump_000_02fc:
-    ld b, a
-
-Jump_000_02fd:
-    ret
-
-
-Call_000_02fe:
-    ld a, b
-
-Call_000_02ff:
-Jump_000_02ff:
-    ld [de], a
-
-Call_000_0300:
-    inc de
-
-Jump_000_0301:
-    ld a, c
-    ld [de], a
-
-Jump_000_0303:
-    inc de
-    ret
-
-
-Call_000_0305:
-    push bc
-    ldh a, [$ff90]
-    ld b, a
-    ldh a, [$ff92]
-    ld [de], a
-    inc de
-    add $03
-    add b
-
-Call_000_0310:
-    ldh [$ff90], a
-    pop bc
-    ret
-
-
-Call_000_0314:
-    push bc
-    ldh a, [$ff90]
-    ld b, a
-    ldh a, [$ff92]
-    set 6, a
-    ld [de], a
-    ldh a, [$ff92]
-
-Call_000_031f:
-    inc de
-
-Jump_000_0320:
-    add $03
-    add b
-    ldh [$ff90], a
-    pop bc
-    ret
-
-
-Call_000_0327:
-jr_000_0327:
-    ld a, [hl+]
-    ld [de], a
-    inc de
-    ldh a, [$ff95]
-    sub $01
-    ldh [$ff95], a
-
-Jump_000_0330:
-    cp $00
-    jr nz, jr_000_0327
-
-    ret
+INCLUDE "map_queue.asm"
 
 
     ld a, [hl+]
@@ -1047,13 +898,13 @@ Jump_000_0363:
     cp $80
     jr c, jr_000_0353
 
-    call Call_000_03d3
+    call SubmitMapQueue
     jr jr_000_0349
 
 jr_000_0375:
     ldh a, [$ff90]
     cp $80
-    call nc, Call_000_03d3
+    call nc, SubmitMapQueue
     pop de
     pop af
     ret
@@ -1140,6 +991,8 @@ Call_000_03cd:
     ret
 
 
+; Request the queued map writes and wait for the next video update.
+SubmitMapQueue:
 Call_000_03d3:
 Jump_000_03d3:
     push hl
@@ -1553,121 +1406,7 @@ jr_000_055e:
     jr nz, jr_000_055e
 
     ret
-
-
-; HL = tile-count byte, BC = destination; decode count*16 LZ bytes.
-DecodeLzTiles:
-Jump_000_0568:
-jr_000_0568:
-    ld a, [hl+]
-    ld e, a
-    xor a
-    sla e
-    rla
-    sla e
-    rla
-    sla e
-    rla
-    sla e
-    rla
-    ld d, a
-    jp Jump_000_0680
-
-
-Call_000_057b:
-    call Call_000_057e
-
-Call_000_057e:
-    call Call_000_0581
-
-Call_000_0581:
-    call Call_000_05b0
-    ld [bc], a
-    inc bc
-    inc bc
-    ret
-
-
-; HL = marker byte, BC = low-plane destination; decode both interleaved planes.
-DecodeRleTiles:
-Jump_000_0588:
-jr_000_0588:
-    ld a, [hl+]
-    ldh [$ffe3], a
-    ld a, [hl+]
-    ld d, a
-    xor a
-    ldh [$ffe0], a
-    push bc
-    push de
-    call Call_000_0598
-    pop de
-    pop bc
-    inc bc
-
-Call_000_0598:
-jr_000_0598:
-    push de
-    ldh a, [$ffe0]
-    ld d, a
-    ldh a, [$ffe1]
-    ld e, a
-    call Call_000_057b
-
-Jump_000_05a2:
-    call Call_000_057b
-    ld a, d
-    ldh [$ffe0], a
-    ld a, e
-    ldh [$ffe1], a
-    pop de
-
-Call_000_05ac:
-    dec d
-    jr nz, jr_000_0598
-
-Call_000_05af:
-    ret
-
-
-Call_000_05b0:
-    bit 0, d
-    jr z, jr_000_05bd
-
-    xor a
-    cp e
-    jr z, jr_000_05bc
-
-    dec e
-    ldh a, [$ffe2]
-    ret
-
-
-jr_000_05bc:
-    ld d, a
-
-jr_000_05bd:
-    ldh a, [$ffe3]
-    cp [hl]
-    jr z, jr_000_05c4
-
-    ld a, [hl+]
-
-Jump_000_05c3:
-    ret
-
-
-jr_000_05c4:
-    inc hl
-    ld a, [hl+]
-    ldh [$ffe2], a
-    ld a, [hl+]
-    ld e, a
-    ldh a, [$ffe2]
-    inc d
-
-Jump_000_05cd:
-    ret
+INCLUDE "gfx_decode.asm"
 
 
 Call_000_05ce:
@@ -2085,56 +1824,7 @@ Jump_000_0775:
     ld a, $04
     ld [$c164], a
     ret
-
-; A = bank; save the previous ROM bank on the bank stack.
-PushRomBank:
-Call_000_0781:
-    push af
-
-Jump_000_0782:
-    ldh a, [$ff8e]
-    call Call_000_0799
-    pop af
-    ldh [$ff8e], a
-    ld [$2000], a
-    ret
-
-; Restore the most recently saved ROM bank; preserve A.
-PopRomBank:
-Call_000_078e:
-Jump_000_078e:
-    push af
-    call Call_000_07a5
-    ldh [$ff8e], a
-    ld [$2000], a
-    pop af
-    ret
-
-
-Call_000_0799:
-    push bc
-    push af
-    ldh a, [$ff8f]
-    ld c, a
-    dec a
-    ldh [$ff8f], a
-    pop af
-    ldh [c], a
-    pop bc
-
-Jump_000_07a4:
-    ret
-
-
-Call_000_07a5:
-    push bc
-    ldh a, [$ff8f]
-    inc a
-    ldh [$ff8f], a
-    ld c, a
-    ldh a, [c]
-    pop bc
-    ret
+INCLUDE "rom_bank.asm"
 
 
 Call_000_07af:
@@ -2606,245 +2296,7 @@ jr_000_0a6c:
     call PushRomBank
     ld hl, $4002
     jr jr_000_0a2a
-
-; Load requested graphics when their cached IDs change.
-LoadSceneGfx:
-Call_000_0a76:
-    ldh a, [hBgLoaded]
-    cp $ff
-    jr z, jr_000_0a82
-
-    ld b, a
-    ldh a, [hBgGfx]
-    cp b
-    jr z, jr_000_0a89
-
-Jump_000_0a82:
-jr_000_0a82:
-    ldh a, [hBgGfx]
-    ldh [hBgLoaded], a
-    call LoadSceneBg
-
-jr_000_0a89:
-    ldh a, [hObjLoaded]
-    cp $ff
-    jr z, jr_000_0a97
-
-    ld b, a
-    ldh a, [hObjGfx]
-    cp b
-    ret z
-
-    cp $7f
-    ret z
-
-jr_000_0a97:
-    ldh a, [hObjGfx]
-    ldh [hObjLoaded], a
-    call LoadSceneObj
-    ret
-
-; Request one $400-byte transfer and wait for VBlank to finish it.
-UploadGfxBlock:
-Call_000_0a9f:
-    ld hl, hVideoFlags
-    set 3, [hl]
-    jp Jump_000_01a9
-
-; A = ID; select its case-relative bank and return HL = resource pointer.
-GetGfxPtr:
-Call_000_0aa7:
-    ld e, a
-    swap a
-    and $0f
-    ld d, a
-    ld a, [wCaseId]
-
-Call_000_0ab0:
-    ld l, a
-    ld h, $00
-    ld bc, CaseGfxBanks
-    add hl, bc
-    ld a, [hl]
-    add d
-    call PushRomBank
-    ld a, e
-    and $0f
-    add a
-    ld e, a
-    ld a, $40
-    ld d, a
-    ld a, [de]
-    ld l, a
-    inc de
-
-Jump_000_0ac7:
-    ld a, [de]
-    ld h, a
-    ret
-CaseGfxBanks:
-    db $33
-Jump_000_0acb:
-    db $2a
-
-; A = first ID; unpack it and ID+1 in WRAM bank 2, then upload $1000 bytes.
-LoadSceneBg:
-Call_000_0acc:
-    push bc
-
-Call_000_0acd:
-    push de
-
-Call_000_0ace:
-    ld d, a
-    ldh a, [rSVBK]
-    push af
-    ld a, $02
-    ldh [rSVBK], a
-    ld a, d
-    push af
-    call GetGfxPtr
-    call UnpackSceneGfx
-    call PopRomBank
-    pop af
-    inc a
-    call GetGfxPtr
-    call UnpackSceneGfx
-    call PopRomBank
-    pop af
-    ldh [rSVBK], a
-    call Call_000_01a9
-
-Jump_000_0af2:
-    ld a, $01
-    ldh [hGfxVramBank], a
-    ld hl, $d000
-    ld a, l
-    ldh [hGfxSrcLo], a
-    ld a, h
-    ldh [hGfxSrcHi], a
-    ld hl, $9000
-    ld a, l
-    ldh [hGfxDstLo], a
-    ld a, h
-    ldh [hGfxDstHi], a
-    call UploadGfxBlock
-
-Call_000_0b0b:
-Jump_000_0b0b:
-    ld hl, $9400
-    ld a, l
-
-Jump_000_0b0f:
-    ldh [hGfxDstLo], a
-    ld a, h
-    ldh [hGfxDstHi], a
-    call UploadGfxBlock
-    ld hl, $8800
-    ld a, l
-    ldh [hGfxDstLo], a
-    ld a, h
-    ldh [hGfxDstHi], a
-    call UploadGfxBlock
-    ld hl, $8c00
-    ld a, l
-    ldh [hGfxDstLo], a
-    ld a, h
-    ldh [hGfxDstHi], a
-    call UploadGfxBlock
-    pop de
-    pop bc
-    ret
-
-; A = ID; unpack in WRAM bank 2 and upload $400 bytes to VRAM bank 0.
-LoadSceneObj:
-Call_000_0b32:
-    call GetGfxPtr
-    ldh a, [rSVBK]
-    push af
-    ld a, $02
-    ldh [rSVBK], a
-    call UnpackSceneGfx
-    pop af
-    ldh [rSVBK], a
-    call PopRomBank
-    call Call_000_01a9
-    ld a, $00
-    ldh [hGfxVramBank], a
-    ld hl, $d000
-    ld a, l
-    ldh [hGfxSrcLo], a
-    ld a, h
-    ldh [hGfxSrcHi], a
-    ld hl, $8000
-    ld a, l
-    ldh [hGfxDstLo], a
-    ld a, h
-
-Jump_000_0b5c:
-    ldh [hGfxDstHi], a
-    call UploadGfxBlock
-    ret
-
-; HL = resource; $ff is empty. Decode into the WRAM staging buffer.
-UnpackSceneGfx:
-Call_000_0b62:
-    ld a, [hl]
-
-Jump_000_0b63:
-    cp $ff
-    ret z
-
-    and $ef
-    cp $0c
-    jr z, jr_000_0b74
-
-    cp $0d
-    jr z, jr_000_0b74
-
-    and $ec
-    jr nz, jr_000_0b7c
-
-jr_000_0b74:
-    push bc
-    push de
-    call DecodeSceneGfx
-    pop de
-    pop bc
-    ret
-
-
-jr_000_0b7c:
-    jr jr_000_0b7c
-
-; The first tile selects $d000 + tile*16; dispatch LZ or planar RLE.
-DecodeSceneGfx:
-Call_000_0b7e:
-    ld a, [hl+]
-    ld e, a
-    ld a, [hl+]
-    swap a
-    ld b, a
-    and $f0
-    ld c, a
-    ld a, b
-    and $0f
-    or $d0
-    ld b, a
-    ld a, e
-    and $0f
-    cp $0c
-    jp z, DecodeLzTiles
-
-    cp $0d
-    jp z, DecodeLzTiles
-
-    bit 1, e
-    jp z, DecodeRleTiles
-
-    ld a, [hl+]
-    ld d, a
-    jp Jump_000_055e
+INCLUDE "scene_gfx.asm"
 
 
 Call_000_0ba4:
@@ -2859,497 +2311,8 @@ Call_000_0ba4:
     pop bc
     pop hl
     ret
-
-; Draw a blank map, load graphics and palettes, then draw the actual cells.
-ShowScene:
-Call_000_0bb6:
-    push bc
-    push de
-    push hl
-    call Call_000_0416
-    call Call_000_03fe
-    ld a, $01
-    ld [wSceneBlank], a
-    call DrawSceneMap
-    call Call_000_0e5d
-    call SelectSceneMap
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call ReadSceneGfx
-    call PopRomBank
-    call PickScenePal
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call ApplyScenePal
-    call PopRomBank
-    call Call_000_03fe
-    xor a
-    ld [wSceneBlank], a
-    call DrawSceneMap
-    push af
-    ld a, $02
-    call PushRomBank
-    pop af
-    call $688c
-    call PopRomBank
-    call PopRomBank
-    pop hl
-    pop de
-    pop bc
-    ret
-
-; Clear the active BG palette, load graphics, copy the map, then apply palettes.
-ReloadScene:
-Call_000_0c08:
-    push bc
-    push de
-    push hl
-    call Call_000_0e5d
-    call Call_000_0404
-
-Jump_000_0c11:
-    call Call_000_03fe
-    call SelectSceneMap
-    push af
-    ld a, $01
-
-Jump_000_0c1a:
-    call PushRomBank
-    pop af
-    call ReadSceneGfx
-    call PopRomBank
-    push af
-
-Jump_000_0c25:
-    ld a, $02
-    call PushRomBank
-    pop af
-    call $688c
-    call PopRomBank
-    call CopySceneMap
-    call PopRomBank
-    call PickScenePal
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call ApplyScenePal
-
-Call_000_0c44:
-    call PopRomBank
-
-Call_000_0c47:
-    call Call_000_01b7
-
-Call_000_0c4a:
-    pop hl
-
-Call_000_0c4b:
-    pop de
-
-Call_000_0c4c:
-    pop bc
-
-Call_000_0c4d:
-    ret
-
-; Load graphics, copy the map, and apply palettes without the initial blank pass.
-RedrawScene:
-Call_000_0c4e:
-    push bc
-
-Call_000_0c4f:
-    push de
-
-Call_000_0c50:
-    push hl
-
-Call_000_0c51:
-    call Call_000_0416
-
-Call_000_0c54:
-    call Call_000_03fe
-
-Call_000_0c57:
-    call SelectSceneMap
-    push af
-    ld a, $01
-    call PushRomBank
-
-Jump_000_0c60:
-    pop af
-    call ReadSceneGfx
-    call PopRomBank
-    push af
-    ld a, $02
-    call PushRomBank
-    pop af
-    call $688c
-    call PopRomBank
-    call CopySceneMap
-    call PopRomBank
-    call PickScenePal
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call ApplyScenePal
-    call PopRomBank
-    pop hl
-    pop de
-    pop bc
-    ret
-
-; Dispatch to the case-specific palette selector.
-PickScenePal:
-Call_000_0c8e:
-    ld a, [wCaseId]
-    cp $00
-    jr nz, jr_000_0ca3
-
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call LoadC1Pal
-    call PopRomBank
-    ret
-
-
-jr_000_0ca3:
-    push af
-    ld a, $03
-    call PushRomBank
-    pop af
-    call LoadC2Pal
-    call PopRomBank
-    ret
-
-; Select the map bank; wMapIndex = scene ID modulo $28. Caller restores bank.
-SelectSceneMap:
-Call_000_0cb1:
-    ld a, [wCaseId]
-    cp $00
-    jr nz, jr_000_0cfa
-
-    ld a, [wSceneId]
-    ld [wMapIndex], a
-    cp $28
-    jr nc, jr_000_0cc8
-
-    ld a, $23
-    call PushRomBank
-    ret
-
-
-jr_000_0cc8:
-    cp $50
-    jr nc, jr_000_0cda
-
-    ld a, $24
-    call PushRomBank
-    ld a, [wSceneId]
-    sub $28
-    ld [wMapIndex], a
-    ret
-
-
-jr_000_0cda:
-    cp $78
-    jr nc, jr_000_0cec
-
-    ld a, $25
-    call PushRomBank
-    ld a, [wSceneId]
-
-Call_000_0ce6:
-    sub $50
-    ld [wMapIndex], a
-    ret
-
-
-jr_000_0cec:
-    ld a, $26
-    call PushRomBank
-    ld a, [wSceneId]
-    sub $78
-    ld [wMapIndex], a
-    ret
-
-
-jr_000_0cfa:
-    ld a, [wSceneId]
-
-Call_000_0cfd:
-    ld [wMapIndex], a
-
-Call_000_0d00:
-    cp $28
-
-Jump_000_0d02:
-    jr nc, jr_000_0d0a
-
-    ld a, $27
-    call PushRomBank
-    ret
-
-
-jr_000_0d0a:
-    ld a, $28
-
-Call_000_0d0c:
-    call PushRomBank
-    ld a, [wSceneId]
-    sub $28
-    ld [wMapIndex], a
-    ret
-
-; Resolve wMapIndex through the selected bank table at $4000.
-ReadSceneMap:
-Call_000_0d18:
-    push bc
-    push hl
-    ld a, [wMapIndex]
-    ld l, a
-    ld h, $00
-    add hl, hl
-
-Call_000_0d21:
-    ld bc, $4000
-    add hl, bc
-    ld a, [hl+]
-    ld c, a
-    ld a, [hl+]
-    ld b, a
-    ld a, c
-    ld [wMapPtr], a
-    ld a, b
-    ld [wMapPtr+1], a
-    call StageSceneMap
-    pop hl
-    pop bc
-    ret
-
-; Copy 196 IDs and attributes into rows of 14 IDs + 14 attributes at $c902.
-StageSceneMap:
-Call_000_0d37:
-    ld a, [wMapPtr]
-    ld c, a
-    ld a, [wMapPtr+1]
-    ld b, a
-    ld hl, $c902
-    ld d, $c4
-    ld e, $0e
-
-jr_000_0d46:
-    ld a, [bc]
-    inc bc
-    ld [hl+], a
-    dec e
-    jr nz, jr_000_0d54
-
-    push de
-    ld de, $000e
-    add hl, de
-    pop de
-    ld e, $0e
-
-jr_000_0d54:
-    dec d
-    jr nz, jr_000_0d46
-
-    ld hl, $c910
-    ld d, $c4
-    ld e, $0e
-
-jr_000_0d5e:
-    ld a, [bc]
-    inc bc
-    ld [hl+], a
-
-Jump_000_0d61:
-    dec e
-    jr nz, jr_000_0d6c
-
-    push de
-    ld de, $000e
-    add hl, de
-    pop de
-    ld e, $0e
-
-jr_000_0d6c:
-    dec d
-    jr nz, jr_000_0d5e
-
-    push af
-    ld a, $29
-    call PushRomBank
-    pop af
-    call $668b
-    call PopRomBank
-    ld a, $02
-    ld [wMapPtr], a
-    ld a, $c9
-    ld [wMapPtr+1], a
-    ret
-
-; Draw through row masks; wSceneBlank selects blank cells.
-DrawSceneMap:
-Call_000_0d87:
-    ld a, [wCaseId]
-    cp $00
-    jr nz, jr_000_0d92
-
-    ld a, $27
-    jr jr_000_0d94
-
-jr_000_0d92:
-    ld a, $1d
-
-jr_000_0d94:
-    call Call_000_080e
-    call ReadSceneMap
-    push bc
-    push hl
-    ld bc, $0df8
-    ld a, [$c640]
-    ld l, a
-    ld h, $00
-    add hl, bc
-    ld a, [hl]
-    ld [$c5c3], a
-    pop hl
-    pop bc
-    xor a
-    ld [$c878], a
-
-jr_000_0db0:
-    xor a
-    ld [$c877], a
-
-jr_000_0db4:
-    push af
-    ld a, $01
-    call PushRomBank
-    pop af
-    call $4f96
-    call PopRomBank
-    ld de, $0000
-
-jr_000_0dc4:
-    ld hl, $c884
-    srl [hl]
-    dec hl
-    rr [hl]
-    jr nc, jr_000_0dd3
-
-Call_000_0dce:
-    push de
-    call $0dff
-    pop de
-
-jr_000_0dd3:
-    inc e
-    ld a, e
-    cp $0e
-    jr nz, jr_000_0dc4
-
-    ld a, [$c877]
-    inc a
-    ld [$c877], a
-    cp $0e
-    jr nz, jr_000_0db4
-
-    call Call_000_03d3
-    call Call_000_01b7
-    ld a, [$c878]
-    inc a
-    ld [$c878], a
-    ld hl, $c5c3
-    cp [hl]
-    jr nz, jr_000_0db0
-
-    ret
-
-
-    rlca
-    rlca
-    rlca
-    rlca
-    rlca
-    rlca
-    ld b, $3e
-    ld bc, $9eea
-
-Call_000_0e03:
-    pop bc
-    ld [$c19f], a
-
-Jump_000_0e07:
-    call Call_000_0e14
-    call Call_000_0e4a
-    ld hl, $c19e
-    call Call_000_02a5
-    ret
-
-
-Call_000_0e14:
-    ld a, [wSceneBlank]
-    cp $00
-    jr z, jr_000_0e26
-
-    ld a, $ff
-    ld [$c1a0], a
-    ld a, $07
-    ld [$c1a1], a
-    ret
-
-
-jr_000_0e26:
-    ld a, [$c877]
-    add a
-    ld l, a
-    add a
-    add a
-    add a
-    sub l
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, de
-    ld a, [wMapPtr]
-    ld c, a
-    ld a, [wMapPtr+1]
-    ld b, a
-    add hl, bc
-    ld a, [hl]
-    ld [$c1a0], a
-    ld bc, $000e
-    add hl, bc
-    ld a, [hl]
-    ld [$c1a1], a
-    ret
-
-
-Call_000_0e4a:
-    ld a, [$c877]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, hl
-    add hl, hl
-    add hl, hl
-    add hl, hl
-    add hl, de
-    ld bc, $9800
-    add hl, bc
-    ld c, l
-    ld b, h
-    ret
+INCLUDE "scene.asm"
+INCLUDE "scene_draw.asm"
 
 
 Call_000_0e5d:
@@ -3365,27 +2328,7 @@ jr_000_0e63:
     call Call_000_074b
     call Call_000_01b7
     ret
-
-; Stage the map, queue a 14x14 transfer to $9800, and wait for completion.
-CopySceneMap:
-Call_000_0e6e:
-    call ReadSceneMap
-    ld a, $0e
-    ld [$c900], a
-    ld [$c901], a
-    call Call_000_0e83
-    call Call_000_03d3
-
-Jump_000_0e7f:
-    call Call_000_01a9
-    ret
-
-
-Call_000_0e83:
-    ld bc, $9800
-    ld hl, $c900
-    call Call_000_02a5
-    ret
+INCLUDE "scene_copy.asm"
 
 
 Call_000_0e8d:
@@ -3994,10 +2937,10 @@ Jump_000_1183:
 
 
 jr_000_118c:
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_000_118f:
-    call Call_000_03d3
+    call SubmitMapQueue
     call Call_000_1875
     call Call_000_03fe
     call Call_000_0456
@@ -4260,7 +3203,7 @@ Jump_000_1315:
     cp $00
     jr z, jr_000_131f
 
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_000_131f:
     xor a
@@ -4625,7 +3568,7 @@ jr_000_150b:
 
 jr_000_150d:
     ld [$c667], a
-    call Call_000_02a5
+    call QueueMapRect
     ret
 
 
@@ -4681,7 +3624,7 @@ Jump_000_155a:
     jr nz, jr_000_158e
 
 jr_000_1571:
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $03
 
 jr_000_1576:
@@ -4799,7 +3742,7 @@ jr_000_1615:
     jr nz, jr_000_1615
 
     call Call_000_1674
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 
@@ -4874,7 +3817,7 @@ jr_000_1674:
     ld bc, $9c21
     ld hl, $c66c
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 
@@ -4885,7 +3828,7 @@ Call_000_1681:
     ld hl, $169b
     ld bc, $9c20
     call Call_000_0339
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 
@@ -4895,7 +3838,7 @@ Call_000_1681:
     add hl, bc
     ld a, a
     rlca
-    call Call_000_03d3
+    call SubmitMapQueue
     ld d, $14
 
 jr_000_16a4:
@@ -4929,7 +3872,7 @@ jr_000_16c6:
 
 
 Call_000_16cb:
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_000_16ce:
     call Call_000_1706
@@ -5313,114 +4256,7 @@ Call_000_18dc:
     pop bc
     pop hl
     ret
-
-; A = palette ID; copy BG and object sets into the next-palette buffers.
-StagePals:
-Call_000_18ef:
-    push af
-    call StageBgPal
-    pop af
-    call StageObjPal
-    ret
-
-; A = palette ID; copy 64 bytes to wBgPalNext.
-StageBgPal:
-Call_000_18f8:
-    push hl
-    push bc
-    push de
-    push af
-    ld a, [wCaseId]
-
-Call_000_18ff:
-Jump_000_18ff:
-    ld l, a
-
-Jump_000_1900:
-    ld h, $00
-    ld bc, BgPalBanks
-    add hl, bc
-    ld a, [hl]
-    call PushRomBank
-    ld a, [wCaseId]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, BgPalTables
-    add hl, bc
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    pop af
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, bc
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    ld d, $40
-    ld hl, wBgPalNext
-
-jr_000_1926:
-    ld a, [bc]
-    ld [hl+], a
-    inc bc
-    dec d
-    jr nz, jr_000_1926
-
-    call PopRomBank
-    pop de
-    pop bc
-    pop hl
-    ret
-
-; A = palette ID; copy 64 bytes to wObjPalNext.
-StageObjPal:
-Call_000_1933:
-    push hl
-    push bc
-    push de
-    push af
-    ld a, [wCaseId]
-    ld l, a
-    ld h, $00
-    ld bc, ObjPalBanks
-    add hl, bc
-    ld a, [hl]
-    call PushRomBank
-    ld a, [wCaseId]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, ObjPalTables
-    add hl, bc
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    pop af
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, bc
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    ld d, $40
-    ld hl, wObjPalNext
-
-jr_000_1961:
-    ld a, [bc]
-    ld [hl+], a
-    inc bc
-    dec d
-    jr nz, jr_000_1961
-
-    call PopRomBank
-    pop de
-    pop bc
-    pop hl
-    ret
+INCLUDE "scene_pal.asm"
 
 
     push de
@@ -6167,6 +5003,8 @@ Call_000_1d1f:
 
     call Call_000_1a94
 
+; A = bit index in the $c4c1 state bitmap; return its value in A and result bit 0.
+ReadStateBit:
 Call_000_1d31:
     call Call_000_1d4f
     call Call_000_1bca
@@ -6472,7 +5310,7 @@ Call_000_1eac:
     ld h, a
     add hl, bc
     ld a, [hl]
-    call Call_000_1d31
+    call ReadStateBit
     ld a, [$c523]
     and $01
     jr nz, jr_000_1eed
@@ -7109,7 +5947,7 @@ Call_000_2273:
     pop af
     call $453b
     call PopRomBank
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 

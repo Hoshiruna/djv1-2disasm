@@ -7047,7 +7047,7 @@ jr_002_6233:
     call Call_002_62cf
     call Call_002_62e3
     call Call_002_62f7
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $05
     call Call_000_0753
     ld a, [$c864]
@@ -7072,7 +7072,7 @@ jr_002_625f:
     call Call_002_630b
     call Call_002_62e3
     call Call_002_62f7
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $05
     call Call_000_0753
     ld a, [$c864]
@@ -7094,7 +7094,7 @@ jr_002_628c:
     ld e, $01
     call Call_002_630b
     call Call_002_62f7
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $05
     call Call_000_0753
     ld a, [$c864]
@@ -7113,7 +7113,7 @@ jr_002_628c:
     call Call_002_630b
     ld e, $02
     call Call_002_630b
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $05
     call Call_000_0753
     ret
@@ -7182,7 +7182,7 @@ Call_002_630b:
     ld a, [hl+]
     ld h, [hl]
     ld l, a
-    call Call_000_02a5
+    call QueueMapRect
     ret
 
 
@@ -7392,7 +7392,7 @@ jr_002_6418:
     ld a, [hl+]
     ld h, [hl]
     ld l, a
-    call Call_000_02a5
+    call QueueMapRect
     ld hl, $64a5
     ld c, [hl]
     inc hl
@@ -7406,8 +7406,8 @@ jr_002_6418:
     ld a, [hl+]
     ld h, [hl]
     ld l, a
-    call Call_000_02a5
-    call Call_000_03d3
+    call QueueMapRect
+    call SubmitMapQueue
     ld a, $10
     call Call_000_0753
 
@@ -7725,7 +7725,7 @@ Call_002_65cd:
 
 
     ld a, [$c8c6]
-    call Call_000_1e81
+    call ReadStateBit
     ld a, [$c523]
     and $01
     jr nz, jr_002_662e
@@ -8385,7 +8385,7 @@ jr_002_69ad:
     call Call_000_0bfd
 
 jr_002_69b0:
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, [$c522]
     cp $00
     jr nz, jr_002_69cc
@@ -8417,7 +8417,7 @@ jr_002_69e2:
     ld bc, $98cf
     ld hl, $6c6a
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     call Call_000_27b6
     jr jr_002_6a44
 
@@ -8428,7 +8428,7 @@ jr_002_69f7:
     ld bc, $98cf
     ld hl, $6c67
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     call Call_000_27b6
     jr jr_002_6a44
 
@@ -10417,7 +10417,7 @@ jr_002_748b:
 
 jr_002_74a3:
     ld a, [$c8c6]
-    call Call_000_1e81
+    call ReadStateBit
     ld a, [$c523]
     and $01
     jr nz, jr_002_74b6
@@ -10645,7 +10645,7 @@ jr_002_75f3:
     ld hl, $7a0e
     ld bc, $99e6
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     xor a
     ld [$c884], a
 
@@ -10753,7 +10753,7 @@ Call_002_76ad:
     ld hl, $7a72
     call Call_002_796e
     call Call_000_01d4
-    jp Jump_000_03d3
+    jp SubmitMapQueue
 
 
 Call_002_76df:
@@ -10765,7 +10765,7 @@ Call_002_76df:
     ld hl, $7aa2
     call Call_002_796e
     call Call_000_01d4
-    call Call_000_03d3
+    call SubmitMapQueue
     jp Jump_002_7724
 
 
@@ -10884,7 +10884,7 @@ Call_002_7799:
     call Call_002_77b1
     call Call_002_77b1
     call Call_002_77b1
-    jp Jump_000_03d3
+    jp SubmitMapQueue
 
 
 Call_002_77b1:
@@ -11022,7 +11022,7 @@ jr_002_7857:
     ld hl, $7b18
     call Call_002_796e
     call Call_000_01d4
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $01
     ld [$c884], a
     call Call_000_38cf
@@ -11125,7 +11125,7 @@ jr_002_78dc:
     ld hl, $7ac8
     call Call_002_796e
     call Call_000_01d4
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $02
     call Call_000_1b14
     call Call_000_38cf

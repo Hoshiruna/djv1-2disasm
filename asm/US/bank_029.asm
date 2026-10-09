@@ -5,6 +5,7 @@
 
 SECTION "ROM Bank $029", ROMX[$4000], BANK[$29]
 
+C2PatchRefs:
     dw Case2BathroomDoorClosed
     dw Case2BathroomDoorOpen
     db $9a, $41, $ad, $41, $c0, $41, $eb, $41, $16, $42, $3d, $42, $64, $42, $77, $42
@@ -6934,363 +6935,8 @@ jr_029_6575:
     ld a, a
     ld a, a
     ld b, $06
-    ld b, $fa
-    sbc c
-    push bc
-    cp $00
-    ret z
-
-    ld a, [$c522]
-    cp $14
-    ret z
-
-    cp $1a
-    ret z
-
-    cp $19
-    ret z
-
-    ld a, [$c5c9]
-    bit 7, a
-    ret nz
-
-    ld de, $c869
-
-jr_029_66a6:
-    xor a
-    ld [$c874], a
-    ld a, [de]
-    cp $fe
-    ret z
-
-    cp $f0
-    jr c, jr_029_66b5
-
-    inc de
-    jr jr_029_66a6
-
-jr_029_66b5:
-    call Call_029_66bb
-    inc de
-    jr jr_029_66a6
-
-Call_029_66bb:
-    push de
-    ld l, a
-    ld h, $00
-    add hl, hl
-    push hl
-    ld bc, $6758
-    add hl, bc
-    ld a, [hl+]
-    ld l, [hl]
-    ld h, $00
-    add hl, hl
-    ld bc, $673c
-    add hl, bc
-    ld c, [hl]
-    inc hl
-    ld b, [hl]
-    ld hl, $c902
-    add hl, bc
-    add l
-    ld [$c5c3], a
-    ld a, $00
-    adc h
-    add hl, bc
-    ld [$c5c4], a
-    pop hl
-    ld de, $4000
-    add hl, de
-    ld a, [hl+]
-    ld h, [hl]
-    ld l, a
-    inc hl
-    ld a, [hl+]
-    ld [$c5c5], a
-    ld a, [hl+]
-    ld [$c5c6], a
-    ld a, [$c5c3]
-    ld c, a
-    ld a, [$c5c4]
-    ld b, a
-
-jr_029_66f9:
-    ld a, [$c5c5]
-    ld e, a
-
-jr_029_66fd:
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    dec e
-    jr nz, jr_029_66fd
-
-    ld a, [$c5c3]
-    add $0e
-    ld [$c5c3], a
-    ld c, a
-    ld a, [$c5c4]
-    adc $00
-    ld [$c5c4], a
-    ld b, a
-    ld a, [$c5c5]
-    ld e, a
-
-jr_029_6719:
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    dec e
-    jr nz, jr_029_6719
-
-    ld a, [$c5c3]
-    add $0e
-    ld [$c5c3], a
-    ld c, a
-    ld a, [$c5c4]
-    adc $00
-    ld [$c5c4], a
-    ld b, a
-    ld a, [$c5c6]
-    dec a
-    ld [$c5c6], a
-    jr nz, jr_029_66f9
-
-    pop de
-    ret
-
-
-    nop
-    nop
-    inc e
-    nop
-    jr c, jr_029_6742
-
-jr_029_6742:
-    ld d, h
-    nop
-    ld [hl], b
-    nop
-    adc h
-    nop
-    xor b
-    nop
-    call nz, $e000
-    nop
-    db $fc
-    nop
-    jr jr_029_6753
-
-    inc [hl]
-
-jr_029_6753:
-    ld bc, $0150
-    ld l, h
-    ld bc, $0205
-    dec b
-    ld [bc], a
-    dec c
-    nop
-    dec c
-    nop
-    dec b
-    ld bc, $0105
-    ld bc, $0100
-    nop
-    dec c
-    ld bc, $010d
-    ld b, $02
-    ld b, $02
-    add hl, bc
-    ld bc, $0109
-    ld [bc], a
-    ld [bc], a
-    ld [bc], a
-    ld [bc], a
-    ld [bc], a
-    nop
-    ld [bc], a
-    nop
-    dec bc
-    nop
-    dec bc
-    nop
-    inc bc
-    ld bc, $0103
-    inc bc
-    ld bc, $0103
-    dec c
-    ld bc, $010d
-    dec c
-    ld bc, $010d
-    nop
-    ld bc, $0100
-    ld bc, $0101
-    ld bc, $0006
-    ld b, $00
-    ld b, $00
-    ld b, $00
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    ld b, $00
-    ld b, $00
-    inc c
-    inc b
-    inc c
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    nop
-    inc bc
-    nop
-    inc bc
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    inc b
-    nop
-    inc b
-    nop
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    add hl, bc
-    nop
-    inc bc
-    inc bc
-    inc bc
-    inc bc
-    rlca
-    inc bc
-    rlca
-    inc bc
-    ld bc, $0103
-    inc bc
-    dec bc
-    ld bc, $010b
-    ld bc, $0101
-    ld bc, $020c
-    inc c
-    ld [bc], a
-    inc b
-    ld bc, HeaderLogo
-    nop
-    nop
-    nop
-    nop
-    inc c
-    dec b
-    inc c
-    dec b
-    nop
-    inc b
-    nop
-    inc b
-    dec bc
-    nop
-    dec bc
-    nop
-    dec bc
-    ld bc, $010b
-    inc b
-    inc bc
-    inc b
-    inc bc
-    nop
-    ld bc, $0100
-    nop
-    ld bc, $0100
-    inc b
-    inc b
-    inc b
-    inc b
-    inc b
-    inc b
-    inc b
-    inc b
-    ld a, [bc]
-    ld [bc], a
-    ld a, [bc]
-    ld [bc], a
-    ld [$0808], sp
-    ld [$0400], sp
-    nop
-    inc b
-    dec b
-    inc b
-    dec b
-    inc b
-    nop
-    nop
-    nop
-    nop
-    ld b, $03
-    ld b, $03
-    nop
-    ld [bc], a
-    nop
-    ld [bc], a
-    inc c
-    ld [bc], a
-    inc c
-    ld [bc], a
-    inc c
-    ld [bc], a
-    inc c
-    ld [bc], a
-    inc b
-    ld [$0804], sp
-    ld bc, $0101
-    ld bc, $0101
-    ld bc, $0401
-    ld bc, HeaderLogo
-    dec bc
-    ld bc, $010b
-    dec bc
-    ld bc, $010b
-    nop
-    nop
-    nop
-    nop
-    ld [$0801], sp
-    ld bc, $0108
-    ld [$0001], sp
-    inc bc
-    nop
-    inc bc
-    inc c
-    inc bc
-    inc c
-    inc bc
-    inc bc
-    inc bc
-    inc bc
-    inc bc
+    db $06
+INCLUDE "c2_patch.asm"
     dec bc
     ld bc, $010a
     add hl, bc
@@ -7310,7 +6956,7 @@ jr_029_6888:
     ld a, e
     push de
     call Call_029_68b4
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $08
     call Call_000_0753
     pop de
@@ -7328,7 +6974,7 @@ jr_029_689f:
     ld a, e
     push de
     call Call_029_68b4
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $08
     call Call_000_0753
     pop de
@@ -7359,7 +7005,7 @@ Call_029_68b4:
     ld l, a
     inc hl
     pop bc
-    call Call_000_02a5
+    call QueueMapRect
     ret
 
 
@@ -7424,8 +7070,8 @@ Call_029_690d:
     ld a, [hl+]
     ld h, [hl]
     ld l, a
-    call Call_000_02a5
-    call Call_000_03d3
+    call QueueMapRect
+    call SubmitMapQueue
     call Call_000_01b7
     ret
 
@@ -7578,7 +7224,7 @@ Call_029_6a34:
     ld a, $20
     ld [$c8e6], a
     call Call_000_10d0
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $1e
     call Call_000_0753
     ret
@@ -7735,7 +7381,7 @@ jr_029_6b1c:
     ld a, $1f
     ld [$c8e6], a
     call Call_000_10d0
-    call Call_000_03d3
+    call SubmitMapQueue
 
 jr_029_6b31:
     call Call_000_0ba4
@@ -8517,7 +8163,7 @@ jr_029_6ff0:
     ld a, $09
     ld [$c8e6], a
     call Call_000_10d0
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, [$c876]
     ld [$c875], a
     ret
@@ -8550,7 +8196,7 @@ jr_029_7031:
     ld h, $c8
     ld bc, $9811
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 
@@ -8623,7 +8269,7 @@ Jump_029_70a4:
     ld a, $06
     ld [$c8e6], a
     call Call_000_10d0
-    call Call_000_03d3
+    call SubmitMapQueue
     ret
 
 
@@ -8667,7 +8313,7 @@ Call_029_70e7:
     ld a, [hl]
     ld [$c669], a
     call Call_000_10d0
-    call Call_000_03d3
+    call SubmitMapQueue
     pop bc
     pop de
     ret
@@ -8693,8 +8339,8 @@ Call_029_7109:
     ld h, [hl]
     ld l, a
     inc hl
-    call Call_000_02a5
-    call Call_000_03d3
+    call QueueMapRect
+    call SubmitMapQueue
     ret
 
 

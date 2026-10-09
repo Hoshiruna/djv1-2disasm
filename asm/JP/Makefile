@@ -46,7 +46,7 @@ hud-preview: ../../res/ui/JP/hud.png
 %.1bpp: %.png
 	"$(RGBGFX)" -d 1 -o $@ $<
 
-game.o: game.asm hardware.inc ../scene.inc bank_*.asm ../../res/ui/JP/case1_font.bin \
+game.o: $(wildcard *.asm) hardware.inc ../scene.inc ../../res/ui/JP/case1_font.bin \
     ../../res/ui/JP/hud_tiles.bin ../../res/ui/JP/hud.pal ../../res/ui/JP/hud.bin \
     ../../res/ui/JP/case2_font.bin ../../res/ui/JP/case2_hud_tiles.bin \
     ../../res/scene/case2/00-lucky-bath/JP/s00-bg.bin \

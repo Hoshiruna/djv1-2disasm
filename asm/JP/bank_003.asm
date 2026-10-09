@@ -249,209 +249,7 @@ jr_003_41d3:
     INCBIN "../../res/scene/case2/common/initial-visibility.bin", $3d, $12
 jr_003_41e5:
     INCBIN "../../res/scene/case2/common/initial-visibility.bin", $4f, $9
-
-Call_003_41ee:
-; Update room state and select its visual scene; special scenes retain their current ID.
-PickC2Scene:
-    call Call_003_4236
-    ld a, [$c8e8]
-    cp $ff
-    jr nz, jr_003_420f
-
-    ld a, [wSceneId]
-    cp $17
-    jr z, jr_003_4203
-
-    cp $19
-    jr nz, jr_003_420f
-
-jr_003_4203:
-    call Call_003_68cf
-    jr nz, jr_003_420f
-
-    ld a, $a8
-    call Call_000_275d
-    jr jr_003_4235
-
-jr_003_420f:
-    ld a, [wRoomId]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld de, $4315
-    add hl, de
-    ld a, [hl+]
-    ld [$c85e], a
-    ld a, [hl]
-    ld [$c85f], a
-    ld a, [wSceneVariant]
-    ld e, a
-    ld d, $00
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    add hl, de
-    ld a, [hl]
-    ld [wSceneId], a
-
-jr_003_4235:
-    ret
-
-
-Call_003_4236:
-    call Call_003_4642
-    ld b, $09
-    ld a, $fe
-    ld hl, $c869
-
-jr_003_4240:
-    ld [hl+], a
-    dec b
-    jr nz, jr_003_4240
-
-    xor a
-    ld [wSceneVariant], a
-    ld bc, $0000
-
-Jump_003_424b:
-jr_003_424b:
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    ld a, [hl]
-    cp $ff
-    ret z
-
-    call Call_003_42a3
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    inc hl
-    inc hl
-    inc hl
-    ld a, [hl]
-    ld [$c868], a
-    cp $fe
-    ret z
-
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    inc hl
-    ld a, [hl]
-    push bc
-    call Call_000_1e81
-    pop bc
-    ld a, [$c523]
-    and $01
-    jr z, jr_003_4294
-
-    ld a, [$c868]
-    inc a
-    ld [$c868], a
-    ld a, [wSceneVariant]
-    ld hl, $19a9
-    add hl, bc
-    add [hl]
-    ld [wSceneVariant], a
-
-jr_003_4294:
-    ld a, [$c868]
-    ld hl, $c869
-    add hl, bc
-    ld [hl], a
-    call Call_003_4c9e
-    inc c
-    jr jr_003_424b
-
-    ret
-
-
-Call_003_42a3:
-    push hl
-    push de
-    push bc
-    xor a
-    ld [$c874], a
-    ld de, $0000
-
-jr_003_42ad:
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    inc hl
-    ld a, [hl]
-    call Call_000_1e81
-    ld a, [$c523]
-    and $01
-    jr z, jr_003_42cc
-
-    ld a, [$c874]
-    ld hl, $19a9
-    add hl, de
-    add [hl]
-    ld [$c874], a
-
-jr_003_42cc:
-    ld a, [$c85e]
-    ld l, a
-    ld a, [$c85f]
-    ld h, a
-    inc hl
-    inc hl
-    inc hl
-    inc hl
-    ld a, [hl-]
-    cp $ff
-    jr z, jr_003_42f1
-
-    ld a, [hl+]
-    cp $fe
-    jr z, jr_003_42f1
-
-    ld [$c873], a
-    inc hl
-    inc hl
-    inc hl
-    cp [hl]
-    jr nz, jr_003_42f1
-
-    inc e
-    call Call_003_4c9e
-    jr jr_003_42ad
-
-jr_003_42f1:
-    ld a, e
-    cp $00
-    jr nz, jr_003_42fd
-
-    ld [$c874], a
-    pop bc
-    pop de
-    pop hl
-    ret
-
-
-jr_003_42fd:
-    call Call_003_4c9e
-    ld a, [$c873]
-    ld c, a
-    ld a, [$c874]
-    add c
-    ld hl, $c869
-    pop bc
-    add hl, bc
-    ld [hl], a
-    inc c
-    pop de
-    pop hl
-    pop af
-    jp Jump_003_424b
+INCLUDE "c2_scene.asm"
 
 
     ld d, a
@@ -1070,7 +868,7 @@ jr_003_4547:
 
 
 Call_003_4551:
-    call Call_003_4642
+    call ReadC2Room
 
 jr_003_4554:
     ld a, [$c85e]
@@ -1243,6 +1041,8 @@ Call_003_463d:
     ld a, [$c536]
     jr jr_003_4645
 
+; Resolve the current room to its four-byte state records.
+ReadC2Room:
 Call_003_4642:
     ld a, [wRoomId]
 
@@ -2612,7 +2412,7 @@ jr_003_4c7b:
     cp d
     jr z, jr_003_4c93
 
-    call Call_003_4c9e
+    call NextC2State
     jr jr_003_4c7b
 
 jr_003_4c93:
@@ -2627,6 +2427,8 @@ jr_003_4c98:
     ret
 
 
+; Advance the room record pointer by four bytes.
+NextC2State:
 Call_003_4c9e:
     push hl
     ld a, [$c85e]
@@ -2908,7 +2710,7 @@ jr_003_4e35:
     ld a, $0a
     ld [$c8e6], a
     call Call_000_107a
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, $08
     call Call_000_0753
     jr jr_003_4df5
@@ -4198,55 +4000,7 @@ jr_003_555c:
 Call_003_556a:
     ld a, $86
     jp Jump_000_1a11
-
-; Choose the Case II palette from scene and gameplay state, then stage both sets.
-LoadC2Pal:
-Call_003_556f:
-    ld a, [$c5c9]
-    cp $00
-    jr nz, jr_003_55ae
-
-    ld a, [$c523]
-    and $40
-    jr nz, jr_003_55ae
-
-    call Call_003_58e9
-    ld a, [$c523]
-    and $01
-    jr nz, jr_003_55ae
-
-    ld a, $4d
-    call Call_000_1dac
-    ld a, [$c523]
-    and $01
-    jr nz, jr_003_55a2
-
-    ld a, [wRoomId]
-    cp $38
-    jr z, jr_003_55a9
-
-    cp $3a
-    jr z, jr_003_55a9
-
-    ld a, $49
-    jr jr_003_55b1
-
-jr_003_55a2:
-    ld a, [$c585]
-    cp $1d
-    jr c, jr_003_55ae
-
-jr_003_55a9:
-    ld a, [$c5c6]
-    jr jr_003_55b1
-
-jr_003_55ae:
-    ld a, [wSceneId]
-
-jr_003_55b1:
-    ld [wScenePalId], a
-    call StagePals
-    ret
+INCLUDE "c2_pal.asm"
 
 
 Call_003_55b8:
@@ -5150,7 +4904,7 @@ Call_003_5b75:
     call Call_000_39c8
     call Call_000_2b9c
     ld a, $0d
-    call Call_000_1e81
+    call ReadStateBit
     jr z, jr_003_5ba1
 
     ld a, $a8
@@ -5431,7 +5185,7 @@ jr_003_5d69:
 
 jr_003_5dc0:
     ld a, $15
-    call Call_000_1e81
+    call ReadStateBit
     jr nz, jr_003_5e0c
 
     call Call_000_39c8
@@ -5589,7 +5343,7 @@ jr_003_5ed4:
     ld bc, $000b
     add hl, bc
     ld a, [hl]
-    call Call_000_1e81
+    call ReadStateBit
     ret z
 
     ld a, [$c57d]
@@ -5994,7 +5748,7 @@ Call_003_5f4a:
 
 
 Call_003_60b1:
-    call Call_003_4642
+    call ReadC2Room
     ld a, [$c8ac]
     sub $30
     srl a
@@ -6099,7 +5853,7 @@ jr_003_6129:
 
 
 jr_003_6153:
-    call Call_003_4c9e
+    call NextC2State
     jp Jump_003_60d4
 
 
@@ -8782,7 +8536,7 @@ jr_003_7056:
     ld b, h
     ld hl, $7090
     call Call_000_01d8
-    call Call_000_03d3
+    call SubmitMapQueue
     ld a, [$c5c3]
     inc a
     cp $13
