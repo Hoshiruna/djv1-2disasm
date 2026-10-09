@@ -16,7 +16,7 @@ This project is currently in progress.
 | Stage | US | JP |
 | --- | :---: | :---: |
 | Reverse-engineered | 100% | 100% |
-| Resources extracted | 1% | 1% |
+| Resources extracted | 100% | 100% |
 | Position dependence | 1% | 1% |
 | Documented | 1% | 1% |
 

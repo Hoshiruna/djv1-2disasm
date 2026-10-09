@@ -8,7 +8,7 @@
 *.2bpp
 __pycache__/
 *.py[cod]
-/res/*/text/.rebuild-stamp
+/res/text/*/.rebuild-stamp
 
 # Local research and handoff notes
 /locate_notes/

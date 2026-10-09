@@ -31,7 +31,7 @@ class SceneAtlasTests(unittest.TestCase):
         self.assertEqual(fallback, 2)
 
     def test_colored_bathroom_atlas_preserves_compressed_slot(self):
-        folder = ROOT / "res/scene/case2/00-bathroom"
+        folder = ROOT / "res/scene/case2/00-lucky-bath"
         for stem in ("s00-bg", "s00-bg-extra",
                      "s00-objects"):
             for region in ("US", "JP"):

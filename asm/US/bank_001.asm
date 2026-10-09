@@ -18,7 +18,7 @@ SECTION "ROM Bank $001", ROMX[$4000], BANK[$1]
     ldh [rOBP0], a
     ldh [rOBP1], a
     ld a, $00
-    ldh [$ff8c], a
+    ldh [hVideoFlags], a
     ld a, $01
     ldh [rIE], a
     ldh a, [$ffac]
@@ -63,18 +63,19 @@ jr_001_4058:
 
     ret
 
-
+; Consume graphics, map, and palette requests with WRAM bank 1 selected.
+VBlankVideo:
     ldh a, [rSVBK]
     push af
     ld a, $01
     ldh [rSVBK], a
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     bit 7, [hl]
     call nz, $ff80
     bit 3, [hl]
     jp z, Jump_001_4079
 
-    call Call_001_40bb
+    call TransferGfx
     jp Jump_001_4086
 
 
@@ -85,7 +86,7 @@ Jump_001_4079:
     res 6, [hl]
     ldh a, [$ff90]
     cp $00
-    call nz, Call_001_40ed
+    call nz, FlushMapQueue
 
 Jump_001_4086:
 jr_001_4086:
@@ -93,10 +94,10 @@ jr_001_4086:
     jr z, jr_001_408f
 
     res 0, [hl]
-    call Call_001_4172
+    call UploadPals
 
 jr_001_408f:
-    ldh a, [$ff8c]
+    ldh a, [hVideoFlags]
     bit 4, a
     call nz, Call_001_4197
     ld a, [$c182]
@@ -124,29 +125,30 @@ jr_001_40b5:
     res 7, [hl]
     ret
 
-
+; Transfer $400 bytes from WRAM bank 2 via CGB general-purpose DMA.
+TransferGfx:
 Call_001_40bb:
     push hl
     ldh a, [rSVBK]
     push af
     ld a, $02
     ldh [rSVBK], a
-    ldh a, [$ff99]
+    ldh a, [hGfxVramBank]
     and $01
     ldh [rVBK], a
-    ldh a, [$ff98]
+    ldh a, [hGfxSrcHi]
     ldh [rHDMA1], a
-    ldh a, [$ff97]
+    ldh a, [hGfxSrcLo]
     ldh [rHDMA2], a
-    ldh a, [$ff9b]
+    ldh a, [hGfxDstHi]
     ldh [rHDMA3], a
-    ldh a, [$ff9a]
+    ldh a, [hGfxDstLo]
     ldh [rHDMA4], a
     ld a, $3f
     ldh [rHDMA5], a
-    ldh a, [$ff98]
+    ldh a, [hGfxSrcHi]
     add $04
-    ldh [$ff98], a
+    ldh [hGfxSrcHi], a
     xor a
     ldh [rVBK], a
     pop af
@@ -155,7 +157,8 @@ Call_001_40bb:
     res 3, [hl]
     ret
 
-
+; Write queued tile/attribute rows or columns to VRAM.
+FlushMapQueue:
 Call_001_40ed:
     push hl
     ld de, $c0a0
@@ -262,23 +265,27 @@ jr_001_4125:
     ldh [rP1], a
     ret
 
-
+; Write active object and BG palette sets to CGB palette registers.
+UploadPals:
 Call_001_4172:
-    call Call_001_4186
-    call Call_001_4179
+    call UploadObjPal
+    call UploadBgPal
     ret
 
-
+; Copy wBgPal to the eight CGB background palettes.
+UploadBgPal:
 Call_001_4179:
-    ld hl, $db40
+    ld hl, wBgPal
     ld d, $40
     ld a, $80
     ldh [rBCPS], a
     ld c, $69
     jr jr_001_4191
 
+; Copy wObjPal to the eight CGB object palettes.
+UploadObjPal:
 Call_001_4186:
-    ld hl, $db80
+    ld hl, wObjPal
     ld d, $40
     ld a, $80
     ldh [rOCPS], a
@@ -295,7 +302,7 @@ jr_001_4191:
 
 Call_001_4197:
     res 4, a
-    ldh [$ff8c], a
+    ldh [hVideoFlags], a
     ld a, $80
     ldh [rTMA], a
     xor a
@@ -588,7 +595,7 @@ Call_001_4341:
     jr jr_001_4349
 
 Call_001_4346:
-    ld a, [$c521]
+    ld a, [wRoomId]
 
 jr_001_4349:
     ld l, a
@@ -1320,643 +1327,155 @@ jr_001_465d:
     jr @+$1b
 
     rst RST_38
-    ld a, [$c599]
+
+; Look up the scene BG/object pair and load changed resources.
+ReadSceneGfx:
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $46af
+    ld bc, CaseGfxRefs
     add hl, bc
     ld c, [hl]
     inc hl
     ld b, [hl]
-    ld a, [$c522]
+    ld a, [wSceneId]
     ld l, a
     ld h, $00
     add hl, hl
     add hl, bc
     ld a, [hl+]
-    ldh [$ffa4], a
+    ldh [hBgGfx], a
     ld a, [hl]
-    ldh [$ffa5], a
-    call Call_000_0a76
+    ldh [hObjGfx], a
+    call LoadSceneGfx
     ret
 
-
-    ld a, [$c599]
+; Request the scene BG and object ID $7f; retain a valid object cache.
+ReadSceneBg:
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $46af
+    ld bc, CaseGfxRefs
     add hl, bc
     ld c, [hl]
     inc hl
     ld b, [hl]
-    ld a, [$c522]
+    ld a, [wSceneId]
     ld l, a
     ld h, $00
     add hl, hl
     add hl, bc
     ld a, [hl+]
-    ldh [$ffa4], a
+    ldh [hBgGfx], a
     ld a, $7f
-    ldh [$ffa5], a
-    call Call_000_0a76
+    ldh [hObjGfx], a
+    call LoadSceneGfx
     ret
-
-
-    or e
-    ld b, [hl]
-    push hl
-    ld b, a
-    ld [bc], a
-    pop bc
-    ld [bc], a
-    pop bc
-    inc b
-    jp nz, $c206
-
-    ld [$0800], sp
-    nop
-    ld [$0800], sp
-    nop
-    ld a, [bc]
-    jp nz, $c20a
-
-    inc c
-    jp nz, $c20c
-
-    ld c, $00
-    ld c, $00
-    db $10
-    jp nz, $c210
-
-    db $10
-    jp nz, $c210
-
-    ld [de], a
-    jp z, $ca12
-
-    inc d
-    nop
-    inc d
-    nop
-    inc d
-    nop
-    inc d
-    nop
-    ld d, $00
-    ld d, $00
-    jr jr_001_46e9
-
+CaseGfxRefs:
+    dw Case1GfxPairs, Case2GfxPairs
+; Per scene: BG ID, object ID. BG also loads ID+1.
+Case1GfxPairs:
+    db $02, $c1, $02, $c1, $04, $c2, $06, $c2, $08, $00, $08, $00, $08, $00, $08, $00
+    db $0a, $c2, $0a, $c2, $0c, $c2, $0c, $c2, $0e, $00, $0e, $00, $10, $c2, $10, $c2
+    db $10, $c2, $10, $c2, $12, $ca, $12, $ca, $14, $00, $14, $00, $14, $00, $14, $00
+    db $16, $00, $16, $00, $18, $00
 jr_001_46e9:
-    jr jr_001_46eb
-
+    db $18, $00
 jr_001_46eb:
-    ld a, [de]
-    nop
-    ld a, [de]
-    nop
-    ld a, [de]
-    nop
-    ld a, [de]
-    nop
-    inc e
-    pop bc
-    inc e
-    pop bc
-    inc e
-    pop bc
-    inc e
-    pop bc
-    ld e, $00
-    ld e, $00
-    jr nz, jr_001_4701
-
+    db $1a, $00, $1a, $00, $1a, $00, $1a, $00, $1c, $c1, $1c, $c1, $1c, $c1, $1c, $c1
+    db $1e, $00, $1e, $00, $20, $00
 jr_001_4701:
-    jr nz, jr_001_4703
-
+    db $20, $00
 jr_001_4703:
-    ld [hl+], a
-    nop
-    ld [hl+], a
-    nop
-    ld [hl+], a
-    nop
-    ld [hl+], a
-    nop
-    inc h
-
+    db $22, $00, $22, $00, $22, $00, $22, $00, $24
 jr_001_470c:
-    nop
-    inc h
-
+    db $00, $24
 jr_001_470e:
-    nop
-    ld h, $00
-    ld h, $00
-    jr z, jr_001_4715
-
+    db $00, $26, $00, $26, $00, $28, $00
 jr_001_4715:
-    ld a, [hl+]
-    nop
-    jr z, jr_001_4719
-
+    db $2a, $00, $28, $00
 jr_001_4719:
-    jr z, jr_001_471b
-
+    db $28, $00
 jr_001_471b:
-    jr z, jr_001_471d
-
+    db $28, $00
 jr_001_471d:
-    ld a, [hl+]
-    nop
-    ld a, [hl+]
-    nop
-    ld a, [hl+]
-    nop
-    jr z, jr_001_4725
-
+    db $2a, $00, $2a, $00, $2a, $00, $28, $00
 jr_001_4725:
-    jr z, jr_001_4727
-
+    db $28, $00
 jr_001_4727:
-    jr z, jr_001_4729
-
+    db $28, $00
 jr_001_4729:
-    ld a, [hl+]
-    nop
-    ld a, [hl+]
-    nop
-    ld a, [hl+]
-    nop
-    jr z, jr_001_4731
-
+    db $2a, $00, $2a, $00, $2a, $00, $28, $00
 jr_001_4731:
-    ld a, [hl+]
-    nop
-    inc l
-    jp Jump_000_002e
-
-
-    ld l, $00
-    jr nc, jr_001_473b
-
+    db $2a, $00, $2c, $c3, $2e, $00, $2e, $00, $30, $00
 jr_001_473b:
-    ld [hl-], a
-    jp $c334
-
-
-    ld [hl], $c3
-    jr c, jr_001_470c
-
-    jr c, jr_001_470e
-
-    ld a, [hl-]
-    jp $c63c
-
-
-    ld a, $00
-    ld b, b
-    jp $0042
-
-
-    ld b, h
-    nop
-    ld b, [hl]
-    nop
-    ld c, b
-    nop
-    ld c, d
-    nop
-    ld c, d
-    nop
-    ld c, h
-    jp z, Jump_000_004e
-
-    ld d, b
-    nop
-    ld d, d
-    jp Jump_000_0054
-
-
-    ld d, [hl]
-    jp $c356
-
-
-    ld d, [hl]
-    jp $c356
-
-
-    ld e, b
-    nop
-    ld e, b
-    nop
-    ld e, b
-    nop
-    ld e, b
-    nop
-    ld e, d
-    nop
-    ld e, d
-    nop
-    ld e, h
-    nop
-    ld e, h
-    nop
-    ld e, h
-    nop
-    ld e, [hl]
-    ret
-
-
-    ld h, b
-
+    db $32, $c3, $34, $c3, $36, $c3, $38, $c9, $38, $c9, $3a, $c3, $3c, $c6, $3e, $00
+    db $40, $c3, $42, $00, $44, $00, $46, $00, $48, $00, $4a, $00, $4a, $00, $4c, $ca
+    db $4e, $00, $50, $00, $52, $c3, $54, $00, $56, $c3, $56, $c3, $56, $c3, $56, $c3
+    db $58, $00, $58, $00, $58, $00, $58, $00, $5a, $00, $5a, $00, $5c, $00, $5c, $00
+    db $5c, $00, $5e, $c9, $60
 jr_001_4780:
-    nop
-    ld h, b
-    nop
-    ld h, d
-    nop
-    ld h, d
-    nop
-    ld h, h
-    jp Jump_000_0066
-
-
-    ld h, [hl]
-
+    db $00, $60, $00, $62, $00, $62, $00, $64, $c3, $66, $00, $66
 jr_001_478c:
-    nop
-    ld l, b
-    nop
-    ld l, b
-    nop
-    and d
-    nop
-    ld l, d
-    nop
-    ld l, d
-    nop
-    ld l, h
-    add $6e
-    call nz, $c46e
-
+    db $00, $68, $00, $68, $00, $a2, $00, $6a, $00, $6a, $00, $6c, $c6, $6e, $c4, $6e
+    db $c4
 jr_001_479d:
-    ld [hl], b
-    push bc
-    ld [hl], b
-    push bc
-    ld [hl], d
-    nop
-    ld [hl], h
-    nop
-
+    db $70, $c5, $70, $c5, $72, $00, $74, $00
 jr_001_47a5:
-    halt
-    nop
-    ld a, b
-    nop
-    ld a, d
-    nop
-    ld a, d
-    nop
-    ld a, h
-    push bc
-
+    db $76, $00, $78, $00, $7a, $00, $7a, $00, $7c, $c5
 jr_001_47af:
-    ld a, [hl]
-    nop
-    ld a, [hl]
-    nop
-    ld a, [hl]
-    nop
-    ld a, [hl]
-    nop
-    add b
-    push bc
-    add b
-    push bc
-    add d
-    push bc
-    add d
-    push bc
-    add h
-    nop
-    add [hl]
-    nop
-    add [hl]
-    nop
-    add h
-    nop
-    adc b
-    nop
-    adc d
-    nop
-    adc d
-    nop
-    adc h
-    nop
-    adc [hl]
-    nop
-    sub b
-    rst RST_00
-    sub d
-    nop
-    sub h
-    nop
-    sub [hl]
-    nop
-    sbc b
-    nop
-    sbc d
-    nop
-    sbc h
-    nop
-    sbc [hl]
-    nop
-    and b
-    nop
-    sub b
-    ret z
+    db $7e, $00, $7e, $00, $7e, $00, $7e, $00, $80, $c5, $80, $c5, $82, $c5, $82, $c5
+    db $84, $00, $86, $00, $86, $00, $84, $00, $88, $00, $8a, $00, $8a, $00, $8c, $00
+    db $8e, $00, $90, $c7, $92, $00, $94, $00, $96, $00, $98, $00, $9a, $00, $9c, $00
+    db $9e, $00, $a0, $00, $90, $c8
+; Per scene: BG ID, object ID. BG also loads ID+1.
+Case2GfxPairs:
+    db $02, $81, $04, $82, $06, $82, $08, $82, $0a, $7f, $0c, $82, $0e, $7f, $10, $82
+    db $12, $82, $12, $82, $16, $83, $18, $83, $1a, $7f, $1c, $83, $1e, $89, $1e, $89
+    db $1e, $89, $20, $83, $22, $83, $24, $83, $26, $81, $26, $81, $28, $8a, $2a, $7f
+    db $2c, $8a, $2a, $7f, $26, $81, $26, $81, $2e, $84, $30, $84, $32, $88, $34, $7f
+    db $36, $86, $38, $86, $3a, $7f, $3c, $7f, $3e, $7f, $40, $7f, $42, $7f, $44, $7f
+    db $46, $7f, $48, $86, $4a, $7f, $4c, $7f, $4e, $84, $50, $87, $52, $87, $54, $87
+    db $56, $7f, $58, $88, $5a, $88, $5c, $7f, $5e, $8b, $60, $88, $62, $7f, $64, $88
+    db $66, $88, $68, $85, $6a, $7f, $6c, $7f, $6e, $7f, $70, $7f, $72, $7f, $74, $7f
+    db $76, $7f, $78, $7f, $78, $7f, $7a, $7f
 
-    ld [bc], a
-    add c
-    inc b
-    add d
-    ld b, $82
-    ld [$0a82], sp
-    ld a, a
-    inc c
-    add d
-    ld c, $7f
-    db $10
-    add d
-    ld [de], a
-    add d
-    ld [de], a
-    add d
-    ld d, $83
-    jr jr_001_4780
-
-    ld a, [de]
-    ld a, a
-    inc e
-    add e
-    ld e, $89
-    ld e, $89
-    ld e, $89
-    jr nz, jr_001_478c
-
-    ld [hl+], a
-    add e
-    inc h
-    add e
-    ld h, $81
-    ld h, $81
-    jr z, jr_001_479d
-
-    ld a, [hl+]
-    ld a, a
-    inc l
-    adc d
-    ld a, [hl+]
-    ld a, a
-    ld h, $81
-    ld h, $81
-    ld l, $84
-    jr nc, jr_001_47a5
-
-    ld [hl-], a
-    adc b
-    inc [hl]
-    ld a, a
-    ld [hl], $86
-    jr c, jr_001_47af
-
-    ld a, [hl-]
-    ld a, a
-    inc a
-    ld a, a
-    ld a, $7f
-    ld b, b
-    ld a, a
-    ld b, d
-    ld a, a
-    ld b, h
-    ld a, a
-    ld b, [hl]
-    ld a, a
-    ld c, b
-    add [hl]
-    ld c, d
-    ld a, a
-    ld c, h
-    ld a, a
-    ld c, [hl]
-    add h
-    ld d, b
-    add a
-    ld d, d
-    add a
-    ld d, h
-    add a
-    ld d, [hl]
-    ld a, a
-    ld e, b
-    adc b
-    ld e, d
-    adc b
-    ld e, h
-    ld a, a
-    ld e, [hl]
-    adc e
-    ld h, b
-    adc b
-    ld h, d
-    ld a, a
-    ld h, h
-    adc b
-    ld h, [hl]
-    adc b
-    ld l, b
-    add l
-    ld l, d
-    ld a, a
-    ld l, h
-    ld a, a
-    ld l, [hl]
-    ld a, a
-    ld [hl], b
-    ld a, a
-    ld [hl], d
-    ld a, a
-    ld [hl], h
-    ld a, a
-    halt
-    ld a, a
-    ld a, b
-    ld a, a
-    ld a, b
-    ld a, a
-    ld a, d
-    ld a, a
-
+; Map the Case I scene ID to a palette ID, then stage both sets.
+LoadC1Pal:
 Call_001_486d:
-    ld a, [$c522]
+    ld a, [wSceneId]
     ld e, a
     ld d, $00
-    ld hl, $487f
+    ld hl, Case1PalIds
     add hl, de
     ld a, [hl]
-    ld [$c641], a
-    call Call_000_18ef
+    ld [wScenePalId], a
+    call StagePals
     ret
-
-
-    nop
-    nop
-    ld bc, $0302
-    inc bc
-    inc bc
-    inc bc
-    inc b
-    inc b
-    dec b
-    dec b
-    ld b, $06
-    rlca
-    rlca
-    rlca
-    rlca
-    ld [$0908], sp
-    add hl, bc
-    add hl, bc
-    add hl, bc
-    ld a, [bc]
-    ld a, [bc]
-    dec bc
-    dec bc
-    inc c
-    inc c
-    inc c
-    inc c
-    dec c
-    dec c
-    dec c
-    dec c
-    ld c, $0e
-    rrca
-    rrca
-    db $10
-    db $10
-    db $10
-    db $10
-    ld de, $1211
-    ld [de], a
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc de
-    inc d
-    dec d
-    dec d
-    ld d, $17
-    jr jr_001_48df
-
-    ld a, [de]
-    ld a, [de]
-    dec de
-    inc e
-    dec e
-    ld e, $1f
-    jr nz, @+$23
-
-    ld [hl+], a
-    inc hl
-    inc hl
-    inc h
-    dec h
-    ld h, $27
-    jr z, jr_001_4901
-
-    add hl, hl
-    ld a, [hl+]
-    ld a, [hl+]
-    dec hl
-    dec hl
-    inc l
-    inc l
-
+; One palette ID per Case I scene; shared IDs use shared palette sets.
+Case1PalIds:
+    db $00, $00, $01, $02, $03, $03, $03, $03, $04, $04, $05, $05, $06, $06, $07, $07
+    db $07, $07, $08, $08, $09, $09, $09, $09, $0a, $0a, $0b, $0b, $0c, $0c, $0c, $0c
+    db $0d, $0d, $0d, $0d, $0e, $0e, $0f, $0f, $10, $10, $10, $10, $11, $11, $12, $12
+    db $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13, $13
+    db $14, $15, $15, $16, $17, $18, $19, $1a, $1a, $1b, $1c, $1d, $1e, $1f, $20, $21
+    db $22, $23, $23, $24, $25, $26, $27, $28, $29, $29, $2a, $2a, $2b, $2b, $2c, $2c
 jr_001_48df:
-    dec l
-    dec l
-    ld l, $2e
-    ld l, $2f
-    jr nc, jr_001_4917
-
-    ld sp, $3231
-    inc sp
-    inc sp
-    inc [hl]
-    inc [hl]
-    dec [hl]
-    ld [hl], $36
-    scf
-    jr c, jr_001_492c
-
-    add hl, sp
-    add hl, sp
-    ld a, [hl-]
-    dec sp
-    inc a
-    dec a
-    ld a, $3e
-    ccf
-    ld b, b
-    ld b, b
-    ld b, c
-    ld b, c
-
+    db $2d, $2d, $2e, $2e, $2e, $2f, $30, $30, $31, $31, $32, $33, $33, $34, $34, $35
+    db $36, $36, $37, $38, $38, $39, $39, $3a, $3b, $3c, $3d, $3e, $3e, $3f, $40, $40
+    db $41, $41
 jr_001_4901:
-    ld b, d
-    ld b, d
-    ld b, e
-    ld b, e
-    ld b, h
-    ld b, l
-    ld b, [hl]
-    ld b, a
-    ld c, b
-    ld c, c
-    ld c, c
-    ld c, d
-    ld c, e
-    ld c, h
-    ld c, l
-    ld c, [hl]
-    ld c, a
-    ld d, b
-    ld d, c
-    ld d, d
-    ld d, e
-    ld d, h
-
+    db $42, $42, $43, $43, $44, $45, $46, $47, $48, $49, $49, $4a, $4b, $4c, $4d, $4e
+    db $4f, $50, $51, $52, $53, $54
 jr_001_4917:
-    ld d, l
-    ld bc, $dbc0
-    ld hl, $db40
+    db $55
+
+; Copy 128 staged palette bytes into active sets and request their upload.
+ApplyScenePal:
+    ld bc, wBgPalNext
+    ld hl, wBgPal
     ld d, $80
 
 jr_001_4920:
@@ -2030,9 +1549,9 @@ jr_001_4964:
     push hl
     push bc
     push de
-    ld hl, $db40
+    ld hl, wBgPal
     call Call_001_497c
-    ld hl, $db80
+    ld hl, wObjPal
     call Call_001_497c
     call Call_000_074b
     pop de
@@ -2081,8 +1600,8 @@ jr_001_49b1:
     push hl
     push bc
     push de
-    ld hl, $db40
-    ld de, $dbc0
+    ld hl, wBgPal
+    ld de, wBgPalNext
     call Call_001_49c6
     call Call_000_074b
     pop de
@@ -2148,11 +1667,11 @@ jr_001_4a14:
     push hl
     push bc
     push de
-    ld hl, $db40
-    ld de, $dbc0
+    ld hl, wBgPal
+    ld de, wBgPalNext
     call Call_001_4a32
-    ld hl, $db80
-    ld de, $dc00
+    ld hl, wObjPal
+    ld de, wObjPalNext
     call Call_001_4a32
     call Call_000_074b
     pop de
@@ -2211,7 +1730,7 @@ jr_001_4a34:
 Call_001_4a7a:
     push de
     push hl
-    ld hl, $db40
+    ld hl, wBgPal
     ld d, $40
 
 jr_001_4a81:
@@ -2236,8 +1755,8 @@ Call_001_4a91:
     push de
     push bc
     push hl
-    ld hl, $db40
-    ld bc, $dbc0
+    ld hl, wBgPal
+    ld bc, wBgPalNext
     ld d, $40
     jr jr_001_4aa9
 
@@ -2245,8 +1764,8 @@ Call_001_4a9e:
     push de
     push bc
     push hl
-    ld hl, $db40
-    ld bc, $dbc0
+    ld hl, wBgPal
+    ld bc, wBgPalNext
     ld d, $80
 
 jr_001_4aa9:
@@ -2271,7 +1790,7 @@ Call_001_4ab7:
     push de
     push hl
     push bc
-    ld hl, $db40
+    ld hl, wBgPal
     ld d, $40
     ld bc, $7fff
     xor a
@@ -2789,7 +2308,7 @@ Call_001_4d6c:
     ld b, $00
     ld hl, $c53b
     add hl, bc
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_001_4d9d
 
@@ -2848,7 +2367,7 @@ jr_001_4dd0:
     jr z, jr_001_4dcb
 
     ld [$c8b6], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_001_4df4
 
@@ -2879,7 +2398,7 @@ Call_001_4e07:
     add hl, bc
     ld a, [hl+]
     ld [$c669], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_001_4e43
 
@@ -3073,7 +2592,7 @@ jr_001_4f23:
     ld c, a
     add l
     ld c, a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_4f35
 
@@ -3102,7 +2621,7 @@ jr_001_4f37:
     xor a
     ldh [$ff9f], a
     ld a, d
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_4f64
 
@@ -3142,7 +2661,7 @@ jr_001_4f6f:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_4f90
 
@@ -4446,7 +3965,7 @@ Call_001_55df:
 
 
 Call_001_55ec:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_001_5613
 
@@ -4550,7 +4069,7 @@ Call_001_561a:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret z
 
@@ -4591,7 +4110,7 @@ Call_001_561a:
     ldh [$ff9e], a
     pop af
     and $07
-    ld [$c866], a
+    ld [wSceneVariant], a
     ld bc, $c4e9
     ldh a, [$ff9e]
     ld l, a
@@ -4600,7 +4119,7 @@ Call_001_561a:
     add hl, bc
     ld a, [hl]
     ld d, a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ldh [$ff9e], a
     xor a
     ldh [$ff9f], a
@@ -4644,7 +4163,7 @@ jr_001_56e0:
     add hl, bc
     ld a, [hl]
     ld d, a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ldh [$ff9e], a
     xor a
     ldh [$ff9f], a
@@ -4735,7 +4254,7 @@ jr_001_5711:
     ldh [$ff9e], a
     pop af
     and $07
-    ld [$c866], a
+    ld [wSceneVariant], a
     ld bc, $c4c1
     ldh a, [$ff9e]
     ld l, a
@@ -4744,7 +4263,7 @@ jr_001_5711:
     add hl, bc
     ld a, [hl]
     ld d, a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ldh [$ff9e], a
     xor a
     ldh [$ff9f], a
@@ -4885,7 +4404,7 @@ Call_001_57c7:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret z
 
@@ -5226,7 +4745,7 @@ jr_001_5a1a:
     jr z, jr_001_5a8e
 
     call Call_001_55df
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_5a4d
 
@@ -5245,7 +4764,7 @@ jr_001_5a50:
     call Call_001_5d65
     call Call_001_5aef
     call Call_001_57ac
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_001_5a72
 
@@ -5365,7 +4884,7 @@ Call_001_5b04:
     ld a, [$c523]
     and $fb
     ld [$c523], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_5b43
 
@@ -5571,7 +5090,7 @@ jr_001_5c0b:
     ld a, [$c523]
     and $fb
     ld [$c523], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_5c52
 
@@ -5622,7 +5141,7 @@ jr_001_5c76:
     ld bc, $c8c5
     add hl, bc
     ld [hl], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_5ca3
 
@@ -5761,7 +5280,7 @@ jr_001_5d38:
     ret nz
 
     sbc d
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     nop
     sbc e
     jr nz, jr_001_5cfa
@@ -5895,7 +5414,7 @@ Call_001_5dca:
     ret nz
 
     sbc d
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     nop
     sbc e
     jr nz, @-$63
@@ -6961,7 +6480,7 @@ Call_001_6325:
     ld a, [hl]
     ld l, a
     ld h, $00
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_633f
 
@@ -7060,7 +6579,7 @@ Call_001_636d:
 
 
 Call_001_63b1:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_63e5
 
@@ -7352,8 +6871,10 @@ Call_001_651c:
     ret
 
 
+; Update room state, then select wSceneId from the room scene list and wSceneVariant.
+PickC1Scene:
     call Call_001_655c
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld l, a
     ld h, $00
     add hl, hl
@@ -7363,7 +6884,7 @@ Call_001_651c:
     ld [$c85e], a
     ld a, [hl]
     ld [$c85f], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld e, a
     ld d, $00
     ld a, [$c85e]
@@ -7372,16 +6893,16 @@ Call_001_651c:
     ld h, a
     add hl, de
     ld a, [hl]
-    ld [$c522], a
+    ld [wSceneId], a
     ret
 
 
 Call_001_655c:
     call Call_001_4346
     xor a
-    ld [$c866], a
+    ld [wSceneVariant], a
     ld d, a
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld e, a
     ld hl, $6731
     add hl, de
@@ -7408,13 +6929,13 @@ jr_001_6578:
     and $01
     jr z, jr_001_659d
 
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld d, a
     ld hl, $1859
     add hl, bc
     ld a, [hl]
     or d
-    ld [$c866], a
+    ld [wSceneVariant], a
 
 jr_001_659d:
     call Call_001_651c
@@ -8288,7 +7809,7 @@ jr_001_69a4:
 Call_001_69ab:
     xor a
     ld [$c865], a
-    ld [$c866], a
+    ld [wSceneVariant], a
     ret
 
 
@@ -8298,9 +7819,9 @@ Call_001_69b3:
     ld a, [$c865]
     add b
     ld [$c865], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     adc $00
-    ld [$c866], a
+    ld [wSceneVariant], a
     pop bc
     ret
 
@@ -8313,7 +7834,7 @@ Call_001_69c6:
     ld h, a
     ld a, [$c865]
     ld [hl+], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld [hl+], a
     pop hl
     ret
@@ -8334,7 +7855,7 @@ Call_001_69d9:
 
     ld a, [hl+]
     ld b, a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     jr nz, jr_001_69f5
 
     xor a
@@ -8435,7 +7956,7 @@ jr_001_6a49:
     push hl
     push bc
     push de
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_001_6a6a
 
@@ -8448,7 +7969,7 @@ jr_001_6a49:
     jr jr_001_6a9c
 
 jr_001_6a6a:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $62
     jr nc, jr_001_6a9c
 
@@ -8472,7 +7993,7 @@ jr_001_6a80:
 
     ld a, [$c865]
     ld [$bf7e], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld [$bf7f], a
     call Call_000_07b5
 
@@ -8511,7 +8032,7 @@ jr_001_6ab2:
 
     ld a, [$bf7f]
     ld b, a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     cp b
     jr nz, jr_001_6ad7
 
@@ -8536,8 +8057,8 @@ jr_001_6ad7:
     halt
     ld [hl], l
     ld a, $ff
-    ldh [$ffa6], a
-    ldh [$ffa7], a
+    ldh [hBgLoaded], a
+    ldh [hObjLoaded], a
     xor a
     ld [$c197], a
     ld [$c184], a
@@ -8563,17 +8084,17 @@ jr_001_6ad7:
 
     call Call_000_0416
     ld a, $8f
-    ld [$c522], a
+    ld [wSceneId], a
     jr jr_001_6b3b
 
 jr_001_6b2f:
-    call Call_001_486d
+    call LoadC1Pal
     call Call_000_1889
     call Call_000_03fe
     call Call_000_0ee0
 
 jr_001_6b3b:
-    call Call_000_0c4e
+    call RedrawScene
     call Call_001_4933
     ld hl, $c8ad
     ld a, $ff
@@ -8594,10 +8115,10 @@ jr_001_6b3b:
     ld a, $5a
     call Call_000_0753
     xor a
-    ld [$c522], a
+    ld [wSceneId], a
     ld a, $06
     ld [$c640], a
-    call Call_000_0bb6
+    call ShowScene
     ld a, $be
     call Call_000_1c8a
     ld a, $fe
@@ -8617,7 +8138,7 @@ Call_001_6b87:
     xor a
     ld [$c8af], a
     xor a
-    ld [$c521], a
+    ld [wRoomId], a
     ld a, $03
     ld [$c55c], a
     ld a, $06
@@ -8719,7 +8240,7 @@ jr_001_6c42:
     cp $6b
     jr nz, jr_001_6c54
 
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $73
     jr z, jr_001_6c54
 
@@ -8731,7 +8252,7 @@ jr_001_6c54:
     cp $5f
     jr nz, jr_001_6c65
 
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $7a
     jr z, jr_001_6c7b
 
@@ -8839,7 +8360,7 @@ jr_001_6cd8:
     jr nz, jr_001_6cfe
 
 jr_001_6cf4:
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $00
     jr z, jr_001_6cfe
 
@@ -8930,7 +8451,7 @@ jr_001_6d5b:
 
 
 jr_001_6d6c:
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $43
     jr z, jr_001_6d5b
 

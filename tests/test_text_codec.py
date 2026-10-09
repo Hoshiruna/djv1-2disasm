@@ -17,12 +17,12 @@ from text_resources import bank_path, parse_blocks, prepare, read_json, rebuild
 
 
 def load_charmap(region):
-    return read_json(ROOT / "res" / region / "text" / "charmap.json")
+    return read_json(ROOT / "res" / "text" / region / "charmap.json")
 
 
 def original_rom(region):
     """Use tracked resources; the tests do not need a local ROM or assembler."""
-    folder = ROOT / "res" / region / "text"
+    folder = ROOT / "res" / "text" / region
     document = read_json(folder / "dialogue.json")
     rom = bytearray(0x19 * BANK_SIZE)
     for table in document["pointer_tables"]:
@@ -44,7 +44,7 @@ def original_rom(region):
 
 def prepare_fixture(folder, region):
     folder.mkdir(parents=True)
-    source = ROOT / "res" / region / "text"
+    source = ROOT / "res" / "text" / region
     for name in ("dialogue.json", "charmap.json"):
         shutil.copyfile(str(source / name), str(folder / name))
     rom = original_rom(region)
@@ -55,7 +55,7 @@ def prepare_fixture(folder, region):
 class CodecTests(unittest.TestCase):
     def test_every_exported_message_and_name_can_be_encoded(self):
         for region in ("US", "JP"):
-            folder = ROOT / "res" / region / "text"
+            folder = ROOT / "res" / "text" / region
             document, charmap = read_json(folder / "dialogue.json"), load_charmap(region)
             for message in document["messages"]:
                 with self.subTest(region=region, message=message["id"]):
@@ -184,7 +184,7 @@ class ResourceTests(unittest.TestCase):
 
     def test_asm_includes_fill_each_bank_and_keep_label_addresses(self):
         for region in ("US", "JP"):
-            document = read_json(ROOT / "res" / region / "text" / "dialogue.json")
+            document = read_json(ROOT / "res" / "text" / region / "dialogue.json")
             for table in document["pointer_tables"]:
                 bank = int(table["bank"], 16)
                 source = (ROOT / "asm" / region / ("bank_{:03x}.asm".format(bank))).read_text(encoding="utf-8")

@@ -52,8 +52,8 @@ class CodecTests(unittest.TestCase):
     def test_original_resources_stay_byte_exact(self):
         for region in ("US", "JP"):
             font = "case1_font" if region == "JP" else "font"
-            graphics = region + "/gfx/"
-            bathroom = "scene/case2/00-bathroom/" + region + "/"
+            graphics = "ui/" + region + "/"
+            bathroom = "scene/case2/00-lucky-bath/" + region + "/"
             for name, expected_size in ((graphics + font, 2048), (graphics + "hud_tiles", 1792),
                                         (graphics + "case2_font", 2048), (graphics + "case2_hud_tiles", 2048),
                                         (bathroom + "s00-bg", 2048),
@@ -69,8 +69,8 @@ class CodecTests(unittest.TestCase):
     def test_edited_resources_keep_header_size_and_pixels(self):
         for region in ("US", "JP"):
             font = "case1_font" if region == "JP" else "font"
-            graphics = region + "/gfx/"
-            bathroom = "scene/case2/00-bathroom/" + region + "/"
+            graphics = "ui/" + region + "/"
+            bathroom = "scene/case2/00-lucky-bath/" + region + "/"
             for name in (graphics + font, graphics + "hud_tiles", graphics + "case2_font", graphics + "case2_hud_tiles",
                          bathroom + "s00-bg",
                          bathroom + "s00-bg-extra",

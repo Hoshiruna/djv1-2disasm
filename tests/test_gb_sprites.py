@@ -8,7 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from bathroom_preview import render, scene_objects
+from bathroom_preview import BATHROOM, render, scene_objects
 from gb_sprites import decode_metasprites, emit_oam, overlay
 
 
@@ -90,10 +90,10 @@ class SpriteTests(unittest.TestCase):
         self.assertEqual({part[2] for part in oam}, set(range(0x16)))
         for door in ("base", "closed", "open"):
             with self.subTest(door=door):
-                us = render(ROOT / "res" / "US", door, objects=True)
-                jp = render(ROOT / "res" / "JP", door, objects=True)
+                us = render(ROOT / "res" / BATHROOM / "US", door, objects=True)
+                jp = render(ROOT / "res" / BATHROOM / "JP", door, objects=True)
                 self.assertEqual(us, jp)
-                self.assertNotEqual(us, render(ROOT / "res" / "US", door))
+                self.assertNotEqual(us, render(ROOT / "res" / BATHROOM / "US", door))
 
     def test_presence_and_visibility_are_independent(self):
         resources = ROOT / "res"

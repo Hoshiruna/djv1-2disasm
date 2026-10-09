@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 from gb_rle import decode_resource, encode, rebuild_resource
 from hud_tilemap import encode_png, load_tiles, palette_colors, process, render_pixels
-from bathroom_preview import apply_door, render as render_bathroom
+from bathroom_preview import BATHROOM, apply_door, render as render_bathroom
 
 
 class RleTests(unittest.TestCase):
@@ -41,7 +41,7 @@ class RleTests(unittest.TestCase):
     def test_original_maps_and_unchanged_rebuild(self):
         for region, size in (("US", 225), ("JP", 233)):
             with self.subTest(region=region):
-                folder = ROOT / "res" / region / "tilemaps"
+                folder = ROOT / "res" / "ui" / region
                 template = (folder / "hud.bin").read_bytes()
                 width, height, tiles, attributes, consumed = decode_resource(template)
                 self.assertEqual((width, height, consumed, len(template)), (20, 32, size, size))
@@ -53,7 +53,7 @@ class RleTests(unittest.TestCase):
     def test_edits_fit_and_preserve_header_and_size(self):
         for region in ("US", "JP"):
             with self.subTest(region=region):
-                template = (ROOT / "res" / region / "tilemaps" / "hud.bin").read_bytes()
+                template = (ROOT / "res" / "ui" / region / "hud.bin").read_bytes()
                 _, _, tiles, attributes, _ = decode_resource(template)
                 edited_tiles = bytearray(tiles)
                 edited_attributes = bytearray(attributes)
@@ -66,11 +66,10 @@ class RleTests(unittest.TestCase):
                 self.assertEqual(decode_resource(rebuilt)[2:4], (edited_tiles, edited_attributes))
 
     def test_overflow_preserves_bin(self):
-        template = (ROOT / "res" / "US" / "tilemaps" / "hud.bin").read_bytes()
+        template = (ROOT / "res" / "ui" / "US" / "hud.bin").read_bytes()
         rng = random.Random(9)
         with tempfile.TemporaryDirectory() as directory:
-            folder = Path(directory) / "tilemaps"
-            folder.mkdir()
+            folder = Path(directory)
             output = folder / "hud.bin"
             output.write_bytes(template)
             (folder / "hud.tilemap").write_bytes(bytes(rng.randrange(256) for _ in range(640)))
@@ -90,16 +89,16 @@ class RendererTests(unittest.TestCase):
             render_pixels(1, 1, b"\x00", b"\x02", tiles, colors, tile_bank=1)
 
     def test_bathroom_preview_matches_both_regions(self):
-        png = (ROOT / "res/scene/case2/previews/00-bathroom.png").read_bytes()
+        png = (ROOT / "res/scene/case2/previews/00-lucky-bath.png").read_bytes()
         self.assertEqual(struct.unpack_from(">II", png, 16), (112, 112))
         for region in ("US", "JP"):
             with self.subTest(region=region):
-                self.assertEqual(render_bathroom(ROOT / "res" / region), png)
+                self.assertEqual(render_bathroom(ROOT / "res" / BATHROOM / region), png)
 
     def test_door_patch_replaces_only_its_rectangle(self):
         resources = ROOT / "res"
-        tiles = (resources / "scene/case2/00-bathroom/s00-bg.tilemap").read_bytes()
-        attributes = (resources / "scene/case2/00-bathroom/s00-bg.attrmap").read_bytes()
+        tiles = (resources / "scene/case2/00-lucky-bath/s00-bg.tilemap").read_bytes()
+        attributes = (resources / "scene/case2/00-lucky-bath/s00-bg.attrmap").read_bytes()
         self.assertEqual(apply_door(tiles, attributes, resources, "closed"), (tiles, attributes))
         opened_tiles, opened_attributes = apply_door(tiles, attributes, resources, "open")
         rectangle = {(y + 2) * 14 + x + 5 for y in range(8) for x in range(4)}
@@ -112,12 +111,12 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(opened_tiles[2 * 14 + 6:2 * 14 + 8], b"\xFF\xFF")
 
     def test_open_door_preview_matches_both_regions(self):
-        png = render_bathroom(ROOT / "res/US", "open")
-        self.assertEqual(render_bathroom(ROOT / "res/JP", "open"), png)
-        self.assertNotEqual(render_bathroom(ROOT / "res/US", "closed"), png)
+        png = render_bathroom(ROOT / "res" / BATHROOM / "US", "open")
+        self.assertEqual(render_bathroom(ROOT / "res" / BATHROOM / "JP", "open"), png)
+        self.assertNotEqual(render_bathroom(ROOT / "res" / BATHROOM / "US", "closed"), png)
 
     def test_signed_tile_ids(self):
-        tiles = load_tiles(ROOT / "res" / "US")
+        tiles = load_tiles(ROOT / "res" / "ui" / "US")
         self.assertEqual(len(tiles), 240)
         self.assertIn(0xFF, tiles)
         self.assertIn(0x10, tiles)
@@ -149,11 +148,11 @@ class RendererTests(unittest.TestCase):
     def test_preview_png_contents(self):
         for region in ("US", "JP"):
             with self.subTest(region=region):
-                folder = ROOT / "res" / region
-                width, height, tiles, attributes, _ = decode_resource((folder / "tilemaps" / "hud.bin").read_bytes())
-                colors = palette_colors((folder / "palettes" / "hud.pal").read_bytes())
+                folder = ROOT / "res" / "ui" / region
+                width, height, tiles, attributes, _ = decode_resource((folder / "hud.bin").read_bytes())
+                colors = palette_colors((folder / "hud.pal").read_bytes())
                 pixels = render_pixels(width, height, tiles, attributes, load_tiles(folder), colors)
-                png = (folder / "tilemaps" / "hud.png").read_bytes()
+                png = (folder / "hud.png").read_bytes()
                 self.assertEqual(encode_png(160, 256, pixels), png)
                 self.assertEqual(struct.unpack_from(">II", png, 16), (160, 256))
                 length = struct.unpack_from(">I", png, 33)[0]

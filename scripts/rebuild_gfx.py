@@ -6,7 +6,8 @@ import argparse
 from pathlib import Path
 import subprocess
 
-from gb_lz import rebuild_resource
+from gb_lz import rebuild_resource as rebuild_lz
+from gb_tile_rle import rebuild_resource as rebuild_planar
 from scene_tiles import decode_atlas
 
 
@@ -23,7 +24,9 @@ def rebuild_png(png, output, rgbgfx="rgbgfx", scene_atlas=False):
             rgbgfx, "--colors", "embedded", "-d", "2",
             "-o", str(tiles_path), str(png),
         ], check=True)
-    rebuilt = rebuild_resource(template, tiles_path.read_bytes())
+    rebuild = (rebuild_planar if template[:1] in (b"\x00", b"\x01", b"\x10", b"\x11")
+               else rebuild_lz)
+    rebuilt = rebuild(template, tiles_path.read_bytes())
     changed = rebuilt != template
     if changed:
         output.write_bytes(rebuilt)

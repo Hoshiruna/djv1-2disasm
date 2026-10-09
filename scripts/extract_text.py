@@ -59,7 +59,7 @@ def main():
     parser.add_argument("--output", type=Path,
                         help="Resource directory containing the regional charmap.json")
     args = parser.parse_args()
-    output = args.output or ROOT / "res" / args.region / "text"
+    output = args.output or ROOT / "res" / "text" / args.region
     try:
         summary = extract(args.region, args.rom, output)
     except (OSError, ValueError) as error:

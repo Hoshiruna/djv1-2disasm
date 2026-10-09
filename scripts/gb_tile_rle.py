@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
-"""Read the game's planar RLE tile resources (bank zero, $0588/$0598)."""
+"""Read and rebuild the game's planar RLE tile resources."""
 
-from gb_rle import decode_runs
+from gb_rle import decode_runs, encode
 
 
 def decode_resource(resource):
@@ -18,3 +18,20 @@ def decode_resource(resource):
     tiles[0::2] = planes[:plane_size]
     tiles[1::2] = planes[plane_size:]
     return bytes(tiles), consumed + 4
+
+
+def rebuild_resource(template, tiles):
+    """Keep the header and slot size, preserving unchanged streams verbatim."""
+    original, _ = decode_resource(template)
+    if len(tiles) != len(original):
+        raise ValueError("Expected {} decoded bytes, got {}; keep the tile count".format(
+            len(original), len(tiles)))
+    if tiles == original:
+        return template
+
+    planes = tiles[0::2] + tiles[1::2]
+    rebuilt = template[:4] + encode(planes, template[2])
+    if len(rebuilt) > len(template):
+        raise ValueError("Compressed resource needs {} bytes; its ROM slot holds {}".format(
+            len(rebuilt), len(template)))
+    return rebuilt + b"\xFF" * (len(template) - len(rebuilt))

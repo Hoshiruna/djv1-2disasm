@@ -198,7 +198,7 @@ def main():
         if command == "prepare":
             subparser.add_argument("rom", type=Path)
     args = parser.parse_args()
-    folder = args.folder or ROOT / "res" / args.region / "text"
+    folder = args.folder or ROOT / "res" / "text" / args.region
     try:
         if args.command == "prepare":
             dialogue, names = prepare(folder, args.region, args.rom.read_bytes())

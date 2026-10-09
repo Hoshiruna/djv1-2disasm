@@ -2961,7 +2961,7 @@ jr_007_4c17:
     jr c, @+$01
 
 Case2BathroomMirrorBreak:
-    INCBIN "../../res/scene/case2/00-bathroom/s00-mirror-break.bin", $0, $f
+    INCBIN "../../res/scene/case2/00-lucky-bath/s00-mirror-break.bin", $0, $f
     ld [$2105], sp
     ld b, a
     ld a, $13
@@ -3184,7 +3184,7 @@ jr_007_4d42:
     ld [bc], a
     ld [hl], $ff
 Case2BathroomColdTapOpen:
-    INCBIN "../../res/scene/case2/00-bathroom/JP/s00-cold-tap-open.bin", $0, $11
+    INCBIN "../../res/scene/case2/00-lucky-bath/JP/s00-cold-tap-open.bin", $0, $11
     jr nc, jr_007_4d2f
 
     ld [$5702], sp
@@ -7526,7 +7526,7 @@ jr_007_5f29:
     cp [hl]
     rst RST_38
 Case2BathroomTowelTake:
-    INCBIN "../../res/scene/case2/00-bathroom/JP/s00-towel-take.bin", $0, $b
+    INCBIN "../../res/scene/case2/00-lucky-bath/JP/s00-towel-take.bin", $0, $b
     nop
     add hl, de
     rst RST_38

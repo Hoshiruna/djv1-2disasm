@@ -16,7 +16,7 @@ def load_tiles(region):
     tiles = {}
     font = "case1_font" if region.name == "JP" else "font"
     for name in (font, "hud_tiles"):
-        resource = (region / "gfx" / (name + ".bin")).read_bytes()
+        resource = (region / (name + ".bin")).read_bytes()
         raw, _ = decode_tiles(resource[3:], resource[2] * 16)
         address = 0x8000 + resource[1] * 16
         if resource[0] & 1 and address < 0x8800:
@@ -80,7 +80,7 @@ def encode_png(width, height, pixels):
 
 
 def process(action, region):
-    folder = region / "tilemaps"
+    folder = region
     resource_path = folder / "hud.bin"
     tiles_path = folder / "hud.tilemap"
     attributes_path = folder / "hud.attrmap"
@@ -103,7 +103,7 @@ def process(action, region):
         print("Rebuilt {} ({} bytes)".format(resource_path, len(rebuilt)))
         return
 
-    palette = (region / "palettes" / "hud.pal").read_bytes()
+    palette = (region / "hud.pal").read_bytes()
     pixels = render_pixels(width, height, tiles, attributes, load_tiles(region), palette_colors(palette))
     preview = folder / "hud.png"
     preview.write_bytes(encode_png(width * 8, height * 8, pixels))
@@ -113,7 +113,7 @@ def process(action, region):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("decode", "rebuild", "preview"))
-    parser.add_argument("region", type=Path, help="Regional resource directory, e.g. res/US")
+    parser.add_argument("region", type=Path, help="Regional UI directory, e.g. res/ui/US")
     args = parser.parse_args()
     try:
         process(args.action, args.region)

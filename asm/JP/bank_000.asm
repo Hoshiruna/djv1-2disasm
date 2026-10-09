@@ -534,7 +534,7 @@ Jump_000_017e:
 
 Jump_000_0183:
     ld a, $09
-    call Call_000_0781
+    call PushRomBank
     jp $4000
 
 
@@ -547,7 +547,7 @@ Call_000_018c:
     push hl
     ld a, $01
     ld [$2000], a
-    call $405f
+    call VBlankVideo
     call Call_000_07ba
     ldh a, [$ff8e]
     ld [$2000], a
@@ -565,7 +565,7 @@ Jump_000_01a9:
     push bc
 
 jr_000_01aa:
-    ldh a, [$ff8c]
+    ldh a, [hVideoFlags]
     cp $00
     jr z, jr_000_01b5
 
@@ -597,7 +597,7 @@ Jump_000_01c3:
 
 
 jr_000_01c5:
-    ldh a, [$ff8c]
+    ldh a, [hVideoFlags]
     cp $00
     jr z, jr_000_01d0
 
@@ -1137,23 +1137,23 @@ Call_000_03cd:
 Call_000_03d3:
 Jump_000_03d3:
     push hl
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     set 6, [hl]
     pop hl
     call Call_000_01b7
     ret
 
 
-    ldh a, [$ff8c]
+    ldh a, [hVideoFlags]
     or $40
-    ldh [$ff8c], a
+    ldh [hVideoFlags], a
     ret
 
 
     push hl
 
 Jump_000_03e6:
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     res 6, [hl]
 
 Call_000_03eb:
@@ -1168,7 +1168,7 @@ Call_000_03eb:
 
 
 Call_000_03f8:
-    ld hl, $ff8c
+    ld hl, hVideoFlags
 
 Call_000_03fb:
 Jump_000_03fb:
@@ -1253,9 +1253,9 @@ Call_000_0449:
 
 
 Call_000_044b:
-    ldh a, [$ff8c]
+    ldh a, [hVideoFlags]
     or $01
-    ldh [$ff8c], a
+    ldh [hVideoFlags], a
     ldh a, [$ffac]
     ldh [rLCDC], a
     ret
@@ -1263,11 +1263,11 @@ Call_000_044b:
 
 Call_000_0456:
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_045b:
     call $4137
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 Call_000_0461:
@@ -1550,6 +1550,8 @@ jr_000_055e:
     ret
 
 
+; HL = tile-count byte, BC = destination; decode count*16 LZ bytes.
+DecodeLzTiles:
 Jump_000_0568:
 jr_000_0568:
     ld a, [hl+]
@@ -1581,6 +1583,8 @@ Call_000_0581:
     ret
 
 
+; HL = marker byte, BC = low-plane destination; decode both interleaved planes.
+DecodeRleTiles:
 Jump_000_0588:
 jr_000_0588:
     ld a, [hl+]
@@ -1989,7 +1993,7 @@ jr_000_0720:
 
 
 Call_000_0722:
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     set 4, [hl]
     jp Jump_000_01b7
 
@@ -2034,7 +2038,7 @@ Call_000_074b:
     push hl
 
 Jump_000_074c:
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     set 0, [hl]
     pop hl
     ret
@@ -2082,7 +2086,8 @@ Jump_000_0779:
     ld [$c164], a
     ret
 
-
+; A = bank; save the previous ROM bank on the bank stack.
+PushRomBank:
 Call_000_0781:
     push af
 
@@ -2094,7 +2099,8 @@ Jump_000_0782:
     ld [$2000], a
     ret
 
-
+; Restore the most recently saved ROM bank; preserve A.
+PopRomBank:
 Call_000_078e:
 Jump_000_078e:
     push af
@@ -2260,11 +2266,11 @@ Jump_000_0844:
     ld a, b
     ld [$d210], a
     ld a, [$c164]
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_0850:
     call $4032
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c181]
     and $df
     ld [$c181], a
@@ -2275,73 +2281,73 @@ Jump_000_0850:
 
 Jump_000_0862:
     xor a
-    ld [$c599], a
+    ld [wCaseId], a
     call Call_000_080e
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6c0e
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41b1
-    call Call_000_078e
+    call PopRomBank
     ld a, $01
     call Call_000_080e
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41da
-    call Call_000_078e
+    call PopRomBank
     xor a
     ld [$c163], a
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7b7b
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Call_000_08ad:
     call $74bc
-    call Call_000_078e
+    call PopRomBank
     ld a, $06
     ld [$c640], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $01
     jr z, jr_000_092e
 
     call Call_000_388b
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6b6b
-    call Call_000_078e
+    call PopRomBank
     ld a, $bf
     call Call_000_1e26
 
 jr_000_08d4:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f79
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5a8d
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c5df]
     cp $ff
     jr z, @+$32
@@ -2362,10 +2368,10 @@ Call_000_0903:
 Call_000_0904:
 Jump_000_0904:
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $785e
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c523]
     and $bf
     ld [$c523], a
@@ -2385,13 +2391,13 @@ jr_000_092e:
 
 Jump_000_0931:
     ld a, $01
-    ld [$c599], a
+    ld [wCaseId], a
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7b7b
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c8e8]
     cp $ff
     jr z, jr_000_0965
@@ -2400,41 +2406,41 @@ Jump_000_0931:
     ld bc, $0180
     call Call_000_0461
     ld a, $01
-    ld [$c599], a
+    ld [wCaseId], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $40bc
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_0965:
     push af
 
 Call_000_0966:
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4000
-    call Call_000_078e
+    call PopRomBank
     ld a, $bf
     call Call_000_1e26
 
 jr_000_0977:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f79
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
 
 Call_000_0987:
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5a8d
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c523]
     and $40
     jr z, jr_000_0977
@@ -2446,10 +2452,10 @@ Call_000_0987:
     ld a, $02
 
 Jump_000_09a2:
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $785e
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c523]
     and $bf
     ld [$c523], a
@@ -2516,18 +2522,18 @@ Call_000_0a00:
 Jump_000_0a00:
     call Call_000_0a2b
     call Call_000_0a50
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0a17
 
     ld a, $3f
-    call Call_000_0781
+    call PushRomBank
     ld hl, $4000
     jr jr_000_0a1f
 
 jr_000_0a17:
     ld a, $32
-    call Call_000_0781
+    call PushRomBank
     ld hl, $4000
 
 jr_000_0a1f:
@@ -2538,22 +2544,22 @@ jr_000_0a1f:
     ld l, c
     ld h, b
     call Call_000_050c
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 Call_000_0a2b:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0a3c
 
     ld a, $33
-    call Call_000_0781
+    call PushRomBank
     ld hl, $4000
     jr jr_000_0a44
 
 jr_000_0a3c:
     ld a, $2a
-    call Call_000_0781
+    call PushRomBank
     ld hl, $4000
 
 Jump_000_0a44:
@@ -2579,12 +2585,12 @@ Jump_000_0a4a:
     call Call_000_050c
 
 Jump_000_0a4d:
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 Call_000_0a50:
 Jump_000_0a50:
-    ld a, [$c599]
+    ld a, [wCaseId]
 
 Jump_000_0a53:
     cp $00
@@ -2594,42 +2600,44 @@ Jump_000_0a55:
 
 Jump_000_0a57:
     ld a, $33
-    call Call_000_0781
+    call PushRomBank
     ld hl, $4002
     jr jr_000_0a1f
 
 jr_000_0a61:
     ld a, $2a
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_0a66:
     ld hl, $4002
     jr jr_000_0a1f
 
+; Load requested graphics when their cached IDs change.
+LoadSceneGfx:
 Call_000_0a6b:
-    ldh a, [$ffa6]
+    ldh a, [hBgLoaded]
     cp $ff
     jr z, jr_000_0a77
 
     ld b, a
-    ldh a, [$ffa4]
+    ldh a, [hBgGfx]
     cp b
     jr z, jr_000_0a7e
 
 jr_000_0a77:
-    ldh a, [$ffa4]
-    ldh [$ffa6], a
-    call Call_000_0ac1
+    ldh a, [hBgGfx]
+    ldh [hBgLoaded], a
+    call LoadSceneBg
 
 jr_000_0a7e:
-    ldh a, [$ffa7]
+    ldh a, [hObjLoaded]
     cp $ff
 
 Jump_000_0a82:
     jr z, jr_000_0a8c
 
     ld b, a
-    ldh a, [$ffa5]
+    ldh a, [hObjGfx]
     cp b
     ret z
 
@@ -2637,31 +2645,33 @@ Jump_000_0a82:
     ret z
 
 jr_000_0a8c:
-    ldh a, [$ffa5]
-    ldh [$ffa7], a
-    call Call_000_0b27
+    ldh a, [hObjGfx]
+    ldh [hObjLoaded], a
+    call LoadSceneObj
     ret
 
-
+; Request one $400-byte transfer and wait for VBlank to finish it.
+UploadGfxBlock:
 Call_000_0a94:
-    ld hl, $ff8c
+    ld hl, hVideoFlags
     set 3, [hl]
     jp Jump_000_01a9
 
-
+; A = ID; select its case-relative bank and return HL = resource pointer.
+GetGfxPtr:
 Call_000_0a9c:
     ld e, a
     swap a
     and $0f
     ld d, a
-    ld a, [$c599]
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
-    ld bc, $0abf
+    ld bc, CaseGfxBanks
     add hl, bc
     ld a, [hl]
     add d
-    call Call_000_0781
+    call PushRomBank
     ld a, e
     and $0f
     add a
@@ -2674,11 +2684,11 @@ Call_000_0a9c:
     ld a, [de]
     ld h, a
     ret
+CaseGfxBanks:
+    db $33, $2a
 
-
-    inc sp
-    ld a, [hl+]
-
+; A = first ID; unpack it and ID+1 in WRAM bank 2, then upload $1000 bytes.
+LoadSceneBg:
 Call_000_0ac1:
     push bc
 
@@ -2697,94 +2707,96 @@ Jump_000_0acb:
     push af
 
 Call_000_0acd:
-    call Call_000_0a9c
-    call Call_000_0b57
-    call Call_000_078e
+    call GetGfxPtr
+    call UnpackSceneGfx
+    call PopRomBank
     pop af
     inc a
-    call Call_000_0a9c
-    call Call_000_0b57
-    call Call_000_078e
+    call GetGfxPtr
+    call UnpackSceneGfx
+    call PopRomBank
     pop af
     ldh [rSVBK], a
 
 Call_000_0ae4:
     call Call_000_01a9
     ld a, $01
-    ldh [$ff99], a
+    ldh [hGfxVramBank], a
     ld hl, $d000
     ld a, l
-    ldh [$ff97], a
+    ldh [hGfxSrcLo], a
 
 Call_000_0af1:
     ld a, h
 
 Jump_000_0af2:
-    ldh [$ff98], a
+    ldh [hGfxSrcHi], a
     ld hl, $9000
     ld a, l
 
 Jump_000_0af8:
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     ld a, h
-    ldh [$ff9b], a
-    call Call_000_0a94
+    ldh [hGfxDstHi], a
+    call UploadGfxBlock
     ld hl, $9400
     ld a, l
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     ld a, h
-    ldh [$ff9b], a
-    call Call_000_0a94
+    ldh [hGfxDstHi], a
+    call UploadGfxBlock
     ld hl, $8800
 
 Jump_000_0b0f:
     ld a, l
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     ld a, h
-    ldh [$ff9b], a
-    call Call_000_0a94
+    ldh [hGfxDstHi], a
+    call UploadGfxBlock
 
 Call_000_0b18:
     ld hl, $8c00
     ld a, l
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     ld a, h
-    ldh [$ff9b], a
-    call Call_000_0a94
+    ldh [hGfxDstHi], a
+    call UploadGfxBlock
     pop de
     pop bc
     ret
 
-
+; A = ID; unpack in WRAM bank 2 and upload $400 bytes to VRAM bank 0.
+LoadSceneObj:
 Call_000_0b27:
-    call Call_000_0a9c
+    call GetGfxPtr
     ldh a, [rSVBK]
     push af
     ld a, $02
     ldh [rSVBK], a
-    call Call_000_0b57
+    call UnpackSceneGfx
 
 Call_000_0b34:
     pop af
     ldh [rSVBK], a
-    call Call_000_078e
+    call PopRomBank
     call Call_000_01a9
     ld a, $00
-    ldh [$ff99], a
+    ldh [hGfxVramBank], a
     ld hl, $d000
     ld a, l
-    ldh [$ff97], a
+    ldh [hGfxSrcLo], a
     ld a, h
-    ldh [$ff98], a
+    ldh [hGfxSrcHi], a
     ld hl, $8000
     ld a, l
-    ldh [$ff9a], a
+    ldh [hGfxDstLo], a
     ld a, h
-    ldh [$ff9b], a
-    call Call_000_0a94
+    ldh [hGfxDstHi], a
+    call UploadGfxBlock
     ret
 
-
+; HL = resource; $ff is empty. Decode into the WRAM staging buffer.
+UnpackSceneGfx:
 Call_000_0b57:
     ld a, [hl]
     cp $ff
@@ -2805,7 +2817,7 @@ Jump_000_0b63:
 jr_000_0b69:
     push bc
     push de
-    call Call_000_0b73
+    call DecodeSceneGfx
     pop de
     pop bc
     ret
@@ -2814,6 +2826,8 @@ jr_000_0b69:
 jr_000_0b71:
     jr jr_000_0b71
 
+; The first tile selects $d000 + tile*16; dispatch LZ or planar RLE.
+DecodeSceneGfx:
 Call_000_0b73:
     ld a, [hl+]
     ld e, a
@@ -2829,13 +2843,13 @@ Call_000_0b73:
     ld a, e
     and $0f
     cp $0c
-    jp z, Jump_000_0568
+    jp z, DecodeLzTiles
 
     cp $0d
-    jp z, Jump_000_0568
+    jp z, DecodeLzTiles
 
     bit 1, e
-    jp z, Jump_000_0588
+    jp z, DecodeRleTiles
 
     ld a, [hl+]
     ld d, a
@@ -2847,15 +2861,16 @@ Call_000_0b99:
     push bc
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7bed
-    call Call_000_078e
+    call PopRomBank
     pop bc
     pop hl
     ret
 
-
+; Draw a blank map, load graphics and palettes, then draw the actual cells.
+ShowScene:
 Call_000_0bab:
     push bc
     push de
@@ -2863,42 +2878,43 @@ Call_000_0bab:
     call Call_000_0416
     call Call_000_03fe
     ld a, $01
-    ld [$c87d], a
-    call Call_000_0d7c
+    ld [wSceneBlank], a
+    call DrawSceneMap
     call Call_000_0e52
-    call Call_000_0ca6
+    call SelectSceneMap
     push af
 
 Jump_000_0bc3:
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $4663
-    call Call_000_078e
-    call Call_000_0c83
+    call ReadSceneGfx
+    call PopRomBank
+    call PickScenePal
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $490d
-    call Call_000_078e
+    call ApplyScenePal
+    call PopRomBank
     call Call_000_03fe
     xor a
-    ld [$c87d], a
-    call Call_000_0d7c
+    ld [wSceneBlank], a
+    call DrawSceneMap
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $688c
-    call Call_000_078e
-    call Call_000_078e
+    call PopRomBank
+    call PopRomBank
     pop hl
     pop de
     pop bc
     ret
 
-
+; Clear the active BG palette, load graphics, copy the map, then apply palettes.
+ReloadScene:
 Call_000_0bfd:
     push bc
     push de
@@ -2914,7 +2930,7 @@ Call_000_0c03:
 Jump_000_0c03:
     call Call_000_0404
     call Call_000_03fe
-    call Call_000_0ca6
+    call SelectSceneMap
 
 Call_000_0c0c:
     push af
@@ -2922,74 +2938,75 @@ Call_000_0c0c:
 
 Call_000_0c0f:
 Jump_000_0c0f:
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Call_000_0c13:
-    call $4663
-    call Call_000_078e
+    call ReadSceneGfx
+    call PopRomBank
     push af
 
 Jump_000_0c1a:
     ld a, $02
 
 Call_000_0c1c:
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Jump_000_0c20:
     call $688c
-    call Call_000_078e
-    call Call_000_0e63
-    call Call_000_078e
-    call Call_000_0c83
+    call PopRomBank
+    call CopySceneMap
+    call PopRomBank
+    call PickScenePal
     push af
 
 Call_000_0c30:
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $490d
-    call Call_000_078e
+    call ApplyScenePal
+    call PopRomBank
     call Call_000_01b7
     pop hl
     pop de
     pop bc
     ret
 
-
+; Load graphics, copy the map, and apply palettes without the initial blank pass.
+RedrawScene:
 Call_000_0c43:
     push bc
     push de
     push hl
     call Call_000_0416
     call Call_000_03fe
-    call Call_000_0ca6
+    call SelectSceneMap
 
 Jump_000_0c4f:
     push af
     ld a, $01
 
 Jump_000_0c52:
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $4663
-    call Call_000_078e
+    call ReadSceneGfx
+    call PopRomBank
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $688c
-    call Call_000_078e
-    call Call_000_0e63
-    call Call_000_078e
-    call Call_000_0c83
+    call PopRomBank
+    call CopySceneMap
+    call PopRomBank
+    call PickScenePal
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $490d
-    call Call_000_078e
+    call ApplyScenePal
+    call PopRomBank
 
 Call_000_0c7f:
     pop hl
@@ -2997,43 +3014,45 @@ Call_000_0c7f:
     pop bc
     ret
 
-
+; Dispatch to the case-specific palette selector.
+PickScenePal:
 Call_000_0c83:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0c98
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $4862
-    call Call_000_078e
+    call LoadC1Pal
+    call PopRomBank
     ret
 
 
 jr_000_0c98:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $556f
-    call Call_000_078e
+    call LoadC2Pal
+    call PopRomBank
     ret
 
-
+; Select the map bank; wMapIndex = scene ID modulo $28. Caller restores bank.
+SelectSceneMap:
 Call_000_0ca6:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0cef
 
-    ld a, [$c522]
-    ld [$c875], a
+    ld a, [wSceneId]
+    ld [wMapIndex], a
     cp $28
     jr nc, jr_000_0cbd
 
     ld a, $23
-    call Call_000_0781
+    call PushRomBank
     ret
 
 
@@ -3042,10 +3061,10 @@ jr_000_0cbd:
     jr nc, jr_000_0ccf
 
     ld a, $24
-    call Call_000_0781
-    ld a, [$c522]
+    call PushRomBank
+    ld a, [wSceneId]
     sub $28
-    ld [$c875], a
+    ld [wMapIndex], a
     ret
 
 
@@ -3058,34 +3077,34 @@ Jump_000_0cd3:
     ld a, $25
 
 Jump_000_0cd5:
-    call Call_000_0781
-    ld a, [$c522]
+    call PushRomBank
+    ld a, [wSceneId]
     sub $50
-    ld [$c875], a
+    ld [wMapIndex], a
     ret
 
 
 jr_000_0ce1:
     ld a, $26
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_0ce6:
-    ld a, [$c522]
+    ld a, [wSceneId]
     sub $78
-    ld [$c875], a
+    ld [wMapIndex], a
     ret
 
 
 jr_000_0cef:
-    ld a, [$c522]
-    ld [$c875], a
+    ld a, [wSceneId]
+    ld [wMapIndex], a
     cp $28
 
 Call_000_0cf7:
     jr nc, jr_000_0cff
 
     ld a, $27
-    call Call_000_0781
+    call PushRomBank
     ret
 
 
@@ -3093,20 +3112,21 @@ Call_000_0cff:
 Jump_000_0cff:
 jr_000_0cff:
     ld a, $28
-    call Call_000_0781
-    ld a, [$c522]
+    call PushRomBank
+    ld a, [wSceneId]
     sub $28
-    ld [$c875], a
+    ld [wMapIndex], a
 
 Call_000_0d0c:
     ret
 
-
+; Resolve wMapIndex through the selected bank table at $4000.
+ReadSceneMap:
 Call_000_0d0d:
 Jump_000_0d0d:
     push bc
     push hl
-    ld a, [$c875]
+    ld a, [wMapIndex]
     ld l, a
     ld h, $00
     add hl, hl
@@ -3119,21 +3139,22 @@ Call_000_0d16:
     ld a, [hl+]
     ld b, a
     ld a, c
-    ld [$c855], a
+    ld [wMapPtr], a
     ld a, b
-    ld [$c856], a
-    call Call_000_0d2c
+    ld [wMapPtr+1], a
+    call StageSceneMap
     pop hl
     pop bc
     ret
 
-
+; Copy 196 IDs and attributes into rows of 14 IDs + 14 attributes at $c902.
+StageSceneMap:
 Call_000_0d2c:
-    ld a, [$c855]
+    ld a, [wMapPtr]
     ld c, a
 
 Jump_000_0d30:
-    ld a, [$c856]
+    ld a, [wMapPtr+1]
     ld b, a
     ld hl, $c902
     ld d, $c4
@@ -3182,19 +3203,20 @@ jr_000_0d61:
 
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $668b
-    call Call_000_078e
+    call PopRomBank
     ld a, $02
-    ld [$c855], a
+    ld [wMapPtr], a
     ld a, $c9
-    ld [$c856], a
+    ld [wMapPtr+1], a
     ret
 
-
+; Draw through row masks; wSceneBlank selects blank cells.
+DrawSceneMap:
 Call_000_0d7c:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0d87
 
@@ -3206,7 +3228,7 @@ jr_000_0d87:
 
 jr_000_0d89:
     call Call_000_080e
-    call Call_000_0d0d
+    call ReadSceneMap
     push bc
     push hl
     ld bc, $0ded
@@ -3228,13 +3250,13 @@ jr_000_0da5:
 jr_000_0da9:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Call_000_0db0:
 Jump_000_0db0:
     call $501d
-    call Call_000_078e
+    call PopRomBank
     ld de, $0000
 
 jr_000_0db9:
@@ -3296,7 +3318,7 @@ Call_000_0dea:
 
 
 Call_000_0e09:
-    ld a, [$c87d]
+    ld a, [wSceneBlank]
     cp $00
     jr z, jr_000_0e1b
 
@@ -3321,9 +3343,9 @@ Jump_000_0e1f:
     ld h, $00
     add hl, hl
     add hl, de
-    ld a, [$c855]
+    ld a, [wMapPtr]
     ld c, a
-    ld a, [$c856]
+    ld a, [wMapPtr+1]
     ld b, a
     add hl, bc
     ld a, [hl]
@@ -3353,7 +3375,7 @@ Call_000_0e3f:
 
 
 Call_000_0e52:
-    ld hl, $db40
+    ld hl, wBgPal
     ld d, $38
     xor a
 
@@ -3366,9 +3388,10 @@ jr_000_0e58:
     call Call_000_01b7
     ret
 
-
+; Stage the map, queue a 14x14 transfer to $9800, and wait for completion.
+CopySceneMap:
 Call_000_0e63:
-    call Call_000_0d0d
+    call ReadSceneMap
     ld a, $0e
     ld [$c900], a
     ld [$c901], a
@@ -3465,7 +3488,7 @@ jr_000_0ecc:
 
 
 Call_000_0ed5:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_0ee3
 
@@ -3480,8 +3503,8 @@ jr_000_0ee3:
     ld de, Case2RoomObjects
 
 jr_000_0ee8:
-    call Call_000_0781
-    ld a, [$c521]
+    call PushRomBank
+    ld a, [wRoomId]
     ld l, a
 
 Call_000_0eef:
@@ -3527,7 +3550,7 @@ Jump_000_0f11:
     ld h, a
     pop af
     ld [hl], a
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 jr_000_0f21:
@@ -3548,20 +3571,20 @@ jr_000_0f2f:
     ld [$c8b8], a
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Jump_000_0f3f:
     call $6bf4
-    call Call_000_078e
+    call PopRomBank
     push af
 
 Jump_000_0f46:
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7267
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_0f52:
     call Call_000_0f5d
@@ -3570,7 +3593,7 @@ Call_000_0f55:
     jr jr_000_0f06
 
 Jump_000_0f57:
-    call Call_000_078e
+    call PopRomBank
     pop af
     jr jr_000_0f52
 
@@ -3755,7 +3778,7 @@ Call_000_1054:
 Call_000_1057:
 Jump_000_1057:
 jr_000_1057:
-    call Call_000_0781
+    call PushRomBank
     pop af
     and $3f
     ld l, a
@@ -3767,7 +3790,7 @@ jr_000_1057:
     ld a, [hl]
     ld [$c19b], a
     call Call_000_10a9
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -3795,9 +3818,9 @@ Jump_000_1075:
 
 Call_000_107a:
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     call Call_000_1086
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -3808,7 +3831,7 @@ Call_000_1086:
     add hl, hl
 
 Call_000_108d:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_1099
 
@@ -4157,9 +4180,9 @@ Jump_000_1259:
     ld a, [$c1a7]
 
 Call_000_125f:
-    call Call_000_0781
+    call PushRomBank
     call Call_000_1269
-    jp Jump_000_078e
+    jp PopRomBank
 
 
     ret
@@ -4428,10 +4451,10 @@ Call_000_13da:
     ld [$c1a2], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5091
-    call Call_000_078e
+    call PopRomBank
     call Call_000_19c5
     call Call_000_03fe
     ld a, $12
@@ -4553,10 +4576,10 @@ Jump_000_1498:
     ld [$c890], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5091
-    call Call_000_078e
+    call PopRomBank
     call Call_000_168a
 
 jr_000_14be:
@@ -4598,12 +4621,12 @@ jr_000_14fd:
     push af
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_1504:
     pop af
     call $5091
-    call Call_000_078e
+    call PopRomBank
     call Call_000_19c5
     call Call_000_03fe
     pop af
@@ -4857,7 +4880,7 @@ Call_000_165f:
     bit 0, a
     jr z, jr_000_1659
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_1671
 
@@ -4892,16 +4915,16 @@ jr_000_168a:
 Call_000_1691:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5091
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5fe0
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_168a
 
 Call_000_16ad:
@@ -5124,12 +5147,12 @@ Jump_000_17ae:
     ld [$c890], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5091
 
 Call_000_17ce:
-    call Call_000_078e
+    call PopRomBank
     call Call_000_168a
 
 jr_000_17d4:
@@ -5168,12 +5191,12 @@ jr_000_1810:
     push af
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Jump_000_1818:
     call $5091
-    call Call_000_078e
+    call PopRomBank
     call Call_000_19c5
     call Call_000_03fe
     pop af
@@ -5263,7 +5286,7 @@ Call_000_1886:
 
 
 Jump_000_189e:
-    ld a, [$c599]
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
 
@@ -5271,28 +5294,28 @@ Jump_000_18a4:
     ld bc, $19a3
     add hl, bc
     ld a, [hl]
-    call Call_000_0781
+    call PushRomBank
     call Call_000_18cd
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6398
-    call Call_000_078e
+    call PopRomBank
 
 Jump_000_18bf:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7469
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_18cd:
-    ld a, [$c599]
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
     add hl, hl
@@ -5301,7 +5324,7 @@ Call_000_18cd:
     ld c, [hl]
     inc hl
     ld b, [hl]
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld l, a
     ld h, $00
     add hl, hl
@@ -5350,7 +5373,7 @@ Jump_000_1900:
     ld bc, $c8c5
     add hl, bc
     ld [hl], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_192f
 
@@ -5399,10 +5422,10 @@ jr_000_193f:
     ld [$c5c2], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6cb2
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c523]
     and $01
     jr z, jr_000_1993
@@ -5412,21 +5435,21 @@ jr_000_193f:
     bit 7, a
     jr z, jr_000_1993
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_1988
 
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     call $6c93
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 jr_000_1988:
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     call $6159
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 jr_000_1993:
@@ -5435,7 +5458,7 @@ jr_000_1993:
 
 
 Jump_000_1999:
-    call Call_000_078e
+    call PopRomBank
     pop bc
     call Call_000_0f5d
     jp Jump_000_18eb
@@ -5456,10 +5479,10 @@ Jump_000_1999:
     push de
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $608f
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5472,10 +5495,10 @@ Call_000_19c5:
     push de
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5488,18 +5511,18 @@ Call_000_19d9:
     push de
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $608f
 
 Jump_000_19e6:
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5522,10 +5545,10 @@ Jump_000_1a00:
 
 Jump_000_1a01:
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f3f
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5542,10 +5565,10 @@ Jump_000_1a11:
     push de
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f4f
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5561,41 +5584,43 @@ Call_000_1a28:
     push de
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f69
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
     ret
 
-
+; A = palette ID; copy BG and object sets into the next-palette buffers.
+StagePals:
 Call_000_1a3f:
     push af
-    call Call_000_1a48
+    call StageBgPal
     pop af
-    call Call_000_1a83
+    call StageObjPal
     ret
 
-
+; A = palette ID; copy 64 bytes to wBgPalNext.
+StageBgPal:
 Call_000_1a48:
     push hl
     push bc
     push de
     push af
-    ld a, [$c599]
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
-    ld bc, $1b5b
+    ld bc, BgPalBanks
     add hl, bc
     ld a, [hl]
-    call Call_000_0781
-    ld a, [$c599]
+    call PushRomBank
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $1b5d
+    ld bc, BgPalTables
     add hl, bc
     ld c, [hl]
     inc hl
@@ -5609,7 +5634,7 @@ Call_000_1a48:
     inc hl
     ld b, [hl]
     ld d, $40
-    ld hl, $dbc0
+    ld hl, wBgPalNext
 
 jr_000_1a76:
     ld a, [bc]
@@ -5618,30 +5643,31 @@ jr_000_1a76:
     dec d
     jr nz, jr_000_1a76
 
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
     ret
 
-
+; A = palette ID; copy 64 bytes to wObjPalNext.
+StageObjPal:
 Call_000_1a83:
     push hl
     push bc
     push de
     push af
-    ld a, [$c599]
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
-    ld bc, $1b61
+    ld bc, ObjPalBanks
     add hl, bc
     ld a, [hl]
-    call Call_000_0781
-    ld a, [$c599]
+    call PushRomBank
+    ld a, [wCaseId]
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $1b63
+    ld bc, ObjPalTables
     add hl, bc
     ld c, [hl]
     inc hl
@@ -5655,7 +5681,7 @@ Call_000_1a83:
     inc hl
     ld b, [hl]
     ld d, $40
-    ld hl, $dc00
+    ld hl, wObjPalNext
 
 jr_000_1ab1:
     ld a, [bc]
@@ -5664,7 +5690,7 @@ jr_000_1ab1:
     dec d
     jr nz, jr_000_1ab1
 
-    call Call_000_078e
+    call PopRomBank
     pop de
     pop bc
     pop hl
@@ -5674,7 +5700,7 @@ jr_000_1ab1:
     push de
     push af
     ld a, $0a
-    call Call_000_0781
+    call PushRomBank
     pop af
     sla a
     ld c, a
@@ -5686,7 +5712,7 @@ jr_000_1ab1:
     ld a, [hl+]
     ld b, a
     ld d, $40
-    ld hl, $db40
+    ld hl, wBgPal
 
 jr_000_1ad8:
     ld a, [bc]
@@ -5697,7 +5723,7 @@ Call_000_1ad9:
     dec d
     jr nz, jr_000_1ad8
 
-    call Call_000_078e
+    call PopRomBank
     call Call_000_074b
     pop de
     ret
@@ -5716,7 +5742,7 @@ Call_000_1ae6:
     ld a, $0a
 
 jr_000_1af6:
-    call Call_000_0781
+    call PushRomBank
     pop af
     sla a
     ld c, a
@@ -5729,7 +5755,7 @@ jr_000_1af6:
 Call_000_1b03:
     ld b, a
     ld d, $40
-    ld hl, $dbc0
+    ld hl, wBgPalNext
 
 jr_000_1b09:
     ld a, [bc]
@@ -5738,7 +5764,7 @@ jr_000_1b09:
     dec d
     jr nz, jr_000_1b09
 
-    call Call_000_078e
+    call PopRomBank
     pop de
     ret
 
@@ -5747,7 +5773,7 @@ Call_000_1b14:
     push de
     push af
     ld a, $0a
-    call Call_000_0781
+    call PushRomBank
     pop af
     sla a
 
@@ -5761,7 +5787,7 @@ Jump_000_1b1e:
     ld a, [hl+]
     ld b, a
     ld d, $40
-    ld hl, $dc00
+    ld hl, wObjPalNext
 
 jr_000_1b2e:
     ld a, [bc]
@@ -5770,7 +5796,7 @@ jr_000_1b2e:
     dec d
     jr nz, jr_000_1b2e
 
-    call Call_000_078e
+    call PopRomBank
     pop de
     ret
 
@@ -5779,7 +5805,7 @@ Call_000_1b39:
     push af
     call Call_000_1ae6
     ld a, $09
-    call Call_000_0781
+    call PushRomBank
     ld hl, $401d
     pop af
     sla a
@@ -5796,21 +5822,16 @@ Call_000_1b39:
     ld h, a
     inc bc
     call Call_000_05ce
-    call Call_000_078e
+    call PopRomBank
     ret
-
-
-    ld a, [bc]
-    dec bc
-    sbc $43
-    nop
-    ld b, b
-    ld a, [bc]
-    dec bc
-    ld a, [bc]
-    ld e, d
-    sbc b
-    ld d, e
+BgPalBanks:
+    db $0a, $0b
+BgPalTables:
+    dw $43de, $4000
+ObjPalBanks:
+    db $0a, $0b
+ObjPalTables:
+    dw $5a0a, $5398
 
 Call_000_1b67:
     push de
@@ -5820,7 +5841,7 @@ Call_000_1b67:
 Call_000_1b6a:
     ld bc, $4613
     ld a, $09
-    call Call_000_0781
+    call PushRomBank
     pop af
     ld l, a
     ld h, $00
@@ -5833,7 +5854,7 @@ Call_000_1b6a:
     ld l, c
     ld h, b
     call Call_000_050c
-    call Call_000_078e
+    call PopRomBank
     pop bc
     pop de
     ret
@@ -5842,48 +5863,48 @@ Call_000_1b6a:
 Call_000_1b87:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6c6d
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c8b3]
     cp $ff
     jr nz, jr_000_1ba9
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6cd5
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 jr_000_1ba9:
     ld a, $06
-    call Call_000_0781
+    call PushRomBank
     jp $400c
 
 
 Jump_000_1bb1:
     call Call_000_1119
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 Jump_000_1bb7:
-    call Call_000_078e
+    call PopRomBank
     pop bc
     call Call_000_1119
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 Call_000_1bc1:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_1bd0
 
     ld a, $06
-    call Call_000_0781
+    call PushRomBank
     jp $4038
 
 
@@ -5897,7 +5918,7 @@ jr_000_1bd0:
     ld hl, $3afe
     add hl, bc
     ld a, [hl-]
-    call Call_000_0781
+    call PushRomBank
     jp Jump_000_3aea
 
 
@@ -5975,10 +5996,10 @@ Call_000_1c24:
 Jump_000_1c45:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $63e6
-    call Call_000_078e
+    call PopRomBank
     call Call_000_3923
     ret
 
@@ -6094,7 +6115,7 @@ Call_000_1cb6:
 Jump_000_1ce3:
     ld a, [$c8a9]
     ld [$c598], a
-    call Call_000_0781
+    call PushRomBank
     jp Jump_000_1c91
 
 
@@ -6102,7 +6123,7 @@ Jump_000_1ce3:
     cp $00
     jr z, jr_000_1cf9
 
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_1cf9:
     call Call_000_07a5
@@ -6183,10 +6204,10 @@ jr_000_1d40:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d83
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_1d76
 
     call Call_000_1be4
@@ -6243,24 +6264,24 @@ Call_000_1dac:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d83
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_1dda
 
     call Call_000_1be4
     push af
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_1dd9
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $60e4
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_1dd9:
     pop af
@@ -6739,7 +6760,7 @@ Jump_000_2002:
     and $01
     jr nz, jr_000_203d
 
-    ld a, [$c599]
+    ld a, [wCaseId]
 
 Call_000_2023:
     cp $00
@@ -6764,7 +6785,7 @@ jr_000_2030:
 
 Jump_000_203d:
 jr_000_203d:
-    ld a, [$c599]
+    ld a, [wCaseId]
 
 Call_000_2040:
     cp $00
@@ -6772,14 +6793,14 @@ Call_000_2040:
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_204a:
     pop af
 
 Call_000_204b:
     call $6118
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_2051:
     ld bc, $c8c6
@@ -6816,7 +6837,7 @@ Jump_000_2075:
 Jump_000_207a:
     jr z, jr_000_2095
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $26
     jr z, jr_000_2089
 
@@ -6846,10 +6867,10 @@ jr_000_209a:
 
 Jump_000_209e:
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6571
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c524]
     cp $01
     jr nz, jr_000_20b9
@@ -6861,9 +6882,9 @@ Call_000_20b6:
     call Call_000_3923
 
 jr_000_20b9:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld [$c536], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_20cb
 
@@ -6874,7 +6895,7 @@ jr_000_20cb:
     call Call_000_1bfc
 
 jr_000_20ce:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld d, a
     ld a, [$c8a7]
     cp d
@@ -6885,89 +6906,89 @@ jr_000_20ce:
 Call_000_20db:
 Jump_000_20db:
 jr_000_20db:
-    ld [$c521], a
+    ld [wRoomId], a
     call Call_000_39c8
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_211e
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6578
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $65b9
+    call PickC1Scene
 
 Call_000_20ff:
 Jump_000_20ff:
-    call Call_000_078e
+    call PopRomBank
     push af
 
 Call_000_2103:
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_2108:
     pop af
 
 Jump_000_2109:
     call $4b6f
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4219
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_2152
 
 jr_000_211e:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4c6c
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41ee
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4b6f
-    call Call_000_078e
+    call PopRomBank
     push af
 
 Jump_000_2146:
     ld a, $03
 
 Jump_000_2148:
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $453b
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_2152:
-    call Call_000_0bab
+    call ShowScene
     call Call_000_0ed5
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_215e:
     pop af
     call $6d65
-    call Call_000_078e
-    ld a, [$c521]
+    call PopRomBank
+    ld a, [wRoomId]
     cp $62
     jr c, jr_000_2172
 
@@ -6982,10 +7003,10 @@ jr_000_2173:
     ld [$c5e4], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5827
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_2183:
     ret
@@ -6995,16 +7016,16 @@ Call_000_2183:
     ld a, $00
 
 Call_000_2187:
-    call Call_000_0781
+    call PushRomBank
     pop af
     call Call_000_21a1
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d68
-    call Call_000_078e
+    call PopRomBank
     jp Jump_000_20db
 
 
@@ -7012,10 +7033,10 @@ Call_000_21a1:
     call Call_000_388b
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6571
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c524]
     cp $01
     jr nz, jr_000_21c0
@@ -7025,7 +7046,7 @@ Call_000_21a1:
     call Call_000_3923
 
 jr_000_21c0:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld [$c536], a
     ret
 
@@ -7033,9 +7054,9 @@ jr_000_21c0:
     call Call_000_1be4
 
 Call_000_21ca:
-    ld [$c521], a
+    ld [wRoomId], a
     call Call_000_39c8
-    ld a, [$c599]
+    ld a, [wCaseId]
 
 Jump_000_21d3:
     cp $00
@@ -7043,53 +7064,53 @@ Jump_000_21d3:
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $65b9
-    call Call_000_078e
+    call PickC1Scene
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4b6f
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4219
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_2227
 
 Jump_000_2200:
 jr_000_2200:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41ee
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4b6f
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $453b
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_2227:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4219
-    call Call_000_078e
-    call Call_000_0bab
+    call PopRomBank
+    call ShowScene
     call Call_000_0ed5
     ret
 
@@ -7129,45 +7150,45 @@ Call_000_226c:
 Jump_000_226c:
 jr_000_226c:
     call Call_000_39c8
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_2291
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $65b9
-    call Call_000_078e
+    call PickC1Scene
+    call PopRomBank
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6991
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 jr_000_2291:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41ee
 
 Jump_000_229b:
-    call Call_000_078e
-    call Call_000_0bfd
+    call PopRomBank
+    call ReloadScene
     ret
 
 
 Jump_000_22a2:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d56
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_22b4
 
     call Call_000_1be4
@@ -7205,28 +7226,28 @@ Call_000_22d7:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d56
-    call Call_000_078e
+    call PopRomBank
     jp Jump_000_2311
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d71
-    call Call_000_078e
+    call PopRomBank
     call Call_000_2311
     push af
 
 Jump_000_22ff:
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d7a
-    call Call_000_078e
+    call PopRomBank
     jp Jump_000_2311
 
 
@@ -7254,7 +7275,7 @@ Call_000_2326:
     ld b, a
 
 Call_000_2330:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp b
     ret nz
 
@@ -7263,16 +7284,16 @@ Call_000_2330:
 
 
     call Call_000_1be4
-    ld [$c521], a
+    ld [wRoomId], a
     ret
 
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5833
-    call Call_000_078e
+    call PopRomBank
     call Call_000_1bfc
     ld a, [$c8a7]
     ld [$c8c5], a
@@ -7280,12 +7301,12 @@ Call_000_2330:
     ld [$c8c6], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5666
 
 Jump_000_2366:
-    call Call_000_078e
+    call PopRomBank
     xor a
     ldh [$ffa0], a
     ret
@@ -7295,10 +7316,10 @@ Jump_000_2366:
     push af
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5833
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_237d:
     call Call_000_1bfc
@@ -7308,10 +7329,10 @@ Call_000_237d:
     ld [$c8d6], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5666
-    call Call_000_078e
+    call PopRomBank
     pop af
     ldh [$ffa0], a
     ret
@@ -7319,10 +7340,10 @@ Call_000_237d:
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5833
-    call Call_000_078e
+    call PopRomBank
     ld e, $10
     ld hl, $c8d4
     ld bc, $c8e4
@@ -7344,16 +7365,16 @@ jr_000_23b2:
 Call_000_23bd:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4b6f
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $453b
-    call Call_000_078e
+    call PopRomBank
     call Call_000_03d3
     ret
 
@@ -7397,7 +7418,7 @@ Call_000_2403:
 
 jr_000_240f:
     call Call_000_1f5e
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_000_2423
 
@@ -7436,10 +7457,10 @@ Jump_000_244a:
     call Call_000_3389
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $697b
-    call Call_000_078e
+    call PopRomBank
 
 jr_000_245a:
     ld a, [$c8b0]
@@ -7495,10 +7516,10 @@ jr_000_248e:
 Jump_000_24aa:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $697b
-    call Call_000_078e
+    call PopRomBank
     jp Jump_000_2467
 
 
@@ -7519,7 +7540,7 @@ Call_000_24ba:
     sla a
     ld l, a
     ld h, $00
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_24ed
 
@@ -7560,7 +7581,7 @@ Jump_000_24ff:
 
 
 Call_000_2500:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_2525
 
@@ -7592,7 +7613,7 @@ jr_000_2525:
     cp $03
     jr c, jr_000_2549
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_2540
 
@@ -7614,10 +7635,10 @@ jr_000_2549:
 
 Call_000_254a:
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $653c
-    call Call_000_078e
+    call PopRomBank
     call Call_000_1fed
     ld a, [$c529]
     inc a
@@ -7639,20 +7660,20 @@ Call_000_256c:
 Call_000_2578:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $504e
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_2586:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6507
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c529]
     dec a
     ld [$c529], a
@@ -8037,10 +8058,10 @@ Call_000_2788:
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6163
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_279e:
     call Call_000_27a7
@@ -8063,10 +8084,10 @@ Call_000_27b6:
     call Call_000_0ed5
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     call Call_000_03fe
     ret
 
@@ -8156,7 +8177,7 @@ jr_000_283b:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_28b7
 
@@ -8194,16 +8215,16 @@ jr_000_2876:
 jr_000_287b:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5f79
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5b1f
-    call Call_000_078e
+    call PopRomBank
     ld a, $7f
     call Call_000_1dac
     ld a, [$c523]
@@ -8215,7 +8236,7 @@ jr_000_287b:
     jr nz, jr_000_287b
 
     pop bc
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8223,7 +8244,7 @@ jr_000_28ad:
     ld a, $7f
     call Call_000_1e26
     pop bc
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8272,18 +8293,18 @@ jr_000_28f4:
 jr_000_28f9:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_28ff:
     pop af
     call $5f79
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5b1f
-    call Call_000_078e
+    call PopRomBank
     ld a, $8f
     call Call_000_1dac
     jr nz, jr_000_2926
@@ -8295,7 +8316,7 @@ Call_000_28ff:
     pop bc
 
 Jump_000_2922:
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8303,7 +8324,7 @@ jr_000_2926:
     ld a, $8f
     call Call_000_1e26
     pop bc
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8317,8 +8338,8 @@ jr_000_2926:
 
 jr_000_293b:
     ld a, $05
-    call Call_000_0781
-    ld a, [$c521]
+    call PushRomBank
+    ld a, [wRoomId]
     ld l, a
 
 Call_000_2944:
@@ -8379,7 +8400,7 @@ Jump_000_2982:
     ld [$c8d6], a
     ld a, [hl]
     ld [$c5c2], a
-    call Call_000_078e
+    call PopRomBank
     call Call_000_1c9e
     ret
 
@@ -8387,7 +8408,7 @@ Jump_000_2982:
 Jump_000_2996:
     ld a, $80
     call Call_000_1e26
-    call Call_000_078e
+    call PopRomBank
     call Call_000_1ca7
     ret
 
@@ -8397,16 +8418,16 @@ jr_000_29a2:
     jp Jump_000_2953
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_29bd
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6a45
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8415,10 +8436,10 @@ jr_000_29bd:
     ld [$c5c8], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $50b0
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8431,10 +8452,10 @@ Jump_000_29d1:
     ld a, d
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6398
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c8b7]
     ld b, a
     ldh a, [$ff9e]
@@ -8449,10 +8470,10 @@ Jump_000_29d1:
 Jump_000_29f8:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6b11
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8505,7 +8526,7 @@ jr_000_2a43:
     jr c, jr_000_2a92
 
     ld [$c53a], a
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $27
     jr z, jr_000_2a6d
 
@@ -8540,7 +8561,7 @@ jr_000_2a7e:
 
 
 jr_000_2a92:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $26
     jr z, jr_000_2aa1
 
@@ -8587,16 +8608,16 @@ jr_000_2acb:
     ld [$c8af], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $61c4
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6210
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c884]
     cp $ff
     jr nz, jr_000_2b05
@@ -8613,7 +8634,7 @@ jr_000_2b05:
     ld b, $00
     ld hl, $c468
     add hl, bc
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_2b47
 
@@ -8644,7 +8665,7 @@ jr_000_2b30:
     ld hl, $2b42
     add hl, bc
     ld c, [hl]
-    ld a, [$c521]
+    ld a, [wRoomId]
     and $01
     jr z, jr_000_2b3d
 
@@ -8666,10 +8687,10 @@ Jump_000_2b44:
 jr_000_2b47:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4cb5
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8695,7 +8716,7 @@ jr_000_2b6b:
 
 
     call Call_000_1ca7
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $c8aa
     cp [hl]
     jr nz, jr_000_2b7f
@@ -8706,7 +8727,7 @@ jr_000_2b6b:
 
 jr_000_2b7f:
     ld a, [$c8aa]
-    ld [$c521], a
+    ld [wRoomId], a
     ld a, $83
     call Call_000_1dda
     ret
@@ -8715,10 +8736,10 @@ jr_000_2b7f:
     call Call_000_39c8
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d2e
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -8726,7 +8747,7 @@ Call_000_2b9c:
     ld a, [$c523]
     or $08
     ld [$c523], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret nz
 
@@ -8834,10 +8855,10 @@ jr_000_2c25:
     push af
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     call Call_000_03fe
     call Call_000_01b7
     pop af
@@ -8991,16 +9012,16 @@ jr_000_2cf3:
     ld [$c8c6], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5666
-    call Call_000_078e
+    call PopRomBank
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6398
-    call Call_000_078e
+    call PopRomBank
     call Call_000_1f19
     call Call_000_23db
     xor a
@@ -9263,28 +9284,28 @@ jr_000_2ed0:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4f34
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4f80
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4fab
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9361,10 +9382,10 @@ Jump_000_2f55:
     ld [$c8e9], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $526c
-    call Call_000_078e
+    call PopRomBank
     ld a, $07
     call Call_000_080e
     ld a, $78
@@ -9399,10 +9420,10 @@ Jump_000_2f55:
 
 Call_000_2fab:
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d5f
-    call Call_000_078e
+    call PopRomBank
     jr jr_000_2fbf
 
     call Call_000_39c8
@@ -9410,28 +9431,28 @@ Call_000_2fab:
 
 jr_000_2fbf:
     ld [$c8e9], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_2fd7
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6f35
 
 Jump_000_2fd3:
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 jr_000_2fd7:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $526c
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9439,17 +9460,17 @@ jr_000_2fd7:
     ld [$c8e9], a
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $527b
 
 Jump_000_2ff5:
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Jump_000_2ff9:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_3017
 
@@ -9459,10 +9480,10 @@ Jump_000_3000:
     ld [$c8e9], a
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $71ce
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9471,12 +9492,12 @@ jr_000_3017:
 
 Call_000_3018:
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Call_000_301e:
     call $52ce
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9555,10 +9576,10 @@ Jump_000_3085:
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6618
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9582,10 +9603,10 @@ Jump_000_30ba:
 
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $693b
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9595,39 +9616,39 @@ Jump_000_30cc:
     ld a, $03
 
 Call_000_30cf:
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $627f
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $625b
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Jump_000_30ef:
     call $6825
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4ff2
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9641,10 +9662,10 @@ Jump_000_30ef:
 jr_000_3111:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4fca
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c523]
     and $01
 
@@ -9657,10 +9678,10 @@ Jump_000_3123:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4d8c
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_3135:
     ret
@@ -9668,21 +9689,21 @@ Call_000_3135:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
 
 Jump_000_313d:
     call $4e54
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5313
-    call Call_000_078e
+    call PopRomBank
 
 Jump_000_3151:
     ret
@@ -9690,32 +9711,32 @@ Jump_000_3151:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $53d0
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3160:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_3166:
     pop af
     call $5004
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_316e:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5027
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9739,40 +9760,40 @@ jr_000_318e:
     ld a, $03
 
 Call_000_3195:
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_3198:
     pop af
-    call $556f
-    call Call_000_078e
+    call LoadC2Pal
+    call PopRomBank
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $41ee
-    call Call_000_078e
-    call Call_000_0bfd
+    call PopRomBank
+    call ReloadScene
     ret
 
 
 Call_000_31b0:
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $68f8
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_31c4:
     pop af
     call $6886
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -9792,10 +9813,10 @@ jr_000_31ce:
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5666
-    call Call_000_078e
+    call PopRomBank
     call Call_000_3923
     ret
 
@@ -9837,17 +9858,17 @@ Call_000_3216:
     call Call_000_275d
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7267
-    call Call_000_078e
+    call PopRomBank
     call Call_000_39c8
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     call Call_000_03fe
     ld a, $30
     call Call_000_0753
@@ -9865,19 +9886,19 @@ Jump_000_324b:
 Call_000_325d:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4ea0
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5539
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -10102,7 +10123,7 @@ Call_000_3389:
     ld a, [$c865]
     ld d, a
     ld a, [$c524]
-    ld [$c866], a
+    ld [wSceneVariant], a
     cp d
     jr z, jr_000_33ab
 
@@ -10216,10 +10237,10 @@ Call_000_3424:
     push hl
     push af
     ld a, $05
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5a17
-    call Call_000_078e
+    call PopRomBank
     pop hl
     push af
     ld a, l
@@ -10374,12 +10395,12 @@ Call_000_34e8:
     ld [$c8af], a
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
 
 Call_000_34fd:
     pop af
     call $61c4
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -10495,7 +10516,7 @@ Call_000_357b:
     ld bc, $c4d9
     add hl, bc
     ld [hl], a
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_35bc
 
@@ -10972,25 +10993,25 @@ Call_000_3811:
     ld [hl], a
     push af
     ld a, $05
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $59a7
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_382c:
     push af
     ld a, $05
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $59a7
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_383a:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_3845
 
@@ -11016,40 +11037,40 @@ jr_000_3847:
 Call_000_3853:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $686b
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3861:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $689a
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_386f:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $68e7
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_387d:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $68f1
-    call Call_000_078e
+    call PopRomBank
 
 Jump_000_388a:
     ret
@@ -11058,37 +11079,37 @@ Jump_000_388a:
 Call_000_388b:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6ad9
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3899:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6b27
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6d28
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_38b5:
     ld a, $06
-    call Call_000_0781
+    call PushRomBank
     call Call_000_1be4
-    call Call_000_078e
+    call PopRomBank
 
 Call_000_38c0:
     ret
@@ -11097,10 +11118,10 @@ Call_000_38c0:
 Call_000_38c1:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7469
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -11108,10 +11129,10 @@ Call_000_38cf:
 Jump_000_38cf:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4928
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -11119,20 +11140,20 @@ Call_000_38dd:
 Jump_000_38dd:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4930
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_38eb:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6b6b
-    call Call_000_078e
+    call PopRomBank
 
 Jump_000_38f8:
     ret
@@ -11141,55 +11162,55 @@ Jump_000_38f8:
 Call_000_38f9:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_38ff:
     pop af
     call $4000
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3907:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $78f5
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4219
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3923:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4b7c
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3931:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7434
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr nz, jr_000_394a
 
@@ -11200,20 +11221,20 @@ Call_000_3931:
 jr_000_394a:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $60a7
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3958:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $7446
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -11221,108 +11242,108 @@ Call_000_3966:
 Jump_000_3966:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $688c
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3974:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $55ba
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3982:
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6886
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3990:
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $689d
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_399e:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5666
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_39ac:
     push af
     ld a, $29
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $68e9
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $00
-    call Call_000_0781
+    call PushRomBank
     pop af
     call Call_000_31b0
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_39c8:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $61ee
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_39d6:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $603d
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_39e4:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6076
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $4663
-    call Call_000_078e
+    call ReadSceneGfx
+    call PopRomBank
     ret
 
 
@@ -11330,20 +11351,20 @@ Call_000_3a00:
 Jump_000_3a00:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $608f
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3a0e:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6dfd
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -11352,10 +11373,10 @@ Call_000_3a1c:
     call Call_000_03fe
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
-    call $4683
-    call Call_000_078e
+    call ReadSceneBg
+    call PopRomBank
 
 Call_000_3a2f:
     call Call_000_0722
@@ -11363,10 +11384,10 @@ Call_000_3a2f:
     ld a, [$c5e0]
     push af
     ld a, $3e
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $4000
-    call Call_000_078e
+    call PopRomBank
     call Call_000_072a
     call Call_000_044b
     call Call_000_0416
@@ -11375,35 +11396,35 @@ Call_000_3a2f:
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5188
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3a5d:
     push af
     ld a, $01
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5dec
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3a6b:
     push af
     ld a, $02
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $6571
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
 Call_000_3a79:
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_000_3a94
 
@@ -11423,22 +11444,22 @@ Call_000_3a79:
 jr_000_3a94:
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
 
 Jump_000_3a9a:
     pop af
     call $5f54
-    call Call_000_078e
+    call PopRomBank
     ld a, [$c8b3]
     cp $ff
     jr nz, jr_000_3ab6
 
     push af
     ld a, $03
-    call Call_000_0781
+    call PushRomBank
     pop af
     call $5fc9
-    call Call_000_078e
+    call PopRomBank
     ret
 
 
@@ -11454,7 +11475,7 @@ jr_000_3ab6:
     add hl, bc
     ld a, [hl-]
     push hl
-    call Call_000_0781
+    call PushRomBank
     pop hl
     ld b, [hl]
     dec hl
@@ -11487,7 +11508,7 @@ jr_000_3aea:
     jr nz, jr_000_3af7
 
     call Call_000_1119
-    jp Jump_000_078e
+    jp PopRomBank
 
 
 jr_000_3af7:

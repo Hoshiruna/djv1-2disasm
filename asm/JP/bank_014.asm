@@ -6,22 +6,22 @@
 SECTION "ROM Bank $014", ROMX[$4000], BANK[$14]
 
 ; Encoded text bank, with original label addresses retained.
-    INCBIN "../../res/JP/text/banks/14.bin", $0, $66
+    INCBIN "../../res/text/JP/banks/14.bin", $0, $66
 jr_014_4066:
-    INCBIN "../../res/JP/text/banks/14.bin", $66, $724
+    INCBIN "../../res/text/JP/banks/14.bin", $66, $724
 jr_014_478a:
-    INCBIN "../../res/JP/text/banks/14.bin", $78a, $1f2
+    INCBIN "../../res/text/JP/banks/14.bin", $78a, $1f2
 jr_014_497c:
-    INCBIN "../../res/JP/text/banks/14.bin", $97c, $78c
+    INCBIN "../../res/text/JP/banks/14.bin", $97c, $78c
 jr_014_5108:
-    INCBIN "../../res/JP/text/banks/14.bin", $1108, $fd5
+    INCBIN "../../res/text/JP/banks/14.bin", $1108, $fd5
 Jump_014_60dd:
-    INCBIN "../../res/JP/text/banks/14.bin", $20dd, $1e86
+    INCBIN "../../res/text/JP/banks/14.bin", $20dd, $1e86
 Call_014_7f63:
-    INCBIN "../../res/JP/text/banks/14.bin", $3f63, $4c
+    INCBIN "../../res/text/JP/banks/14.bin", $3f63, $4c
 Call_014_7faf:
-    INCBIN "../../res/JP/text/banks/14.bin", $3faf, $37
+    INCBIN "../../res/text/JP/banks/14.bin", $3faf, $37
 Call_014_7fe6:
-    INCBIN "../../res/JP/text/banks/14.bin", $3fe6, $3
+    INCBIN "../../res/text/JP/banks/14.bin", $3fe6, $3
 Call_014_7fe9:
-    INCBIN "../../res/JP/text/banks/14.bin", $3fe9, $17
+    INCBIN "../../res/text/JP/banks/14.bin", $3fe9, $17

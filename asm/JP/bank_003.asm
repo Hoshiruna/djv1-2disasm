@@ -6,8 +6,8 @@
 SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
 
     ld a, $ff
-    ldh [$ffa6], a
-    ldh [$ffa7], a
+    ldh [hBgLoaded], a
+    ldh [hObjLoaded], a
     xor a
     ld [$c197], a
     ld [$c184], a
@@ -27,12 +27,12 @@ SECTION "ROM Bank $003", ROMX[$4000], BANK[$3]
     call Call_003_453b
     call Call_000_3923
     call Call_003_412a
-    call Call_003_41ee
-    call Call_003_556f
+    call PickC2Scene
+    call LoadC2Pal
     call Call_000_19d9
     call Call_000_03fe
     call Call_000_0ed5
-    call Call_000_0c43
+    call RedrawScene
     call Call_000_38cf
     ld hl, $c8ad
     ld d, $18
@@ -92,8 +92,8 @@ jr_003_40a8:
     xor a
     ld [$c8af], a
     xor a
-    ld [$c522], a
-    ld [$c521], a
+    ld [wSceneId], a
+    ld [wRoomId], a
     ld a, $02
     ld [$c524], a
     ld [$c525], a
@@ -251,12 +251,14 @@ jr_003_41e5:
     INCBIN "../../res/scene/case2/common/initial-visibility.bin", $4f, $9
 
 Call_003_41ee:
+; Update room state and select its visual scene; special scenes retain their current ID.
+PickC2Scene:
     call Call_003_4236
     ld a, [$c8e8]
     cp $ff
     jr nz, jr_003_420f
 
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $17
     jr z, jr_003_4203
 
@@ -272,7 +274,7 @@ jr_003_4203:
     jr jr_003_4235
 
 jr_003_420f:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld l, a
     ld h, $00
     add hl, hl
@@ -282,7 +284,7 @@ jr_003_420f:
     ld [$c85e], a
     ld a, [hl]
     ld [$c85f], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld e, a
     ld d, $00
     ld a, [$c85e]
@@ -291,7 +293,7 @@ jr_003_420f:
     ld h, a
     add hl, de
     ld a, [hl]
-    ld [$c522], a
+    ld [wSceneId], a
 
 jr_003_4235:
     ret
@@ -309,7 +311,7 @@ jr_003_4240:
     jr nz, jr_003_4240
 
     xor a
-    ld [$c866], a
+    ld [wSceneVariant], a
     ld bc, $0000
 
 Jump_003_424b:
@@ -351,11 +353,11 @@ jr_003_424b:
     ld a, [$c868]
     inc a
     ld [$c868], a
-    ld a, [$c866]
+    ld a, [wSceneVariant]
     ld hl, $19a9
     add hl, bc
     add [hl]
-    ld [$c866], a
+    ld [wSceneVariant], a
 
 jr_003_4294:
     ld a, [$c868]
@@ -1242,7 +1244,7 @@ Call_003_463d:
     jr jr_003_4645
 
 Call_003_4642:
-    ld a, [$c521]
+    ld a, [wRoomId]
 
 jr_003_4645:
     ld l, a
@@ -2669,12 +2671,12 @@ jr_003_4cd5:
     ld hl, $4d29
     add hl, bc
     ld a, [hl]
-    ld hl, $c521
+    ld hl, wRoomId
     cp [hl]
     jr z, jr_003_4cfc
 
     push af
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $31
     jr nz, jr_003_4cf4
 
@@ -2687,7 +2689,7 @@ jr_003_4cd5:
 
 jr_003_4cf4:
     pop af
-    ld [$c521], a
+    ld [wRoomId], a
     call Call_003_4d05
     ret
 
@@ -2749,7 +2751,7 @@ jr_003_4d49:
 
 
 Call_003_4d4d:
-    ld a, [$c521]
+    ld a, [wRoomId]
     sub $1b
     ld c, a
     ld b, $00
@@ -3250,7 +3252,7 @@ jr_003_4fee:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret z
 
@@ -3332,7 +3334,7 @@ jr_003_5087:
 
     ld a, [$c8a7]
     push af
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     jr z, jr_003_50ab
 
@@ -3710,7 +3712,7 @@ Jump_003_526c:
     ld a, [$c160]
     ld [$c165], a
     call Call_000_16b9
-    ld a, [$c522]
+    ld a, [wSceneId]
     ld [$c539], a
 
 Call_003_527b:
@@ -3729,8 +3731,8 @@ Jump_003_527b:
     ld bc, $52e9
     add hl, bc
     ld a, [hl]
-    ld [$c522], a
-    call Call_000_0bab
+    ld [wSceneId], a
+    call ShowScene
 
 jr_003_529c:
     ld a, [$c8e9]
@@ -3766,12 +3768,12 @@ jr_003_52c7:
 
 
 Call_003_52ce:
-    call Call_003_41ee
+    call PickC2Scene
     ld a, [$c539]
-    ld [$c522], a
+    ld [wSceneId], a
     ld a, $06
     ld [$c640], a
-    call Call_000_0bab
+    call ShowScene
     call Call_000_27b6
     ld a, [$c165]
     call Call_000_080e
@@ -3820,7 +3822,7 @@ Call_003_52ce:
     rst RST_38
     ld c, $40
     ld e, $00
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $5390
 
 jr_003_531d:
@@ -4197,7 +4199,8 @@ Call_003_556a:
     ld a, $86
     jp Jump_000_1a11
 
-
+; Choose the Case II palette from scene and gameplay state, then stage both sets.
+LoadC2Pal:
 Call_003_556f:
     ld a, [$c5c9]
     cp $00
@@ -4218,7 +4221,7 @@ Call_003_556f:
     and $01
     jr nz, jr_003_55a2
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $38
     jr z, jr_003_55a9
 
@@ -4238,11 +4241,11 @@ jr_003_55a9:
     jr jr_003_55b1
 
 jr_003_55ae:
-    ld a, [$c522]
+    ld a, [wSceneId]
 
 jr_003_55b1:
-    ld [$c641], a
-    call Call_000_1a3f
+    ld [wScenePalId], a
+    call StagePals
     ret
 
 
@@ -4616,7 +4619,7 @@ Call_003_57fd:
     ret
 
 
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret z
 
@@ -4758,7 +4761,7 @@ Call_003_58e9:
     ld bc, $590d
 
 jr_003_58ec:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld e, a
     ld hl, $0000
 
@@ -4825,11 +4828,11 @@ jr_003_5931:
 
     call Call_000_39c8
     ld a, [$c5c6]
-    ld [$c641], a
+    ld [wScenePalId], a
     call Call_003_55b8
-    call Call_003_556f
-    call Call_003_41ee
-    call Call_000_0bfd
+    call LoadC2Pal
+    call PickC2Scene
+    call ReloadScene
 
 jr_003_5953:
     ld a, $86
@@ -4844,7 +4847,7 @@ jr_003_595d:
     and $01
     jr nz, jr_003_59bb
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $38
     jr z, jr_003_59bb
 
@@ -4855,11 +4858,11 @@ jr_003_595d:
     ld a, $4d
     call Call_000_1e26
     ld a, $49
-    ld [$c641], a
+    ld [wScenePalId], a
     call Call_003_55b8
-    call Call_003_556f
-    call Call_003_41ee
-    call Call_000_0bfd
+    call LoadC2Pal
+    call PickC2Scene
+    call ReloadScene
     call Call_000_2b9c
     ld a, $88
     call Call_000_1c63
@@ -4895,7 +4898,7 @@ Call_003_59c0:
 
 Call_003_59cf:
     ld hl, $5b0f
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld e, a
     cp $42
     ret nc
@@ -4908,7 +4911,7 @@ jr_003_59d9:
     cp $ff
     jr nz, jr_003_59d9
 
-    ld a, [$c522]
+    ld a, [wSceneId]
     cp $17
     ret z
 
@@ -5033,7 +5036,7 @@ Call_003_5ab7:
     call Call_000_1dac
     ret z
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $41
     ret z
 
@@ -5089,7 +5092,7 @@ Call_003_5ab7:
     rst RST_38
 
 Call_003_5b25:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $0a
     jr z, jr_003_5b37
 
@@ -5134,7 +5137,7 @@ jr_003_5b58:
 
 
 Call_003_5b75:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $0d
     ret nz
 
@@ -5295,7 +5298,7 @@ Call_003_5cb3:
     call Call_000_1dac
     ret z
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $46
     ret c
 
@@ -5343,7 +5346,7 @@ Call_003_5d07:
     call Call_000_1dac
     ret nz
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $46
     jr z, jr_003_5d1b
 
@@ -5390,7 +5393,7 @@ jr_003_5d1b:
 
 
 jr_003_5d69:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $46
     jr z, jr_003_5dc0
 
@@ -5485,7 +5488,7 @@ Call_003_5e34:
 
 
 Call_003_5e3d:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $62
     jr z, jr_003_5e4e
 
@@ -5535,7 +5538,7 @@ jr_003_5e70:
     call Call_000_1c59
     ld a, $0f
     call Call_003_5f3e
-    call Call_003_556f
+    call LoadC2Pal
     call Call_003_55b8
     ld a, $78
     call Call_000_0753
@@ -5566,7 +5569,7 @@ jr_003_5eac:
 
 Call_003_5ec1:
     ld hl, $5f06
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld e, a
     ld c, $0c
 
@@ -5638,7 +5641,7 @@ jr_003_5efd:
     ld c, $0e
 
 Call_003_5f1e:
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $02
     ret nz
 
@@ -6222,7 +6225,7 @@ jr_003_61ee:
     ret
 
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $1b
     jr c, jr_003_6223
 
@@ -6278,7 +6281,7 @@ Call_003_6244:
     ld a, [$c57b]
     inc a
     ld [$c57b], a
-    ld a, [$c521]
+    ld a, [wRoomId]
     cp $15
     ret c
 
@@ -6657,7 +6660,7 @@ Call_003_6447:
 
 
     call Call_003_6447
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a05
     add hl, bc
     cp [hl]
@@ -6704,7 +6707,7 @@ jr_003_64ae:
 
 
     call Call_003_6447
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a05
     add hl, bc
     cp [hl]
@@ -6738,7 +6741,7 @@ jr_003_64d9:
 
 
 Call_003_64f7:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a15
     add hl, bc
     cp [hl]
@@ -6751,7 +6754,7 @@ Call_003_6500:
 
 
 Call_003_6506:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a15
     add hl, bc
     cp [hl]
@@ -6763,7 +6766,7 @@ Call_003_6506:
 
 
     call Call_003_6447
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a15
     add hl, bc
     cp [hl]
@@ -6795,7 +6798,7 @@ Call_003_6506:
     push bc
     call Call_000_1e8b
     pop bc
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a15
     add hl, bc
     cp [hl]
@@ -6951,7 +6954,7 @@ Jump_003_660b:
     ld a, [hl]
     call Call_000_1e26
     pop bc
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a15
     add hl, bc
     cp [hl]
@@ -6985,9 +6988,9 @@ jr_003_6675:
     call Call_000_23bd
     ld a, $a2
     call Call_000_1c59
-    ld a, [$c522]
+    ld a, [wSceneId]
     dec a
-    ld [$c522], a
+    ld [wSceneId], a
     ret
 
 
@@ -7037,7 +7040,7 @@ jr_003_66a2:
 Call_003_66fb:
     push de
     push bc
-    ld a, [$c521]
+    ld a, [wRoomId]
     and $01
     jr z, jr_003_670c
 
@@ -7058,7 +7061,7 @@ jr_003_6712:
 Call_003_6715:
     push de
     push bc
-    ld a, [$c521]
+    ld a, [wRoomId]
     and $01
     jr z, jr_003_6723
 
@@ -7081,14 +7084,14 @@ jr_003_672c:
     ld hl, $689c
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     call Call_003_67f3
     ld hl, $68b0
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     push de
@@ -7113,14 +7116,14 @@ jr_003_675f:
     ld hl, $689c
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     call Call_003_67f3
     ld hl, $68b0
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     push de
@@ -7144,14 +7147,14 @@ jr_003_6791:
     ld hl, $68a6
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     call Call_003_67f3
     ld hl, $68ba
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     push de
@@ -7176,14 +7179,14 @@ jr_003_67c4:
     ld hl, $68a6
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     call Call_003_67f3
     ld hl, $68ba
     add hl, de
     ld a, [hl+]
-    ld [$c87d], a
+    ld [wSceneBlank], a
     ld a, [hl]
     ld [$c87e], a
     push de
@@ -7204,13 +7207,13 @@ Call_003_67f3:
     ld bc, $0000
 
 jr_003_67f6:
-    ld a, [$c87d]
+    ld a, [wSceneBlank]
     ld l, a
     ld a, [$c87e]
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld hl, $db40
+    ld hl, wBgPal
     add hl, bc
     ld [hl], a
     inc c
@@ -7225,13 +7228,13 @@ Call_003_680c:
     ld bc, $0000
 
 jr_003_680f:
-    ld a, [$c87d]
+    ld a, [wSceneBlank]
     ld l, a
     ld a, [$c87e]
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld hl, $db80
+    ld hl, wObjPal
     add hl, bc
     ld [hl], a
     inc c
@@ -7245,7 +7248,7 @@ jr_003_680f:
     ld de, $0000
 
 jr_003_6828:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a05
     add hl, de
     cp [hl]
@@ -7391,7 +7394,7 @@ Call_003_68cf:
     ld de, $0000
 
 jr_003_68d2:
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld hl, $6a05
     add hl, de
     cp [hl]
@@ -7457,7 +7460,7 @@ jr_003_68f5:
     add b
     db $e4
     sub d
-    ldh [$ffa6], a
+    ldh [hBgLoaded], a
     db $e4
     cp d
     db $e3
@@ -8401,11 +8404,11 @@ jr_003_6d49:
     nop
     ld bc, $0800
     nop
-    ld a, [$c599]
+    ld a, [wCaseId]
     cp $00
     ret z
 
-    ld a, [$c521]
+    ld a, [wRoomId]
     ld e, a
     ld hl, $6df8
 
@@ -8519,7 +8522,7 @@ Call_003_6e02:
     call Call_003_6fdb
     call Call_000_38cf
     xor a
-    ld [$c599], a
+    ld [wCaseId], a
     ld a, $0e
     call Call_000_080e
     ld a, $ff
@@ -8693,9 +8696,9 @@ Call_003_6fdb:
     ld bc, $7093
     add hl, bc
     ld a, [hl+]
-    ld [$c599], a
+    ld [wCaseId], a
     ld a, [hl]
-    ld [$c522], a
+    ld [wSceneId], a
     call Call_000_3a1c
     ld a, [$c5e0]
     inc a

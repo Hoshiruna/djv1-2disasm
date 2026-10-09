@@ -1,0 +1,1344 @@
+{
+  "graphics": {
+    "00": {
+      "US": "../../ui/US/case2_font.bin",
+      "JP": "../../ui/JP/case2_font.bin"
+    },
+    "01": {
+      "US": "../../ui/US/case2_hud_tiles.bin",
+      "JP": "../../ui/JP/case2_hud_tiles.bin"
+    },
+    "02": {
+      "png": "00-lucky-bath/s00-bg.png",
+      "US": "00-lucky-bath/US/s00-bg.bin",
+      "JP": "00-lucky-bath/JP/s00-bg.bin"
+    },
+    "03": {
+      "png": "00-lucky-bath/s00-bg-extra.png",
+      "US": "00-lucky-bath/US/s00-bg-extra.bin",
+      "JP": "00-lucky-bath/JP/s00-bg-extra.bin"
+    },
+    "04": {
+      "png": "01-lucky-room/s01-bg.png",
+      "US": "common/US/g04.bin",
+      "JP": "common/JP/g04.bin"
+    },
+    "06": {
+      "png": "02-lucky-casino-hall/s02-bg.png",
+      "US": "common/US/g06.bin",
+      "JP": "common/JP/g06.bin"
+    },
+    "07": {
+      "png": "02-lucky-casino-hall/s02-bg-extra.png",
+      "US": "common/US/g07.bin",
+      "JP": "common/JP/g07.bin"
+    },
+    "08": {
+      "png": "03-lucky-lobby/s03-bg.png",
+      "US": "common/US/g08.bin",
+      "JP": "common/JP/g08.bin"
+    },
+    "0a": {
+      "png": "04-lucky-cashier/s04-bg.png",
+      "US": "common/US/g0a.bin",
+      "JP": "common/JP/g0a.bin"
+    },
+    "0c": {
+      "png": "05-rudy-blackjack/s05-bg.png",
+      "US": "common/US/g0c.bin",
+      "JP": "common/JP/g0c.bin"
+    },
+    "0e": {
+      "png": "06-stogie-martin/s06-bg.png",
+      "US": "common/US/g0e.bin",
+      "JP": "common/JP/g0e.bin"
+    },
+    "0f": {
+      "png": "06-stogie-martin/s06-bg-extra.png",
+      "US": "common/US/g0f.bin",
+      "JP": "common/JP/g0f.bin"
+    },
+    "10": {
+      "png": "07-lucky-1f/s07-bg.png",
+      "US": "common/US/g10.bin",
+      "JP": "common/JP/g10.bin"
+    },
+    "11": {
+      "png": "07-lucky-1f/s07-bg-extra.png",
+      "US": "common/US/g11.bin",
+      "JP": "common/JP/g11.bin"
+    },
+    "12": {
+      "png": "common/bg-12.png",
+      "US": "common/US/g12.bin",
+      "JP": "common/JP/g12.bin"
+    },
+    "13": {
+      "png": "common/bg-13.png",
+      "US": "common/US/g13.bin",
+      "JP": "common/JP/g13.bin"
+    },
+    "16": {
+      "png": "0a-lucky-4f/s0a-bg.png",
+      "US": "common/US/g16.bin",
+      "JP": "common/JP/g16.bin"
+    },
+    "17": {
+      "png": "0a-lucky-4f/s0a-bg-extra.png",
+      "US": "common/US/g17.bin",
+      "JP": "common/JP/g17.bin"
+    },
+    "18": {
+      "png": "0b-ventini-office/s0b-bg.png",
+      "US": "common/US/g18.bin",
+      "JP": "common/JP/g18.bin"
+    },
+    "19": {
+      "png": "0b-ventini-office/s0b-bg-extra.png",
+      "US": "common/US/g19.bin",
+      "JP": "common/JP/g19.bin"
+    },
+    "1a": {
+      "png": "0c-malone-office/s0c-bg.png",
+      "US": "common/US/g1a.bin",
+      "JP": "common/JP/g1a.bin"
+    },
+    "1b": {
+      "png": "0c-malone-office/s0c-bg-extra.png",
+      "US": "common/US/g1b.bin",
+      "JP": "common/JP/g1b.bin"
+    },
+    "1c": {
+      "png": "0d-lucky-entrance/s0d-bg.png",
+      "US": "common/US/g1c.bin",
+      "JP": "common/JP/g1c.bin"
+    },
+    "1d": {
+      "png": "0d-lucky-entrance/s0d-bg-extra.png",
+      "US": "common/US/g1d.bin",
+      "JP": "common/JP/g1d.bin"
+    },
+    "1e": {
+      "png": "common/bg-1e.png",
+      "US": "common/US/g1e.bin",
+      "JP": "common/JP/g1e.bin"
+    },
+    "1f": {
+      "png": "common/bg-1f.png",
+      "US": "common/US/g1f.bin",
+      "JP": "common/JP/g1f.bin"
+    },
+    "20": {
+      "png": "11-vegas-station/s11-bg.png",
+      "US": "common/US/g20.bin",
+      "JP": "common/JP/g20.bin"
+    },
+    "21": {
+      "png": "11-vegas-station/s11-bg-extra.png",
+      "US": "common/US/g21.bin",
+      "JP": "common/JP/g21.bin"
+    },
+    "22": {
+      "png": "12-vegas-waiting-hall/s12-bg.png",
+      "US": "common/US/g22.bin",
+      "JP": "common/JP/g22.bin"
+    },
+    "24": {
+      "png": "13-vegas-baggage/s13-bg.png",
+      "US": "common/US/g24.bin",
+      "JP": "common/JP/g24.bin"
+    },
+    "25": {
+      "png": "13-vegas-baggage/s13-bg-extra.png",
+      "US": "common/US/g25.bin",
+      "JP": "common/JP/g25.bin"
+    },
+    "26": {
+      "png": "common/bg-26.png",
+      "US": "common/US/g26.bin",
+      "JP": "common/JP/g26.bin"
+    },
+    "27": {
+      "png": "common/bg-27.png",
+      "US": "common/US/g27.bin",
+      "JP": "common/JP/g27.bin"
+    },
+    "28": {
+      "png": "16-train-passengers/s16-bg.png",
+      "US": "common/US/g28.bin",
+      "JP": "common/JP/g28.bin"
+    },
+    "29": {
+      "png": "16-train-passengers/s16-bg-extra.png",
+      "US": "common/US/g29.bin",
+      "JP": "common/JP/g29.bin"
+    },
+    "2a": {
+      "png": "common/bg-2a.png",
+      "US": "common/US/g2a.bin",
+      "JP": "common/JP/g2a.bin"
+    },
+    "2b": {
+      "png": "common/bg-2b.png",
+      "US": "common/US/g2b.bin",
+      "JP": "common/JP/g2b.bin"
+    },
+    "2c": {
+      "png": "18-train-interior/s18-bg.png",
+      "US": "common/US/g2c.bin",
+      "JP": "common/JP/g2c.bin"
+    },
+    "2d": {
+      "png": "18-train-interior/s18-bg-extra.png",
+      "US": "common/US/g2d.bin",
+      "JP": "common/JP/g2d.bin"
+    },
+    "2e": {
+      "png": "1c-chicago-waiting-hall/s1c-bg.png",
+      "US": "common/US/g2e.bin",
+      "JP": "common/JP/g2e.bin"
+    },
+    "30": {
+      "png": "1d-chicago-station/s1d-bg.png",
+      "US": "common/US/g30.bin",
+      "JP": "common/JP/g30.bin"
+    },
+    "31": {
+      "png": "1d-chicago-station/s1d-bg-extra.png",
+      "US": "common/US/g31.bin",
+      "JP": "common/JP/g31.bin"
+    },
+    "32": {
+      "png": "1e-gabby-cab/s1e-bg.png",
+      "US": "common/US/g32.bin",
+      "JP": "common/JP/g32.bin"
+    },
+    "33": {
+      "png": "1e-gabby-cab/s1e-bg-extra.png",
+      "US": "common/US/g33.bin",
+      "JP": "common/JP/g33.bin"
+    },
+    "34": {
+      "png": "1f-ace-street/s1f-bg.png",
+      "US": "common/US/g34.bin",
+      "JP": "common/JP/g34.bin"
+    },
+    "35": {
+      "png": "1f-ace-street/s1f-bg-extra.png",
+      "US": "common/US/g35.bin",
+      "JP": "common/JP/g35.bin"
+    },
+    "36": {
+      "png": "20-ace-apartment-door/s20-bg.png",
+      "US": "common/US/g36.bin",
+      "JP": "common/JP/g36.bin"
+    },
+    "37": {
+      "png": "20-ace-apartment-door/s20-bg-extra.png",
+      "US": "common/US/g37.bin",
+      "JP": "common/JP/g37.bin"
+    },
+    "38": {
+      "png": "21-ace-apartment/s21-bg.png",
+      "US": "common/US/g38.bin",
+      "JP": "common/JP/g38.bin"
+    },
+    "39": {
+      "png": "21-ace-apartment/s21-bg-extra.png",
+      "US": "common/US/g39.bin",
+      "JP": "common/JP/g39.bin"
+    },
+    "3a": {
+      "png": "22-joes-place/s22-bg.png",
+      "US": "common/US/g3a.bin",
+      "JP": "common/JP/g3a.bin"
+    },
+    "3b": {
+      "png": "22-joes-place/s22-bg-extra.png",
+      "US": "common/US/g3b.bin",
+      "JP": "common/JP/g3b.bin"
+    },
+    "3c": {
+      "png": "23-joes-back-alley/s23-bg.png",
+      "US": "common/US/g3c.bin",
+      "JP": "common/JP/g3c.bin"
+    },
+    "3d": {
+      "png": "23-joes-back-alley/s23-bg-extra.png",
+      "US": "common/US/g3d.bin",
+      "JP": "common/JP/g3d.bin"
+    },
+    "3e": {
+      "png": "24-joes-hall/s24-bg.png",
+      "US": "common/US/g3e.bin",
+      "JP": "common/JP/g3e.bin"
+    },
+    "40": {
+      "png": "25-secretary-office/s25-bg.png",
+      "US": "common/US/g40.bin",
+      "JP": "common/JP/g40.bin"
+    },
+    "41": {
+      "png": "25-secretary-office/s25-bg-extra.png",
+      "US": "common/US/g41.bin",
+      "JP": "common/JP/g41.bin"
+    },
+    "42": {
+      "png": "26-joes-bar/s26-bg.png",
+      "US": "common/US/g42.bin",
+      "JP": "common/JP/g42.bin"
+    },
+    "43": {
+      "png": "26-joes-bar/s26-bg-extra.png",
+      "US": "common/US/g43.bin",
+      "JP": "common/JP/g43.bin"
+    },
+    "44": {
+      "png": "27-joes-manhole/s27-bg.png",
+      "US": "common/US/g44.bin",
+      "JP": "common/JP/g44.bin"
+    },
+    "46": {
+      "png": "28-joes-casino/s28-bg.png",
+      "US": "common/US/g46.bin",
+      "JP": "common/JP/g46.bin"
+    },
+    "47": {
+      "png": "28-joes-casino/s28-bg-extra.png",
+      "US": "common/US/g47.bin",
+      "JP": "common/JP/g47.bin"
+    },
+    "48": {
+      "png": "29-joes-upper-hall/s29-bg.png",
+      "US": "common/US/g48.bin",
+      "JP": "common/JP/g48.bin"
+    },
+    "49": {
+      "png": "29-joes-upper-hall/s29-bg-extra.png",
+      "US": "common/US/g49.bin",
+      "JP": "common/JP/g49.bin"
+    },
+    "4a": {
+      "png": "2a-siegel-office/s2a-bg.png",
+      "US": "common/US/g4a.bin",
+      "JP": "common/JP/g4a.bin"
+    },
+    "4b": {
+      "png": "2a-siegel-office/s2a-bg-extra.png",
+      "US": "common/US/g4b.bin",
+      "JP": "common/JP/g4b.bin"
+    },
+    "4c": {
+      "png": "2b-joes-private-door/s2b-bg.png",
+      "US": "common/US/g4c.bin",
+      "JP": "common/JP/g4c.bin"
+    },
+    "4e": {
+      "png": "2c-joes-side-alley/s2c-bg.png",
+      "US": "common/US/g4e.bin",
+      "JP": "common/JP/g4e.bin"
+    },
+    "4f": {
+      "png": "2c-joes-side-alley/s2c-bg-extra.png",
+      "US": "common/US/g4f.bin",
+      "JP": "common/JP/g4f.bin"
+    },
+    "50": {
+      "png": "2d-police-station/s2d-bg.png",
+      "US": "common/US/g50.bin",
+      "JP": "common/JP/g50.bin"
+    },
+    "51": {
+      "png": "2d-police-station/s2d-bg-extra.png",
+      "US": "common/US/g51.bin",
+      "JP": "common/JP/g51.bin"
+    },
+    "52": {
+      "png": "2e-sugar-street/s2e-bg.png",
+      "US": "common/US/g52.bin",
+      "JP": "common/JP/g52.bin"
+    },
+    "53": {
+      "png": "2e-sugar-street/s2e-bg-extra.png",
+      "US": "common/US/g53.bin",
+      "JP": "common/JP/g53.bin"
+    },
+    "54": {
+      "png": "2f-sugar-apartment/s2f-bg.png",
+      "US": "common/US/g54.bin",
+      "JP": "common/JP/g54.bin"
+    },
+    "55": {
+      "png": "2f-sugar-apartment/s2f-bg-extra.png",
+      "US": "common/US/g55.bin",
+      "JP": "common/JP/g55.bin"
+    },
+    "56": {
+      "png": "30-city-morgue/s30-bg.png",
+      "US": "common/US/g56.bin",
+      "JP": "common/JP/g56.bin"
+    },
+    "57": {
+      "png": "30-city-morgue/s30-bg-extra.png",
+      "US": "common/US/g57.bin",
+      "JP": "common/JP/g57.bin"
+    },
+    "58": {
+      "png": "31-morgue-clerk/s31-bg.png",
+      "US": "common/US/g58.bin",
+      "JP": "common/JP/g58.bin"
+    },
+    "59": {
+      "png": "31-morgue-clerk/s31-bg-extra.png",
+      "US": "common/US/g59.bin",
+      "JP": "common/JP/g59.bin"
+    },
+    "5a": {
+      "png": "32-morgue-drawers/s32-bg.png",
+      "US": "common/US/g5a.bin",
+      "JP": "common/JP/g5a.bin"
+    },
+    "5b": {
+      "png": "32-morgue-drawers/s32-bg-extra.png",
+      "US": "common/US/g5b.bin",
+      "JP": "common/JP/g5b.bin"
+    },
+    "5c": {
+      "png": "33-laundry-hamper/s33-bg.png",
+      "US": "common/US/g5c.bin",
+      "JP": "common/JP/g5c.bin"
+    },
+    "5e": {
+      "png": "34-reliant-cleaners/s34-bg.png",
+      "US": "common/US/g5e.bin",
+      "JP": "common/JP/g5e.bin"
+    },
+    "5f": {
+      "png": "34-reliant-cleaners/s34-bg-extra.png",
+      "US": "common/US/g5f.bin",
+      "JP": "common/JP/g5f.bin"
+    },
+    "60": {
+      "png": "35-reliant-laundry/s35-bg.png",
+      "US": "common/US/g60.bin",
+      "JP": "common/JP/g60.bin"
+    },
+    "61": {
+      "png": "35-reliant-laundry/s35-bg-extra.png",
+      "US": "common/US/g61.bin",
+      "JP": "common/JP/g61.bin"
+    },
+    "62": {
+      "png": "36-reliant-hall/s36-bg.png",
+      "US": "common/US/g62.bin",
+      "JP": "common/JP/g62.bin"
+    },
+    "63": {
+      "png": "36-reliant-hall/s36-bg-extra.png",
+      "US": "common/US/g63.bin",
+      "JP": "common/JP/g63.bin"
+    },
+    "64": {
+      "png": "37-reliant-office/s37-bg.png",
+      "US": "common/US/g64.bin",
+      "JP": "common/JP/g64.bin"
+    },
+    "65": {
+      "png": "37-reliant-office/s37-bg-extra.png",
+      "US": "common/US/g65.bin",
+      "JP": "common/JP/g65.bin"
+    },
+    "66": {
+      "png": "38-ventini-secret/s38-bg.png",
+      "US": "common/US/g66.bin",
+      "JP": "common/JP/g66.bin"
+    },
+    "68": {
+      "png": "39-hitman/s39-bg.png",
+      "US": "common/US/g68.bin",
+      "JP": "common/JP/g68.bin"
+    },
+    "6a": {
+      "png": "3a-moose-spike/s3a-bg.png",
+      "US": "common/US/g6a.bin",
+      "JP": "common/JP/g6a.bin"
+    },
+    "6b": {
+      "png": "3a-moose-spike/s3a-bg-extra.png",
+      "US": "common/US/g6b.bin",
+      "JP": "common/JP/g6b.bin"
+    },
+    "6c": {
+      "png": "3b-dog/s3b-bg.png",
+      "US": "common/US/g6c.bin",
+      "JP": "common/JP/g6c.bin"
+    },
+    "6e": {
+      "png": "3c-policeman/s3c-bg.png",
+      "US": "common/US/g6e.bin",
+      "JP": "common/JP/g6e.bin"
+    },
+    "70": {
+      "png": "3d-handcuffs/s3d-bg.png",
+      "US": "common/US/g70.bin",
+      "JP": "common/JP/g70.bin"
+    },
+    "72": {
+      "png": "3e-ace-grave/s3e-bg.png",
+      "US": "common/US/g72.bin",
+      "JP": "common/JP/g72.bin"
+    },
+    "74": {
+      "png": "3f-casino-bouncer/s3f-bg.png",
+      "US": "common/US/g74.bin",
+      "JP": "common/JP/g74.bin"
+    },
+    "76": {
+      "png": "40-lemonade-stand/s40-bg.png",
+      "US": "common/US/g76.bin",
+      "JP": "common/JP/g76.bin"
+    },
+    "78": {
+      "png": "common/bg-78.png",
+      "US": "common/US/g78.bin",
+      "JP": "common/JP/g78.bin"
+    },
+    "79": {
+      "png": "common/bg-79.png",
+      "US": "common/US/g79.bin",
+      "JP": "common/JP/g79.bin"
+    },
+    "7a": {
+      "png": "43-card-tiles/s43-bg.png",
+      "US": "common/US/g7a.bin",
+      "JP": "common/JP/g7a.bin"
+    },
+    "7b": {
+      "png": "43-card-tiles/s43-bg-extra.png",
+      "US": "common/US/g7b.bin",
+      "JP": "common/JP/g7b.bin"
+    },
+    "81": {
+      "png": "00-lucky-bath/s00-objects.png",
+      "US": "00-lucky-bath/US/s00-objects.bin",
+      "JP": "00-lucky-bath/JP/s00-objects.bin"
+    },
+    "82": {
+      "png": "common/objects-82.png",
+      "US": "common/US/g82.bin",
+      "JP": "common/JP/g82.bin"
+    },
+    "83": {
+      "png": "common/objects-83.png",
+      "US": "common/US/g83.bin",
+      "JP": "common/JP/g83.bin"
+    },
+    "84": {
+      "png": "common/objects-84.png",
+      "US": "common/US/g84.bin",
+      "JP": "common/JP/g84.bin"
+    },
+    "85": {
+      "png": "39-hitman/s39-objects.png",
+      "US": "common/US/g85.bin",
+      "JP": "common/JP/g85.bin"
+    },
+    "86": {
+      "png": "common/objects-86.png",
+      "US": "common/US/g86.bin",
+      "JP": "common/JP/g86.bin"
+    },
+    "87": {
+      "png": "common/objects-87.png",
+      "US": "common/US/g87.bin",
+      "JP": "common/JP/g87.bin"
+    },
+    "88": {
+      "png": "1e-gabby-cab/s1e-objects.png",
+      "US": "common/US/g88.bin",
+      "JP": "common/JP/g88.bin"
+    },
+    "89": {
+      "png": "common/objects-89.png",
+      "US": "common/US/g89.bin",
+      "JP": "common/JP/g89.bin"
+    },
+    "8a": {
+      "png": "common/objects-8a.png",
+      "US": "common/US/g8a.bin",
+      "JP": "common/JP/g8a.bin"
+    },
+    "8b": {
+      "png": "34-reliant-cleaners/s34-objects.png",
+      "US": "common/US/g8b.bin",
+      "JP": "common/JP/g8b.bin"
+    },
+    "05": null,
+    "09": null,
+    "0b": null,
+    "7f": null,
+    "0d": null,
+    "23": null,
+    "2f": null,
+    "3f": null,
+    "45": null,
+    "4d": null,
+    "5d": null,
+    "67": null,
+    "69": null,
+    "6d": null,
+    "6f": null,
+    "71": null,
+    "73": null,
+    "75": null,
+    "77": null
+  },
+  "scenes": {
+    "00": {
+      "graphics": [
+        "02",
+        "03",
+        "81"
+      ],
+      "tilemap": "00-lucky-bath/s00-bg.tilemap",
+      "attrmap": "00-lucky-bath/s00-bg.attrmap",
+      "bg_palette": "00-lucky-bath/s00-bg.pal",
+      "obj_palette": "00-lucky-bath/s00-objects.pal"
+    },
+    "01": {
+      "graphics": [
+        "04",
+        "05",
+        "82"
+      ],
+      "tilemap": "01-lucky-room/s01-bg.tilemap",
+      "attrmap": "01-lucky-room/s01-bg.attrmap",
+      "bg_palette": "01-lucky-room/s01-bg.pal",
+      "obj_palette": "01-lucky-room/s01-objects.pal"
+    },
+    "02": {
+      "graphics": [
+        "06",
+        "07",
+        "82"
+      ],
+      "tilemap": "02-lucky-casino-hall/s02-bg.tilemap",
+      "attrmap": "02-lucky-casino-hall/s02-bg.attrmap",
+      "bg_palette": "02-lucky-casino-hall/s02-bg.pal",
+      "obj_palette": "02-lucky-casino-hall/s02-objects.pal"
+    },
+    "03": {
+      "graphics": [
+        "08",
+        "09",
+        "82"
+      ],
+      "tilemap": "03-lucky-lobby/s03-bg.tilemap",
+      "attrmap": "03-lucky-lobby/s03-bg.attrmap",
+      "bg_palette": "03-lucky-lobby/s03-bg.pal",
+      "obj_palette": "03-lucky-lobby/s03-objects.pal"
+    },
+    "04": {
+      "graphics": [
+        "0a",
+        "0b",
+        "7f"
+      ],
+      "tilemap": "04-lucky-cashier/s04-bg.tilemap",
+      "attrmap": "04-lucky-cashier/s04-bg.attrmap",
+      "bg_palette": "04-lucky-cashier/s04-bg.pal",
+      "obj_palette": "04-lucky-cashier/s04-objects.pal"
+    },
+    "05": {
+      "graphics": [
+        "0c",
+        "0d",
+        "82"
+      ],
+      "tilemap": "05-rudy-blackjack/s05-bg.tilemap",
+      "attrmap": "05-rudy-blackjack/s05-bg.attrmap",
+      "bg_palette": "05-rudy-blackjack/s05-bg.pal",
+      "obj_palette": "05-rudy-blackjack/s05-objects.pal"
+    },
+    "06": {
+      "graphics": [
+        "0e",
+        "0f",
+        "7f"
+      ],
+      "tilemap": "06-stogie-martin/s06-bg.tilemap",
+      "attrmap": "06-stogie-martin/s06-bg.attrmap",
+      "bg_palette": "06-stogie-martin/s06-bg.pal",
+      "obj_palette": "06-stogie-martin/s06-objects.pal"
+    },
+    "07": {
+      "graphics": [
+        "10",
+        "11",
+        "82"
+      ],
+      "tilemap": "07-lucky-1f/s07-bg.tilemap",
+      "attrmap": "07-lucky-1f/s07-bg.attrmap",
+      "bg_palette": "07-lucky-1f/s07-bg.pal",
+      "obj_palette": "07-lucky-1f/s07-objects.pal"
+    },
+    "08": {
+      "graphics": [
+        "12",
+        "13",
+        "82"
+      ],
+      "tilemap": "08-lucky-2f/s08-bg.tilemap",
+      "attrmap": "08-lucky-2f/s08-bg.attrmap",
+      "bg_palette": "08-lucky-2f/s08-bg.pal",
+      "obj_palette": "08-lucky-2f/s08-objects.pal"
+    },
+    "09": {
+      "graphics": [
+        "12",
+        "13",
+        "82"
+      ],
+      "tilemap": "09-lucky-3f/s09-bg.tilemap",
+      "attrmap": "09-lucky-3f/s09-bg.attrmap",
+      "bg_palette": "09-lucky-3f/s09-bg.pal",
+      "obj_palette": "09-lucky-3f/s09-objects.pal"
+    },
+    "0a": {
+      "graphics": [
+        "16",
+        "17",
+        "83"
+      ],
+      "tilemap": "0a-lucky-4f/s0a-bg.tilemap",
+      "attrmap": "0a-lucky-4f/s0a-bg.attrmap",
+      "bg_palette": "0a-lucky-4f/s0a-bg.pal",
+      "obj_palette": "0a-lucky-4f/s0a-objects.pal"
+    },
+    "0b": {
+      "graphics": [
+        "18",
+        "19",
+        "83"
+      ],
+      "tilemap": "0b-ventini-office/s0b-bg.tilemap",
+      "attrmap": "0b-ventini-office/s0b-bg.attrmap",
+      "bg_palette": "0b-ventini-office/s0b-bg.pal",
+      "obj_palette": "0b-ventini-office/s0b-objects.pal"
+    },
+    "0c": {
+      "graphics": [
+        "1a",
+        "1b",
+        "7f"
+      ],
+      "tilemap": "0c-malone-office/s0c-bg.tilemap",
+      "attrmap": "0c-malone-office/s0c-bg.attrmap",
+      "bg_palette": "0c-malone-office/s0c-bg.pal",
+      "obj_palette": "0c-malone-office/s0c-objects.pal"
+    },
+    "0d": {
+      "graphics": [
+        "1c",
+        "1d",
+        "83"
+      ],
+      "tilemap": "0d-lucky-entrance/s0d-bg.tilemap",
+      "attrmap": "0d-lucky-entrance/s0d-bg.attrmap",
+      "bg_palette": "0d-lucky-entrance/s0d-bg.pal",
+      "obj_palette": "0d-lucky-entrance/s0d-objects.pal"
+    },
+    "0e": {
+      "graphics": [
+        "1e",
+        "1f",
+        "89"
+      ],
+      "tilemap": "0e-desert/s0e-bg.tilemap",
+      "attrmap": "0e-desert/s0e-bg.attrmap",
+      "bg_palette": "0e-desert/s0e-bg.pal",
+      "obj_palette": "0e-desert/s0e-objects.pal"
+    },
+    "0f": {
+      "graphics": [
+        "1e",
+        "1f",
+        "89"
+      ],
+      "tilemap": "0f-desert/s0f-bg.tilemap",
+      "attrmap": "0f-desert/s0f-bg.attrmap",
+      "bg_palette": "0f-desert/s0f-bg.pal",
+      "obj_palette": "0f-desert/s0f-objects.pal"
+    },
+    "10": {
+      "graphics": [
+        "1e",
+        "1f",
+        "89"
+      ],
+      "tilemap": "10-desert/s10-bg.tilemap",
+      "attrmap": "10-desert/s10-bg.attrmap",
+      "bg_palette": "10-desert/s10-bg.pal",
+      "obj_palette": "10-desert/s10-objects.pal"
+    },
+    "11": {
+      "graphics": [
+        "20",
+        "21",
+        "83"
+      ],
+      "tilemap": "11-vegas-station/s11-bg.tilemap",
+      "attrmap": "11-vegas-station/s11-bg.attrmap",
+      "bg_palette": "11-vegas-station/s11-bg.pal",
+      "obj_palette": "11-vegas-station/s11-objects.pal"
+    },
+    "12": {
+      "graphics": [
+        "22",
+        "23",
+        "83"
+      ],
+      "tilemap": "12-vegas-waiting-hall/s12-bg.tilemap",
+      "attrmap": "12-vegas-waiting-hall/s12-bg.attrmap",
+      "bg_palette": "12-vegas-waiting-hall/s12-bg.pal",
+      "obj_palette": "12-vegas-waiting-hall/s12-objects.pal"
+    },
+    "13": {
+      "graphics": [
+        "24",
+        "25",
+        "83"
+      ],
+      "tilemap": "13-vegas-baggage/s13-bg.tilemap",
+      "attrmap": "13-vegas-baggage/s13-bg.attrmap",
+      "bg_palette": "13-vegas-baggage/s13-bg.pal",
+      "obj_palette": "13-vegas-baggage/s13-objects.pal"
+    },
+    "14": {
+      "graphics": [
+        "26",
+        "27",
+        "81"
+      ],
+      "tilemap": "14-train-platform/s14-bg.tilemap",
+      "attrmap": "14-train-platform/s14-bg.attrmap",
+      "bg_palette": "14-train-platform/s14-bg.pal",
+      "obj_palette": "14-train-platform/s14-objects.pal"
+    },
+    "15": {
+      "graphics": [
+        "26",
+        "27",
+        "81"
+      ],
+      "tilemap": "15-train-platform/s15-bg.tilemap",
+      "attrmap": "15-train-platform/s15-bg.attrmap",
+      "bg_palette": "15-train-platform/s15-bg.pal",
+      "obj_palette": "15-train-platform/s15-objects.pal"
+    },
+    "16": {
+      "graphics": [
+        "28",
+        "29",
+        "8a"
+      ],
+      "tilemap": "16-train-passengers/s16-bg.tilemap",
+      "attrmap": "16-train-passengers/s16-bg.attrmap",
+      "bg_palette": "16-train-passengers/s16-bg.pal",
+      "obj_palette": "16-train-passengers/s16-objects.pal"
+    },
+    "17": {
+      "graphics": [
+        "2a",
+        "2b",
+        "7f"
+      ],
+      "tilemap": "17-conductor/s17-bg.tilemap",
+      "attrmap": "17-conductor/s17-bg.attrmap",
+      "bg_palette": "17-conductor/s17-bg.pal",
+      "obj_palette": "17-conductor/s17-objects.pal"
+    },
+    "18": {
+      "graphics": [
+        "2c",
+        "2d",
+        "8a"
+      ],
+      "tilemap": "18-train-interior/s18-bg.tilemap",
+      "attrmap": "18-train-interior/s18-bg.attrmap",
+      "bg_palette": "18-train-interior/s18-bg.pal",
+      "obj_palette": "18-train-interior/s18-objects.pal"
+    },
+    "19": {
+      "graphics": [
+        "2a",
+        "2b",
+        "7f"
+      ],
+      "tilemap": "19-conductor/s19-bg.tilemap",
+      "attrmap": "19-conductor/s19-bg.attrmap",
+      "bg_palette": "19-conductor/s19-bg.pal",
+      "obj_palette": "19-conductor/s19-objects.pal"
+    },
+    "1a": {
+      "graphics": [
+        "26",
+        "27",
+        "81"
+      ],
+      "tilemap": "1a-train-platform/s1a-bg.tilemap",
+      "attrmap": "1a-train-platform/s1a-bg.attrmap",
+      "bg_palette": "1a-train-platform/s1a-bg.pal",
+      "obj_palette": "1a-train-platform/s1a-objects.pal"
+    },
+    "1b": {
+      "graphics": [
+        "26",
+        "27",
+        "81"
+      ],
+      "tilemap": "1b-train-platform/s1b-bg.tilemap",
+      "attrmap": "1b-train-platform/s1b-bg.attrmap",
+      "bg_palette": "1b-train-platform/s1b-bg.pal",
+      "obj_palette": "1b-train-platform/s1b-objects.pal"
+    },
+    "1c": {
+      "graphics": [
+        "2e",
+        "2f",
+        "84"
+      ],
+      "tilemap": "1c-chicago-waiting-hall/s1c-bg.tilemap",
+      "attrmap": "1c-chicago-waiting-hall/s1c-bg.attrmap",
+      "bg_palette": "1c-chicago-waiting-hall/s1c-bg.pal",
+      "obj_palette": "1c-chicago-waiting-hall/s1c-objects.pal"
+    },
+    "1d": {
+      "graphics": [
+        "30",
+        "31",
+        "84"
+      ],
+      "tilemap": "1d-chicago-station/s1d-bg.tilemap",
+      "attrmap": "1d-chicago-station/s1d-bg.attrmap",
+      "bg_palette": "1d-chicago-station/s1d-bg.pal",
+      "obj_palette": "1d-chicago-station/s1d-objects.pal"
+    },
+    "1e": {
+      "graphics": [
+        "32",
+        "33",
+        "88"
+      ],
+      "tilemap": "1e-gabby-cab/s1e-bg.tilemap",
+      "attrmap": "1e-gabby-cab/s1e-bg.attrmap",
+      "bg_palette": "1e-gabby-cab/s1e-bg.pal",
+      "obj_palette": "1e-gabby-cab/s1e-objects.pal"
+    },
+    "1f": {
+      "graphics": [
+        "34",
+        "35",
+        "7f"
+      ],
+      "tilemap": "1f-ace-street/s1f-bg.tilemap",
+      "attrmap": "1f-ace-street/s1f-bg.attrmap",
+      "bg_palette": "1f-ace-street/s1f-bg.pal",
+      "obj_palette": "1f-ace-street/s1f-objects.pal"
+    },
+    "20": {
+      "graphics": [
+        "36",
+        "37",
+        "86"
+      ],
+      "tilemap": "20-ace-apartment-door/s20-bg.tilemap",
+      "attrmap": "20-ace-apartment-door/s20-bg.attrmap",
+      "bg_palette": "20-ace-apartment-door/s20-bg.pal",
+      "obj_palette": "20-ace-apartment-door/s20-objects.pal"
+    },
+    "21": {
+      "graphics": [
+        "38",
+        "39",
+        "86"
+      ],
+      "tilemap": "21-ace-apartment/s21-bg.tilemap",
+      "attrmap": "21-ace-apartment/s21-bg.attrmap",
+      "bg_palette": "21-ace-apartment/s21-bg.pal",
+      "obj_palette": "21-ace-apartment/s21-objects.pal"
+    },
+    "22": {
+      "graphics": [
+        "3a",
+        "3b",
+        "7f"
+      ],
+      "tilemap": "22-joes-place/s22-bg.tilemap",
+      "attrmap": "22-joes-place/s22-bg.attrmap",
+      "bg_palette": "22-joes-place/s22-bg.pal",
+      "obj_palette": "22-joes-place/s22-objects.pal"
+    },
+    "23": {
+      "graphics": [
+        "3c",
+        "3d",
+        "7f"
+      ],
+      "tilemap": "23-joes-back-alley/s23-bg.tilemap",
+      "attrmap": "23-joes-back-alley/s23-bg.attrmap",
+      "bg_palette": "23-joes-back-alley/s23-bg.pal",
+      "obj_palette": "23-joes-back-alley/s23-objects.pal"
+    },
+    "24": {
+      "graphics": [
+        "3e",
+        "3f",
+        "7f"
+      ],
+      "tilemap": "24-joes-hall/s24-bg.tilemap",
+      "attrmap": "24-joes-hall/s24-bg.attrmap",
+      "bg_palette": "24-joes-hall/s24-bg.pal",
+      "obj_palette": "24-joes-hall/s24-objects.pal"
+    },
+    "25": {
+      "graphics": [
+        "40",
+        "41",
+        "7f"
+      ],
+      "tilemap": "25-secretary-office/s25-bg.tilemap",
+      "attrmap": "25-secretary-office/s25-bg.attrmap",
+      "bg_palette": "25-secretary-office/s25-bg.pal",
+      "obj_palette": "25-secretary-office/s25-objects.pal"
+    },
+    "26": {
+      "graphics": [
+        "42",
+        "43",
+        "7f"
+      ],
+      "tilemap": "26-joes-bar/s26-bg.tilemap",
+      "attrmap": "26-joes-bar/s26-bg.attrmap",
+      "bg_palette": "26-joes-bar/s26-bg.pal",
+      "obj_palette": "26-joes-bar/s26-objects.pal"
+    },
+    "27": {
+      "graphics": [
+        "44",
+        "45",
+        "7f"
+      ],
+      "tilemap": "27-joes-manhole/s27-bg.tilemap",
+      "attrmap": "27-joes-manhole/s27-bg.attrmap",
+      "bg_palette": "27-joes-manhole/s27-bg.pal",
+      "obj_palette": "27-joes-manhole/s27-objects.pal"
+    },
+    "28": {
+      "graphics": [
+        "46",
+        "47",
+        "7f"
+      ],
+      "tilemap": "28-joes-casino/s28-bg.tilemap",
+      "attrmap": "28-joes-casino/s28-bg.attrmap",
+      "bg_palette": "28-joes-casino/s28-bg.pal",
+      "obj_palette": "28-joes-casino/s28-objects.pal"
+    },
+    "29": {
+      "graphics": [
+        "48",
+        "49",
+        "86"
+      ],
+      "tilemap": "29-joes-upper-hall/s29-bg.tilemap",
+      "attrmap": "29-joes-upper-hall/s29-bg.attrmap",
+      "bg_palette": "29-joes-upper-hall/s29-bg.pal",
+      "obj_palette": "29-joes-upper-hall/s29-objects.pal"
+    },
+    "2a": {
+      "graphics": [
+        "4a",
+        "4b",
+        "7f"
+      ],
+      "tilemap": "2a-siegel-office/s2a-bg.tilemap",
+      "attrmap": "2a-siegel-office/s2a-bg.attrmap",
+      "bg_palette": "2a-siegel-office/s2a-bg.pal",
+      "obj_palette": "2a-siegel-office/s2a-objects.pal"
+    },
+    "2b": {
+      "graphics": [
+        "4c",
+        "4d",
+        "7f"
+      ],
+      "tilemap": "2b-joes-private-door/s2b-bg.tilemap",
+      "attrmap": "2b-joes-private-door/s2b-bg.attrmap",
+      "bg_palette": "2b-joes-private-door/s2b-bg.pal",
+      "obj_palette": "2b-joes-private-door/s2b-objects.pal"
+    },
+    "2c": {
+      "graphics": [
+        "4e",
+        "4f",
+        "84"
+      ],
+      "tilemap": "2c-joes-side-alley/s2c-bg.tilemap",
+      "attrmap": "2c-joes-side-alley/s2c-bg.attrmap",
+      "bg_palette": "2c-joes-side-alley/s2c-bg.pal",
+      "obj_palette": "2c-joes-side-alley/s2c-objects.pal"
+    },
+    "2d": {
+      "graphics": [
+        "50",
+        "51",
+        "87"
+      ],
+      "tilemap": "2d-police-station/s2d-bg.tilemap",
+      "attrmap": "2d-police-station/s2d-bg.attrmap",
+      "bg_palette": "2d-police-station/s2d-bg.pal",
+      "obj_palette": "2d-police-station/s2d-objects.pal"
+    },
+    "2e": {
+      "graphics": [
+        "52",
+        "53",
+        "87"
+      ],
+      "tilemap": "2e-sugar-street/s2e-bg.tilemap",
+      "attrmap": "2e-sugar-street/s2e-bg.attrmap",
+      "bg_palette": "2e-sugar-street/s2e-bg.pal",
+      "obj_palette": "2e-sugar-street/s2e-objects.pal"
+    },
+    "2f": {
+      "graphics": [
+        "54",
+        "55",
+        "87"
+      ],
+      "tilemap": "2f-sugar-apartment/s2f-bg.tilemap",
+      "attrmap": "2f-sugar-apartment/s2f-bg.attrmap",
+      "bg_palette": "2f-sugar-apartment/s2f-bg.pal",
+      "obj_palette": "2f-sugar-apartment/s2f-objects.pal"
+    },
+    "30": {
+      "graphics": [
+        "56",
+        "57",
+        "7f"
+      ],
+      "tilemap": "30-city-morgue/s30-bg.tilemap",
+      "attrmap": "30-city-morgue/s30-bg.attrmap",
+      "bg_palette": "30-city-morgue/s30-bg.pal",
+      "obj_palette": "30-city-morgue/s30-objects.pal"
+    },
+    "31": {
+      "graphics": [
+        "58",
+        "59",
+        "88"
+      ],
+      "tilemap": "31-morgue-clerk/s31-bg.tilemap",
+      "attrmap": "31-morgue-clerk/s31-bg.attrmap",
+      "bg_palette": "31-morgue-clerk/s31-bg.pal",
+      "obj_palette": "31-morgue-clerk/s31-objects.pal"
+    },
+    "32": {
+      "graphics": [
+        "5a",
+        "5b",
+        "88"
+      ],
+      "tilemap": "32-morgue-drawers/s32-bg.tilemap",
+      "attrmap": "32-morgue-drawers/s32-bg.attrmap",
+      "bg_palette": "32-morgue-drawers/s32-bg.pal",
+      "obj_palette": "32-morgue-drawers/s32-objects.pal"
+    },
+    "33": {
+      "graphics": [
+        "5c",
+        "5d",
+        "7f"
+      ],
+      "tilemap": "33-laundry-hamper/s33-bg.tilemap",
+      "attrmap": "33-laundry-hamper/s33-bg.attrmap",
+      "bg_palette": "33-laundry-hamper/s33-bg.pal",
+      "obj_palette": "33-laundry-hamper/s33-objects.pal"
+    },
+    "34": {
+      "graphics": [
+        "5e",
+        "5f",
+        "8b"
+      ],
+      "tilemap": "34-reliant-cleaners/s34-bg.tilemap",
+      "attrmap": "34-reliant-cleaners/s34-bg.attrmap",
+      "bg_palette": "34-reliant-cleaners/s34-bg.pal",
+      "obj_palette": "34-reliant-cleaners/s34-objects.pal"
+    },
+    "35": {
+      "graphics": [
+        "60",
+        "61",
+        "88"
+      ],
+      "tilemap": "35-reliant-laundry/s35-bg.tilemap",
+      "attrmap": "35-reliant-laundry/s35-bg.attrmap",
+      "bg_palette": "35-reliant-laundry/s35-bg.pal",
+      "obj_palette": "35-reliant-laundry/s35-objects.pal"
+    },
+    "36": {
+      "graphics": [
+        "62",
+        "63",
+        "7f"
+      ],
+      "tilemap": "36-reliant-hall/s36-bg.tilemap",
+      "attrmap": "36-reliant-hall/s36-bg.attrmap",
+      "bg_palette": "36-reliant-hall/s36-bg.pal",
+      "obj_palette": "36-reliant-hall/s36-objects.pal"
+    },
+    "37": {
+      "graphics": [
+        "64",
+        "65",
+        "88"
+      ],
+      "tilemap": "37-reliant-office/s37-bg.tilemap",
+      "attrmap": "37-reliant-office/s37-bg.attrmap",
+      "bg_palette": "37-reliant-office/s37-bg.pal",
+      "obj_palette": "37-reliant-office/s37-objects.pal"
+    },
+    "38": {
+      "graphics": [
+        "66",
+        "67",
+        "88"
+      ],
+      "tilemap": "38-ventini-secret/s38-bg.tilemap",
+      "attrmap": "38-ventini-secret/s38-bg.attrmap",
+      "bg_palette": "38-ventini-secret/s38-bg.pal",
+      "obj_palette": "38-ventini-secret/s38-objects.pal"
+    },
+    "39": {
+      "graphics": [
+        "68",
+        "69",
+        "85"
+      ],
+      "tilemap": "39-hitman/s39-bg.tilemap",
+      "attrmap": "39-hitman/s39-bg.attrmap",
+      "bg_palette": "39-hitman/s39-bg.pal",
+      "obj_palette": "39-hitman/s39-objects.pal"
+    },
+    "3a": {
+      "graphics": [
+        "6a",
+        "6b",
+        "7f"
+      ],
+      "tilemap": "3a-moose-spike/s3a-bg.tilemap",
+      "attrmap": "3a-moose-spike/s3a-bg.attrmap",
+      "bg_palette": "3a-moose-spike/s3a-bg.pal",
+      "obj_palette": "3a-moose-spike/s3a-objects.pal"
+    },
+    "3b": {
+      "graphics": [
+        "6c",
+        "6d",
+        "7f"
+      ],
+      "tilemap": "3b-dog/s3b-bg.tilemap",
+      "attrmap": "3b-dog/s3b-bg.attrmap",
+      "bg_palette": "3b-dog/s3b-bg.pal",
+      "obj_palette": "3b-dog/s3b-objects.pal"
+    },
+    "3c": {
+      "graphics": [
+        "6e",
+        "6f",
+        "7f"
+      ],
+      "tilemap": "3c-policeman/s3c-bg.tilemap",
+      "attrmap": "3c-policeman/s3c-bg.attrmap",
+      "bg_palette": "3c-policeman/s3c-bg.pal",
+      "obj_palette": "3c-policeman/s3c-objects.pal"
+    },
+    "3d": {
+      "graphics": [
+        "70",
+        "71",
+        "7f"
+      ],
+      "tilemap": "3d-handcuffs/s3d-bg.tilemap",
+      "attrmap": "3d-handcuffs/s3d-bg.attrmap",
+      "bg_palette": "3d-handcuffs/s3d-bg.pal",
+      "obj_palette": "3d-handcuffs/s3d-objects.pal"
+    },
+    "3e": {
+      "graphics": [
+        "72",
+        "73",
+        "7f"
+      ],
+      "tilemap": "3e-ace-grave/s3e-bg.tilemap",
+      "attrmap": "3e-ace-grave/s3e-bg.attrmap",
+      "bg_palette": "3e-ace-grave/s3e-bg.pal",
+      "obj_palette": "3e-ace-grave/s3e-objects.pal"
+    },
+    "3f": {
+      "graphics": [
+        "74",
+        "75",
+        "7f"
+      ],
+      "tilemap": "3f-casino-bouncer/s3f-bg.tilemap",
+      "attrmap": "3f-casino-bouncer/s3f-bg.attrmap",
+      "bg_palette": "3f-casino-bouncer/s3f-bg.pal",
+      "obj_palette": "3f-casino-bouncer/s3f-objects.pal"
+    },
+    "40": {
+      "graphics": [
+        "76",
+        "77",
+        "7f"
+      ],
+      "tilemap": "40-lemonade-stand/s40-bg.tilemap",
+      "attrmap": "40-lemonade-stand/s40-bg.attrmap",
+      "bg_palette": "40-lemonade-stand/s40-bg.pal",
+      "obj_palette": "40-lemonade-stand/s40-objects.pal"
+    },
+    "41": {
+      "graphics": [
+        "78",
+        "79",
+        "7f"
+      ],
+      "tilemap": "41-vegas-times/s41-bg.tilemap",
+      "attrmap": "41-vegas-times/s41-bg.attrmap",
+      "bg_palette": "41-vegas-times/s41-bg.pal",
+      "obj_palette": "41-vegas-times/s41-objects.pal"
+    },
+    "42": {
+      "graphics": [
+        "78",
+        "79",
+        "7f"
+      ],
+      "tilemap": "42-vegas-times/s42-bg.tilemap",
+      "attrmap": "42-vegas-times/s42-bg.attrmap",
+      "bg_palette": "42-vegas-times/s42-bg.pal",
+      "obj_palette": "42-vegas-times/s42-objects.pal"
+    },
+    "43": {
+      "graphics": [
+        "7a",
+        "7b",
+        "7f"
+      ],
+      "bg_palette": "43-card-tiles/s43-bg.pal",
+      "obj_palette": "43-card-tiles/s43-objects.pal"
+    }
+  }
+}

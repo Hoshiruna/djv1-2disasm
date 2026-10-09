@@ -1002,13 +1002,13 @@ Jump_009_43c1:
     sbc a
 ; HUD initialization map: 20x32 tile IDs and CGB attributes.
 Resource_JP_009_441e:
-    INCBIN "../../res/JP/tilemaps/hud.bin", $0, $4
+    INCBIN "../../res/ui/JP/hud.bin", $0, $4
 jr_009_4422:
-    INCBIN "../../res/JP/tilemaps/hud.bin", $4, $17
+    INCBIN "../../res/ui/JP/hud.bin", $4, $17
 Jump_009_4439:
-    INCBIN "../../res/JP/tilemaps/hud.bin", $1b, $8b
+    INCBIN "../../res/ui/JP/hud.bin", $1b, $8b
 Call_009_44c4:
-    INCBIN "../../res/JP/tilemaps/hud.bin", $a6, $43
+    INCBIN "../../res/ui/JP/hud.bin", $a6, $43
 
     rla
     inc d

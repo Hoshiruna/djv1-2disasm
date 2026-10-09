@@ -14,7 +14,7 @@ from game_text import BANK_SIZE, decode_message, extract_dialogue, extract_names
 
 
 def charmap(region):
-    path = ROOT / "res" / region / "text" / "charmap.json"
+    path = ROOT / "res" / "text" / region / "charmap.json"
     return json.loads(path.read_text(encoding="utf-8"))
 
 

@@ -11,7 +11,7 @@ from gb_sprites import color_index, decode_metasprites, emit_oam, overlay
 from hud_tilemap import encode_png, palette_colors, render_pixels
 
 
-BATHROOM = Path("scene/case2/00-bathroom")
+BATHROOM = Path("scene/case2/00-lucky-bath")
 PREFIX = "s00-"
 
 
@@ -77,8 +77,8 @@ def scene_objects(resources, visible=None, present=None):
 
 def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
     """Add the initial room objects using their tiles and palette."""
-    resources = region.parent
-    resource = (resources / BATHROOM / region.name / (PREFIX + "objects.bin")).read_bytes()
+    resources = region.parents[len(BATHROOM.parts)]
+    resource = (region / (PREFIX + "objects.bin")).read_bytes()
     raw, _ = decode(resource[3:], resource[2] * 16)
     sprite_tiles = {resource[1] + index: raw[index * 16:(index + 1) * 16]
                     for index in range(resource[2])}
@@ -98,10 +98,10 @@ def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
 
 def render(region, door="closed", objects=False):
     """Use shared map/palette data and one region's compressed graphics."""
-    resources = region.parent
+    resources = region.parents[len(BATHROOM.parts)]
     tiles = {}
     for name in ("bg", "bg-extra"):
-        resource = (resources / BATHROOM / region.name / (PREFIX + name + ".bin")).read_bytes()
+        resource = (region / (PREFIX + name + ".bin")).read_bytes()
         raw, _ = decode(resource[3:], resource[2] * 16)
         for index in range(resource[2]):
             tiles[resource[1] + index] = raw[index * 16:(index + 1) * 16]
@@ -123,7 +123,8 @@ def render(region, door="closed", objects=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("region", type=Path, help="Regional resources, e.g. res/US")
+    parser.add_argument("region", type=Path,
+                        help="Regional bathroom directory, e.g. res/scene/case2/00-lucky-bath/US")
     parser.add_argument("--door", choices=("base", "closed", "open"), default="closed")
     parser.add_argument("--objects", action="store_true", help="Overlay the scene objects")
     parser.add_argument("--output", type=Path,
@@ -132,11 +133,11 @@ def main():
     try:
         objects = args.objects
         png = render(args.region, args.door, objects)
-        name = "00-bathroom" + ("-objects" if objects else "")
+        name = "00-lucky-bath" + ("-objects" if objects else "")
         if args.door != "closed":
             name += "-" + args.door
         folder = (Path(gettempdir()) if objects or args.door != "closed"
-                  else args.region.parent / "scene/case2/previews")
+                  else args.region.parent.parent / "previews")
         output = args.output or folder / (name + ".png")
         output.write_bytes(png)
     except (OSError, ValueError) as error:

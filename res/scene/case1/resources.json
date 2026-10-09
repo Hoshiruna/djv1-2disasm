@@ -1,0 +1,2425 @@
+{
+  "graphics": {
+    "00": {
+      "US": "../../ui/US/font.bin",
+      "JP": "../../ui/JP/case1_font.bin"
+    },
+    "01": {
+      "US": "../../ui/US/hud_tiles.bin",
+      "JP": "../../ui/JP/hud_tiles.bin"
+    },
+    "02": {
+      "png": "common/bg-02.png",
+      "US": "common/US/g02.bin",
+      "JP": "common/JP/g02.bin"
+    },
+    "04": {
+      "png": "02-joes-washroom/s02-bg.png",
+      "US": "common/US/g04.bin",
+      "JP": "common/JP/g04.bin"
+    },
+    "06": {
+      "png": "03-joes-washroom/s03-bg.png",
+      "US": "common/US/g06.bin",
+      "JP": "common/JP/g06.bin"
+    },
+    "08": {
+      "png": "common/bg-08.png",
+      "US": "common/US/g08.bin",
+      "JP": "common/JP/g08.bin"
+    },
+    "0a": {
+      "png": "common/bg-0a.png",
+      "US": "common/US/g0a.bin",
+      "JP": "common/JP/g0a.bin"
+    },
+    "0c": {
+      "png": "common/bg-0c.png",
+      "US": "common/US/g0c.bin",
+      "JP": "common/JP/g0c.bin"
+    },
+    "0e": {
+      "png": "common/bg-0e.png",
+      "US": "common/US/g0e.bin",
+      "JP": "common/JP/g0e.bin"
+    },
+    "10": {
+      "png": "common/bg-10.png",
+      "US": "common/US/g10.bin",
+      "JP": "common/JP/g10.bin"
+    },
+    "11": {
+      "png": "common/bg-11.png",
+      "US": "common/US/g11.bin",
+      "JP": "common/JP/g11.bin"
+    },
+    "12": {
+      "png": "common/bg-12.png",
+      "US": "common/US/g12.bin",
+      "JP": "common/JP/g12.bin"
+    },
+    "13": {
+      "png": "common/bg-13.png",
+      "US": "common/US/g13.bin",
+      "JP": "common/JP/g13.bin"
+    },
+    "14": {
+      "png": "common/bg-14.png",
+      "US": "common/US/g14.bin",
+      "JP": "common/JP/g14.bin"
+    },
+    "16": {
+      "png": "common/bg-16.png",
+      "US": "common/US/g16.bin",
+      "JP": "common/JP/g16.bin"
+    },
+    "17": {
+      "png": "common/bg-17.png",
+      "US": "common/US/g17.bin",
+      "JP": "common/JP/g17.bin"
+    },
+    "18": {
+      "png": "common/bg-18.png",
+      "US": "common/US/g18.bin",
+      "JP": "common/JP/g18.bin"
+    },
+    "1a": {
+      "png": "common/bg-1a.png",
+      "US": "common/US/g1a.bin",
+      "JP": "common/JP/g1a.bin"
+    },
+    "1b": {
+      "png": "common/bg-1b.png",
+      "US": "common/US/g1b.bin",
+      "JP": "common/JP/g1b.bin"
+    },
+    "1c": {
+      "png": "common/bg-1c.png",
+      "US": "common/US/g1c.bin",
+      "JP": "common/JP/g1c.bin"
+    },
+    "1d": {
+      "png": "common/bg-1d.png",
+      "US": "common/US/g1d.bin",
+      "JP": "common/JP/g1d.bin"
+    },
+    "1e": {
+      "png": "common/bg-1e.png",
+      "US": "common/US/g1e.bin",
+      "JP": "common/JP/g1e.bin"
+    },
+    "1f": {
+      "png": "common/bg-1f.png",
+      "US": "common/US/g1f.bin",
+      "JP": "common/JP/g1f.bin"
+    },
+    "20": {
+      "png": "common/bg-20.png",
+      "US": "common/US/g20.bin",
+      "JP": "common/JP/g20.bin"
+    },
+    "22": {
+      "png": "common/bg-22.png",
+      "US": "common/US/g22.bin",
+      "JP": "common/JP/g22.bin"
+    },
+    "23": {
+      "png": "common/bg-23.png",
+      "US": "common/US/g23.bin",
+      "JP": "common/JP/g23.bin"
+    },
+    "24": {
+      "png": "common/bg-24.png",
+      "US": "common/US/g24.bin",
+      "JP": "common/JP/g24.bin"
+    },
+    "25": {
+      "png": "common/bg-25.png",
+      "US": "common/US/g25.bin",
+      "JP": "common/JP/g25.bin"
+    },
+    "26": {
+      "png": "common/bg-26.png",
+      "US": "common/US/g26.bin",
+      "JP": "common/JP/g26.bin"
+    },
+    "28": {
+      "png": "common/bg-28.png",
+      "US": "common/US/g28.bin",
+      "JP": "common/JP/g28.bin"
+    },
+    "29": {
+      "png": "common/bg-29.png",
+      "US": "common/US/g29.bin",
+      "JP": "common/JP/g29.bin"
+    },
+    "2a": {
+      "png": "common/bg-2a.png",
+      "US": "common/US/g2a.bin",
+      "JP": "common/JP/g2a.bin"
+    },
+    "2b": {
+      "png": "common/bg-2b.png",
+      "US": "common/US/g2b.bin",
+      "JP": "common/JP/g2b.bin"
+    },
+    "2c": {
+      "png": "40-joes-street/s40-bg.png",
+      "US": "common/US/g2c.bin",
+      "JP": "common/JP/g2c.bin"
+    },
+    "2d": {
+      "png": "40-joes-street/s40-bg-extra.png",
+      "US": "common/US/g2d.bin",
+      "JP": "common/JP/g2d.bin"
+    },
+    "2e": {
+      "png": "common/bg-2e.png",
+      "US": "common/US/g2e.bin",
+      "JP": "common/JP/g2e.bin"
+    },
+    "2f": {
+      "png": "common/bg-2f.png",
+      "US": "common/US/g2f.bin",
+      "JP": "common/JP/g2f.bin"
+    },
+    "30": {
+      "png": "43-mercedes-trunk/s43-bg.png",
+      "US": "common/US/g30.bin",
+      "JP": "common/JP/g30.bin"
+    },
+    "31": {
+      "png": "43-mercedes-trunk/s43-bg-extra.png",
+      "US": "common/US/g31.bin",
+      "JP": "common/JP/g31.bin"
+    },
+    "32": {
+      "png": "44-sternwood-trunk/s44-bg.png",
+      "US": "common/US/g32.bin",
+      "JP": "common/JP/g32.bin"
+    },
+    "33": {
+      "png": "44-sternwood-trunk/s44-bg-extra.png",
+      "US": "common/US/g33.bin",
+      "JP": "common/JP/g33.bin"
+    },
+    "34": {
+      "png": "45-newsstand/s45-bg.png",
+      "US": "common/US/g34.bin",
+      "JP": "common/JP/g34.bin"
+    },
+    "36": {
+      "png": "46-newsstand/s46-bg.png",
+      "US": "common/US/g36.bin",
+      "JP": "common/JP/g36.bin"
+    },
+    "37": {
+      "png": "46-newsstand/s46-bg-extra.png",
+      "US": "common/US/g37.bin",
+      "JP": "common/JP/g37.bin"
+    },
+    "38": {
+      "png": "common/bg-38.png",
+      "US": "common/US/g38.bin",
+      "JP": "common/JP/g38.bin"
+    },
+    "3a": {
+      "png": "49-petes-gun-palace/s49-bg.png",
+      "US": "common/US/g3a.bin",
+      "JP": "common/JP/g3a.bin"
+    },
+    "3b": {
+      "png": "49-petes-gun-palace/s49-bg-extra.png",
+      "US": "common/US/g3b.bin",
+      "JP": "common/JP/g3b.bin"
+    },
+    "3c": {
+      "png": "4a-petes-counter/s4a-bg.png",
+      "US": "common/US/g3c.bin",
+      "JP": "common/JP/g3c.bin"
+    },
+    "3d": {
+      "png": "4a-petes-counter/s4a-bg-extra.png",
+      "US": "common/US/g3d.bin",
+      "JP": "common/JP/g3d.bin"
+    },
+    "3e": {
+      "png": "4b-peoria-blue-cab/s4b-bg.png",
+      "US": "common/US/g3e.bin",
+      "JP": "common/JP/g3e.bin"
+    },
+    "40": {
+      "png": "4c-peoria-blue-cab/s4c-bg.png",
+      "US": "common/US/g40.bin",
+      "JP": "common/JP/g40.bin"
+    },
+    "41": {
+      "png": "4c-peoria-blue-cab/s4c-bg-extra.png",
+      "US": "common/US/g41.bin",
+      "JP": "common/JP/g41.bin"
+    },
+    "42": {
+      "png": "4d-peoria-yellow-cab/s4d-bg.png",
+      "US": "common/US/g42.bin",
+      "JP": "common/JP/g42.bin"
+    },
+    "44": {
+      "png": "4e-police-station/s4e-bg.png",
+      "US": "common/US/g44.bin",
+      "JP": "common/JP/g44.bin"
+    },
+    "46": {
+      "png": "4f-police-station/s4f-bg.png",
+      "US": "common/US/g46.bin",
+      "JP": "common/JP/g46.bin"
+    },
+    "48": {
+      "png": "50-peoria-alley/s50-bg.png",
+      "US": "common/US/g48.bin",
+      "JP": "common/JP/g48.bin"
+    },
+    "49": {
+      "png": "50-peoria-alley/s50-bg-extra.png",
+      "US": "common/US/g49.bin",
+      "JP": "common/JP/g49.bin"
+    },
+    "4a": {
+      "png": "common/bg-4a.png",
+      "US": "common/US/g4a.bin",
+      "JP": "common/JP/g4a.bin"
+    },
+    "4b": {
+      "png": "common/bg-4b.png",
+      "US": "common/US/g4b.bin",
+      "JP": "common/JP/g4b.bin"
+    },
+    "4c": {
+      "png": "53-drunkard/s53-bg.png",
+      "US": "common/US/g4c.bin",
+      "JP": "common/JP/g4c.bin"
+    },
+    "4e": {
+      "png": "54-mugger/s54-bg.png",
+      "US": "common/US/g4e.bin",
+      "JP": "common/JP/g4e.bin"
+    },
+    "4f": {
+      "png": "54-mugger/s54-bg-extra.png",
+      "US": "common/US/g4f.bin",
+      "JP": "common/JP/g4f.bin"
+    },
+    "50": {
+      "png": "55-sugar-shack/s55-bg.png",
+      "US": "common/US/g50.bin",
+      "JP": "common/JP/g50.bin"
+    },
+    "52": {
+      "png": "56-sugar-shack/s56-bg.png",
+      "US": "common/US/g52.bin",
+      "JP": "common/JP/g52.bin"
+    },
+    "53": {
+      "png": "56-sugar-shack/s56-bg-extra.png",
+      "US": "common/US/g53.bin",
+      "JP": "common/JP/g53.bin"
+    },
+    "54": {
+      "png": "57-sugar-portrait/s57-bg.png",
+      "US": "common/US/g54.bin",
+      "JP": "common/JP/g54.bin"
+    },
+    "56": {
+      "png": "common/bg-56.png",
+      "US": "common/US/g56.bin",
+      "JP": "common/JP/g56.bin"
+    },
+    "57": {
+      "png": "common/bg-57.png",
+      "US": "common/US/g57.bin",
+      "JP": "common/JP/g57.bin"
+    },
+    "58": {
+      "png": "common/bg-58.png",
+      "US": "common/US/g58.bin",
+      "JP": "common/JP/g58.bin"
+    },
+    "59": {
+      "png": "common/bg-59.png",
+      "US": "common/US/g59.bin",
+      "JP": "common/JP/g59.bin"
+    },
+    "5a": {
+      "png": "common/bg-5a.png",
+      "US": "common/US/g5a.bin",
+      "JP": "common/JP/g5a.bin"
+    },
+    "5c": {
+      "png": "common/bg-5c.png",
+      "US": "common/US/g5c.bin",
+      "JP": "common/JP/g5c.bin"
+    },
+    "5d": {
+      "png": "common/bg-5d.png",
+      "US": "common/US/g5d.bin",
+      "JP": "common/JP/g5d.bin"
+    },
+    "5e": {
+      "png": "65-siegel-penthouse/s65-bg.png",
+      "US": "common/US/g5e.bin",
+      "JP": "common/JP/g5e.bin"
+    },
+    "5f": {
+      "png": "65-siegel-penthouse/s65-bg-extra.png",
+      "US": "common/US/g5f.bin",
+      "JP": "common/JP/g5f.bin"
+    },
+    "60": {
+      "png": "common/bg-60.png",
+      "US": "common/US/g60.bin",
+      "JP": "common/JP/g60.bin"
+    },
+    "61": {
+      "png": "common/bg-61.png",
+      "US": "common/US/g61.bin",
+      "JP": "common/JP/g61.bin"
+    },
+    "62": {
+      "png": "common/bg-62.png",
+      "US": "common/US/g62.bin",
+      "JP": "common/JP/g62.bin"
+    },
+    "63": {
+      "png": "common/bg-63.png",
+      "US": "common/US/g63.bin",
+      "JP": "common/JP/g63.bin"
+    },
+    "64": {
+      "png": "6a-vickers-bedroom/s6a-bg.png",
+      "US": "common/US/g64.bin",
+      "JP": "common/JP/g64.bin"
+    },
+    "65": {
+      "png": "6a-vickers-bedroom/s6a-bg-extra.png",
+      "US": "common/US/g65.bin",
+      "JP": "common/JP/g65.bin"
+    },
+    "66": {
+      "png": "common/bg-66.png",
+      "US": "common/US/g66.bin",
+      "JP": "common/JP/g66.bin"
+    },
+    "67": {
+      "png": "common/bg-67.png",
+      "US": "common/US/g67.bin",
+      "JP": "common/JP/g67.bin"
+    },
+    "68": {
+      "png": "common/bg-68.png",
+      "US": "common/US/g68.bin",
+      "JP": "common/JP/g68.bin"
+    },
+    "69": {
+      "png": "common/bg-69.png",
+      "US": "common/US/g69.bin",
+      "JP": "common/JP/g69.bin"
+    },
+    "6a": {
+      "png": "common/bg-6a.png",
+      "US": "common/US/g6a.bin",
+      "JP": "common/JP/g6a.bin"
+    },
+    "6c": {
+      "png": "72-brody-office/s72-bg.png",
+      "US": "common/US/g6c.bin",
+      "JP": "common/JP/g6c.bin"
+    },
+    "6d": {
+      "png": "72-brody-office/s72-bg-extra.png",
+      "US": "common/US/g6d.bin",
+      "JP": "common/JP/g6d.bin"
+    },
+    "6e": {
+      "png": "common/bg-6e.png",
+      "US": "common/US/g6e.bin",
+      "JP": "common/JP/g6e.bin"
+    },
+    "6f": {
+      "png": "common/bg-6f.png",
+      "US": "common/US/g6f.bin",
+      "JP": "common/JP/g6f.bin"
+    },
+    "70": {
+      "png": "common/bg-70.png",
+      "US": "common/US/g70.bin",
+      "JP": "common/JP/g70.bin"
+    },
+    "71": {
+      "png": "common/bg-71.png",
+      "US": "common/US/g71.bin",
+      "JP": "common/JP/g71.bin"
+    },
+    "72": {
+      "png": "77-sternwood-gate/s77-bg.png",
+      "US": "common/US/g72.bin",
+      "JP": "common/JP/g72.bin"
+    },
+    "73": {
+      "png": "77-sternwood-gate/s77-bg-extra.png",
+      "US": "common/US/g73.bin",
+      "JP": "common/JP/g73.bin"
+    },
+    "74": {
+      "png": "77-sternwood-gate/s77-bg.png",
+      "US": "common/US/g74.bin",
+      "JP": "common/JP/g74.bin"
+    },
+    "75": {
+      "png": "78-sternwood-gate/s78-bg-extra.png",
+      "US": "common/US/g75.bin",
+      "JP": "common/JP/g75.bin"
+    },
+    "76": {
+      "png": "79-sternwood-door/s79-bg.png",
+      "US": "common/US/g76.bin",
+      "JP": "common/JP/g76.bin"
+    },
+    "78": {
+      "png": "7a-sternwood-foyer/s7a-bg.png",
+      "US": "common/US/g78.bin",
+      "JP": "common/JP/g78.bin"
+    },
+    "79": {
+      "png": "7a-sternwood-foyer/s7a-bg-extra.png",
+      "US": "common/US/g79.bin",
+      "JP": "common/JP/g79.bin"
+    },
+    "7a": {
+      "png": "common/bg-7a.png",
+      "US": "common/US/g7a.bin",
+      "JP": "common/JP/g7a.bin"
+    },
+    "7b": {
+      "png": "common/bg-7b.png",
+      "US": "common/US/g7b.bin",
+      "JP": "common/JP/g7b.bin"
+    },
+    "7c": {
+      "png": "7d-sternwood-kitchen/s7d-bg.png",
+      "US": "common/US/g7c.bin",
+      "JP": "common/JP/g7c.bin"
+    },
+    "7d": {
+      "png": "7d-sternwood-kitchen/s7d-bg-extra.png",
+      "US": "common/US/g7d.bin",
+      "JP": "common/JP/g7d.bin"
+    },
+    "7e": {
+      "png": "common/bg-7e.png",
+      "US": "common/US/g7e.bin",
+      "JP": "common/JP/g7e.bin"
+    },
+    "7f": {
+      "png": "common/bg-7f.png",
+      "US": "common/US/g7f.bin",
+      "JP": "common/JP/g7f.bin"
+    },
+    "80": {
+      "png": "common/bg-80.png",
+      "US": "common/US/g80.bin",
+      "JP": "common/JP/g80.bin"
+    },
+    "82": {
+      "png": "common/bg-82.png",
+      "US": "common/US/g82.bin",
+      "JP": "common/JP/g82.bin"
+    },
+    "83": {
+      "png": "common/bg-83.png",
+      "US": "common/US/g83.bin",
+      "JP": "common/JP/g83.bin"
+    },
+    "84": {
+      "png": "common/bg-84.png",
+      "US": "common/US/g84.bin",
+      "JP": "common/JP/g84.bin"
+    },
+    "85": {
+      "png": "common/bg-85.png",
+      "US": "common/US/g85.bin",
+      "JP": "common/JP/g85.bin"
+    },
+    "86": {
+      "png": "common/bg-86.png",
+      "US": "common/US/g86.bin",
+      "JP": "common/JP/g86.bin"
+    },
+    "87": {
+      "png": "common/bg-87.png",
+      "US": "common/US/g87.bin",
+      "JP": "common/JP/g87.bin"
+    },
+    "88": {
+      "png": "8a-sewer-whirlpool/s8a-bg.png",
+      "US": "common/US/g88.bin",
+      "JP": "common/JP/g88.bin"
+    },
+    "89": {
+      "png": "8a-sewer-whirlpool/s8a-bg-extra.png",
+      "US": "common/US/g89.bin",
+      "JP": "common/JP/g89.bin"
+    },
+    "8a": {
+      "png": "common/bg-8a.png",
+      "US": "common/US/g8a.bin",
+      "JP": "common/JP/g8a.bin"
+    },
+    "8b": {
+      "png": "common/bg-8b.png",
+      "US": "common/US/g8b.bin",
+      "JP": "common/JP/g8b.bin"
+    },
+    "8c": {
+      "png": "8d-alligator/s8d-bg.png",
+      "US": "common/US/g8c.bin",
+      "JP": "common/JP/g8c.bin"
+    },
+    "8e": {
+      "png": "8e-alligator/s8e-bg.png",
+      "US": "common/US/g8e.bin",
+      "JP": "common/JP/g8e.bin"
+    },
+    "90": {
+      "png": "common/bg-90.png",
+      "US": "common/US/g90.bin",
+      "JP": "common/JP/g90.bin"
+    },
+    "92": {
+      "png": "90-ace-cleared/s90-bg.png",
+      "US": "common/US/g92.bin",
+      "JP": "common/JP/g92.bin"
+    },
+    "93": {
+      "png": "90-ace-cleared/s90-bg-extra.png",
+      "US": "common/US/g93.bin",
+      "JP": "common/JP/g93.bin"
+    },
+    "94": {
+      "png": "91-ace-certificate/s91-bg.png",
+      "US": "common/US/g94.bin",
+      "JP": "common/JP/g94.bin"
+    },
+    "95": {
+      "png": "91-ace-certificate/s91-bg-extra.png",
+      "US": "common/US/g95.bin",
+      "JP": "common/JP/g95.bin"
+    },
+    "96": {
+      "png": "92-handcuffs/s92-bg.png",
+      "US": "common/US/g96.bin",
+      "JP": "common/JP/g96.bin"
+    },
+    "98": {
+      "png": "93-ace-grave/s93-bg.png",
+      "US": "common/US/g98.bin",
+      "JP": "common/JP/g98.bin"
+    },
+    "9a": {
+      "png": "94-socko/s94-bg.png",
+      "US": "common/US/g9a.bin",
+      "JP": "common/JP/g9a.bin"
+    },
+    "9c": {
+      "png": "95-blam/s95-bg.png",
+      "US": "common/US/g9c.bin",
+      "JP": "common/JP/g9c.bin"
+    },
+    "9e": {
+      "png": "96-boom/s96-bg.png",
+      "US": "common/US/g9e.bin",
+      "JP": "common/JP/g9e.bin"
+    },
+    "a0": {
+      "png": "97-slot-machine/s97-bg.png",
+      "US": "common/US/ga0.bin",
+      "JP": "common/JP/ga0.bin"
+    },
+    "a2": {
+      "png": "6f-sherman-lobby/s6f-bg.png",
+      "US": "common/US/ga2.bin",
+      "JP": "common/JP/ga2.bin"
+    },
+    "a3": {
+      "png": "6f-sherman-lobby/s6f-bg-extra.png",
+      "US": "common/US/ga3.bin",
+      "JP": "common/JP/ga3.bin"
+    },
+    "c1": {
+      "png": "common/objects-c1.png",
+      "US": "common/US/gc1.bin",
+      "JP": "common/JP/gc1.bin"
+    },
+    "c2": {
+      "png": "common/objects-c2.png",
+      "US": "common/US/gc2.bin",
+      "JP": "common/JP/gc2.bin"
+    },
+    "c3": {
+      "png": "common/objects-c3.png",
+      "US": "common/US/gc3.bin",
+      "JP": "common/JP/gc3.bin"
+    },
+    "c4": {
+      "png": "common/objects-c4.png",
+      "US": "common/US/gc4.bin",
+      "JP": "common/JP/gc4.bin"
+    },
+    "c5": {
+      "png": "common/objects-c5.png",
+      "US": "common/US/gc5.bin",
+      "JP": "common/JP/gc5.bin"
+    },
+    "c6": {
+      "png": "common/objects-c6.png",
+      "US": "common/US/gc6.bin",
+      "JP": "common/JP/gc6.bin"
+    },
+    "c7": {
+      "png": "8f-hitman/s8f-objects.png",
+      "US": "common/US/gc7.bin",
+      "JP": "common/JP/gc7.bin"
+    },
+    "c8": {
+      "png": "98-hitman/s98-objects.png",
+      "US": "common/US/gc8.bin",
+      "JP": "common/JP/gc8.bin"
+    },
+    "c9": {
+      "png": "common/objects-c9.png",
+      "US": "common/US/gc9.bin",
+      "JP": "common/JP/gc9.bin"
+    },
+    "ca": {
+      "png": "common/objects-ca.png",
+      "US": "common/US/gca.bin",
+      "JP": "common/JP/gca.bin"
+    },
+    "03": null,
+    "05": null,
+    "07": null,
+    "09": null,
+    "0b": null,
+    "0d": null,
+    "0f": null,
+    "15": null,
+    "19": null,
+    "21": null,
+    "27": null,
+    "35": null,
+    "39": null,
+    "3f": null,
+    "43": null,
+    "45": null,
+    "47": null,
+    "4d": null,
+    "51": null,
+    "55": null,
+    "5b": null,
+    "6b": null,
+    "77": null,
+    "81": null,
+    "8d": null,
+    "8f": null,
+    "91": null,
+    "97": null,
+    "99": null,
+    "9b": null,
+    "9d": null,
+    "9f": null,
+    "a1": null
+  },
+  "scenes": {
+    "00": {
+      "graphics": [
+        "02",
+        "03",
+        "c1"
+      ],
+      "tilemap": "00-joes-stall/s00-bg.tilemap",
+      "attrmap": "00-joes-stall/s00-bg.attrmap",
+      "bg_palette": "common/pb00.pal",
+      "obj_palette": "common/po00.pal"
+    },
+    "01": {
+      "graphics": [
+        "02",
+        "03",
+        "c1"
+      ],
+      "tilemap": "01-joes-stall/s01-bg.tilemap",
+      "attrmap": "01-joes-stall/s01-bg.attrmap",
+      "bg_palette": "common/pb00.pal",
+      "obj_palette": "common/po00.pal"
+    },
+    "02": {
+      "graphics": [
+        "04",
+        "05",
+        "c2"
+      ],
+      "tilemap": "02-joes-washroom/s02-bg.tilemap",
+      "attrmap": "02-joes-washroom/s02-bg.attrmap",
+      "bg_palette": "02-joes-washroom/s02-bg.pal",
+      "obj_palette": "02-joes-washroom/s02-objects.pal"
+    },
+    "03": {
+      "graphics": [
+        "06",
+        "07",
+        "c2"
+      ],
+      "tilemap": "03-joes-washroom/s03-bg.tilemap",
+      "attrmap": "03-joes-washroom/s03-bg.attrmap",
+      "bg_palette": "03-joes-washroom/s03-bg.pal",
+      "obj_palette": "03-joes-washroom/s03-objects.pal"
+    },
+    "04": {
+      "graphics": [
+        "08",
+        "09",
+        "00"
+      ],
+      "tilemap": "04-joes-hall/s04-bg.tilemap",
+      "attrmap": "04-joes-hall/s04-bg.attrmap",
+      "bg_palette": "common/pb03.pal",
+      "obj_palette": "common/po03.pal"
+    },
+    "05": {
+      "graphics": [
+        "08",
+        "09",
+        "00"
+      ],
+      "tilemap": "05-joes-hall/s05-bg.tilemap",
+      "attrmap": "05-joes-hall/s05-bg.attrmap",
+      "bg_palette": "common/pb03.pal",
+      "obj_palette": "common/po03.pal"
+    },
+    "06": {
+      "graphics": [
+        "08",
+        "09",
+        "00"
+      ],
+      "tilemap": "06-joes-hall/s06-bg.tilemap",
+      "attrmap": "06-joes-hall/s06-bg.attrmap",
+      "bg_palette": "common/pb03.pal",
+      "obj_palette": "common/po03.pal"
+    },
+    "07": {
+      "graphics": [
+        "08",
+        "09",
+        "00"
+      ],
+      "tilemap": "07-joes-hall/s07-bg.tilemap",
+      "attrmap": "07-joes-hall/s07-bg.attrmap",
+      "bg_palette": "common/pb03.pal",
+      "obj_palette": "common/po03.pal"
+    },
+    "08": {
+      "graphics": [
+        "0a",
+        "0b",
+        "c2"
+      ],
+      "tilemap": "08-joes-washroom/s08-bg.tilemap",
+      "attrmap": "08-joes-washroom/s08-bg.attrmap",
+      "bg_palette": "common/pb04.pal",
+      "obj_palette": "common/po04.pal"
+    },
+    "09": {
+      "graphics": [
+        "0a",
+        "0b",
+        "c2"
+      ],
+      "tilemap": "09-joes-washroom/s09-bg.tilemap",
+      "attrmap": "09-joes-washroom/s09-bg.attrmap",
+      "bg_palette": "common/pb04.pal",
+      "obj_palette": "common/po04.pal"
+    },
+    "0a": {
+      "graphics": [
+        "0c",
+        "0d",
+        "c2"
+      ],
+      "tilemap": "0a-joes-washroom/s0a-bg.tilemap",
+      "attrmap": "0a-joes-washroom/s0a-bg.attrmap",
+      "bg_palette": "common/pb05.pal",
+      "obj_palette": "common/po05.pal"
+    },
+    "0b": {
+      "graphics": [
+        "0c",
+        "0d",
+        "c2"
+      ],
+      "tilemap": "0b-joes-washroom/s0b-bg.tilemap",
+      "attrmap": "0b-joes-washroom/s0b-bg.attrmap",
+      "bg_palette": "common/pb05.pal",
+      "obj_palette": "common/po05.pal"
+    },
+    "0c": {
+      "graphics": [
+        "0e",
+        "0f",
+        "00"
+      ],
+      "tilemap": "0c-joes-toilet/s0c-bg.tilemap",
+      "attrmap": "0c-joes-toilet/s0c-bg.attrmap",
+      "bg_palette": "common/pb06.pal",
+      "obj_palette": "common/po06.pal"
+    },
+    "0d": {
+      "graphics": [
+        "0e",
+        "0f",
+        "00"
+      ],
+      "tilemap": "0d-joes-toilet/s0d-bg.tilemap",
+      "attrmap": "0d-joes-toilet/s0d-bg.attrmap",
+      "bg_palette": "common/pb06.pal",
+      "obj_palette": "common/po06.pal"
+    },
+    "0e": {
+      "graphics": [
+        "10",
+        "11",
+        "c2"
+      ],
+      "tilemap": "0e-joes-bar/s0e-bg.tilemap",
+      "attrmap": "0e-joes-bar/s0e-bg.attrmap",
+      "bg_palette": "common/pb07.pal",
+      "obj_palette": "common/po07.pal"
+    },
+    "0f": {
+      "graphics": [
+        "10",
+        "11",
+        "c2"
+      ],
+      "tilemap": "0f-joes-bar/s0f-bg.tilemap",
+      "attrmap": "0f-joes-bar/s0f-bg.attrmap",
+      "bg_palette": "common/pb07.pal",
+      "obj_palette": "common/po07.pal"
+    },
+    "10": {
+      "graphics": [
+        "10",
+        "11",
+        "c2"
+      ],
+      "tilemap": "10-joes-bar/s10-bg.tilemap",
+      "attrmap": "10-joes-bar/s10-bg.attrmap",
+      "bg_palette": "common/pb07.pal",
+      "obj_palette": "common/po07.pal"
+    },
+    "11": {
+      "graphics": [
+        "10",
+        "11",
+        "c2"
+      ],
+      "tilemap": "11-joes-bar/s11-bg.tilemap",
+      "attrmap": "11-joes-bar/s11-bg.attrmap",
+      "bg_palette": "common/pb07.pal",
+      "obj_palette": "common/po07.pal"
+    },
+    "12": {
+      "graphics": [
+        "12",
+        "13",
+        "ca"
+      ],
+      "tilemap": "12-joes-cellar/s12-bg.tilemap",
+      "attrmap": "12-joes-cellar/s12-bg.attrmap",
+      "bg_palette": "common/pb08.pal",
+      "obj_palette": "common/po08.pal"
+    },
+    "13": {
+      "graphics": [
+        "12",
+        "13",
+        "ca"
+      ],
+      "tilemap": "13-joes-cellar/s13-bg.tilemap",
+      "attrmap": "13-joes-cellar/s13-bg.attrmap",
+      "bg_palette": "common/pb08.pal",
+      "obj_palette": "common/po08.pal"
+    },
+    "14": {
+      "graphics": [
+        "14",
+        "15",
+        "00"
+      ],
+      "tilemap": "14-joes-manhole/s14-bg.tilemap",
+      "attrmap": "14-joes-manhole/s14-bg.attrmap",
+      "bg_palette": "common/pb09.pal",
+      "obj_palette": "common/po09.pal"
+    },
+    "15": {
+      "graphics": [
+        "14",
+        "15",
+        "00"
+      ],
+      "tilemap": "15-joes-manhole/s15-bg.tilemap",
+      "attrmap": "15-joes-manhole/s15-bg.attrmap",
+      "bg_palette": "common/pb09.pal",
+      "obj_palette": "common/po09.pal"
+    },
+    "16": {
+      "graphics": [
+        "14",
+        "15",
+        "00"
+      ],
+      "tilemap": "16-joes-manhole/s16-bg.tilemap",
+      "attrmap": "16-joes-manhole/s16-bg.attrmap",
+      "bg_palette": "common/pb09.pal",
+      "obj_palette": "common/po09.pal"
+    },
+    "17": {
+      "graphics": [
+        "14",
+        "15",
+        "00"
+      ],
+      "tilemap": "17-joes-manhole/s17-bg.tilemap",
+      "attrmap": "17-joes-manhole/s17-bg.attrmap",
+      "bg_palette": "common/pb09.pal",
+      "obj_palette": "common/po09.pal"
+    },
+    "18": {
+      "graphics": [
+        "16",
+        "17",
+        "00"
+      ],
+      "tilemap": "18-joes-casino/s18-bg.tilemap",
+      "attrmap": "18-joes-casino/s18-bg.attrmap",
+      "bg_palette": "common/pb0a.pal",
+      "obj_palette": "common/po0a.pal"
+    },
+    "19": {
+      "graphics": [
+        "16",
+        "17",
+        "00"
+      ],
+      "tilemap": "19-joes-casino/s19-bg.tilemap",
+      "attrmap": "19-joes-casino/s19-bg.attrmap",
+      "bg_palette": "common/pb0a.pal",
+      "obj_palette": "common/po0a.pal"
+    },
+    "1a": {
+      "graphics": [
+        "18",
+        "19",
+        "00"
+      ],
+      "tilemap": "1a-joes-elevator/s1a-bg.tilemap",
+      "attrmap": "1a-joes-elevator/s1a-bg.attrmap",
+      "bg_palette": "common/pb0b.pal",
+      "obj_palette": "common/po0b.pal"
+    },
+    "1b": {
+      "graphics": [
+        "18",
+        "19",
+        "00"
+      ],
+      "tilemap": "1b-joes-elevator/s1b-bg.tilemap",
+      "attrmap": "1b-joes-elevator/s1b-bg.attrmap",
+      "bg_palette": "common/pb0b.pal",
+      "obj_palette": "common/po0b.pal"
+    },
+    "1c": {
+      "graphics": [
+        "1a",
+        "1b",
+        "00"
+      ],
+      "tilemap": "1c-joes-elevator/s1c-bg.tilemap",
+      "attrmap": "1c-joes-elevator/s1c-bg.attrmap",
+      "bg_palette": "common/pb0c.pal",
+      "obj_palette": "common/po0c.pal"
+    },
+    "1d": {
+      "graphics": [
+        "1a",
+        "1b",
+        "00"
+      ],
+      "tilemap": "1d-joes-elevator/s1d-bg.tilemap",
+      "attrmap": "1d-joes-elevator/s1d-bg.attrmap",
+      "bg_palette": "common/pb0c.pal",
+      "obj_palette": "common/po0c.pal"
+    },
+    "1e": {
+      "graphics": [
+        "1a",
+        "1b",
+        "00"
+      ],
+      "tilemap": "1e-joes-elevator/s1e-bg.tilemap",
+      "attrmap": "1e-joes-elevator/s1e-bg.attrmap",
+      "bg_palette": "common/pb0c.pal",
+      "obj_palette": "common/po0c.pal"
+    },
+    "1f": {
+      "graphics": [
+        "1a",
+        "1b",
+        "00"
+      ],
+      "tilemap": "1f-joes-elevator/s1f-bg.tilemap",
+      "attrmap": "1f-joes-elevator/s1f-bg.attrmap",
+      "bg_palette": "common/pb0c.pal",
+      "obj_palette": "common/po0c.pal"
+    },
+    "20": {
+      "graphics": [
+        "1c",
+        "1d",
+        "c1"
+      ],
+      "tilemap": "20-restraint-room/s20-bg.tilemap",
+      "attrmap": "20-restraint-room/s20-bg.attrmap",
+      "bg_palette": "common/pb0d.pal",
+      "obj_palette": "common/po0d.pal"
+    },
+    "21": {
+      "graphics": [
+        "1c",
+        "1d",
+        "c1"
+      ],
+      "tilemap": "21-restraint-room/s21-bg.tilemap",
+      "attrmap": "21-restraint-room/s21-bg.attrmap",
+      "bg_palette": "common/pb0d.pal",
+      "obj_palette": "common/po0d.pal"
+    },
+    "22": {
+      "graphics": [
+        "1c",
+        "1d",
+        "c1"
+      ],
+      "tilemap": "22-restraint-room/s22-bg.tilemap",
+      "attrmap": "22-restraint-room/s22-bg.attrmap",
+      "bg_palette": "common/pb0d.pal",
+      "obj_palette": "common/po0d.pal"
+    },
+    "23": {
+      "graphics": [
+        "1c",
+        "1d",
+        "c1"
+      ],
+      "tilemap": "23-restraint-room/s23-bg.tilemap",
+      "attrmap": "23-restraint-room/s23-bg.attrmap",
+      "bg_palette": "common/pb0d.pal",
+      "obj_palette": "common/po0d.pal"
+    },
+    "24": {
+      "graphics": [
+        "1e",
+        "1f",
+        "00"
+      ],
+      "tilemap": "24-joes-upper-hall/s24-bg.tilemap",
+      "attrmap": "24-joes-upper-hall/s24-bg.attrmap",
+      "bg_palette": "common/pb0e.pal",
+      "obj_palette": "common/po0e.pal"
+    },
+    "25": {
+      "graphics": [
+        "1e",
+        "1f",
+        "00"
+      ],
+      "tilemap": "25-joes-upper-hall/s25-bg.tilemap",
+      "attrmap": "25-joes-upper-hall/s25-bg.attrmap",
+      "bg_palette": "common/pb0e.pal",
+      "obj_palette": "common/po0e.pal"
+    },
+    "26": {
+      "graphics": [
+        "20",
+        "21",
+        "00"
+      ],
+      "tilemap": "26-joes-upper-hall/s26-bg.tilemap",
+      "attrmap": "26-joes-upper-hall/s26-bg.attrmap",
+      "bg_palette": "common/pb0f.pal",
+      "obj_palette": "common/po0f.pal"
+    },
+    "27": {
+      "graphics": [
+        "20",
+        "21",
+        "00"
+      ],
+      "tilemap": "27-joes-upper-hall/s27-bg.tilemap",
+      "attrmap": "27-joes-upper-hall/s27-bg.attrmap",
+      "bg_palette": "common/pb0f.pal",
+      "obj_palette": "common/po0f.pal"
+    },
+    "28": {
+      "graphics": [
+        "22",
+        "23",
+        "00"
+      ],
+      "tilemap": "28-siegel-office/s28-bg.tilemap",
+      "attrmap": "28-siegel-office/s28-bg.attrmap",
+      "bg_palette": "common/pb10.pal",
+      "obj_palette": "common/po10.pal"
+    },
+    "29": {
+      "graphics": [
+        "22",
+        "23",
+        "00"
+      ],
+      "tilemap": "29-siegel-office/s29-bg.tilemap",
+      "attrmap": "29-siegel-office/s29-bg.attrmap",
+      "bg_palette": "common/pb10.pal",
+      "obj_palette": "common/po10.pal"
+    },
+    "2a": {
+      "graphics": [
+        "22",
+        "23",
+        "00"
+      ],
+      "tilemap": "2a-siegel-office/s2a-bg.tilemap",
+      "attrmap": "2a-siegel-office/s2a-bg.attrmap",
+      "bg_palette": "common/pb10.pal",
+      "obj_palette": "common/po10.pal"
+    },
+    "2b": {
+      "graphics": [
+        "22",
+        "23",
+        "00"
+      ],
+      "tilemap": "2b-siegel-office/s2b-bg.tilemap",
+      "attrmap": "2b-siegel-office/s2b-bg.attrmap",
+      "bg_palette": "common/pb10.pal",
+      "obj_palette": "common/po10.pal"
+    },
+    "2c": {
+      "graphics": [
+        "24",
+        "25",
+        "00"
+      ],
+      "tilemap": "2c-secretary-office/s2c-bg.tilemap",
+      "attrmap": "2c-secretary-office/s2c-bg.attrmap",
+      "bg_palette": "common/pb11.pal",
+      "obj_palette": "common/po11.pal"
+    },
+    "2d": {
+      "graphics": [
+        "24",
+        "25",
+        "00"
+      ],
+      "tilemap": "2d-secretary-office/s2d-bg.tilemap",
+      "attrmap": "2d-secretary-office/s2d-bg.attrmap",
+      "bg_palette": "common/pb11.pal",
+      "obj_palette": "common/po11.pal"
+    },
+    "2e": {
+      "graphics": [
+        "26",
+        "27",
+        "00"
+      ],
+      "tilemap": "2e-joes-private-door/s2e-bg.tilemap",
+      "attrmap": "2e-joes-private-door/s2e-bg.attrmap",
+      "bg_palette": "common/pb12.pal",
+      "obj_palette": "common/po12.pal"
+    },
+    "2f": {
+      "graphics": [
+        "26",
+        "27",
+        "00"
+      ],
+      "tilemap": "2f-joes-private-door/s2f-bg.tilemap",
+      "attrmap": "2f-joes-private-door/s2f-bg.attrmap",
+      "bg_palette": "common/pb12.pal",
+      "obj_palette": "common/po12.pal"
+    },
+    "30": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "30-joes-street/s30-bg.tilemap",
+      "attrmap": "30-joes-street/s30-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "31": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "31-joes-street/s31-bg.tilemap",
+      "attrmap": "31-joes-street/s31-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "32": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "32-joes-street/s32-bg.tilemap",
+      "attrmap": "32-joes-street/s32-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "33": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "33-joes-street/s33-bg.tilemap",
+      "attrmap": "33-joes-street/s33-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "34": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "34-joes-street/s34-bg.tilemap",
+      "attrmap": "34-joes-street/s34-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "35": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "35-joes-street/s35-bg.tilemap",
+      "attrmap": "35-joes-street/s35-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "36": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "36-joes-street/s36-bg.tilemap",
+      "attrmap": "36-joes-street/s36-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "37": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "37-joes-street/s37-bg.tilemap",
+      "attrmap": "37-joes-street/s37-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "38": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "38-joes-street/s38-bg.tilemap",
+      "attrmap": "38-joes-street/s38-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "39": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "39-joes-street/s39-bg.tilemap",
+      "attrmap": "39-joes-street/s39-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3a": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "3a-joes-street/s3a-bg.tilemap",
+      "attrmap": "3a-joes-street/s3a-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3b": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "3b-joes-street/s3b-bg.tilemap",
+      "attrmap": "3b-joes-street/s3b-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3c": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "3c-joes-street/s3c-bg.tilemap",
+      "attrmap": "3c-joes-street/s3c-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3d": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "3d-joes-street/s3d-bg.tilemap",
+      "attrmap": "3d-joes-street/s3d-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3e": {
+      "graphics": [
+        "28",
+        "29",
+        "00"
+      ],
+      "tilemap": "3e-joes-street/s3e-bg.tilemap",
+      "attrmap": "3e-joes-street/s3e-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "3f": {
+      "graphics": [
+        "2a",
+        "2b",
+        "00"
+      ],
+      "tilemap": "3f-joes-street/s3f-bg.tilemap",
+      "attrmap": "3f-joes-street/s3f-bg.attrmap",
+      "bg_palette": "common/pb13.pal",
+      "obj_palette": "common/po13.pal"
+    },
+    "40": {
+      "graphics": [
+        "2c",
+        "2d",
+        "c3"
+      ],
+      "tilemap": "40-joes-street/s40-bg.tilemap",
+      "attrmap": "40-joes-street/s40-bg.attrmap",
+      "bg_palette": "40-joes-street/s40-bg.pal",
+      "obj_palette": "40-joes-street/s40-objects.pal"
+    },
+    "41": {
+      "graphics": [
+        "2e",
+        "2f",
+        "00"
+      ],
+      "tilemap": "41-mercedes-interior/s41-bg.tilemap",
+      "attrmap": "41-mercedes-interior/s41-bg.attrmap",
+      "bg_palette": "common/pb15.pal",
+      "obj_palette": "common/po15.pal"
+    },
+    "42": {
+      "graphics": [
+        "2e",
+        "2f",
+        "00"
+      ],
+      "tilemap": "42-mercedes-interior/s42-bg.tilemap",
+      "attrmap": "42-mercedes-interior/s42-bg.attrmap",
+      "bg_palette": "common/pb15.pal",
+      "obj_palette": "common/po15.pal"
+    },
+    "43": {
+      "graphics": [
+        "30",
+        "31",
+        "00"
+      ],
+      "tilemap": "43-mercedes-trunk/s43-bg.tilemap",
+      "attrmap": "43-mercedes-trunk/s43-bg.attrmap",
+      "bg_palette": "43-mercedes-trunk/s43-bg.pal",
+      "obj_palette": "43-mercedes-trunk/s43-objects.pal"
+    },
+    "44": {
+      "graphics": [
+        "32",
+        "33",
+        "c3"
+      ],
+      "tilemap": "44-sternwood-trunk/s44-bg.tilemap",
+      "attrmap": "44-sternwood-trunk/s44-bg.attrmap",
+      "bg_palette": "44-sternwood-trunk/s44-bg.pal",
+      "obj_palette": "44-sternwood-trunk/s44-objects.pal"
+    },
+    "45": {
+      "graphics": [
+        "34",
+        "35",
+        "c3"
+      ],
+      "tilemap": "45-newsstand/s45-bg.tilemap",
+      "attrmap": "45-newsstand/s45-bg.attrmap",
+      "bg_palette": "45-newsstand/s45-bg.pal",
+      "obj_palette": "45-newsstand/s45-objects.pal"
+    },
+    "46": {
+      "graphics": [
+        "36",
+        "37",
+        "c3"
+      ],
+      "tilemap": "46-newsstand/s46-bg.tilemap",
+      "attrmap": "46-newsstand/s46-bg.attrmap",
+      "bg_palette": "46-newsstand/s46-bg.pal",
+      "obj_palette": "46-newsstand/s46-objects.pal"
+    },
+    "47": {
+      "graphics": [
+        "38",
+        "39",
+        "c9"
+      ],
+      "tilemap": "47-petes-gun-palace/s47-bg.tilemap",
+      "attrmap": "47-petes-gun-palace/s47-bg.attrmap",
+      "bg_palette": "common/pb1a.pal",
+      "obj_palette": "common/po1a.pal"
+    },
+    "48": {
+      "graphics": [
+        "38",
+        "39",
+        "c9"
+      ],
+      "tilemap": "48-petes-gun-palace/s48-bg.tilemap",
+      "attrmap": "48-petes-gun-palace/s48-bg.attrmap",
+      "bg_palette": "common/pb1a.pal",
+      "obj_palette": "common/po1a.pal"
+    },
+    "49": {
+      "graphics": [
+        "3a",
+        "3b",
+        "c3"
+      ],
+      "tilemap": "49-petes-gun-palace/s49-bg.tilemap",
+      "attrmap": "49-petes-gun-palace/s49-bg.attrmap",
+      "bg_palette": "49-petes-gun-palace/s49-bg.pal",
+      "obj_palette": "49-petes-gun-palace/s49-objects.pal"
+    },
+    "4a": {
+      "graphics": [
+        "3c",
+        "3d",
+        "c6"
+      ],
+      "tilemap": "4a-petes-counter/s4a-bg.tilemap",
+      "attrmap": "4a-petes-counter/s4a-bg.attrmap",
+      "bg_palette": "4a-petes-counter/s4a-bg.pal",
+      "obj_palette": "4a-petes-counter/s4a-objects.pal"
+    },
+    "4b": {
+      "graphics": [
+        "3e",
+        "3f",
+        "00"
+      ],
+      "tilemap": "4b-peoria-blue-cab/s4b-bg.tilemap",
+      "attrmap": "4b-peoria-blue-cab/s4b-bg.attrmap",
+      "bg_palette": "4b-peoria-blue-cab/s4b-bg.pal",
+      "obj_palette": "4b-peoria-blue-cab/s4b-objects.pal"
+    },
+    "4c": {
+      "graphics": [
+        "40",
+        "41",
+        "c3"
+      ],
+      "tilemap": "4c-peoria-blue-cab/s4c-bg.tilemap",
+      "attrmap": "4c-peoria-blue-cab/s4c-bg.attrmap",
+      "bg_palette": "4c-peoria-blue-cab/s4c-bg.pal",
+      "obj_palette": "4c-peoria-blue-cab/s4c-objects.pal"
+    },
+    "4d": {
+      "graphics": [
+        "42",
+        "43",
+        "00"
+      ],
+      "tilemap": "4d-peoria-yellow-cab/s4d-bg.tilemap",
+      "attrmap": "4d-peoria-yellow-cab/s4d-bg.attrmap",
+      "bg_palette": "4d-peoria-yellow-cab/s4d-bg.pal",
+      "obj_palette": "4d-peoria-yellow-cab/s4d-objects.pal"
+    },
+    "4e": {
+      "graphics": [
+        "44",
+        "45",
+        "00"
+      ],
+      "tilemap": "4e-police-station/s4e-bg.tilemap",
+      "attrmap": "4e-police-station/s4e-bg.attrmap",
+      "bg_palette": "4e-police-station/s4e-bg.pal",
+      "obj_palette": "4e-police-station/s4e-objects.pal"
+    },
+    "4f": {
+      "graphics": [
+        "46",
+        "47",
+        "00"
+      ],
+      "tilemap": "4f-police-station/s4f-bg.tilemap",
+      "attrmap": "4f-police-station/s4f-bg.attrmap",
+      "bg_palette": "4f-police-station/s4f-bg.pal",
+      "obj_palette": "4f-police-station/s4f-objects.pal"
+    },
+    "50": {
+      "graphics": [
+        "48",
+        "49",
+        "00"
+      ],
+      "tilemap": "50-peoria-alley/s50-bg.tilemap",
+      "attrmap": "50-peoria-alley/s50-bg.attrmap",
+      "bg_palette": "50-peoria-alley/s50-bg.pal",
+      "obj_palette": "50-peoria-alley/s50-objects.pal"
+    },
+    "51": {
+      "graphics": [
+        "4a",
+        "4b",
+        "00"
+      ],
+      "tilemap": "51-joes-back-alley/s51-bg.tilemap",
+      "attrmap": "51-joes-back-alley/s51-bg.attrmap",
+      "bg_palette": "common/pb23.pal",
+      "obj_palette": "common/po23.pal"
+    },
+    "52": {
+      "graphics": [
+        "4a",
+        "4b",
+        "00"
+      ],
+      "tilemap": "52-joes-back-alley/s52-bg.tilemap",
+      "attrmap": "52-joes-back-alley/s52-bg.attrmap",
+      "bg_palette": "common/pb23.pal",
+      "obj_palette": "common/po23.pal"
+    },
+    "53": {
+      "graphics": [
+        "4c",
+        "4d",
+        "ca"
+      ],
+      "tilemap": "53-drunkard/s53-bg.tilemap",
+      "attrmap": "53-drunkard/s53-bg.attrmap",
+      "bg_palette": "53-drunkard/s53-bg.pal",
+      "obj_palette": "53-drunkard/s53-objects.pal"
+    },
+    "54": {
+      "graphics": [
+        "4e",
+        "4f",
+        "00"
+      ],
+      "tilemap": "54-mugger/s54-bg.tilemap",
+      "attrmap": "54-mugger/s54-bg.attrmap",
+      "bg_palette": "54-mugger/s54-bg.pal",
+      "obj_palette": "54-mugger/s54-objects.pal"
+    },
+    "55": {
+      "graphics": [
+        "50",
+        "51",
+        "00"
+      ],
+      "tilemap": "55-sugar-shack/s55-bg.tilemap",
+      "attrmap": "55-sugar-shack/s55-bg.attrmap",
+      "bg_palette": "55-sugar-shack/s55-bg.pal",
+      "obj_palette": "55-sugar-shack/s55-objects.pal"
+    },
+    "56": {
+      "graphics": [
+        "52",
+        "53",
+        "c3"
+      ],
+      "tilemap": "56-sugar-shack/s56-bg.tilemap",
+      "attrmap": "56-sugar-shack/s56-bg.attrmap",
+      "bg_palette": "56-sugar-shack/s56-bg.pal",
+      "obj_palette": "56-sugar-shack/s56-objects.pal"
+    },
+    "57": {
+      "graphics": [
+        "54",
+        "55",
+        "00"
+      ],
+      "tilemap": "57-sugar-portrait/s57-bg.tilemap",
+      "attrmap": "57-sugar-portrait/s57-bg.attrmap",
+      "bg_palette": "57-sugar-portrait/s57-bg.pal",
+      "obj_palette": "57-sugar-portrait/s57-objects.pal"
+    },
+    "58": {
+      "graphics": [
+        "56",
+        "57",
+        "c3"
+      ],
+      "tilemap": "58-cab-interior/s58-bg.tilemap",
+      "attrmap": "58-cab-interior/s58-bg.attrmap",
+      "bg_palette": "common/pb29.pal",
+      "obj_palette": "common/po29.pal"
+    },
+    "59": {
+      "graphics": [
+        "56",
+        "57",
+        "c3"
+      ],
+      "tilemap": "59-cab-interior/s59-bg.tilemap",
+      "attrmap": "59-cab-interior/s59-bg.attrmap",
+      "bg_palette": "common/pb29.pal",
+      "obj_palette": "common/po29.pal"
+    },
+    "5a": {
+      "graphics": [
+        "56",
+        "57",
+        "c3"
+      ],
+      "tilemap": "5a-cab-interior/s5a-bg.tilemap",
+      "attrmap": "5a-cab-interior/s5a-bg.attrmap",
+      "bg_palette": "common/pb2a.pal",
+      "obj_palette": "common/po2a.pal"
+    },
+    "5b": {
+      "graphics": [
+        "56",
+        "57",
+        "c3"
+      ],
+      "tilemap": "5b-cab-interior/s5b-bg.tilemap",
+      "attrmap": "5b-cab-interior/s5b-bg.attrmap",
+      "bg_palette": "common/pb2a.pal",
+      "obj_palette": "common/po2a.pal"
+    },
+    "5c": {
+      "graphics": [
+        "58",
+        "59",
+        "00"
+      ],
+      "tilemap": "5c-stanford-arms/s5c-bg.tilemap",
+      "attrmap": "5c-stanford-arms/s5c-bg.attrmap",
+      "bg_palette": "common/pb2b.pal",
+      "obj_palette": "common/po2b.pal"
+    },
+    "5d": {
+      "graphics": [
+        "58",
+        "59",
+        "00"
+      ],
+      "tilemap": "5d-stanford-arms/s5d-bg.tilemap",
+      "attrmap": "5d-stanford-arms/s5d-bg.attrmap",
+      "bg_palette": "common/pb2b.pal",
+      "obj_palette": "common/po2b.pal"
+    },
+    "5e": {
+      "graphics": [
+        "58",
+        "59",
+        "00"
+      ],
+      "tilemap": "5e-stanford-arms/s5e-bg.tilemap",
+      "attrmap": "5e-stanford-arms/s5e-bg.attrmap",
+      "bg_palette": "common/pb2c.pal",
+      "obj_palette": "common/po2c.pal"
+    },
+    "5f": {
+      "graphics": [
+        "58",
+        "59",
+        "00"
+      ],
+      "tilemap": "5f-stanford-arms/s5f-bg.tilemap",
+      "attrmap": "5f-stanford-arms/s5f-bg.attrmap",
+      "bg_palette": "common/pb2c.pal",
+      "obj_palette": "common/po2c.pal"
+    },
+    "60": {
+      "graphics": [
+        "5a",
+        "5b",
+        "00"
+      ],
+      "tilemap": "60-stanford-lobby/s60-bg.tilemap",
+      "attrmap": "60-stanford-lobby/s60-bg.attrmap",
+      "bg_palette": "common/pb2d.pal",
+      "obj_palette": "common/po2d.pal"
+    },
+    "61": {
+      "graphics": [
+        "5a",
+        "5b",
+        "00"
+      ],
+      "tilemap": "61-stanford-lobby/s61-bg.tilemap",
+      "attrmap": "61-stanford-lobby/s61-bg.attrmap",
+      "bg_palette": "common/pb2d.pal",
+      "obj_palette": "common/po2d.pal"
+    },
+    "62": {
+      "graphics": [
+        "5c",
+        "5d",
+        "00"
+      ],
+      "tilemap": "62-stanford-elevator/s62-bg.tilemap",
+      "attrmap": "62-stanford-elevator/s62-bg.attrmap",
+      "bg_palette": "common/pb2e.pal",
+      "obj_palette": "common/po2e.pal"
+    },
+    "63": {
+      "graphics": [
+        "5c",
+        "5d",
+        "00"
+      ],
+      "tilemap": "63-stanford-elevator/s63-bg.tilemap",
+      "attrmap": "63-stanford-elevator/s63-bg.attrmap",
+      "bg_palette": "common/pb2e.pal",
+      "obj_palette": "common/po2e.pal"
+    },
+    "64": {
+      "graphics": [
+        "5c",
+        "5d",
+        "00"
+      ],
+      "tilemap": "64-stanford-elevator/s64-bg.tilemap",
+      "attrmap": "64-stanford-elevator/s64-bg.attrmap",
+      "bg_palette": "common/pb2e.pal",
+      "obj_palette": "common/po2e.pal"
+    },
+    "65": {
+      "graphics": [
+        "5e",
+        "5f",
+        "c9"
+      ],
+      "tilemap": "65-siegel-penthouse/s65-bg.tilemap",
+      "attrmap": "65-siegel-penthouse/s65-bg.attrmap",
+      "bg_palette": "65-siegel-penthouse/s65-bg.pal",
+      "obj_palette": "65-siegel-penthouse/s65-objects.pal"
+    },
+    "66": {
+      "graphics": [
+        "60",
+        "61",
+        "00"
+      ],
+      "tilemap": "66-vickers-bungalow/s66-bg.tilemap",
+      "attrmap": "66-vickers-bungalow/s66-bg.attrmap",
+      "bg_palette": "common/pb30.pal",
+      "obj_palette": "common/po30.pal"
+    },
+    "67": {
+      "graphics": [
+        "60",
+        "61",
+        "00"
+      ],
+      "tilemap": "67-vickers-bungalow/s67-bg.tilemap",
+      "attrmap": "67-vickers-bungalow/s67-bg.attrmap",
+      "bg_palette": "common/pb30.pal",
+      "obj_palette": "common/po30.pal"
+    },
+    "68": {
+      "graphics": [
+        "62",
+        "63",
+        "00"
+      ],
+      "tilemap": "68-vickers-bungalow/s68-bg.tilemap",
+      "attrmap": "68-vickers-bungalow/s68-bg.attrmap",
+      "bg_palette": "common/pb31.pal",
+      "obj_palette": "common/po31.pal"
+    },
+    "69": {
+      "graphics": [
+        "62",
+        "63",
+        "00"
+      ],
+      "tilemap": "69-vickers-bungalow/s69-bg.tilemap",
+      "attrmap": "69-vickers-bungalow/s69-bg.attrmap",
+      "bg_palette": "common/pb31.pal",
+      "obj_palette": "common/po31.pal"
+    },
+    "6a": {
+      "graphics": [
+        "64",
+        "65",
+        "c3"
+      ],
+      "tilemap": "6a-vickers-bedroom/s6a-bg.tilemap",
+      "attrmap": "6a-vickers-bedroom/s6a-bg.attrmap",
+      "bg_palette": "6a-vickers-bedroom/s6a-bg.pal",
+      "obj_palette": "6a-vickers-bedroom/s6a-objects.pal"
+    },
+    "6b": {
+      "graphics": [
+        "66",
+        "67",
+        "00"
+      ],
+      "tilemap": "6b-sherman-offices/s6b-bg.tilemap",
+      "attrmap": "6b-sherman-offices/s6b-bg.attrmap",
+      "bg_palette": "common/pb33.pal",
+      "obj_palette": "common/po33.pal"
+    },
+    "6c": {
+      "graphics": [
+        "66",
+        "67",
+        "00"
+      ],
+      "tilemap": "6c-sherman-offices/s6c-bg.tilemap",
+      "attrmap": "6c-sherman-offices/s6c-bg.attrmap",
+      "bg_palette": "common/pb33.pal",
+      "obj_palette": "common/po33.pal"
+    },
+    "6d": {
+      "graphics": [
+        "68",
+        "69",
+        "00"
+      ],
+      "tilemap": "6d-sherman-offices/s6d-bg.tilemap",
+      "attrmap": "6d-sherman-offices/s6d-bg.attrmap",
+      "bg_palette": "common/pb34.pal",
+      "obj_palette": "common/po34.pal"
+    },
+    "6e": {
+      "graphics": [
+        "68",
+        "69",
+        "00"
+      ],
+      "tilemap": "6e-sherman-offices/s6e-bg.tilemap",
+      "attrmap": "6e-sherman-offices/s6e-bg.attrmap",
+      "bg_palette": "common/pb34.pal",
+      "obj_palette": "common/po34.pal"
+    },
+    "6f": {
+      "graphics": [
+        "a2",
+        "a3",
+        "00"
+      ],
+      "tilemap": "6f-sherman-lobby/s6f-bg.tilemap",
+      "attrmap": "6f-sherman-lobby/s6f-bg.attrmap",
+      "bg_palette": "6f-sherman-lobby/s6f-bg.pal",
+      "obj_palette": "6f-sherman-lobby/s6f-objects.pal"
+    },
+    "70": {
+      "graphics": [
+        "6a",
+        "6b",
+        "00"
+      ],
+      "tilemap": "70-brody-door/s70-bg.tilemap",
+      "attrmap": "70-brody-door/s70-bg.attrmap",
+      "bg_palette": "common/pb36.pal",
+      "obj_palette": "common/po36.pal"
+    },
+    "71": {
+      "graphics": [
+        "6a",
+        "6b",
+        "00"
+      ],
+      "tilemap": "71-brody-door/s71-bg.tilemap",
+      "attrmap": "71-brody-door/s71-bg.attrmap",
+      "bg_palette": "common/pb36.pal",
+      "obj_palette": "common/po36.pal"
+    },
+    "72": {
+      "graphics": [
+        "6c",
+        "6d",
+        "c6"
+      ],
+      "tilemap": "72-brody-office/s72-bg.tilemap",
+      "attrmap": "72-brody-office/s72-bg.attrmap",
+      "bg_palette": "72-brody-office/s72-bg.pal",
+      "obj_palette": "72-brody-office/s72-objects.pal"
+    },
+    "73": {
+      "graphics": [
+        "6e",
+        "6f",
+        "c4"
+      ],
+      "tilemap": "73-ace-door/s73-bg.tilemap",
+      "attrmap": "73-ace-door/s73-bg.attrmap",
+      "bg_palette": "common/pb38.pal",
+      "obj_palette": "common/po38.pal"
+    },
+    "74": {
+      "graphics": [
+        "6e",
+        "6f",
+        "c4"
+      ],
+      "tilemap": "74-ace-door/s74-bg.tilemap",
+      "attrmap": "74-ace-door/s74-bg.attrmap",
+      "bg_palette": "common/pb38.pal",
+      "obj_palette": "common/po38.pal"
+    },
+    "75": {
+      "graphics": [
+        "70",
+        "71",
+        "c5"
+      ],
+      "tilemap": "75-ace-office/s75-bg.tilemap",
+      "attrmap": "75-ace-office/s75-bg.attrmap",
+      "bg_palette": "common/pb39.pal",
+      "obj_palette": "common/po39.pal"
+    },
+    "76": {
+      "graphics": [
+        "70",
+        "71",
+        "c5"
+      ],
+      "tilemap": "76-ace-office/s76-bg.tilemap",
+      "attrmap": "76-ace-office/s76-bg.attrmap",
+      "bg_palette": "common/pb39.pal",
+      "obj_palette": "common/po39.pal"
+    },
+    "77": {
+      "graphics": [
+        "72",
+        "73",
+        "00"
+      ],
+      "tilemap": "77-sternwood-gate/s77-bg.tilemap",
+      "attrmap": "77-sternwood-gate/s77-bg.attrmap",
+      "bg_palette": "77-sternwood-gate/s77-bg.pal",
+      "obj_palette": "77-sternwood-gate/s77-objects.pal"
+    },
+    "78": {
+      "graphics": [
+        "74",
+        "75",
+        "00"
+      ],
+      "tilemap": "78-sternwood-gate/s78-bg.tilemap",
+      "attrmap": "78-sternwood-gate/s78-bg.attrmap",
+      "bg_palette": "78-sternwood-gate/s78-bg.pal",
+      "obj_palette": "78-sternwood-gate/s78-objects.pal"
+    },
+    "79": {
+      "graphics": [
+        "76",
+        "77",
+        "00"
+      ],
+      "tilemap": "79-sternwood-door/s79-bg.tilemap",
+      "attrmap": "79-sternwood-door/s79-bg.attrmap",
+      "bg_palette": "79-sternwood-door/s79-bg.pal",
+      "obj_palette": "79-sternwood-door/s79-objects.pal"
+    },
+    "7a": {
+      "graphics": [
+        "78",
+        "79",
+        "00"
+      ],
+      "tilemap": "7a-sternwood-foyer/s7a-bg.tilemap",
+      "attrmap": "7a-sternwood-foyer/s7a-bg.attrmap",
+      "bg_palette": "7a-sternwood-foyer/s7a-bg.pal",
+      "obj_palette": "7a-sternwood-foyer/s7a-objects.pal"
+    },
+    "7b": {
+      "graphics": [
+        "7a",
+        "7b",
+        "00"
+      ],
+      "tilemap": "7b-sternwood-foyer/s7b-bg.tilemap",
+      "attrmap": "7b-sternwood-foyer/s7b-bg.attrmap",
+      "bg_palette": "common/pb3e.pal",
+      "obj_palette": "common/po3e.pal"
+    },
+    "7c": {
+      "graphics": [
+        "7a",
+        "7b",
+        "00"
+      ],
+      "tilemap": "7c-sternwood-foyer/s7c-bg.tilemap",
+      "attrmap": "7c-sternwood-foyer/s7c-bg.attrmap",
+      "bg_palette": "common/pb3e.pal",
+      "obj_palette": "common/po3e.pal"
+    },
+    "7d": {
+      "graphics": [
+        "7c",
+        "7d",
+        "c5"
+      ],
+      "tilemap": "7d-sternwood-kitchen/s7d-bg.tilemap",
+      "attrmap": "7d-sternwood-kitchen/s7d-bg.attrmap",
+      "bg_palette": "7d-sternwood-kitchen/s7d-bg.pal",
+      "obj_palette": "7d-sternwood-kitchen/s7d-objects.pal"
+    },
+    "7e": {
+      "graphics": [
+        "7e",
+        "7f",
+        "00"
+      ],
+      "tilemap": "7e-sternwood-hall/s7e-bg.tilemap",
+      "attrmap": "7e-sternwood-hall/s7e-bg.attrmap",
+      "bg_palette": "common/pb40.pal",
+      "obj_palette": "common/po40.pal"
+    },
+    "7f": {
+      "graphics": [
+        "7e",
+        "7f",
+        "00"
+      ],
+      "tilemap": "7f-sternwood-hall/s7f-bg.tilemap",
+      "attrmap": "7f-sternwood-hall/s7f-bg.attrmap",
+      "bg_palette": "common/pb40.pal",
+      "obj_palette": "common/po40.pal"
+    },
+    "80": {
+      "graphics": [
+        "7e",
+        "7f",
+        "00"
+      ],
+      "tilemap": "80-sternwood-hall/s80-bg.tilemap",
+      "attrmap": "80-sternwood-hall/s80-bg.attrmap",
+      "bg_palette": "common/pb41.pal",
+      "obj_palette": "common/po41.pal"
+    },
+    "81": {
+      "graphics": [
+        "7e",
+        "7f",
+        "00"
+      ],
+      "tilemap": "81-sternwood-hall/s81-bg.tilemap",
+      "attrmap": "81-sternwood-hall/s81-bg.attrmap",
+      "bg_palette": "common/pb41.pal",
+      "obj_palette": "common/po41.pal"
+    },
+    "82": {
+      "graphics": [
+        "80",
+        "81",
+        "c5"
+      ],
+      "tilemap": "82-vickers-bed/s82-bg.tilemap",
+      "attrmap": "82-vickers-bed/s82-bg.attrmap",
+      "bg_palette": "common/pb42.pal",
+      "obj_palette": "common/po42.pal"
+    },
+    "83": {
+      "graphics": [
+        "80",
+        "81",
+        "c5"
+      ],
+      "tilemap": "83-vickers-bed/s83-bg.tilemap",
+      "attrmap": "83-vickers-bed/s83-bg.attrmap",
+      "bg_palette": "common/pb42.pal",
+      "obj_palette": "common/po42.pal"
+    },
+    "84": {
+      "graphics": [
+        "82",
+        "83",
+        "c5"
+      ],
+      "tilemap": "84-sternwood-bed/s84-bg.tilemap",
+      "attrmap": "84-sternwood-bed/s84-bg.attrmap",
+      "bg_palette": "common/pb43.pal",
+      "obj_palette": "common/po43.pal"
+    },
+    "85": {
+      "graphics": [
+        "82",
+        "83",
+        "c5"
+      ],
+      "tilemap": "85-sternwood-bed/s85-bg.tilemap",
+      "attrmap": "85-sternwood-bed/s85-bg.attrmap",
+      "bg_palette": "common/pb43.pal",
+      "obj_palette": "common/po43.pal"
+    },
+    "86": {
+      "graphics": [
+        "84",
+        "85",
+        "00"
+      ],
+      "tilemap": "86-sewer-tunnel/s86-bg.tilemap",
+      "attrmap": "86-sewer-tunnel/s86-bg.attrmap",
+      "bg_palette": "86-sewer-tunnel/s86-bg.pal",
+      "obj_palette": "86-sewer-tunnel/s86-objects.pal"
+    },
+    "87": {
+      "graphics": [
+        "86",
+        "87",
+        "00"
+      ],
+      "tilemap": "87-sewer-junction/s87-bg.tilemap",
+      "attrmap": "87-sewer-junction/s87-bg.attrmap",
+      "bg_palette": "87-sewer-junction/s87-bg.pal",
+      "obj_palette": "87-sewer-junction/s87-objects.pal"
+    },
+    "88": {
+      "graphics": [
+        "86",
+        "87",
+        "00"
+      ],
+      "tilemap": "88-sewer-junction/s88-bg.tilemap",
+      "attrmap": "88-sewer-junction/s88-bg.attrmap",
+      "bg_palette": "88-sewer-junction/s88-bg.pal",
+      "obj_palette": "88-sewer-junction/s88-objects.pal"
+    },
+    "89": {
+      "graphics": [
+        "84",
+        "85",
+        "00"
+      ],
+      "tilemap": "89-sewer-tunnel/s89-bg.tilemap",
+      "attrmap": "89-sewer-tunnel/s89-bg.attrmap",
+      "bg_palette": "89-sewer-tunnel/s89-bg.pal",
+      "obj_palette": "89-sewer-tunnel/s89-objects.pal"
+    },
+    "8a": {
+      "graphics": [
+        "88",
+        "89",
+        "00"
+      ],
+      "tilemap": "8a-sewer-whirlpool/s8a-bg.tilemap",
+      "attrmap": "8a-sewer-whirlpool/s8a-bg.attrmap",
+      "bg_palette": "8a-sewer-whirlpool/s8a-bg.pal",
+      "obj_palette": "8a-sewer-whirlpool/s8a-objects.pal"
+    },
+    "8b": {
+      "graphics": [
+        "8a",
+        "8b",
+        "00"
+      ],
+      "tilemap": "8b-sewer-ladder/s8b-bg.tilemap",
+      "attrmap": "8b-sewer-ladder/s8b-bg.attrmap",
+      "bg_palette": "common/pb49.pal",
+      "obj_palette": "common/po49.pal"
+    },
+    "8c": {
+      "graphics": [
+        "8a",
+        "8b",
+        "00"
+      ],
+      "tilemap": "8c-sewer-ladder/s8c-bg.tilemap",
+      "attrmap": "8c-sewer-ladder/s8c-bg.attrmap",
+      "bg_palette": "common/pb49.pal",
+      "obj_palette": "common/po49.pal"
+    },
+    "8d": {
+      "graphics": [
+        "8c",
+        "8d",
+        "00"
+      ],
+      "tilemap": "8d-alligator/s8d-bg.tilemap",
+      "attrmap": "8d-alligator/s8d-bg.attrmap",
+      "bg_palette": "8d-alligator/s8d-bg.pal",
+      "obj_palette": "8d-alligator/s8d-objects.pal"
+    },
+    "8e": {
+      "graphics": [
+        "8e",
+        "8f",
+        "00"
+      ],
+      "tilemap": "8e-alligator/s8e-bg.tilemap",
+      "attrmap": "8e-alligator/s8e-bg.attrmap",
+      "bg_palette": "8e-alligator/s8e-bg.pal",
+      "obj_palette": "8e-alligator/s8e-objects.pal"
+    },
+    "8f": {
+      "graphics": [
+        "90",
+        "91",
+        "c7"
+      ],
+      "tilemap": "8f-hitman/s8f-bg.tilemap",
+      "attrmap": "8f-hitman/s8f-bg.attrmap",
+      "bg_palette": "8f-hitman/s8f-bg.pal",
+      "obj_palette": "8f-hitman/s8f-objects.pal"
+    },
+    "90": {
+      "graphics": [
+        "92",
+        "93",
+        "00"
+      ],
+      "tilemap": "90-ace-cleared/s90-bg.tilemap",
+      "attrmap": "90-ace-cleared/s90-bg.attrmap",
+      "bg_palette": "90-ace-cleared/s90-bg.pal",
+      "obj_palette": "90-ace-cleared/s90-objects.pal"
+    },
+    "91": {
+      "graphics": [
+        "94",
+        "95",
+        "00"
+      ],
+      "tilemap": "91-ace-certificate/s91-bg.tilemap",
+      "attrmap": "91-ace-certificate/s91-bg.attrmap",
+      "bg_palette": "91-ace-certificate/s91-bg.pal",
+      "obj_palette": "91-ace-certificate/s91-objects.pal"
+    },
+    "92": {
+      "graphics": [
+        "96",
+        "97",
+        "00"
+      ],
+      "tilemap": "92-handcuffs/s92-bg.tilemap",
+      "attrmap": "92-handcuffs/s92-bg.attrmap",
+      "bg_palette": "92-handcuffs/s92-bg.pal",
+      "obj_palette": "92-handcuffs/s92-objects.pal"
+    },
+    "93": {
+      "graphics": [
+        "98",
+        "99",
+        "00"
+      ],
+      "tilemap": "93-ace-grave/s93-bg.tilemap",
+      "attrmap": "93-ace-grave/s93-bg.attrmap",
+      "bg_palette": "93-ace-grave/s93-bg.pal",
+      "obj_palette": "93-ace-grave/s93-objects.pal"
+    },
+    "94": {
+      "graphics": [
+        "9a",
+        "9b",
+        "00"
+      ],
+      "tilemap": "94-socko/s94-bg.tilemap",
+      "attrmap": "94-socko/s94-bg.attrmap",
+      "bg_palette": "94-socko/s94-bg.pal",
+      "obj_palette": "94-socko/s94-objects.pal"
+    },
+    "95": {
+      "graphics": [
+        "9c",
+        "9d",
+        "00"
+      ],
+      "tilemap": "95-blam/s95-bg.tilemap",
+      "attrmap": "95-blam/s95-bg.attrmap",
+      "bg_palette": "95-blam/s95-bg.pal",
+      "obj_palette": "95-blam/s95-objects.pal"
+    },
+    "96": {
+      "graphics": [
+        "9e",
+        "9f",
+        "00"
+      ],
+      "tilemap": "96-boom/s96-bg.tilemap",
+      "attrmap": "96-boom/s96-bg.attrmap",
+      "bg_palette": "96-boom/s96-bg.pal",
+      "obj_palette": "96-boom/s96-objects.pal"
+    },
+    "97": {
+      "graphics": [
+        "a0",
+        "a1",
+        "00"
+      ],
+      "tilemap": "97-slot-machine/s97-bg.tilemap",
+      "attrmap": "97-slot-machine/s97-bg.attrmap",
+      "bg_palette": "97-slot-machine/s97-bg.pal",
+      "obj_palette": "97-slot-machine/s97-objects.pal"
+    },
+    "98": {
+      "graphics": [
+        "90",
+        "91",
+        "c8"
+      ],
+      "tilemap": "98-hitman/s98-bg.tilemap",
+      "attrmap": "98-hitman/s98-bg.attrmap",
+      "bg_palette": "98-hitman/s98-bg.pal",
+      "obj_palette": "98-hitman/s98-objects.pal"
+    }
+  }
+}
