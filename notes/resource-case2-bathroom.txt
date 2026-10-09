@@ -167,10 +167,13 @@ Case2BathroomDoorClosed/Case2BathroomDoorOpen. Existing labels remain
 at their original addresses. Plane edits update both ROM versions.
 
 make bathroom-preview SHELL=bash refreshes the closed-door background.
-make bathroom-door-open-preview SHELL=bash refreshes the open-door PNG
-at res/shared/tilemaps/case2_bathroom_open.png. Both targets process
-resources without assembling a ROM. For the unpatched base map, run
+make bathroom-door-open-preview SHELL=bash writes case2_bathroom_open.png
+to the system temporary directory and prints its path. Only the main
+closed-door background preview is kept in res/shared/tilemaps. Both targets
+process resources without assembling a ROM. For the unpatched base map, run
 python scripts/bathroom_preview.py res/US --door base.
+This variant also goes to the temporary directory. Use --output PATH to
+choose an output file explicitly.
 
 These previews cover the door state. Object sprite graphics selected by
 resource $81, interactions, and other runtime overlays remain separate

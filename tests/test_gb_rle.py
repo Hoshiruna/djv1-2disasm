@@ -112,10 +112,9 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(opened_tiles[2 * 14 + 6:2 * 14 + 8], b"\xFF\xFF")
 
     def test_open_door_preview_matches_both_regions(self):
-        png = (ROOT / "res/shared/tilemaps/case2_bathroom_open.png").read_bytes()
-        for region in ("US", "JP"):
-            with self.subTest(region=region):
-                self.assertEqual(render_bathroom(ROOT / "res" / region, "open"), png)
+        png = render_bathroom(ROOT / "res/US", "open")
+        self.assertEqual(render_bathroom(ROOT / "res/JP", "open"), png)
+        self.assertNotEqual(render_bathroom(ROOT / "res/US", "closed"), png)
 
     def test_signed_tile_ids(self):
         tiles = load_tiles(ROOT / "res" / "US")

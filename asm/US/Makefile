@@ -60,22 +60,15 @@ bathroom-preview: ../../res/shared/tilemaps/case2_bathroom.png
     ../../scripts/bathroom_preview.py ../../scripts/hud_tilemap.py ../../scripts/gb_lz.py ../../scripts/gb_rle.py
 	$(PYTHON) ../../scripts/bathroom_preview.py ../../res/US
 
-bathroom-door-open-preview: ../../res/shared/tilemaps/case2_bathroom_open.png
-
-bathroom-objects-preview: ../../res/shared/tilemaps/case2_bathroom_objects.png \
-    ../../res/shared/tilemaps/case2_bathroom_objects_open.png
-
-../../res/shared/tilemaps/case2_bathroom_objects.png: ../../res/shared/tilemaps/case2_bathroom.png \
+bathroom-objects-preview: ../../res/shared/tilemaps/case2_bathroom.png \
     ../../res/US/gfx/case2_bathroom_object_tiles.bin \
     ../../res/shared/palettes/case2_bathroom_objects.pal $(BATHROOM_OBJECT_DATA) \
     ../../scripts/gb_sprites.py
+
+bathroom-objects-preview:
 	$(PYTHON) ../../scripts/bathroom_preview.py ../../res/US --objects
 
-../../res/shared/tilemaps/case2_bathroom_objects_open.png: ../../res/shared/tilemaps/case2_bathroom_objects.png \
-    ../../res/shared/tilemaps/case2_bathroom_open.png
-	$(PYTHON) ../../scripts/bathroom_preview.py ../../res/US --objects --door open
-
-../../res/shared/tilemaps/case2_bathroom_open.png: ../../res/shared/tilemaps/case2_bathroom.png \
+bathroom-door-open-preview: ../../res/shared/tilemaps/case2_bathroom.png \
     ../../res/shared/tilemaps/case2_bathroom_door_open.tilemap \
     ../../res/shared/tilemaps/case2_bathroom_door_open.attrmap
 	$(PYTHON) ../../scripts/bathroom_preview.py ../../res/US --door open
@@ -103,6 +96,9 @@ game.o: game.asm hardware.inc bank_*.asm ../../res/US/gfx/font.bin \
     ../../res/shared/tilemaps/case2_bathroom_door_open.tilemap \
     ../../res/shared/tilemaps/case2_bathroom_door_open.attrmap \
     ../../res/US/gfx/case2_bathroom_object_tiles.bin ../../res/shared/palettes/case2_bathroom_objects.pal \
+    ../../res/US/scripts/case2_bathroom_towel_take.bin \
+    ../../res/shared/scripts/case2_bathroom_mirror_break.bin \
+    ../../res/US/scripts/case2_bathroom_cold_tap_open.bin \
     $(BATHROOM_OBJECT_DATA) $(TEXT_BANKS) $(TEXT_STAMP)
 	rgbasm -o game.o game.asm
 

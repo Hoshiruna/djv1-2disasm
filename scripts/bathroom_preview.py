@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"""Render the Case II bathroom, door state, and initial scene objects."""
+"""Render the Case II bathroom and its initial objects."""
 
 import argparse
 from pathlib import Path
+from tempfile import gettempdir
 
 from gb_lz import decode
 from gb_sprites import color_index, decode_metasprites, emit_oam, overlay
@@ -27,25 +28,35 @@ def apply_door(tilemap, attributes, shared, state):
     return bytes(tilemap), bytes(attributes)
 
 
-def initial_objects(shared):
-    """Select room-zero objects using the Case II initial visibility flags."""
+def initial_visibility(shared):
+    """Read the object IDs enabled by Case II initialization."""
+    flags = (shared / "objects" / "case2_initial_flags.bin").read_bytes()
+    if not flags or flags[-1] != 0xFF:
+        raise ValueError("Initial visibility flags must end with $FF")
+    return set(flags[:-1])
+
+
+def scene_objects(shared, visible=None, present=None):
+    """Select room-zero sprites whose presence and visibility flags are both set."""
     folder = shared / "objects"
     definitions = decode_metasprites((folder / "case2_bathroom.sprites").read_bytes())
     positions = (folder / "case2_bathroom.positions").read_bytes()
     animations = (folder / "case2_bathroom.animations").read_bytes()
     hitboxes = (folder / "case2_bathroom.hitboxes").read_bytes()
-    flags = (folder / "case2_initial_flags.bin").read_bytes()
     if len(positions) != len(definitions) * 2 or len(animations) != len(definitions) * 5:
         raise ValueError("Bathroom positions and animations must match the sprite records")
-    if not flags or flags[-1] != 0xFF or len(hitboxes) % 7 != 1 or hitboxes[-1] != 0xFF:
-        raise ValueError("Initial flags and room hitboxes must end with $FF")
-    visible = set(flags[:-1])
+    if len(hitboxes) % 7 != 1 or hitboxes[-1] != 0xFF:
+        raise ValueError("Room hitboxes must end with $FF")
+    if visible is None:
+        visible = initial_visibility(shared)
     objects = []
     for offset in range(0, len(hitboxes) - 1, 7):
         record = hitboxes[offset:offset + 7]
         object_id = record[6]
-        # $C420 starts with all bits set; $C438 controls initial visibility.
         if not record[4] & 0x80 or object_id not in visible:
+            continue
+        # No presence override represents the initial all-set $C420 bitmap.
+        if present is not None and object_id not in present:
             continue
         if object_id >= len(definitions):
             raise ValueError("Room references an unextracted object")
@@ -61,7 +72,7 @@ def initial_objects(shared):
 
 
 def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
-    """Add the initial room's OAM using its object tiles and palette."""
+    """Add the initial room objects using their tiles and palette."""
     shared = region.parent / "shared"
     resource = (region / "gfx" / "case2_bathroom_object_tiles.bin").read_bytes()
     raw, _ = decode(resource[3:], resource[2] * 16)
@@ -77,7 +88,7 @@ def overlay_objects(region, pixels, tilemap, attributes, background_tiles):
                 indices[offset] = color_index(background_tiles[tile_id], x, y, attribute)
                 priorities[offset] = attribute & 0x80
     colors = palette_colors((shared / "palettes" / "case2_bathroom_objects.pal").read_bytes())
-    oam = emit_oam(initial_objects(shared))
+    oam = emit_oam(scene_objects(shared))
     return overlay(112, 112, pixels, indices, priorities, oam, sprite_tiles, colors)
 
 
@@ -110,18 +121,23 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("region", type=Path, help="Regional resources, e.g. res/US")
     parser.add_argument("--door", choices=("base", "closed", "open"), default="closed")
-    parser.add_argument("--objects", action="store_true", help="Overlay the initial visible objects")
+    parser.add_argument("--objects", action="store_true", help="Overlay the scene objects")
+    parser.add_argument("--output", type=Path,
+                        help="Output PNG path; variants default to the system temporary directory")
     args = parser.parse_args()
     try:
-        png = render(args.region, args.door, args.objects)
-        name = "case2_bathroom" + ("_objects" if args.objects else "")
+        objects = args.objects
+        png = render(args.region, args.door, objects)
+        name = "case2_bathroom" + ("_objects" if objects else "")
         if args.door != "closed":
             name += "_" + args.door
-        output = args.region.parent / "shared" / "tilemaps" / (name + ".png")
+        folder = (Path(gettempdir()) if objects or args.door != "closed"
+                  else args.region.parent / "shared" / "tilemaps")
+        output = args.output or folder / (name + ".png")
         output.write_bytes(png)
     except (OSError, ValueError) as error:
         parser.exit(1, "error: {}\n".format(error))
-    layer = "initial objects" if args.objects else "background"
+    layer = "initial objects" if objects else "background"
     print("Rendered {} (112x112, door {}, {})".format(output, args.door, layer))
 
 

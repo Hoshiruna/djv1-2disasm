@@ -1,0 +1,100 @@
+Resource: Case II scene $02 tile export
+
+The scene graphics pair at US $01:$47E9 / JP $01:$47DE is $06 $82.
+The background loader loads $06 followed by $07. Object resource $82
+is already exported as res/shared/gfx/case2_object82_tiles.png and is
+reused without another image. Scene $02 is a numeric identifier; its
+location name has not been assigned.
+
+Resource  Region  Bank  CPU range    ROM offset  Stored  Tiles
+$06       US      $2A   $5584-$5B46  $0A9584     1475    128
+$06       JP      $2A   $572B-$5CED  $0A972B     1475    128
+$07       US      $2A   $5B47-$5CEF  $0A9B47      425     47
+$07       JP      $2A   $5CEE-$5E96  $0A9CEE      425     47
+
+Exported files
+--------------
+res/shared/gfx/case2_scene02_tiles.png
+    Resource $06, header $1D $00 $80; 2048 decoded bytes.
+    16 columns x 8 rows of 8x8 tiles (128x64 pixels).
+
+res/shared/gfx/case2_scene02_extra_tiles.png
+    Resource $07, header $1D $80 $2F; 752 decoded bytes.
+    47 columns x 1 row of 8x8 tiles (376x8 pixels).
+    A single row preserves the exact tile count without padding.
+
+The main and extra files hold distinct tile ranges, not alternate scene
+states. Both resources have identical compressed bytes in US and JP,
+so each atlas is shared. Indexed colors 0-3 appear as white, light gray,
+dark gray, and black; these grays are not the runtime palettes.
+
+Validation
+----------
+Both streams end exactly at the next resource pointer. Rebuilding the
+unchanged decoded data preserves the original compressed blocks. Reading
+the saved PNG indices back into 2bpp planes reproduces all decoded bytes
+in their original tile order. Both atlases were visually inspected.
+
+PNG edits are not yet connected to ROM rebuilding. Game-derived graphics
+retain the rights described in LICENSE.
+
+Main scene preview
+------------------
+res/shared/tilemaps/case2_scene02.png is the single 112x112 background
+preview for this scene. It shows the corridor facing the CASINO doors.
+The scene uses 14x14 cells, with layout and attributes exported as:
+
+    res/shared/tilemaps/case2_scene02.tilemap
+    res/shared/tilemaps/case2_scene02.attrmap
+
+The scene $02 pointer at $27:$4004 selects $4360. Tile IDs occupy
+$27:$4360-$4423 and attributes occupy $27:$4424-$44E7 (196 bytes each).
+Both planes match between US and JP. Rendering uses resources $06/$07,
+the scene $02 background palette, and each cell's palette/flip attributes
+in VRAM bank 1. Both regional renders produce identical PNG bytes.
+
+This is the base background, without object overlays, HUD, or interaction
+state variants. It was visually inspected. No ROM build was run.
+
+Scene palettes
+--------------
+Background palette: res/shared/palettes/case2_scene02.pal
+US/JP bank $0B:$4118-$4157, ROM offset $02C118; 64 bytes.
+Palette  RGB555 words (color indices 0, 1, 2, 3)
+   0     $0000 $0011 $03FF $001B
+   1     $0000 $2D29 $4E2E $7FFF
+   2     $0000 $7E40 $7F6D $7FFF
+   3     $0000 $008A $0011 $0155
+   4     $0000 $7D60 $4C40 $7FFF
+   5     $0000 $00F0 $29B4 $7FFF
+   6     $0000 $0011 $7FFF $7E00
+   7     $0000 $7E02 $001E $037F
+
+Objects palette: res/shared/palettes/case2_scene02_objects.pal
+US/JP bank $0B:$54B0-$54EF, ROM offset $02D4B0; 64 bytes.
+Palette  RGB555 words (color indices 0, 1, 2, 3)
+   0     $7FE0 $0000 $0140 $0280
+   1     $7FE0 $0000 $4E73 $7FFF
+   2     $7FE0 $2C0B $5816 $7C1F
+   3     $7FE0 $2C0B $5816 $7C1F
+   4     $7FE0 $2C0B $5816 $7C1F
+   5     $0000 $2C0B $5816 $7C1F
+   6     $7FE0 $0CEB $1D70 $3635
+   7     $7FE0 $0000 $001F $01BF
+
+Each file contains eight palettes of four little-endian RGB555 words.
+Bits 0-4 are red, 5-9 green, and 10-14 blue. The background pointer table
+is at $0B:$4000; the object pointer table is at $0B:$5398. Both are indexed
+by scene for the ordinary scene palette path. Special runtime palette
+changes are outside this export.
+
+The atlases retain color indices 0-3. A background cell's attribute byte
+selects its palette using bits 0-2; an object's OAM attribute does the same
+for object palettes. Object color index zero is transparent when drawn.
+A shared object atlas can therefore have different colors in each scene.
+The .pal files preserve every original color, including index-zero entries.
+
+Palette selection is not implied by atlas order: apply palettes using the map/OAM attributes when reconstructing a
+scene. These palette files are exports and are not yet included by ASM.
+Readback matched both original ROMs byte for byte; all 32 words per file
+fit RGB555. No ROM build verification was run.

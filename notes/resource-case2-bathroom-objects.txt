@@ -132,25 +132,136 @@ Run from the repository root:
 
     make bathroom-objects-preview
 
-This target processes resources only. It produces the following shared
-112x112 images, leaving the existing background-only previews available:
+This target processes resources only. It writes the 112x112 preview
+case2_bathroom_objects.png to the system temporary directory and prints
+its path. It uses the closed door and new-game visible object set.
+Only case2_bathroom.png, the main background preview, stays in
+res/shared/tilemaps.
 
-    res/shared/tilemaps/case2_bathroom_objects.png
-    res/shared/tilemaps/case2_bathroom_objects_open.png
-
-The closed image uses the new-game visible object set. The open image
-applies the open-door patch to that same set; it is a comparison of door
-states, not a saved-game snapshot. The script does not load a save file
-or simulate later changes to inventory and visibility.
-
-The equivalent direct commands are:
+Render the initial objects or the open-door variant on demand with:
 
     python scripts/bathroom_preview.py res/US --objects
     python scripts/bathroom_preview.py res/US --objects --door open
 
+Both commands write to the temporary directory. Use --output PATH to choose
+an output file explicitly. These previews do not load a save file or display
+the inventory and dialogue UI.
+
 Use res/JP to render with the Japanese graphics resources. Position,
 animation, sprite, hitbox, and initial flag edits remain fixed-size so
 their ASM slots and following table entries keep the same addresses.
+
+Towel pickup state
+------------------
+The name mapping at US $01:$64EA uses base $00 for category $03 and base
+$70 for category $04. The room hitboxes therefore identify object $00 as
+NAME:$05, TOWEL; object $01 as NAME:$70, TRENCH COAT; and object $02 as
+NAME:$71, PANTS. These names come from the extracted object-name table.
+Objects $03 and $04 show the broken mirror and running water. Their
+script conditions are documented below. Their graphics stay in the object tile atlas.
+
+The Case II inventory action table is at US $07:$5591. Entry $05 points
+to $5671; action dispatch $02:$6CB4 maps command index $02 to script slot
+$03, whose pointer at $5677 selects the towel's pickup script. The JP
+table, action-list pointer, and script pointer are each two bytes later.
+
+Region  Script CPU range  Pointer   Bytes
+US      $07:$6024-$602E   $5677     11
+JP      $07:$6026-$6030   $5679     11
+
+Regional source: res/<region>/scripts/case2_bathroom_towel_take.bin
+ASM symbol: Case2BathroomTowelTake
+
+US script bytes: $17 $E0 $66 $05 $DA $66 $2A $00 $07 $DE $66
+JP script bytes: $17 $E2 $66 $05 $DC $66 $2A $00 $07 $E0 $66
+
+The regional branch addresses differ. Both scripts contain $2A $00,
+which clears visibility for scene object $00. The Case II interpreter
+at US $00:$39BB uses the command table at $39E0. Opcode $2A dispatches
+to $2616: it reads an object ID, selects the $C438 flag bitmap, and clears
+that bit. The successful path then branches to US $07:$66DE / JP $07:$66E0,
+where $26 invokes the common pickup routine. The routine updates inventory
+and redraws the scene through US $00:$2666. The $C420 presence flag stays
+set; $C438 visibility is sufficient to remove the sprite from the room.
+
+The visibility change is recorded as script data. No pickup-state background
+preview is generated. The towel graphics remain in the object tile atlas.
+
+Hidden objects: broken mirror and running water
+-----------------------------------------------
+Object $03 is the broken-mirror overlay at (105,22). Room interaction
+index $03 resolves through $07:$4006 to the action list at $4172 (US).
+Its third pointer, at $4176, selects $4C2F. The script is:
+
+    28 03       Test object $03 visibility in $C438.
+    03 21 47    If already visible, branch to $4721 (already broken).
+    3E 13       Play sound $13.
+    29 03       Set object $03 visibility.
+    2B          Redraw the scene.
+    30 AE       Set the message object name to MIRROR.
+    2C 00       Display the generic object-broke message.
+    FF          End.
+
+The repeat branch at $4721 uses name $AD (GLASS) and generic message $01
+(already broken). The examine script at $46ED tests the same visibility
+bit and skips the intact-mirror reflection sequence after it is set.
+JP's break script starts at $4C31; all 15 bytes match US, including the
+shared $4721 branch destination. This is an interaction-driven overlay,
+independent of the bathroom door patches.
+
+Object $04 is running water at (16,61). Room interaction indices $01/$02
+resolve to action lists $4162/$416A. Their open-script pointers at
+$4164/$416C select $4D47/$4D58. The scripts name COLD TAP ($D2) and HOT
+TAP ($D3), respectively. The corresponding examine scripts name BLUE
+($B2) and RED ($B1) in the generic faucet description.
+
+The tap state uses bits $01 (cold) and $02 (hot) in $C450, separate from
+the sprite visibility bitmap at $C438. Opcode $08 branches when a state
+bit is set; $54 branches when it is clear; $09 sets it and $0A clears it.
+Opcode $29 sets sprite visibility, $2A clears it, and $2B redraws.
+
+Action         US script  JP script  Visibility change
+Open cold      $4D47      $4D49      Set $04; set cold bit $01.
+Open hot       $4D58      $4D5A      Set $04; set hot bit $02.
+Close cold     $4DD3      $4DD5      Clear $04 only if hot bit $02 is clear.
+Close hot      $4DEA      $4DEC      Clear $04 only if cold bit $01 is clear.
+
+Opening an already open tap branches to the generic already-open message
+at US $4D55 / JP $4D57. Closing an already closed tap branches to the
+already-closed message at US $4E1F / JP $4E21. A successful close clears
+its own tap bit whether or not water remains visible. With either tap
+open, $04 remains visible; closing the last open tap removes it.
+
+Two further script entries at US $5022/$5041 (JP $5024/$5043) toggle the
+cold/hot bits. They contain the same visibility rule: opening sets $04,
+and closing clears it only when the other tap is off. Their caller/action
+mapping has not yet been traced, so they are not assigned a UI command.
+
+Evidence was checked directly against both local ROMs, the interpreter
+handlers, action pointers, and extracted Case II text. The relevant
+handlers in US bank zero are $2600/$260A/$2616 for visibility test/set/
+clear, $2622 for selecting $C438, and $1D1F for selecting $C450. The
+mirror script matches exactly between regions; the tap scripts retain
+the same operations with their regional branch addresses. No preview
+image or ROM build was generated for this analysis.
+
+Exported graphics and script sources
+------------------------------------
+The broken mirror, running water, and towel graphics are already exported
+in res/shared/gfx/case2_bathroom_object_tiles.png. Keep these as tiles;
+small interaction differences do not need background preview presets.
+The preview tool has no --state option or pickup-state Make target.
+
+The extracted scripts remain part of the disassembly:
+
+    res/shared/scripts/case2_bathroom_mirror_break.bin (15 bytes)
+    res/US/scripts/case2_bathroom_cold_tap_open.bin (17 bytes)
+    res/JP/scripts/case2_bathroom_cold_tap_open.bin (17 bytes)
+
+Both bank_007.asm files include these sources under Case2BathroomMirrorBreak
+and Case2BathroomColdTapOpen. The mirror block is shared; cold-tap blocks
+retain regional branch addresses. These sources preserve the original
+ROM bytes and are independent of background preview generation.
 
 Verification
 ------------
@@ -170,3 +281,6 @@ matched the corresponding local ROM bytes; all original labels were
 retained, including $05:$48D2 inside the room pointer word. LOW/HIGH
 expressions preserve that label while naming the pointer. Source edits
 outside these data blocks only replace address literals with symbols.
+
+The object-state preview presets and their tests were removed. The
+remaining sprite tests cover rendering and initial scene selection.

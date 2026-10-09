@@ -67,6 +67,9 @@ game.o: game.asm hardware.inc bank_*.asm ../../res/JP/gfx/case1_font.bin \
     ../../res/shared/tilemaps/case2_bathroom_door_open.tilemap \
     ../../res/shared/tilemaps/case2_bathroom_door_open.attrmap \
     ../../res/JP/gfx/case2_bathroom_object_tiles.bin ../../res/shared/palettes/case2_bathroom_objects.pal \
+    ../../res/JP/scripts/case2_bathroom_towel_take.bin \
+    ../../res/shared/scripts/case2_bathroom_mirror_break.bin \
+    ../../res/JP/scripts/case2_bathroom_cold_tap_open.bin \
     $(BATHROOM_OBJECT_DATA) $(TEXT_BANKS) $(TEXT_STAMP)
 	rgbasm -o game.o game.asm
 

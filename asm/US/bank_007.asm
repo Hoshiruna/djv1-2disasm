@@ -2877,19 +2877,8 @@ jr_007_4c15:
     ld [bc], a
     jr c, @+$01
 
-    jr z, @+$05
-
-    inc bc
-    ld hl, $3e47
-    inc de
-    add hl, hl
-    inc bc
-    dec hl
-    jr nc, @-$50
-
-    inc l
-    nop
-    rst RST_38
+Case2BathroomMirrorBreak:
+    INCBIN "../../res/shared/scripts/case2_bathroom_mirror_break.bin", $0, $f
     ld [$2105], sp
     ld b, a
     ld a, $13
@@ -3115,19 +3104,8 @@ jr_007_4d40:
     rst RST_38
     ld [bc], a
     ld [hl], $ff
-    jr nc, jr_007_4d1b
-
-    ld [$5501], sp
-    ld c, l
-    inc l
-    ld [bc], a
-    add hl, hl
-    inc b
-    dec hl
-    add hl, bc
-    ld bc, $2cff
-    add hl, de
-    rst RST_38
+Case2BathroomColdTapOpen:
+    INCBIN "../../res/US/scripts/case2_bathroom_cold_tap_open.bin", $0, $11
     jr nc, jr_007_4d2d
 
     ld [$5502], sp
@@ -5271,8 +5249,7 @@ jr_007_5502:
     ld e, c
     ld e, b
     ld h, [hl]
-    inc h
-    ld h, b
+    dw Case2BathroomTowelTake
     cpl
     ld h, b
     ld [hl-], a
@@ -7567,14 +7544,8 @@ jr_007_5f27:
     ld [bc], a
     cp [hl]
     rst RST_38
-    rla
-    ldh [$ff66], a
-    dec b
-    jp c, $2a66
-
-    nop
-    rlca
-    sbc $66
+Case2BathroomTowelTake:
+    INCBIN "../../res/US/scripts/case2_bathroom_towel_take.bin", $0, $b
     nop
     add hl, de
     rst RST_38
