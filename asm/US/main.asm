@@ -81,7 +81,7 @@ jr_000_08d4:
     pop af
     call HandleInput
     call PopRomBank
-    ld a, [$c5df]
+    ld a, [wC1Exit]
     cp $ff
     jr z, @+$32
 

@@ -4184,7 +4184,7 @@ jr_008_5191:
     ld d, c
     ld d, h
     ld a, b
-    call z, Call_000_2051
+    call z, StoreRoomState
     ld b, h
     ld b, l
     ld [bc], a

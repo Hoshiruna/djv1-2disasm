@@ -7095,7 +7095,7 @@ Call_029_690d:
     ld a, [$c522]
     ld [$c539], a
     call FadeOut
-    call Call_000_1746
+    call HideTextWindow
     call BlankOam
     call Call_029_6f98
     call Call_029_70bf
@@ -7223,7 +7223,7 @@ Call_029_6a34:
     ld [$c669], a
     ld a, $20
     ld [$c8e6], a
-    call Call_000_10d0
+    call ShowListText
     call SubmitMapQueue
     ld a, $1e
     call WaitTicks
@@ -7380,7 +7380,7 @@ jr_029_6b1c:
     ld [$c669], a
     ld a, $1f
     ld [$c8e6], a
-    call Call_000_10d0
+    call ShowListText
     call SubmitMapQueue
 
 jr_029_6b31:
@@ -8162,7 +8162,7 @@ jr_029_6ff0:
     ld [$c669], a
     ld a, $09
     ld [$c8e6], a
-    call Call_000_10d0
+    call ShowListText
     call SubmitMapQueue
     ld a, [$c876]
     ld [$c875], a
@@ -8268,7 +8268,7 @@ Jump_029_70a4:
     ld [$c8b6], a
     ld a, $06
     ld [$c8e6], a
-    call Call_000_10d0
+    call ShowListText
     call SubmitMapQueue
     ret
 
@@ -8312,7 +8312,7 @@ Call_029_70e7:
     ld [$c668], a
     ld a, [hl]
     ld [$c669], a
-    call Call_000_10d0
+    call ShowListText
     call SubmitMapQueue
     pop bc
     pop de

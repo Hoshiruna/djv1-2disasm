@@ -46,7 +46,7 @@ jr_006_4038:
     cp $ff
     jr nz, jr_006_4045
 
-    call Call_000_11c1
+    call ClearTextUI
     jp PopRomBank
 
 

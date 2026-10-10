@@ -34,7 +34,7 @@ InitC1View:
 
 jr_001_6bb6:
     call LoadC1Pal
-    call Call_000_19d9
+    call DrawCursorObjs
     call SubmitOam
     call BuildObjList
 
@@ -88,13 +88,13 @@ Call_001_6c0e:
     xor a
     ld [wRoomId], a
     ld a, $03
-    ld [$c55c], a
+    ld [wC1Count0], a
     ld a, $06
-    ld [$c55d], a
+    ld [wC1Count1], a
     xor a
-    ld [$c55e], a
-    ld [$c563], a
-    ld [$c564], a
+    ld [wC1Count2], a
+    ld [wBullet1Count], a
+    ld [wBullet2Count], a
     ld a, $07
     ld [$c55f], a
     ld a, $06
@@ -127,7 +127,7 @@ Call_001_6c0e:
     ld a, $0a
     ld [$c53b], a
     xor a
-    ld [$c55b], a
+    ld [wC1HeldItem], a
     call InitC1Absent
     ret
 

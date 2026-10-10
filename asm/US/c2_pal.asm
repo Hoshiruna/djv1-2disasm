@@ -10,7 +10,7 @@ Call_003_556f:
     and $40
     jr nz, jr_003_55ae
 
-    call Call_003_58e9
+    call FindC2TimedPal
     ld a, [$c523]
     and $01
     jr nz, jr_003_55ae

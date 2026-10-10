@@ -33,10 +33,10 @@ Call_002_6d28:
 jr_002_6d4d:
     ld a, $06
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $e4
     call ShowMsg1
-    call Call_000_2eef
+    call ClearC1Count
     ld a, [wStateResult]
     or $08
     ld [wStateResult], a
@@ -44,7 +44,7 @@ jr_002_6d4d:
     call ShowMsg1
     ld a, $e7
     call ShowMsg1
-    call Call_000_2a6b
+    call ResumeTextUI
     call SetResult
     ret
 
@@ -52,15 +52,15 @@ jr_002_6d4d:
 jr_002_6d76:
     ld a, $07
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $16
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $e6
     call ShowMsg2
     ld a, $15
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $62
     call ShowMsg2
     ld a, [wStateResult]
@@ -75,7 +75,7 @@ jr_002_6da4:
     call ShowMsg1
     ld a, $15
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $62
     call ShowMsg2
     ld a, [wStateResult]
@@ -89,12 +89,12 @@ Jump_002_6dc2:
 jr_002_6dc2:
     ld a, $07
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $f0
     call ShowMsg1
     ld a, $15
     ld [$c8e9], a
-    call Call_002_71ce
+    call FinishC1Effect
     ld a, $62
     call ShowMsg2
     ld a, [wStateResult]
@@ -216,7 +216,7 @@ Call_002_6e74:
     ld [wItemType], a
     ld a, $47
     ld [wItemId], a
-    call Call_000_216c
+    call ClearSelStateView
     ld a, $5d
     call ClearObjFlag
     call SetResult

@@ -48,7 +48,7 @@ jr_001_4f4f:
     call PickListHead
     xor a
     ld [wListMark], a
-    call Call_000_107a
+    call ShowListText
     call SubmitMapQueue
     pop af
     ldh [hChangePos], a

@@ -5475,7 +5475,7 @@ jr_009_64ae:
     adc [hl]
     ld bc, $10ef
     dec a
-    jp nz, Jump_000_2336
+    jp nz, AddItemList
 
     sbc $2c
     inc sp

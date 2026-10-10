@@ -50,14 +50,14 @@ jr_001_5fb4:
     jr z, jr_001_5fc9
 
     push de
-    call Call_000_19d9
+    call DrawCursorObjs
     call SubmitOam
     pop de
     dec d
     jr nz, jr_001_5fb4
 
 jr_001_5fc9:
-    call Call_000_19d9
+    call DrawCursorObjs
     call SubmitOam
     call PollJoy
     ld a, [wJoyHeld]

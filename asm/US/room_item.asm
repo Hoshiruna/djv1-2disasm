@@ -142,7 +142,7 @@ Jump_000_1818:
     and $01
     jr z, jr_000_1843
 
-    call Call_000_0e8d
+    call ReadCursorBox
     ld a, [wStateResult]
     bit 7, a
     jr z, jr_000_1843

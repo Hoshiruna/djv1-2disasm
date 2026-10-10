@@ -10,7 +10,7 @@ Call_000_0bab:
     ld a, $01
     ld [wSceneBlank], a
     call DrawSceneMap
-    call Call_000_0e52
+    call ClearScenePals
     call SelectSceneMap
     push af
 
@@ -35,7 +35,7 @@ Jump_000_0bc3:
     ld a, $02
     call PushRomBank
     pop af
-    call $688c
+    call PlayRoomCue
     call PopRomBank
     call PopRomBank
     pop hl
@@ -54,7 +54,7 @@ Jump_000_0bff:
 
 Call_000_0c00:
 Jump_000_0c00:
-    call Call_000_0e52
+    call ClearScenePals
 
 Call_000_0c03:
 Jump_000_0c03:
@@ -84,7 +84,7 @@ Call_000_0c1c:
     pop af
 
 Jump_000_0c20:
-    call $688c
+    call PlayRoomCue
     call PopRomBank
     call CopySceneMap
     call PopRomBank
@@ -126,7 +126,7 @@ Jump_000_0c52:
     ld a, $02
     call PushRomBank
     pop af
-    call $688c
+    call PlayRoomCue
     call PopRomBank
     call CopySceneMap
     call PopRomBank

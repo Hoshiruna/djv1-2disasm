@@ -63,7 +63,7 @@ jr_001_5a50:
     cp $00
     jr z, jr_001_5a72
 
-    call Call_000_3845
+    call C2EventsCall
 
 jr_001_5a72:
     call ClearSelect

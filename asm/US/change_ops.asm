@@ -12,7 +12,7 @@ ChangeOps:
 ChangeGroup:
     pop hl
     ld a, [hl]
-    call Call_000_36a1
+    call TouchGroup
     ret
 
 ; Discard the saved value pointer and return for types 0, 3 and 5.

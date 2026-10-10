@@ -10,13 +10,13 @@ PickListRoom:
     cp $00
     jr z, jr_000_2acb
 
-    ld [$c534], a
+    ld [wSavedListMode], a
     xor a
     ld [wChangeMode], a
     call RefreshLists
 
 jr_000_2acb:
-    call Call_000_2bbb
+    call ResumeTextUI
     ld a, $04
     ld [wCursorX], a
     ld a, $b4
@@ -40,7 +40,7 @@ jr_000_2acb:
     jr nz, jr_000_2b05
 
 jr_000_2afe:
-    call Call_000_2bae
+    call RestoreTextLists
     call SetResult
     ret
 

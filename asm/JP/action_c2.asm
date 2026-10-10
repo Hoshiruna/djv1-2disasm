@@ -93,7 +93,7 @@ jr_000_3aea:
     cp $ff
     jr nz, jr_000_3af7
 
-    call Call_000_1119
+    call ClearTextUI
     jp PopRomBank
 
 

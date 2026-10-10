@@ -207,6 +207,6 @@ jr_000_1062:
     ld [wTextPtr+1], a
 
 Jump_000_1075:
-    call Call_000_1113
+    call ShowTextMsg
     call PopRomBank
     ret

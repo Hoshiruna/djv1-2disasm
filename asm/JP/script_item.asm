@@ -54,3 +54,30 @@ Call_000_237d:
     pop af
     ldh [hItemSlot], a
     ret
+
+; Write both operation slots, then swap their original sixteen-byte records.
+SwapOpSlots:
+
+
+    push af
+    ld a, $01
+    call PushRomBank
+    pop af
+    call WriteOpSlots
+    call PopRomBank
+    ld e, $10
+    ld hl, wListValue
+    ld bc, wAltSlot+15
+
+jr_000_23b2:
+    ld a, [hl]
+    ld d, a
+    ld a, [bc]
+    ld [hl-], a
+    ld a, d
+    ld [bc], a
+    dec bc
+    dec e
+    jr nz, jr_000_23b2
+
+    ret

@@ -55,7 +55,7 @@ jr_002_6117:
 ; Restore each six-object group when its associated counter is zero.
 RestoreC1Objs:
 
-    ld a, [$c563]
+    ld a, [wBullet1Count]
     cp $00
     jr nz, jr_002_613d
 
@@ -81,7 +81,7 @@ jr_002_6124:
     jr nz, jr_002_6124
 
 jr_002_613d:
-    ld a, [$c564]
+    ld a, [wBullet2Count]
     cp $00
     jr nz, jr_002_6162
 

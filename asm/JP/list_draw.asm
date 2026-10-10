@@ -231,7 +231,7 @@ jr_001_4f29:
 
 jr_001_4f2b:
     ld [wListMark], a
-    call Call_000_107a
+    call ShowListText
     call SubmitMapQueue
     pop af
     ldh [hChangePos], a

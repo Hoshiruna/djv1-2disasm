@@ -11,6 +11,9 @@ Jump_000_2603:
     call ReadBit
     ret
 
+; Read an object ID from the script, then enter SetObjVisible.
+ScriptShowObj:
+
 
     call ReadArg
 ; A = object ID; set its visibility bit.
@@ -20,6 +23,9 @@ Call_000_260d:
     call SelectVisible
     ld bc, BitMasks
     jp SetBit
+
+; Read an object ID from the script, then enter ClearObjVisible.
+ScriptHideObj:
 
 
     call ReadArg

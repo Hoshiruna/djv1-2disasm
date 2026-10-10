@@ -25,7 +25,7 @@ InitC2View:
     call InitC2Bits
     call PickC2Scene
     call LoadC2Pal
-    call Call_000_19d9
+    call DrawCursorObjs
     call SubmitOam
     call BuildObjList
     call RedrawScene
@@ -46,7 +46,7 @@ InitC2View:
     call ShowMsg0
     ld a, $0d
     ld [$c8e9], a
-    call Call_003_526c
+    call SaveC2Effect
     ld a, $0a
     call PlayAudio
     ld a, $78
@@ -57,15 +57,15 @@ InitC2View:
     call WaitTicks
     xor a
     ld [$c8e9], a
-    call Call_003_527b
+    call ShowC2Effect
     ld a, $78
     call WaitTicks
     ld a, $02
     call ShowMsg0
     ld a, $3c
     call WaitTicks
-    call Call_003_52ce
-    call Call_000_3966
+    call RestoreC2Effect
+    call RoomCueCall
     ld a, $03
     call ShowMsg0
 

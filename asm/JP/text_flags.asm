@@ -1,0 +1,20 @@
+
+; Clear text mode bit zero to select tile map $9800.
+TextUseMap0:
+
+
+Jump_000_1199:
+    ld a, [wTextMode]
+    and $fe
+    ld [wTextMode], a
+    ret
+
+; Set text mode bit zero to select tile map $9c00.
+TextUseMap1:
+
+
+Jump_000_11a2:
+    ld a, [wTextMode]
+    or $01
+    ld [wTextMode], a
+    ret

@@ -302,3 +302,157 @@ DEF sStateSum          EQU $bf7e
 
 ; Startup A saved for the original soft-reset path.
 DEF hBootByte         EQU $ffa8
+
+; Text mode flags, page initialization flag, and last byte read.
+DEF wTextMode          EQU $c88f
+DEF wTextPageReady     EQU $c892
+DEF wTextByte          EQU $c8ec
+
+; Nonzero list mode saved before restricted room selection.
+DEF wSavedListMode     EQU $c534
+
+; Name IDs used by text substitutions and English form selection.
+DEF wTextName0         EQU $c537
+DEF wTextName1         EQU $c538
+
+; Text character/value scratch and decimal digits.
+DEF wTextValue         EQU $c885
+DEF wTextNum100        EQU $c88b
+DEF wTextNum10         EQU $c88c
+DEF wTextNum1          EQU $c88d
+DEF wTextNumShown      EQU $c88e
+DEF wTextChar          EQU $c660
+
+; High decimal digits and shared text value/address scratch.
+DEF wTextNum10000      EQU $c889
+DEF wTextNum1000       EQU $c88a
+DEF wTextTmp           EQU $c887
+
+; Text tile position and sprite line start.
+DEF wTextCol           EQU $c662
+DEF wTextRow           EQU $c663
+DEF wTextStartX        EQU $c893
+
+; Text buffer tile rectangle: width, height, then row-major tiles.
+DEF wTextBuf           EQU $c66e
+DEF wTextWidth         EQU $c66c
+DEF wTextHeight        EQU $c66d
+
+; Glyph rectangle and map position; auxiliary byte is US attribute or JP lower tile.
+DEF wTextRect          EQU $c664
+DEF wTextTile          EQU $c666
+DEF wTextAux           EQU $c667
+DEF wTextMapX          EQU $c195
+DEF wTextMapY          EQU $c196
+DEF wTextOriginX       EQU $c65e
+DEF wTextOriginY       EQU $c65f
+
+; Cursor bounds scratch: inclusive X minimum/maximum, then Y minimum/maximum.
+DEF wCursorBounds     EQU $c865
+
+; Staged scene map rectangle: width, height, interleaved tile/attribute rows.
+DEF wSceneRect        EQU $c900
+
+; List end row and previous mode; previous mode shares the scene-variant byte.
+DEF wListEndRow        EQU $c527
+DEF wPrevListMode      EQU $c866
+
+; Exclusive byte-index limit for the list deletion shift.
+DEF wDropEnd          EQU $c87f
+
+; List search target and group/row result; group shares saved text-list mode.
+DEF wFoundGroup        EQU $c534
+DEF wFoundRow          EQU $c535
+DEF wFindListValue     EQU $c882
+
+; Working-list source pointer; shares room-object draw scratch.
+DEF wWorkSrc          EQU $c867
+
+; Case-two item category counters.
+DEF wC2Word            EQU $c58a
+DEF wC2Count0          EQU $c53a
+DEF wC2Count1          EQU $c590
+DEF wC2Count2          EQU $c58d
+
+; Object ID recorded by the alternate-target room hit scan.
+DEF wHitObj           EQU $c5c2
+
+; Case-one list count; shares storage with a case-two category counter.
+DEF wC1ListCount      EQU $c53a
+
+; Case-one held-item byte; case two reuses this address for text records.
+DEF wC1HeldItem       EQU $c55b
+; Suppress the input-kind-two list wait when this byte equals one.
+DEF wSkipListWait     EQU $c5e5
+
+; Case-one BULLET1 ($08) and BULLET2 ($2d) quantities.
+DEF wBullet1Count     EQU $c563
+DEF wBullet2Count     EQU $c564
+
+; Case-one counts capped at six; their gameplay names are not yet traced.
+DEF wC1Count0          EQU $c55c
+DEF wC1Count1          EQU $c55d
+DEF wC1Count2          EQU $c55e
+
+; Base of the case-two script indexed byte counters.
+DEF wC2Counters       EQU $c57b
+
+; Byte cost used by the case-two word comparison and subtraction.
+DEF wC2Cost           EQU $c58e
+
+; Scene effect index, saved scene ID, and saved case-two audio cue.
+DEF wFxCue             EQU $c165
+DEF wFxScene           EQU $c539
+DEF wFxId              EQU $c8e9
+
+; Case-one game loop exits when this marker is $ff.
+DEF wC1Exit           EQU $c5df
+
+; Case-one slot prize and three final reel indices; shares general scratch.
+DEF wSlotPrize         EQU $c884
+DEF wSlotResult        EQU $c855
+
+; Case-one displayed reel indices and animation iteration; shares general scratch.
+DEF wSlotShown         EQU $c858
+DEF wSlotFrame         EQU $c864
+
+; Case-two put mode and saved active list mode.
+DEF wPutMode           EQU $c5c8
+DEF wPutList           EQU $c5c7
+
+; Case-two put group pointer, free byte offset, and packed value; pointer shares draw scratch.
+DEF wPutPtr            EQU $c863
+DEF wPutValue          EQU $c896
+DEF wPutPos            EQU $c895
+
+; Audio test selection and decimal digits; shares game scratch.
+DEF wTestIndex         EQU $c5c3
+DEF wTestDigit         EQU $c5c5
+DEF wTestTens          EQU $c5c6
+
+; Nonzero suppresses case-two room cue selection during scene effects.
+DEF wRoomCueHold      EQU $c5c9
+
+; Case-two event bitmap; bank two clears its bits and associated counters.
+DEF wC2EventBits     EQU $c5d2
+
+; One when both case-two final flags and group tests succeed.
+DEF wC2FinalReady    EQU $c5e2
+
+; Index for the seven case-two effect object records.
+DEF wC2FxObjIndex    EQU $c5cb
+
+; Next case/scene pair in the ending display.
+DEF wCreditIndex     EQU $c5e0
+
+; Palette selected for the case-two timed room event; shares audio-test digit scratch.
+DEF wC2TimedPal      EQU $c5c6
+
+; Eight four-byte case-two schedule records, with $fe denoting an unused byte.
+DEF wC2Schedule      EQU $c55b
+
+; Scratch used while selecting case-two schedule records; shared with other UI paths.
+DEF wC2SchedPtr        EQU $c855
+DEF wC2SchedStart      EQU $c859
+DEF wC2SchedEnd        EQU $c85a
+DEF wC2SchedIndex      EQU $c85b

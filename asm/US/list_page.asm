@@ -152,8 +152,8 @@ jr_001_4ca9:
     ld [$c867], a
     ld a, $c8
     ld [$c868], a
-    call Call_000_3138
-    call Call_000_31c9
+    call ClearWorkList
+    call CopyWorkList
     ld a, [wChangeMode]
     cp $00
     jr z, jr_001_4c99
@@ -245,8 +245,8 @@ jr_001_4d4c:
     ld [$c867], a
     ld a, b
     ld [$c868], a
-    call Call_000_3138
-    call Call_000_31c9
+    call ClearWorkList
+    call CopyWorkList
     ld a, [wChangeMode]
     cp $02
     jr z, jr_001_4d25

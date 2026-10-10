@@ -60,3 +60,38 @@ Jump_000_2226:
     pop af
     ldh [hItemSlot], a
     ret
+
+; Write both operation slots, then swap their original sixteen-byte records.
+SwapOpSlots:
+
+
+    push af
+
+Jump_000_224e:
+    ld a, $01
+    call PushRomBank
+    pop af
+    call WriteOpSlots
+    call PopRomBank
+    ld e, $10
+    ld hl, wListValue
+    ld bc, wAltSlot+15
+
+jr_000_2262:
+    ld a, [hl]
+
+Jump_000_2263:
+    ld d, a
+    ld a, [bc]
+
+Jump_000_2265:
+    ld [hl-], a
+
+Jump_000_2266:
+    ld a, d
+    ld [bc], a
+    dec bc
+    dec e
+    jr nz, jr_000_2262
+
+    ret

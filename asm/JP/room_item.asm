@@ -154,7 +154,7 @@ jr_000_193f:
     and $01
     jr z, jr_000_1993
 
-    call Call_000_0e82
+    call ReadCursorBox
     ld a, [wStateResult]
     bit 7, a
     jr z, jr_000_1993

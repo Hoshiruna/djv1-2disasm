@@ -10,6 +10,9 @@ Call_000_2753:
     call ReadBit
     ret
 
+; Read an object ID from the script, then enter SetObjVisible.
+ScriptShowObj:
+
 
     call ReadArg
 ; A = object ID; set its visibility bit.
@@ -19,6 +22,9 @@ Call_000_275d:
     call SelectVisible
     ld bc, BitMasks
     jp SetBit
+
+; Read an object ID from the script, then enter ClearObjVisible.
+ScriptHideObj:
 
 
     call ReadArg

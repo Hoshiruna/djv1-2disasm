@@ -1,0 +1,54 @@
+
+; Case-one labels: sixteen pointers. Case-two labels: thirty-four pointers.
+C1ListTexts:
+    dw C1Lbl00
+    dw C1Lbl01
+    dw C1Lbl02
+    dw C1Lbl03
+    dw C1Lbl04
+    dw C1Lbl05
+    dw C1Lbl06
+    dw C1Lbl07
+    dw C1Lbl08
+    dw C1Lbl09
+    dw C1Lbl0a
+    dw C1Lbl0b
+    dw C1Lbl0c
+    dw C1Lbl0d
+    dw C1Lbl0e
+    dw C1Lbl0f
+C2ListTexts:
+    dw C2Lbl00
+    dw C2Lbl01
+    dw C2Lbl02
+    dw C2Lbl03
+    dw C2Lbl04
+    dw C2Lbl05
+    dw C2Lbl06
+    dw C2Lbl07
+    dw C2Lbl08
+    dw C2Lbl09
+    dw C2Lbl0a
+    dw C2Lbl0b
+    dw C2Lbl0c
+    dw C2Lbl0d
+    dw C2Lbl0e
+    dw C2Lbl0f
+    dw C2Lbl10
+    dw C2Lbl11
+    dw C2Lbl12
+    dw C2Lbl13
+    dw C2Lbl14
+    dw C2Lbl15
+    dw C2Lbl16
+    dw C2Lbl17
+    dw C2Lbl18
+    dw C2Lbl19
+    dw C2Lbl1a
+    dw C2Lbl1b
+    dw C2Lbl1c
+    dw C2Lbl1d
+    dw C2Lbl1e
+    dw C2Lbl1f
+    dw C2Lbl20
+    dw C2Lbl21

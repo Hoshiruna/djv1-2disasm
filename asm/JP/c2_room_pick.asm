@@ -20,7 +20,7 @@ jr_003_4cbe:
     ld a, [wListPick]
     sub $0d
     ld [wListMarkRow], a
-    call Call_000_3a5d
+    call ClearListMarkCall
     call WaitFrame
     ret
 
@@ -55,7 +55,7 @@ jr_003_4cf4:
 jr_003_4cfc:
     ld a, $46
     call ShowMsg1
-    call Call_000_2bae
+    call RestoreTextLists
     ret
 
 ; Reset scrolling, call the original bank 29 helper, show the selection messages and play its effect.
@@ -73,7 +73,7 @@ Call_003_4d05:
     ld a, $4a
     call ShowMsg1
     call Call_000_39ac
-    call Call_000_2bae
+    call RestoreTextLists
     ret
 
 C2PickKeys:
