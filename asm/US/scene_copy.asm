@@ -10,7 +10,7 @@ Call_000_0e6e:
     call SubmitMapQueue
 
 Jump_000_0e7f:
-    call Call_000_01a9
+    call WaitVideo
     ret
 
 

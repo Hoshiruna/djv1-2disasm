@@ -7,7 +7,7 @@ VBlankVideo:
     ldh [rSVBK], a
     ld hl, hVideoFlags
     bit 7, [hl]
-    call nz, $ff80
+    call nz, hOamDma
     bit 3, [hl]
     jp z, Jump_001_4079
 
@@ -35,7 +35,7 @@ jr_001_4086:
 jr_001_408f:
     ldh a, [hVideoFlags]
     bit 4, a
-    call nz, Call_001_4197
+    call nz, StartTimer
     ld a, [$c182]
     ldh [rSCX], a
     ld a, [$c184]
@@ -43,11 +43,14 @@ jr_001_408f:
     ld a, [$c18c]
     inc a
     ld [$c18c], a
-    ld hl, $ffab
+    ld hl, hFrameTick
     inc [hl]
     pop af
     ldh [rSVBK], a
     ret
+
+; HRAM source: start DMA from $c000, wait, then clear request bit 7 at HL.
+OamDmaCode:
 
 
     ld a, $c0

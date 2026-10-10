@@ -21,7 +21,7 @@ SECTION "ROM Bank $03e", ROMX[$4000], BANK[$3e]
     ld a, [bc]
     ld h, a
     inc bc
-    call Call_000_05ce
+    call ReadBgMap
     ret
 
 

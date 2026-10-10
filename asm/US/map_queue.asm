@@ -24,7 +24,7 @@ jr_000_02b7:
 
 Jump_000_02b9:
     ldh [hMapRunLeft], a
-    call Call_000_02df
+    call QueueMapRow
     ldh a, [hMapHeight]
 
 Call_000_02c0:
@@ -57,16 +57,19 @@ jr_000_02dc:
 Jump_000_02de:
     ret
 
+; Queue a tile row and its attribute row, then advance BC by $20.
+QueueMapRow:
+
 
 Call_000_02df:
-    call Call_000_02fe
-    call Call_000_0305
-    call Call_000_0327
+    call QueueMapAddr
+    call QueueTileLen
+    call QueueMapRun
     ldh a, [hMapWidth]
     ldh [hMapRunLeft], a
-    call Call_000_02fe
-    call Call_000_0314
-    call Call_000_0327
+    call QueueMapAddr
+    call QueueAttrLen
+    call QueueMapRun
     ld a, $20
     add c
     ld c, a
@@ -79,6 +82,9 @@ Jump_000_02fc:
 
 Jump_000_02fd:
     ret
+
+; Append BC as destination high/low bytes at DE; advance DE by two.
+QueueMapAddr:
 
 
 Call_000_02fe:
@@ -99,6 +105,9 @@ Jump_000_0303:
     inc de
     ret
 
+; Append the tile width and add width+3 to hMapQueueLen; preserve BC.
+QueueTileLen:
+
 
 Call_000_0305:
     push bc
@@ -114,6 +123,9 @@ Call_000_0310:
     ldh [hMapQueueLen], a
     pop bc
     ret
+
+; Append width with bit 6 set; add width+3 to the queue length; preserve BC.
+QueueAttrLen:
 
 
 Call_000_0314:
@@ -134,6 +146,9 @@ Jump_000_0320:
     ldh [hMapQueueLen], a
     pop bc
     ret
+
+; Copy hMapRunLeft bytes from HL to DE, advancing both pointers.
+QueueMapRun:
 
 
 Call_000_0327:

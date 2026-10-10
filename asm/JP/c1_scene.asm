@@ -7,7 +7,7 @@ PickC1Scene:
     ld l, a
     ld h, $00
     add hl, hl
-    ld de, $6631
+    ld de, C1SceneRefs
     add hl, de
     ld a, [hl+]
     ld [wRoomDataPtr], a
@@ -35,7 +35,7 @@ Call_001_65e3:
     ld d, a
     ld a, [wRoomId]
     ld e, a
-    ld hl, $67b8
+    ld hl, C1StateCounts
     add hl, de
     ld a, [hl]
     srl a

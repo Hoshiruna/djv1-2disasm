@@ -16,17 +16,26 @@ jr_000_0568:
     sla e
     rla
     ld d, a
-    jp Jump_000_0680
+    jp DecodeLz
+
+; Decode four bytes into one tile plane, advancing BC by two per byte.
+CopyRle4:
 
 
 Call_000_057b:
-    call Call_000_057e
+    call CopyRle2
+
+; Decode two bytes through the original call-and-fall-through cascade.
+CopyRle2:
 
 Call_000_057e:
-    call Call_000_0581
+    call CopyRle1
+
+; Decode one byte to BC and advance BC by two.
+CopyRle1:
 
 Call_000_0581:
-    call Call_000_05b0
+    call ReadRleByte
     ld [bc], a
     inc bc
     inc bc
@@ -38,33 +47,36 @@ DecodeRleTiles:
 Jump_000_0588:
 jr_000_0588:
     ld a, [hl+]
-    ldh [$ffe3], a
+    ldh [hRleMark], a
     ld a, [hl+]
     ld d, a
     xor a
-    ldh [$ffe0], a
+    ldh [hRleFlags], a
     push bc
     push de
-    call Call_000_0598
+    call DecodeRlePlane
     pop de
     pop bc
     inc bc
 
+; Decode D tiles into one plane and retain run state for the next plane.
+DecodeRlePlane:
+
 Call_000_0598:
 jr_000_0598:
     push de
-    ldh a, [$ffe0]
+    ldh a, [hRleFlags]
     ld d, a
-    ldh a, [$ffe1]
+    ldh a, [hRleLeft]
     ld e, a
-    call Call_000_057b
+    call CopyRle4
 
 Jump_000_05a2:
-    call Call_000_057b
+    call CopyRle4
     ld a, d
-    ldh [$ffe0], a
+    ldh [hRleFlags], a
     ld a, e
-    ldh [$ffe1], a
+    ldh [hRleLeft], a
     pop de
 
 Call_000_05ac:
@@ -73,6 +85,9 @@ Call_000_05ac:
 
 Call_000_05af:
     ret
+
+; Return a literal or run byte; marker/value/count emits count+1 copies.
+ReadRleByte:
 
 
 Call_000_05b0:
@@ -84,7 +99,7 @@ Call_000_05b0:
     jr z, jr_000_05bc
 
     dec e
-    ldh a, [$ffe2]
+    ldh a, [hRleValue]
     ret
 
 
@@ -92,7 +107,7 @@ jr_000_05bc:
     ld d, a
 
 jr_000_05bd:
-    ldh a, [$ffe3]
+    ldh a, [hRleMark]
     cp [hl]
     jr z, jr_000_05c4
 
@@ -105,10 +120,10 @@ Jump_000_05c3:
 jr_000_05c4:
     inc hl
     ld a, [hl+]
-    ldh [$ffe2], a
+    ldh [hRleValue], a
     ld a, [hl+]
     ld e, a
-    ldh a, [$ffe2]
+    ldh a, [hRleValue]
     inc d
 
 Jump_000_05cd:

@@ -13,7 +13,7 @@ jr_000_0d92:
     ld a, $1d
 
 jr_000_0d94:
-    call Call_000_080e
+    call PlayAudio
     call ReadSceneMap
     push bc
     push hl
@@ -68,7 +68,7 @@ jr_000_0dd3:
     jr nz, jr_000_0db4
 
     call SubmitMapQueue
-    call Call_000_01b7
+    call WaitFrame
     ld a, [wDrawStep]
     inc a
     ld [wDrawStep], a

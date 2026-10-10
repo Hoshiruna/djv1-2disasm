@@ -156,8 +156,8 @@ jr_001_4920:
     dec d
     jr nz, jr_001_4920
 
-    call Call_000_01a9
-    call Call_000_074b
+    call WaitVideo
+    call RequestPals
 
 jr_001_492c:
     ret

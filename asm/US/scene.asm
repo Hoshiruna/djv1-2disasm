@@ -5,8 +5,8 @@ Call_000_0bb6:
     push bc
     push de
     push hl
-    call Call_000_0416
-    call Call_000_03fe
+    call BlankOam
+    call SubmitOam
     ld a, $01
     ld [wSceneBlank], a
     call DrawSceneMap
@@ -25,7 +25,7 @@ Call_000_0bb6:
     pop af
     call ApplyScenePal
     call PopRomBank
-    call Call_000_03fe
+    call SubmitOam
     xor a
     ld [wSceneBlank], a
     call DrawSceneMap
@@ -48,10 +48,10 @@ Call_000_0c08:
     push de
     push hl
     call Call_000_0e5d
-    call Call_000_0404
+    call ClearOam
 
 Jump_000_0c11:
-    call Call_000_03fe
+    call SubmitOam
     call SelectSceneMap
     push af
     ld a, $01
@@ -82,7 +82,7 @@ Call_000_0c44:
     call PopRomBank
 
 Call_000_0c47:
-    call Call_000_01b7
+    call WaitFrame
 
 Call_000_0c4a:
     pop hl
@@ -108,10 +108,10 @@ Call_000_0c50:
     push hl
 
 Call_000_0c51:
-    call Call_000_0416
+    call BlankOam
 
 Call_000_0c54:
-    call Call_000_03fe
+    call SubmitOam
 
 Call_000_0c57:
     call SelectSceneMap

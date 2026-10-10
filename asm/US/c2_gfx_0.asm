@@ -26,99 +26,99 @@ ResourcePointers_02a:
 
 ; Case II font: 128 tiles (2048 decoded bytes).
 Resource_US_02a_4020:
-    INCBIN "../../res/ui/US/case2_font.bin", $0, $22
+    INCBIN "../../res/ui/font/US/case2_font.bin", $0, $22
 jr_02a_4042:
-    INCBIN "../../res/ui/US/case2_font.bin", $22, $10
+    INCBIN "../../res/ui/font/US/case2_font.bin", $22, $10
 jr_02a_4052:
-    INCBIN "../../res/ui/US/case2_font.bin", $32, $3d
+    INCBIN "../../res/ui/font/US/case2_font.bin", $32, $3d
 jr_02a_408f:
-    INCBIN "../../res/ui/US/case2_font.bin", $6f, $83
+    INCBIN "../../res/ui/font/US/case2_font.bin", $6f, $83
 jr_02a_4112:
-    INCBIN "../../res/ui/US/case2_font.bin", $f2, $1b
+    INCBIN "../../res/ui/font/US/case2_font.bin", $f2, $1b
 jr_02a_412d:
-    INCBIN "../../res/ui/US/case2_font.bin", $10d, $31
+    INCBIN "../../res/ui/font/US/case2_font.bin", $10d, $31
 Call_02a_415e:
-    INCBIN "../../res/ui/US/case2_font.bin", $13e, $4
+    INCBIN "../../res/ui/font/US/case2_font.bin", $13e, $4
 jr_02a_4162:
-    INCBIN "../../res/ui/US/case2_font.bin", $142, $c3
+    INCBIN "../../res/ui/font/US/case2_font.bin", $142, $c3
 jr_02a_4225:
-    INCBIN "../../res/ui/US/case2_font.bin", $205, $20
+    INCBIN "../../res/ui/font/US/case2_font.bin", $205, $20
 jr_02a_4245:
-    INCBIN "../../res/ui/US/case2_font.bin", $225, $4a
+    INCBIN "../../res/ui/font/US/case2_font.bin", $225, $4a
 jr_02a_428f:
-    INCBIN "../../res/ui/US/case2_font.bin", $26f, $a7
+    INCBIN "../../res/ui/font/US/case2_font.bin", $26f, $a7
 jr_02a_4336:
-    INCBIN "../../res/ui/US/case2_font.bin", $316, $62
+    INCBIN "../../res/ui/font/US/case2_font.bin", $316, $62
 
 ; Case II HUD graphics: 128 tiles (2048 decoded bytes).
 Resource_US_02a_4398:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $0, $1
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $0, $1
 jr_02a_4399:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $1, $6
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $1, $6
 jr_02a_439f:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $7, $37
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $7, $37
 jr_02a_43d6:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $3e, $d
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $3e, $d
 jr_02a_43e3:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $4b, $10
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $4b, $10
 jr_02a_43f3:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $5b, $f
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $5b, $f
 Jump_02a_4402:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $6a, $d8
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $6a, $d8
 jr_02a_44da:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $142, $18
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $142, $18
 jr_02a_44f2:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $15a, $11
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $15a, $11
 jr_02a_4503:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $16b, $17
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $16b, $17
 jr_02a_451a:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $182, $26
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $182, $26
 jr_02a_4540:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $1a8, $25
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $1a8, $25
 jr_02a_4565:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $1cd, $6
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $1cd, $6
 jr_02a_456b:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $1d3, $2a
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $1d3, $2a
 jr_02a_4595:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $1fd, $12
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $1fd, $12
 jr_02a_45a7:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $20f, $7
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $20f, $7
 jr_02a_45ae:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $216, $48
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $216, $48
 jr_02a_45f6:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $25e, $c
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $25e, $c
 jr_02a_4602:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $26a, $37
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $26a, $37
 jr_02a_4639:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $2a1, $3b
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $2a1, $3b
 jr_02a_4674:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $2dc, $e
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $2dc, $e
 jr_02a_4682:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $2ea, $4
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $2ea, $4
 jr_02a_4686:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $2ee, $5
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $2ee, $5
 jr_02a_468b:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $2f3, $22
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $2f3, $22
 jr_02a_46ad:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $315, $2f
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $315, $2f
 jr_02a_46dc:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $344, $1b
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $344, $1b
 jr_02a_46f7:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $35f, $39
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $35f, $39
 jr_02a_4730:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $398, $3a
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $398, $3a
 jr_02a_476a:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $3d2, $1c
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $3d2, $1c
 jr_02a_4786:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $3ee, $29
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $3ee, $29
 jr_02a_47af:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $417, $7c
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $417, $7c
 jr_02a_482b:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $493, $28
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $493, $28
 jr_02a_4853:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $4bb, $15
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $4bb, $15
 jr_02a_4868:
-    INCBIN "../../res/ui/US/case2_hud_tiles.bin", $4d0, $4b
+    INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $4d0, $4b
 Case2BathroomTiles:
 
 GfxC2_G02:

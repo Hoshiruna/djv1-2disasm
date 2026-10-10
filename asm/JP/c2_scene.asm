@@ -19,7 +19,7 @@ jr_003_4203:
     jr nz, jr_003_420f
 
     ld a, $a8
-    call Call_000_275d
+    call SetObjVisible
     jr jr_003_4235
 
 jr_003_420f:
@@ -27,7 +27,7 @@ jr_003_420f:
     ld l, a
     ld h, $00
     add hl, hl
-    ld de, $4315
+    ld de, C2SceneRefs
     add hl, de
     ld a, [hl+]
     ld [wRoomDataPtr], a

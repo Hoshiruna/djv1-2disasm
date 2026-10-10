@@ -1,0 +1,48 @@
+{
+  "region": "US",
+  "map": {
+    "id": 1,
+    "bank": 9,
+    "table": 16384,
+    "address": 16572,
+    "stored": 465,
+    "width": 20,
+    "height": 18
+  },
+  "palettes": {
+    "title.pal": {
+      "bank": 10,
+      "table": 16912,
+      "id": 1,
+      "address": 16992,
+      "stored": 64
+    },
+    "title_objects.pal": {
+      "bank": 10,
+      "table": 16384,
+      "id": 2,
+      "address": 16528,
+      "stored": 64
+    }
+  },
+  "graphics": {
+    "title_tiles": {
+      "id": 2,
+      "bank": 9,
+      "table": 18108,
+      "address": 20890,
+      "stored": 1501,
+      "first_tile": 0,
+      "count": 128
+    },
+    "title_tiles_extra": {
+      "id": 3,
+      "bank": 9,
+      "table": 18108,
+      "address": 22391,
+      "stored": 1273,
+      "first_tile": 128,
+      "count": 128
+    }
+  }
+}

@@ -127,58 +127,9 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
     ld [hl], $f3
     ld a, a
     ldh [$ff5f], a
-    nop
-    nop
-    ld sp, $5d11
-    ld a, $ff
-    ld h, a
-    ld b, b
-    ld l, h
-    inc bc
-    ld e, c
-    ld a, h
-    ld a, [hl-]
-    rst RST_38
-    ld b, a
-    nop
-    nop
-    nop
-    inc a
-    ld b, b
-    ld l, h
-    rst RST_38
-    inc bc
-    nop
-    nop
-    nop
-    inc a
-    ld e, l
-    ld a, $ff
-    ld h, a
-    nop
-    nop
-    ld sp, $5d11
-    ld a, $ce
-    nop
-    nop
-    nop
-    adc $00
-    ld e, l
-    ld a, $00
-    inc a
-    ld h, b
-    dec [hl]
-    nop
-    nop
-    ret c
 
-    ld bc, $03df
-    nop
-    nop
-    and b
-    ld [hl], $f3
-    ld a, a
-    ldh [$ff5f], a
+PalTitleObj:
+    INCBIN "../../res/ui/title/title_objects.pal", $0, $40
     di
     add hl, bc
     ld b, l
@@ -508,58 +459,9 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
     ld b, d
     rra
     ld hl, $78e3
-    nop
-    nop
-    ld sp, $5d11
-    ld a, $ff
-    ld h, a
-    ld b, b
-    ld l, h
-    inc bc
-    ld e, c
-    ld a, h
-    ld a, [hl-]
-    rst RST_38
-    ld b, a
-    nop
-    nop
-    nop
-    inc a
-    ld b, b
-    ld l, h
-    rst RST_38
-    inc bc
-    nop
-    nop
-    nop
-    inc a
-    ld e, l
-    ld a, $ff
-    ld h, a
-    nop
-    nop
-    ld sp, $5d11
-    ld a, $ce
-    nop
-    nop
-    nop
-    adc $00
-    ld e, l
-    ld a, $00
-    inc a
-    ld h, b
-    dec [hl]
-    nop
-    nop
-    ret c
 
-    ld bc, $03df
-    nop
-    nop
-    and b
-    ld [hl], $f3
-    ld a, a
-    ldh [$ff5f], a
+PalTitleBg:
+    INCBIN "../../res/ui/title/title.pal", $0, $40
     nop
     nop
     ld sp, $5d11
@@ -615,11 +517,11 @@ SECTION "ROM Bank $00a", ROMX[$4000], BANK[$a]
 
 ; HUD initialization background palettes: 8 groups of 4 RGB555 colors.
 Resource_JP_00a_42de:
-    INCBIN "../../res/ui/JP/hud.pal", $0, $2e
+    INCBIN "../../res/ui/hud/JP/hud.pal", $0, $2e
 jr_00a_430c:
-    INCBIN "../../res/ui/JP/hud.pal", $2e, $5
+    INCBIN "../../res/ui/hud/JP/hud.pal", $2e, $5
 jr_00a_4311:
-    INCBIN "../../res/ui/JP/hud.pal", $33, $d
+    INCBIN "../../res/ui/hud/JP/hud.pal", $33, $d
 
     ld d, b
     halt

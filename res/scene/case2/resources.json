@@ -1,12 +1,12 @@
 {
   "graphics": {
     "00": {
-      "US": "../../ui/US/case2_font.bin",
-      "JP": "../../ui/JP/case2_font.bin"
+      "US": "../../ui/font/US/case2_font.bin",
+      "JP": "../../ui/font/JP/case2_font.bin"
     },
     "01": {
-      "US": "../../ui/US/case2_hud_tiles.bin",
-      "JP": "../../ui/JP/case2_hud_tiles.bin"
+      "US": "../../ui/hud/US/case2_hud_tiles.bin",
+      "JP": "../../ui/hud/JP/case2_hud_tiles.bin"
     },
     "02": {
       "png": "00-lucky-bath/s00-bg.png",

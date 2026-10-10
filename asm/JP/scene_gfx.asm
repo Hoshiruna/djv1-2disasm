@@ -42,7 +42,7 @@ UploadGfxBlock:
 Call_000_0a94:
     ld hl, hVideoFlags
     set 3, [hl]
-    jp Jump_000_01a9
+    jp WaitVideo
 
 ; A = ID; select its case-relative bank and return HL = resource pointer.
 GetGfxPtr:
@@ -106,7 +106,7 @@ Call_000_0acd:
     ldh [rSVBK], a
 
 Call_000_0ae4:
-    call Call_000_01a9
+    call WaitVideo
     ld a, $01
     ldh [hGfxVramBank], a
     ld hl, $d000
@@ -166,7 +166,7 @@ Call_000_0b34:
     pop af
     ldh [rSVBK], a
     call PopRomBank
-    call Call_000_01a9
+    call WaitVideo
     ld a, $00
     ldh [hGfxVramBank], a
     ld hl, $d000

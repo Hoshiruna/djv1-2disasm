@@ -17,6 +17,7 @@ REGION := US
 all: game.gbc
 
 include ../scene-resources.mk
+include ../title-resources.mk
 
 text-resources: $(TEXT_STAMP)
 
@@ -26,19 +27,22 @@ $(TEXT_STAMP): $(TEXT_FILES) ../../res/text/US/editor.json \
 	$(PYTHON) ../../scripts/text_resources.py rebuild US
 	touch "$@"
 
-../../res/ui/US/%.bin: ../../res/ui/US/%.png ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
+../../res/ui/font/US/%.bin: ../../res/ui/font/US/%.png ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
+	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
+
+../../res/ui/hud/US/%.bin: ../../res/ui/hud/US/%.png ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
 # Both cases share font.png and keep separate compressed ROM slots.
-../../res/ui/US/case2_font.bin: ../../res/ui/US/font.png \
+../../res/ui/font/US/case2_font.bin: ../../res/ui/font/US/font.png \
     ../../scripts/rebuild_gfx.py ../../scripts/gb_lz.py
 	$(PYTHON) ../../scripts/rebuild_gfx.py --rgbgfx "$(RGBGFX)" "$<" "$@"
 
-../../res/ui/US/hud.bin: ../../res/ui/US/hud.tilemap \
-    ../../res/ui/US/hud.attrmap ../../scripts/hud_tilemap.py ../../scripts/gb_rle.py
-	$(PYTHON) ../../scripts/hud_tilemap.py rebuild ../../res/ui/US
+../../res/ui/hud/US/hud.bin: ../../res/ui/hud/US/hud.tilemap \
+    ../../res/ui/hud/US/hud.attrmap ../../scripts/hud_tilemap.py ../../scripts/gb_rle.py
+	$(PYTHON) ../../scripts/hud_tilemap.py rebuild ../../res/ui/hud/US
 
-hud-preview: ../../res/ui/US/hud.png
+hud-preview: ../../res/ui/hud/US/hud.png
 
 bathroom-preview: ../../res/scene/case2/previews/00-lucky-bath.png
 
@@ -64,10 +68,10 @@ bathroom-door-open-preview: ../../res/scene/case2/previews/00-lucky-bath.png \
     ../../res/scene/case2/00-lucky-bath/s00-door-open.attrmap
 	$(PYTHON) ../../scripts/bathroom_preview.py ../../res/scene/case2/00-lucky-bath/US --door open
 
-../../res/ui/US/hud.png: ../../res/ui/US/hud.bin \
-    ../../res/ui/US/font.bin ../../res/ui/US/hud_tiles.bin ../../res/ui/US/hud.pal \
+../../res/ui/hud/US/hud.png: ../../res/ui/hud/US/hud.bin \
+    ../../res/ui/font/US/font.bin ../../res/ui/hud/US/hud_tiles.bin ../../res/ui/hud/US/hud.pal \
     ../../scripts/hud_tilemap.py ../../scripts/gb_lz.py ../../scripts/gb_rle.py
-	$(PYTHON) ../../scripts/hud_tilemap.py preview ../../res/ui/US
+	$(PYTHON) ../../scripts/hud_tilemap.py preview ../../res/ui/hud/US
 
 %.2bpp: %.png
 	"$(RGBGFX)" --colors embedded -o $@ $<
@@ -75,9 +79,9 @@ bathroom-door-open-preview: ../../res/scene/case2/previews/00-lucky-bath.png \
 %.1bpp: %.png
 	"$(RGBGFX)" -d 1 -o $@ $<
 
-game.o: $(wildcard *.asm) hardware.inc ../scene.inc ../../res/ui/US/font.bin \
-    ../../res/ui/US/hud_tiles.bin ../../res/ui/US/hud.pal ../../res/ui/US/hud.bin \
-    ../../res/ui/US/case2_font.bin ../../res/ui/US/case2_hud_tiles.bin \
+game.o: $(wildcard *.asm) hardware.inc ../scene.inc ../../res/ui/font/US/font.bin \
+    ../../res/ui/hud/US/hud_tiles.bin ../../res/ui/hud/US/hud.pal ../../res/ui/hud/US/hud.bin \
+    ../../res/ui/font/US/case2_font.bin ../../res/ui/hud/US/case2_hud_tiles.bin \
     ../../res/scene/case2/00-lucky-bath/US/s00-bg.bin \
     ../../res/scene/case2/00-lucky-bath/US/s00-bg-extra.bin \
     ../../res/scene/case2/00-lucky-bath/s00-bg.tilemap \
@@ -103,9 +107,9 @@ clean:
 	rm -f ../../res/scene/case*/common/$(REGION)/*.2bpp
 	rm -f game.o game.gbc game.sym game.map
 	rm -f "$(TEXT_STAMP)"
-	rm -f ../../res/ui/US/font.2bpp ../../res/ui/US/hud_tiles.2bpp
-	rm -f ../../res/ui/US/case2_hud_tiles.2bpp
-	rm -f ../../res/ui/US/case2_font.2bpp ../../res/scene/case2/00-lucky-bath/US/s00-bg.2bpp
+	rm -f ../../res/ui/font/US/font.2bpp ../../res/ui/hud/US/hud_tiles.2bpp
+	rm -f ../../res/ui/hud/US/case2_hud_tiles.2bpp
+	rm -f ../../res/ui/font/US/case2_font.2bpp ../../res/scene/case2/00-lucky-bath/US/s00-bg.2bpp
 	rm -f ../../res/scene/case2/00-lucky-bath/US/s00-bg-extra.2bpp
 	rm -f ../../res/scene/case2/00-lucky-bath/US/s00-objects.2bpp
 	find . \( -iname '*.1bpp' -o -iname '*.2bpp' \) -exec rm {} +

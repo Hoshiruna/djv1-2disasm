@@ -161,8 +161,8 @@ class Exporter:
             tiles = {}
             names = (("case2_font", "case2_hud_tiles") if case == "case2"
                      else ("font" if region == "US" else "case1_font", "hud_tiles"))
-            for name in names:
-                block = (ROOT / "res" / "ui" / region / (name + ".bin")).read_bytes()
+            for category, name in zip(("font", "hud"), names):
+                block = (ROOT / "res" / "ui" / category / region / (name + ".bin")).read_bytes()
                 raw, _ = decode(block[3:], block[2] * 16)
                 tiles.update({block[1] + index: raw[index * 16:(index + 1) * 16]
                               for index in range(block[2])})
@@ -200,7 +200,7 @@ class Exporter:
                          for rom in self.roms.values()]
             if self.case == "case1" and role == "objects" and resource_id == 0:
                 # This ID loads the existing regional font, whose JP glyphs differ.
-                font_paths = {region: ROOT / "res" / "ui" / region /
+                font_paths = {region: ROOT / "res" / "ui" / "font" / region /
                     (("font" if region == "US" else "case1_font") + ".png") for region in self.roms}
                 for region, item in zip(self.roms, resources):
                     if decode_atlas(font_paths[region].read_bytes()) != item["tiles"]:

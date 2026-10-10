@@ -6958,7 +6958,7 @@ jr_029_6888:
     call Call_029_68b4
     call SubmitMapQueue
     ld a, $08
-    call Call_000_0753
+    call WaitTicks
     pop de
     inc e
     ld a, $0d
@@ -6976,7 +6976,7 @@ jr_029_689f:
     call Call_029_68b4
     call SubmitMapQueue
     ld a, $08
-    call Call_000_0753
+    call WaitTicks
     pop de
     dec e
     ld a, $ff
@@ -7037,7 +7037,7 @@ Call_029_68b4:
     ld a, $01
     call Call_029_690d
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     xor a
     call Call_029_690d
     ret
@@ -7046,11 +7046,11 @@ Call_029_68b4:
     ld a, $02
     call Call_029_690d
     ld a, $28
-    call Call_000_0753
+    call WaitTicks
     ld a, $03
     call Call_029_690d
     ld a, $14
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
@@ -7072,7 +7072,7 @@ Call_029_690d:
     ld l, a
     call QueueMapRect
     call SubmitMapQueue
-    call Call_000_01b7
+    call WaitFrame
     ret
 
 
@@ -7094,36 +7094,36 @@ Call_029_690d:
     ld b, d
     ld a, [$c522]
     ld [$c539], a
-    call Call_000_37ae
+    call FadeOut
     call Call_000_1746
-    call Call_000_0416
+    call BlankOam
     call Call_029_6f98
     call Call_029_70bf
     call Call_029_6986
-    call Call_000_37ae
+    call FadeOut
     ld a, $ff
     ldh [$ffa6], a
     ldh [$ffa7], a
     ld a, [$c539]
     ld [$c522], a
-    call Call_000_37ca
+    call ReloadC2View
     ld a, [$c5e1]
     cp $ff
     ret nz
 
     ld a, $4e
-    call Call_000_1b27
+    call ShowMsg3
     ret
 
 
 Call_029_6971:
-    call Call_000_0722
-    call Call_000_0420
+    call RequestTimer
+    call DisableLcd
     call $09c1
     ld a, $05
-    call Call_000_19e9
-    call Call_000_072a
-    call Call_000_044b
+    call ReadUiMap
+    call StopTimer
+    call RestoreLcd
     ret
 
 
@@ -7144,7 +7144,7 @@ Jump_029_6992:
     ld a, $0f
     call Call_029_70e7
     ld a, $8c
-    call Call_000_0753
+    call WaitTicks
     jp Jump_029_6a33
 
 
@@ -7157,9 +7157,9 @@ jr_029_69a6:
     ld a, $0d
     call Call_029_70e7
     ld a, $27
-    call Call_000_080e
+    call PlayAudio
     ld a, $8c
-    call Call_000_0753
+    call WaitTicks
     call Call_029_6a34
     jr jr_029_698f
 
@@ -7177,7 +7177,7 @@ jr_029_69c4:
     call Call_029_6a34
     call Call_029_6c6c
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     call Call_029_6a34
     call Call_029_6b89
     call Call_029_6a34
@@ -7195,7 +7195,7 @@ jr_029_69c4:
     ld a, $10
     ld [$c876], a
     call Call_029_6ceb
-    call Call_000_03fe
+    call SubmitOam
     ld a, [$c875]
     cp $00
     jr nz, jr_029_6a23
@@ -7205,12 +7205,12 @@ jr_029_69c4:
 
 
 jr_029_6a23:
-    call Call_000_03fe
+    call SubmitOam
     call Call_029_6a34
     ld a, $04
     call Call_029_70e7
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
 
 Jump_029_6a33:
     ret
@@ -7226,7 +7226,7 @@ Call_029_6a34:
     call Call_000_10d0
     call SubmitMapQueue
     ld a, $1e
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
@@ -7257,7 +7257,7 @@ jr_029_6a58:
     ldh [$ff9e], a
     call Call_029_6d52
     ld a, $20
-    call Call_000_0753
+    call WaitTicks
     ldh a, [$ffa0]
     dec a
     ldh [$ffa0], a
@@ -7384,8 +7384,8 @@ jr_029_6b1c:
     call SubmitMapQueue
 
 jr_029_6b31:
-    call Call_000_0ba4
-    call Call_000_0456
+    call NextRandom
+    call PollJoy
     ld a, [$c188]
     and $f1
     jr z, jr_029_6b31
@@ -7429,7 +7429,7 @@ jr_029_6b6c:
     sub [hl]
     ld [$c58c], a
     ld a, $1e
-    call Call_000_0753
+    call WaitTicks
     jp Jump_029_70a4
 
 
@@ -7463,7 +7463,7 @@ jr_029_6b9e:
 
 jr_029_6ba9:
     ld a, $20
-    call Call_000_0753
+    call WaitTicks
     ld a, [$c863]
     cp $11
     jr nc, jr_029_6c16
@@ -7547,9 +7547,9 @@ Jump_029_6c26:
     ld a, [$c876]
     and $02
     add $24
-    call Call_000_080e
+    call PlayAudio
     ld a, $20
-    call Call_000_0753
+    call WaitTicks
     xor a
     ld [$c875], a
     ld a, [$c876]
@@ -7627,7 +7627,7 @@ jr_029_6cb4:
 jr_029_6cbc:
     ld a, [$c874]
     call Call_029_6d30
-    call Call_000_03fe
+    call SubmitOam
     call Call_029_6a34
     ld a, $01
     call Call_029_6faf
@@ -7649,7 +7649,7 @@ jr_029_6ce3:
 
 
 jr_029_6ce4:
-    call Call_000_03fe
+    call SubmitOam
     call Call_029_6a34
     ret
 
@@ -7661,12 +7661,12 @@ jr_029_6ceb:
     ld [$c8ab], a
     ld a, $7d
     ld [$c8ac], a
-    call Call_000_38d1
-    call Call_000_03fe
+    call DrawBankCursor
+    call SubmitOam
 
 jr_029_6cfe:
-    call Call_000_0ba4
-    call Call_000_0456
+    call NextRandom
+    call PollJoy
     ld a, [$c188]
     and $31
     jr z, jr_029_6cfe
@@ -7678,21 +7678,21 @@ jr_029_6cfe:
     jr z, jr_029_6d1e
 
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     xor a
     ld [$c875], a
     jr jr_029_6ceb
 
 jr_029_6d1e:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, $2c
     ld [$c875], a
     jr jr_029_6ceb
 
 jr_029_6d2a:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
@@ -7711,7 +7711,7 @@ Call_029_6d30:
     ld a, [hl]
     ld [$c877], a
     ld a, $25
-    call Call_000_080e
+    call PlayAudio
     call Call_029_7109
     ret
 
@@ -7719,7 +7719,7 @@ Call_029_6d30:
 Call_029_6d52:
 Jump_029_6d52:
 jr_029_6d52:
-    call Call_000_0ba4
+    call NextRandom
     ldh a, [$ffa2]
     cp $00
     jr z, jr_029_6d52
@@ -8043,7 +8043,7 @@ jr_029_6f37:
 
 jr_029_6f54:
     ld a, $0e
-    call Call_000_1c5c
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_029_6f65
@@ -8057,7 +8057,7 @@ jr_029_6f65:
 
 jr_029_6f69:
     ld a, $0e
-    call Call_000_1c5c
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_029_6f77
@@ -8195,7 +8195,7 @@ jr_029_7031:
     ld l, $55
     ld h, $c8
     ld bc, $9811
-    call Call_000_01d8
+    call QueueTileRect
     call SubmitMapQueue
     ret
 
@@ -8233,9 +8233,9 @@ jr_029_7071:
     ld [$c58c], a
     call Call_029_70a4
     ld a, $23
-    call Call_000_080e
+    call PlayAudio
     ld a, $08
-    call Call_000_0753
+    call WaitTicks
     ld a, [$c58c]
     cp $ff
     jr z, jr_029_7095
@@ -8247,14 +8247,14 @@ jr_029_7071:
 
 jr_029_7095:
     ld a, $28
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 jr_029_709b:
     call Call_029_70a4
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
@@ -8274,7 +8274,7 @@ Jump_029_70a4:
 
 
 Call_029_70bf:
-    call Call_000_37ae
+    call FadeOut
     call Call_029_6971
     ld a, $10
     call Call_029_70e7
@@ -8292,7 +8292,7 @@ Call_029_70bf:
     call Call_029_70a4
 
 jr_029_70e3:
-    call Call_000_37a0
+    call FadeIn
     ret
 
 

@@ -41,7 +41,7 @@ class RleTests(unittest.TestCase):
     def test_original_maps_and_unchanged_rebuild(self):
         for region, size in (("US", 225), ("JP", 233)):
             with self.subTest(region=region):
-                folder = ROOT / "res" / "ui" / region
+                folder = ROOT / "res" / "ui" / "hud" / region
                 template = (folder / "hud.bin").read_bytes()
                 width, height, tiles, attributes, consumed = decode_resource(template)
                 self.assertEqual((width, height, consumed, len(template)), (20, 32, size, size))
@@ -53,7 +53,7 @@ class RleTests(unittest.TestCase):
     def test_edits_fit_and_preserve_header_and_size(self):
         for region in ("US", "JP"):
             with self.subTest(region=region):
-                template = (ROOT / "res" / "ui" / region / "hud.bin").read_bytes()
+                template = (ROOT / "res" / "ui" / "hud" / region / "hud.bin").read_bytes()
                 _, _, tiles, attributes, _ = decode_resource(template)
                 edited_tiles = bytearray(tiles)
                 edited_attributes = bytearray(attributes)
@@ -66,7 +66,7 @@ class RleTests(unittest.TestCase):
                 self.assertEqual(decode_resource(rebuilt)[2:4], (edited_tiles, edited_attributes))
 
     def test_overflow_preserves_bin(self):
-        template = (ROOT / "res" / "ui" / "US" / "hud.bin").read_bytes()
+        template = (ROOT / "res" / "ui" / "hud" / "US" / "hud.bin").read_bytes()
         rng = random.Random(9)
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
@@ -116,7 +116,7 @@ class RendererTests(unittest.TestCase):
         self.assertNotEqual(render_bathroom(ROOT / "res" / BATHROOM / "US", "closed"), png)
 
     def test_signed_tile_ids(self):
-        tiles = load_tiles(ROOT / "res" / "ui" / "US")
+        tiles = load_tiles(ROOT / "res" / "ui" / "hud" / "US")
         self.assertEqual(len(tiles), 240)
         self.assertIn(0xFF, tiles)
         self.assertIn(0x10, tiles)
@@ -148,7 +148,7 @@ class RendererTests(unittest.TestCase):
     def test_preview_png_contents(self):
         for region in ("US", "JP"):
             with self.subTest(region=region):
-                folder = ROOT / "res" / "ui" / region
+                folder = ROOT / "res" / "ui" / "hud" / region
                 width, height, tiles, attributes, _ = decode_resource((folder / "hud.bin").read_bytes())
                 colors = palette_colors((folder / "hud.pal").read_bytes())
                 pixels = render_pixels(width, height, tiles, attributes, load_tiles(folder), colors)

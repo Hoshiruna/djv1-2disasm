@@ -16,7 +16,7 @@ Call_003_556f:
     jr nz, jr_003_55ae
 
     ld a, $4d
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_003_55a2

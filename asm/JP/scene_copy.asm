@@ -8,7 +8,7 @@ Call_000_0e63:
     ld [$c901], a
     call Call_000_0e78
     call SubmitMapQueue
-    call Call_000_01a9
+    call WaitVideo
     ret
 
 

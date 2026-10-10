@@ -15,8 +15,9 @@ def load_tiles(region):
     """Map signed BG tile IDs to the font and HUD data loaded into VRAM bank 0."""
     tiles = {}
     font = "case1_font" if region.name == "JP" else "font"
-    for name in (font, "hud_tiles"):
-        resource = (region / (name + ".bin")).read_bytes()
+    font_dir = region.parent.parent / "font" / region.name
+    for path in (font_dir / (font + ".bin"), region / "hud_tiles.bin"):
+        resource = path.read_bytes()
         raw, _ = decode_tiles(resource[3:], resource[2] * 16)
         address = 0x8000 + resource[1] * 16
         if resource[0] & 1 and address < 0x8800:
@@ -113,7 +114,7 @@ def process(action, region):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("decode", "rebuild", "preview"))
-    parser.add_argument("region", type=Path, help="Regional UI directory, e.g. res/ui/US")
+    parser.add_argument("region", type=Path, help="Regional HUD directory, e.g. res/ui/hud/US")
     args = parser.parse_args()
     try:
         process(args.action, args.region)

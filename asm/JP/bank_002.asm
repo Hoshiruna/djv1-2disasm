@@ -6475,302 +6475,10 @@ jr_002_5ebc:
     rst RST_38
     rst RST_38
     nop
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, $400a
-    add hl, bc
-    ld a, [hl+]
-    ld c, a
-    ld a, [hl]
-    ld h, a
-    ld l, c
-    jp Jump_000_04b3
-
-
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_5f5f
-
-    ld bc, $401b
-    jr jr_002_5f62
-
-jr_002_5f5f:
-    ld bc, Case2SpriteDefinitions
-
-jr_002_5f62:
-    add hl, bc
-    ld a, [hl+]
-    ld h, [hl]
-    ld l, a
-    jp Jump_000_04b3
-
-
-    call Call_002_60c7
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_5f7c
-
-    ld bc, $401b
-    jr jr_002_5f7f
-
-jr_002_5f7c:
-    ld bc, Case2SpriteDefinitions
-
-jr_002_5f7f:
-    add hl, bc
-    ld a, [hl+]
-    ld h, [hl]
-    ld l, a
-    ldh a, [$ff94]
-    cp $28
-    ret z
-
-    ldh a, [$ff94]
-    add a
-    add a
-    add $00
-    ld c, a
-    ld a, $00
-    adc $c0
-    ld b, a
-    ldh a, [$ff93]
-    add $10
-    ld e, a
-    ldh a, [$ff92]
-    add $08
-    ld d, a
-    ld a, [hl+]
-
-jr_002_5f9f:
-    ldh [$ff91], a
-    ld a, [hl+]
-    add e
-    ld [bc], a
-    cp $a8
-    jr nc, jr_002_5fd6
-
-    ld a, [$c1a2]
-    cp $00
-    jr z, jr_002_5fb4
-
-    ld a, [bc]
-    cp $54
-    jr nc, jr_002_5fd6
-
-jr_002_5fb4:
-    inc bc
-    ld a, [hl+]
-    add d
-    ld [bc], a
-    cp $b0
-    jr nc, jr_002_5fdb
-
-    ld a, [hl]
-    cp $ff
-    jr z, jr_002_5fdb
-
-    inc bc
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    ldh a, [$ff94]
-    inc a
-    ldh [$ff94], a
-    cp $28
-    ret z
-
-jr_002_5fd0:
-    ldh a, [$ff91]
-    dec a
-    jr nz, jr_002_5f9f
-
-    ret
-
-
-jr_002_5fd6:
-    inc hl
-    inc hl
-    inc hl
-    jr jr_002_5fd0
-
-jr_002_5fdb:
-    inc hl
-    inc hl
-    dec bc
-    jr jr_002_5fd0
-
-    ld a, $90
-    ldh [$ff92], a
-    ld a, $80
-    ldh [$ff93], a
-    ld a, [$c5d4]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_5ffb
-
-    ld bc, $4b65
-    jr jr_002_5ffe
-
-jr_002_5ffb:
-    ld bc, $5f29
-
-jr_002_5ffe:
-    add hl, bc
-    ld a, [hl]
-    ld c, a
-    ld a, [$c5d5]
-    cp c
-    jr c, jr_002_6033
-
-    inc hl
-    inc hl
-    ld a, [hl]
-    cp $ff
-    jr nz, jr_002_6026
-
-    xor a
-    ld [$c5d4], a
-    ld [$c5d5], a
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_6021
-
-    ld hl, $4b65
-    jr jr_002_6037
-
-jr_002_6021:
-    ld hl, $5f29
-    jr jr_002_6037
-
-jr_002_6026:
-    ld a, [$c5d4]
-    inc a
-    ld [$c5d4], a
-    xor a
-    ld [$c5d5], a
-    jr jr_002_6037
-
-jr_002_6033:
-    inc a
-    ld [$c5d5], a
-
-jr_002_6037:
-    inc hl
-    ld a, [hl]
-    call Call_000_1a11
-    ret
-
-
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_604d
-
-    ld bc, $48d9
-    jr jr_002_6050
-
-jr_002_604d:
-    ld bc, Case2ObjectAnimations
-
-jr_002_6050:
-    add hl, bc
-    ld a, [hl+]
-    ld h, [hl]
-    ld l, a
-
-jr_002_6054:
-    ld a, [hl+]
-    ld [$c5d6], a
-    cp $ff
-    ret z
-
-    cp $00
-    ret z
-
-jr_002_605e:
-    ld a, [hl]
-    push hl
-    call Call_000_1a11
-    call Call_000_19c5
-    call Call_000_03fe
-    pop hl
-    ld a, [$c5d6]
-    dec a
-    ld [$c5d6], a
-    jr nz, jr_002_605e
-
-    inc hl
-    jr jr_002_6054
-
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, Case2ObjectAnimations
-    add hl, bc
-    ld a, [hl+]
-    ld [$c5c3], a
-    ld c, a
-    ld a, [hl]
-    ld [$c5c4], a
-    ld b, a
-    ld a, [$c5d7]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, bc
-    ld a, [hl]
-    ld c, a
-    ld a, [$c5d8]
-    cp c
-    jr c, jr_002_60bd
-
-    inc hl
-    inc hl
-    ld a, [hl]
-    cp $ff
-    jr nz, jr_002_60b0
-
-    xor a
-    ld [$c5d7], a
-    ld [$c5d8], a
-    ld a, [$c5c3]
-    ld l, a
-    ld a, [$c5c4]
-    ld h, a
-    jr jr_002_60c1
-
-jr_002_60b0:
-    ld a, [$c5d7]
-    inc a
-    ld [$c5d7], a
-    xor a
-    ld [$c5d8], a
-    jr jr_002_60c1
-
-jr_002_60bd:
-    inc a
-    ld [$c5d8], a
-
-jr_002_60c1:
-    inc hl
-    ld a, [hl]
-    call Call_000_1a11
-    ret
+INCLUDE "sprite.asm"
+INCLUDE "anim.asm"
+; A = object ID; return the sprite byte in its first animation pair.
+PickObjFrame:
 
 
 Call_002_60c7:
@@ -6798,154 +6506,17 @@ jr_002_60d7:
     inc bc
     ld a, [bc]
     ret
-
-
-    ld a, [$c8a7]
-    cp $00
-    jr nz, jr_002_60ef
-
-    call Call_000_2788
-    ret
-
-
-jr_002_60ef:
-    cp $01
-    jr nz, jr_002_60f7
-
-    call Call_000_2788
-    ret
-
-
-jr_002_60f7:
-    cp $02
-    jr nz, jr_002_60ff
-
-    call Call_000_2788
-    ret
-
-
-jr_002_60ff:
-    cp $09
-    jr nz, jr_002_6107
-
-    call Call_000_2788
-    ret
-
-
-jr_002_6107:
-    cp $14
-    jr nz, jr_002_610f
-
-    call Call_000_2788
-    ret
-
-
-jr_002_610f:
-    cp $15
-    jr nz, jr_002_6117
-
-    call Call_000_2788
-    ret
-
-
-jr_002_6117:
-    ret
-
-
-    ld a, [$c563]
-    cp $00
-    jr nz, jr_002_613d
-
-    ld c, $00
-    ld hl, $617d
-
-jr_002_6124:
-    ld a, [hl+]
-    push bc
-    call Call_000_1ed4
-    pop bc
-    ld a, c
-    add $26
-    push bc
-    push af
-    call Call_000_2788
-    pop af
-    call Call_000_275d
-    pop bc
-    inc c
-    ld a, $06
-    cp c
-    jr nz, jr_002_6124
-
-jr_002_613d:
-    ld a, [$c564]
-    cp $00
-    jr nz, jr_002_6162
-
-    ld c, $00
-    ld hl, $6177
-
-jr_002_6149:
-    ld a, [hl+]
-    push bc
-    call Call_000_1ed4
-    pop bc
-    ld a, c
-    add $20
-    push bc
-    push af
-    call Call_000_2788
-    pop af
-    call Call_000_275d
-    pop bc
-    inc c
-    ld a, $06
-    cp c
-    jr nz, jr_002_6149
-
-jr_002_6162:
-    ret
-
-
-    ld a, [$c8c6]
-    ld bc, $0000
-    ld hl, $6177
-
-jr_002_616c:
-    cp [hl]
-    jr z, jr_002_6173
-
-    inc hl
-    inc bc
-    jr jr_002_616c
-
-jr_002_6173:
-    ld a, c
-    add $20
-    ret
-
-
-    ld c, d
-    ld c, a
-    ld d, b
-    ld d, c
-    ld d, d
-    ld d, e
-    dec a
-    ld a, $3f
-    ld b, b
-    ld b, c
-    ld b, d
+INCLUDE "c1_items.asm"
 
 Call_002_6183:
     ld a, $11
-    call Call_000_080e
+    call PlayAudio
     ld a, $3c
-    call Call_000_0753
-    call Call_000_0416
+    call WaitTicks
+    call BlankOam
     call Call_002_61d3
     ld a, $12
-    call Call_000_080e
+    call PlayAudio
     call Call_002_622f
     call Call_002_6250
     ld a, [$c884]
@@ -6955,24 +6526,24 @@ Call_002_6183:
     ld [$c538], a
     ld [$c8a7], a
     ld a, $14
-    call Call_000_080e
+    call PlayAudio
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     ld a, $15
-    call Call_000_080e
+    call PlayAudio
     ld a, $02
-    call Call_000_0753
+    call WaitTicks
     call Call_000_302f
     ld a, $18
-    call Call_000_1c6d
+    call ShowMsg2
     ret
 
 
 jr_002_61c8:
     ld a, $16
-    call Call_000_080e
+    call PlayAudio
     ld a, $75
-    call Call_000_1c6d
+    call ShowMsg2
     ret
 
 
@@ -6984,14 +6555,14 @@ Call_002_61d3:
     cp $46
     jr nc, jr_002_6206
 
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     cp $06
     jr c, jr_002_6206
 
 jr_002_61e9:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     ld c, a
@@ -7015,7 +6586,7 @@ jr_002_620a:
     ld bc, $0000
 
 jr_002_620d:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     ld hl, $c855
@@ -7049,7 +6620,7 @@ jr_002_6233:
     call Call_002_62f7
     call SubmitMapQueue
     ld a, $05
-    call Call_000_0753
+    call WaitTicks
     ld a, [$c864]
     inc a
     ld [$c864], a
@@ -7061,7 +6632,7 @@ jr_002_6233:
 
 Call_002_6250:
     ld a, $13
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c855]
     ld [$c858], a
     xor a
@@ -7074,7 +6645,7 @@ jr_002_625f:
     call Call_002_62f7
     call SubmitMapQueue
     ld a, $05
-    call Call_000_0753
+    call WaitTicks
     ld a, [$c864]
     inc a
     ld [$c864], a
@@ -7082,7 +6653,7 @@ jr_002_625f:
     jr nz, jr_002_625f
 
     ld a, $13
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c856]
     ld [$c859], a
     xor a
@@ -7096,7 +6667,7 @@ jr_002_628c:
     call Call_002_62f7
     call SubmitMapQueue
     ld a, $05
-    call Call_000_0753
+    call WaitTicks
     ld a, [$c864]
     inc a
     ld [$c864], a
@@ -7104,7 +6675,7 @@ jr_002_628c:
     jr nz, jr_002_628c
 
     ld a, $13
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c857]
     ld [$c85a], a
     ld e, $00
@@ -7115,13 +6686,13 @@ jr_002_628c:
     call Call_002_630b
     call SubmitMapQueue
     ld a, $05
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 Call_002_62cf:
 jr_002_62cf:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     ld hl, $c858
@@ -7136,7 +6707,7 @@ jr_002_62cf:
 
 Call_002_62e3:
 jr_002_62e3:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     ld hl, $c859
@@ -7151,7 +6722,7 @@ jr_002_62e3:
 
 Call_002_62f7:
 jr_002_62f7:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $07
     ld hl, $c85a
@@ -7348,17 +6919,17 @@ jr_002_6373:
     db $10
     ld c, $0c
     ld a, [bc]
-    call Call_000_0722
-    call Call_000_0420
+    call RequestTimer
+    call DisableLcd
     call Call_000_09f5
     ld a, $06
-    call Call_000_1b39
+    call ReadUiMap
     ld a, $02
-    call Call_000_1b14
-    call Call_000_072a
-    call Call_000_044b
-    call Call_000_0416
-    call Call_000_38cf
+    call StageUiObj
+    call StopTimer
+    call RestoreLcd
+    call BlankOam
+    call FadeIn
     xor a
     ld [$c5c3], a
 
@@ -7409,10 +6980,10 @@ jr_002_6418:
     call QueueMapRect
     call SubmitMapQueue
     ld a, $10
-    call Call_000_0753
+    call WaitTicks
 
 jr_002_6455:
-    call Call_000_0456
+    call PollJoy
     ld a, [$c188]
     bit 6, a
     jr z, jr_002_646c
@@ -7452,9 +7023,9 @@ jr_002_647d:
     ld a, [hl]
 
 jr_002_6491:
-    call Call_000_080e
+    call PlayAudio
     ld a, $10
-    call Call_000_0753
+    call WaitTicks
     jr jr_002_6455
 
 jr_002_649b:
@@ -7527,201 +7098,8 @@ jr_002_649b:
     add hl, bc
     ld bc, $010a
     inc c
-    ld a, [$c599]
-    cp $00
-    ret nz
-
-    ld bc, $c8c5
-    ldh a, [$ffa0]
-    ld l, a
-    ldh a, [$ffa1]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    cp $01
-    jr nz, jr_002_653b
-
-    ld bc, $c8c6
-    ldh a, [$ffa0]
-    ld l, a
-    ldh a, [$ffa1]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    cp $06
-    jr nz, jr_002_6532
-
-    ld a, $18
-    call Call_000_279e
-    jr jr_002_653b
-
-jr_002_6532:
-    cp $08
-    jr nz, jr_002_653b
-
-    ld a, $19
-    call Call_000_279e
-
-jr_002_653b:
-    ret
-
-
-    ld a, [$c599]
-    cp $00
-    ret nz
-
-    ld bc, $c8c5
-    ldh a, [$ffa0]
-    ld l, a
-    ldh a, [$ffa1]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    cp $01
-    jr nz, jr_002_6570
-
-    ld bc, $c8c6
-    ldh a, [$ffa0]
-    ld l, a
-    ldh a, [$ffa1]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    cp $06
-    jr nz, jr_002_6567
-
-    ld a, $18
-    call Call_000_2788
-    jr jr_002_6570
-
-jr_002_6567:
-    cp $08
-    jr nz, jr_002_6570
-
-    ld a, $19
-    call Call_000_2788
-
-jr_002_6570:
-    ret
-
-
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_6582
-
-    ld a, $18
-    call Call_000_279e
-    ld a, $19
-    call Call_000_279e
-
-jr_002_6582:
-    ld d, a
-    ld a, $00
-    ldh [$ff9e], a
-    ld a, $00
-    ldh [$ff9f], a
-    ld a, d
-
-jr_002_658c:
-    ldh a, [$ff9e]
-    ld l, a
-    ldh a, [$ff9f]
-    ld h, a
-    ld bc, $c52a
-    add hl, bc
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_65af
-
-    ld a, [hl]
-    cp $ff
-    jr z, jr_002_65c1
-
-    call Call_002_65cd
-    ldh a, [$ff9e]
-    inc a
-    inc a
-    ldh [$ff9e], a
-    cp $08
-    jr c, jr_002_658c
-
-jr_002_65af:
-    ld a, [hl]
-    cp $ff
-    jr z, jr_002_65c1
-
-    call Call_000_316e
-    ldh a, [$ff9e]
-    inc a
-    inc a
-    ldh [$ff9e], a
-    cp $08
-    jr c, jr_002_658c
-
-jr_002_65c1:
-    ld c, $0a
-    ld hl, $c528
-    ld a, $ff
-
-jr_002_65c8:
-    ld [hl+], a
-    dec c
-    jr nz, jr_002_65c8
-
-    ret
-
-
-Call_002_65cd:
-    rst RST_00
-    rst RST_30
-    ld h, l
-    jp c, $f865
-
-    ld h, l
-    rst RST_30
-    ld h, l
-    add hl, bc
-    ld h, [hl]
-    rst RST_30
-    ld h, l
-    ld bc, $c52b
-    ldh a, [$ff9e]
-    ld l, a
-    ldh a, [$ff9f]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    call Call_000_35c9
-    ld a, $48
-    call Call_000_1e97
-    ld a, $4a
-    call Call_000_1e97
-    ld a, $4b
-    call Call_000_1e97
-    ret
-
-
-    ld bc, $c52b
-    ldh a, [$ff9e]
-    ld l, a
-    ldh a, [$ff9f]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    add $20
-    call Call_000_1e26
-    ret
-
-
-    ld bc, $c52b
-    ldh a, [$ff9e]
-    ld l, a
-    ldh a, [$ff9f]
-    ld h, a
-    add hl, bc
-    ld a, [hl]
-    call Call_000_366c
-    ret
+INCLUDE "c1_pairs.asm"
+INCLUDE "changes.asm"
 
 
     ld a, [$c8c6]
@@ -7731,14 +7109,14 @@ Call_002_65cd:
     jr nz, jr_002_662e
 
     ld a, $63
-    call Call_000_1c6d
+    call ShowMsg2
     pop bc
-    jp Jump_000_1bb7
+    jp EndNestedAction
 
 
 jr_002_662e:
-    call Call_000_388b
-    call Call_000_38b5
+    call SaveState
+    call ReadC1Arg
     ld a, [$c8a7]
     ld [$c8aa], a
     call Call_002_6647
@@ -7747,7 +7125,7 @@ jr_002_662e:
     ret z
 
     pop bc
-    jp Jump_000_1bb7
+    jp EndNestedAction
 
 
 Call_002_6647:
@@ -7789,36 +7167,36 @@ jr_002_665a:
     dec l
     ld l, b
     ld a, $07
-    call Call_000_1eb6
+    call ReadItemFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_6688
 
     ld a, $54
-    call Call_000_1eb6
+    call ReadItemFlag
     ld a, [$c523]
     and $01
     ret z
 
 jr_002_6688:
-    call Call_000_1ca7
+    call ClearResult
     ld a, [$c53a]
     cp $00
     ret z
 
     ld a, $93
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_66a1
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_66a1:
-    call Call_000_1ca7
-    call Call_000_0b99
+    call ClearResult
+    call NextRandom
     ldh a, [$ffa2]
     and $03
     ret nz
@@ -7826,28 +7204,28 @@ jr_002_66a1:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $e0
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
     ld a, $92
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_66cb
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_66cb:
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $01
     jr nz, jr_002_66d8
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
@@ -7855,19 +7233,19 @@ jr_002_66d8:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $e5
-    call Call_000_1c6d
-    call Call_000_1c9e
+    call ShowMsg2
+    call SetResult
     ret
 
 
     ld a, $02
-    call Call_000_374a
+    call ReadProp4Bit0
     ld a, [$c523]
     and $01
     jr nz, jr_002_66fe
 
     ld a, $07
-    call Call_000_374a
+    call ReadProp4Bit0
     ld a, [$c523]
     and $01
     ret z
@@ -7876,12 +7254,12 @@ jr_002_66fe:
     ld a, [$c565]
     inc a
     ld [$c565], a
-    call Call_000_1ca7
+    call ClearResult
     ld a, [$c565]
     cp $03
     ret c
 
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $01
     ret z
@@ -7889,68 +7267,68 @@ jr_002_66fe:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $33
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
-    call Call_000_0b99
+    call NextRandom
     ldh a, [$ffa2]
     and $01
     jr z, jr_002_6732
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_6732:
     ld a, $a8
-    call Call_000_1dda
+    call SetObjFlag
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $91
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_6752
 
     ld a, $db
-    call Call_000_1c6d
-    call Call_000_1c9e
+    call ShowMsg2
+    call SetResult
     ret
 
 
 jr_002_6752:
     ld a, $de
-    call Call_000_1c6d
-    call Call_000_1c9e
+    call ShowMsg2
+    call SetResult
     ret
 
 
     ld a, $05
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_676b
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_676b:
     ld a, $2a
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_677b
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_677b:
-    call Call_000_1ca7
-    call Call_000_0b99
+    call ClearResult
+    call NextRandom
     ldh a, [$ffa2]
     and $18
     jr z, jr_002_6788
@@ -7962,46 +7340,46 @@ jr_002_6788:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $eb
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
     ld a, $06
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_67a7
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_67a7:
     ld a, $2a
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_67b7
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_67b7:
     ld a, $05
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_67c7
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_67c7:
-    call Call_000_1ca7
-    call Call_000_0b99
+    call ClearResult
+    call NextRandom
     ldh a, [$ffa2]
     and $18
     jr z, jr_002_67d4
@@ -8013,46 +7391,46 @@ jr_002_67d4:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $f1
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
     ld a, $07
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_67f3
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_67f3:
     ld a, $2a
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_6803
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_6803:
     ld a, $06
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_6813
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_6813:
-    call Call_000_1ca7
-    call Call_000_0b99
+    call ClearResult
+    call NextRandom
     ldh a, [$ffa2]
     and $18
     ret nz
@@ -8060,52 +7438,52 @@ jr_002_6813:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $f4
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
     ld a, $2a
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr z, jr_002_683d
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_683d:
     ld a, $07
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_684d
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_684d:
     ld a, $07
-    call Call_000_1eb6
+    call ReadItemFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_6869
 
     ld a, $54
-    call Call_000_1eb6
+    call ReadItemFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_6869
 
-    call Call_000_1ca7
+    call ClearResult
     ret
 
 
 jr_002_6869:
-    call Call_000_1ca7
-    call Call_000_0b99
+    call ClearResult
+    call NextRandom
     ldh a, [$ffa2]
     and $1c
     ret nz
@@ -8113,8 +7491,8 @@ jr_002_6869:
     ld a, [$c8aa]
     call Call_000_21ca
     ld a, $f6
-    call Call_000_1c63
-    call Call_000_1c9e
+    call ShowMsg1
+    call SetResult
     ret
 
 
@@ -8140,7 +7518,7 @@ jr_002_6869:
     add hl, bc
     ld a, [hl]
     and $0f
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
@@ -8154,7 +7532,7 @@ jr_002_68a7:
     jr c, jr_002_68ba
 
     ld a, $03
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
@@ -8166,7 +7544,7 @@ jr_002_68ba:
     ld a, [hl]
     ret z
 
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
@@ -8362,114 +7740,7 @@ jr_002_68ba:
     inc a
     ld [$c525], a
     ret
-
-
-    ld a, [$c522]
-    cp $8e
-    jr z, jr_002_69a3
-
-    cp $13
-    jr nz, jr_002_69ad
-
-    ld a, [$c8c6]
-    cp $06
-    jr nz, jr_002_69ad
-
-jr_002_69a3:
-    ld a, $06
-    ld [$c640], a
-    call Call_000_0bab
-    jr jr_002_69b0
-
-jr_002_69ad:
-    call Call_000_0bfd
-
-jr_002_69b0:
-    call SubmitMapQueue
-    ld a, [$c522]
-    cp $00
-    jr nz, jr_002_69cc
-
-    ld a, $41
-    call Call_000_2788
-    call Call_000_27b6
-    ld a, $42
-    call Call_000_2788
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_69cc:
-    cp $01
-    jr nz, jr_002_69e2
-
-    ld a, $41
-    call Call_000_279e
-    call Call_000_27b6
-    ld a, $42
-    call Call_000_279e
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_69e2:
-    cp $12
-    jr nz, jr_002_69f7
-
-    ld bc, $98cf
-    ld hl, $6c6a
-    call Call_000_01d8
-    call SubmitMapQueue
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_69f7:
-    cp $13
-    jr nz, jr_002_6a0c
-
-    ld bc, $98cf
-    ld hl, $6c67
-    call Call_000_01d8
-    call SubmitMapQueue
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_6a0c:
-    cp $43
-    jr nz, jr_002_6a1a
-
-    ld a, $1f
-    call Call_000_279e
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_6a1a:
-    cp $44
-    jr nz, jr_002_6a28
-
-    ld a, $1f
-    call Call_000_2788
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_6a28:
-    cp $73
-    jr nz, jr_002_6a36
-
-    ld a, $16
-    call Call_000_2788
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_6a36:
-    cp $74
-    jr nz, jr_002_6a44
-
-    ld a, $16
-    call Call_000_279e
-    call Call_000_27b6
-    jr jr_002_6a44
-
-jr_002_6a44:
-    ret
+INCLUDE "c1_refresh.asm"
 
 
     ld a, [$c8c5]
@@ -8486,9 +7757,9 @@ jr_002_6a44:
 
 jr_002_6a5a:
     ld a, $29
-    call Call_000_1c6d
+    call ShowMsg2
     ld a, $80
-    call Call_000_1e26
+    call ClearObjFlag
     jr jr_002_6aae
 
 jr_002_6a66:
@@ -8511,9 +7782,9 @@ jr_002_6a73:
 
 jr_002_6a7e:
     ld a, $80
-    call Call_000_1e26
+    call ClearObjFlag
     ld a, $7d
-    call Call_000_1c6d
+    call ShowMsg2
     jr jr_002_6aae
 
 jr_002_6a8a:
@@ -8526,7 +7797,7 @@ jr_002_6a8a:
     ld [$c523], a
     call Call_002_6aba
     ld a, $80
-    call Call_000_1e26
+    call ClearObjFlag
     pop af
     ldh [$ffa0], a
     pop af
@@ -8543,11 +7814,11 @@ jr_002_6aae:
     and $ef
     ld [$c523], a
     pop bc
-    jp Jump_000_1bb7
+    jp EndNestedAction
 
 
 Call_002_6aba:
-    call Call_000_1ca7
+    call ClearResult
     ld a, [$c8d5]
     rst RST_00
     call $cd6a
@@ -8560,7 +7831,7 @@ Call_002_6aba:
     ld l, e
     call Call_000_3e6a
     inc de
-    call Call_000_1c59
+    call ShowMsg0
     ret
 
 
@@ -8568,7 +7839,7 @@ Call_002_6aba:
     cp $04
     jr nz, jr_002_6ade
 
-    call Call_000_1c9e
+    call SetResult
     ret
 
 
@@ -8602,7 +7873,7 @@ jr_002_6ae5:
     jr c, jr_002_6ae5
 
     ld a, $76
-    call Call_000_1c6d
+    call ShowMsg2
     ld a, [$c523]
     or $10
     ld [$c523], a
@@ -8614,24 +7885,24 @@ jr_002_6ae5:
     jr nz, jr_002_6b30
 
     ld a, [$c8c6]
-    call Call_000_1ed4
+    call ClearItemFlag
     ld a, [$c8c7]
     and $fe
     or $02
     ld [$c8c7], a
     ld a, [$c8c6]
-    call Call_000_1f08
+    call SetItemState
     jr jr_002_6b46
 
 jr_002_6b30:
     ld a, [$c8c6]
-    call Call_000_37b5
+    call ClearProp4Bit0
     ld a, [$c8c7]
     and $fe
     or $02
     ld [$c8c7], a
     ld a, [$c8c6]
-    call Call_000_36da
+    call SetProp4Bit1
 
 jr_002_6b46:
     ld a, [$c8c9]
@@ -8642,13 +7913,13 @@ jr_002_6b46:
     inc a
     ld [$c528], a
     call Call_000_3444
-    call Call_000_3923
+    call RefreshLists
     call Call_000_33c2
     ld a, [$c8cb]
     ld [$c537], a
     ld a, $05
-    call Call_000_1c6d
-    call Call_000_1ca7
+    call ShowMsg2
+    call ClearResult
     ret
 
 
@@ -8660,25 +7931,25 @@ jr_002_6b46:
     inc a
     ld [$c528], a
     call Call_000_3444
-    call Call_000_3923
+    call RefreshLists
     call Call_000_33c2
     ld a, [$c8c6]
-    call Call_000_1ed4
+    call ClearItemFlag
     ld a, [$c8c7]
     and $fe
     ld [$c8c7], a
     ld a, [$c5c2]
-    call Call_000_275d
-    call Call_000_27b6
+    call SetObjVisible
+    call RefreshObjs
     ld a, $58
-    call Call_000_1c6d
-    call Call_000_1ca7
+    call ShowMsg2
+    call ClearResult
     ld a, [$c8c6]
     cp $2c
     ret nz
 
     ld a, $87
-    call Call_000_1e26
+    call ClearObjFlag
     ret
 
 
@@ -8690,617 +7961,29 @@ jr_002_6b46:
     inc a
     ld [$c528], a
     call Call_000_3444
-    call Call_000_3923
+    call RefreshLists
     call Call_000_33c2
     ld a, [$c8c6]
-    call Call_000_37b5
+    call ClearProp4Bit0
     ld a, [$c8c7]
     and $fe
     ld [$c8c7], a
     ld a, [$c5c2]
-    call Call_000_275d
-    call Call_000_27b6
+    call SetObjVisible
+    call RefreshObjs
     ld a, $58
-    call Call_000_1c6d
-    call Call_000_1ca7
+    call ShowMsg2
+    call ClearResult
     ret
-
-
-    ld a, [$c599]
-    cp $00
-    ret nz
-
-    ld a, [$c5c3]
-    and $07
-    rst RST_00
-    ld c, $6c
-    ld d, a
-    ld l, h
-    ld [hl-], a
-    ld l, h
-    ld e, b
-    ld l, h
-    ld h, [hl]
-    ld l, h
-
-jr_002_6c0a:
-    jp Jump_000_0f57
-
-
-    ret
-
-
-    ld a, [$c521]
-    cp $06
-    jr nz, jr_002_6c27
-
-    ld a, $04
-    call Call_000_1dac
-    ld a, [$c523]
-    and $01
-    jr z, jr_002_6c26
-
-    ld a, $04
-    ld [$c8b8], a
-
-jr_002_6c26:
-    ret
-
-
-jr_002_6c27:
-    call Call_002_6c33
-    ld a, [$c523]
-    and $01
-    ret z
-
-    jr jr_002_6c0a
-
-    ret
-
-
-Call_002_6c33:
-    call Call_000_1ca7
-    ld a, [$c8b8]
-    cp $16
-    ret nz
-
-    ld a, [$c522]
-    cp $73
-    ret nz
-
-    ld a, $16
-    call Call_000_1dac
-    ld a, [$c523]
-    and $01
-    jr nz, jr_002_6c53
-
-    ld a, $0a
-    ld [$c8b8], a
-
-jr_002_6c53:
-    call Call_000_1ca7
-    ret
-
-
-    ret
-
-
-    ld a, [$c8b8]
-    cp $1f
-    ret nz
-
-    ld a, [$c522]
-    cp $44
-    ret z
-
-    jr jr_002_6c0a
-
-    ret
+INCLUDE "c1_obj.asm"
 
 
     ld bc, $7301
     ld bc, $7001
-    ld a, [$c8b1]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, $6c87
-    add hl, bc
-    ld a, [hl+]
-    ld c, a
-    ld b, [hl]
-    ld a, [$c8b2]
-    ld l, a
-    ld h, $00
-    add hl, bc
-    ld a, [hl]
-    ld [$c8b3], a
-    ret
-
-
-    sub e
-    ld l, h
-    sbc [hl]
-    ld l, h
-    xor c
-    ld l, h
-    or h
-    ld l, h
-    cp a
-    ld l, h
-    jp z, Jump_000_006c
-
-    rst RST_38
-    inc bc
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    ld [bc], a
-    ld bc, $ffff
-    rst RST_38
-    nop
-    ld bc, $ff03
-    rst RST_38
-    ld [bc], a
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    nop
-    ld bc, $ff03
-    rst RST_38
-    ld [bc], a
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    nop
-    rst RST_38
-    inc bc
-    ld [bc], a
-    ld bc, $ffff
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    nop
-    ld bc, $0405
-    inc bc
-    ld [bc], a
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    nop
-    ld bc, $ffff
-    rst RST_38
-    ld [bc], a
-    rst RST_38
-    rst RST_38
-    inc bc
-    rst RST_38
-    rst RST_38
-    call Call_002_6d28
-    ld a, [$c523]
-    and $01
-    ret nz
-
-    call Call_002_6df9
-    ld a, [$c523]
-    and $01
-    ret nz
-
-    call Call_002_6e74
-    ld a, [$c523]
-    and $01
-    ret nz
-
-    ld a, [$c8b1]
-    add a
-    ld c, a
-    ld b, $00
-    ld hl, $6ea5
-    add hl, bc
-    ld a, [hl+]
-    ld c, a
-    ld a, [hl]
-    ld b, a
-    ld a, [$c8b2]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    add hl, bc
-    inc hl
-    ld a, [hl-]
-    cp $ff
-    jr nz, jr_002_6d0e
-
-    ret
-
-
-jr_002_6d0e:
-    push hl
-    rst RST_00
-    ld d, $6d
-    inc e
-    ld l, l
-    ld [hl+], a
-    ld l, l
-    pop hl
-    ld a, [hl]
-    call Call_000_1c59
-    ret
-
-
-    pop hl
-    ld a, [hl]
-    call Call_000_1c63
-    ret
-
-
-    pop hl
-    ld a, [hl]
-    call Call_000_1c6d
-    ret
-
-
-Call_002_6d28:
-    ld a, [$c521]
-    cp $1e
-    jr z, jr_002_6d4d
-
-    cp $20
-    jr z, jr_002_6d76
-
-    cp $24
-    jr z, jr_002_6da4
-
-    cp $4a
-    jp z, Jump_002_6dc2
-
-    cp $4b
-    jp z, Jump_002_6dc2
-
-    cp $4c
-    jr z, jr_002_6dc2
-
-    cp $4d
-    jr z, jr_002_6dc2
-
-    call Call_000_1ca7
-    ret
-
-
-jr_002_6d4d:
-    ld a, $06
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $e4
-    call Call_000_1c63
-    call Call_000_303f
-    ld a, [$c523]
-    or $08
-    ld [$c523], a
-    ld a, $e5
-    call Call_000_1c63
-    ld a, $e7
-    call Call_000_1c63
-    call Call_000_2bbb
-    call Call_000_1c9e
-    ret
-
-
-jr_002_6d76:
-    ld a, $07
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $16
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $e6
-    call Call_000_1c6d
-    ld a, $15
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $62
-    call Call_000_1c6d
-    ld a, [$c523]
-    or $40
-    ld [$c523], a
-    call Call_000_1c9e
-    ret
-
-
-jr_002_6da4:
-    ld a, $37
-    call Call_000_1c63
-    ld a, $15
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $62
-    call Call_000_1c6d
-    ld a, [$c523]
-    or $40
-    ld [$c523], a
-    call Call_000_1c9e
-    ret
-
-
-Jump_002_6dc2:
-jr_002_6dc2:
-    ld a, $07
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $f0
-    call Call_000_1c63
-    ld a, $15
-    ld [$c8e9], a
-    call Call_002_71ce
-    ld a, $62
-    call Call_000_1c6d
-    ld a, [$c523]
-    or $40
-    ld [$c523], a
-    ld a, $07
-    call Call_000_1dac
-    ld a, [$c523]
-    and $01
-    jr z, jr_002_6df5
-
-    ld a, $95
-    call Call_000_1dda
-
-jr_002_6df5:
-    call Call_000_1c9e
-    ret
-
-
-Call_002_6df9:
-    call Call_000_1ca7
-    ld a, [$c8c5]
-    cp $00
-    ret nz
-
-    ld a, [$c8c6]
-    cp $12
-    ret nz
-
-    ld a, [$c8b2]
-    cp $01
-    jr z, jr_002_6e14
-
-    cp $05
-    jr z, jr_002_6e44
-
-    ret
-
-
-jr_002_6e14:
-    ld a, $04
-    call Call_000_1dac
-    ld a, $6a
-    ld [$c537], a
-    ld a, [$c523]
-    and $01
-    jr z, jr_002_6e2e
-
-    ld a, $01
-    call Call_000_1c6d
-    call Call_000_1c9e
-    ret
-
-
-jr_002_6e2e:
-    ld a, $00
-    call Call_000_1c6d
-    ld a, $03
-    call Call_000_1e26
-    ld a, $04
-    call Call_000_1dda
-    call Call_000_27b6
-    call Call_000_1c9e
-    ret
-
-
-jr_002_6e44:
-    ld a, $03
-    call Call_000_1dac
-    ld a, $6a
-    ld [$c537], a
-    ld a, [$c523]
-    and $01
-    jr z, jr_002_6e5e
-
-    ld a, $03
-    call Call_000_1c6d
-    call Call_000_1c9e
-    ret
-
-
-jr_002_6e5e:
-    ld a, $02
-    call Call_000_1c6d
-    ld a, $04
-    call Call_000_1e26
-    ld a, $03
-    call Call_000_1dda
-    call Call_000_27b6
-    call Call_000_1c9e
-    ret
-
-
-Call_002_6e74:
-    call Call_000_1ca7
-    ld a, [$c8c5]
-    cp $00
-    ret nz
-
-    ld a, [$c8c6]
-    cp $3f
-    ret nz
-
-    ld a, [$c522]
-    cp $44
-    ret nz
-
-    ld a, [$c8b2]
-    cp $05
-    ret nz
-
-    ld a, $05
-    ld [$c8c5], a
-    ld a, $47
-    ld [$c8c6], a
-    call Call_000_22bc
-    ld a, $5d
-    call Call_000_1e26
-    call Call_000_1c9e
-    ret
-
-
-    or c
-    ld l, [hl]
-    rst RST_00
-    ld l, [hl]
-    db $dd
-    ld l, [hl]
-    di
-    ld l, [hl]
-    add hl, bc
-    ld l, a
-    rra
-    ld l, a
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    ld d, $00
-    scf
-    ld [bc], a
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc d
-    nop
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    ld d, $00
-    rst RST_38
-    rst RST_38
-    ld a, l
-    nop
-    dec de
-    nop
-    inc de
-    nop
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    ld d, $00
-    rst RST_38
-    rst RST_38
-    ld a, l
-    nop
-    dec de
-    nop
-    inc de
-    nop
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc d
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    ld a, [de]
-    nop
-    inc de
-    nop
-    inc de
-    nop
-    inc d
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    ld a, [de]
-    nop
-    dec de
-    nop
-    inc de
-    nop
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    ld d, $00
-    rst RST_38
-    rst RST_38
-    ld a, [de]
-    nop
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
-    inc de
-    nop
-    rst RST_38
-    rst RST_38
+INCLUDE "c1_action.asm"
+INCLUDE "c1_fallback.asm"
+INCLUDE "c1_rules.asm"
+INCLUDE "c1_reply.asm"
     push af
     ldh a, [$ffa0]
     push af
@@ -9313,7 +7996,7 @@ Call_002_6e74:
     call Call_002_6f73
     call Call_002_71eb
     pop af
-    call Call_000_080e
+    call PlayAudio
     pop af
     ldh [$ff9e], a
     pop af
@@ -9406,108 +8089,108 @@ Call_002_6f73:
     or l
     ld l, a
     xor a
-    call Call_000_080e
+    call PlayAudio
     call Call_002_6183
     ret
 
 
     ld a, $0b
-    call Call_000_080e
+    call PlayAudio
     call Call_002_70a2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     call Call_002_7101
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     call Call_002_70d2
     ret
 
 
 Jump_002_6fce:
     xor a
-    call Call_000_080e
+    call PlayAudio
     ld a, $10
-    call Call_000_0753
+    call WaitTicks
     ld a, $20
-    call Call_000_080e
+    call PlayAudio
     ld a, $5a
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 Jump_002_6fe2:
     xor a
-    call Call_000_080e
+    call PlayAudio
     ld a, $10
-    call Call_000_0753
+    call WaitTicks
     ld a, $1a
-    call Call_000_080e
+    call PlayAudio
     ld a, $5a
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 Jump_002_6ff6:
     xor a
-    call Call_000_080e
+    call PlayAudio
     ld a, $10
-    call Call_000_0753
+    call WaitTicks
     ld a, $1f
-    call Call_000_080e
+    call PlayAudio
     ld a, $b4
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
     ld a, $0b
-    call Call_000_080e
+    call PlayAudio
     call Call_002_70a2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     ld a, $78
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_7048
 
     ld a, $b2
-    call Call_000_1dac
+    call ReadObjFlag
     ld a, [$c523]
     and $01
     jr nz, jr_002_703d
 
     ld a, $0a
-    call Call_000_0fb7
+    call ShowText1
     call Call_002_70d2
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 jr_002_703d:
     ld a, $32
-    call Call_000_0ff9
+    call ShowText2
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
 jr_002_7048:
     ld a, $fc
-    call Call_000_0ff9
+    call ShowText2
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     ret
 
 
     ld a, $0b
-    call Call_000_080e
+    call PlayAudio
     call Call_002_70a2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     call Call_002_7101
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     call Call_002_70d2
     ret
 
@@ -9515,10 +8198,10 @@ jr_002_7048:
 Call_002_706c:
     call Call_002_70a2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     call Call_002_7101
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     call Call_002_70d2
     ld a, $91
     ld [$c522], a
@@ -9527,11 +8210,11 @@ Call_002_706c:
     call Call_000_0bab
     call Call_002_70a2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     ld a, $dd
-    call Call_000_0ff9
+    call ShowText2
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     call Call_000_3a0e
     ret
 
@@ -9557,8 +8240,8 @@ Call_002_70a2:
     ld [$c601], a
     ld a, $ff
     ld [$c603], a
-    call Call_000_19c5
-    call Call_000_03fe
+    call DrawRoomObjs
+    call SubmitOam
     ret
 
 
@@ -9571,7 +8254,7 @@ Call_002_70d2:
     ld a, [hl]
     ld a, $ff
     ld [$c600], a
-    call Call_000_19c5
+    call DrawRoomObjs
     ret
 
 
@@ -9615,19 +8298,19 @@ Call_002_7101:
     ld [hl], c
     pop hl
     ld a, [hl]
-    call Call_000_1c59
+    call ShowMsg0
     ret
 
 
     pop hl
     ld a, [hl]
-    call Call_000_1c63
+    call ShowMsg1
     ret
 
 
     pop hl
     ld a, [hl]
-    call Call_000_1c6d
+    call ShowMsg2
     ret
 
 
@@ -9755,7 +8438,7 @@ Call_002_71ce:
     call Call_002_718c
     call Call_002_71fd
     ld a, $3c
-    call Call_000_0753
+    call WaitTicks
     pop af
     ldh [$ff9e], a
     pop af
@@ -9770,7 +8453,7 @@ Call_002_71eb:
     ld a, $06
     ld [$c640], a
     call Call_000_0bab
-    call Call_000_27b6
+    call RefreshObjs
     ret
 
 
@@ -9846,90 +8529,27 @@ Call_002_71fd:
 
 
     xor a
-    call Call_000_080e
+    call PlayAudio
     ld a, $28
-    call Call_000_080e
+    call PlayAudio
     ld a, $78
-    call Call_000_0753
+    call WaitTicks
     xor a
-    call Call_000_080e
-    call Call_000_01b7
+    call PlayAudio
+    call WaitFrame
     ld a, $04
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
     ld a, $04
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
     call Call_002_706c
     ret
-
-
-    push hl
-    push bc
-    push de
-    call Call_002_7271
-    pop de
-    pop bc
-    pop hl
-    ret
-
-
-Call_002_7271:
-    ld a, [$c8b8]
-    call Call_000_2781
-    ld a, [$c523]
-    and $01
-    ret z
-
-    ld a, [$c8b8]
-    call Call_000_2753
-    ld a, [$c523]
-    and $01
-    ret z
-
-Call_002_7289:
-    ld a, [$c8b8]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_729c
-
-    ld bc, $72c4
-    jr jr_002_729f
-
-jr_002_729c:
-    ld bc, Case2ObjectPositions
-
-jr_002_729f:
-    add hl, bc
-    ld a, l
-    ld [$c863], a
-    ld a, h
-    ld [$c864], a
-    ld a, [$c867]
-    ld c, a
-    ld a, [$c868]
-    ld b, a
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    ld a, [$c8b8]
-    ld [bc], a
-    inc bc
-    ld a, c
-    ld [$c867], a
-    ld a, b
-    ld [$c868], a
-    ret
+INCLUDE "obj_add.asm"
 
 
     inc de
@@ -10331,9 +8951,11 @@ jr_002_7433:
 jr_002_7439:
     ld a, $c6
     ld [$c868], a
-    call Call_002_7289
+    call AppendRoomObj
     ld a, $ff
     ld [$c603], a
+; Draw X/Y/object triples until X is $ff; subtract the sprite Y offset.
+RenderObjList:
     push hl
 
 jr_002_7447:
@@ -10359,7 +8981,7 @@ jr_002_745b:
     pop bc
     ldh [$ff93], a
     ld a, [hl+]
-    call Call_000_1a28
+    call DrawObjSprite
     jr jr_002_744c
 
 jr_002_7465:
@@ -10367,70 +8989,7 @@ jr_002_7465:
     pop de
     pop hl
     ret
-
-
-    ld d, a
-    ldh a, [$ffa0]
-    cp $00
-    ld a, d
-    ret nz
-
-    ld a, [$c8b2]
-    cp $ff
-    ret nz
-
-    ld a, $bf
-    call Call_000_1dda
-    ld a, [$c8c5]
-
-jr_002_747e:
-    rst RST_00
-    adc e
-    ld [hl], h
-    adc e
-    ld [hl], h
-    adc e
-    ld [hl], h
-    adc e
-    ld [hl], h
-    adc e
-    ld [hl], h
-    sub c
-    ld [hl], h
-
-jr_002_748b:
-    ld a, $00
-    ld [$c8b2], a
-    ret
-
-
-    ld a, [$c599]
-    cp $00
-    jr nz, jr_002_74a3
-
-    ld a, [$c8c6]
-    cp $23
-    jr c, jr_002_74a3
-
-    cp $2c
-    jr c, jr_002_74b6
-
-jr_002_74a3:
-    ld a, [$c8c6]
-    call ReadStateBit
-    ld a, [$c523]
-    and $01
-    jr nz, jr_002_74b6
-
-    ld a, $01
-    ld [$c8b2], a
-    ret
-
-
-jr_002_74b6:
-    ld a, $08
-    ld [$c8b2], a
-    ret
+INCLUDE "sel_action.asm"
 
 
     call Call_002_776c
@@ -10442,8 +9001,8 @@ jr_002_74bf:
 Jump_002_74c3:
 jr_002_74c3:
     call Call_002_7845
-    call Call_000_03fe
-    call Call_000_0456
+    call SubmitOam
+    call PollJoy
     ld a, [$c188]
     bit 0, a
     jp nz, Jump_002_7584
@@ -10521,7 +9080,7 @@ jr_002_74c3:
 
 jr_002_754b:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ldh a, [$ffad]
     cp $00
     jp z, Jump_002_74c3
@@ -10533,7 +9092,7 @@ jr_002_754b:
 
 Jump_002_755d:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ldh a, [$ffad]
     inc a
     ldh [$ffad], a
@@ -10547,7 +9106,7 @@ Jump_002_755d:
 
 Jump_002_7572:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ldh a, [$ffad]
     cp $02
     jp z, Jump_002_74c3
@@ -10559,7 +9118,7 @@ Jump_002_7572:
 
 Jump_002_7584:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ldh a, [$ffad]
     ld c, a
     ld b, $00
@@ -10576,8 +9135,8 @@ Jump_002_7584:
 
 jr_002_75a0:
     call Call_002_7830
-    call Call_000_03fe
-    call Call_000_0456
+    call SubmitOam
+    call PollJoy
     ld a, [$c188]
     bit 0, a
     jr nz, jr_002_75e4
@@ -10592,7 +9151,7 @@ jr_002_75a0:
     jr z, jr_002_75a0
 
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     cp $00
     jr z, jr_002_75a0
@@ -10603,7 +9162,7 @@ jr_002_75a0:
 
 jr_002_75cf:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     cp $02
     jr z, jr_002_75a0
@@ -10616,7 +9175,7 @@ jr_002_75cf:
 
 jr_002_75e4:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     rst RST_00
     add b
@@ -10636,23 +9195,23 @@ jr_002_75f3:
     ld l, c
     ld h, b
     ld bc, $9965
-    call Call_000_01d8
+    call QueueTileRect
     xor a
     ld [$c599], a
     ld hl, $7a01
     ld bc, $99a6
-    call Call_000_01d8
+    call QueueTileRect
     ld hl, $7a0e
     ld bc, $99e6
-    call Call_000_01d8
+    call QueueTileRect
     call SubmitMapQueue
     xor a
     ld [$c884], a
 
 jr_002_7624:
     call Call_002_7830
-    call Call_000_03fe
-    call Call_000_0456
+    call SubmitOam
+    call PollJoy
     ld a, [$c188]
     bit 0, a
     jr nz, jr_002_7670
@@ -10667,7 +9226,7 @@ jr_002_7624:
     jr z, jr_002_7624
 
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     cp $00
     jr z, jr_002_7624
@@ -10678,7 +9237,7 @@ jr_002_7624:
 
 jr_002_7652:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     cp $02
     jr z, jr_002_7624
@@ -10689,14 +9248,14 @@ jr_002_7652:
 
 jr_002_7665:
     ld a, $2f
-    call Call_000_080e
+    call PlayAudio
     call Call_002_7799
     jp Jump_002_74c3
 
 
 jr_002_7670:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, [$c884]
     srl a
     ld [$c599], a
@@ -10704,18 +9263,18 @@ jr_002_7670:
     jr jr_002_768a
 
     ld a, $19
-    call Call_000_080e
-    call Call_000_3853
+    call PlayAudio
+    call LoadGame
     ld a, $ff
 
 jr_002_768a:
     ld [$c8e8], a
-    jp Jump_000_38dd
+    jp FadeOut
 
 
 Jump_002_7690:
     ld a, $2f
-    call Call_000_080e
+    call PlayAudio
 
 jr_002_7695:
     call Call_002_7799
@@ -10727,10 +9286,10 @@ jr_002_7695:
     cp $00
     jr nz, jr_002_76a8
 
-    call Call_000_386f
+    call EraseGame
 
 jr_002_76a8:
-    call Call_000_387d
+    call ScanGames
     jr jr_002_7695
 
 Call_002_76ad:
@@ -10743,16 +9302,16 @@ Call_002_76ad:
     ld l, c
     ld h, b
     ld bc, $9965
-    call Call_000_01d8
+    call QueueTileRect
     ld hl, $7a25
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     ld hl, $7a52
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     ld hl, $7a72
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     jp SubmitMapQueue
 
 
@@ -10761,10 +9320,10 @@ Call_002_76df:
     ld [$c884], a
     ld [$c875], a
     ld hl, $7a20
-    call Call_000_023a
+    call QueueFillSpec
     ld hl, $7aa2
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     call SubmitMapQueue
     jp Jump_002_7724
 
@@ -10810,8 +9369,8 @@ Jump_002_7724:
 
 jr_002_7728:
     call Call_002_76fb
-    call Call_000_03fe
-    call Call_000_0456
+    call SubmitOam
+    call PollJoy
     ld a, [$c188]
     bit 0, a
     jr nz, jr_002_7766
@@ -10826,21 +9385,21 @@ jr_002_7728:
     jr z, jr_002_7728
 
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     xor a
     ld [$c875], a
     jr jr_002_7728
 
 jr_002_774f:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ld a, $01
     ld [$c875], a
     jr jr_002_7728
 
 jr_002_775b:
     ld a, $2f
-    call Call_000_080e
+    call PlayAudio
     ld a, $01
     ld [$c875], a
     ret
@@ -10848,7 +9407,7 @@ jr_002_775b:
 
 jr_002_7766:
     ld a, $19
-    call Call_000_080e
+    call PlayAudio
     ret
 
 
@@ -10858,22 +9417,22 @@ Call_002_776c:
     ld [hl+], a
     ld [hl+], a
     ld [hl+], a
-    call Call_000_387d
-    call Call_000_0722
-    call Call_000_0420
+    call ScanGames
+    call RequestTimer
+    call DisableLcd
     call Call_000_09ea
     ld a, $02
-    call Call_000_1b39
-    call Call_000_072a
-    call Call_000_044b
+    call ReadUiMap
+    call StopTimer
+    call RestoreLcd
     call Call_002_7799
     xor a
     ldh [$ffad], a
 
 jr_002_7790:
     call Call_002_7845
-    call Call_000_03fe
-    jp Jump_000_38cf
+    call SubmitOam
+    jp FadeIn
 
 
 Call_002_7799:
@@ -10901,7 +9460,7 @@ Call_002_77ba:
     ld hl, $7983
     call Call_002_7815
     pop hl
-    jp Jump_000_01d8
+    jp QueueTileRect
 
 
 Call_002_77c8:
@@ -10916,7 +9475,7 @@ Call_002_77c8:
     call Call_002_7820
     ld hl, $79d4
     call Call_002_796e
-    jp Jump_000_01d8
+    jp QueueTileRect
 
 
 jr_002_77e7:
@@ -10935,12 +9494,12 @@ jr_002_77e7:
     jr nz, jr_002_7804
 
     ld hl, $79eb
-    jp Jump_000_01d8
+    jp QueueTileRect
 
 
 jr_002_7804:
     ld hl, $79f3
-    jp Jump_000_01d8
+    jp QueueTileRect
 
 
     ld b, $24
@@ -10961,7 +9520,7 @@ Call_002_7815:
 
 Call_002_781a:
     ld hl, $7a1b
-    jp Jump_000_023a
+    jp QueueFillSpec
 
 
 Call_002_7820:
@@ -11015,27 +9574,27 @@ jr_002_7857:
     ret
 
 
-    call Call_000_38dd
+    call FadeOut
     call Call_000_16b9
     call Call_002_7951
     call Call_002_781a
     ld hl, $7b18
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     call SubmitMapQueue
     ld a, $01
     ld [$c884], a
-    call Call_000_38cf
+    call FadeIn
     call Call_002_7724
     ld a, [$c875]
     cp $00
     jr nz, jr_002_788e
 
-    call Call_000_3899
+    call RestoreState
     call Call_002_7892
 
 jr_002_788e:
-    call Call_000_38dd
+    call FadeOut
     ret
 
 
@@ -11099,9 +9658,9 @@ Call_002_78d0:
 jr_002_78dc:
     call Call_002_78d0
     ld a, $4e
-    call Call_000_1e26
+    call ClearObjFlag
     ld a, $a8
-    call Call_000_1e26
+    call ClearObjFlag
     ld a, $3a
     ld [$c521], a
     ret
@@ -11121,14 +9680,14 @@ jr_002_78dc:
     call Call_002_781a
     ld hl, $7aee
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     ld hl, $7ac8
     call Call_002_796e
-    call Call_000_01d4
+    call QueueTileSpec
     call SubmitMapQueue
     ld a, $02
-    call Call_000_1b14
-    call Call_000_38cf
+    call StageUiObj
+    call FadeIn
     xor a
     ld [$c884], a
     call Call_002_7724
@@ -11136,10 +9695,10 @@ jr_002_78dc:
     cp $00
     jr nz, jr_002_7933
 
-    call Call_000_3861
+    call StoreGame
 
 jr_002_7933:
-    call Call_000_38dd
+    call FadeOut
     ld a, [$c197]
     ld [$c184], a
     ld a, $ff
@@ -11149,26 +9708,26 @@ jr_002_7933:
     cp $00
     jr nz, jr_002_794d
 
-    call Call_000_38eb
+    call ReloadC1View
     ret
 
 
 jr_002_794d:
-    call Call_000_38f9
+    call ReloadC2View
     ret
 
 
 Call_002_7951:
-    call Call_000_0416
-    call Call_000_0722
-    call Call_000_0420
+    call BlankOam
+    call RequestTimer
+    call DisableLcd
     call Call_000_09ea
     ld a, $02
-    call Call_000_1b39
+    call ReadUiMap
     ld a, $02
-    call Call_000_1b14
-    call Call_000_072a
-    call Call_000_044b
+    call StageUiObj
+    call StopTimer
+    call RestoreLcd
     ret
 
 
@@ -11587,136 +10146,8 @@ jr_002_7b6b:
     ld a, a
     ld a, a
     ld a, a
-    ld a, [$c599]
-    ld l, a
-    ld h, $00
-    add hl, hl
-    ld bc, $7b95
-    add hl, bc
-    ld a, [hl+]
-    ld h, [hl]
-    ld l, a
-    ld bc, $c1a5
-    ld d, $2d
-
-jr_002_7b8e:
-    ld a, [hl+]
-    ld [bc], a
-    inc bc
-    dec d
-    jr nz, jr_002_7b8e
-
-    ret
-
-
-    sbc c
-    ld a, e
-    ret nz
-
-    ld a, e
-    jr jr_002_7beb
-
-    stop
-    ld b, b
-    inc c
-    add b
-    ld b, b
-    inc c
-    nop
-    ld b, b
-    dec c
-    add b
-    ld b, b
-    dec c
-    nop
-    ld b, b
-    ld c, $80
-    ld b, b
-    ld c, $00
-    ld b, b
-    rrca
-    add b
-    ld b, b
-
-jr_002_7bb3:
-    rrca
-    nop
-    ld b, b
-    db $10
-    add b
-    ld b, b
-    stop
-    ld b, b
-    dec c
-    add b
-    ld b, b
-    dec c
-    inc bc
-    ld c, l
-    jr jr_002_7bc4
-
-jr_002_7bc4:
-    ld b, b
-    ld [de], a
-    add b
-    ld b, b
-    ld [de], a
-    nop
-    ld b, b
-    inc de
-    add b
-    ld b, b
-    inc de
-    nop
-    ld b, b
-    inc d
-    add b
-    ld b, b
-    inc d
-    nop
-    ld b, b
-    dec d
-    add b
-    ld b, b
-    dec d
-    nop
-    ld b, b
-    ld d, $80
-    ld b, b
-    ld d, $00
-    ld b, b
-    rla
-    add b
-    ld b, b
-    rla
-    nop
-    ld b, b
-    jr jr_002_7b6b
-
-jr_002_7beb:
-    ld b, b
-    jr jr_002_7bb3
-
-    ldh a, [$ffa3]
-    add $01
-    ldh [$ffa2], a
-    ld c, a
-    add a
-    add a
-    add c
-    ldh [$ffa3], a
-    ldh a, [$ffa2]
-    swap a
-    and $0f
-    ldh [$ffa2], a
-    ld c, a
-    ldh a, [$ffa3]
-    swap a
-    and $f0
-    or c
-    ldh [$ffa2], a
-    pop bc
-    ret
+INCLUDE "text_refs.asm"
+INCLUDE "rng.asm"
 
 
     nop

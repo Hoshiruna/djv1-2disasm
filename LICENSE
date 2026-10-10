@@ -3,7 +3,8 @@ Licensing and rights notice
 Project documentation, configuration, and tools
 ----------------------------------------------
 The MIT License below applies solely to README.md, BUILD.md, .gitignore,
-the Makefile at the repository root, and Python files under scripts/ and tests/.
+the Makefile at the repository root, asm/title-resources.mk,
+and Python files under scripts/ and tests/.
 It does not license any other file in this repository.
 
 Game-derived content

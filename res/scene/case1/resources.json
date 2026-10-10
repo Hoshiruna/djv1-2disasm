@@ -1,12 +1,12 @@
 {
   "graphics": {
     "00": {
-      "US": "../../ui/US/font.bin",
-      "JP": "../../ui/JP/case1_font.bin"
+      "US": "../../ui/font/US/font.bin",
+      "JP": "../../ui/font/JP/case1_font.bin"
     },
     "01": {
-      "US": "../../ui/US/hud_tiles.bin",
-      "JP": "../../ui/JP/hud_tiles.bin"
+      "US": "../../ui/hud/US/hud_tiles.bin",
+      "JP": "../../ui/hud/JP/hud_tiles.bin"
     },
     "02": {
       "png": "common/bg-02.png",

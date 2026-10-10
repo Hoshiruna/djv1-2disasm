@@ -26,97 +26,97 @@ ResourcePointers_033:
 
 ; Compressed font data: 128 tiles, decoded to 2048 bytes.
 Resource_JP_033_4020:
-    INCBIN "../../res/ui/JP/case1_font.bin", $0, $22
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $0, $22
 jr_033_4042:
-    INCBIN "../../res/ui/JP/case1_font.bin", $22, $a
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $22, $a
 jr_033_404c:
-    INCBIN "../../res/ui/JP/case1_font.bin", $2c, $20
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $2c, $20
 jr_033_406c:
-    INCBIN "../../res/ui/JP/case1_font.bin", $4c, $4
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $4c, $4
 jr_033_4070:
-    INCBIN "../../res/ui/JP/case1_font.bin", $50, $1b0
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $50, $1b0
 jr_033_4220:
-    INCBIN "../../res/ui/JP/case1_font.bin", $200, $18
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $200, $18
 jr_033_4238:
-    INCBIN "../../res/ui/JP/case1_font.bin", $218, $2e
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $218, $2e
 jr_033_4266:
-    INCBIN "../../res/ui/JP/case1_font.bin", $246, $23
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $246, $23
 jr_033_4289:
-    INCBIN "../../res/ui/JP/case1_font.bin", $269, $1d
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $269, $1d
 jr_033_42a6:
-    INCBIN "../../res/ui/JP/case1_font.bin", $286, $d0
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $286, $d0
 jr_033_4376:
-    INCBIN "../../res/ui/JP/case1_font.bin", $356, $72
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $356, $72
 jr_033_43e8:
-    INCBIN "../../res/ui/JP/case1_font.bin", $3c8, $142
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $3c8, $142
 jr_033_452a:
-    INCBIN "../../res/ui/JP/case1_font.bin", $50a, $1d
+    INCBIN "../../res/ui/font/JP/case1_font.bin", $50a, $1d
 
 ; Compressed HUD graphics: 112 tiles, decoded to 1792 bytes.
 Resource_JP_033_4547:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $0, $1e
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $0, $1e
 jr_033_4565:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $1e, $159
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $1e, $159
 jr_033_46be:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $177, $48
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $177, $48
 jr_033_4706:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $1bf, $6a
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $1bf, $6a
 jr_033_4770:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $229, $37
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $229, $37
 jr_033_47a7:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $260, $21
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $260, $21
 jr_033_47c8:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $281, $19
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $281, $19
 jr_033_47e1:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $29a, $10
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $29a, $10
 jr_033_47f1:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $2aa, $8
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $2aa, $8
 jr_033_47f9:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $2b2, $e
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $2b2, $e
 jr_033_4807:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $2c0, $15
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $2c0, $15
 jr_033_481c:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $2d5, $19
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $2d5, $19
 jr_033_4835:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $2ee, $15
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $2ee, $15
 jr_033_484a:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $303, $1b
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $303, $1b
 jr_033_4865:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $31e, $f
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $31e, $f
 jr_033_4874:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $32d, $1f
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $32d, $1f
 Jump_033_4893:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $34c, $c
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $34c, $c
 jr_033_489f:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $358, $d
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $358, $d
 jr_033_48ac:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $365, $12
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $365, $12
 jr_033_48be:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $377, $5
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $377, $5
 jr_033_48c3:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $37c, $15
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $37c, $15
 jr_033_48d8:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $391, $30
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $391, $30
 jr_033_4908:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $3c1, $16
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $3c1, $16
 jr_033_491e:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $3d7, $3
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $3d7, $3
 jr_033_4921:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $3da, $38
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $3da, $38
 jr_033_4959:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $412, $6
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $412, $6
 jr_033_495f:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $418, $14
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $418, $14
 jr_033_4973:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $42c, $27
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $42c, $27
 jr_033_499a:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $453, $7
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $453, $7
 jr_033_49a1:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $45a, $6a
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $45a, $6a
 jr_033_4a0b:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $4c4, $2
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $4c4, $2
 jr_033_4a0d:
-    INCBIN "../../res/ui/JP/hud_tiles.bin", $4c6, $14
+    INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $4c6, $14
 
 GfxC1_G02:
     INCBIN "../../res/scene/case1/common/JP/g02.bin", $0, $23
