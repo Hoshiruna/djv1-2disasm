@@ -2,22 +2,22 @@
 ; Choose the Case II palette from scene and gameplay state, then stage both sets.
 LoadC2Pal:
 Call_003_556f:
-    ld a, [$c5c9]
+    ld a, [wRoomCueHold]
     cp $00
     jr nz, jr_003_55ae
 
-    ld a, [$c523]
+    ld a, [wStateResult]
     and $40
     jr nz, jr_003_55ae
 
     call FindC2TimedPal
-    ld a, [$c523]
+    ld a, [wStateResult]
     and $01
     jr nz, jr_003_55ae
 
-    ld a, $4d
+    ld a, C2LampFlag
     call ReadObjFlag
-    ld a, [$c523]
+    ld a, [wStateResult]
     and $01
     jr nz, jr_003_55a2
 
@@ -32,12 +32,12 @@ Call_003_556f:
     jr jr_003_55b1
 
 jr_003_55a2:
-    ld a, [$c585]
+    ld a, [wC2LampTick]
     cp $1d
     jr c, jr_003_55ae
 
 jr_003_55a9:
-    ld a, [$c5c6]
+    ld a, [wC2TimedPal]
     jr jr_003_55b1
 
 jr_003_55ae:

@@ -156,7 +156,7 @@ Call_000_24fb:
 Call_000_2500:
     jr z, jr_000_256a
 
-    ld a, [$c8b0]
+    ld a, [wInputKind]
     cp $02
     jr z, jr_000_2542
 

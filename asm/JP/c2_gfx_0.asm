@@ -7,6 +7,7 @@ SECTION "ROM Bank $02a", ROMX[$4000], BANK[$2a]
 
 ; Bank-local resource pointers; entries $00/$01 load the Case II font/HUD.
 ResourcePointers_02a:
+C2Gfx0Refs:
     dw Resource_JP_02a_4020 ; $00
     dw Resource_JP_02a_453f ; $01
     dw GfxC2_G02 ; $02

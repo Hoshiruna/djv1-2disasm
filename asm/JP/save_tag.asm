@@ -12,7 +12,7 @@ Call_001_6a81:
     ld a, [wSaveTagPtr+1]
     ld h, a
     ld bc, SaveTag
-    ld d, $04
+    ld d, SaveTagLen
 
 jr_001_6a91:
     ld a, [hl+]
@@ -50,7 +50,7 @@ Call_001_6aa4:
     ld a, [wSaveTagPtr+1]
     ld h, a
     ld bc, SaveTag
-    ld d, $04
+    ld d, SaveTagLen
 
 jr_001_6ab4:
     ld a, [bc]

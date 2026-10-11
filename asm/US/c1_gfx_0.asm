@@ -7,6 +7,7 @@ SECTION "ROM Bank $033", ROMX[$4000], BANK[$33]
 
 ; Bank-local resource pointers, indexed by the low nibble of the resource ID.
 ResourcePointers_033:
+C1Gfx0Refs:
     dw Resource_US_033_4020 ; $00
     dw Resource_US_033_4398 ; $01
     dw GfxC1_G02 ; $02

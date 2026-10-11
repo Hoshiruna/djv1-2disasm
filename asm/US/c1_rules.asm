@@ -15,10 +15,10 @@ Call_002_6d28:
     jr z, jr_002_6da4
 
     cp $4a
-    jp z, Jump_002_6dc2
+    jp z, C1Room4AFx
 
     cp $4b
-    jp z, Jump_002_6dc2
+    jp z, C1Room4AFx
 
     cp $4c
     jr z, jr_002_6dc2
@@ -32,11 +32,11 @@ Call_002_6d28:
 
 jr_002_6d4d:
     ld a, $06
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $e4
     call ShowMsg1
-    call ClearC1Count
+    call ClearC1Cash
     ld a, [wStateResult]
     or $08
     ld [wStateResult], a
@@ -51,15 +51,15 @@ jr_002_6d4d:
 
 jr_002_6d76:
     ld a, $07
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $16
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $e6
     call ShowMsg2
     ld a, $15
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $62
     call ShowMsg2
@@ -74,7 +74,7 @@ jr_002_6da4:
     ld a, $37
     call ShowMsg1
     ld a, $15
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $62
     call ShowMsg2
@@ -84,16 +84,19 @@ jr_002_6da4:
     call SetResult
     ret
 
+; Run the shared effect and message sequence for rooms $4a through $4d.
+C1Room4AFx:
+
 
 Jump_002_6dc2:
 jr_002_6dc2:
     ld a, $07
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $f0
     call ShowMsg1
     ld a, $15
-    ld [$c8e9], a
+    ld [wFxId], a
     call FinishC1Effect
     ld a, $62
     call ShowMsg2
@@ -141,7 +144,7 @@ jr_002_6e14:
     ld a, $04
     call ReadObjFlag
     ld a, $6a
-    ld [$c537], a
+    ld [wTextName0], a
     ld a, [wStateResult]
     and $01
     jr z, jr_002_6e2e
@@ -168,7 +171,7 @@ jr_002_6e44:
     ld a, $03
     call ReadObjFlag
     ld a, $6a
-    ld [$c537], a
+    ld [wTextName0], a
     ld a, [wStateResult]
     and $01
     jr z, jr_002_6e5e

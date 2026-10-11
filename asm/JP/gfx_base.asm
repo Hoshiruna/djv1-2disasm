@@ -13,13 +13,13 @@ Jump_000_0a00:
 
     ld a, $3f
     call PushRomBank
-    ld hl, $4000
+    ld hl, C1ObjGfxRefs
     jr jr_000_0a1f
 
 jr_000_0a17:
     ld a, $32
     call PushRomBank
-    ld hl, $4000
+    ld hl, C2ObjGfxRefs
 
 jr_000_0a1f:
     ld a, [hl+]
@@ -42,13 +42,13 @@ Call_000_0a2b:
 
     ld a, $33
     call PushRomBank
-    ld hl, $4000
+    ld hl, C1Gfx0Refs
     jr jr_000_0a44
 
 jr_000_0a3c:
     ld a, $2a
     call PushRomBank
-    ld hl, $4000
+    ld hl, C2Gfx0Refs
 
 Jump_000_0a44:
 jr_000_0a44:
@@ -92,7 +92,7 @@ Jump_000_0a55:
 Jump_000_0a57:
     ld a, $33
     call PushRomBank
-    ld hl, $4002
+    ld hl, C1Gfx0Refs+2
     jr jr_000_0a1f
 
 jr_000_0a61:
@@ -100,5 +100,5 @@ jr_000_0a61:
     call PushRomBank
 
 Call_000_0a66:
-    ld hl, $4002
+    ld hl, C2Gfx0Refs+2
     jr jr_000_0a1f

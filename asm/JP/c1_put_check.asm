@@ -11,7 +11,7 @@ CheckC1Put:
     cp $00
     jr nz, jr_002_6a66
 
-    ld a, [wC1ListCount]
+    ld a, [wC1Coins]
     cp $00
     jr nz, jr_002_6a7e
 

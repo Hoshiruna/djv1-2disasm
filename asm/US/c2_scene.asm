@@ -3,7 +3,7 @@ Call_003_41ee:
 ; Update room state and select its visual scene; special scenes retain their current ID.
 PickC2Scene:
     call BuildC2Scene
-    ld a, [$c8e8]
+    ld a, [wCaseResume]
     cp $ff
     jr nz, jr_003_420f
 
@@ -15,7 +15,7 @@ PickC2Scene:
     jr nz, jr_003_420f
 
 jr_003_4203:
-    call Call_003_68ca
+    call ReadTrainPass
     jr nz, jr_003_420f
 
     ld a, $a8
@@ -65,6 +65,9 @@ jr_003_4240:
     ld [wSceneVariant], a
     ld bc, $0000
 
+; Continue building scene variants and patch entries from the current room record.
+ScanC2Patch:
+
 Jump_003_424b:
 jr_003_424b:
     ld a, [wRoomDataPtr]
@@ -105,7 +108,7 @@ jr_003_424b:
     inc a
     ld [wPatchId], a
     ld a, [wSceneVariant]
-    ld hl, $1859
+    ld hl, BitMasks
     add hl, bc
     add [hl]
     ld [wSceneVariant], a
@@ -145,7 +148,7 @@ jr_003_42ad:
     jr z, jr_003_42cc
 
     ld a, [wPatchBits]
-    ld hl, $1859
+    ld hl, BitMasks
     add hl, de
     add [hl]
     ld [wPatchBits], a
@@ -205,4 +208,4 @@ jr_003_42fd:
     pop hl
     ; Discard this call's return address and resume the outer record loop.
     pop af
-    jp Jump_003_424b
+    jp ScanC2Patch

@@ -14,7 +14,7 @@ Jump_000_073c:
     ldh a, [hRomBank]
 
 Jump_000_0743:
-    ld [$2000], a
+    ld [rROMB0], a
 
 Call_000_0746:
     pop hl

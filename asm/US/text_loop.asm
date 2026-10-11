@@ -28,7 +28,7 @@ ReadTextLoop:
 Call_000_1122:
 jr_000_1122:
     call ReadTextByte
-    ld [$c660], a
+    ld [wTextChar], a
     cp $5f
     jr z, jr_000_118c
 

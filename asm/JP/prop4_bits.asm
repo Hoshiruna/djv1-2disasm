@@ -162,6 +162,9 @@ jr_000_36cd:
     pop af
     ret
 
+; Read one property index, then set bit 1 of its property-four byte.
+ScriptProp4Bit1:
+
     call ReadArg
 
 ; A = property index; set bit 1 of wProp4 and preserve the scratch index.

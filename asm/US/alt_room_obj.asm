@@ -28,6 +28,9 @@ Call_000_2800:
 Jump_000_2800:
     ld [wRoomObjPtr+1], a
 
+; Scan the current alternate-object record for the selected item and cursor hit.
+ScanAltRoom:
+
 Jump_000_2803:
     ld a, [wRoomObjPtr]
     ld l, a
@@ -35,7 +38,7 @@ Jump_000_2803:
     ld h, a
     ld a, [hl]
     cp $ff
-    jp z, Jump_000_2846
+    jp z, FailAltRoom
 
 Call_000_2811:
     ld bc, $0004
@@ -69,6 +72,9 @@ Call_000_2811:
     call SetResult
     ret
 
+; On scan exhaustion, clear object flag $80, restore the bank, and clear the result.
+FailAltRoom:
+
 
 Jump_000_2846:
     ld a, $80
@@ -80,4 +86,4 @@ Jump_000_2846:
 
 jr_000_2852:
     call NextRoomObj
-    jp Jump_000_2803
+    jp ScanAltRoom

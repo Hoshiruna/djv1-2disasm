@@ -18,7 +18,7 @@ QueueSceneMap:
 
 
 Call_000_0e83:
-    ld bc, $9800
+    ld bc, _SCRN0
     ld hl, wSceneRect
     call QueueMapRect
     ret

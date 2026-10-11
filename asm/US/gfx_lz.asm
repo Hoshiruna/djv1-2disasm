@@ -19,6 +19,9 @@ Call_000_068f:
     ldh [hLzBitsLo], a
     ldh [hLzBitsHi], a
 
+; Advance the LZ flag bit and decode the next literal or reference.
+LzNextToken:
+
 Jump_000_0694:
 jr_000_0694:
     ldh a, [hLzBitsLo]
@@ -127,7 +130,7 @@ Jump_000_0700:
     ld l, a
     ldh a, [hLzSrcHi]
     ld h, a
-    jp Jump_000_0694
+    jp LzNextToken
 
 
     ret

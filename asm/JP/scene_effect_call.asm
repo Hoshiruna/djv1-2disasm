@@ -1,5 +1,6 @@
 
-; Read the case-two room effect code through bank three and enter the shared effect selector.
+; Read the current passenger-room effect in bank three, then enter the shared effect selector.
+TrainRoomEffect:
 RoomEffect:
 
 
@@ -9,7 +10,7 @@ Call_000_2fab:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomCode
+    call TrainRoomFx
     call PopRomBank
     jr jr_000_2fbf
 

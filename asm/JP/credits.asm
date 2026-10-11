@@ -8,7 +8,7 @@ Call_003_6e02:
     ld [wCreditIndex], a
     call PlayAudio
     call DisableLcd
-    call Call_000_09f5
+    call LoadAuxGfx
     call RestoreLcd
     call LoadCreditScene
     call FadeIn
@@ -17,11 +17,11 @@ Call_003_6e02:
     ld a, $0e
     call PlayAudio
     ld a, $ff
-    ld [$c5df], a
+    ld [wC1Exit], a
     xor a
-    ld [$c890], a
+    ld [wTextFast], a
     ld [wTextStartX], a
-    ld [$c894], a
+    ld [wTextNoWrap], a
     call CreditWait40
     ld a, $08
     call DrawCreditText

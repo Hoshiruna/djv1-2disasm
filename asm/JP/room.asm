@@ -31,6 +31,9 @@ jr_000_2030:
     pop bc
     jp EndBankAction
 
+; Save state and return without reading script arguments.
+SaveStateRet:
+
 
     call SaveState
     ret
@@ -118,6 +121,9 @@ jr_000_2095:
 
 jr_000_209a:
     call SaveState
+
+; Flush pending changes, then read destination arguments and enter the room.
+MoveRoomFlush:
     push af
 
 Jump_000_209e:
@@ -126,12 +132,12 @@ Jump_000_209e:
     pop af
     call FlushChanges
     call PopRomBank
-    ld a, [$c524]
+    ld a, [wChangeMode]
     cp $01
     jr nz, jr_000_20b9
 
     ld a, $02
-    ld [$c524], a
+    ld [wChangeMode], a
 
 Call_000_20b6:
     call RefreshLists
@@ -246,13 +252,13 @@ jr_000_2152:
 
 Call_000_215e:
     pop af
-    call $6d65
+    call PlayDesertMotion
     call PopRomBank
     ld a, [wRoomId]
-    cp $62
+    cp RoomTracksA
     jr c, jr_000_2172
 
-    ld a, [$c5e4]
+    ld a, [wC2EscapeSteps]
     inc a
     jr jr_000_2173
 
@@ -260,12 +266,12 @@ jr_000_2172:
     xor a
 
 jr_000_2173:
-    ld [$c5e4], a
+    ld [wC2EscapeSteps], a
     push af
     ld a, $03
     call PushRomBank
     pop af
-    call $5827
+    call CheckDesertEnd
     call PopRomBank
 
 Call_000_2183:

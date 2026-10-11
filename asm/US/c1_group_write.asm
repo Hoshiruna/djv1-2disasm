@@ -26,6 +26,9 @@ Jump_000_2881:
     ld bc, wGroupData
     add hl, bc
     ld [hl], a
+
+; Run the Case I put completion in bank two and restore the previous ROM bank.
+C1PutFinishCall:
     push af
     ld a, $02
     call PushRomBank

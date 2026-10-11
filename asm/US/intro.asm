@@ -4,11 +4,11 @@ ShowBoot:
 
 
     call DisableLcd
-    call Call_000_09f5
+    call LoadExtraUiGfx
     ld a, $07
     call DrawBoot
     call DisableLcd
-    call Call_000_09df
+    call LoadBootGfx
     ld a, $04
     call DrawBoot
     call DisableLcd
@@ -35,7 +35,7 @@ ShowTitle:
 
     call LoadTextSet
     call DisableLcd
-    call Call_000_09d4
+    call LoadTitleGfx
     ld a, $01
     call ReadUiMap
     ld a, $02

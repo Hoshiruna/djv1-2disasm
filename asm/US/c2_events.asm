@@ -6,44 +6,44 @@ StepC2Events:
     call TestC2Exit
     ret nz
 
-    call StepC2RoomTick
+    call StepC2Time
     call TestC2Exit
     ret nz
 
-    call CheckC2RoomFx
+    call CheckC2Watch
     call TestC2Exit
     ret nz
 
-    call StepC2TimedFx
+    call StepC2End
     call TestC2Exit
     ret nz
 
-    call StepC2PalTimer
+    call StepC2Lamp
     call TestC2Exit
     ret nz
 
-    call StepC2RangeTimer
+    call StepC2Heat
     call TestC2Exit
     ret nz
 
-    call StepC2ThreeRooms
+    call StepC2Goons
     call TestC2Exit
     ret nz
 
-    call StepC2Flag84Timer
+    call StepC2Hunt
     call TestC2Exit
     ret nz
 
-    call StepC2Room0D
+    call StepC2Dump
     call TestC2Exit
     ret nz
 
-    call StepC2FourRooms
+    call StepC2Guard
     call TestC2Exit
     ret nz
 
-    call StepC2StateTimer
-    call StepC2Room02
+    call StepC2Doors
+    call StepC2BedDoor
     ret
 
 ; Return A = state bit six and leave Z set only when the bit is clear.

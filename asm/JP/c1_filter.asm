@@ -3,12 +3,12 @@
 BuildC1Item:
 
 
-    ld a, [$c5c4]
+    ld a, [wRoomType]
     and $7f
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemType
@@ -28,7 +28,7 @@ C1ItemCalls:
 ; Set the result for an unrestricted entry or a visible object.
 CheckListVisible:
     call ClearResult
-    ld a, [$c5c6]
+    ld a, [wRoomVisId]
     cp $ff
     jr z, jr_001_6cc6
 
@@ -47,7 +47,7 @@ jr_001_6cc9:
 CheckC1RoomItem:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     cp $6b
     jr nz, jr_001_6cdb
 
@@ -59,7 +59,7 @@ CheckC1RoomItem:
 
 
 jr_001_6cdb:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     cp $5f
     jr nz, jr_001_6cec
 
@@ -71,7 +71,7 @@ jr_001_6cdb:
 
 
 jr_001_6cec:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     cp $13
     jr nz, jr_001_6d02
 
@@ -85,11 +85,11 @@ jr_001_6cec:
 
 
 jr_001_6d02:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -101,11 +101,11 @@ jr_001_6d02:
 CopyC1Item:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -117,33 +117,33 @@ CopyC1Item:
 CheckC1BitItem:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     push af
     srl a
     srl a
     srl a
-    ldh [$ff9e], a
+    ldh [hRoomIndex], a
     pop af
     and $07
-    ld [$c869], a
-    ld bc, $c4e9
-    ldh a, [$ff9e]
+    ld [wRoomBit], a
+    ld bc, wItemFlags
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
     ld d, a
-    ld a, [$c869]
-    ldh [$ff9e], a
+    ld a, [wRoomBit]
+    ldh [hRoomIndex], a
     xor a
-    ldh [$ff9f], a
+    ldh [hRoomIndex+1], a
     ld a, d
     push af
     ld bc, BitMasks
-    ldh a, [$ff9e]
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
@@ -156,11 +156,11 @@ CheckC1BitItem:
 
 
 jr_001_6d5f:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -172,7 +172,7 @@ jr_001_6d5f:
 CheckC1ObjItem:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     cp $00
     jr z, jr_001_6d7b
 
@@ -188,12 +188,12 @@ jr_001_6d7b:
 
 
 jr_001_6d85:
-    ld a, [$c5c5]
-    ldh [$ff9e], a
-    ld bc, $c509
-    ldh a, [$ff9e]
+    ld a, [wRoomItem]
+    ldh [hRoomIndex], a
+    ld bc, wProp4
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
@@ -205,11 +205,11 @@ jr_001_6d85:
 
 jr_001_6d9c:
     ld d, a
-    ldh a, [$ff9e]
+    ldh a, [hRoomIndex]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -222,7 +222,7 @@ jr_001_6d9c:
 CheckC1MarkItem:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     cp $47
     jr z, jr_001_6df3
 
@@ -260,11 +260,11 @@ jr_001_6dd5:
 
 
 jr_001_6de2:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId

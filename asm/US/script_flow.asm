@@ -80,5 +80,5 @@ JumpBankScript:
     call ReadArgs3
     ld a, [wArg2]
     ldh [hRomBank], a
-    ld [$2000], a
+    ld [rROMB0], a
     jp BranchScript

@@ -36,5 +36,5 @@ jr_000_2c81:
     ld a, [wArg2]
     ld [wScriptPtr], a
     ld a, [wArg3]
-    ld [$c8a6], a
+    ld [wScriptPtr+1], a
     ret

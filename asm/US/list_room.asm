@@ -104,6 +104,6 @@ Jump_000_29f8:
     ld a, $03
     call PushRomBank
     pop af
-    call PickC2Room
+    call PickCabStop
     call PopRomBank
     ret

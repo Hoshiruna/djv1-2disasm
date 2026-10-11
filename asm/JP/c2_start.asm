@@ -8,9 +8,9 @@ InitC2View:
     ld [wSpriteScrollY], a
     ld [wScrollY], a
     ld a, $10
-    ld [$c8ab], a
+    ld [wCursorX], a
     ld a, $80
-    ld [$c8ac], a
+    ld [wCursorY], a
     call FadeOut
     call RequestTimer
     call DisableLcd
@@ -30,7 +30,7 @@ InitC2View:
     call BuildObjList
     call RedrawScene
     call FadeIn
-    ld hl, $c8ad
+    ld hl, wRoomObjPtr
     ld d, $18
     ld a, $ff
     call FillC2Bytes
@@ -45,7 +45,7 @@ InitC2View:
     xor a
     call ShowMsg0
     ld a, $0d
-    ld [$c8e9], a
+    ld [wFxId], a
     call SaveC2Effect
     ld a, $0a
     call PlayAudio
@@ -56,7 +56,7 @@ InitC2View:
     ld a, $3c
     call WaitTicks
     xor a
-    ld [$c8e9], a
+    ld [wFxId], a
     call ShowC2Effect
     ld a, $78
     call WaitTicks
@@ -73,7 +73,7 @@ jr_003_40a8:
     ld a, $fe
     ld [wCaseResume], a
     xor a
-    ld [$c8af], a
+    ld [wInputSel], a
     ld a, $a0
     call SetStateBit
     ld a, $a3
@@ -86,41 +86,41 @@ InitC2Data:
 
     ld a, $ff
     ld d, $20
-    ld hl, $c8a5
+    ld hl, wScriptPtr
     call FillC2Bytes
     xor a
-    ld [$c8af], a
+    ld [wInputSel], a
     xor a
     ld [wSceneId], a
     ld [wRoomId], a
     ld a, $02
-    ld [$c524], a
-    ld [$c525], a
+    ld [wChangeMode], a
+    ld [wListMax], a
     ld a, $ff
-    ld [$c8b1], a
-    ld [$c8b2], a
-    ld [$c8b3], a
-    ld hl, $c8c5
+    ld [wOpClass], a
+    ld [wSelAction], a
+    ld [wActionCode], a
+    ld hl, wItemType
     ld d, $20
     call FillC2Bytes
     ld hl, wObjPresent
     ld d, $18
     call FillC2Bytes
-    ld hl, $c468
+    ld hl, wListBase
     ld d, $59
     call FillC2Bytes
-    ld hl, $c528
+    ld hl, wPending
     ld d, $0c
     call FillC2Bytes
-    ld hl, $c53b
+    ld hl, wGroupData
     ld d, $20
     call FillC2Bytes
     xor a
-    ld [$c53b], a
-    ld [$c543], a
-    ld [$c54b], a
-    ld [$c553], a
-    ld hl, $c438
+    ld [wC2Washer], a
+    ld [wC2Trash1], a
+    ld [wC2Trash2], a
+    ld [wC2Desk], a
+    ld hl, wObjVisible
     ld d, $18
     call FillC2Bytes
     call InitC2Visible

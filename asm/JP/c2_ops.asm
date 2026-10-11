@@ -102,15 +102,16 @@ jr_000_3b9c:
     dw ScriptWaitObjs ; opcode $47
     dw SlotName0 ; opcode $48
 Jump_000_3ba1:
-    dw $2c3e ; opcode $49
-    dw $2c45 ; opcode $4a
+    dw ScriptValue0 ; opcode $49
+    dw ScriptValues01 ; opcode $4a
+    ; Pointer to ScriptBuildObjs; split bytes retain the interior label.
     db $52 ; opcode $4b
 jr_000_3ba6:
     db $2c
     dw AddArgList ; opcode $4c
     dw TestSelNameArg ; opcode $4d
     dw DropItemChange ; opcode $4e
-    dw $209d ; opcode $4f
+    dw MoveRoomFlush ; opcode $4f
     dw ScriptSetRoom ; opcode $50
     ; Pointer to SlotName1; split bytes retain the original interior label.
     db $f4 ; opcode $51
@@ -121,53 +122,53 @@ Call_000_3bb2:
     dw BranchFlagClr ; opcode $54
     dw BranchRoomNot ; opcode $55
     dw BranchPackedNot ; opcode $56
-    dw $30be ; opcode $57
-    dw $30cc ; opcode $58
-    dw $30da ; opcode $59
+    dw BlackjackCall ; opcode $57
+    dw Trains2To5Call ; opcode $58
+    dw Trains6To9Call ; opcode $59
     db $66 ; opcode $5a
 Jump_000_3bc4:
     db $39
     dw BranchNoAttr2 ; opcode $5b
-    dw TestC2Count ; opcode $5c
-    dw DecC2Count ; opcode $5d
-    dw $30e8 ; opcode $5e
-    dw $1d5b ; opcode $5f
-    dw MoveC2Room ; opcode $60
-    dw ClearC2ExtraView ; opcode $61
-    dw SetC2RoomView ; opcode $62
-    dw RoomEffect ; opcode $63
-    dw $1db2 ; opcode $64
+    dw TestC2Quarters ; opcode $5c
+    dw DecC2Quarter ; opcode $5d
+    dw TrainFareCall ; opcode $5e
+    dw BranchNoTrainPass ; opcode $5f
+    dw LeaveTrain ; opcode $60
+    dw ClearTrainLinks ; opcode $61
+    dw ShowCarFare ; opcode $62
+    dw TrainRoomEffect ; opcode $63
+    dw SetTrainPass ; opcode $64
     dw ScriptPutItem ; opcode $65
     dw ScriptC2Effect ; opcode $66
-    ; Pointer to SpendWordOne; split bytes retain the original interior label.
+    ; Pointer to SpendCashOne; split bytes retain the original interior label.
     db $0c ; opcode $67
 jr_000_3bde:
     db $31
-    dw SpendWordCost ; opcode $68
-    dw $3128 ; opcode $69
-    dw $3136 ; opcode $6a
+    dw SpendCashCost ; opcode $68
+    dw BuyChipsCall ; opcode $69
+    dw SellChipsCall ; opcode $6a
     dw ScriptRet ; opcode $6b
-    dw $3144 ; opcode $6c
-    dw $3152 ; opcode $6d
+    dw DesertMoveCall ; opcode $6c
+    dw C2ShopCall ; opcode $6d
     dw BranchNoAttr0 ; opcode $6e
-    dw ClearC2RoomView ; opcode $6f
+    dw HideCarFare ; opcode $6f
     dw ScriptAddChange ; opcode $70
-    dw CheckWordCall ; opcode $71
-    dw UseC2Count2 ; opcode $72
+    dw CheckCashCall ; opcode $71
+    dw UseC2Cell ; opcode $72
     dw ReloadC2Map ; opcode $73
     dw PickListRoom ; opcode $74
-    dw $31b0 ; opcode $75
-    dw $31be ; opcode $76
+    dw MapPulse23Call ; opcode $75
+    dw MapStepsCall ; opcode $76
     dw RepeatCue10 ; opcode $77
     ; Pointer to RefreshItemList; split bytes retain the original interior label.
     db $dc ; opcode $78
 Jump_000_3c00:
     db $31
-    dw BranchWordFive ; opcode $79
+    dw BranchNoFunds ; opcode $79
     dw BlinkObjTwice ; opcode $7a
-    dw $326b ; opcode $7b
+    dw C2ChoiceCall ; opcode $7b
     dw CallBankScript ; opcode $7c
     dw JumpBankScript ; opcode $7d
     dw ScriptWait60 ; opcode $7e
     dw ResetItemSlots ; opcode $7f
-    dw $2039 ; opcode $80
+    dw SaveStateRet ; opcode $80

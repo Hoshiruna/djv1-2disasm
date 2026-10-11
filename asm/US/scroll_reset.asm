@@ -24,7 +24,7 @@ jr_001_6173:
 
     sub $08
     ld [wSpriteScrollY], a
-    ld [$c184], a
+    ld [wScrollY], a
     call DrawRoomObjs
     call SubmitOam
     jr jr_001_6173

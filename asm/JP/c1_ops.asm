@@ -65,15 +65,15 @@ jr_006_40a4:
     dw ScriptSetStateView ; opcode $36
     dw ClearSelStateView ; opcode $37
     dw ScriptName1 ; opcode $38
-    dw AddListCountArg ; opcode $39
+    dw AddC1CoinsArg ; opcode $39
     dw PickBullet1 ; opcode $3a
     dw PickBullet2 ; opcode $3b
 jr_006_40c3:
-    dw SpendListCount ; opcode $3c
+    dw SpendC1Coins ; opcode $3c
     dw UseBullet1 ; opcode $3d
     dw UseBullet2 ; opcode $3e
     dw ScriptHoldText ; opcode $3f
-    dw UseListCount ; opcode $40
+    dw UseC1Coin ; opcode $40
     dw PickListRoom ; opcode $41
     dw AddQuickArg ; opcode $42
     dw SetRoomArg3 ; opcode $43
@@ -83,41 +83,42 @@ jr_006_40c3:
     dw RemoveChange ; opcode $47
     dw ExitActionFlag ; opcode $48
     dw DropSelList ; opcode $49
-    dw TestListCount ; opcode $4a
+    dw TestC1Coins ; opcode $4a
     dw TestHeldArg ; opcode $4b
     dw HoldItem ; opcode $4c
     dw ClearHeldItem ; opcode $4d
-    dw IncC1Count0 ; opcode $4e
-    dw DecC1Count0 ; opcode $4f
-    dw IncC1Count2 ; opcode $50
-    dw DecC1Count2 ; opcode $51
+    dw IncGun1Ammo ; opcode $4e
+    dw DecGun1Ammo ; opcode $4f
+    dw IncGun3Ammo ; opcode $50
+    dw DecGun3Ammo ; opcode $51
     dw ReadItemArg ; opcode $52
     dw SetItem2ArgA ; opcode $53
+    ; ScriptProp4Bit1: split pointer retains the original interior label.
     db $d7 ; opcode $54
 jr_006_40f4:
     db $36
     dw DropListArg ; opcode $55
     dw AddBullet1Arg ; opcode $56
     dw AddBullet2 ; opcode $57
-    dw IncC1Count1 ; opcode $58
-    dw DecC1Count1 ; opcode $59
+    dw IncGun2Ammo ; opcode $58
+    dw DecGun2Ammo ; opcode $59
     dw FinishEffect ; opcode $5a
-    dw $29f8 ; opcode $5b
+    dw C1PutFinishCall ; opcode $5b
     dw ScriptFirstItem ; opcode $5c
     dw TestProp4 ; opcode $5d
-    dw $3099 ; opcode $5e
+    dw C1RoomEventCall ; opcode $5e
     dw ScriptPlayAudio ; opcode $5f
     dw SwapOpSlots ; opcode $60
     ; Pointer to ReturnHeldItem; split bytes retain the original interior label.
     db $f4 ; opcode $61
 jr_006_410e:
     db $2c
-    dw AddCountFindArg ; opcode $62
-    dw ClearC1Count ; opcode $63
+    dw AddCoinFindArg ; opcode $62
+    dw ClearC1Cash ; opcode $63
     dw CheckListFull ; opcode $64
     dw CallScript ; opcode $65
     dw ReturnScript ; opcode $66
-    dw SpendListTwo ; opcode $67
+    dw SpendTwoCoins ; opcode $67
     dw ScriptWait60 ; opcode $68
     dw ScriptRoomDraw ; opcode $69
     dw PlayPickEffect ; opcode $6a

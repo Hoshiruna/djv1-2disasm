@@ -8,7 +8,7 @@ Call_000_1b39:
     call StageMapPal
     ld a, $09
     call PushRomBank
-    ld hl, $401d
+    ld hl, UiMapRefs
     pop af
     sla a
     ld c, a
@@ -29,11 +29,11 @@ Call_000_1b39:
 BgPalBanks:
     db $0a, $0b
 BgPalTables:
-    dw $43de, $4000
+    dw C1BgPalRefs, C2BgPalRefs
 ObjPalBanks:
     db $0a, $0b
 ObjPalTables:
-    dw $5a0a, $5398
+    dw C1ObjPalRefs, C2ObjPalRefs
 
 ; Read the indexed bank-9 graphics resource; preserve BC/DE and restore the ROM bank.
 ReadUiGfx:
@@ -44,7 +44,7 @@ Call_000_1b67:
     push af
 
 Call_000_1b6a:
-    ld bc, $4613
+    ld bc, UiGfxRefs
     ld a, $09
     call PushRomBank
     pop af

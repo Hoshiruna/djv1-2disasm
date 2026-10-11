@@ -1,12 +1,12 @@
 
-; Set exactly $23 initial state bits and restore caller scratch at $ffa0/$ffa1.
+; Set exactly $23 initial state bits and restore caller scratch at hItemSlot/hItemSlot+1.
 InitC1Bits:
 
 Call_001_45ef:
     push af
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     pop af
     push hl
@@ -28,9 +28,9 @@ jr_001_45fd:
     pop hl
     push af
     ld a, l
-    ldh [$ffa0], a
+    ldh [hItemSlot], a
     ld a, h
-    ldh [$ffa1], a
+    ldh [hItemSlot+1], a
     pop af
     ret
 
@@ -44,9 +44,9 @@ InitC1Absent:
 
 Call_001_4638:
     push af
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     pop af
     push hl
@@ -68,9 +68,9 @@ jr_001_4650:
 
 jr_001_4652:
     ld a, l
-    ldh [$ffa0], a
+    ldh [hItemSlot], a
     ld a, h
-    ldh [$ffa1], a
+    ldh [hItemSlot+1], a
     pop af
     ret
 

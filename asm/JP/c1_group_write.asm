@@ -27,6 +27,9 @@ Jump_000_29d1:
     add hl, bc
     ld [hl], a
 
+; Run the Case I put completion in bank two and restore the previous ROM bank.
+C1PutFinishCall:
+
 Jump_000_29f8:
     push af
     ld a, $02

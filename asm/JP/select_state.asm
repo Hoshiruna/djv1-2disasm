@@ -63,13 +63,13 @@ Call_001_5be2:
     ld a, $ff
     ld [wSelAction], a
 
-; Fill the first 16-byte operation slot and $c8b1/$c8b3 with $ff; leave the action unchanged.
+; Fill the first 16-byte operation slot and wOpClass/wActionCode with $ff; leave the action unchanged.
 ClearSelect:
 
 Call_001_5be7:
     ld a, $ff
-    ld [$c8b1], a
-    ld [$c8b3], a
+    ld [wOpClass], a
+    ld [wActionCode], a
     ld hl, wItemType
     ld d, $10
 

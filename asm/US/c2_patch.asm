@@ -14,7 +14,7 @@ ApplyC2Patches:
     cp $19
     ret z
 
-    ld a, [$c5c9]
+    ld a, [wRoomCueHold]
     bit 7, a
     ret nz
 

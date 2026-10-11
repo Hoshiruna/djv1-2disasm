@@ -41,7 +41,7 @@ Jump_000_0862:
     pop af
 
 Call_000_08ad:
-    call $74bc
+    call RunSaveSelect
     call PopRomBank
     ld a, $06
     ld [wSceneFx], a
@@ -103,7 +103,7 @@ Jump_000_0904:
     ld a, $02
     call PushRomBank
     pop af
-    call $785e
+    call RunRestorePrompt
     call PopRomBank
     ld a, [wStateResult]
     and $bf
@@ -116,10 +116,10 @@ Jump_000_0904:
 C1LoopCalls:
     dw ResumeC1Game, SoftReset
 
-; Clear $0b00 bytes starting at $c400, then fall through to StartC2Game.
+; Clear $0b00 bytes starting at wCaseData, then fall through to StartC2Game.
 ClearCaseData:
 
-    ld hl, $c400
+    ld hl, wCaseData
     ld bc, $0b00
     call ZeroBytes
 
@@ -200,7 +200,7 @@ Call_000_0987:
 Jump_000_09a2:
     call PushRomBank
     pop af
-    call $785e
+    call RunRestorePrompt
     call PopRomBank
     ld a, [wStateResult]
     and $bf

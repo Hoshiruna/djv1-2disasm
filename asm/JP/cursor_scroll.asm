@@ -4,7 +4,7 @@ StepCursorScroll:
 
 jr_001_61ab:
     ld [wSpriteScrollY], a
-    ld [$c184], a
+    ld [wScrollY], a
     call DrawCursorRaw
     call DrawRoomObjs
     call SubmitOam
@@ -42,7 +42,7 @@ jr_001_61cc:
     jr z, jr_001_61de
 
     ld [wSpriteScrollY], a
-    ld [$c184], a
+    ld [wScrollY], a
     ret
 
 

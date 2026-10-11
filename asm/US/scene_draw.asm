@@ -148,7 +148,7 @@ Call_000_0e4a:
     add hl, hl
     add hl, hl
     add hl, de
-    ld bc, $9800
+    ld bc, _SCRN0
     add hl, bc
     ld c, l
     ld b, h

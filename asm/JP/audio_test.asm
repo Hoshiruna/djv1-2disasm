@@ -3,7 +3,7 @@
 AudioTest:
     call RequestTimer
     call DisableLcd
-    call Call_000_09f5
+    call LoadAuxGfx
     ld a, $06
     call ReadUiMap
     ld a, $02

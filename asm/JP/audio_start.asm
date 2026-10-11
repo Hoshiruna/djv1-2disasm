@@ -4,21 +4,21 @@ Jump_004_4000:
     push hl
     push bc
     ld hl, wAudioWork
-    ld bc, $0140
+    ld bc, AudioWorkLen
     call ZeroBytes
     xor a
     ld [wAudioState], a
     ld [wAudioId], a
     ld a, $ff
-    ld [wAudioWork+25], a
-    ld [wAudioWork+57], a
-    ld [wAudioWork+89], a
-    ld [wAudioWork+121], a
-    ld [wAudioWork+153], a
-    ld [wAudioWork+185], a
-    ld [wAudioWork+217], a
-    ld [wAudioWork+249], a
-    ld [wAudioWork+281], a
+    ld [wBaseP2+25], a
+    ld [wBaseP1+25], a
+    ld [wBaseWave+25], a
+    ld [wBaseNoise+25], a
+    ld [wAltP2+25], a
+    ld [wAltP1+25], a
+    ld [wAltWave+25], a
+    ld [wTopP1+25], a
+    ld [wTopNoise+25], a
     pop bc
     pop hl
     ret

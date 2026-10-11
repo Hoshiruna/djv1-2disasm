@@ -100,6 +100,9 @@ Jump_000_0552:
     ld a, [hl+]
     ld d, a
 
+; Copy D sixteen-byte tiles from HL to BC, retaining the original byte-count wrap.
+CopyGfxRun:
+
 Jump_000_055e:
 jr_000_055e:
     call CopyGfx8

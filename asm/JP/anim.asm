@@ -14,11 +14,11 @@ StepWaitAnim:
     cp $00
     jr nz, jr_002_5ffb
 
-    ld bc, $4b65
+    ld bc, C1WaitAnim
     jr jr_002_5ffe
 
 jr_002_5ffb:
-    ld bc, $5f29
+    ld bc, C2WaitAnim
 
 jr_002_5ffe:
     add hl, bc
@@ -41,11 +41,11 @@ jr_002_5ffe:
     cp $00
     jr nz, jr_002_6021
 
-    ld hl, $4b65
+    ld hl, C1WaitAnim
     jr jr_002_6037
 
 jr_002_6021:
-    ld hl, $5f29
+    ld hl, C2WaitAnim
     jr jr_002_6037
 
 jr_002_6026:
@@ -76,11 +76,11 @@ PlayAnim:
     cp $00
     jr nz, jr_002_604d
 
-    ld bc, $48d9
+    ld bc, C1AnimPtrs
     jr jr_002_6050
 
 jr_002_604d:
-    ld bc, Case2ObjectAnimations
+    ld bc, C2AnimPtrs
 
 jr_002_6050:
     add hl, bc
@@ -119,7 +119,7 @@ StepC2Anim:
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, Case2ObjectAnimations
+    ld bc, C2AnimPtrs
     add hl, bc
     ld a, [hl+]
     ld [wAnimPtr], a

@@ -1,10 +1,10 @@
 C1ScriptTypes:
-    dw $4125
-    dw $4a0a
-    dw $4c83
-    dw $4d62
-    dw $6529
-    dw $6fd6
+    dw C1Type0Refs
+    dw C1Type1Refs
+    dw C1Type2Refs
+    dw C1Type3Refs
+    dw C1Type4Refs
+    dw C1Type5Refs
 
 ; Resolve first-slot type, value and action-code pointers, then enter the Case I script loop.
 StartC1Script:

@@ -22,14 +22,17 @@ Call_000_1414:
     rst RST_00
 
 JpGlyphParts:
-    dw $1440
-    dw $1448
-    dw $1440
-    dw $1448
-    dw $1448
-    dw $1454
-    dw $1448
-    dw $1454
+    dw JpGlyphPlain
+    dw JpGlyphTop90
+    dw JpGlyphPlain
+    dw JpGlyphTop90
+    dw JpGlyphTop90
+    dw JpGlyphTopA0
+    dw JpGlyphTop90
+    dw JpGlyphTopA0
+
+; Keep the blank upper tile and unchanged lower tile.
+JpGlyphPlain:
     ret
 
 
@@ -38,11 +41,17 @@ jr_000_1441:
     ld [wTextAux], a
     jr jr_000_1461
 
+; Add $80 to the lower tile and select upper tile $90.
+JpGlyphTop90:
+
     ld a, [wTextAux]
     add $80
     ld [wTextAux], a
     ld a, $90
     jr jr_000_145e
+
+; Add $70 to the lower tile and select upper tile $a0.
+JpGlyphTopA0:
 
     ld a, [wTextAux]
     add $70
@@ -86,22 +95,22 @@ DrawWindowGlyph:
 
 
 Jump_000_1498:
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_14be
 
     call PollJoy
-    ld a, [$c188]
+    ld a, [wJoyPress]
     bit 0, a
     jr z, jr_000_14be
 
     ld a, $ff
-    ld [$c890], a
+    ld [wTextFast], a
     push af
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call RefreshObjOam
 
@@ -132,7 +141,7 @@ Jump_000_14cf:
     cp $ff
     jr z, jr_000_14f8
 
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_1515
 
@@ -148,7 +157,7 @@ jr_000_14fd:
 
 Jump_000_1504:
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call DrawRoomObjs
     call SubmitOam
@@ -180,7 +189,7 @@ jr_000_1515:
     cp b
     ret nz
 
-    ld a, [$c894]
+    ld a, [wTextNoWrap]
     cp $00
     jr nz, jr_000_1548
 

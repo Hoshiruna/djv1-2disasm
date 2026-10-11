@@ -185,7 +185,7 @@ ReadOpBits:
     ldh [hChangePos+1], a
     ld a, d
     push af
-    ld bc, $1859
+    ld bc, BitMasks
     ldh a, [hChangePos]
     ld l, a
     ldh a, [hChangePos+1]
@@ -229,7 +229,7 @@ jr_001_56e0:
     ldh [hChangePos+1], a
     ld a, d
     push af
-    ld bc, $1859
+    ld bc, BitMasks
     ldh a, [hChangePos]
     ld l, a
     ldh a, [hChangePos+1]
@@ -335,7 +335,7 @@ ReadOpState:
     ldh [hChangePos+1], a
     ld a, d
     push af
-    ld bc, $1859
+    ld bc, BitMasks
     ldh a, [hChangePos]
     ld l, a
     ldh a, [hChangePos+1]

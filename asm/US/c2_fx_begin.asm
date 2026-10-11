@@ -17,12 +17,13 @@ Jump_003_5f3f:
     ld [wFxId], a
     jp ShowC2Effect
 
-; Play audio cue nine, then begin effect six.
+; Play audio nine, then begin the Moose and Spike effect.
+BeginGoonsFx:
 BeginC2Fx6:
 
 
 Call_003_5f45:
     ld a, $09
     call PlayAudio
-    ld a, $06
+    ld a, FxGoons
     jp BeginC2Fx

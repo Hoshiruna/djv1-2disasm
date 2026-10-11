@@ -77,9 +77,12 @@ Call_001_427e:
     bit 7, a
     ret z
 
+; Test the conditional mark ID in A; preserve the original result-bit handling.
+C1MarkCond:
+
 Call_001_4285:
     and $7f
-    ld [$c855], a
+    ld [wC1MarkId], a
     ld e, a
     ld d, a
     ld a, $00
@@ -96,7 +99,7 @@ jr_001_4295:
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld [$c5c3], a
+    ld [wC1MarkTest], a
     cp e
     jr nz, jr_001_42c4
 
@@ -106,7 +109,7 @@ jr_001_4295:
     ld a, d
     jr nc, jr_001_42bf
 
-    ld a, [$c5c3]
+    ld a, [wC1MarkTest]
     call ReadStateBit
     ld a, [wStateResult]
     and $01

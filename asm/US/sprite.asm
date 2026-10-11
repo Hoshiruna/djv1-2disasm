@@ -1,9 +1,9 @@
-; A = sprite ID in the shared pointer table at $400a.
+; A = sprite ID in the shared pointer table at UiSpritePtrs.
 DrawUiSprite:
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $400a
+    ld bc, UiSpritePtrs
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -22,11 +22,11 @@ DrawCaseSprite:
     cp $00
     jr nz, jr_002_5f5f
 
-    ld bc, $401b
+    ld bc, C1SpriteDefs
     jr jr_002_5f62
 
 jr_002_5f5f:
-    ld bc, Case2SpriteDefinitions
+    ld bc, C2SpriteDefs
 
 jr_002_5f62:
     add hl, bc
@@ -46,11 +46,11 @@ DrawObjFrame:
     cp $00
     jr nz, jr_002_5f7c
 
-    ld bc, $401b
+    ld bc, C1SpriteDefs
     jr jr_002_5f7f
 
 jr_002_5f7c:
-    ld bc, Case2SpriteDefinitions
+    ld bc, C2SpriteDefs
 
 jr_002_5f7f:
     add hl, bc

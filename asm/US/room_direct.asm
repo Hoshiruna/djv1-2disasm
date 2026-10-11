@@ -1,5 +1,6 @@
 
-; Store the current room state, select the case-two next room in bank three, then enter it.
+; Save the room state and changes, read the current passenger-room platform in bank three, then enter it.
+LeaveTrain:
 MoveC2Room:
 
 
@@ -15,7 +16,7 @@ Jump_000_2041:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomNext
+    call TrainRoomExit
 
 Call_000_204b:
     call PopRomBank

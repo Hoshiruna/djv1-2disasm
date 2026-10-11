@@ -9,10 +9,13 @@ VBlankVideo:
     bit 7, [hl]
     call nz, hOamDma
     bit 3, [hl]
-    jp z, Jump_001_4079
+    jp z, VideoMapStep
 
     call TransferGfx
-    jp Jump_001_4086
+    jp VideoPalStep
+
+; Consume a pending map queue when the graphics-transfer branch was skipped.
+VideoMapStep:
 
 
 Jump_001_4079:
@@ -23,6 +26,9 @@ Jump_001_4079:
     ldh a, [hMapQueueLen]
     cp $00
     call nz, FlushMapQueue
+
+; Consume a palette request, then continue the timer and scroll update.
+VideoPalStep:
 
 Jump_001_4086:
 jr_001_4086:
@@ -36,13 +42,13 @@ jr_001_408f:
     ldh a, [hVideoFlags]
     bit 4, a
     call nz, StartTimer
-    ld a, [$c182]
+    ld a, [wScrollX]
     ldh [rSCX], a
-    ld a, [$c184]
+    ld a, [wScrollY]
     ldh [rSCY], a
-    ld a, [$c18c]
+    ld a, [wVBlankCount]
     inc a
-    ld [$c18c], a
+    ld [wVBlankCount], a
     ld hl, hFrameTick
     inc [hl]
     pop af

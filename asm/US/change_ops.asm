@@ -98,8 +98,8 @@ AppendChange:
     pop af
     ld [wChangeType], a
     call PrepChangeList
-    ld bc, $c46f
-    ld hl, $c85b
+    ld bc, wWorkList
+    ld hl, wListScratch
     ld e, $00
 
 jr_003_5080:
@@ -116,5 +116,5 @@ jr_003_5087:
     cp e
     jr nz, jr_003_5080
 
-    call Call_000_241c
+    call SelectListMode1
     ret

@@ -7,11 +7,11 @@ Call_004_4738:
     ld hl, wAudioMask
     xor a
     ld [hl], a
-    ld bc, wAudioWork+128
+    ld bc, wAltP2
     call AudioActive
     jr c, jr_004_474d
 
-    ld bc, wAudioWork
+    ld bc, wBaseP2
     call AudioActive
     jr nc, jr_004_475b
 
@@ -21,19 +21,19 @@ jr_004_474d:
     jr c, jr_004_475b
 
     set 1, [hl]
-    ld de, wAudioOut+8
+    ld de, wOutP2
     call StageAudioOut
 
 jr_004_475b:
-    ld bc, wAudioWork+224
+    ld bc, wTopP1
     call AudioActive
     jr c, jr_004_4773
 
-    ld bc, wAudioWork+160
+    ld bc, wAltP1
     call AudioActive
     jr c, jr_004_4773
 
-    ld bc, wAudioWork+32
+    ld bc, wBaseP1
     call AudioActive
     jr nc, jr_004_4781
 
@@ -43,15 +43,15 @@ jr_004_4773:
     jr c, jr_004_4781
 
     set 0, [hl]
-    ld de, wAudioOut
+    ld de, wOutP1
     call StageAudioOut
 
 jr_004_4781:
-    ld bc, wAudioWork+192
+    ld bc, wAltWave
     call AudioActive
     jr c, jr_004_4791
 
-    ld bc, wAudioWork+64
+    ld bc, wBaseWave
     call AudioActive
     jr nc, jr_004_479f
 
@@ -61,15 +61,15 @@ jr_004_4791:
     jr c, jr_004_479f
 
     set 2, [hl]
-    ld de, wAudioOut+16
+    ld de, wOutWave
     call StageAudioOut
 
 jr_004_479f:
-    ld bc, wAudioWork+256
+    ld bc, wTopNoise
     call AudioActive
     jr c, jr_004_47af
 
-    ld bc, wAudioWork+96
+    ld bc, wBaseNoise
     call AudioActive
     jr nc, jr_004_47bd
 
@@ -79,7 +79,7 @@ jr_004_47af:
     jr c, jr_004_47bd
 
     set 3, [hl]
-    ld de, wAudioOut+24
+    ld de, wOutNoise
     call StageAudioOut
 
 jr_004_47bd:
@@ -172,20 +172,20 @@ WritePulse1:
 
 
 Call_004_482c:
-    ld a, [wAudioOut+5]
+    ld a, [wOutP1+5]
     cp $ff
     jr nz, jr_004_4839
 
-    ld a, [wAudioOut+1]
+    ld a, [wOutP1+1]
     call AudioVolume
 
 jr_004_4839:
     ld [wAudioReg+2], a
-    ld a, [wAudioOut]
+    ld a, [wOutP1]
     and $40
     jr z, jr_004_4870
 
-    ld a, [wAudioOut+2]
+    ld a, [wOutP1+2]
     ld b, a
     sla a
     jr nc, jr_004_4852
@@ -200,25 +200,25 @@ jr_004_4852:
 
 jr_004_4854:
     ld [wAudioReg], a
-    ld a, [wAudioOut+1]
+    ld a, [wOutP1+1]
     and $c0
     ld b, a
-    ld a, [wAudioOut+4]
+    ld a, [wOutP1+4]
     srl a
     srl a
     srl a
     or b
     ld [wAudioReg+1], a
-    ld a, [wAudioOut+3]
+    ld a, [wOutP1+3]
     ld [wAudioReg+3], a
 
 jr_004_4870:
-    ld a, [wAudioOut+4]
+    ld a, [wOutP1+4]
     ld b, a
-    ld a, [wAudioOut+1]
+    ld a, [wOutP1+1]
     call AudioTrigger
     ld [wAudioReg+4], a
-    ld a, [wAudioOut]
+    ld a, [wOutP1]
     and $40
     jr nz, jr_004_48b7
 
@@ -301,38 +301,38 @@ WritePulse2:
 
 
 Call_004_48ee:
-    ld a, [wAudioOut+13]
+    ld a, [wOutP2+5]
     cp $ff
     jr nz, jr_004_48fb
 
-    ld a, [wAudioOut+9]
+    ld a, [wOutP2+1]
     call AudioVolume
 
 jr_004_48fb:
     ld [wAudioReg+7], a
-    ld a, [wAudioOut+8]
+    ld a, [wOutP2]
     and $40
     jr z, jr_004_491e
 
-    ld a, [wAudioOut+9]
+    ld a, [wOutP2+1]
     and $c0
     ld b, a
-    ld a, [wAudioOut+12]
+    ld a, [wOutP2+4]
     srl a
     srl a
     srl a
     or b
     ld [wAudioReg+6], a
-    ld a, [wAudioOut+11]
+    ld a, [wOutP2+3]
     ld [wAudioReg+8], a
 
 jr_004_491e:
-    ld a, [wAudioOut+12]
+    ld a, [wOutP2+4]
     ld b, a
-    ld a, [wAudioOut+9]
+    ld a, [wOutP2+1]
     call AudioTrigger
     ld [wAudioReg+9], a
-    ld a, [wAudioOut+8]
+    ld a, [wOutP2]
     and $40
     jr nz, jr_004_495b
 
@@ -389,7 +389,7 @@ WriteWave:
 
 
 Call_004_497c:
-    ld a, [wAudioOut+16]
+    ld a, [wOutWave]
     and $40
     jr nz, jr_004_4984
 
@@ -400,14 +400,14 @@ jr_004_4984:
     xor a
     ldh [rNR30], a
     ldh [rNR31], a
-    ld a, [wAudioOut+21]
+    ld a, [wOutWave+5]
     and $60
     ldh [rNR32], a
-    ld a, [wAudioOut+19]
+    ld a, [wOutWave+3]
     ldh [rNR33], a
     ld a, $80
     ldh [rNR30], a
-    ld a, [wAudioOut+20]
+    ld a, [wOutWave+4]
     and $07
     or $80
     ldh [rNR34], a
@@ -418,7 +418,7 @@ WriteNoise:
 
 
 Call_004_49a3:
-    ld a, [wAudioOut+24]
+    ld a, [wOutNoise]
     and $40
     jr nz, jr_004_49ab
 
@@ -426,13 +426,13 @@ Call_004_49a3:
 
 
 jr_004_49ab:
-    ld a, [wAudioOut+25]
+    ld a, [wOutNoise+1]
     ldh [rNR41], a
-    ld a, [wAudioOut+26]
+    ld a, [wOutNoise+2]
     ldh [rNR42], a
-    ld a, [wAudioOut+27]
+    ld a, [wOutNoise+3]
     ldh [rNR43], a
-    ld a, [wAudioOut+28]
+    ld a, [wOutNoise+4]
     ldh [rNR44], a
     ret
 
@@ -469,7 +469,8 @@ Call_004_49d6:
     sla a
     ret
 
-; Copy flags and selected slot fields to DE, clear source bit 6, and preserve HL.
+; Write flags, slot bytes 16..19, level, and pan to output bytes 0..6.
+; Leave output byte 7 unchanged, clear source bit 6, and preserve HL.
 StageAudioOut:
 
 
@@ -512,7 +513,7 @@ AudioPan:
 Call_004_49fd:
     ld b, $00
     ld c, $00
-    ld a, [wAudioOut+30]
+    ld a, [wOutNoise+6]
     srl a
     rl b
     srl a
@@ -521,12 +522,12 @@ Call_004_49fd:
     rl b
     scf
     rl c
-    ld a, [wAudioOut+14]
+    ld a, [wOutP2+6]
     srl a
     rl b
     srl a
     rl c
-    ld a, [wAudioOut+6]
+    ld a, [wOutP1+6]
     srl a
     rl b
     srl a

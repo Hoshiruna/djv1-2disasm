@@ -1,11 +1,12 @@
 
-; Accept mode three or an allowed packed value, show the original confirmation, update first-slot attributes and lists, then select slot one and return $ff; rejection returns zero.
+; Accept desk placement or an allowed packed item, show its confirmation, and update attributes and lists.
+; Select slot one and return $ff on success; rejection returns zero.
 CheckC2Put:
 
 
 Call_003_512c:
     ld a, [wArg0]
-    cp $03
+    cp GrpDesk
     jr z, jr_003_513a
 
     call CanC2Put
@@ -16,7 +17,7 @@ jr_003_513a:
     ld a, [wSelName]
     ld [wTextName0], a
     ld a, [wArg0]
-    cp $03
+    cp GrpDesk
     jr z, jr_003_514b
 
     ld a, $2c
@@ -44,7 +45,7 @@ jr_003_514d:
 
 jr_003_5173:
     ld a, [wPutMode]
-    cp $04
+    cp PutDirect
     call z, RefreshC2Put
 
 jr_003_517b:

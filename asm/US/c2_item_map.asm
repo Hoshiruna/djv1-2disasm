@@ -80,22 +80,24 @@ Call_003_4f01:
     rst RST_00
 
 C2ItemCounters:
-    dw AddC2Word10
-    dw AddC2Word1
-    dw IncC2Count0
-    dw IncC2Count1
-    dw IncC2Count2
+    dw AddC2Ten
+    dw AddC2Dollar
+    dw AddC2Quarter
+    dw AddC2Bullet
+    dw AddC2Cell
 
-; Add ten to the shared case-two word counter.
+; Add ten dollars to Case II cash.
+AddC2Ten:
 AddC2Word10:
     ld a, $0a
 
-; Add A to the little-endian case-two word counter with carry.
+; Add A to Case II cash with carry into the high byte.
+AddC2Cash:
 AddC2Word:
 
 Call_003_4f0e:
 jr_003_4f0e:
-    ld hl, wC2Word
+    ld hl, wC2Cash
     add [hl]
     ld [hl+], a
     ld a, [hl]
@@ -103,35 +105,39 @@ jr_003_4f0e:
     ld [hl], a
     ret
 
-; Add one to the shared case-two word counter.
+; Add one dollar to Case II cash.
+AddC2Dollar:
 AddC2Word1:
 
 
     ld a, $01
     jr jr_003_4f0e
 
-; Increment the case-two byte counter at wC2Count0.
+; Add one Case II quarter with byte wrap.
+AddC2Quarter:
 IncC2Count0:
 
-    ld a, [wC2Count0]
+    ld a, [wC2Quarters]
     inc a
-    ld [wC2Count0], a
+    ld [wC2Quarters], a
     ret
 
-; Increment the case-two byte counter at wC2Count1.
+; Add one Case II bullet to the inventory count with byte wrap.
+AddC2Bullet:
 IncC2Count1:
 
 
-    ld a, [wC2Count1]
+    ld a, [wC2Bullets]
     inc a
-    ld [wC2Count1], a
+    ld [wC2Bullets], a
     ret
 
-; Increment the case-two byte counter at wC2Count2.
+; Add one Case II battery with byte wrap.
+AddC2Cell:
 IncC2Count2:
 
 
-    ld a, [wC2Count2]
+    ld a, [wC2Cells]
     inc a
-    ld [wC2Count2], a
+    ld [wC2Cells], a
     ret

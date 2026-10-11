@@ -1,4 +1,12 @@
 
+
+; Read a little-endian destination from HL, then enter QueueMapRect.
+QueueMapSpec:
+    ld a, [hl+]
+    ld c, a
+    ld a, [hl+]
+    ld b, a
+
 ; HL = width, height, interleaved tile/attribute rows; BC = VRAM destination.
 QueueMapRect:
 Call_000_02a5:

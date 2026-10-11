@@ -73,6 +73,9 @@ Call_000_2403:
     call ClearWorkList
     call CopySlotList
 
+; Set the operation byte to one and refresh the list mode.
+SelectListMode1:
+
 Call_000_241c:
     ld a, $01
     ld [wOpByte], a

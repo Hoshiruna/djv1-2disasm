@@ -5,11 +5,11 @@ ClearUiText:
 
 Call_001_6e22:
     ld a, $01
-    ld [$c5c3], a
-    ld [$c5c4], a
+    ld [wClearCellX], a
+    ld [wClearCellY], a
 
 jr_001_6e2a:
-    ld a, [$c5c4]
+    ld a, [wClearCellY]
     ld l, a
     ld h, $00
     add hl, hl
@@ -17,9 +17,9 @@ jr_001_6e2a:
     add hl, hl
     add hl, hl
     add hl, hl
-    ld de, $9800
+    ld de, _SCRN0
     add hl, de
-    ld a, [$c5c3]
+    ld a, [wClearCellX]
     ld e, a
     ld d, $00
     add hl, de
@@ -28,21 +28,21 @@ jr_001_6e2a:
     ld hl, UiBlankGlyph
     call QueueTileRect
     call SubmitMapQueue
-    ld a, [$c5c3]
+    ld a, [wClearCellX]
     inc a
     cp $13
     jr nz, jr_001_6e5e
 
-    ld a, [$c5c4]
+    ld a, [wClearCellY]
     inc a
     cp $11
     ret z
 
-    ld [$c5c4], a
+    ld [wClearCellY], a
     xor a
 
 jr_001_6e5e:
-    ld [$c5c3], a
+    ld [wClearCellX], a
     jr jr_001_6e2a
 
 ; Width, height, blank tile(s).

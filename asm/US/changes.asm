@@ -74,7 +74,7 @@ Call_002_65cd:
     rst RST_00
 
 C1ChangeOps:
-    dw $65f7, UndoChange1, UndoChange2, $65f7, UndoChange4, $65f7
+    dw SkipC1Change, UndoChange1, UndoChange2, SkipC1Change, UndoChange4, SkipC1Change
 
 ; Clear value property bit 2 and state bits $48/$4a/$4b.
 UndoChange1:
@@ -92,6 +92,9 @@ UndoChange1:
     call ClearStateBit
     ld a, $4b
     call ClearStateBit
+
+; Return without cleanup for pending change types zero, three, and five.
+SkipC1Change:
     ret
 
 ; Clear the third object flag at pending value + $20.

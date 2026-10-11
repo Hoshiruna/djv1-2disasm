@@ -144,7 +144,7 @@ Call_002_706c:
     ld [wSceneId], a
     ld a, $06
     ld [wSceneFx], a
-    call Call_000_0bab
+    call ShowScene
     call DrawC1FxObj
     ld a, $78
     call WaitTicks

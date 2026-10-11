@@ -25,16 +25,16 @@ jr_003_415b:
     db $56, $60, $6a, $6b, $6e, $6f, $70, $71, $72, $78, $79, $7a, $7b, $54, $59, $23
     db $26, $29, $2c, $3c, $3f, $42, $45, $77, $ff
 
-; Set initial object visibility and restore the caller scratch bytes at $ffa0/$ffa1.
+; Set initial object visibility and restore the caller scratch bytes at hItemSlot/hItemSlot+1.
 InitC2Visible:
 
 Call_003_4174:
     push af
 
 jr_003_4175:
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     pop af
     push hl
@@ -56,9 +56,9 @@ jr_003_418c:
     pop hl
     push af
     ld a, l
-    ldh [$ffa0], a
+    ldh [hItemSlot], a
     ld a, h
-    ldh [$ffa1], a
+    ldh [hItemSlot+1], a
     pop af
     ret
 

@@ -277,7 +277,7 @@ Call_000_0d16:
     pop bc
     ret
 
-; Copy 196 IDs and attributes into rows of 14 IDs + 14 attributes at $c902.
+; Copy 196 IDs and attributes into rows of 14 IDs + 14 attributes at wSceneMap.
 StageSceneMap:
 Call_000_0d2c:
     ld a, [wMapPtr]
@@ -286,7 +286,7 @@ Call_000_0d2c:
 Jump_000_0d30:
     ld a, [wMapPtr+1]
     ld b, a
-    ld hl, $c902
+    ld hl, wSceneMap
     ld d, $c4
 
 Jump_000_0d39:
@@ -309,7 +309,7 @@ jr_000_0d49:
     dec d
     jr nz, jr_000_0d3b
 
-    ld hl, $c910
+    ld hl, wSceneMap+14
     ld d, $c4
     ld e, $0e
 

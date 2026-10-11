@@ -39,7 +39,7 @@ Call_000_2403:
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld [$c526], a
+    ld [wListRow], a
     call DropListHead
     call StoreWorkGroup
 
@@ -97,6 +97,9 @@ jr_000_245a:
     ld a, [wHitObj]
     call ClearObjVisible
 
+; Refresh objects and advance the current pending index beyond the last record.
+FinishListAdd:
+
 Jump_000_2467:
     call RefreshObjs
     ld a, [wPendingLast]
@@ -153,4 +156,4 @@ Jump_000_24aa:
     pop af
     call IncListEnd
     call PopRomBank
-    jp Jump_000_2467
+    jp FinishListAdd

@@ -38,18 +38,18 @@ Call_002_7289:
     cp $00
     jr nz, jr_002_729c
 
-    ld bc, $72c4
+    ld bc, C1ObjPos
     jr jr_002_729f
 
 jr_002_729c:
-    ld bc, Case2ObjectPositions
+    ld bc, C2ObjPos
 
 jr_002_729f:
     add hl, bc
     ld a, l
-    ld [$c863], a
+    ld [wObjPosPtr], a
     ld a, h
-    ld [$c864], a
+    ld [wObjPosPtr+1], a
     ld a, [wObjListPtr]
     ld c, a
     ld a, [wObjListPtr+1]

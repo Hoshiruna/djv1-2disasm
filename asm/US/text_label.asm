@@ -19,18 +19,18 @@ Call_000_10dc:
     ld h, $00
     add hl, hl
     ld a, l
-    ldh [$ff9e], a
+    ldh [hTextIndex], a
     ld a, h
-    ldh [$ff9f], a
+    ldh [hTextIndex+1], a
     ld a, [wCaseId]
     cp $00
     jr nz, jr_000_10fd
 
 Jump_000_10f0:
     ld bc, C1ListTexts
-    ldh a, [$ff9e]
+    ldh a, [hTextIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hTextIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl+]
@@ -40,9 +40,9 @@ Jump_000_10fb:
 
 jr_000_10fd:
     ld bc, C2ListTexts
-    ldh a, [$ff9e]
+    ldh a, [hTextIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hTextIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl+]

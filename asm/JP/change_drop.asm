@@ -152,7 +152,7 @@ Call_000_264b:
     cp $ff
     jr z, jr_000_26ba
 
-    ld a, [$c8b0]
+    ld a, [wInputKind]
     cp $02
     jr z, jr_000_2692
 
@@ -344,7 +344,7 @@ jr_000_2730:
 CopyChangeList:
 
 Call_000_2734:
-    ld hl, $c470
+    ld hl, wWorkList+1
     ld a, [wListScratch]
     ld [hl+], a
     ld a, [wListScratch+1]

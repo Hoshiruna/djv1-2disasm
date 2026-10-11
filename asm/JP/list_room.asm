@@ -103,6 +103,6 @@ jr_000_2b47:
     ld a, $03
     call PushRomBank
     pop af
-    call PickC2Room
+    call PickCabStop
     call PopRomBank
     ret

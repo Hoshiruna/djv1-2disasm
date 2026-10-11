@@ -10,13 +10,13 @@ Call_002_70a2:
     ld hl, C1FxObjs
     add hl, bc
     ld a, [hl]
-    ld [$c5c3], a
+    ld [wC1FxObj], a
     ld [wObjList+2], a
-    ld a, [$c5c3]
+    ld a, [wC1FxObj]
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, $72c4
+    ld bc, C1ObjPos
     add hl, bc
     ld a, [hl+]
     ld [wObjList], a

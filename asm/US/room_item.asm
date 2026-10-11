@@ -50,7 +50,7 @@ Jump_000_178e:
     ld a, [hl+]
     ld [wRoomObjPtr], a
     ld a, [hl]
-    ld [$c8ae], a
+    ld [wRoomObjPtr+1], a
 
 ; Find a visible entry with its rule enabled, or write the original end marker.
 ScanRoomItems:
@@ -58,17 +58,17 @@ ScanRoomItems:
 Jump_000_179b:
     ld d, a
     ld a, $00
-    ldh [$ff9e], a
+    ldh [hRoomIndex], a
     ld a, $00
-    ldh [$ff9f], a
+    ldh [hRoomIndex+1], a
     ld a, d
     ld a, [wRoomObjPtr]
     ld c, a
-    ld a, [$c8ae]
+    ld a, [wRoomObjPtr+1]
     ld b, a
-    ldh a, [$ff9e]
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
@@ -124,12 +124,12 @@ jr_000_17ef:
     ld hl, $0004
     add hl, bc
     ld a, [hl+]
-    ld [$c5c4], a
+    ld [wRoomType], a
     ld a, [hl+]
-    ld [$c5c5], a
+    ld [wRoomItem], a
     ld a, [hl]
-    ld [$c5c6], a
-    ld [$c5c2], a
+    ld [wRoomVisId], a
+    ld [wHitObj], a
     push af
     ld a, $01
     call PushRomBank
@@ -186,5 +186,6 @@ RoomItemBanks:
 RoomItemRefs:
     dw C1EntryRefs, C2EntryRefs
 
-; BitMasks retains its existing constant definition.
+; One-bit masks indexed from bit zero to seven.
+BitMasks:
     db $01, $02, $04, $08, $10, $20, $40, $80

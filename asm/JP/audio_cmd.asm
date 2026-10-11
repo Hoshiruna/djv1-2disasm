@@ -4,9 +4,9 @@ ReadAudio:
 
 
 Call_004_4500:
-    ld a, [wAudioSlot+1]
+    ld a, [wNotePtr]
     ld l, a
-    ld a, [wAudioSlot+2]
+    ld a, [wNotePtr+1]
     ld h, a
 
 ; Read audio commands until a note/rest returns with carry set or an end command clears carry.
@@ -47,43 +47,43 @@ Jump_004_4508:
 
 jr_004_4534:
     ld a, [hl+]
-    ld [wAudioSlot+21], a
+    ld [wNoteShift], a
     jp NextAudio
 
 
 jr_004_453b:
     ld a, $01
-    ld [wAudioSlot+26], a
+    ld [wNotePan], a
     jp NextAudio
 
 
 jr_004_4543:
     ld a, $03
-    ld [wAudioSlot+26], a
+    ld [wNotePan], a
     jp NextAudio
 
 
 jr_004_454b:
     ld a, $02
-    ld [wAudioSlot+26], a
+    ld [wNotePan], a
     jp NextAudio
 
 
 jr_004_4553:
     call AddNoteTime
     ld a, l
-    ld [wAudioSlot+1], a
+    ld [wNotePtr], a
     ld a, h
-    ld [wAudioSlot+2], a
+    ld [wNotePtr+1], a
     ld a, [wAudioByte]
     scf
     ret
 
 
 jr_004_4563:
-    ld a, [wAudioSlot]
+    ld a, [wNoteFlags]
     or $08
-    ld [wAudioSlot], a
+    ld [wNoteFlags], a
     jp NextAudio
 
 
@@ -96,9 +96,9 @@ jr_004_456e:
     ld hl, AudioTimes
     add hl, bc
     ld a, [hl+]
-    ld [wAudioSlot+3], a
+    ld [wNoteLen], a
     ld a, [hl+]
-    ld [wAudioSlot+4], a
+    ld [wNoteLen+1], a
     pop hl
     jp NextAudio
 
@@ -108,8 +108,8 @@ EndAudioSlot:
 
 Jump_004_4586:
     xor a
-    ld [wAudioSlot], a
-    ld [wAudioSlot+2], a
+    ld [wNoteFlags], a
+    ld [wNotePtr+1], a
     call RetrigAudio
     scf
     ccf
@@ -140,24 +140,24 @@ jr_004_45a8:
     ld a, c
     sla a
     ld b, a
-    ld a, [wAudioSlot+30]
+    ld a, [wInstPtr]
     add b
     ld e, a
-    ld a, [wAudioSlot+31]
+    ld a, [wInstPtr+1]
     ld b, $00
     adc b
     ld d, a
     ld a, [de]
     inc de
-    ld [wAudioSlot+16], a
+    ld [wNoteRegs], a
     ld a, [de]
-    ld [wAudioSlot+10], a
+    ld [wNoteInst], a
     xor a
     ld [wAudioSlot+11], a
-    ld [wAudioSlot+17], a
-    ld [wAudioSlot+19], a
+    ld [wNoteRegs+1], a
+    ld [wNoteRegs+3], a
     ld [wAudioSlot+24], a
-    ld [wAudioSlot+9], a
+    ld [wEnvMode], a
     jp NextAudio
 
 ; Read the wave instrument, upload sixteen wave RAM bytes, reset staged fields, then continue parsing.
@@ -168,17 +168,17 @@ jr_004_45d4:
     ld a, c
     sla a
     ld b, a
-    ld a, [wAudioSlot+30]
+    ld a, [wInstPtr]
     add b
     ld e, a
-    ld a, [wAudioSlot+31]
+    ld a, [wInstPtr+1]
     ld b, $00
     adc b
     ld d, a
     ld a, $00
     ldh [rNR30], a
     ld a, [de]
-    ld [wAudioSlot+20], a
+    ld [wWaveId], a
     inc de
     push hl
     sla a
@@ -201,13 +201,13 @@ jr_004_4601:
 
     pop hl
     ld a, [de]
-    ld [wAudioSlot+10], a
+    ld [wNoteInst], a
     xor a
     ld [wAudioSlot+11], a
-    ld [wAudioSlot+17], a
-    ld [wAudioSlot+19], a
+    ld [wNoteRegs+1], a
+    ld [wNoteRegs+3], a
     ld [wAudioSlot+24], a
-    ld [wAudioSlot+9], a
+    ld [wEnvMode], a
     jp NextAudio
 
 ; Interpret loop start/end/iteration commands using the original four-byte records and scans.
@@ -223,7 +223,7 @@ Jump_004_461f:
     and $0f
     ld [wAudioLoopTmp], a
     ld bc, wAudioLoops
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     add c
     ld c, a
     ld a, $00
@@ -240,19 +240,19 @@ Jump_004_461f:
     inc bc
     ld a, h
     ld [bc], a
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     and $f0
     ld b, a
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     add $04
     and $0f
     or b
-    ld [wAudioSlot+15], a
+    ld [wLoopPos], a
     jp NextAudio
 
 
 jr_004_4657:
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     call AudioLoopPtr
     jr nc, jr_004_4679
 
@@ -275,9 +275,9 @@ jr_004_4657:
 
 
 jr_004_4671:
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     sub $04
-    ld [wAudioSlot+15], a
+    ld [wLoopPos], a
 
 jr_004_4679:
     ld a, [hl+]
@@ -293,7 +293,7 @@ jr_004_4684:
     and $0f
     dec a
     ld d, a
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     call AudioLoopPtr
     ld a, [bc]
     cp d
@@ -351,7 +351,7 @@ RetrigAudio:
 
 
 Call_004_46c8:
-    ld a, [wAudioSlot+15]
+    ld a, [wLoopPos]
     and $f0
     cp $40
     jr z, jr_004_46e2
@@ -372,37 +372,37 @@ Call_004_46c8:
 
 
 jr_004_46e2:
-    ld a, [wAudioWork]
+    ld a, [wBaseP2]
     or $40
-    ld [wAudioWork], a
+    ld [wBaseP2], a
     ret
 
 
 jr_004_46eb:
-    ld a, [wAudioWork+160]
+    ld a, [wAltP1]
     or $40
-    ld [wAudioWork+160], a
+    ld [wAltP1], a
 
 jr_004_46f3:
-    ld a, [wAudioWork+32]
+    ld a, [wBaseP1]
     or $40
-    ld [wAudioWork+32], a
+    ld [wBaseP1], a
     ret
 
 
 jr_004_46fc:
-    ld a, [wAudioWork+64]
+    ld a, [wBaseWave]
     or $40
-    ld [wAudioWork+64], a
+    ld [wBaseWave], a
     ld a, $00
     ldh [rNR30], a
-    ld a, [wAudioWork+84]
+    ld a, [wBaseWave+20]
     ld b, a
-    ld a, [wAudioSlot+20]
+    ld a, [wWaveId]
     xor b
     jr z, jr_004_472e
 
-    ld a, [wAudioWork+84]
+    ld a, [wBaseWave+20]
     sla a
     sla a
     sla a
@@ -426,7 +426,7 @@ jr_004_472e:
 
 
 jr_004_472f:
-    ld a, [wAudioWork+96]
+    ld a, [wBaseNoise]
     or $40
-    ld [wAudioWork+96], a
+    ld [wBaseNoise], a
     ret

@@ -17,7 +17,7 @@ ShowC1AfterFx:
     ld a, $04
     ld [wTextRow], a
     xor a
-    ld [$c890], a
+    ld [wTextFast], a
     ld [wTextStartX], a
     ld a, $06
     call ShowUiText

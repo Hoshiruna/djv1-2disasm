@@ -38,5 +38,5 @@ jr_000_2b31:
 
 Call_000_2b37:
     ld a, [wArg3]
-    ld [$c8a6], a
+    ld [wScriptPtr+1], a
     ret

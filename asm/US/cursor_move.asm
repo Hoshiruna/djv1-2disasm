@@ -178,10 +178,10 @@ Jump_001_6030:
     add hl, de
     ld a, [hl]
     cp $18
-    jp z, $4bb8
+    jp z, GoNextList
 
     cp $19
-    jp z, Jump_001_4bbc
+    jp z, GoPrevList
 
     cp $ff
     ret z

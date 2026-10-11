@@ -11,7 +11,7 @@ LoadUiPal:
     sla a
     ld c, a
     ld b, $00
-    ld hl, $4000
+    ld hl, UiPalRefs
     add hl, bc
     ld a, [hl+]
     ld c, a
@@ -39,7 +39,7 @@ StageMapPal:
 Call_000_1996:
     push de
     push af
-    ld hl, $4210
+    ld hl, UiMapPalRefs
     ld a, $0a
     jr jr_000_19a6
 
@@ -48,7 +48,7 @@ StageUiBg:
 
     push de
     push af
-    ld hl, $4000
+    ld hl, UiPalRefs
     ld a, $0a
 
 jr_000_19a6:
@@ -89,7 +89,7 @@ Call_000_19c4:
     sla a
     ld c, a
     ld b, $00
-    ld hl, $4000
+    ld hl, UiPalRefs
     add hl, bc
     ld a, [hl+]
     ld c, a

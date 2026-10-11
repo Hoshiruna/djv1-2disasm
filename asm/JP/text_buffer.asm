@@ -39,7 +39,7 @@ SubmitTextBuffer:
 
 Call_000_15ff:
 jr_000_15ff:
-    ld bc, $9c21
+    ld bc, _SCRN1+33
     ld hl, wTextWidth
     call QueueTileRect
 
@@ -53,10 +53,10 @@ InitTextFrame:
 
 Call_000_160c:
     ld hl, TextTopFill
-    ld bc, $9c00
+    ld bc, _SCRN1
     call QueueMapFill
     ld hl, TextBodyFill
-    ld bc, $9c20
+    ld bc, _SCRN1+32
     call QueueMapFill
     call SubmitMapQueue
     ret

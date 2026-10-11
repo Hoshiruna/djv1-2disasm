@@ -39,7 +39,7 @@ Jump_000_22a2:
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld [$c526], a
+    ld [wListRow], a
 
 Jump_000_22b9:
     call DropListHead
@@ -96,6 +96,9 @@ jr_000_230a:
     ld a, [wHitObj]
     call ClearObjVisible
 
+; Refresh objects and advance the current pending index beyond the last record.
+FinishListAdd:
+
 Jump_000_2317:
     call RefreshObjs
     ld a, [wPendingLast]
@@ -151,4 +154,4 @@ jr_000_233e:
     pop af
     call IncListEnd
     call PopRomBank
-    jp Jump_000_2317
+    jp FinishListAdd

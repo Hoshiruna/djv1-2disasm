@@ -22,7 +22,8 @@ Call_000_10b2:
     call SetTextMode1
     call InitTextBuffer
 
-; Read and handle regional text codes, preserving the original end and wait controls.
+; Read one-byte text codes and retain the next byte without consuming it.
+; Preserve the original end and wait controls.
 ReadTextLoop:
 
 Call_000_10b8:
@@ -33,14 +34,14 @@ jr_000_10b8:
     ld a, [wTextPtr+1]
     ld h, a
     ld a, [hl+]
-    ld [$c660], a
+    ld [wTextChar], a
     ld a, l
     ld [wTextPtr], a
     ld a, h
     ld [wTextPtr+1], a
     ld a, [hl]
-    ld [$c661], a
-    ld a, [$c660]
+    ld [wTextNext], a
+    ld a, [wTextChar]
     cp $ff
     jr z, jr_000_10fb
 

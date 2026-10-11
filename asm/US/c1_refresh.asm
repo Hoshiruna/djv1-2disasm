@@ -52,7 +52,7 @@ jr_002_69e2:
     jr nz, jr_002_69f7
 
     ld bc, $98cf
-    ld hl, $6c6a
+    ld hl, C1ObjTile70
     call QueueTileRect
     call SubmitMapQueue
     call RefreshObjs
@@ -63,7 +63,7 @@ jr_002_69f7:
     jr nz, jr_002_6a0c
 
     ld bc, $98cf
-    ld hl, $6c67
+    ld hl, C1ObjTile73
     call QueueTileRect
     call SubmitMapQueue
     call RefreshObjs

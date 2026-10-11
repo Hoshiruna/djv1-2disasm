@@ -6,7 +6,7 @@ ResetC1State:
     push hl
     push de
     ld hl, wObjPresent
-    ld de, $017a
+    ld de, SaveDataLen
     xor a
     call FillCountData
     call InitC1Data
@@ -56,7 +56,7 @@ jr_001_6a6a:
 jr_001_6a71:
     call EnableRam
     call ClearSaveSum
-    ld de, $017a
+    ld de, SaveDataLen
     ld hl, wObjPresent
     ld bc, sStateSnap
 
@@ -92,7 +92,7 @@ LoadSnapshot:
     push de
     call EnableRam
     call ClearSaveSum
-    ld de, $017a
+    ld de, SaveDataLen
     ld hl, wObjPresent
     ld bc, sStateSnap
 

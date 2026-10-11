@@ -136,7 +136,7 @@ DrawAsciiWindow:
 
 
 Jump_000_17ae:
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_17d4
 
@@ -146,12 +146,12 @@ Jump_000_17ae:
     jr z, jr_000_17d4
 
     ld a, $ff
-    ld [$c890], a
+    ld [wTextFast], a
     push af
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
 
 Call_000_17ce:
     call PopRomBank
@@ -176,12 +176,12 @@ jr_000_17d4:
     ld [wTextRect+1], a
     ld hl, wTextRect
     call QueueTextGlyph
-    ld a, [$c5df]
+    ld a, [wC1Exit]
     cp $ff
     jr z, jr_000_180b
 
 Call_000_1804:
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_1828
 
@@ -197,7 +197,7 @@ jr_000_1810:
     pop af
 
 Jump_000_1818:
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call DrawRoomObjs
     call SubmitOam
@@ -232,7 +232,7 @@ Call_000_183b:
     ret nz
 
 Jump_000_1850:
-    ld a, [$c894]
+    ld a, [wTextNoWrap]
     cp $00
     jr nz, jr_000_185b
 
@@ -253,7 +253,7 @@ Call_000_1861:
 Jump_000_1861:
     ld a, [wTextMode]
     and $02
-    jp nz, Jump_000_1573
+    jp nz, TextSpriteLine
 
     ld a, [wTextRow]
     inc a
@@ -263,7 +263,7 @@ Jump_000_1861:
     cp b
     jr nz, jr_000_1881
 
-    call Call_000_158e
+    call ScrollTextRow
     ld a, [wTextRow]
     dec a
     ld [wTextRow], a

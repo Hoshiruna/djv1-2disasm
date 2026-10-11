@@ -4,7 +4,7 @@ ReadBgMap:
 
 
 Call_000_05ce:
-    ld bc, $9800
+    ld bc, _SCRN0
     ld a, [hl+]
     cp $20
     jp z, ReadMapRle
@@ -44,7 +44,7 @@ Call_000_05f0:
     ldh [hReadHeight], a
     pop af
     ldh [hReadWidth], a
-    ld bc, $9800
+    ld bc, _SCRN0
 
 Jump_000_0601:
     ld a, $01
@@ -122,7 +122,7 @@ Call_000_0630:
 Call_000_0640:
     pop af
     ldh [hReadWidth], a
-    ld bc, $9800
+    ld bc, _SCRN0
     ld a, $01
     ldh [rVBK], a
 

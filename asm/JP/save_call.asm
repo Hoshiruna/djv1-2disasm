@@ -36,3 +36,18 @@ Call_000_386f:
     call ClearSave
     call PopRomBank
     ret
+
+; Call ScanSaves in bank 1 and restore the previous ROM bank.
+ScanGames:
+
+
+Call_000_387d:
+    push af
+    ld a, $01
+    call PushRomBank
+    pop af
+    call ScanSaves
+    call PopRomBank
+
+Jump_000_388a:
+    ret

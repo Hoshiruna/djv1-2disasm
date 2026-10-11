@@ -39,7 +39,7 @@ Call_001_65e3:
     add hl, de
     ld a, [hl]
     srl a
-    ld [$c867], a
+    ld [wC1StateCount], a
     cp $00
     ret z
 
@@ -62,7 +62,7 @@ jr_001_65ff:
 
     ld a, [wSceneVariant]
     ld d, a
-    ld hl, $19a9
+    ld hl, BitMasks
     add hl, bc
     ld a, [hl]
     or d
@@ -71,7 +71,7 @@ jr_001_65ff:
 jr_001_6624:
     call NextC1State
     inc c
-    ld a, [$c867]
+    ld a, [wC1StateCount]
     ld l, a
     ld a, c
     cp l

@@ -15,7 +15,7 @@ Call_004_41f0:
 jr_004_41f0:
     xor a
     ld [wAudioDone], a
-    ld bc, wAudioWork
+    ld bc, wBaseP2
     ld a, [bc]
     sla a
     jr nc, jr_004_4208
@@ -26,7 +26,7 @@ jr_004_41f0:
     call SaveAudioSlot
 
 jr_004_4208:
-    ld bc, wAudioWork+32
+    ld bc, wBaseP1
     ld a, [bc]
     sla a
     jr nc, jr_004_421c
@@ -37,7 +37,7 @@ jr_004_4208:
     call SaveAudioSlot
 
 jr_004_421c:
-    ld bc, wAudioWork+64
+    ld bc, wBaseWave
     ld a, [bc]
     sla a
     jr nc, jr_004_4230
@@ -48,7 +48,7 @@ jr_004_421c:
     call SaveAudioSlot
 
 jr_004_4230:
-    ld bc, wAudioWork+96
+    ld bc, wBaseNoise
     ld a, [bc]
     sla a
     jr nc, jr_004_4241
@@ -58,7 +58,7 @@ jr_004_4230:
     call SaveAudioSlot
 
 jr_004_4241:
-    ld bc, wAudioWork+128
+    ld bc, wAltP2
     ld a, [bc]
     sla a
     jr nc, jr_004_4255
@@ -69,7 +69,7 @@ jr_004_4241:
     call SaveAudioSlot
 
 jr_004_4255:
-    ld bc, wAudioWork+160
+    ld bc, wAltP1
     ld a, [bc]
     sla a
     jr nc, jr_004_4269
@@ -80,7 +80,7 @@ jr_004_4255:
     call SaveAudioSlot
 
 jr_004_4269:
-    ld bc, wAudioWork+192
+    ld bc, wAltWave
     ld a, [bc]
     sla a
     jr nc, jr_004_427d
@@ -91,7 +91,7 @@ jr_004_4269:
     call SaveAudioSlot
 
 jr_004_427d:
-    ld bc, wAudioWork+224
+    ld bc, wTopP1
     ld a, [bc]
     sla a
     jr nc, jr_004_4291
@@ -102,7 +102,7 @@ jr_004_427d:
     call PulseEnv
 
 jr_004_4291:
-    ld bc, wAudioWork+256
+    ld bc, wTopNoise
     ld a, [bc]
     sla a
     jr nc, jr_004_42a2
@@ -132,7 +132,7 @@ Call_004_42b0:
     ld a, b
     ld [wAudioSlotPtr+1], a
     ld hl, wAudioSlot
-    ld d, $20
+    ld d, AudioRecLen
 
 jr_004_42bd:
     ld a, [bc]
@@ -153,7 +153,7 @@ Call_004_42c4:
     ld a, [wAudioSlotPtr+1]
     ld h, a
     ld bc, wAudioSlot
-    ld d, $20
+    ld d, AudioRecLen
 
 jr_004_42d1:
     ld a, [bc]
@@ -169,15 +169,15 @@ EndAudio:
 
 
 Call_004_42d8:
-    ld a, [wAudioWork]
+    ld a, [wBaseP2]
     ld b, a
-    ld a, [wAudioWork+32]
+    ld a, [wBaseP1]
     or b
     ld b, a
-    ld a, [wAudioWork+64]
+    ld a, [wBaseWave]
     or b
     ld b, a
-    ld a, [wAudioWork+96]
+    ld a, [wBaseNoise]
     or b
     rla
     ret c
@@ -197,10 +197,10 @@ StopAudioBase:
 
 Jump_004_42ff:
     xor a
-    ld [wAudioWork], a
-    ld [wAudioWork+32], a
-    ld [wAudioWork+64], a
-    ld [wAudioWork+96], a
+    ld [wBaseP2], a
+    ld [wBaseP1], a
+    ld [wBaseWave], a
+    ld [wBaseNoise], a
     ld [wAudioState], a
     ld [wAudioId], a
     ret

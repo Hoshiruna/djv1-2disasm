@@ -354,9 +354,21 @@ Audio52d3:
     dw Seq5308
     dw Inst5309
     dw Audio530b
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq52e1:
-    db $e0, $00, $03, $83, $32, $31, $32, $31, $32, $31, $32, $31, $32, $31, $32, $31
-    db $88, $32, $ff
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $03.
+    db $83
+    db $32, $31, $32, $31, $32, $31, $32, $31, $32, $31, $32, $31
+    ; Select duration table index $08.
+    db $88
+    db $32
+    ; End stream.
+    db $ff
 Seq52f4:
     db $e1, $00, $03, $83, $30, $2f, $30, $2f, $30, $2f, $30, $2f, $30, $2f, $30, $2f
     db $88, $30, $ff
@@ -374,11 +386,22 @@ Audio530b:
     dw Seq534e
     dw Inst534f
     dw Audio5351
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq5319:
-    db $e0, $00, $03, $83, $3a, $30, $40, $36, $32, $3e, $2a, $33, $3a, $30, $40, $36
-    db $32, $3e, $2a, $33
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $03.
+    db $83
+    db $3a, $30, $40, $36, $32, $3e, $2a, $33, $3a, $30, $40, $36, $32, $3e, $2a, $33
 jr_004_532d:
-    db $80, $3e, $ff
+    ; Select duration table index $00.
+    db $80
+    db $3e
+    ; End stream.
+    db $ff
 Seq5330:
     db $e1
 jr_004_5331:
@@ -400,14 +423,29 @@ Audio5351:
     dw Seq538a
     dw Inst538b
     dw Audio538d
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq535f:
-    db $e0, $00, $03, $83, $4c
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $03.
+    db $83
+    db $4c
 jr_004_5364:
     db $4a, $48, $46, $44
 jr_004_5368:
-    db $42, $40, $3e, $3c, $3a, $38, $36, $34, $7f
+    db $42, $40, $3e, $3c, $3a, $38, $36, $34
+    ; Rest event.
+    db $7f
 jr_004_5371:
-    db $82, $7f, $ff
+    ; Select duration table index $02.
+    db $82
+    ; Rest event.
+    db $7f
+    ; End stream.
+    db $ff
 Seq5374:
     db $e1, $00, $03, $83, $1c, $1e, $20, $22
 jr_004_537c:
@@ -434,6 +472,8 @@ Seq539f:
     db $ff
 Seq53a0:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst53a1:
     db $00, $00
 Audio53a3:
@@ -445,8 +485,24 @@ jr_004_53a5:
     dw Seq53cf
     dw Inst53d0
     dw Audio53d2
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq53b1:
-    db $e0, $00, $03, $c2, $82, $82, $38, $31, $2c, $2c, $33, $cf, $ff
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Start loop with limit $02.
+    db $c2
+    ; Select duration table index $02.
+    db $82
+    ; Select duration table index $02.
+    db $82
+    db $38, $31, $2c, $2c, $33
+    ; End loop.
+    db $cf
+    ; End stream.
+    db $ff
 Seq53be:
     db $e1, $00, $03, $c2, $82, $83, $7f, $82, $2c, $33, $38, $31, $83, $2c, $cf, $ff
 Seq53ce:
@@ -463,17 +519,47 @@ Audio53d2:
     dw Seq5404
     dw Inst5405
     dw Audio5407
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq53e0:
-    db $e0, $00, $03, $c2, $82, $82, $2e, $2e, $30, $30
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Start loop with limit $02.
+    db $c2
+    ; Select duration table index $02.
+    db $82
+    ; Select duration table index $02.
+    db $82
+    db $2e, $2e, $30, $30
 jr_004_53ea:
-    db $cf, $ff
+    ; End loop.
+    db $cf
+    ; End stream.
+    db $ff
 Seq53ec:
     db $e1, $00, $03, $c2, $82, $83, $7f, $82, $2d, $2d, $2f, $83, $2f, $cf, $ff
+
+; Type-3 headers skip stream field 2; no current header loads this stream.
 jr_004_53fb:
 Seq53fb:
-    db $e2, $00, $03, $c2, $80, $80, $22
+    ; Load wave instrument $00.
+    db $e2, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Start loop with limit $02.
+    db $c2
+    ; Select duration table index $00.
+    db $80
+    ; Select duration table index $00.
+    db $80
+    db $22
 jr_004_5402:
-    db $cf, $ff
+    ; End loop.
+    db $cf
+    ; End stream.
+    db $ff
 Seq5404:
     db $ff
 Inst5405:
@@ -813,6 +899,8 @@ Seq5d3a:
     db $ff
 Seq5d3b:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst5d3c:
     db $00, $00
 Audio5d3e:
@@ -831,6 +919,8 @@ Seq5d50:
     db $ff
 Seq5d51:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst5d52:
     db $00, $00
 Audio5d54:
@@ -841,8 +931,18 @@ Audio5d54:
     dw Seq5d75
     dw Inst5d76
     dw Audio5d78
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq5d62:
-    db $e0, $00, $03, $84, $3f, $34, $3b, $38, $ff
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $04.
+    db $84
+    db $3f, $34, $3b, $38
+    ; End stream.
+    db $ff
 Seq5d6b:
     db $e1, $00, $03, $84, $3b, $2c, $34, $2f, $ff
 Seq5d74:
@@ -909,11 +1009,39 @@ Audio5e17:
     dw Seq5e52
     dw Inst5e53
     dw Audio5e55
+
+; Type-3 headers skip stream field 0; no current header loads this stream.
 Seq5e25:
-    db $e0, $00, $03, $82, $38, $90, $38, $91, $38, $38, $34, $38, $90, $3b, $91, $3b
+    ; Load instrument pair $00.
+    db $e0, $00
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $02.
+    db $82
+    db $38
+    ; Select duration table index $10.
+    db $90
+    db $38
+    ; Select duration table index $11.
+    db $91
+    db $38, $38, $34, $38
+    ; Select duration table index $10.
+    db $90
+    db $3b
+    ; Select duration table index $11.
+    db $91
+    db $3b
+    ; Select duration table index $02.
     db $82
 jr_004_5e36:
-    db $34, $7e, $83, $34, $ff
+    db $34
+    ; Suppress retrigger for the following note.
+    db $7e
+    ; Select duration table index $03.
+    db $83
+    db $34
+    ; End stream.
+    db $ff
 Seq5e3b:
     db $e1, $00, $03, $82, $34, $90, $34, $91, $34, $34, $2f, $34, $90, $38, $91, $38
     db $82, $3b, $7e, $83, $3b, $ff
@@ -998,17 +1126,91 @@ jr_004_5f0f:
     db $7f, $ff
 Seq5f31:
     db $ff
+
+; Type-2 headers skip stream field 3; no current header loads this stream.
 Seq5f32:
-    db $03, $81, $7f
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $01.
+    db $81
+    ; Rest event.
+    db $7f
 jr_004_5f35:
-    db $85, $34, $35, $8b, $7f, $c4, $82, $ca, $82, $8b, $7f, $cf, $cf, $89, $7f, $90
+    ; Select duration table index $05.
+    db $85
+    db $34, $35
+    ; Select duration table index $0b.
+    db $8b
+    ; Rest event.
+    db $7f
+    ; Start loop with limit $04.
+    db $c4
+    ; Select duration table index $02.
+    db $82
+    ; Start loop with limit $0a.
+    db $ca
+    ; Select duration table index $02.
+    db $82
+    ; Select duration table index $0b.
+    db $8b
+    ; Rest event.
+    db $7f
+    ; End loop.
+    db $cf
+    ; End loop.
+    db $cf
+    ; Select duration table index $09.
+    db $89
+    ; Rest event.
+    db $7f
+    ; Select duration table index $10.
+    db $90
 jr_004_5f45:
-    db $7f, $7f, $91, $7f, $7f, $83, $7f, $85, $7f, $80, $7f, $82, $7f, $8a, $7f, $86
-    db $7f, $ff
+    ; Rest event.
+    db $7f
+    ; Rest event.
+    db $7f
+    ; Select duration table index $11.
+    db $91
+    ; Rest event.
+    db $7f
+    ; Rest event.
+    db $7f
+    ; Select duration table index $03.
+    db $83
+    ; Rest event.
+    db $7f
+    ; Select duration table index $05.
+    db $85
+    ; Rest event.
+    db $7f
+    ; Select duration table index $00.
+    db $80
+    ; Rest event.
+    db $7f
+    ; Select duration table index $02.
+    db $82
+    ; Rest event.
+    db $7f
+    ; Select duration table index $0a.
+    db $8a
+    ; Rest event.
+    db $7f
+    ; Select duration table index $06.
+    db $86
+    ; Rest event.
+    db $7f
+    ; End stream.
+    db $ff
 Inst5f57:
     db $c0, $00, $80, $0b, $c0, $0c
+
+; LoadAudio3 skips this noise-table pointer.
+; Each row supplies NR41, NR42, NR43, NR44 in that order.
 Inst5f5d:
-    db $3c, $b0, $42, $c0, $3a, $b1, $11, $80, $00, $b2, $18, $80
+    db $3c, $b0, $42, $c0
+    db $3a, $b1, $11, $80
+    db $00, $b2, $18, $80
 Audio5f69:
     db $02, $10
     dw Seq5f77
@@ -1027,15 +1229,67 @@ Seq5fa2:
     db $7f, $ff
 Seq5fc4:
     db $ff
+
+; Type-2 headers skip stream field 3; no current header loads this stream.
 Seq5fc5:
-    db $03, $81, $7f, $85, $34, $35, $8b, $7f, $c4, $84, $ca, $84, $8b, $7f
+    ; Set stereo bits to $03.
+    db $03
+    ; Select duration table index $01.
+    db $81
+    ; Rest event.
+    db $7f
+    ; Select duration table index $05.
+    db $85
+    db $34, $35
+    ; Select duration table index $0b.
+    db $8b
+    ; Rest event.
+    db $7f
+    ; Start loop with limit $04.
+    db $c4
+    ; Select duration table index $04.
+    db $84
+    ; Start loop with limit $0a.
+    db $ca
+    ; Select duration table index $04.
+    db $84
+    ; Select duration table index $0b.
+    db $8b
+    ; Rest event.
+    db $7f
 jr_004_5fd3:
-    db $cf, $cf, $83, $7f, $91, $7f, $84, $7f, $8b, $7f, $ff
+    ; End loop.
+    db $cf
+    ; End loop.
+    db $cf
+    ; Select duration table index $03.
+    db $83
+    ; Rest event.
+    db $7f
+    ; Select duration table index $11.
+    db $91
+    ; Rest event.
+    db $7f
+    ; Select duration table index $04.
+    db $84
+    ; Rest event.
+    db $7f
+    ; Select duration table index $0b.
+    db $8b
+    ; Rest event.
+    db $7f
+    ; End stream.
+    db $ff
 jr_004_5fde:
 Inst5fde:
     db $c0, $00, $80, $0b, $00, $00
+
+; LoadAudio3 skips this noise-table pointer.
+; Each row supplies NR41, NR42, NR43, NR44 in that order.
 Inst5fe4:
-    db $3c, $b0, $42, $c0, $3a, $b1, $11, $80, $00, $91, $09, $80
+    db $3c, $b0, $42, $c0
+    db $3a, $b1, $11, $80
+    db $00, $91, $09, $80
 Audio5ff0:
     db $03
 jr_004_5ff1:
@@ -1148,16 +1402,59 @@ Seq609a:
     db $ff
 Seq609b:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst609c:
     db $00, $00
+
+; Type-3 record pattern; not selected by the current audio ID tables.
+Audio609e:
 Inst609e:
-    db $03, $10, $ac, $60, $ad, $60, $ae, $60, $af, $60, $c4, $60, $c4, $60, $ff, $ff
-    db $ff, $03, $84, $34, $34, $34, $34, $34, $34, $34, $34, $35, $35, $35, $35, $35
-    db $35, $35, $35, $82
+    db $03, $10
+    dw Seq60ac
+    dw Seq60ad
+    dw Seq60ae
+    dw Seq60af
+    dw Inst60c4
+    dw Inst60c4
+Seq60ac:
+    db $ff
+Seq60ad:
+    db $ff
+Seq60ae:
+    db $ff
+Seq60af:
+    db $03, $84, $34, $34, $34, $34, $34, $34, $34, $34, $35, $35, $35, $35, $35, $35
+    db $35, $35, $82
 jr_004_60c2:
-    db $35, $ff, $00, $c2, $12, $80, $00, $c2, $22, $80, $03, $10, $da, $60, $db, $60
-    db $dc, $60, $dd, $60, $e3, $60, $e3, $60, $ff, $ff, $ff, $03, $85, $34, $82, $35
-    db $ff, $00, $c2, $32, $80
+    db $35, $ff
+
+; Two four-byte noise instrument rows for this record pattern.
+Inst60c4:
+    db $00, $c2, $12, $80
+    db $00, $c2, $22, $80
+
+; Type-3 record pattern; not selected by the current audio ID tables.
+Audio60cc:
+    db $03, $10
+    dw Seq60da
+    dw Seq60db
+    dw Seq60dc
+    dw Seq60dd
+    dw Inst60e3
+    dw Inst60e3
+Seq60da:
+    db $ff
+Seq60db:
+    db $ff
+Seq60dc:
+    db $ff
+Seq60dd:
+    db $03, $85, $34, $82, $35, $ff
+
+; Two four-byte noise instrument rows for this record pattern.
+Inst60e3:
+    db $00, $c2, $32, $80
 jr_004_60e7:
     db $00, $c2, $82, $80
 Audio60eb:
@@ -1251,6 +1548,8 @@ Seq6191:
     db $ff
 Seq6192:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst6193:
     db $c0, $00
 Audio6195:
@@ -1271,6 +1570,8 @@ Seq61c5:
     db $ff
 Seq61c6:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst61c7:
     db $c0, $00
 Audio61c9:
@@ -1289,6 +1590,8 @@ Seq61e2:
     db $ff
 Seq61e3:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst61e4:
     db $40, $0b
 Audio61e6:
@@ -1461,6 +1764,8 @@ Seq62ec:
     db $ff
 Seq62ed:
     db $03, $84, $34, $7e, $85, $34, $7f, $8c, $35, $83, $7f, $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst62f9:
     db $80, $12
 Inst62fb:

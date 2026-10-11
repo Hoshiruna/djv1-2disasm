@@ -76,7 +76,8 @@ Jump_000_2148:
     call ReloadScene
     ret
 
-; Read the current Case II room state ID and set it before refreshing the scene.
+; Read and set the current train-room fare-view state, then refresh without an attribute or cue change.
+ShowCarFare:
 SetC2RoomView:
 
 
@@ -84,7 +85,7 @@ SetC2RoomView:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomState
+    call TrainRoomState
     call PopRomBank
     jr jr_000_2164
 
@@ -130,7 +131,8 @@ Call_000_2187:
     call PlayCaseCue
     jp RefreshStateView
 
-; Read the current Case II room state ID, clear it, play the cue, and refresh.
+; Clear the current train-room fare-view state, play its cue, and refresh.
+HideCarFare:
 ClearC2RoomView:
 
 
@@ -138,11 +140,12 @@ ClearC2RoomView:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomState
+    call TrainRoomState
     call PopRomBank
     jp ClearStateView
 
-; Clear each additional Case II room state in order, preserving both cue and refresh calls.
+; Clear the two additional train-room states in order; retain both cue and refresh calls.
+ClearTrainLinks:
 ClearC2ExtraView:
 
 
@@ -150,7 +153,7 @@ ClearC2ExtraView:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomStateA
+    call TrainRoomStateA
 
 Call_000_21a8:
     call PopRomBank
@@ -159,7 +162,7 @@ Call_000_21a8:
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomStateB
+    call TrainRoomStateB
     call PopRomBank
     jp ClearStateView
 

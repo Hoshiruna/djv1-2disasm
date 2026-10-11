@@ -11,7 +11,7 @@ Jump_000_1427:
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call DrawRoomObjs
     call SubmitOam
@@ -24,8 +24,8 @@ Jump_000_1427:
     ld [wTextOriginY], a
     call ClearTextBuffer
     xor a
-    ld [$c890], a
+    ld [wTextFast], a
     ld [wTextStartX], a
-    ld [$c894], a
+    ld [wTextNoWrap], a
     call ShowTextWindow
     ret

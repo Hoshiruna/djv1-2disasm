@@ -97,8 +97,8 @@ jr_001_5c0b:
 ActionTargets:
     dw PickFixedTarget
     dw SelectAux
-    dw $4bcb
-    dw $4bcb
+    dw ApplyListPage
+    dw ApplyListPage
     dw SkipSelect
     dw SkipSelect
     dw SkipSelect
@@ -109,7 +109,7 @@ ActionTargets:
     dw SkipSelect
     dw SkipSelect
     dw SkipSelect
-    dw $3810
+    dw PickRoomTarget
 
 ; Return without changing selection state.
 SkipSelect:
@@ -123,7 +123,7 @@ SelectAux:
     and $04
     ret nz
 
-    call Call_000_37d8
+    call SavePromptCall
     ldh a, [hItemSlot]
     cp $10
     jr nz, jr_001_5c5d

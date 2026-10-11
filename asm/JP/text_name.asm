@@ -68,7 +68,8 @@ Call_000_125f:
 
     ret
 
-; Draw the selected name until the regional terminator, retaining the Japan eight-character limit.
+; Draw at most eight one-byte name codes, stopping at $ff.
+; Retain the following byte in wTextNext without advancing wTextTmp past it.
 EmitTextName:
 
 
@@ -92,7 +93,7 @@ jr_000_126b:
     ld a, [hl+]
 
 Jump_000_1283:
-    ld [$c661], a
+    ld [wTextNext], a
     push de
     call DrawTextGlyph
     pop de

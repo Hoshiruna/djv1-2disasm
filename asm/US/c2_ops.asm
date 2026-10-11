@@ -100,13 +100,13 @@ jr_000_3a5d:
     dw ScriptWaitObjs ; opcode $47
 jr_000_3a70:
     dw SlotName0 ; opcode $48
-    dw $2aee ; opcode $49
-    dw $2af5 ; opcode $4a
-    dw $2b02 ; opcode $4b
+    dw ScriptValue0 ; opcode $49
+    dw ScriptValues01 ; opcode $4a
+    dw ScriptBuildObjs ; opcode $4b
     dw AddArgList ; opcode $4c
     dw TestSelNameArg ; opcode $4d
     dw DropItemChange ; opcode $4e
-    dw $1f4d ; opcode $4f
+    dw MoveRoomFlush ; opcode $4f
     dw ScriptSetRoom ; opcode $50
     dw SlotName1 ; opcode $51
     dw UseBulletCall ; opcode $52
@@ -115,49 +115,51 @@ jr_000_3a86:
     dw BranchFlagClr ; opcode $54
     dw BranchRoomNot ; opcode $55
     dw BranchPackedNot ; opcode $56
-    dw $2f6e ; opcode $57
-    dw $2f7c ; opcode $58
+    dw BlackjackCall ; opcode $57
+    dw Trains2To5Call ; opcode $58
+    ; Pointer to Trains6To9Call; split bytes retain the interior label.
+    ; Pointer to Trains6To9Call; split bytes retain the interior label.
     db $8a ; opcode $59
 jr_000_3a93:
     db $2f
-    dw $3837 ; opcode $5a
+    dw RoomCueCall ; opcode $5a
     dw BranchNoAttr2 ; opcode $5b
-    dw TestC2Count ; opcode $5c
+    dw TestC2Quarters ; opcode $5c
 Jump_000_3a9a:
-    dw DecC2Count ; opcode $5d
-    dw $2f98 ; opcode $5e
-    dw $1c0b ; opcode $5f
-    dw MoveC2Room ; opcode $60
-    dw ClearC2ExtraView ; opcode $61
-    dw SetC2RoomView ; opcode $62
-    dw RoomEffect ; opcode $63
-    dw $1c62 ; opcode $64
+    dw DecC2Quarter ; opcode $5d
+    dw TrainFareCall ; opcode $5e
+    dw BranchNoTrainPass ; opcode $5f
+    dw LeaveTrain ; opcode $60
+    dw ClearTrainLinks ; opcode $61
+    dw ShowCarFare ; opcode $62
+    dw TrainRoomEffect ; opcode $63
+    dw SetTrainPass ; opcode $64
     dw ScriptPutItem ; opcode $65
     dw ScriptC2Effect ; opcode $66
-    dw SpendWordOne ; opcode $67
-    dw SpendWordCost ; opcode $68
-    dw $2fd8 ; opcode $69
-    dw $2fe6 ; opcode $6a
+    dw SpendCashOne ; opcode $67
+    dw SpendCashCost ; opcode $68
+    dw BuyChipsCall ; opcode $69
+    dw SellChipsCall ; opcode $6a
 Call_000_3ab6:
     dw ScriptRet ; opcode $6b
-    dw $2ff4 ; opcode $6c
-    dw $3002 ; opcode $6d
+    dw DesertMoveCall ; opcode $6c
+    dw C2ShopCall ; opcode $6d
     dw BranchNoAttr0 ; opcode $6e
-    dw ClearC2RoomView ; opcode $6f
+    dw HideCarFare ; opcode $6f
     dw ScriptAddChange ; opcode $70
-    dw CheckWordCall ; opcode $71
-    dw UseC2Count2 ; opcode $72
+    dw CheckCashCall ; opcode $71
+    dw UseC2Cell ; opcode $72
     dw ReloadC2Map ; opcode $73
     dw PickListRoom ; opcode $74
-    dw $3060 ; opcode $75
-    dw $306e ; opcode $76
+    dw MapPulse23Call ; opcode $75
+    dw MapStepsCall ; opcode $76
     dw RepeatCue10 ; opcode $77
     dw RefreshItemList ; opcode $78
-    dw BranchWordFive ; opcode $79
+    dw BranchNoFunds ; opcode $79
     dw BlinkObjTwice ; opcode $7a
-    dw $311b ; opcode $7b
+    dw C2ChoiceCall ; opcode $7b
     dw CallBankScript ; opcode $7c
     dw JumpBankScript ; opcode $7d
     dw ScriptWait60 ; opcode $7e
     dw ResetItemSlots ; opcode $7f
-    dw $1ee9 ; opcode $80
+    dw SaveStateRet ; opcode $80

@@ -9,7 +9,7 @@ DispatchTextCtrl:
 
 
 Call_000_113d:
-    ld a, [$c660]
+    ld a, [wTextChar]
     cp $20
     ret nc
 

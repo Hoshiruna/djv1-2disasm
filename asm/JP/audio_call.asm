@@ -20,7 +20,7 @@ Jump_000_07c3:
 
 jr_000_07c8:
     ld a, [wAudioBank]
-    ld [$2000], a
+    ld [rROMB0], a
     ldh a, [rSVBK]
     push af
     ld a, $07
@@ -40,7 +40,7 @@ InitAudio:
 
 Call_000_07e1:
     ld a, [wAudioBank]
-    ld [$2000], a
+    ld [rROMB0], a
     ldh a, [rSVBK]
     push af
     ld a, $07
@@ -49,7 +49,7 @@ Call_000_07e1:
     pop af
     ldh [rSVBK], a
     ldh a, [hRomBank]
-    ld [$2000], a
+    ld [rROMB0], a
     ret
 
 ; Read the retained audio ID and compare it with zero; preserve BC and restore the WRAM bank.

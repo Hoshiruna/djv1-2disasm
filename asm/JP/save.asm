@@ -16,7 +16,7 @@ Call_001_686b:
     ld a, [wSavePtr+1]
     ld h, a
     ld bc, wObjPresent
-    ld de, $017a
+    ld de, SaveDataLen
 
 jr_001_6889:
     ld a, [hl+]
@@ -68,7 +68,7 @@ jr_001_68b1:
     ld a, [wSavePtr+1]
     ld h, a
     ld bc, wObjPresent
-    ld de, $017a
+    ld de, SaveDataLen
 
 jr_001_68c5:
     ld a, [bc]
@@ -86,7 +86,7 @@ jr_001_68c5:
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
-    cp $04
+    cp SaveCopies
     jr nz, jr_001_68b1
 
     pop de
@@ -142,7 +142,7 @@ jr_001_691b:
     ld l, a
     ld a, [wSavePtr+1]
     ld h, a
-    ld de, $017a
+    ld de, SaveDataLen
 
 jr_001_692c:
     ld a, [hl+]
@@ -163,7 +163,7 @@ jr_001_6941:
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
-    cp $04
+    cp SaveCopies
     jr nz, jr_001_691b
 
     call ClearSaveCopies
@@ -186,7 +186,7 @@ jr_001_6950:
     ld l, a
     ld a, [wSavePtr+1]
     ld h, a
-    ld bc, $0179
+    ld bc, SaveCaseOff
     add hl, bc
     ld a, [hl]
     push af
@@ -202,7 +202,8 @@ jr_001_6950:
 SaveMasks:
     db $01, $02, $04
 
-; If the accepted copy is nonzero, stage $180 bytes at $be00 and replicate them to all four copies.
+; If the accepted copy is nonzero, stage its full record in sStateSnap.
+; This overwrites the snapshot buffer before replicating all four copies.
 RepairSaveCopies:
 
 Call_001_6982:
@@ -217,8 +218,8 @@ Call_001_6982:
     ld l, a
     ld a, [wSavePtr+1]
     ld h, a
-    ld bc, $be00
-    ld de, $0180
+    ld bc, sStateSnap
+    ld de, SaveRecLen
 
 jr_001_699c:
     ld a, [hl+]
@@ -239,8 +240,8 @@ jr_001_69aa:
     ld l, a
     ld a, [wSavePtr+1]
     ld h, a
-    ld bc, $be00
-    ld de, $0180
+    ld bc, sStateSnap
+    ld de, SaveRecLen
 
 jr_001_69bb:
     ld a, [bc]
@@ -255,7 +256,7 @@ jr_001_69bb:
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
-    cp $04
+    cp SaveCopies
     jr nz, jr_001_69aa
 
 jr_001_69d0:

@@ -52,10 +52,10 @@ NextListPage:
 
 Call_001_4cba:
     ld a, [wListPrev]
-    ld [$c859], a
+    ld [wListNavPrev], a
     ld a, $0b
     ld [wListSel], a
-    ld [$c85a], a
+    ld [wListNavNext], a
 
 jr_001_4cc8:
     push af
@@ -149,9 +149,9 @@ jr_001_4d27:
     call ReadChange
     call PrepChangeList
     ld a, $5b
-    ld [$c867], a
+    ld [wWorkSrc], a
     ld a, $c8
-    ld [$c868], a
+    ld [wWorkSrc+1], a
     call ClearWorkList
     call CopyWorkList
     ld a, [wChangeMode]
@@ -165,10 +165,10 @@ PrevListPage:
 
 Call_001_4d5b:
     ld a, [wListPrev]
-    ld [$c859], a
+    ld [wListNavPrev], a
     ld a, $0c
     ld [wListSel], a
-    ld [$c85a], a
+    ld [wListNavNext], a
     push af
     ldh a, [hItemSlot]
     ld l, a
@@ -242,9 +242,9 @@ jr_001_4dca:
     call PrepChangeList
     ld bc, wListScratch
     ld a, c
-    ld [$c867], a
+    ld [wWorkSrc], a
     ld a, b
-    ld [$c868], a
+    ld [wWorkSrc+1], a
     call ClearWorkList
     call CopyWorkList
     ld a, [wChangeMode]

@@ -7,10 +7,10 @@ Call_000_0769:
     xor a
 
 Jump_000_076a:
-    ld [$3000], a
-    ld [$4000], a
+    ld [rROMB1], a
+    ld [rRAMB], a
     ld a, $01
-    ld [$2000], a
+    ld [rROMB0], a
 
 Jump_000_0775:
     ldh [hRomBank], a
@@ -30,7 +30,7 @@ Jump_000_0782:
     call PushHramByte
     pop af
     ldh [hRomBank], a
-    ld [$2000], a
+    ld [rROMB0], a
     ret
 
 ; Restore the most recently saved ROM bank; preserve A.
@@ -40,7 +40,7 @@ Jump_000_078e:
     push af
     call PopHramByte
     ldh [hRomBank], a
-    ld [$2000], a
+    ld [rROMB0], a
     pop af
     ret
 
@@ -80,7 +80,7 @@ EnableRam:
 
 Call_000_07af:
     ld a, $0a
-    ld [$0000], a
+    ld [rRAMG], a
     ret
 
 ; Write zero to the cartridge RAM enable register.
@@ -89,5 +89,5 @@ DisableRam:
 
 Call_000_07b5:
     xor a
-    ld [$0000], a
+    ld [rRAMG], a
     ret

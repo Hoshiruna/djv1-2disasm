@@ -15,7 +15,7 @@ BeginC2Put:
     rst RST_00
 
 C2PutCalls:
-    dw PutC2Group0, PutC2Group1, PutC2Group2, PutC2Group3, CheckC2Put
+    dw PutC2Washer, PutC2Trash1, PutC2Trash2, PutC2Desk, CheckC2Put
 
 ; Advance the little-endian group pointer by eight with carry.
 NextPutGroup:
@@ -30,18 +30,23 @@ Call_003_50d4:
     ld [hl], a
     ret
 
-; Advance to group three through three helper calls, then enter the shared free-slot scan.
+; Advance three times to the desk record, then use the shared placement scan.
+PutC2Desk:
 PutC2Group3:
     call NextPutGroup
-; Advance the initial group pointer twice, then enter the shared free-slot scan.
+
+; Advance twice to the second trash-can record, then use the shared placement scan.
+PutC2Trash2:
 PutC2Group2:
     call NextPutGroup
 
-; Advance the initial group pointer once, then enter the shared free-slot scan.
+; Advance to the first trash-can record, then use the shared six-slot placement scan.
+PutC2Trash1:
 PutC2Group1:
     call NextPutGroup
 
-; Scan group offsets one through six for $ff, confirm placement, store the saved packed value, and retain the pending-operation refresh.
+; Use the washer record, scan its six item slots, confirm placement, and refresh the pending list.
+PutC2Washer:
 PutC2Group0:
     ld de, $0001
 

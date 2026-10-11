@@ -27,7 +27,7 @@ Call_002_6183:
     call PlayAudio
     ld a, $02
     call WaitTicks
-    call AddCountFind
+    call AddCoinFind
     ld a, $18
     call ShowMsg2
     ret
@@ -40,12 +40,12 @@ jr_002_61c8:
     call ShowMsg2
     ret
 
-; At zero count choose matching reels; at count $46 or above choose nonmatching reels; between them use the original low-three-bit random branch.
+; At zero coins choose matching reels; at $46 coins or above choose nonmatching reels; between them use the original low-three-bit random branch.
 PickSlotResult:
 
 
 Call_002_61d3:
-    ld a, [wC1ListCount]
+    ld a, [wC1Coins]
     cp $00
     jr z, jr_002_61e9
 

@@ -1,4 +1,16 @@
 
+; Test the second item-bitmap bit using the absolute first-slot item value.
+GetItem2First:
+
+
+    ld a, [wItemId]
+    jr jr_000_1da4
+
+; Read a script item ID, then test its second item-bitmap bit.
+ReadItem2Arg:
+
+    call ReadArg
+
 ; A = item bit ID; read its bit from the wItemState bitmap into result bit 0.
 ReadItemState:
 

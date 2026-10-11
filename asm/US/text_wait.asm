@@ -89,7 +89,7 @@ Call_000_1706:
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     push af
     ld a, $02

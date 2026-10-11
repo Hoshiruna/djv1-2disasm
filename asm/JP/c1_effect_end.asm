@@ -30,6 +30,6 @@ Call_002_71eb:
     ld [wSceneId], a
     ld a, $06
     ld [wSceneFx], a
-    call Call_000_0bab
+    call ShowScene
     call RefreshObjs
     ret

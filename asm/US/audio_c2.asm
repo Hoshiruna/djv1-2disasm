@@ -252,7 +252,13 @@ jr_004_689f:
     db $86, $7f, $c4, $83, $83, $34, $34, $35, $82, $36, $83, $35, $cf, $34, $34, $35
     db $34, $cf, $ff
 Inst68c2:
-    db $40, $03, $40, $06, $40, $0b, $00
+    db $40, $03
+    db $40, $06
+
+; No instrument command in the current loaded streams reads this pair.
+Inst68c6:
+    db $40, $0b
+    db $00
 jr_004_68c9:
     db $00
 Inst68ca:
@@ -788,8 +794,12 @@ Seq77d2:
     db $ff
 Inst77d3:
     db $80, $00, $80, $00, $00, $00
+
+; The selected noise stream ends immediately, without reading a row.
+; Each row supplies NR41, NR42, NR43, NR44 in that order.
 Inst77d9:
-    db $00, $92, $20, $80, $34, $81, $40, $c0
+    db $00, $92, $20, $80
+    db $34, $81, $40, $c0
 Audio77e1:
     db $00, $10
     dw Seq77ef
@@ -842,6 +852,8 @@ Seq781d:
     db $03, $81
 jr_004_781f:
     db $34, $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst7821:
     db $80, $0b
 Inst7823:
@@ -985,8 +997,12 @@ Seq793e:
     db $ff
 Seq793f:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst7940:
     db $80, $02
+
+; These header bytes also supply instrument pair 1 through Inst7940.
 Audio7942:
     db $03, $0d
     dw Seq7950
@@ -1003,8 +1019,12 @@ Seq7959:
     db $ff
 Seq795a:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst795b:
     db $80, $04
+
+; These header bytes also supply instrument pair 1 through Inst795b.
 Audio795d:
     db $03, $0d
     dw Seq796b
@@ -1021,8 +1041,12 @@ Seq7974:
     db $ff
 Seq7975:
     db $ff
+
+; No instrument command in the current loaded streams reads this pair.
 Inst7976:
     db $80, $05
+
+; These header bytes also supply instrument pair 1 through Inst7976.
 Audio7978:
     db $02, $14
     dw Seq7986

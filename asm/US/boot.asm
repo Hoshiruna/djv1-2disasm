@@ -10,7 +10,7 @@ Call_000_0151:
     call DisableLcd
 
 Call_000_0157:
-    ld hl, $c000
+    ld hl, wShadowOam
     ld bc, $2000
     call ZeroBytes
 

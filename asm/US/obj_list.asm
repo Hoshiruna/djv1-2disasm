@@ -8,7 +8,7 @@ Call_000_0ee0:
     jr nz, jr_000_0eee
 
     ld a, $05
-    ld de, $4000
+    ld de, C1EntryRefs
     jr jr_000_0ef3
 
 jr_000_0eee:

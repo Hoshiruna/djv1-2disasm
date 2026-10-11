@@ -3,12 +3,12 @@
 ShowMono:
 
 Jump_000_3707:
-    ld hl, $7b32
+    ld hl, MonoGfxRef
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     call ReadGfx
-    ld hl, $7a8f
+    ld hl, MonoMapRef
 
 Jump_000_3713:
     ld a, [hl+]
@@ -20,5 +20,7 @@ Jump_000_3713:
     ld a, $c1
     ldh [rLCDC], a
 
+; Remain on the monochrome screen.
+MonoSpin:
 Jump_000_3721:
-    jp Jump_000_3721
+    jp MonoSpin

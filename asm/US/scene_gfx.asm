@@ -110,7 +110,7 @@ Call_000_0ace:
 Jump_000_0af2:
     ld a, $01
     ldh [hGfxVramBank], a
-    ld hl, $d000
+    ld hl, wGfxBuf
     ld a, l
     ldh [hGfxSrcLo], a
     ld a, h
@@ -163,7 +163,7 @@ Call_000_0b32:
     call WaitVideo
     ld a, $00
     ldh [hGfxVramBank], a
-    ld hl, $d000
+    ld hl, wGfxBuf
     ld a, l
     ldh [hGfxSrcLo], a
     ld a, h
@@ -236,4 +236,4 @@ Call_000_0b7e:
 
     ld a, [hl+]
     ld d, a
-    jp Jump_000_055e
+    jp CopyGfxRun

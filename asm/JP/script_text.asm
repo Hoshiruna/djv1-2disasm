@@ -11,7 +11,7 @@ ShowMsg0:
 
 Call_000_1c59:
 Jump_000_1c59:
-    call Call_000_1071
+    call BeforeMsg0
     call ShowText0
     ret
 
@@ -25,7 +25,7 @@ ScriptMsg1:
 ShowMsg1:
 
 Call_000_1c63:
-    call Call_000_1072
+    call BeforeMsg1
     call ShowText1
     ret
 
@@ -39,7 +39,7 @@ ScriptMsg2:
 ShowMsg2:
 
 Call_000_1c6d:
-    call Call_000_1073
+    call BeforeMsg2
     call ShowText2
     ret
 

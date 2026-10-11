@@ -11,11 +11,11 @@ Call_000_018c:
     push de
     push hl
     ld a, $01
-    ld [$2000], a
+    ld [rROMB0], a
     call VBlankVideo
     call TickAudio
     ldh a, [hRomBank]
-    ld [$2000], a
+    ld [rROMB0], a
     ld hl, wFrameFlags
     res 4, [hl]
     pop hl

@@ -28,6 +28,9 @@ jr_000_156e:
     ld [wTextCol], a
     ret
 
+; Restore the text start column and advance Y, wrapping at $20.
+TextSpriteLine:
+
 
 Jump_000_1573:
 jr_000_1573:
@@ -50,7 +53,10 @@ ScrollTextBuffer:
 
 Call_000_158b:
     ; Keep the call and fall-through: this entry runs the following body twice.
-    call Call_000_158e
+    call ScrollTextRow
+
+; Shift the text buffer by one eighteen-tile row, blank the last row, and submit it.
+ScrollTextRow:
 
 Call_000_158e:
     ld hl, wTextBuf

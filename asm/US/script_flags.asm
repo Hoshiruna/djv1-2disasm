@@ -60,12 +60,16 @@ Jump_000_1c03:
     and $01
     ret
 
+; Read the current train clearance flag in bank three, then read a target and branch when clear.
+BranchNoTrainPass:
+BranchC2FlagClr:
+
 
     push af
     ld a, $03
     call PushRomBank
     pop af
-    call C2RoomFlag
+    call TrainPassFlag
     call PopRomBank
     jr jr_000_1c26
 
@@ -136,6 +140,10 @@ Call_000_1c5c:
     call SelectObjFlag
     jp ReadBit
 
+; Read the current train clearance flag in bank three, then set its object flag.
+SetTrainPass:
+SetC2RoomFlag:
+
 
     push af
     ld a, $03
@@ -143,7 +151,7 @@ Call_000_1c5c:
 
 Jump_000_1c68:
     pop af
-    call C2RoomFlag
+    call TrainPassFlag
     call PopRomBank
     jr jr_000_1c8a
 ; Read an object ID; run the Case I presence hook before setting its object flag.

@@ -22,7 +22,7 @@ SaveC1FxScene:
     ld [wSceneId], a
     ld a, $06
     ld [wSceneFx], a
-    call Call_000_0bab
+    call ShowScene
     ld a, $ff
     ld [wObjList], a
     ret
@@ -52,7 +52,7 @@ Call_002_718c:
     ld [wSceneId], a
     ld a, $06
     ld [wSceneFx], a
-    call Call_000_0bab
+    call ShowScene
     ld a, $ff
     ld [wObjList], a
     ret
@@ -68,7 +68,7 @@ jr_002_71ba:
     add hl, de
     ld a, [hl]
     ld [wSceneId], a
-    call Call_000_0bfd
+    call ReloadScene
     ld a, $ff
     ld [wObjList], a
     ret

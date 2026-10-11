@@ -101,11 +101,11 @@ jr_003_46e0:
     db $4b
     dw C2Room44
     dw C2Room45
-    dw C2Room46
-    dw C2Room47
+    dw HamperStates
+    dw LaundryStates
     dw C2Room48
-    dw C2Room49
-    dw C2Room4A
+    dw OuterRoomStates
+    dw SecretRoomStates
     dw C2RoomNone
     dw C2RoomNone
     dw C2RoomNone
@@ -659,10 +659,12 @@ C2Room45:
     db $24, $69, $05, $fe
     db $ff
 
+HamperStates:
 C2Room46:
     db $20, $6b, $04, $68
     db $ff
 
+LaundryStates:
 C2Room47:
     db $55, $95, $02, $72
     db $01, $14, $04, $fe
@@ -680,6 +682,7 @@ jr_003_4bad:
     db $7a, $20, $6a, $02
     db $fe, $ff
 
+OuterRoomStates:
 C2Room49:
     db $a1, $6d, $02, $7e
     db $55, $b0, $00, $80
@@ -687,6 +690,7 @@ C2Room49:
     db $04, $6c, $05, $fe
     db $ff
 
+SecretRoomStates:
 C2Room4A:
     db $24, $6d, $05
 jr_003_4bd3:
@@ -731,42 +735,43 @@ C2Room63:
     db $24, $72, $05, $fe
     db $ff
 
+; Shared movement lists: entry labels select tails ending at the original $ff.
 C2Room70:
-    db $42, $78, $00, $fe
+    db $42, GridRight, $00, $fe
 
 C2Room75:
-    db $24, $7a, $05, $fe
+    db $24, GridDown, $05, $fe
 
 C2RoomA0:
-    db $02, $79, $01, $fe
-    db $20, $7b, $02, $fe
+    db $02, GridLeft, $01, $fe
+    db $20, GridUp, $02, $fe
     db $ff
 
 C2Room6E:
-    db $24, $7a, $05, $fe
+    db $24, GridDown, $05, $fe
 
 C2Room99:
-    db $42, $78, $00, $fe
-    db $20, $7b, $02, $fe
+    db $42, GridRight, $00, $fe
+    db $20, GridUp, $02, $fe
     db $ff
 
 C2Room67:
-    db $42, $78, $00, $fe
+    db $42, GridRight, $00, $fe
 
 C2Room6D:
-    db $24, $7a, $05, $fe
-    db $02, $79, $01, $fe
+    db $24, GridDown, $05, $fe
+    db $02, GridLeft, $01, $fe
     db $ff
 
 C2Room6F:
-    db $42, $78, $00, $fe
-    db $02, $79, $01, $fe
-    db $20, $7b, $02, $fe
+    db $42, GridRight, $00, $fe
+    db $02, GridLeft, $01, $fe
+    db $20, GridUp, $02, $fe
     db $ff
 
 C2Room66:
-    db $42, $78, $00, $fe
-    db $24, $7a, $05, $fe
+    db $42, GridRight, $00, $fe
+    db $24, GridDown, $05, $fe
 
 C2RoomNone:
     db $ff

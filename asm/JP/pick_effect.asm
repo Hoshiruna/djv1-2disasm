@@ -8,6 +8,6 @@ PlayPickEffect:
     ld a, $03
     call PushRomBank
     pop af
-    call PlayC2PickFx
+    call PlayCabRide
     call PopRomBank
     ret

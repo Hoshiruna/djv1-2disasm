@@ -81,22 +81,22 @@ DrawWindowGlyph:
 
 
 Jump_000_1514:
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_153a
 
     call PollJoy
-    ld a, [$c188]
+    ld a, [wJoyPress]
     bit 0, a
     jr z, jr_000_153a
 
     ld a, $ff
-    ld [$c890], a
+    ld [wTextFast], a
     push af
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call RefreshObjOam
 
@@ -127,7 +127,7 @@ Jump_000_155a:
     cp $ff
     jr z, jr_000_1571
 
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr nz, jr_000_158e
 
@@ -141,7 +141,7 @@ jr_000_1576:
     ld a, $03
     call PushRomBank
     pop af
-    call StepC2TextObj
+    call StepC2WarText
     call PopRomBank
     call DrawRoomObjs
     call SubmitOam
@@ -173,7 +173,7 @@ jr_000_158e:
     cp b
     ret nz
 
-    ld a, [$c894]
+    ld a, [wTextNoWrap]
     cp $00
     jr nz, jr_000_15c1
 

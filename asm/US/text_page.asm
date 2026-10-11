@@ -5,7 +5,7 @@ WaitTextPage:
 
 Call_000_1315:
 Jump_000_1315:
-    ld a, [$c890]
+    ld a, [wTextFast]
     cp $00
     jr z, jr_000_131f
 
@@ -13,7 +13,7 @@ Jump_000_1315:
 
 jr_000_131f:
     xor a
-    ld [$c890], a
+    ld [wTextFast], a
     ld [$c891], a
     call WaitTextConfirm
     ret

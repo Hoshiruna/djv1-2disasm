@@ -87,6 +87,9 @@ Call_003_4598:
     bit 7, a
     ret z
 
+; Read the ID after the indexed room cell and test its mapped object flag.
+C2MarkCond:
+
 Call_003_45ac:
     ldh a, [hChangePos]
     inc a
@@ -99,7 +102,7 @@ Call_003_45ac:
     ld b, a
     add hl, bc
     ld a, [hl]
-    ld [$c855], a
+    ld [wC2MarkId], a
     ld e, a
     ld d, a
     ld a, $00
@@ -116,7 +119,7 @@ jr_003_45cc:
     ld h, a
     add hl, bc
     ld a, [hl]
-    ld [$c5c3], a
+    ld [wC2MarkTest], a
     cp e
     jr nz, jr_003_45f6
 

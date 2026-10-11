@@ -3,12 +3,12 @@
 BuildC2Item:
 
 
-    ld a, [$c5c4]
+    ld a, [wRoomType]
     and $7f
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemType
@@ -28,11 +28,11 @@ C2ItemCalls:
 
 ; Copy the item ID into the current room-list slot for types $00..$02.
 CopyC2Item:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -47,33 +47,33 @@ KeepC2Item:
 CheckC2BitItem:
 
 
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     push af
     srl a
     srl a
     srl a
-    ldh [$ff9e], a
+    ldh [hRoomIndex], a
     pop af
     and $07
-    ld [$c869], a
-    ld bc, $c4e9
-    ldh a, [$ff9e]
+    ld [wRoomBit], a
+    ld bc, wItemFlags
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
     ld d, a
-    ld a, [$c869]
-    ldh [$ff9e], a
+    ld a, [wRoomBit]
+    ldh [hRoomIndex], a
     xor a
-    ldh [$ff9f], a
+    ldh [hRoomIndex+1], a
     ld a, d
     push af
     ld bc, BitMasks
-    ldh a, [$ff9e]
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
@@ -86,11 +86,11 @@ CheckC2BitItem:
 
 
 jr_003_61c6:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -102,12 +102,12 @@ jr_003_61c6:
 CheckC2ObjItem:
 
 
-    ld a, [$c5c5]
-    ldh [$ff9e], a
-    ld bc, $c509
-    ldh a, [$ff9e]
+    ld a, [wRoomItem]
+    ldh [hRoomIndex], a
+    ld bc, wProp4
+    ldh a, [hRoomIndex]
     ld l, a
-    ldh a, [$ff9f]
+    ldh a, [hRoomIndex+1]
     ld h, a
     add hl, bc
     ld a, [hl]
@@ -119,11 +119,11 @@ CheckC2ObjItem:
 
 jr_003_61ee:
     ld d, a
-    ldh a, [$ff9e]
+    ldh a, [hRoomIndex]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -150,9 +150,9 @@ PickC2RoomItem:
     add hl, bc
     ld a, [hl]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId
@@ -162,11 +162,11 @@ PickC2RoomItem:
 
 
 jr_003_6223:
-    ld a, [$c5c5]
+    ld a, [wRoomItem]
     ld b, a
-    ldh a, [$ffa0]
+    ldh a, [hItemSlot]
     ld l, a
-    ldh a, [$ffa1]
+    ldh a, [hItemSlot+1]
     ld h, a
     ld a, b
     ld bc, wItemId

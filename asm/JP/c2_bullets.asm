@@ -1,9 +1,10 @@
 
-; With a nonzero category count, clear the first set bullet flag, decrement the count, refresh the selected mode, and retain both failure messages.
+; With a nonzero inventory count, clear the first loaded-bullet flag and consume one bullet.
+; Refresh the selected list mode and retain both failure messages.
 UseC2Bullet:
 
 
-    ld a, [wC2Count1]
+    ld a, [wC2Bullets]
     cp $00
     jr nz, jr_003_4f44
 
@@ -30,9 +31,9 @@ jr_003_4f47:
     ld a, $8e
     call ShowMsg1
     call SetResult
-    ld a, [wC2Count1]
+    ld a, [wC2Bullets]
     dec a
-    ld [wC2Count1], a
+    ld [wC2Bullets], a
     ld bc, wSelMode
     ldh a, [hItemSlot]
     ld l, a
@@ -51,7 +52,8 @@ jr_003_4f77:
     call ClearResult
     ret
 
-; Set the first clear bullet flag and play cue $10; if all six are set, show message $90 and clear the result.
+; Mark the first unloaded bullet slot and play cue $10; the inventory count is unchanged.
+; If all six slots are loaded, show message $90 and clear the result.
 TakeC2Bullet:
 
 

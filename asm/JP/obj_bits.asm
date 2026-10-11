@@ -1,6 +1,10 @@
+
+
+Call_000_2750:
+; Read an object ID from the script, then enter ReadObjVisible.
+ScriptObjVisible:
+    call ReadArg
 ; Bit masks in the fixed ROM bank.
-DEF BitMasks EQU $19a9
-DEF ClearMasks EQU $384b
 
 ; A = object ID; read its visibility bit from wObjVisible.
 ReadObjVisible:

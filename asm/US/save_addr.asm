@@ -22,13 +22,13 @@ Call_001_694c:
     ld [wSavePtr], a
     ld a, h
     ld [wSavePtr+1], a
-    ld bc, $017a
+    ld bc, SaveDataLen
     add hl, bc
     ld a, l
     ld [wSaveTagPtr], a
     ld a, h
     ld [wSaveTagPtr+1], a
-    ld bc, $0004
+    ld bc, SaveTagLen
     add hl, bc
     ld a, l
     ld [wSaveSumPtr], a
@@ -50,7 +50,7 @@ jr_001_6986:
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
-    cp $04
+    cp SaveCopies
     jr nz, jr_001_6986
 
     ret

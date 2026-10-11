@@ -27,6 +27,9 @@ jr_000_15e6:
     ld [wTextCol], a
     ret
 
+; Restore the text start column and advance Y, wrapping at $20.
+TextSpriteLine:
+
 
 jr_000_15eb:
     ld a, [wTextStartX]
@@ -41,6 +44,9 @@ jr_000_15eb:
     xor a
     ld [wTextY], a
     ret
+
+; Shift the text buffer by one eighteen-tile row, blank the last row, and submit it.
+ScrollTextRow:
 
 ; Scroll and submit the text buffer through the original regional entry flow.
 ScrollTextBuffer:

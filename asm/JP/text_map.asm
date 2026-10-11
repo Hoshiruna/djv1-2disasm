@@ -9,11 +9,11 @@ Call_000_15ab:
     bit 0, a
     jr nz, jr_000_15b8
 
-    ld bc, $9800
+    ld bc, _SCRN0
     jr jr_000_15bb
 
 jr_000_15b8:
-    ld bc, $9c00
+    ld bc, _SCRN1
 
 jr_000_15bb:
     ld a, [wTextMapY]
