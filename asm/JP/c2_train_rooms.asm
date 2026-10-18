@@ -17,21 +17,21 @@ C2SchedNextRooms:
 ; Previous-room values written at the destination platform.
 TrainPrevRooms:
 C2SchedPrevRooms:
-    db $1b, $1d, $1f, $21, $23, $25, $27, $29
+    db RoomTrain6A, RoomTrain7A, RoomTrain8A, RoomTrain9A, RoomTrain2A, RoomTrain3A, RoomTrain4A, RoomTrain5A
 
 ; First passenger room for each train.
 TrainCarA:
 C2SchedRoomsA:
-    db $23, $25
+    db RoomTrain2A, RoomTrain3A
 jr_003_6a07:
-    db $27, $29, $1b, $1d, $1f, $21
+    db RoomTrain4A, RoomTrain5A, RoomTrain6A, RoomTrain7A, RoomTrain8A, RoomTrain9A
 
 ; Second passenger room for each train.
 TrainCarB:
 C2SchedRoomsB:
-    db $24, $26, $28, $2a
+    db RoomTrain2B, RoomTrain3B, RoomTrain4B, RoomTrain5B
 jr_003_6a11:
-    db $1c, $1e, $20, $22
+    db RoomTrain6B, RoomTrain7B, RoomTrain8B, RoomTrain9B
 
 ; Departure platform room for each train.
 TrainPlatforms:

@@ -61,10 +61,12 @@ PickListHead:
 Call_001_4f1a:
     ld a, [wChangeMode]
     cp $02
-    jr c, jr_001_4f23
+    jr c, PickListHeadDispatch
 
     ld a, $02
 
+; Dispatch the clamped heading mode through the three-entry table.
+PickListHeadDispatch:
 jr_001_4f23:
     rst RST_00
 
@@ -75,14 +77,18 @@ ListHeadTable:
 HeadMode0:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_4f35
+    jr nz, HeadMode0Case2
 
     ld a, $be
-    jr jr_001_4f37
+    jr HeadMode0Store
 
+; Choose the Case II mode-zero heading name.
+HeadMode0Case2:
 jr_001_4f35:
     ld a, $c8
 
+; Store the selected mode-zero heading name.
+HeadMode0Store:
 jr_001_4f37:
     ld [wListName], a
     ret
@@ -107,7 +113,7 @@ HeadRecord:
     ld a, d
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_4f64
+    jr nz, HeadRecordCase2Base
 
     ld bc, C1NameBase
     ldh a, [hChangePos]
@@ -116,8 +122,10 @@ HeadRecord:
     ld h, a
     add hl, bc
     ld a, [hl]
-    jr jr_001_4f6f
+    jr HeadRecordAddValue
 
+; Read the Case II name base for the selected list type.
+HeadRecordCase2Base:
 jr_001_4f64:
     ld bc, C2NameBase
     ldh a, [hChangePos]
@@ -127,6 +135,8 @@ jr_001_4f64:
     add hl, bc
     ld a, [hl]
 
+; Add the selected record value to its case and type name base.
+HeadRecordAddValue:
 jr_001_4f6f:
     push af
     ld bc, wListValue
@@ -150,14 +160,18 @@ HeadMode2:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_4f90
+    jr nz, HeadMode2Case2
 
     ld a, $bd
-    jr jr_001_4f92
+    jr HeadMode2Store
 
+; Choose the Case II mode-two heading name.
+HeadMode2Case2:
 jr_001_4f90:
     ld a, $c9
 
+; Store the selected mode-two heading name.
+HeadMode2Store:
 jr_001_4f92:
     ld [wListName], a
     ret

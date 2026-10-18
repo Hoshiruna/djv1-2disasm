@@ -6,7 +6,7 @@ AdvanceText2:
 Call_000_11fc:
     ld a, [wTextPtr]
     add $02
-    jr jr_000_1208
+    jr TextPtrStoreAdvance
 
 ; Advance the text pointer by one byte with carry.
 AdvanceText1:
@@ -15,6 +15,8 @@ Call_000_1203:
     ld a, [wTextPtr]
     add $01
 
+; Store the advanced text pointer with carry.
+TextPtrStoreAdvance:
 jr_000_1208:
     ld [wTextPtr], a
     ld a, [wTextPtr+1]

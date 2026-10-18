@@ -6,7 +6,7 @@ SetTextX:
 Jump_000_11ab:
     ld a, [wTextMode]
     and $02
-    jr nz, jr_000_11c2
+    jr nz, TextSetSpriteX
 
     ld a, [wTextPtr]
     ld l, a
@@ -18,6 +18,8 @@ Jump_000_11ab:
     ret
 
 
+; Set the sprite text X and start column from the stream.
+TextSetSpriteX:
 jr_000_11c2:
     ld a, [wTextPtr]
     ld l, a
@@ -38,7 +40,7 @@ Jump_000_11d5:
 
 Call_000_11d8:
     and $02
-    jr nz, jr_000_11ec
+    jr nz, TextSetSpriteY
 
     ld a, [wTextPtr]
     ld l, a
@@ -50,6 +52,8 @@ Call_000_11d8:
     ret
 
 
+; Set the sprite text Y from the stream.
+TextSetSpriteY:
 jr_000_11ec:
     ld a, [wTextPtr]
     ld l, a

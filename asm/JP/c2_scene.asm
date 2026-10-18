@@ -5,23 +5,27 @@ PickC2Scene:
     call BuildC2Scene
     ld a, [wCaseResume]
     cp $ff
-    jr nz, jr_003_420f
+    jr nz, C2SceneSelectVariant
 
     ld a, [wSceneId]
     cp $17
-    jr z, jr_003_4203
+    jr z, C2SceneCheckTrainPass
 
     cp $19
-    jr nz, jr_003_420f
+    jr nz, C2SceneSelectVariant
 
+; Check train clearance for the retained special scene.
+C2SceneCheckTrainPass:
 jr_003_4203:
     call ReadTrainPass
-    jr nz, jr_003_420f
+    jr nz, C2SceneSelectVariant
 
     ld a, $a8
     call SetObjVisible
-    jr jr_003_4235
+    jr C2SceneReturn
 
+; Read the visual scene selected by the room and variant index.
+C2SceneSelectVariant:
 jr_003_420f:
     ld a, [wRoomId]
     ld l, a
@@ -44,6 +48,8 @@ jr_003_420f:
     ld a, [hl]
     ld [wSceneId], a
 
+; Return after choosing or retaining the scene.
+C2SceneReturn:
 jr_003_4235:
     ret
 
@@ -56,10 +62,12 @@ Call_003_4236:
     ld a, $fe
     ld hl, wPatchList
 
+; Fill the next patch-list slot with the terminator.
+C2SceneClearNextPatch:
 jr_003_4240:
     ld [hl+], a
     dec b
-    jr nz, jr_003_4240
+    jr nz, C2SceneClearNextPatch
 
     xor a
     ld [wSceneVariant], a
@@ -102,7 +110,7 @@ jr_003_424b:
     pop bc
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_4294
+    jr z, C2SceneStorePatch
 
     ld a, [wPatchId]
     inc a
@@ -113,6 +121,8 @@ jr_003_424b:
     add [hl]
     ld [wSceneVariant], a
 
+; Store the selected patch ID for this room record.
+C2SceneStorePatch:
 jr_003_4294:
     ld a, [wPatchId]
     ld hl, wPatchList
@@ -120,7 +130,7 @@ jr_003_4294:
     ld [hl], a
     call NextC2State
     inc c
-    jr jr_003_424b
+    jr ScanC2Patch
 
     ret
 
@@ -135,6 +145,8 @@ Call_003_42a3:
     ld [wPatchBits], a
     ld de, $0000
 
+; Accumulate state bits from adjacent grouped patch records.
+C2SceneGroupNext:
 jr_003_42ad:
     ld a, [wRoomDataPtr]
     ld l, a
@@ -145,7 +157,7 @@ jr_003_42ad:
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_42cc
+    jr z, C2SceneCheckGroupEnd
 
     ld a, [wPatchBits]
     ld hl, BitMasks
@@ -153,6 +165,8 @@ jr_003_42ad:
     add [hl]
     ld [wPatchBits], a
 
+; Check whether the next record continues the patch group.
+C2SceneCheckGroupEnd:
 jr_003_42cc:
     ld a, [wRoomDataPtr]
     ld l, a
@@ -164,27 +178,29 @@ jr_003_42cc:
     inc hl
     ld a, [hl-]
     cp $ff
-    jr z, jr_003_42f1
+    jr z, C2SceneFinishGroup
 
     ld a, [hl+]
     cp $fe
-    jr z, jr_003_42f1
+    jr z, C2SceneFinishGroup
 
     ld [wPatchBase], a
     inc hl
     inc hl
     inc hl
     cp [hl]
-    jr nz, jr_003_42f1
+    jr nz, C2SceneFinishGroup
 
     inc e
     call NextC2State
-    jr jr_003_42ad
+    jr C2SceneGroupNext
 
+; Return for a single record or prepare the grouped patch ID.
+C2SceneFinishGroup:
 jr_003_42f1:
     ld a, e
     cp $00
-    jr nz, jr_003_42fd
+    jr nz, C2SceneStoreGroupedPatch
 
     ld [wPatchBits], a
     pop bc
@@ -193,6 +209,8 @@ jr_003_42f1:
     ret
 
 
+; Store the grouped patch ID and resume outer record scanning.
+C2SceneStoreGroupedPatch:
 jr_003_42fd:
     call NextC2State
     ld a, [wPatchBase]

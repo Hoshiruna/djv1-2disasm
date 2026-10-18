@@ -5,7 +5,7 @@ FinishC1Put:
 
     ld a, [wItemType]
     cp $03
-    jr nz, jr_002_6b30
+    jr nz, C1FinishPutProperty
 
     ld a, [wItemId]
     call ClearItemFlag
@@ -15,8 +15,10 @@ FinishC1Put:
     ld [wOpAttr], a
     ld a, [wItemId]
     call SetItemState
-    jr jr_002_6b46
+    jr C1FinishPutList
 
+; Clear property-four bit zero and set bit one for the placed property.
+C1FinishPutProperty:
 jr_002_6b30:
     ld a, [wItemId]
     call ClearProp4Bit0
@@ -27,6 +29,8 @@ jr_002_6b30:
     ld a, [wItemId]
     call SetProp4Bit1
 
+; Remove the placed item from the selected list and show its name.
+C1FinishPutList:
 jr_002_6b46:
     ld a, [wSelMode]
     ld [wChangeMode], a

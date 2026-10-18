@@ -9,89 +9,107 @@ Call_004_4738:
     ld [hl], a
     ld bc, wAltP2
     call AudioActive
-    jr c, jr_004_474d
+    jr c, MixStagePulse2
 
     ld bc, wBaseP2
     call AudioActive
-    jr nc, jr_004_475b
+    jr nc, MixTryPulse1
 
+; Stage the selected pulse-two slot unless its masked flag excludes output.
+MixStagePulse2:
 jr_004_474d:
     sla a
     sla a
-    jr c, jr_004_475b
+    jr c, MixTryPulse1
 
     set 1, [hl]
     ld de, wOutP2
     call StageAudioOut
 
+; Search pulse-one slots in priority order.
+MixTryPulse1:
 jr_004_475b:
     ld bc, wTopP1
     call AudioActive
-    jr c, jr_004_4773
+    jr c, MixStagePulse1
 
     ld bc, wAltP1
     call AudioActive
-    jr c, jr_004_4773
+    jr c, MixStagePulse1
 
     ld bc, wBaseP1
     call AudioActive
-    jr nc, jr_004_4781
+    jr nc, MixTryWave
 
+; Stage the selected pulse-one slot unless its masked flag excludes output.
+MixStagePulse1:
 jr_004_4773:
     sla a
     sla a
-    jr c, jr_004_4781
+    jr c, MixTryWave
 
     set 0, [hl]
     ld de, wOutP1
     call StageAudioOut
 
+; Search wave slots in priority order.
+MixTryWave:
 jr_004_4781:
     ld bc, wAltWave
     call AudioActive
-    jr c, jr_004_4791
+    jr c, MixStageWave
 
     ld bc, wBaseWave
     call AudioActive
-    jr nc, jr_004_479f
+    jr nc, MixTryNoise
 
+; Stage the selected wave slot unless its masked flag excludes output.
+MixStageWave:
 jr_004_4791:
     sla a
     sla a
-    jr c, jr_004_479f
+    jr c, MixTryNoise
 
     set 2, [hl]
     ld de, wOutWave
     call StageAudioOut
 
+; Search noise slots in priority order.
+MixTryNoise:
 jr_004_479f:
     ld bc, wTopNoise
     call AudioActive
-    jr c, jr_004_47af
+    jr c, MixStageNoise
 
     ld bc, wBaseNoise
     call AudioActive
-    jr nc, jr_004_47bd
+    jr nc, MixCheckActiveChannels
 
+; Stage the selected noise slot unless its masked flag excludes output.
+MixStageNoise:
 jr_004_47af:
     sla a
     sla a
-    jr c, jr_004_47bd
+    jr c, MixCheckActiveChannels
 
     set 3, [hl]
     ld de, wOutNoise
     call StageAudioOut
 
+; Test whether any output channel remains active.
+MixCheckActiveChannels:
 jr_004_47bd:
     ld a, [hl]
     and $0f
-    jr nz, jr_004_47c6
+    jr nz, MixEnableAudio
 
     xor a
     ldh [rNR52], a
     ret
 
 
+; Enable sound output and prepare channel register writes.
+MixEnableAudio:
 jr_004_47c6:
     ld a, $80
     ldh [rNR52], a
@@ -100,70 +118,86 @@ jr_004_47c6:
     call AudioPan
     ldh [rNR51], a
     srl [hl]
-    jr nc, jr_004_47dc
+    jr nc, MixSilencePulse1
 
     call WritePulse1
-    jr jr_004_47ea
+    jr MixWritePulse2
 
+; Write the pulse-one mute envelope and trigger when needed.
+MixSilencePulse1:
 jr_004_47dc:
     ldh a, [rNR12]
     cp $08
-    jr z, jr_004_47ea
+    jr z, MixWritePulse2
 
     ld a, $08
     ldh [rNR12], a
     ld a, $80
     ldh [rNR14], a
 
+; Write or silence pulse two according to its active bit.
+MixWritePulse2:
 jr_004_47ea:
     srl [hl]
-    jr nc, jr_004_47f3
+    jr nc, MixSilencePulse2
 
     call WritePulse2
-    jr jr_004_4801
+    jr MixWriteWave
 
+; Write the pulse-two mute envelope and trigger when needed.
+MixSilencePulse2:
 jr_004_47f3:
     ldh a, [rNR22]
     cp $08
-    jr z, jr_004_4801
+    jr z, MixWriteWave
 
     ld a, $08
     ldh [rNR22], a
     ld a, $80
     ldh [rNR24], a
 
+; Write or silence the wave channel according to its active bit.
+MixWriteWave:
 jr_004_4801:
     srl [hl]
-    jr nc, jr_004_480a
+    jr nc, MixSilenceWave
 
     call WriteWave
-    jr jr_004_4814
+    jr MixWriteNoise
 
+; Clear wave output level when no wave slot is active.
+MixSilenceWave:
 jr_004_480a:
     ldh a, [rNR32]
     and $60
-    jr z, jr_004_4814
+    jr z, MixWriteNoise
 
     ld a, $00
     ldh [rNR32], a
 
+; Write or silence noise according to its active bit.
+MixWriteNoise:
 jr_004_4814:
     srl [hl]
-    jr nc, jr_004_481d
+    jr nc, MixSilenceNoise
 
     call WriteNoise
-    jr jr_004_482b
+    jr MixDone
 
+; Write the noise mute envelope and trigger when needed.
+MixSilenceNoise:
 jr_004_481d:
     ldh a, [rNR42]
     cp $08
-    jr z, jr_004_482b
+    jr z, MixDone
 
     ld a, $08
     ldh [rNR42], a
     ld a, $80
     ldh [rNR44], a
 
+; Return after all four channel outputs are handled.
+MixDone:
 jr_004_482b:
     ret
 
@@ -174,30 +208,36 @@ WritePulse1:
 Call_004_482c:
     ld a, [wOutP1+5]
     cp $ff
-    jr nz, jr_004_4839
+    jr nz, Pulse1StageEnvelope
 
     ld a, [wOutP1+1]
     call AudioVolume
 
+; Stage the pulse-one envelope byte.
+Pulse1StageEnvelope:
 jr_004_4839:
     ld [wAudioReg+2], a
     ld a, [wOutP1]
     and $40
-    jr z, jr_004_4870
+    jr z, Pulse1StageTrigger
 
     ld a, [wOutP1+2]
     ld b, a
     sla a
-    jr nc, jr_004_4852
+    jr nc, Pulse1DefaultSweep
 
     ld a, b
     add $10
     and $7f
-    jr jr_004_4854
+    jr Pulse1StageRegisters
 
+; Use sweep value eight when the packed sweep flag is clear.
+Pulse1DefaultSweep:
 jr_004_4852:
     ld a, $08
 
+; Stage pulse-one sweep, duty, and low frequency bytes.
+Pulse1StageRegisters:
 jr_004_4854:
     ld [wAudioReg], a
     ld a, [wOutP1+1]
@@ -212,6 +252,8 @@ jr_004_4854:
     ld a, [wOutP1+3]
     ld [wAudioReg+3], a
 
+; Stage the pulse-one trigger byte and compare cached registers.
+Pulse1StageTrigger:
 jr_004_4870:
     ld a, [wOutP1+4]
     ld b, a
@@ -220,61 +262,71 @@ jr_004_4870:
     ld [wAudioReg+4], a
     ld a, [wOutP1]
     and $40
-    jr nz, jr_004_48b7
+    jr nz, Pulse1WriteNR10
 
     ld a, [wAudioReg]
     ld b, a
     ld a, [wAudioCache]
     cp b
-    jr nz, jr_004_48b7
+    jr nz, Pulse1WriteNR10
 
     ld a, [wAudioReg+1]
     ld b, a
     ld a, [wAudioCache+1]
     cp b
-    jr nz, jr_004_48bf
+    jr nz, Pulse1WriteNR11
 
     ld a, [wAudioReg+3]
     ld b, a
     ld a, [wAudioCache+3]
     cp b
-    jr nz, jr_004_48c7
+    jr nz, Pulse1WriteNR13
 
     ld a, [wAudioReg+2]
     ld b, a
     ld a, [wAudioCache+2]
     cp b
-    jr nz, jr_004_48cf
+    jr nz, Pulse1WriteNR12
 
     ld a, [wAudioReg+4]
     ld b, a
     ld a, [wAudioCache+4]
     cp b
-    jr nz, jr_004_48d7
+    jr nz, Pulse1WriteNR14
 
     ret
 
 
+; Write and cache pulse-one sweep, then continue with remaining registers.
+Pulse1WriteNR10:
 jr_004_48b7:
     ld a, [wAudioReg]
     ldh [rNR10], a
     ld [wAudioCache], a
 
+; Write and cache pulse-one duty, then continue with remaining registers.
+Pulse1WriteNR11:
 jr_004_48bf:
     ld a, [wAudioReg+1]
     ldh [rNR11], a
     ld [wAudioCache+1], a
 
+; Write and cache pulse-one low frequency, then continue.
+Pulse1WriteNR13:
 jr_004_48c7:
     ld a, [wAudioReg+3]
     ldh [rNR13], a
     ld [wAudioCache+3], a
 
+; Write and cache pulse-one envelope, then continue.
+Pulse1WriteNR12:
 jr_004_48cf:
     ld a, [wAudioReg+2]
     ldh [rNR12], a
     ld [wAudioCache+2], a
 
+; Write and cache pulse-one trigger and high frequency.
+Pulse1WriteNR14:
 jr_004_48d7:
     ld a, [wAudioReg+4]
     ldh [rNR14], a
@@ -303,16 +355,18 @@ WritePulse2:
 Call_004_48ee:
     ld a, [wOutP2+5]
     cp $ff
-    jr nz, jr_004_48fb
+    jr nz, Pulse2StageEnvelope
 
     ld a, [wOutP2+1]
     call AudioVolume
 
+; Stage the pulse-two envelope byte.
+Pulse2StageEnvelope:
 jr_004_48fb:
     ld [wAudioReg+7], a
     ld a, [wOutP2]
     and $40
-    jr z, jr_004_491e
+    jr z, Pulse2StageTrigger
 
     ld a, [wOutP2+1]
     and $c0
@@ -326,6 +380,8 @@ jr_004_48fb:
     ld a, [wOutP2+3]
     ld [wAudioReg+8], a
 
+; Stage the pulse-two trigger byte and compare cached registers.
+Pulse2StageTrigger:
 jr_004_491e:
     ld a, [wOutP2+4]
     ld b, a
@@ -334,50 +390,58 @@ jr_004_491e:
     ld [wAudioReg+9], a
     ld a, [wOutP2]
     and $40
-    jr nz, jr_004_495b
+    jr nz, Pulse2WriteNR21
 
     ld a, [wAudioReg+6]
     ld b, a
     ld a, [wAudioCache+6]
     cp b
-    jr nz, jr_004_495b
+    jr nz, Pulse2WriteNR21
 
     ld a, [wAudioReg+8]
     ld b, a
     ld a, [wAudioCache+8]
     cp b
-    jr nz, jr_004_4963
+    jr nz, Pulse2WriteNR23
 
     ld a, [wAudioReg+7]
     ld b, a
     ld a, [wAudioCache+7]
     cp b
-    jr nz, jr_004_496b
+    jr nz, Pulse2WriteNR22
 
     ld a, [wAudioReg+9]
     ld b, a
     ld a, [wAudioCache+9]
     cp b
-    jr nz, jr_004_4973
+    jr nz, Pulse2WriteNR24
 
     ret
 
 
+; Write and cache pulse-two duty, then continue with remaining registers.
+Pulse2WriteNR21:
 jr_004_495b:
     ld a, [wAudioReg+6]
     ldh [rNR21], a
     ld [wAudioCache+6], a
 
+; Write and cache pulse-two low frequency, then continue.
+Pulse2WriteNR23:
 jr_004_4963:
     ld a, [wAudioReg+8]
     ldh [rNR23], a
     ld [wAudioCache+8], a
 
+; Write and cache pulse-two envelope, then continue.
+Pulse2WriteNR22:
 jr_004_496b:
     ld a, [wAudioReg+7]
     ldh [rNR22], a
     ld [wAudioCache+7], a
 
+; Write and cache pulse-two trigger and high frequency.
+Pulse2WriteNR24:
 jr_004_4973:
     ld a, [wAudioReg+9]
     ldh [rNR24], a
@@ -391,11 +455,13 @@ WriteWave:
 Call_004_497c:
     ld a, [wOutWave]
     and $40
-    jr nz, jr_004_4984
+    jr nz, WaveWriteRegisters
 
     ret
 
 
+; Write wave power, level, frequency, and trigger registers.
+WaveWriteRegisters:
 jr_004_4984:
     xor a
     ldh [rNR30], a
@@ -420,11 +486,13 @@ WriteNoise:
 Call_004_49a3:
     ld a, [wOutNoise]
     and $40
-    jr nz, jr_004_49ab
+    jr nz, NoiseWriteRegisters
 
     ret
 
 
+; Write noise length, envelope, frequency, and trigger registers.
+NoiseWriteRegisters:
 jr_004_49ab:
     ld a, [wOutNoise+1]
     ldh [rNR41], a
@@ -443,7 +511,7 @@ AudioVolume:
 Call_004_49c0:
     ld b, a
     and $10
-    jr nz, jr_004_49d0
+    jr nz, AudioVolumeHighNibble
 
     ld a, b
     srl a
@@ -454,6 +522,8 @@ Call_004_49c0:
     ret
 
 
+; Take the output envelope from the high nibble of the packed volume byte.
+AudioVolumeHighNibble:
 jr_004_49d0:
     ld a, b
     swap a

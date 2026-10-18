@@ -34,36 +34,42 @@ Jump_002_7724:
     xor a
     ld [wSaveAnswer], a
 
+; Draw the answer cursor and poll for confirmation or movement.
+SaveAnswerInputLoop:
 jr_002_7728:
     call DrawSaveAnswer
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr nz, jr_002_7766
+    jr nz, SaveAnswerConfirm
 
     bit 1, a
-    jr nz, jr_002_775b
+    jr nz, SaveAnswerCancel
 
     bit 7, a
-    jr nz, jr_002_774f
+    jr nz, SaveAnswerMoveDown
 
     bit 6, a
-    jr z, jr_002_7728
+    jr z, SaveAnswerInputLoop
 
     ld a, $19
     call PlayAudio
     xor a
     ld [wSaveAnswer], a
-    jr jr_002_7728
+    jr SaveAnswerInputLoop
 
+; Set answer one after a downward press.
+SaveAnswerMoveDown:
 jr_002_774f:
     ld a, $19
     call PlayAudio
     ld a, $01
     ld [wSaveAnswer], a
-    jr jr_002_7728
+    jr SaveAnswerInputLoop
 
+; Return answer one after a cancel press.
+SaveAnswerCancel:
 jr_002_775b:
     ld a, $2f
     call PlayAudio
@@ -72,6 +78,8 @@ jr_002_775b:
     ret
 
 
+; Return the current answer after a confirm press.
+SaveAnswerConfirm:
 jr_002_7766:
     ld a, $19
     call PlayAudio

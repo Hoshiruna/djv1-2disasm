@@ -15,18 +15,20 @@ TestWordFive:
 Call_000_31f3:
     ld a, [wChips]
     cp $00
-    jr nz, jr_000_320a
+    jr nz, C2FundsAvailable
 
     ld a, [wC2Cash]
     sub $05
     ld a, [wC2Cash+1]
     sbc $00
-    jr nc, jr_000_320a
+    jr nc, C2FundsAvailable
 
     call ClearResult
     ret
 
 
+; Set the result when chips or sufficient cash are available.
+C2FundsAvailable:
 jr_000_320a:
     call SetResult
     ret

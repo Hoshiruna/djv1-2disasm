@@ -7,6 +7,8 @@ Call_002_622f:
     xor a
     ld [wSlotFrame], a
 
+; Advance all three reels for the spin animation.
+C1SlotsSpinLoop:
 jr_002_6233:
     call StepSlot0
     call StepSlot1
@@ -18,7 +20,7 @@ jr_002_6233:
     inc a
     ld [wSlotFrame], a
     cp $1d
-    jr nz, jr_002_6233
+    jr nz, C1SlotsSpinLoop
 
     ret
 
@@ -34,6 +36,8 @@ Call_002_6250:
     xor a
     ld [wSlotFrame], a
 
+; Keep reel zero fixed while the other two reels advance.
+C1SlotsStopFirstLoop:
 jr_002_625f:
     ld e, $00
     call DrawSlotReel
@@ -46,7 +50,7 @@ jr_002_625f:
     inc a
     ld [wSlotFrame], a
     cp $0a
-    jr nz, jr_002_625f
+    jr nz, C1SlotsStopFirstLoop
 
     ld a, $13
     call PlayAudio
@@ -55,6 +59,8 @@ jr_002_625f:
     xor a
     ld [wSlotFrame], a
 
+; Keep reels zero and one fixed while reel two advances.
+C1SlotsStopSecondLoop:
 jr_002_628c:
     ld e, $00
     call DrawSlotReel
@@ -68,7 +74,7 @@ jr_002_628c:
     inc a
     ld [wSlotFrame], a
     cp $0a
-    jr nz, jr_002_628c
+    jr nz, C1SlotsStopSecondLoop
 
     ld a, $13
     call PlayAudio

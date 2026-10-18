@@ -6,14 +6,18 @@ Call_002_60c7:
     push af
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_60d4
+    jr nz, ObjFrameCaseIIAnim
 
     ld bc, C1AnimPtrs
-    jr jr_002_60d7
+    jr ObjFrameReadAnim
 
+; Select the Case II animation-pointer table.
+ObjFrameCaseIIAnim:
 jr_002_60d4:
     ld bc, C2AnimPtrs
 
+; Read the selected object first animation frame.
+ObjFrameReadAnim:
 jr_002_60d7:
     pop af
     ld l, a

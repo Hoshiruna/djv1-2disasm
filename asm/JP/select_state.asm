@@ -22,7 +22,7 @@ InputModes:
 CancelSelect:
     ldh a, [hItemSlot]
     cp $10
-    jr nz, jr_001_5bd6
+    jr nz, CancelSelectPrimary
 
     ld a, [wSelRow]
     ld [wListMarkRow], a
@@ -33,14 +33,18 @@ CancelSelect:
     ld [wStateResult], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_5bca
+    jr nz, CancelSelectCase2Flag
 
-    ld a, $7f
-    jr jr_001_5bcc
+    ld a, C1AltTargetCancelled
+    jr CancelSelectRestoreList
 
+; Choose the Case II cancellation flag for the alternate slot.
+CancelSelectCase2Flag:
 jr_001_5bca:
     ld a, $8f
 
+; Set the selected cancellation flag and restore the previous list selection.
+CancelSelectRestoreList:
 jr_001_5bcc:
     call SetObjFlag
     ld a, [wListPrev]
@@ -48,6 +52,8 @@ jr_001_5bcc:
     ret
 
 
+; Reset the primary selection and clear its list cursor.
+CancelSelectPrimary:
 jr_001_5bd6:
     call ResetSelect
     call ClearListCursor
@@ -73,10 +79,12 @@ Call_001_5be7:
     ld hl, wItemType
     ld d, $10
 
+; Fill the sixteen-byte primary operation slot with $ff.
+ClearSelectSlotLoop:
 jr_001_5bf4:
     ld [hl+], a
     dec d
-    jr nz, jr_001_5bf4
+    jr nz, ClearSelectSlotLoop
 
     ret
 
@@ -89,10 +97,12 @@ Call_001_5bf9:
     ld a, $ff
     ld d, $10
 
+; Fill the sixteen-byte alternate operation slot with $ff.
+ClearAltSlotLoop:
 jr_001_5c00:
     ld [hl+], a
     dec d
-    jr nz, jr_001_5c00
+    jr nz, ClearAltSlotLoop
 
     ret
 

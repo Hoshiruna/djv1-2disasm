@@ -7,10 +7,10 @@ StepC2RangeTimer:
 Call_003_5e3d:
     ld a, [wRoomId]
     cp RoomTracksA
-    jr z, jr_003_5e4e
+    jr z, C2HeatAdvance
 
     cp RoomTracksB
-    jr z, jr_003_5e4e
+    jr z, C2HeatAdvance
 
     cp DesertRoomMin
     ret c
@@ -18,6 +18,8 @@ Call_003_5e3d:
     cp DesertRoomEnd
     ret nc
 
+; Advance desert exposure in the tracked rooms.
+C2HeatAdvance:
 jr_003_5e4e:
     ld a, [wC2HeatTick]
     inc a

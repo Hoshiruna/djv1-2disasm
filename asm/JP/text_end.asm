@@ -5,18 +5,22 @@ FinishText:
 Call_000_1103:
     ld a, [wStateResult]
     and $08
-    jr z, jr_000_1112
+    jr z, FinishTextClearUi
 
     ld a, [wTextMode]
     and $02
-    jr nz, jr_000_1115
+    jr nz, FinishTextSetMode
 
     ret
 
 
+; Clear the text interface when the result and mode require it.
+FinishTextClearUi:
 jr_000_1112:
     call ClearTextUI
 
+; Select text mode one at the end of text.
+FinishTextSetMode:
 jr_000_1115:
     call SetTextMode1
     ret
@@ -28,7 +32,7 @@ ClearTextUI:
 Call_000_1119:
     ld a, [wTextMode]
     and $02
-    jr nz, jr_000_1136
+    jr nz, ClearTextUiReturn
 
     ld a, $00
     ld [wTextPageReady], a
@@ -43,5 +47,7 @@ Call_000_1131:
 Call_000_1133:
     ld [wStateResult], a
 
+; Return after the conditional text-interface cleanup.
+ClearTextUiReturn:
 jr_000_1136:
     ret

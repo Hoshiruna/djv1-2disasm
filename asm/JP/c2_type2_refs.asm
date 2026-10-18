@@ -13,13 +13,13 @@ C2Act2_00:
     dw CloseC2Washer
 
 C2Act2_01:
-    dw C2Sc2_01
+    dw LookWickerBin
     dw OpenC2Group
     dw RejectC2Group
     dw CloseC2Group
 
 C2Act2_02:
-    dw C2Sc2_02
+    dw LookFoodTrash
     dw OpenC2Group
     dw RejectC2Group
     dw CloseC2Group

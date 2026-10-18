@@ -25,18 +25,24 @@ InitC1View:
     call InitC1Bits
     ld a, [wCaseResume]
     cp $00
-    jr nz, jr_001_6bb6
+    jr nz, C1ResumeViewLoad
 
     call BlankOam
     ld a, $8f
     ld [wSceneId], a
-    jr jr_001_6bc2
+    jr C1InitViewDraw
+
+; Load the resumed scene palette and submit cursor objects before drawing the view.
+C1ResumeViewLoad:
 
 jr_001_6bb6:
     call LoadC1Pal
     call DrawCursorObjs
     call SubmitOam
     call BuildObjList
+
+; Redraw and fade in the selected view, then reset room-object and list selection fields.
+C1InitViewDraw:
 
 jr_001_6bc2:
     call RedrawScene
@@ -51,7 +57,7 @@ jr_001_6bc2:
     ld [hl], a
     xor a
     ld [wInputSel], a
-    ld a, $be
+    ld a, C1OpeningShown
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
@@ -64,7 +70,7 @@ jr_001_6bc2:
     ld a, $06
     ld [wSceneFx], a
     call ShowScene
-    ld a, $be
+    ld a, C1OpeningShown
     call SetObjFlag
     ld a, $fe
     ld [wCaseResume], a
@@ -139,6 +145,6 @@ Call_001_6c8e:
 jr_001_6c8e:
     ld [hl+], a
     dec d
-    jr nz, jr_001_6c8e
+    jr nz, FillC1Bytes
 
     ret

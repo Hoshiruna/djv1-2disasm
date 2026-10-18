@@ -13,6 +13,8 @@ C1ObjRules:
     dw C1ObjSwap, C1Rule1, C1Rule2, C1ObjOnly, C1Rule4
 
 ; Tail transfer: SkipRoomObj removes this call from the stack.
+; Tail-call SkipRoomObj through the original stack-removing path.
+C1ObjSkipRoom:
 jr_002_6c0a:
     jp SkipRoomObj
 
@@ -24,28 +26,32 @@ C1ObjSwap:
 
     ld a, [wRoomId]
     cp $06
-    jr nz, jr_002_6c27
+    jr nz, C1ObjSwapSceneCheck
 
-    ld a, $04
+    ld a, C1SpigotOpen
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_6c26
+    jr z, C1ObjSpigotReturn
 
     ld a, $04
     ld [wDrawObj], a
 
+; Return after the room-six spigot object selection.
+C1ObjSpigotReturn:
 jr_002_6c26:
     ret
 
 
+; Check the scene-specific replacement outside room six.
+C1ObjSwapSceneCheck:
 jr_002_6c27:
     call SwapSceneObj ; Always returns with result bit 0 clear.
     ld a, [wStateResult]
     and $01
     ret z
 
-    jr jr_002_6c0a
+    jr C1ObjSkipRoom
 
 C1Rule2:
     ret
@@ -63,15 +69,17 @@ Call_002_6c33:
     cp $73
     ret nz
 
-    ld a, $16
+    ld a, C1ShadowShot
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6c53
+    jr nz, C1SwapSceneObjDone
 
     ld a, $0a
     ld [wDrawObj], a
 
+; Clear the result after the scene-$73 object replacement check.
+C1SwapSceneObjDone:
 jr_002_6c53:
     call ClearResult
     ret
@@ -90,7 +98,7 @@ C1ObjOnly:
     cp $44
     ret z
 
-    jr jr_002_6c0a
+    jr C1ObjSkipRoom
 
 C1Rule4:
     ret

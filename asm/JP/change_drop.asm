@@ -19,6 +19,8 @@ Call_000_2586:
     ldh [hChangePos+1], a
     ld a, d
 
+; Scan pending type and value pairs for the selected item.
+RemoveChangeScan:
 jr_000_25a4:
     ld bc, wPendingOps
     ldh a, [hChangePos]
@@ -36,7 +38,7 @@ jr_000_25a4:
     add hl, bc
     ld a, [hl]
     cp d
-    jr nz, jr_000_25d8
+    jr nz, RemoveChangeNext
 
     ld bc, wPendingArgs
     ldh a, [hChangePos]
@@ -54,8 +56,10 @@ jr_000_25a4:
     add hl, bc
     ld a, [hl]
     cp d
-    jr z, jr_000_25e8
+    jr z, RemoveChangeFound
 
+; Advance two bytes to the next pending pair.
+RemoveChangeNext:
 jr_000_25d8:
     ldh a, [hChangePos]
     ld c, a
@@ -67,12 +71,16 @@ jr_000_25d8:
     ldh [hChangePos], a
     ld a, b
     ldh [hChangePos+1], a
-    jr jr_000_25a4
+    jr RemoveChangeScan
 
+; Save the matched byte offset before compacting pending pairs.
+RemoveChangeFound:
 jr_000_25e8:
     ldh a, [hChangePos]
     ld [wDropPos], a
 
+; Shift later pending type and value bytes over the removed pair.
+RemoveChangeShiftLoop:
 jr_000_25ed:
     ld bc, wPendingOps+2
     ldh a, [hChangePos]
@@ -124,7 +132,7 @@ Jump_000_2611:
     ldh [hChangePos+1], a
     ld a, c
     cp $0a
-    jr c, jr_000_25ed
+    jr c, RemoveChangeShiftLoop
 
     ld a, $ff
     ld b, a
@@ -139,10 +147,10 @@ Jump_000_2611:
     ld [hl], a
     ld a, [wChangeMode]
     cp $02
-    jr nc, jr_000_2692
+    jr nc, TrimChangeSel
 
     cp $00
-    jr z, jr_000_2692
+    jr z, TrimChangeSel
 
 ; Adjust the current record after removal; rebuild the list when required.
 AdjustChange:
@@ -150,11 +158,11 @@ AdjustChange:
 Call_000_264b:
     ld a, [wPendingLast]
     cp $ff
-    jr z, jr_000_26ba
+    jr z, ResetChangeSel
 
     ld a, [wInputKind]
     cp $02
-    jr z, jr_000_2692
+    jr z, TrimChangeSel
 
     ld a, [wPendingCur]
     ld c, a
@@ -162,11 +170,13 @@ Call_000_264b:
     srl a
     dec a
     cp $ff
-    jr z, jr_000_2669
+    jr z, AdjustChangeCurrent
 
     cp c
     ret nc
 
+; Check whether the current record became empty after removal.
+AdjustChangeCurrent:
 jr_000_2669:
     ld a, [wPendingCur]
     add a
@@ -179,7 +189,7 @@ jr_000_2669:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr nz, jr_000_26ad
+    jr nz, AdjustChangeRefresh
 
     ld a, [wPendingCur]
     dec a
@@ -198,13 +208,15 @@ jr_000_2692:
     ld c, a
     ld a, [wDropPos]
     cp $00
-    jr z, jr_000_26a2
+    jr z, TrimChangeCurrent
 
     srl a
     dec a
     cp c
     ret nc
 
+; Decrease the current record index unless it is already empty.
+TrimChangeCurrent:
 jr_000_26a2:
     ld a, [wPendingCur]
     cp $ff
@@ -214,6 +226,8 @@ jr_000_26a2:
     ld [wPendingCur], a
     ret
 
+; Rebuild and refresh the selected change list.
+AdjustChangeRefresh:
 jr_000_26ad:
     call ReadChange
     call PrepChangeList
@@ -251,23 +265,27 @@ Call_000_26cf:
     ld [wPendingLast], a
     ld hl, wPendingOps
 
+; Compare both script operands with each pending pair.
+DropArgChangeScan:
 jr_000_26dc:
     ld a, [wArg0]
     cp [hl]
-    jr nz, jr_000_26ec
+    jr nz, DropArgChangeNext
 
     ld a, [wArg1]
     inc hl
     cp [hl]
-    jr z, jr_000_26f0
+    jr z, ShiftChanges
 
     inc hl
-    jr jr_000_26dc
+    jr DropArgChangeScan
 
+; Advance to the next script-operand pair.
+DropArgChangeNext:
 jr_000_26ec:
     inc hl
     inc hl
-    jr jr_000_26dc
+    jr DropArgChangeScan
 
 ; HL = matching value byte; shift to low byte $32, then clear two bytes at HL-4.
 ShiftChanges:
@@ -279,6 +297,8 @@ jr_000_26f0:
     inc hl
     inc hl
 
+; Shift subsequent pending pairs until the original end offset.
+ShiftChangesLoop:
 jr_000_26f5:
     ld a, [hl+]
     ld [bc], a
@@ -288,7 +308,7 @@ jr_000_26f5:
     inc bc
     ld a, l
     cp $32
-    jr nz, jr_000_26f5
+    jr nz, ShiftChangesLoop
 
     dec hl
     dec hl
@@ -306,6 +326,8 @@ DropItemChange:
 
     ld hl, wPendingOps
 
+; Compare the selected type and value with each pending pair.
+DropItemChangeScan:
 jr_000_270c:
     push hl
     ld bc, wItemType
@@ -317,7 +339,7 @@ jr_000_270c:
     ld a, [hl]
     pop hl
     cp [hl]
-    jr nz, jr_000_2730
+    jr nz, DropItemChangeNext
 
     push hl
     ld bc, wItemId
@@ -330,15 +352,17 @@ jr_000_270c:
     pop hl
     inc hl
     cp [hl]
-    jr z, jr_000_26f0
+    jr z, ShiftChanges
 
     inc hl
-    jr jr_000_270c
+    jr DropItemChangeScan
 
+; Advance to the next pending item pair.
+DropItemChangeNext:
 jr_000_2730:
     inc hl
     inc hl
-    jr jr_000_270c
+    jr DropItemChangeScan
 
 ; Copy six scratch bytes to the working list without filtering or clearing its seventh slot.
 CopyChangeList:

@@ -11,6 +11,8 @@ Call_029_6a71:
     ldh [hBJLoop+1], a
     ld a, d
 
+; Deal the current opening-hand slot and advance the slot index.
+BJDealFirstSlot:
 jr_029_6a7b:
     ld bc, BJFirstSlots
     ldh a, [hBJLoop]
@@ -35,7 +37,7 @@ jr_029_6a7b:
     dec a
     ldh [hBJLoop], a
     bit 7, a
-    jr z, jr_029_6a7b
+    jr z, BJDealFirstSlot
 
     ret
 

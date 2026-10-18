@@ -77,7 +77,7 @@ FailAltRoom:
 
 
 Jump_000_2846:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     call PopRomBank
     call ClearResult

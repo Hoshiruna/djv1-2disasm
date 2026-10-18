@@ -10,11 +10,13 @@ Call_029_6fb3:
     ld c, $0b
     ld hl, wBJCards
 
+; Clear each of the twelve hand-card slots.
+BJClearHandSlots:
 jr_029_6fbf:
     ld [hl+], a
     dec c
     bit 7, c
-    jr z, jr_029_6fbf
+    jr z, BJClearHandSlots
 
     ld a, $02
     ld [wBJNextD], a
@@ -31,11 +33,13 @@ Call_029_6fd0:
     ld c, $05
     ld hl, wBJUsed
 
+; Clear the first six used-card bitmap bytes.
+BJClearUsedCardBytes:
 jr_029_6fd6:
     ld [hl+], a
     dec c
     bit 7, c
-    jr z, jr_029_6fd6
+    jr z, BJClearUsedCardBytes
 
     ld a, $0f
     ld [wBJUsed+6], a

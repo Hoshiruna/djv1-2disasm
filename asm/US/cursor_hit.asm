@@ -9,6 +9,8 @@ Call_000_0e8d:
     push hl
     ld de, $0000
 
+; Copy the next of four room-object cursor bounds.
+CopyCursorBoundByte:
 jr_000_0e93:
     ld a, [wRoomObjPtr]
     ld l, a
@@ -22,7 +24,7 @@ jr_000_0e93:
     inc e
     ld a, e
     cp $04
-    jr c, jr_000_0e93
+    jr c, CopyCursorBoundByte
 
     call TestCursorBox
     pop hl
@@ -41,41 +43,49 @@ Call_000_0eaf:
     ld hl, wCursorBounds
     ld a, [wCursorX]
     cp [hl]
-    jr nc, jr_000_0ec1
+    jr nc, CursorBoxCheckMaxX
 
     ret
 
 
+; Test whether cursor X is at or below its upper bound.
+CursorBoxCheckMaxX:
 jr_000_0ec1:
     inc hl
     cp [hl]
-    jr c, jr_000_0ec8
+    jr c, CursorBoxCheckMinY
 
 Call_000_0ec5:
-    jr z, jr_000_0ec8
+    jr z, CursorBoxCheckMinY
 
     ret
 
 
+; Test whether cursor Y reaches its lower bound.
+CursorBoxCheckMinY:
 jr_000_0ec8:
     inc hl
     ld a, [wCursorY]
     cp [hl]
-    jr nc, jr_000_0ed0
+    jr nc, CursorBoxCheckMaxY
 
     ret
 
 
+; Test whether cursor Y is at or below its upper bound.
+CursorBoxCheckMaxY:
 jr_000_0ed0:
     inc hl
     cp [hl]
-    jr c, jr_000_0ed7
+    jr c, CursorBoxMarkHit
 
-    jr z, jr_000_0ed7
+    jr z, CursorBoxMarkHit
 
     ret
 
 
+; Set result bit seven after both coordinates satisfy the bounds.
+CursorBoxMarkHit:
 jr_000_0ed7:
     ld a, [wStateResult]
     or $80

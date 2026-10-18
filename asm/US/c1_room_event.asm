@@ -7,7 +7,7 @@ TryC1RoomEvent:
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_662e
+    jr nz, C1RoomEventStateReady
 
     ld a, $63
     call ShowMsg2
@@ -15,6 +15,8 @@ TryC1RoomEvent:
     jp EndNestedAction
 
 
+; Save state and read the target room after its state-bit check succeeds.
+C1RoomEventStateReady:
 jr_002_662e:
     call SaveState
     call ReadC1Arg
@@ -38,17 +40,21 @@ Call_002_6647:
     ld b, a
     ld hl, C1RoomEvtIds
 
+; Scan the terminated room-event ID list.
+C1RoomEventIdLoop:
 jr_002_6650:
     ld a, [hl+]
     cp $ff
     ret z
 
     cp b
-    jr z, jr_002_665a
+    jr z, C1RoomEventDispatch
 
     inc c
-    jr jr_002_6650
+    jr C1RoomEventIdLoop
 
+; Set scene effect six and dispatch the matching room-event entry.
+C1RoomEventDispatch:
 jr_002_665a:
     ld a, $06
     ld [wSceneFx], a

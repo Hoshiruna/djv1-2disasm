@@ -50,6 +50,8 @@ PutC2Washer:
 PutC2Group0:
     ld de, $0001
 
+; Scan the selected group item slots.
+C2PutFindOpenSlot:
 jr_003_50ec:
     ld a, [wPutPtr]
     ld l, a
@@ -58,18 +60,20 @@ jr_003_50ec:
     add hl, de
     ld a, [hl]
     cp $ff
-    jr z, jr_003_5106
+    jr z, C2PutStoreInGroup
 
     inc e
     ld a, $07
     cp e
-    jr nz, jr_003_50ec
+    jr nz, C2PutFindOpenSlot
 
     ld a, $f2
     call ShowMsg1
     ret
 
 
+; Confirm placement and write the packed item to the open slot.
+C2PutStoreInGroup:
 jr_003_5106:
     ld a, e
     ld [wPutPos], a

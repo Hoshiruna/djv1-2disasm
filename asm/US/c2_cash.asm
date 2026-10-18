@@ -10,7 +10,7 @@ Call_003_4fca:
     sub [hl]
     ld a, [wC2Cash+1]
     sbc $00
-    jr c, jr_003_4fee
+    jr c, C2CashInsufficient
 
     ld a, [wC2Cash]
     ld hl, wArg0
@@ -23,6 +23,8 @@ Call_003_4fca:
     ret
 
 
+; Clear the result when cash is below the requested amount.
+C2CashInsufficient:
 jr_003_4fee:
     call ClearResult
     ret
@@ -37,7 +39,7 @@ TestC2Word:
     sub [hl]
     ld a, [wC2Cash+1]
     sbc $00
-    jr c, jr_003_4fee
+    jr c, C2CashInsufficient
 
     call SetResult
     ret

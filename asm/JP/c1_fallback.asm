@@ -34,11 +34,13 @@ FallbackC1:
     inc hl
     ld a, [hl-]
     cp $ff
-    jr nz, jr_002_6d0e
+    jr nz, C1FallbackReplyDispatch
 
     ret
 
 
+; Save the reply pointer and dispatch its message stream selector.
+C1FallbackReplyDispatch:
 jr_002_6d0e:
     push hl
     rst RST_00

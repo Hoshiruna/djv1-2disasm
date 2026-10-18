@@ -99,570 +99,570 @@ jr_006_4d75:
     dw C1Act3_5C
 
 C1Act3_00:
-    dw C1Sc3_00
-    dw C1Sc3_01
-    dw C1Sc3_47
-    dw C1Sc3_02
+    dw LookC1Coin
+    dw TakeC1Coins
+    dw PlaceC1Item
+    dw UseC1Coins
 
 C1Act3_01:
-    dw C1Sc3_10
-    dw C1Sc3_11
-    dw C1Sc3_47
-    dw C1Sc3_52
+    dw LookC1Lighter
+    dw TakeC1Lighter
+    dw PlaceC1Item
+    dw UseC1Lighter
 
 C1Act3_02:
-    dw C1Sc3_63
-    dw C1Sc3_12
-    dw C1Sc3_4C
-    dw C1Sc3_64
+    dw LookC1GumCigs
+    dw TakeC1GumCigs
+    dw PlaceC1CheckedItem
+    dw UseC1GumCigs
 
 C1Act3_03:
-    dw C1Sc3_65
-    dw C1Sc3_13
-    dw C1Sc3_4C
-    dw C1Sc3_08
+    dw LookC1Hanky
+    dw TakeC1Hanky
+    dw PlaceC1CheckedItem
+    dw OfferC1Item
 
 C1Act3_04:
-    dw C1Sc3_66
-    dw C1Sc3_14
-    dw C1Sc3_4C
-    dw C1Sc3_03
+    dw LookC1Sunglasses
+    dw TakeC1Sunglasses
+    dw PlaceC1CheckedItem
+    dw UseC1Sunglasses
 
 C1Act3_05:
     ; Pointer to $5d8b; split bytes retain the interior label.
     db $8b
 Call_006_4e45:
     db $5d
-    dw C1Sc3_15
-    dw C1Sc3_47
-    dw C1Sc3_04
+    dw TakeC1Key1
+    dw PlaceC1Item
+    dw UseC1Key1
 
 C1Act3_06:
-    dw C1Sc3_68
-    dw C1Sc3_16
-    dw C1Sc3_47
-    dw C1Sc3_56
+    dw LookC1Card
+    dw TakeC1Card
+    dw PlaceC1Item
+    dw UseC1Card
 
 C1Act3_07:
-    dw C1Sc3_69
-    dw C1Sc3_17
-    dw C1Sc3_47
-    dw C1Sc3_6B
+    dw LookC1Bill20
+    dw TakeC1Bill20
+    dw PlaceC1Item
+    dw UseC1Bill20
 
 C1Act3_08:
-    dw C1Sc3_6C
-    dw C1Sc3_53
-    dw C1Sc3_48
-    dw C1Sc3_05
+    dw LookC1Bullet1
+    dw C1ItemNoHere
+    dw PlaceC1Bullet1
+    dw UseC1Bullet1
 
 C1Act3_09:
-    dw C1Sc3_6D
-    dw C1Sc3_1C
-    dw C1Sc3_6D
-    dw C1Sc3_53
+    dw C1ItemNoAction
+    dw C1NoPickupAction
+    dw C1ItemNoAction
+    dw C1ItemNoHere
 
 C1Act3_0A:
-    dw C1Sc3_6E
-    dw C1Sc3_6F
-    dw C1Sc3_47
-    dw C1Sc3_70
+    dw LookC1MedTool
+    dw TakeC1MedTool
+    dw PlaceC1Item
+    dw UseC1MedTool
 
 C1Act3_0B:
-    dw C1Sc3_71
-    dw C1Sc3_1D
-    dw C1Sc3_47
-    dw C1Sc3_06
+    dw LookC1Key2
+    dw TakeC1Key2
+    dw PlaceC1Item
+    dw UseC1Key2
 
 C1Act3_0C:
-    dw C1Sc3_72
-    dw C1Sc3_1E
-    dw C1Sc3_47
-    dw C1Sc3_73
+    dw LookC1Pencil
+    dw TakeC1Pencil
+    dw PlaceC1Item
+    dw UseC1Pencil
 
 C1Act3_0D:
-    dw C1Sc3_74
-    dw C1Sc3_1F
-    dw C1Sc3_47
-    dw C1Sc3_57
+    dw LookC1Key3
+    dw TakeC1Key3
+    dw PlaceC1Item
+    dw UseC1Key3
 
 C1Act3_0E:
-    dw C1Sc3_76
-    dw C1Sc3_20
-    dw C1Sc3_4D
-    dw C1Sc3_53
+    dw LookC1Note1
+    dw TakeC1Note1
+    dw PlaceC1Note1
+    dw C1ItemNoHere
 
 C1Act3_0F:
-    dw C1Sc3_75
-    dw C1Sc3_21
-    dw C1Sc3_47
-    dw C1Sc3_07
+    dw LookC1Key4
+    dw TakeC1Key4
+    dw PlaceC1Item
+    dw UseC1Key4
 
 C1Act3_10:
-    dw C1Sc3_77
-    dw C1Sc3_22
-    dw C1Sc3_4E
-    dw C1Sc3_53
+    dw LookC1Bill
+    dw TakeC1Bill
+    dw PlaceC1Bill
+    dw C1ItemNoHere
 
 C1Act3_11:
-    dw C1Sc3_78
-    dw C1Sc3_23
-    dw C1Sc3_4F
-    dw C1Sc3_53
+    dw LookC1Note2
+    dw TakeC1Note2
+    dw PlaceC1Note2
+    dw C1ItemNoHere
 
 C1Act3_12:
-    dw C1Sc3_79
-    dw C1Sc3_24
-    dw C1Sc3_50
-    dw C1Sc3_53
+    dw LookC1Map
+    dw TakeC1Map
+    dw PlaceC1Map
+    dw C1ItemNoHere
 
 C1Act3_13:
-    dw C1Sc3_7A
-    dw C1Sc3_25
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Snapshot
+    dw TakeC1Snapshot
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_14:
-    dw C1Sc3_7B
-    dw C1Sc3_26
-    dw C1Sc3_4C
-    dw C1Sc3_08
+    dw LookC1Cosmetic
+    dw TakeC1Cosmetic
+    dw PlaceC1CheckedItem
+    dw OfferC1Item
 
 C1Act3_15:
-    dw C1Sc3_7C
-    dw C1Sc3_27
-    dw C1Sc3_47
-    dw C1Sc3_58
+    dw LookC1Key5
+    dw TakeC1Key5
+    dw PlaceC1Item
+    dw UseC1Key5
 
 C1Act3_16:
-    dw C1Sc3_7D
-    dw C1Sc3_28
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Bookmark
+    dw TakeC1Bookmark
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_17:
-    dw C1Sc3_7E
-    dw C1Sc3_29
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1File1
+    dw TakeC1File1
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_18:
-    dw C1Sc3_7F
-    dw C1Sc3_2A
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1File2
+    dw TakeC1File2
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_19:
-    dw C1Sc3_80
-    dw C1Sc3_2B
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1File3
+    dw TakeC1File3
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_1A:
-    dw C1Sc3_81
-    dw C1Sc3_2C
-    dw C1Sc3_47
-    dw C1Sc3_53
+    dw LookC1File4
+    dw TakeC1File4
+    dw PlaceC1Item
+    dw C1ItemNoHere
 
 C1Act3_1B:
-    dw C1Sc3_82
-    dw C1Sc3_2D
-    dw C1Sc3_4A
-    dw C1Sc3_53
+    dw LookC1File5
+    dw TakeC1File5
+    dw PlaceC1File5
+    dw C1ItemNoHere
 
 C1Act3_1C:
-    dw C1Sc3_83
-    dw C1Sc3_2E
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1File6
+    dw TakeC1File6
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_1D:
-    dw C1Sc3_84
-    dw C1Sc3_2F
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1File7
+    dw TakeC1File7
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_1E:
-    dw C1Sc3_85
-    dw C1Sc3_30
-    dw C1Sc3_47
-    dw C1Sc3_53
+    dw LookC1Letter1
+    dw TakeC1Letter1
+    dw PlaceC1Item
+    dw C1ItemNoHere
 
 C1Act3_1F:
-    dw C1Sc3_86
-    dw C1Sc3_31
-    dw C1Sc3_4C
-    dw C1Sc3_59
+    dw LookC1Sugar
+    dw TakeC1Sugar
+    dw PlaceC1CheckedItem
+    dw UseC1Sugar
 
 C1Act3_20:
-    dw C1Sc3_87
-    dw C1Sc3_32
-    dw C1Sc3_4C
-    dw C1Sc3_09
+    dw LookC1Flour
+    dw TakeC1Flour
+    dw PlaceC1CheckedItem
+    dw UseC1Flour
 
 C1Act3_21:
-    dw C1Sc3_88
-    dw C1Sc3_33
-    dw C1Sc3_4C
-    dw C1Sc3_08
+    dw LookC1Tissue
+    dw TakeC1Tissue
+    dw PlaceC1CheckedItem
+    dw OfferC1Item
 
 C1Act3_22:
-    dw C1Sc3_89
-    dw C1Sc3_34
-    dw C1Sc3_47
-    dw C1Sc3_53
+    dw LookC1Letter2
+    dw TakeC1Letter2
+    dw PlaceC1Item
+    dw C1ItemNoHere
 
 C1Act3_23:
-    dw C1Sc3_8A
-    dw C1Sc3_35
-    dw C1Sc3_4C
-    dw C1Sc3_5A
+    dw LookC1Candy
+    dw TakeC1Candy
+    dw PlaceC1CheckedItem
+    dw UseC1Candy
 
 C1Act3_24:
-    dw C1Sc3_8B
-    dw C1Sc3_36
-    dw C1Sc3_47
-    dw C1Sc3_53
+    dw LookC1Memo
+    dw TakeC1Memo
+    dw PlaceC1Item
+    dw C1ItemNoHere
 
 C1Act3_25:
-    dw C1Sc3_8C
+    dw LookC1Pen
 jr_006_4f46:
-    dw C1Sc3_37
-    dw C1Sc3_4C
-    dw C1Sc3_8D
+    dw TakeC1Pen
+    dw PlaceC1CheckedItem
+    dw UseC1Pen
 
 C1Act3_26:
-    dw C1Sc3_8E
-    dw C1Sc3_38
-    dw C1Sc3_4C
-    dw C1Sc3_5B
+    dw LookC1Glasses
+    dw TakeC1Glasses
+    dw PlaceC1CheckedItem
+    dw UseC1Glasses
 
 C1Act3_27:
-    dw C1Sc3_8F
-    dw C1Sc3_39
-    dw C1Sc3_4C
-    dw C1Sc3_5C
+    dw LookC1Seltzer
+    dw TakeC1Seltzer
+    dw PlaceC1CheckedItem
+    dw UseC1Seltzer
 
 C1Act3_28:
-    dw C1Sc3_90
-    dw C1Sc3_54
-    dw C1Sc3_4B
-    dw C1Sc3_53
+    dw LookC1Meds1
+    dw C1EmptyVialReply
+    dw C1PlaceNeedsTaken
+    dw C1ItemNoHere
 
 C1Act3_29:
-    dw C1Sc3_91
-    dw C1Sc3_3A
-    dw C1Sc3_47
-    dw C1Sc3_5D
+    dw LookC1Meds2
+    dw TakeC1Meds2
+    dw PlaceC1Item
+    dw UseC1Medrezine29
 
 C1Act3_2A:
-    dw C1Sc3_92
-    dw C1Sc3_54
-    dw C1Sc3_4B
-    dw C1Sc3_53
+    dw LookC1Diethanol
+    dw C1EmptyVialReply
+    dw C1PlaceNeedsTaken
+    dw C1ItemNoHere
 
 C1Act3_2B:
-    dw C1Sc3_93
-    dw C1Sc3_94
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Newspaper
+    dw BuyC1Newspaper
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_2C:
-    dw C1Sc3_95
-    dw C1Sc3_3B
-    dw C1Sc3_4C
-    dw C1Sc3_08
+    dw LookC1Gag
+    dw TakeC1Gag
+    dw PlaceC1CheckedItem
+    dw OfferC1Item
 
 C1Act3_2D:
-    dw C1Sc3_96
-    dw C1Sc3_53
-    dw C1Sc3_49
-    dw C1Sc3_60
+    dw LookC1Bullet2
+    dw C1ItemNoHere
+    dw PlaceC1Bullet2
+    dw UseC1Bullet2
 
 C1Act3_2E:
-    dw C1Sc3_97
-    dw C1Sc3_3C
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Magazine
+    dw TakeC1Magazine
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_2F:
-    dw C1Sc3_98
-    dw C1Sc3_3D
-    dw C1Sc3_51
-    dw C1Sc3_53
+    dw LookC1Photo
+    dw TakeC1Photo
+    dw PlaceC1Photo
+    dw C1ItemNoHere
 
 C1Act3_30:
-    dw C1Sc3_99
-    dw C1Sc3_3E
-    dw C1Sc3_4C
-    dw C1Sc3_08
+    dw LookC1Earring
+    dw TakeC1Earring
+    dw PlaceC1CheckedItem
+    dw OfferC1Item
 
 C1Act3_31:
-    dw C1Sc3_9A
-    dw C1Sc3_3F
-    dw C1Sc3_47
-    dw C1Sc3_9B
+    dw LookC1Note3
+    dw TakeC1Note3
+    dw PlaceC1Item
+    dw UseC1Note3
 
 C1Act3_32:
-    dw C1Sc3_9C
-    dw C1Sc3_40
-    dw C1Sc3_47
-    dw C1Sc3_9D
+    dw LookC1Note4
+    dw TakeC1Note4
+    dw PlaceC1Item
+    dw UseC1Note4
 
 C1Act3_33:
-    dw C1Sc3_A8
-    dw C1Sc3_A7
-    dw C1Sc3_47
-    dw C1Sc3_0A
+    dw LookC1Ofreeall
+    dw TakeC1Meds4
+    dw PlaceC1Item
+    dw UseC1Ofreeall33
 
 C1Act3_34:
-    dw C1Sc3_AA
-    dw C1Sc3_41
-    dw C1Sc3_47
-    dw C1Sc3_62
+    dw LookC1Chemopapain
+    dw TakeC1Meds5
+    dw PlaceC1Item
+    dw UseC1Chemopapain34
 
 C1Act3_35:
-    dw C1Sc3_AB
-    dw C1Sc3_A9
-    dw C1Sc3_47
-    dw C1Sc3_0C
+    dw LookC1Bisodiumitis
+    dw TakeC1Meds6
+    dw PlaceC1Item
+    dw UseC1Bisodiumitis35
 
 C1Act3_36:
-    dw C1Sc3_AC
-    dw C1Sc3_42
-    dw C1Sc3_47
-    dw C1Sc3_61
+    dw LookC1Bicarbonate
+    dw TakeC1Bicarbonate
+    dw PlaceC1Item
+    dw UseC1Bicarbonate36
 
 C1Act3_37:
-    dw C1Sc3_9E
-    dw C1Sc3_43
-    dw C1Sc3_4C
-    dw C1Sc3_0F
+    dw LookC1Sausage
+    dw TakeC1Sausage
+    dw PlaceC1CheckedItem
+    dw UseC1Sausage
 
 C1Act3_38:
-    dw C1Sc3_9F
-    dw C1Sc3_44
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Plate
+    dw TakeC1Plate
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_39:
-    dw C1Sc3_A0
-    dw C1Sc3_45
-    dw C1Sc3_4C
+    dw LookC1FryingPan
+    dw TakeC1FryingPan
+    dw PlaceC1CheckedItem
 jr_006_4fea:
-    dw C1Sc3_53
+    dw C1ItemNoHere
 
 C1Act3_3A:
-    dw C1Sc3_A1
-    dw C1Sc3_46
-    dw C1Sc3_4C
-    dw C1Sc3_53
+    dw LookC1Pitcher
+    dw TakeC1Pitcher
+    dw PlaceC1CheckedItem
+    dw C1ItemNoHere
 
 C1Act3_3B:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_3C:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_3D:
-    dw C1Sc3_6C
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_3E:
-    dw C1Sc3_6C
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_3F:
-    dw C1Sc3_6C
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_40:
-    dw C1Sc3_6C
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_41:
-    dw C1Sc3_6C
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_42:
     ; Pointer to $5f4a; split bytes retain the interior label.
     db $4a
 jr_006_502d:
     db $5f
-    dw C1Sc3_19
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw BuyC1Bullet1
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_43:
-    dw C1Sc3_6C
-    dw C1Sc3_53
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw C1ItemNoHere
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_44:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_45:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_46:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_47:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_48:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_49:
-    dw C1Sc3_6C
-    dw C1Sc3_1B
-    dw C1Sc3_48
-    dw C1Sc3_55
+    dw LookC1Bullet1
+    dw TakeC1SixBullets
+    dw PlaceC1Bullet1
+    dw C1UseNeedsTaken
 
 C1Act3_4A:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_4B:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_4C:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_4D:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_4E:
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
-    dw C1Sc3_6D
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
+    dw C1ItemNoAction
 
 C1Act3_4F:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_50:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_51:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_52:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_53:
-    dw C1Sc3_96
-    dw C1Sc3_1A
-    dw C1Sc3_49
-    dw C1Sc3_55
+    dw LookC1Bullet2
+    dw BuyC1Bullet2
+    dw PlaceC1Bullet2
+    dw C1UseNeedsTaken
 
 C1Act3_54:
-    dw C1Sc3_69
-    dw C1Sc3_18
-    dw C1Sc3_47
-    dw C1Sc3_6A
+    dw LookC1Bill20
+    dw TakeC1Bill20Alt
+    dw PlaceC1Item
+    dw UseC1Bill20Alt
 
 C1Act3_55:
-    dw C1Sc3_A2
-    dw C1Sc3_A3
-    dw C1Sc3_47
-    dw C1Sc3_A4
+    dw LookC1Pentothal
+    dw TakeC1Pentothal
+    dw PlaceC1Item
+    dw UseC1Pentothal55
 
 C1Act3_56:
-    dw C1Sc3_A2
-    dw C1Sc3_A3
-    dw C1Sc3_47
+    dw LookC1Pentothal
+    dw TakeC1Pentothal
+    dw PlaceC1Item
 jr_006_50d2:
-    dw C1Sc3_A5
+    dw UseC1Pentothal56
 
 C1Act3_57:
-    dw C1Sc3_A2
-    dw C1Sc3_A3
-    dw C1Sc3_47
-    dw C1Sc3_A6
+    dw LookC1Pentothal
+    dw TakeC1Pentothal
+    dw PlaceC1Item
+    dw UseC1Pentothal57
 
 C1Act3_58:
-    dw C1Sc3_91
-    dw C1Sc3_3A
-    dw C1Sc3_47
-    dw C1Sc3_5E
+    dw LookC1Meds2
+    dw TakeC1Meds2
+    dw PlaceC1Item
+    dw UseC1Medrezine58
 
 C1Act3_59:
-    dw C1Sc3_91
-    dw C1Sc3_3A
-    dw C1Sc3_47
-    dw C1Sc3_5F
+    dw LookC1Meds2
+    dw TakeC1Meds2
+    dw PlaceC1Item
+    dw UseC1Medrezine59
 
 C1Act3_5A:
-    dw C1Sc3_A8
-    dw C1Sc3_A7
-    dw C1Sc3_47
-    dw C1Sc3_0B
+    dw LookC1Ofreeall
+    dw TakeC1Meds4
+    dw PlaceC1Item
+    dw UseC1Ofreeall5A
 
 C1Act3_5B:
-    dw C1Sc3_AB
-    dw C1Sc3_A9
-    dw C1Sc3_47
+    dw LookC1Bisodiumitis
+    dw TakeC1Meds6
+    dw PlaceC1Item
 jr_006_50fa:
-    dw C1Sc3_0D
+    dw UseC1Bisodiumitis5B
 
 C1Act3_5C:
-    dw C1Sc3_AB
-    dw C1Sc3_A9
-    dw C1Sc3_47
+    dw LookC1Bisodiumitis
+    dw TakeC1Meds6
+    dw PlaceC1Item
 jr_006_5102:
-    dw C1Sc3_0E
+    dw UseC1Bisodiumitis5C

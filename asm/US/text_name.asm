@@ -20,7 +20,7 @@ Jump_000_11eb:
     ld [$c8eb], a
     ld a, [bc]
     ld [wTextValue], a
-    jr jr_000_120f
+    jr TextNameLocateRecord
 
 ; Read a name ID from the text stream and select its regional name record.
 DrawTextName:
@@ -29,6 +29,8 @@ Jump_000_1209:
     call ReadTextByte
     ld [wTextValue], a
 
+; Find the selected name record in the regional reference table.
+TextNameLocateRecord:
 jr_000_120f:
     ld a, [wTextValue]
     ld l, a

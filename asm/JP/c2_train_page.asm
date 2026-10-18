@@ -10,7 +10,7 @@ jr_003_62d1:
     add hl, de
     ld a, [hl+]
     cp TrainNone
-    jr z, jr_003_6304
+    jr z, TrainPageAdvanceRecord
 
     ld [wTrainNo], a
     ld a, [hl+]
@@ -33,6 +33,8 @@ jr_003_62d1:
     inc a
     ld [wTrainRows], a
 
+; Advance to the next four-byte train record.
+TrainPageAdvanceRecord:
 jr_003_6304:
     inc de
     inc de
@@ -40,21 +42,21 @@ jr_003_6304:
     inc de
     ld a, [wTrainPageEnd]
     cp e
-    jr z, jr_003_633d
+    jr z, TrainPageConfirm
 
     ld a, [wTrainRows]
     cp TrainPageRows
-    jr c, jr_003_62d1
+    jr c, ShowTrainPage
 
     ld hl, wTrainRecs
     add hl, de
     ld a, [hl]
     cp TrainNone
-    jr z, jr_003_633d
+    jr z, TrainPageConfirm
 
     ld a, [wTrainPageOff]
     cp $00
-    jr nz, jr_003_633d
+    jr nz, TrainPageConfirm
 
     push de
     call WaitTextConfirm
@@ -66,8 +68,10 @@ jr_003_6304:
     ld a, [wTrainRepeat]
     ld [wTrainPageOff], a
     ld e, a
-    jr jr_003_62d1
+    jr ShowTrainPage
 
+; Wait for confirmation after the current timetable page.
+TrainPageConfirm:
 jr_003_633d:
     call WaitTextConfirm
     ret

@@ -33,46 +33,50 @@ SelectAudio:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_004_4066
+    jr nz, SelectCase2Audio
 
     ld a, [wAudioReq]
     cp $01
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $02
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $03
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $04
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $0b
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $0c
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $0d
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $0e
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
-    jr jr_004_4081
+    jr DispatchAudio
 
+; Apply the Case II request IDs that retain the current selection.
+SelectCase2Audio:
 jr_004_4066:
     ld a, [wAudioReq]
     cp $0e
-    jr c, jr_004_4075
+    jr c, SelectRetainedAudio
 
     cp $14
-    jr z, jr_004_4075
+    jr z, SelectRetainedAudio
 
     cp $1a
-    jr nz, jr_004_4081
+    jr nz, DispatchAudio
 
+; Skip a request when its retained ID already matches.
+SelectRetainedAudio:
 jr_004_4075:
     ld a, [wAudioId]
     ld b, a
@@ -93,14 +97,18 @@ jr_004_4081:
     ld b, $00
     ld a, [wCaseId]
     and $01
-    jr nz, jr_004_4096
+    jr nz, DispatchCase2Audio
 
     ld hl, C1AudioPtrs
-    jr jr_004_4099
+    jr DispatchAudioRecord
 
+; Select the Case II audio pointer table.
+DispatchCase2Audio:
 jr_004_4096:
     ld hl, C2AudioPtrs
 
+; Read the selected two-byte pointer and dispatch its record type.
+DispatchAudioRecord:
 jr_004_4099:
     add hl, bc
     ld a, [hl+]

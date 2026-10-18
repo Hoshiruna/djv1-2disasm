@@ -18,6 +18,8 @@ Call_001_67e4:
     ld bc, wObjPresent
     ld de, SaveDataLen
 
+; Copy one validated payload byte from SRAM into working memory.
+LoadSavePayloadByte:
 jr_001_6802:
     ld a, [hl+]
     ld [bc], a
@@ -26,7 +28,7 @@ jr_001_6802:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6802
+    jr nz, LoadSavePayloadByte
 
     call DisableRam
     pop de
@@ -60,6 +62,8 @@ Call_001_6823:
     xor a
     ld [wSaveCopy], a
 
+; Select and initialize the next save copy for writing.
+WriteSaveCopy:
 jr_001_682a:
     call GetSaveAddr
     call ClearSaveSum
@@ -70,6 +74,8 @@ jr_001_682a:
     ld bc, wObjPresent
     ld de, SaveDataLen
 
+; Write one payload byte to SRAM and add it to the running sum.
+WriteSavePayloadByte:
 jr_001_683e:
     ld a, [bc]
     inc bc
@@ -79,7 +85,7 @@ jr_001_683e:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_683e
+    jr nz, WriteSavePayloadByte
 
     call WriteSaveSum
     call WriteSaveTag
@@ -87,7 +93,7 @@ jr_001_683e:
     inc a
     ld [wSaveCopy], a
     cp SaveCopies
-    jr nz, jr_001_682a
+    jr nz, WriteSaveCopy
 
     pop de
     pop bc
@@ -135,6 +141,8 @@ Call_001_6890:
     xor a
     ld [wSaveCopy], a
 
+; Initialize the sum and address for the next candidate copy.
+CheckNextSaveCopy:
 jr_001_6894:
     call ClearSaveSum
     call GetSaveAddr
@@ -144,6 +152,8 @@ jr_001_6894:
     ld h, a
     ld de, SaveDataLen
 
+; Add one candidate payload byte to the validation sum.
+SumSavePayloadByte:
 jr_001_68a5:
     ld a, [hl+]
     call AddSaveByte
@@ -151,25 +161,29 @@ jr_001_68a5:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_68a5
+    jr nz, SumSavePayloadByte
 
     call CheckSaveTag
-    jr nz, jr_001_68ba
+    jr nz, RejectSaveCopy
 
     call CheckSaveSum
-    jr z, jr_001_68c9
+    jr z, AcceptSaveCopy
 
+; Advance to the next copy after a tag or sum mismatch.
+RejectSaveCopy:
 jr_001_68ba:
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
     cp SaveCopies
-    jr nz, jr_001_6894
+    jr nz, CheckNextSaveCopy
 
     call ClearSaveCopies
     ret
 
 
+; Repair copies if needed and mark the selected slot available.
+AcceptSaveCopy:
 jr_001_68c9:
     call RepairSaveCopies
     ld hl, SaveMasks
@@ -211,7 +225,7 @@ Call_001_68fb:
     push de
     ld a, [wSaveCopy]
     cp $00
-    jr z, jr_001_6949
+    jr z, RepairSaveCopiesDone
 
     call GetSaveAddr
     ld a, [wSavePtr]
@@ -221,6 +235,8 @@ Call_001_68fb:
     ld bc, sStateSnap
     ld de, SaveRecLen
 
+; Copy one byte of the accepted nonzero save copy into the snapshot buffer.
+StageRecoveredSaveByte:
 jr_001_6915:
     ld a, [hl+]
     ld [bc], a
@@ -229,11 +245,13 @@ jr_001_6915:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6915
+    jr nz, StageRecoveredSaveByte
 
     xor a
     ld [wSaveCopy], a
 
+; Select the next destination for the recovered save record.
+WriteRecoveredSaveCopy:
 jr_001_6923:
     call GetSaveAddr
     ld a, [wSavePtr]
@@ -243,6 +261,8 @@ jr_001_6923:
     ld bc, sStateSnap
     ld de, SaveRecLen
 
+; Copy one snapshot byte into the destination save copy.
+WriteRecoveredSaveByte:
 jr_001_6934:
     ld a, [bc]
     inc bc
@@ -251,14 +271,16 @@ jr_001_6934:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6934
+    jr nz, WriteRecoveredSaveByte
 
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
     cp SaveCopies
-    jr nz, jr_001_6923
+    jr nz, WriteRecoveredSaveCopy
 
+; Restore registers and return after repair or when copy zero was valid.
+RepairSaveCopiesDone:
 jr_001_6949:
     pop de
     pop hl

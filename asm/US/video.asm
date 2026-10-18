@@ -20,7 +20,7 @@ VideoMapStep:
 
 Jump_001_4079:
     bit 6, [hl]
-    jr z, jr_001_4086
+    jr z, VideoPalStep
 
     res 6, [hl]
     ldh a, [hMapQueueLen]
@@ -33,11 +33,13 @@ VideoPalStep:
 Jump_001_4086:
 jr_001_4086:
     bit 0, [hl]
-    jr z, jr_001_408f
+    jr z, VideoFinishFrame
 
     res 0, [hl]
     call UploadPals
 
+; Update timer, scroll, and frame counters after video requests.
+VideoFinishFrame:
 jr_001_408f:
     ldh a, [hVideoFlags]
     bit 4, a
@@ -63,9 +65,11 @@ OamDmaCode:
     ldh [rDMA], a
     ld a, $28
 
+; Delay until the OAM DMA transfer can finish.
+OamDmaWait:
 jr_001_40b5:
     dec a
-    jr nz, jr_001_40b5
+    jr nz, OamDmaWait
 
     res 7, [hl]
     ret
@@ -109,6 +113,8 @@ Call_001_40ed:
     ld de, wMapQueue
     ld c, a
 
+; Read the destination and length of the next queued map write.
+MapQueueNextEntry:
 jr_001_40f2:
     ld a, [de]
     ld h, a
@@ -120,39 +126,47 @@ jr_001_40f2:
     ld b, a
     inc de
     bit 6, b
-    jr z, jr_001_4105
+    jr z, MapQueueCheckColumn
 
     res 6, b
     ld a, $01
     ldh [rVBK], a
 
+; Choose row or column copying from length bit seven.
+MapQueueCheckColumn:
 jr_001_4105:
     bit 7, b
-    jr nz, jr_001_411e
+    jr nz, MapQueueBeginColumn
 
     ld a, c
     sub b
     sub $03
     ld c, a
 
+; Copy one queued byte to a consecutive VRAM address.
+MapQueueWriteRowByte:
 jr_001_410e:
     ld a, [de]
     ld [hl+], a
     inc de
     dec b
-    jr nz, jr_001_410e
+    jr nz, MapQueueWriteRowByte
 
+; Restore tile VRAM bank and check remaining queue bytes.
+MapQueueAfterEntry:
 jr_001_4114:
     xor a
     ldh [rVBK], a
     cp c
-    jr nz, jr_001_40f2
+    jr nz, MapQueueNextEntry
 
     ldh [hMapQueueLen], a
     pop hl
     ret
 
 
+; Clear the column flag and subtract this entry from queue length.
+MapQueueBeginColumn:
 jr_001_411e:
     res 7, b
     ld a, c
@@ -160,6 +174,8 @@ jr_001_411e:
     sub $03
     ld c, a
 
+; Copy one queued byte and advance its VRAM address by 32.
+MapQueueWriteColumnByte:
 jr_001_4125:
     ld a, [de]
     ld [hl], a
@@ -172,6 +188,6 @@ jr_001_4125:
     and $fb
     ld h, a
     dec b
-    jr nz, jr_001_4125
+    jr nz, MapQueueWriteColumnByte
 
-    jr jr_001_4114
+    jr MapQueueAfterEntry

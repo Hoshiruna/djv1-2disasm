@@ -12,6 +12,8 @@ Call_003_453b:
     push hl
     call DoC2Marks
 
+; Restore the saved mark-work index after drawing.
+C2MarksRestoreIndex:
 jr_003_4547:
     pop hl
     push af
@@ -29,6 +31,8 @@ DoC2Marks:
 Call_003_4551:
     call ReadC2Room
 
+; Read the next four-byte room mark record.
+C2MarksNextRecord:
 jr_003_4554:
     ld a, [wRoomDataPtr]
     ld l, a
@@ -39,13 +43,13 @@ jr_003_4554:
     ret z
 
     cp $55
-    jr z, jr_003_4582
+    jr z, C2MarksAdvanceRecord
 
 Call_003_4564:
     call HideC2Mark
     ld a, [wStateResult]
     and $01
-    jr nz, jr_003_4582
+    jr nz, C2MarksAdvanceRecord
 
     ld a, [wRoomDataPtr]
     ld l, a
@@ -57,6 +61,8 @@ Call_003_4564:
     ld hl, C2MarkTile
     call QueueTileRect
 
+; Advance four bytes to the next room mark record.
+C2MarksAdvanceRecord:
 jr_003_4582:
     ld a, [wRoomDataPtr]
     ld c, a
@@ -70,7 +76,7 @@ jr_003_4582:
     ld [wRoomDataPtr], a
     ld a, b
     ld [wRoomDataPtr+1], a
-    jr jr_003_4554
+    jr C2MarksNextRecord
 
 ; For conditional records, map the second byte to an object flag; result bit 0 means hidden.
 HideC2Mark:
@@ -112,6 +118,8 @@ Call_003_45ac:
     ldh [hChangePos+1], a
     ld a, d
 
+; Search the mark-condition table for the current ID.
+C2MarkFindCondition:
 jr_003_45cc:
     ld bc, C2MarkTests
     ldh a, [hChangePos]
@@ -122,7 +130,7 @@ jr_003_45cc:
     ld a, [hl]
     ld [wC2MarkTest], a
     cp e
-    jr nz, jr_003_45f6
+    jr nz, C2MarkNextCondition
 
     ld bc, C2MarkTests+1
     ldh a, [hChangePos]
@@ -139,12 +147,14 @@ jr_003_45cc:
     jp ClearResult
 
 
+; Advance to the next mark-condition pair.
+C2MarkNextCondition:
 jr_003_45f6:
     ldh a, [hChangePos]
     inc a
     inc a
     ldh [hChangePos], a
-    jr jr_003_45cc
+    jr C2MarkFindCondition
 
 C2MarkTests:
     db $0d, $1d
@@ -182,6 +192,8 @@ Call_003_4624:
     swap a
     and $07
 
+; Combine the decoded row and column into a map address.
+C2MarkFinishPosition:
 jr_003_4633:
     or l
     ld l, a

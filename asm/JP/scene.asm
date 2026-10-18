@@ -149,7 +149,7 @@ PickScenePal:
 Call_000_0c83:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0c98
+    jr nz, PickCase2ScenePal
 
     push af
     ld a, $01
@@ -160,6 +160,8 @@ Call_000_0c83:
     ret
 
 
+; Load the Case II scene palette through bank three.
+PickCase2ScenePal:
 jr_000_0c98:
     push af
     ld a, $03
@@ -174,21 +176,23 @@ SelectSceneMap:
 Call_000_0ca6:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0cef
+    jr nz, SelectCase2MapBank
 
     ld a, [wSceneId]
     ld [wMapIndex], a
     cp $28
-    jr nc, jr_000_0cbd
+    jr nc, SelectC1MapBank24
 
     ld a, $23
     call PushRomBank
     ret
 
 
+; Select map bank 24 for Case I scene IDs from 28h to 4Fh.
+SelectC1MapBank24:
 jr_000_0cbd:
     cp $50
-    jr nc, jr_000_0ccf
+    jr nc, SelectC1MapBank25
 
     ld a, $24
     call PushRomBank
@@ -199,9 +203,11 @@ jr_000_0cbd:
 
 
 Jump_000_0ccf:
+; Select map bank 25 for Case I scene IDs from 50h to 77h.
+SelectC1MapBank25:
 jr_000_0ccf:
     cp $78
-    jr nc, jr_000_0ce1
+    jr nc, SelectC1MapBank26
 
 Jump_000_0cd3:
     ld a, $25
@@ -214,6 +220,8 @@ Jump_000_0cd5:
     ret
 
 
+; Select map bank 26 for Case I scene IDs from 78h upward.
+SelectC1MapBank26:
 jr_000_0ce1:
     ld a, $26
     call PushRomBank
@@ -225,13 +233,15 @@ Call_000_0ce6:
     ret
 
 
+; Choose Case II map bank 27 or 28 from the scene ID.
+SelectCase2MapBank:
 jr_000_0cef:
     ld a, [wSceneId]
     ld [wMapIndex], a
     cp $28
 
 Call_000_0cf7:
-    jr nc, jr_000_0cff
+    jr nc, SelectC2MapBank28
 
     ld a, $27
     call PushRomBank
@@ -240,6 +250,8 @@ Call_000_0cf7:
 
 Call_000_0cff:
 Jump_000_0cff:
+; Select map bank 28 for Case II scene IDs from 28h upward.
+SelectC2MapBank28:
 jr_000_0cff:
     ld a, $28
     call PushRomBank
@@ -292,12 +304,14 @@ Jump_000_0d30:
 Jump_000_0d39:
     ld e, $0e
 
+; Copy the next tile ID from the selected scene map.
+StageSceneTileByte:
 jr_000_0d3b:
     ld a, [bc]
     inc bc
     ld [hl+], a
     dec e
-    jr nz, jr_000_0d49
+    jr nz, StageSceneTileRow
 
     push de
     ld de, $000e
@@ -305,20 +319,24 @@ jr_000_0d3b:
     pop de
     ld e, $0e
 
+; Skip the attribute half of each staged row after fourteen tiles.
+StageSceneTileRow:
 jr_000_0d49:
     dec d
-    jr nz, jr_000_0d3b
+    jr nz, StageSceneTileByte
 
     ld hl, wSceneMap+14
     ld d, $c4
     ld e, $0e
 
+; Copy the next attribute from the selected scene map.
+StageSceneAttrByte:
 jr_000_0d53:
     ld a, [bc]
     inc bc
     ld [hl+], a
     dec e
-    jr nz, jr_000_0d61
+    jr nz, StageSceneAttrRow
 
     push de
     ld de, $000e
@@ -327,9 +345,11 @@ jr_000_0d53:
     ld e, $0e
 
 Jump_000_0d61:
+; Advance to the next staged row after fourteen attributes.
+StageSceneAttrRow:
 jr_000_0d61:
     dec d
-    jr nz, jr_000_0d53
+    jr nz, StageSceneAttrByte
 
     push af
     ld a, $29

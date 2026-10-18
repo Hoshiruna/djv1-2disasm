@@ -28,7 +28,7 @@ UseListCount:
     call ClearResult
     ld a, [wC1Coins]
     cp $00
-    jr z, jr_000_2a43
+    jr z, C1UseCoinEmpty
 
     dec a
     ld [wC1Coins], a
@@ -48,6 +48,8 @@ Jump_000_2a31:
     ret
 
 
+; Show the empty-coin reply when no coin can be consumed.
+C1UseCoinEmpty:
 jr_000_2a43:
     ld a, $72
     call ShowMsg2
@@ -62,32 +64,38 @@ SpendListCount:
     ld a, [wC1Coins]
     ld hl, wArg0
     sub [hl]
-    jr c, jr_000_2a92
+    jr c, C1SpendCoinsInsufficient
 
     ld [wC1Coins], a
     ld a, [wRoomId]
     cp $27
-    jr z, jr_000_2a6d
+    jr z, C1SpendCheckYellowDebt
 
-    ld a, $81
+    ld a, C1BlueCabDebt
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_2a7e
+    jr nz, C1SpendRefreshCoins
 
-    jr jr_000_2a79
+    jr C1SpendMarkFarePaid
 
+; Check the yellow-cab debt flag after deducting the cost in room $27.
+C1SpendCheckYellowDebt:
 jr_000_2a6d:
-    ld a, $a0
+    ld a, C1YellowCabDebt
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_2a7e
+    jr nz, C1SpendRefreshCoins
 
+; Set the fare-paid flag only when the selected cab has no previous debt.
+C1SpendMarkFarePaid:
 jr_000_2a79:
-    ld a, $82
+    ld a, C1CabFarePaid
     call SetObjFlag
 
+; Refresh the coin list entry and return success after payment.
+C1SpendRefreshCoins:
 jr_000_2a7e:
     xor a
     ld [wFindListValue], a
@@ -99,27 +107,33 @@ jr_000_2a7e:
     ret
 
 
+; Handle insufficient coins according to the current cab room.
+C1SpendCoinsInsufficient:
 jr_000_2a92:
     ld a, [wRoomId]
     cp $26
-    jr z, jr_000_2aa1
+    jr z, C1SpendBlueDebt
 
     cp $27
-    jr z, jr_000_2aaa
+    jr z, C1SpendYellowDebt
 
     call ClearResult
     ret
 
 
+; Set blue-cab debt when its requested cost exceeds the coin count.
+C1SpendBlueDebt:
 jr_000_2aa1:
-    ld a, $81
+    ld a, C1BlueCabDebt
     call SetObjFlag
     call ClearResult
     ret
 
 
+; Set yellow-cab debt when its requested cost exceeds the coin count.
+C1SpendYellowDebt:
 jr_000_2aaa:
-    ld a, $a0
+    ld a, C1YellowCabDebt
     call SetObjFlag
     call ClearResult
     ret

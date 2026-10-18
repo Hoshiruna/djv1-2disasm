@@ -48,6 +48,8 @@ Jump_000_0753:
     ld [hl], a
     pop af
 
+; Wait and poll input until the frame tick passes the requested count.
+WaitTicksNextFrame:
 jr_000_075b:
     call WaitFrame
 
@@ -56,7 +58,7 @@ Jump_000_075e:
     call PollJoy
     pop af
     cp [hl]
-    jr nc, jr_000_075b
+    jr nc, WaitTicksNextFrame
 
 Jump_000_0766:
     ld [hl], $01

@@ -6,12 +6,14 @@ SpendListTwo:
 
     ld a, [wC1Coins]
     cp $02
-    jr nc, jr_000_2f62
+    jr nc, C1SpendTwoCoinsReady
 
     call ClearResult
     ret
 
 
+; Subtract two through the original byte-addition path.
+C1SpendTwoCoinsReady:
 jr_000_2f62:
     ld a, $fe
     ld [wArg0], a

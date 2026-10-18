@@ -22,6 +22,8 @@ Jump_000_01d8:
     ldh [hMapHeight], a
 
 Jump_000_01e0:
+; Locate the queue write position for a tile rectangle.
+QueueTileRectBuffer:
 jr_000_01e0:
     ldh a, [hMapQueueLen]
     add $a0
@@ -30,6 +32,8 @@ jr_000_01e0:
     adc $c0
     ld d, a
 
+; Queue the next row of tile bytes.
+QueueTileRectNextRow:
 jr_000_01ea:
     ldh a, [hMapWidth]
     ldh [hMapRunLeft], a
@@ -40,21 +44,23 @@ Jump_000_01ee:
     dec a
     ldh [hMapHeight], a
     cp $00
-    jr z, jr_000_0205
+    jr z, QueueTileRectFinish
 
     ldh a, [hMapQueueLen]
     cp $80
 
 Jump_000_01fe:
-    jr c, jr_000_01ea
+    jr c, QueueTileRectNextRow
 
 Call_000_0200:
 Jump_000_0200:
     call SubmitMapQueue
 
 Jump_000_0203:
-    jr jr_000_01e0
+    jr QueueTileRectBuffer
 
+; Submit a final full queue before returning.
+QueueTileRectFinish:
 jr_000_0205:
     ldh a, [hMapQueueLen]
 
@@ -62,10 +68,12 @@ Call_000_0207:
     cp $80
 
 Call_000_0209:
-    jr c, jr_000_020e
+    jr c, QueueTileRectDone
 
     call SubmitMapQueue
 
+; Restore registers and return from tile rectangle queuing.
+QueueTileRectDone:
 jr_000_020e:
     pop de
     pop af
@@ -95,6 +103,8 @@ Call_000_0217:
     ldh [hMapQueueLen], a
     pop bc
 
+; Append the next source tile byte to the queue.
+QueueTileRowByte:
 jr_000_0225:
     ld a, [hl+]
     ld [de], a
@@ -105,7 +115,7 @@ Jump_000_022a:
     dec a
     ldh [hMapRunLeft], a
     cp $00
-    jr nz, jr_000_0225
+    jr nz, QueueTileRowByte
 
     ld a, $20
     add c
@@ -143,6 +153,8 @@ Jump_000_0240:
     ld a, [hl+]
     ldh [hMapHeight], a
 
+; Locate the queue write position for a constant tile fill.
+QueueFillRectBuffer:
 jr_000_0246:
     ldh a, [hMapQueueLen]
     add $a0
@@ -155,6 +167,8 @@ Call_000_024b:
     adc $c0
     ld d, a
 
+; Queue the next row of repeated tile bytes.
+QueueFillRectNextRow:
 jr_000_0250:
     ldh a, [hMapWidth]
     ldh [hMapRunLeft], a
@@ -163,23 +177,27 @@ jr_000_0250:
     dec a
     ldh [hMapHeight], a
     cp $00
-    jr z, jr_000_026b
+    jr z, QueueFillRectFinish
 
     ldh a, [hMapQueueLen]
     cp $80
-    jr c, jr_000_0250
+    jr c, QueueFillRectNextRow
 
     call SubmitMapQueue
-    jr jr_000_0246
+    jr QueueFillRectBuffer
 
+; Submit a final full queue before returning.
+QueueFillRectFinish:
 jr_000_026b:
     ldh a, [hMapQueueLen]
     cp $80
-    jr c, jr_000_0274
+    jr c, QueueFillRectDone
 
     call SubmitMapQueue
 
 Jump_000_0274:
+; Restore registers and return from tile fill queuing.
+QueueFillRectDone:
 jr_000_0274:
     pop de
     pop af
@@ -217,6 +235,8 @@ Call_000_0285:
     ldh [hMapQueueLen], a
     ld b, [hl]
 
+; Append one copy of the fill tile to the queue.
+QueueFillRowByte:
 jr_000_028b:
     ld a, b
     ld [de], a
@@ -225,7 +245,7 @@ jr_000_028b:
     dec a
     ldh [hMapRunLeft], a
     cp $00
-    jr nz, jr_000_028b
+    jr nz, QueueFillRowByte
 
     pop bc
     ld a, $20

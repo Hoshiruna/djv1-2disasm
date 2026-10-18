@@ -9,7 +9,7 @@ Jump_000_04b3:
 Jump_000_04b5:
     ldh a, [hOamCount]
     cp $28
-    jr z, jr_000_04ff
+    jr z, EmitSpriteDone
 
     ldh a, [hOamCount]
     sla a
@@ -33,13 +33,15 @@ Call_000_04ce:
     ld d, a
     ld a, [hl+]
 
+; Process the next count-prefixed sprite part.
+EmitSpriteNextPart:
 jr_000_04d4:
     ldh [hSpriteLeft], a
     ld a, [hl+]
     add e
     ld [bc], a
     cp $a8
-    jr nc, jr_000_0502
+    jr nc, EmitSpriteSkipVertical
 
     inc bc
     ld a, [hl+]
@@ -48,11 +50,11 @@ jr_000_04d4:
 Jump_000_04e0:
     ld [bc], a
     cp $b0
-    jr nc, jr_000_0507
+    jr nc, EmitSpriteSkipCurrent
 
     ld a, [hl]
     cp $ff
-    jr z, jr_000_0507
+    jr z, EmitSpriteSkipCurrent
 
     inc bc
     ld a, [hl+]
@@ -65,14 +67,18 @@ Jump_000_04e0:
     inc a
     ldh [hOamCount], a
     cp $28
-    jr z, jr_000_04ff
+    jr z, EmitSpriteDone
 
+; Advance the sprite-part counter after drawing or skipping.
+EmitSpriteAdvancePart:
 jr_000_04fa:
     ldh a, [hSpriteLeft]
     dec a
-    jr nz, jr_000_04d4
+    jr nz, EmitSpriteNextPart
 
 Call_000_04ff:
+; Restore registers and return from sprite emission.
+EmitSpriteDone:
 jr_000_04ff:
     pop de
 
@@ -83,17 +89,21 @@ Call_000_0501:
     ret
 
 
+; Skip the remainder of a part outside the vertical display range.
+EmitSpriteSkipVertical:
 jr_000_0502:
     inc hl
     inc hl
     inc hl
 
 Jump_000_0505:
-    jr jr_000_04fa
+    jr EmitSpriteAdvancePart
 
 Jump_000_0507:
+; Skip the current part after a horizontal or tile check.
+EmitSpriteSkipCurrent:
 jr_000_0507:
     inc hl
     inc hl
     dec bc
-    jr jr_000_04fa
+    jr EmitSpriteAdvancePart

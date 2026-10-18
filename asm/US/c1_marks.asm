@@ -28,6 +28,9 @@ DoC1Marks:
 Call_001_423a:
     call ReadC1Room
 
+; Read the next room mark, skip flagged records, and draw marks whose hidden result is clear.
+C1MarkRecordLoop:
+
 jr_001_423d:
     ld a, [wRoomDataPtr]
     ld l, a
@@ -38,12 +41,12 @@ jr_001_423d:
     ret z
 
     bit 7, a
-    jr nz, jr_001_4269
+    jr nz, C1MarkNextRecord
 
     call HideC1Mark
     ld a, [wStateResult]
     and $01
-    jr nz, jr_001_4269
+    jr nz, C1MarkNextRecord
 
     ld a, [wRoomDataPtr]
     ld l, a
@@ -53,6 +56,9 @@ jr_001_423d:
     call C1MarkPos
     ld hl, C1MarkTile
     call QueueTileRect
+
+; Advance the mark record pointer by three bytes and continue scanning.
+C1MarkNextRecord:
 
 jr_001_4269:
     ld a, [wRoomDataPtr]
@@ -66,7 +72,7 @@ jr_001_4269:
     ld [wRoomDataPtr], a
     ld a, b
     ld [wRoomDataPtr+1], a
-    jr jr_001_423d
+    jr C1MarkRecordLoop
 
 ; Test a record condition at HL; result bit 0 means the mark is hidden.
 HideC1Mark:
@@ -91,6 +97,9 @@ Call_001_4285:
     ldh [hChangePos+1], a
     ld a, d
 
+; Match the conditional mark ID against the first byte of each two-byte test row.
+C1MarkTestLoop:
+
 jr_001_4295:
     ld bc, C1MarkTests
     ldh a, [hChangePos]
@@ -101,13 +110,13 @@ jr_001_4295:
     ld a, [hl]
     ld [wC1MarkTest], a
     cp e
-    jr nz, jr_001_42c4
+    jr nz, C1MarkNextTest
 
     ld d, a
     ldh a, [hChangePos]
     cp $04
     ld a, d
-    jr nc, jr_001_42bf
+    jr nc, C1MarkCheckSpecialId
 
     ld a, [wC1MarkTest]
     call ReadStateBit
@@ -117,11 +126,17 @@ jr_001_4295:
 
     jp ClearResult
 
+; Use the matched special mark ID for the flag-$bb visibility check.
+C1MarkCheckSpecialId:
+
 
 jr_001_42bf:
     ld a, e
     call HideC1MarkBB
     ret
+
+; Advance the HRAM test-row offset by two and try the next mark ID.
+C1MarkNextTest:
 
 
 jr_001_42c4:
@@ -129,7 +144,7 @@ jr_001_42c4:
     inc a
     inc a
     ldh [hChangePos], a
-    jr jr_001_4295
+    jr C1MarkTestLoop
 
 C1MarkTests:
     db $08, $6f
@@ -148,28 +163,28 @@ HideC1MarkId:
 
 Call_001_42e0:
     cp $24
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $25
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $26
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $27
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $29
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $2a
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $2b
-    jr z, jr_001_4300
+    jr z, HideC1MarkBB
 
     cp $2c
-    jr nz, jr_001_4324
+    jr nz, C1MarkNotHidden
 
 ; Use input bit 3 to choose whether object flag $bb hides the mark.
 HideC1MarkBB:
@@ -177,16 +192,19 @@ HideC1MarkBB:
 Call_001_4300:
 jr_001_4300:
     and $08
-    jr nz, jr_001_4314
+    jr nz, C1MarkInvertBB
 
     ld a, $bb
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_4324
+    jr z, C1MarkNotHidden
 
     call SetResult
     ret
+
+; With input bit 3 set, hide the mark when object flag $bb is clear.
+C1MarkInvertBB:
 
 
 jr_001_4314:
@@ -194,10 +212,13 @@ jr_001_4314:
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_001_4324
+    jr nz, C1MarkNotHidden
 
     call SetResult
     ret
+
+; Clear the hidden-mark result and return.
+C1MarkNotHidden:
 
 
 jr_001_4324:

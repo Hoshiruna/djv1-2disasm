@@ -7,7 +7,7 @@ Call_000_154e:
 Jump_000_154e:
     ld a, [wTextMode]
     and $02
-    jr nz, jr_000_1573
+    jr nz, TextSpriteLine
 
     ld a, [wTextRow]
     inc a
@@ -16,13 +16,15 @@ Jump_000_154e:
     ld b, a
     ld a, [wTextHeight]
     cp b
-    jr nz, jr_000_156e
+    jr nz, TextLineResetColumn
 
     call ScrollTextBuffer
     ld a, [wTextRow]
     dec a
     ld [wTextRow], a
 
+; Reset the text column after advancing or scrolling a row.
+TextLineResetColumn:
 jr_000_156e:
     xor a
     ld [wTextCol], a
@@ -63,20 +65,24 @@ Call_000_158e:
     ld bc, wTextBuf+18
     ld d, $7e
 
+; Copy the next tile from the following row.
+TextScrollCopyNextTile:
 jr_000_1596:
     ld a, [bc]
     inc bc
     ld [hl+], a
     dec d
-    jr nz, jr_000_1596
+    jr nz, TextScrollCopyNextTile
 
     ld d, $12
     ld a, $7f
 
+; Fill the final text-buffer row with blank tiles.
+TextScrollBlankLastRow:
 jr_000_15a0:
     ld [hl+], a
     dec d
-    jr nz, jr_000_15a0
+    jr nz, TextScrollBlankLastRow
 
     call SubmitTextBuffer
     call SubmitMapQueue

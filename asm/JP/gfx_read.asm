@@ -6,16 +6,18 @@ Call_000_050c:
     ld a, [hl]
     and $ef
     cp $0c
-    jr z, jr_000_051b
+    jr z, GfxReadAccepted
 
     cp $0d
-    jr z, jr_000_051b
+    jr z, GfxReadAccepted
 
     and $ec
 
 Jump_000_0519:
-    jr nz, jr_000_0523
+    jr nz, GfxInvalidFormatLoop
 
+; Preserve registers and decode an accepted graphics format.
+GfxReadAccepted:
 jr_000_051b:
     push bc
     push de
@@ -25,8 +27,10 @@ jr_000_051b:
     ret
 
 
+; Remain in the invalid-format branch.
+GfxInvalidFormatLoop:
 jr_000_0523:
-    jr jr_000_0523
+    jr GfxInvalidFormatLoop
 
 ; Copy eight bytes through the original call-and-fall-through cascade.
 CopyGfx8:
@@ -71,11 +75,11 @@ Call_000_053e:
     or $80
     ld b, a
     bit 0, e
-    jr z, jr_000_054d
+    jr z, GfxReadSelectDecoder
 
     ld a, b
     cp $88
-    jr nc, jr_000_054d
+    jr nc, GfxReadSelectDecoder
 
 Jump_000_054a:
     or $10
@@ -83,19 +87,21 @@ Jump_000_054a:
 Call_000_054c:
     ld b, a
 
+; Select LZ, planar RLE, or raw tile copying.
+GfxReadSelectDecoder:
 jr_000_054d:
     ld a, e
     and $0f
     cp $0c
 
 Jump_000_0552:
-    jr z, jr_000_0568
+    jr z, DecodeLzTiles
 
     cp $0d
-    jr z, jr_000_0568
+    jr z, DecodeLzTiles
 
     bit 1, e
-    jr z, jr_000_0588
+    jr z, DecodeRleTiles
 
     ld a, [hl+]
     ld d, a
@@ -108,6 +114,6 @@ jr_000_055e:
     call CopyGfx8
     call CopyGfx8
     dec d
-    jr nz, jr_000_055e
+    jr nz, CopyGfxRun
 
     ret

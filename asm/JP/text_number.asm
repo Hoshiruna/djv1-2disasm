@@ -6,12 +6,14 @@ DrawTextDigit:
 Call_000_136b:
     ld [wTextChar], a
     cp $00
-    jr nz, jr_000_1378
+    jr nz, TextDigitEmit
 
     ld a, [wTextNumShown]
     cp $00
     ret z
 
+; Emit a non-leading-zero digit glyph.
+TextDigitEmit:
 jr_000_1378:
     ld a, [wTextChar]
 
@@ -52,15 +54,19 @@ DivTextDigit:
 Call_000_13a7:
     ld d, $00
 
+; Subtract the decimal place value while possible.
+TextDivideSubtract:
 jr_000_13a9:
     ld a, e
     sub b
-    jr c, jr_000_13b1
+    jr c, TextDivideDone
 
     inc d
     ld e, a
-    jr jr_000_13a9
+    jr TextDivideSubtract
 
+; Return the quotient after subtraction would underflow.
+TextDivideDone:
 jr_000_13b1:
     ld a, d
     ret

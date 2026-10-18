@@ -45,6 +45,9 @@ Call_001_655c:
 
     ld bc, $0000
 
+; Read the next room-state bit and add its weight to the scene variant when set.
+C1SceneStateLoop:
+
 jr_001_6578:
     ld a, [wRoomDataPtr]
     ld l, a
@@ -58,7 +61,7 @@ jr_001_6578:
     pop bc
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_659d
+    jr z, C1SceneNextState
 
     ld a, [wSceneVariant]
     ld d, a
@@ -68,6 +71,9 @@ jr_001_6578:
     or d
     ld [wSceneVariant], a
 
+; Advance the three-byte room record and continue until all scene-state bits are tested.
+C1SceneNextState:
+
 jr_001_659d:
     call NextC1State
     inc c
@@ -75,6 +81,6 @@ jr_001_659d:
     ld l, a
     ld a, c
     cp l
-    jr c, jr_001_6578
+    jr c, C1SceneStateLoop
 
     ret

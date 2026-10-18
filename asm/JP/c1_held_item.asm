@@ -7,10 +7,12 @@ TestHeldArg:
     call ReadArg
     ld hl, wC1HeldItem
     cp [hl]
-    jr nz, jr_000_2ccd
+    jr nz, C1HeldArgReturn
 
     call SetResult
 
+; Return after comparing the script argument with the held-item byte.
+C1HeldArgReturn:
 jr_000_2ccd:
     ret
 
@@ -21,12 +23,14 @@ HoldItem:
     call ClearResult
     ld a, [wC1HeldItem]
     cp $00
-    jr nz, jr_000_2ce1
+    jr nz, C1HoldItemReturn
 
     ld a, [wItemId]
     ld [wC1HeldItem], a
     call SetResult
 
+; Return after checking or filling the held-item byte.
+C1HoldItemReturn:
 jr_000_2ce1:
     ret
 
@@ -37,12 +41,14 @@ ClearHeldItem:
     call ClearResult
     ld a, [wC1HeldItem]
     cp $00
-    jr z, jr_000_2cf3
+    jr z, C1ClearHeldReturn
 
     xor a
     ld [wC1HeldItem], a
     call SetResult
 
+; Return after checking or clearing the held-item byte.
+C1ClearHeldReturn:
 jr_000_2cf3:
     ret
 

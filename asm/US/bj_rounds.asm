@@ -9,6 +9,8 @@ Call_029_6986:
     ld a, $0a
     ld [wBJBet], a
 
+; Reset the blackjack deck before checking the next round.
+BJRoundResetDeck:
 jr_029_698f:
     call ResetBJDeck
 
@@ -18,7 +20,7 @@ BJRoundCheck:
 Jump_029_6992:
     ld a, [wChips]
     cp $00
-    jr nz, jr_029_69a6
+    jr nz, BJRoundCheckDeck
 
     ld a, $0f
     call ShowBJText
@@ -27,11 +29,13 @@ Jump_029_6992:
     jp BJRoundExit
 
 
+; Set card bias and check whether the deck has enough cards.
+BJRoundCheckDeck:
 jr_029_69a6:
     call SetBJBias
     ld a, [wBJLeft]
     cp $10
-    jr nc, jr_029_69c4
+    jr nc, BJRoundPlayHand
 
     ld a, $0d
     call ShowBJText
@@ -40,8 +44,10 @@ jr_029_69a6:
     ld a, $8c
     call WaitTicks
     call ShowBJPause
-    jr jr_029_698f
+    jr BJRoundResetDeck
 
+; Prepare and play the next blackjack hand.
+BJRoundPlayHand:
 jr_029_69c4:
     call ShowBJChips
     call ClearBJHands
@@ -77,12 +83,14 @@ jr_029_69c4:
     call SubmitOam
     ld a, [wBJChoice]
     cp $00
-    jr nz, jr_029_6a23
+    jr nz, BJRoundFinishPrompt
 
     call LoadBJTable
     jp BJRoundCheck
 
 
+; Finish the replay prompt and return from the round loop.
+BJRoundFinishPrompt:
 jr_029_6a23:
     call SubmitOam
     call ShowBJPause

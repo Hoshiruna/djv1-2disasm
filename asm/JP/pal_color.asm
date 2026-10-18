@@ -7,9 +7,9 @@ Call_001_4ac3:
     cp c
     ret z
 
-    jr c, jr_001_4acb
+    jr c, StepColorIncrease
 
-    jr jr_001_4ad8
+    jr DarkColor
 
 ; Set C to 31 and enter the original four-increment path.
 LightColor:
@@ -17,6 +17,8 @@ LightColor:
 Call_001_4ac9:
     ld c, $1f
 
+; Increase a color component toward its target by up to four.
+StepColorIncrease:
 jr_001_4acb:
     cp c
     ret z

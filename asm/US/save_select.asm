@@ -34,7 +34,7 @@ jr_002_74c3:
     jp nz, NextSaveSlot
 
     bit 6, a
-    jr nz, jr_002_754b
+    jr nz, PrevSaveSlot
 
     ld a, [wSaveCodeStage]
     rst RST_00
@@ -50,53 +50,53 @@ SaveCode0:
     ld a, [wJoyHeld]
     and $12
     cp $12
-    jr nz, jr_002_74c3
+    jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
     inc a
     ld [wSaveCodeStage], a
-    jr jr_002_74c3
+    jr ReadSaveSelect
 
 ; Reject held mask $cd and advance on mask $22.
 SaveCode1:
 
     ld a, [wJoyHeld]
     and $cd
-    jr nz, jr_002_74bf
+    jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
     and $22
     cp $22
-    jr nz, jr_002_74c3
+    jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
     inc a
     ld [wSaveCodeStage], a
-    jr jr_002_74c3
+    jr ReadSaveSelect
 
 ; Reject held mask $5d and advance on mask $82.
 SaveCode2:
 
     ld a, [wJoyHeld]
     and $5d
-    jr nz, jr_002_74bf
+    jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
     and $82
     cp $82
-    jr nz, jr_002_74c3
+    jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
     inc a
     ld [wSaveCodeStage], a
-    jr jr_002_74c3
+    jr ReadSaveSelect
 
 ; Reject held mask $3d and enter the audio test on mask $42.
 SaveCode3:
 
     ld a, [wJoyHeld]
     and $3d
-    jr nz, jr_002_74bf
+    jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
     and $42

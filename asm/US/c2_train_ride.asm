@@ -18,21 +18,23 @@ C2SchedPhase0E:
     ld hl, TrainPlatforms
     add hl, bc
     cp [hl]
-    jr z, jr_003_65d2
+    jr z, CloseTrainDoors
 
     ld hl, TrainCarA
     add hl, bc
     cp [hl]
-    jr z, jr_003_656a
+    jr z, TrainDepartInCar
 
     ld hl, TrainCarB
     add hl, bc
     cp [hl]
-    jr z, jr_003_656a
+    jr z, TrainDepartInCar
 
     ret
 
 
+; Check the passenger clearance and departure conditions.
+TrainDepartInCar:
 jr_003_656a:
     ld hl, TrainPassFlags
     add hl, bc
@@ -49,14 +51,14 @@ jr_003_656a:
     ld [wTrainName], a
     ld a, [hl]
     cp CityNY
-    jr c, jr_003_65c7
+    jr c, TrainDepartWhistle
 
     push bc
     call TestEscapePlan
     pop bc
     ld a, [wC2EscapeReady]
     cp $01
-    jr z, jr_003_65c7
+    jr z, TrainDepartWhistle
 
     call TrainWhistle
     ld a, $e1
@@ -81,6 +83,8 @@ jr_003_656a:
     ret
 
 
+; Announce a permitted departure.
+TrainDepartWhistle:
 jr_003_65c7:
     call TrainWhistle
     ret
@@ -95,6 +99,9 @@ Call_003_65cb:
     ld a, $32
     call ShowMsg1
     pop bc
+
+; Update train visibility, clear the door states, and announce closure.
+CloseTrainDoors:
 
 jr_003_65d2:
     call ResetObjScroll
@@ -186,19 +193,22 @@ C2SchedPhase0F:
     ld hl, TrainPlatforms
     add hl, bc
     cp [hl]
-    jr z, jr_003_6670
+    jr z, TrainLeavesView
 
     ld hl, TrainCarA
     add hl, bc
     cp [hl]
-    jr z, jr_003_669d
+    jr z, TrainRideCar
 
     ld hl, TrainCarB
     add hl, bc
     cp [hl]
-    jr z, jr_003_669d
+    jr z, TrainRideCar
 
     ret
+
+; Show the train departing while Ace remains on the platform.
+TrainLeavesView:
 
 
 jr_003_6670:
@@ -220,6 +230,9 @@ jr_003_6670:
     dec a
     ld [wSceneId], a
     ret
+
+; Run the passenger journey, enter the destination, and set the completed ride flag.
+TrainRideCar:
 
 
 jr_003_669d:
@@ -249,7 +262,7 @@ jr_003_669d:
     add hl, bc
     ld a, [hl]
     call EnterRoom
-    ld a, $31
+    ld a, C2TrainTaken
     call SetObjFlag
     call RoomCueCall
     pop bc

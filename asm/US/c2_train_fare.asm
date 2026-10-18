@@ -6,26 +6,30 @@ PickC2SchedCost:
 
     ld de, $0000
 
+; Scan passenger room IDs for the current room.
+TrainFareFindRoom:
 jr_003_6823:
     ld a, [wRoomId]
     ld hl, TrainCarA
     add hl, de
     cp [hl]
-    jr z, jr_003_683b
+    jr z, TrainFareStore
 
     ld hl, TrainCarB
     add hl, de
     cp [hl]
-    jr z, jr_003_683b
+    jr z, TrainFareStore
 
     inc e
     ld a, TrainCount
     cp e
-    jr nz, jr_003_6823
+    jr nz, TrainFareFindRoom
 
     ret
 
 
+; Store the selected destination name and fare.
+TrainFareStore:
 jr_003_683b:
     sla e
     sla e

@@ -5,12 +5,14 @@ PickRoomTarget:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_381b
+    jr nz, PickRoomTargetCase2
 
     call C1PickTarget
     ret
 
 
+; Switch to bank three for the Case II room-target hit test.
+PickRoomTargetCase2:
 jr_000_381b:
     push af
     ld a, $03

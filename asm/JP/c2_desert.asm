@@ -7,18 +7,22 @@ MoveC2Grid:
     ld a, [wRoomId]
     ld hl, DesertRooms
 
+; Scan the desert-room grid for the current room.
+DesertFindCurrentRoom:
 jr_003_531d:
     cp [hl]
-    jr z, jr_003_5326
+    jr z, DesertApplyStep
 
     inc hl
     inc e
     dec c
-    jr nz, jr_003_531d
+    jr nz, DesertFindCurrentRoom
 
     ret
 
 
+; Apply the selected direction to the desert-room index.
+DesertApplyStep:
 jr_003_5326:
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -47,23 +51,23 @@ jr_003_5326:
 TryDesertCash:
     xor a
     call ReadItemFlag
-    jr z, jr_003_538b
+    jr z, DesertCashReturn
 
     ld a, [wChips]
     cp $00
-    jr nz, jr_003_538b
+    jr nz, DesertCashReturn
 
     ld a, [wC2Cash]
     sub $05
     ld a, [wC2Cash+1]
     sbc $00
-    jr nc, jr_003_538b
+    jr nc, DesertCashReturn
 
     call NextRandom
     ldh a, [hRandByte]
     and $07
     cp $06
-    jr c, jr_003_538b
+    jr c, DesertCashReturn
 
     ld a, [wC2Cash]
     add $0a
@@ -77,6 +81,8 @@ TryDesertCash:
     ld [wOpByte], a
     call RefreshListMode
 
+; Return after checking the desert cash event.
+DesertCashReturn:
 jr_003_538b:
     ret
 

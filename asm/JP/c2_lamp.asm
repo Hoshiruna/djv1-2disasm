@@ -10,14 +10,17 @@ Call_003_591b:
 
     ld a, [wC2LampTick]
     inc a
-    cp $1d
-    jr z, jr_003_5931
+    cp LampDimStep
+    jr z, DimC2Lamp
 
-    cp $3b
-    jr nc, jr_003_595d
+    cp LampEndStep
+    jr nc, ExpireC2Lamp
 
     ld [wC2LampTick], a
     ret
+
+; At the original dimming step, update the timer and use the room palette lookup.
+DimC2Lamp:
 
 
 jr_003_5931:
@@ -25,7 +28,7 @@ jr_003_5931:
     call FindC2TimedPal
     ld a, [wStateResult]
     and $01
-    jr nz, jr_003_5953
+    jr nz, ShowLampWeak
 
     call ResetObjScroll
     ld a, [wC2TimedPal]
@@ -35,25 +38,31 @@ jr_003_5931:
     call PickC2Scene
     call ReloadScene
 
+; Show the weak-light text and set the original weak-cell flag.
+ShowLampWeak:
+
 jr_003_5953:
     ld a, $86
     call ShowMsg1
-    ld a, $a8
+    ld a, C2LampWeak
     jp SetObjFlag
+
+; Retain the original room-dependent lamp expiry and death branch.
+ExpireC2Lamp:
 
 
 jr_003_595d:
     call FindC2TimedPal
     ld a, [wStateResult]
     and $01
-    jr nz, jr_003_59bb
+    jr nz, LampExpiryText
 
     ld a, [wRoomId]
     cp $38
-    jr z, jr_003_59bb
+    jr z, LampExpiryText
 
     cp $3a
-    jr z, jr_003_59bb
+    jr z, LampExpiryText
 
     call ResetObjScroll
     ld a, C2LampFlag
@@ -77,24 +86,30 @@ jr_003_595d:
     ld a, $3b
     call ShowMsg3
     call ResumeTextUI
-    call ClearC2PalFlags
+    call ClearLampFlags
     ld a, [wC2EventBits]
     or EvtLamp
     ld [wC2EventBits], a
     jp PlayExitEffect
+
+; Show the original lamp expiry text and fall through to flag cleanup.
+LampExpiryText:
 
 
 jr_003_59bb:
     ld a, $88
     call ShowMsg1
 
+; Clear the original flags 76, lamp-on and cell-installed in order.
+ClearLampFlags:
+
 ; Clear object flags $76, $4d and $4e in order.
 ClearC2PalFlags:
 
 Call_003_59c0:
-    ld a, $76
+    ld a, C2LampReady
     call ClearObjFlag
     ld a, C2LampFlag
     call ClearObjFlag
-    ld a, $4e
+    ld a, C2LampHasCell
     jp ClearObjFlag

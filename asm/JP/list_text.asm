@@ -6,7 +6,7 @@ PickListName:
 Call_001_6438:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_646c
+    jr nz, C2ListNameResolve
 
     ld bc, wListType
     ldh a, [hItemSlot]
@@ -21,7 +21,7 @@ Call_001_6438:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_001_6465
+    jr z, C1ListNameStore
 
     push af
     ld bc, wListValue
@@ -35,12 +35,16 @@ Call_001_6438:
     pop af
     add b
 
+; Store the Case I base-plus-value name and apply its type-three remapping.
+C1ListNameStore:
 jr_001_6465:
     ld [wListName], a
     call MapC1Name
     ret
 
 
+; Resolve the Case II list name from its type base and value.
+C2ListNameResolve:
 jr_001_646c:
     ld bc, wListType
     ldh a, [hItemSlot]
@@ -55,7 +59,7 @@ jr_001_646c:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_001_6492
+    jr z, C2ListNameStore
 
     push af
     ld bc, wListValue
@@ -69,6 +73,8 @@ jr_001_646c:
     pop af
     add b
 
+; Store the resolved Case II list name.
+C2ListNameStore:
 jr_001_6492:
     ld [wListName], a
     ret
@@ -90,83 +96,85 @@ Call_001_6496:
     ld c, $00
     ld a, [wListName]
     cp $3d
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $3e
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $3f
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $40
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $41
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $42
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $43
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $49
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $4a
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $4f
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $50
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $51
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $52
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $53
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $54
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $55
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $56
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $57
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $58
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $59
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $5a
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     inc c
     cp $5b
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     cp $5c
-    jr z, jr_001_650b
+    jr z, C1ListNameMapFound
 
     ret
 
 
+; Read one of seven remapped Case I category names.
+C1ListNameMapFound:
 jr_001_650b:
     ld b, $00
     ld hl, C1NameMap
@@ -194,7 +202,7 @@ Call_001_651d:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr nz, jr_001_6540
+    jr nz, ReadListRowDecode
 
     ld a, [wStateResult]
     or $02
@@ -202,6 +210,8 @@ Call_001_651d:
     ret
 
 
+; Decode a nonterminating list row without storing its packed value.
+ReadListRowDecode:
 jr_001_6540:
     call DecodeList
     ret
@@ -224,7 +234,7 @@ jr_001_6544:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr nz, jr_001_6567
+    jr nz, LoadListRowStore
 
     ld a, [wStateResult]
     or $02
@@ -232,6 +242,8 @@ jr_001_6544:
     ret
 
 
+; Store and decode a nonterminating selected list row.
+LoadListRowStore:
 jr_001_6567:
     call SetListItem
     ret

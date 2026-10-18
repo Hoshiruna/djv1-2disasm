@@ -13,7 +13,7 @@ Mode2Text:
 
 Call_000_1117:
     call SetTextMode2
-    jr jr_000_1122
+    jr ReadTextLoop
 
 ; Select text mode one, initialize the regional text buffer, and enter the loop.
 StartTextMsg:
@@ -30,7 +30,7 @@ jr_000_1122:
     call ReadTextByte
     ld [wTextChar], a
     cp $5f
-    jr z, jr_000_118c
+    jr z, WaitTextRelease
 
     cp $1f
     jr z, jr_000_11a3
@@ -38,4 +38,4 @@ jr_000_1122:
     call DispatchTextCtrl
 
 Call_000_1133:
-    jr jr_000_1122
+    jr ReadTextLoop

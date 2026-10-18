@@ -18,11 +18,13 @@ SelectListRow:
     call LoadListRow
     ld a, [wStateResult]
     and $02
-    jr z, jr_001_5d5a
+    jr z, SelectListRowCopy
 
     ret
 
 
+; Copy the valid list row into the selected operation slot and draw its mark.
+SelectListRowCopy:
 jr_001_5d5a:
     ld bc, wListType
     ldh a, [hItemSlot]

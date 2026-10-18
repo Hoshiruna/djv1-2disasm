@@ -15,19 +15,25 @@ AudioTest:
     xor a
     ld [wTestIndex], a
 
+; Convert the current test index to one-based decimal digits.
+AudioTestDrawSelection:
 jr_002_6409:
     ld c, $00
     ld a, [wTestIndex]
     inc a
 
+; Subtract ten until the displayed digit is below ten.
+AudioTestDivideByTen:
 jr_002_640f:
     cp $0a
-    jr c, jr_002_6418
+    jr c, AudioTestQueueDigits
 
     sub $0a
     inc c
-    jr jr_002_640f
+    jr AudioTestDivideByTen
 
+; Queue both decimal digit tiles and wait before polling.
+AudioTestQueueDigits:
 jr_002_6418:
     ld [wTestDigit], a
     ld a, c
@@ -64,35 +70,41 @@ jr_002_6418:
     ld a, $10
     call WaitTicks
 
+; Poll for direction, play, or stop input.
+AudioTestPollInput:
 jr_002_6455:
     call PollJoy
     ld a, [wJoyPress]
     bit 6, a
-    jr z, jr_002_646c
+    jr z, AudioTestMoveDown
 
     ld a, [wTestIndex]
     cp $00
-    jr z, jr_002_6455
+    jr z, AudioTestPollInput
 
     dec a
     ld [wTestIndex], a
-    jr jr_002_6409
+    jr AudioTestDrawSelection
 
+; Increase the test index unless it is already at the last entry.
+AudioTestMoveDown:
 jr_002_646c:
     bit 7, a
-    jr z, jr_002_647d
+    jr z, AudioTestCheckPlay
 
     ld a, [wTestIndex]
     cp $11
-    jr z, jr_002_6455
+    jr z, AudioTestPollInput
 
     inc a
     ld [wTestIndex], a
-    jr jr_002_6409
+    jr AudioTestDrawSelection
 
+; Check the play button and read the selected audio pair.
+AudioTestCheckPlay:
 jr_002_647d:
     bit 0, a
-    jr z, jr_002_649b
+    jr z, AudioTestCheckStop
 
     ld a, [wTestIndex]
     ld l, a
@@ -104,17 +116,21 @@ jr_002_647d:
     ld [wCaseId], a
     ld a, [hl]
 
+; Send the selected or zero audio request and resume polling.
+AudioTestPlayRequest:
 jr_002_6491:
     call PlayAudio
     ld a, $10
     call WaitTicks
-    jr jr_002_6455
+    jr AudioTestPollInput
 
+; Check the stop button and send request zero when pressed.
+AudioTestCheckStop:
 jr_002_649b:
     bit 1, a
-    jr z, jr_002_6455
+    jr z, AudioTestPollInput
 
     xor a
-    jr jr_002_6491
+    jr AudioTestPlayRequest
 
     ret

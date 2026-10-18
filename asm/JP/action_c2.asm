@@ -6,21 +6,23 @@ RunC2Action:
 Call_000_3a79:
     ld a, [wCaseId]
     cp $00
-    jr z, jr_000_3a94
+    jr z, C2ActionLookup
 
     ld a, [wSelAction]
     cp $04
-    jr nz, jr_000_3a94
+    jr nz, C2ActionLookup
 
     ld a, [wListMax]
     cp $0b
-    jr c, jr_000_3a94
+    jr c, C2ActionLookup
 
     ld a, $93
     call ShowMsg1
     ret
 
 
+; Resolve the Case II action code after the regional capacity gate.
+C2ActionLookup:
 jr_000_3a94:
     push af
     ld a, $03
@@ -91,12 +93,14 @@ Jump_000_3aea:
 jr_000_3aea:
     call ReadArg
     cp $ff
-    jr nz, jr_000_3af7
+    jr nz, C2ActionDispatchOpcode
 
     call ClearTextUI
     jp PopRomBank
 
 
+; Dispatch a nonterminal Case II opcode and continue the script loop.
+C2ActionDispatchOpcode:
 jr_000_3af7:
     call DispatchC2Op
     jr jr_000_3aea

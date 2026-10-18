@@ -9,7 +9,7 @@ Call_029_6e91:
     jp z, PickBJTen
 
     cp $0b
-    jr z, jr_029_6f0f
+    jr z, BJScanAceGroup
 
 ; Scan lower rank groups for an unused card, using the original group offsets and returning $ff when exhausted.
 ScanBJRanks:
@@ -20,12 +20,14 @@ jr_029_6e9d:
     dec a
     ld [wBJTarget], a
     bit 7, a
-    jr z, jr_029_6eab
+    jr z, BJScanRankGroup
 
     ld a, $ff
     ret
 
 
+; Select the used-card byte and half for the current rank.
+BJScanRankGroup:
 jr_029_6eab:
     srl a
     ldh [hBJByte], a
@@ -48,11 +50,11 @@ jr_029_6eab:
     pop af
     and [hl]
     cp [hl]
-    jr z, jr_029_6e9d
+    jr z, ScanBJRanks
 
     ld a, [wBJTarget]
     and $01
-    jr z, jr_029_6eea
+    jr z, BJScanRankBase
 
     ldh a, [hBJByte]
     ld l, a
@@ -66,6 +68,8 @@ jr_029_6eab:
     add a
     ld [wBJScan], a
 
+; Load the first card ID and used bits for this rank.
+BJScanRankBase:
 jr_029_6eea:
     ld a, [wBJTarget]
     ldh [hBJRank], a
@@ -76,6 +80,8 @@ jr_029_6eea:
     ld a, [hl]
     ld [wBJScanId], a
 
+; Advance the card ID until an unused bit is found.
+BJScanRankBit:
 jr_029_6efa:
     ld a, [wBJScanId]
     inc a
@@ -83,12 +89,14 @@ jr_029_6efa:
     ld a, [wBJScan]
     sla a
     ld [wBJScan], a
-    jr c, jr_029_6efa
+    jr c, BJScanRankBit
 
     ld a, [wBJScanId]
     ret
 
 
+; Check the ace group before falling back to ten-point cards.
+BJScanAceGroup:
 jr_029_6f0f:
     xor a
     ld [wBJScanId], a
@@ -96,7 +104,7 @@ jr_029_6f0f:
     ld [wBJScan], a
     and $f0
     cp $f0
-    jr nz, jr_029_6efa
+    jr nz, BJScanRankBit
 
     ld a, [wBJTarget]
     dec a
@@ -112,6 +120,8 @@ Jump_029_6f26:
     ldh [hBJByte], a
     ldh [hBJBit], a
 
+; Test the next ten-point card ID against the used-card mask.
+BJScanTenCard:
 jr_029_6f31:
     ld a, [wBJScan]
     inc a
@@ -130,13 +140,13 @@ jr_029_6f31:
     add hl, bc
     pop af
     and [hl]
-    jr z, jr_029_6f6f
+    jr z, BJScanTenFound
 
     ldh a, [hBJBit]
     inc a
     ldh [hBJBit], a
     cp $08
-    jr nz, jr_029_6f31
+    jr nz, BJScanTenCard
 
     xor a
     ldh [hBJBit], a
@@ -144,7 +154,7 @@ jr_029_6f31:
     inc a
     ldh [hBJByte], a
     cp $07
-    jr nz, jr_029_6f31
+    jr nz, BJScanTenCard
 
     ld a, [wBJTarget]
     dec a
@@ -152,6 +162,8 @@ jr_029_6f31:
     jp ScanBJRanks
 
 
+; Return the unused ten-point card ID.
+BJScanTenFound:
 jr_029_6f6f:
     ld a, [wBJScan]
     ret

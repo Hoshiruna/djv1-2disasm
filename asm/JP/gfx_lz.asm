@@ -35,7 +35,7 @@ jr_000_0694:
     ld a, b
     ldh [hLzBitsHi], a
     bit 0, b
-    jr nz, jr_000_06b0
+    jr nz, LzCheckTokenBit
 
     ld a, [hl+]
     ldh [hLzBitsLo], a
@@ -43,17 +43,21 @@ jr_000_0694:
     ld a, $ff
     ldh [hLzBitsHi], a
 
+; Use the low flag bit to choose a literal or a back-reference.
+LzCheckTokenBit:
 jr_000_06b0:
     bit 0, c
-    jr z, jr_000_06bb
+    jr z, LzReadReference
 
     ld a, [hl+]
     call PutLzByte
-    jr nz, jr_000_0694
+    jr nz, LzNextToken
 
     ret
 
 
+; Read the two-byte reference token and save the following source position.
+LzReadReference:
 jr_000_06bb:
     ld a, [hl+]
     ld c, a
@@ -77,25 +81,31 @@ Jump_000_06c2:
     ld h, a
     ld a, d
     cp h
-    jr z, jr_000_06da
+    jr z, LzCheckReferenceLow
 
-    jr nc, jr_000_06e6
+    jr nc, LzResolveReference
 
-    jr jr_000_06e0
+    jr LzWrapReference
 
+; Compare the low reference offset with the current output offset.
+LzCheckReferenceLow:
 jr_000_06da:
     ld a, e
     cp l
-    jr z, jr_000_06da
+    jr z, LzCheckReferenceLow
 
-    jr nc, jr_000_06e6
+    jr nc, LzResolveReference
 
+; Subtract 400h from the reference offset before adding the destination base.
+LzWrapReference:
 jr_000_06e0:
     push bc
     ld bc, $fc00
     add hl, bc
     pop bc
 
+; Add the output base address and derive the reference copy length.
+LzResolveReference:
 jr_000_06e6:
     push bc
     ldh a, [hLzDstLo]
@@ -112,6 +122,8 @@ jr_000_06e6:
     ld c, a
     ld b, $00
 
+; Copy the next byte from the resolved reference.
+LzCopyReferenceByte:
 jr_000_06f8:
     ld a, [hl+]
     call PutLzByte
@@ -124,7 +136,7 @@ Jump_000_06fc:
     cp b
 
 Jump_000_0700:
-    jr nz, jr_000_06f8
+    jr nz, LzCopyReferenceByte
 
     ldh a, [hLzSrcLo]
     ld l, a
@@ -158,12 +170,14 @@ Jump_000_0717:
     cp d
 
 Jump_000_071b:
-    jr nz, jr_000_0720
+    jr nz, PutLzByteDone
 
     ldh a, [hLzLenLo]
     cp e
 
 Call_000_0720:
+; Restore HL and return after testing the output byte count.
+PutLzByteDone:
 jr_000_0720:
     pop hl
     ret

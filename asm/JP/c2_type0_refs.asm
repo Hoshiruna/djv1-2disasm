@@ -185,761 +185,761 @@ jr_007_4137:
     dw C2Act0_AC
 
 C2Act0_00:
-    dw C2Sc0_00
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Tub
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_01:
-    dw C2Sc0_01
-    dw C2Sc0_A4
-    dw C2Sc0_79
-    dw C2Sc0_AE
+    dw LookColdTap
+    dw OpenColdTap
+    dw C2SceneQuestion
+    dw CloseColdTap
 
 C2Act0_02:
-    dw C2Sc0_02
-    dw C2Sc0_A5
-    dw C2Sc0_79
+    dw LookHotTap
+    dw OpenHotTap
+    dw C2SceneQuestion
 jr_007_4170:
-    dw C2Sc0_AF
+    dw CloseHotTap
 
 C2Act0_03:
 jr_007_4172:
-    dw C2Sc0_03
+    dw LookBathMirror
 jr_007_4174:
-    dw C2Sc0_79
+    dw C2SceneQuestion
 jr_007_4176:
-    dw C2Sc0_8E
-    dw C2Sc0_79
+    dw BreakBathMirror
+    dw C2SceneQuestion
 
 C2Act0_04:
-    dw C2Sc0_04
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookTowelRod
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_05:
-    dw C2Sc0_05
-    dw C2Sc0_7B
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Sink
+    dw UseSinkTarget
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_06:
-    dw C2Sc0_06
-    dw C2Sc0_79
-    dw C2Sc0_8F
-    dw C2Sc0_79
+    dw LookGrimyWindow
+    dw C2SceneQuestion
+    dw BreakGrimyGlass
+    dw C2SceneQuestion
 
 C2Act0_07:
-    dw C2Sc0_07
-    dw C2Sc0_A6
-    dw C2Sc0_79
-    dw C2Sc0_B0
+    dw LookRoomCurtain
+    dw OpenRoomCurtain
+    dw C2SceneQuestion
+    dw CloseRoomCurtain
 
 C2Act0_08:
-    dw C2Sc0_08
-    dw C2Sc0_79
-    dw C2Sc0_90
-    dw C2Sc0_79
+    dw LookRoomMirror
+    dw C2SceneQuestion
+    dw BreakRoomMirror
+    dw C2SceneQuestion
 
 C2Act0_09:
-    dw C2Sc0_09
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookC2Bed
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_0A:
-    dw C2Sc0_0A
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookRoomArt
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_0B:
-    dw C2Sc0_0B
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookHotelTable
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_0C:
-    dw C2Sc0_0C
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookLitLamp
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_0D:
-    dw C2Sc0_0D
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookTackyLamp
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_0E:
-    dw C2Sc0_0E
-    dw C2Sc0_7F
-    dw C2Sc0_7F
-    dw C2Sc0_79
+    dw LookC2LiftButton
+    dw CallVegasLift1
+    dw CallVegasLift1
+    dw C2SceneQuestion
 
 C2Act0_0F:
-    dw C2Sc0_0F
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadCasinoSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_10:
-    dw C2Sc0_10
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookShowdownArt
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_11:
-    dw C2Sc0_11
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookRedChair
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_12:
-    dw C2Sc0_12
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Chair
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_13:
-    dw C2Sc0_13
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCoffeeTable
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_14:
-    dw C2Sc0_14
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadCashierSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_15:
-    dw C2Sc0_15
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ShowChipPrice
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_16:
-    dw C2Sc0_16
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCashCounter
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_17:
-    dw C2Sc0_17
-    dw C2Sc0_79
-    dw C2Sc0_86
-    dw C2Sc0_98
+    dw LookCashierLady
+    dw C2SceneQuestion
+    dw PunchC2Cashier
+    dw TalkC2Cashier
 
 C2Act0_18:
-    dw C2Sc0_18
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBJTable
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_19:
-    dw C2Sc0_B9
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw EndC2Scene
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_1A:
-    dw C2Sc0_19
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw ReadRudyTag
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_1B:
-    dw C2Sc0_1A
-    dw C2Sc0_79
-    dw C2Sc0_87
-    dw C2Sc0_99
+    dw LookC2Rudy
+    dw C2SceneQuestion
+    dw PunchC2Dealer
+    dw AskC2Dealer
 
 C2Act0_1C:
-    dw C2Sc0_00
-    dw C2Sc0_00
-    dw C2Sc0_00
-    dw C2Sc0_00
+    dw LookC2Tub
+    dw LookC2Tub
+    dw LookC2Tub
+    dw LookC2Tub
 
 C2Act0_1D:
-    dw C2Sc0_00
-    dw C2Sc0_00
-    dw C2Sc0_00
-    dw C2Sc0_00
+    dw LookC2Tub
+    dw LookC2Tub
+    dw LookC2Tub
+    dw LookC2Tub
 
 C2Act0_1E:
-    dw C2Sc0_1B
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadCasinoAd
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_1F:
-    dw C2Sc0_1C
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookLiftPanel
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_20:
-    dw C2Sc0_1D
-    dw C2Sc0_80
-    dw C2Sc0_80
-    dw C2Sc0_79
+    dw LookLift1Btn
+    dw TravelLift1
+    dw TravelLift1
+    dw C2SceneQuestion
 
 C2Act0_21:
-    dw C2Sc0_1E
-    dw C2Sc0_81
-    dw C2Sc0_81
-    dw C2Sc0_79
+    dw LookLift2Btn
+    dw TravelLift2
+    dw TravelLift2
+    dw C2SceneQuestion
 
 C2Act0_22:
-    dw C2Sc0_1F
-    dw C2Sc0_82
-    dw C2Sc0_82
-    dw C2Sc0_79
+    dw LookLift3Btn
+    dw TravelLift3
+    dw TravelLift3
+    dw C2SceneQuestion
 
 C2Act0_23:
-    dw C2Sc0_20
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookHotelArt1
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_24:
-    dw C2Sc0_21
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookHotelArt2
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_25:
-    dw C2Sc0_22
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookPalmShade
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_26:
-    dw C2Sc0_23
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookEntryPalm
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_27:
-    dw C2Sc0_24
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadHotelAwning
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_28:
-    dw C2Sc0_25
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookCactusThorn
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_29:
-    dw C2Sc0_26
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookDesertTree
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_2A:
-    dw C2Sc0_27
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookHotRock
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_2B:
-    dw C2Sc0_28
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookAnimalSkull
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_2C:
-    dw C2Sc0_29
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookDesertGrass
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_2D:
-    dw C2Sc0_2A
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookDesertCactus
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_2E:
-    dw C2Sc0_2B
-    dw C2Sc0_79
-    dw C2Sc0_91
-    dw C2Sc0_79
+    dw LookArchWin1
+    dw C2SceneQuestion
+    dw BreakArchWin1
+    dw C2SceneQuestion
 
 C2Act0_2F:
-    dw C2Sc0_2C
-    dw C2Sc0_79
-    dw C2Sc0_92
-    dw C2Sc0_79
+    dw LookArchWin2
+    dw C2SceneQuestion
+    dw BreakArchWin2
+    dw C2SceneQuestion
 
 C2Act0_30:
-    dw C2Sc0_2D
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadVegasSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_31:
-    dw C2Sc0_2E
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookWoodBench
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_32:
-    dw C2Sc0_2F
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform6
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_33:
-    dw C2Sc0_30
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform7
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_34:
-    dw C2Sc0_31
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform8
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_35:
-    dw C2Sc0_32
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform9
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_36:
-    dw C2Sc0_33
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadBaggageSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_37:
-    dw C2Sc0_34
-    dw C2Sc0_79
-    dw C2Sc0_88
-    dw C2Sc0_9A
+    dw LookC2Seller
+    dw C2SceneQuestion
+    dw PunchC2Person
+    dw TalkC2Seller
 
 C2Act0_38:
-    dw C2Sc0_35
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ViewTrains6To9
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_39:
-    dw C2Sc0_35
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ViewTrains6To9
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_3A:
-    dw C2Sc0_36
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadClaimSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_3B:
-    dw C2Sc0_37
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookScheduleBox
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_3C:
-    dw C2Sc0_38
-    dw C2Sc0_79
-    dw C2Sc0_88
-    dw C2Sc0_9B
+    dw LookAttendant
+    dw C2SceneQuestion
+    dw PunchC2Person
+    dw TalkAttendant
 
 C2Act0_3D:
-    dw C2Sc0_39
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCeilPlatform
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_3E:
-    dw C2Sc0_3A
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Train
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_3F:
-    dw C2Sc0_3B
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookTrainSeats
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_40:
-    dw C2Sc0_3C
-    dw C2Sc0_A7
-    dw C2Sc0_79
-    dw C2Sc0_B1
+    dw LookTrainShade
+    dw TrainShadeNoOpen
+    dw C2SceneQuestion
+    dw ShadeClosedReply
 
 C2Act0_41:
-    dw C2Sc0_3D
-    dw C2Sc0_79
+    dw LookTrainWindow
+    dw C2SceneQuestion
 Jump_007_4366:
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_42:
-    dw C2Sc0_3E
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadTrainDest
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_43:
-    dw C2Sc0_3F
-    dw C2Sc0_79
-    dw C2Sc0_89
-    dw C2Sc0_9C
+    dw LookC2Conductor
+    dw C2SceneQuestion
+    dw PunchC2Conductor
+    dw TalkC2Conductor
 
 C2Act0_44:
-    dw C2Sc0_40
-    dw C2Sc0_79
-    dw C2Sc0_89
-    dw C2Sc0_9D
+    dw LookChattyWoman
+    dw C2SceneQuestion
+    dw PunchC2Conductor
+    dw TalkChattyWoman
 
 C2Act0_45:
-    dw C2Sc0_41
-    dw C2Sc0_79
-    dw C2Sc0_89
-    dw C2Sc0_9E
+    dw LookSeatMan
+    dw C2SceneQuestion
+    dw PunchC2Conductor
+    dw TalkSeatMan
 
 C2Act0_46:
-    dw C2Sc0_42
-    dw C2Sc0_79
-    dw C2Sc0_89
-    dw C2Sc0_9F
+    dw LookYoungWoman
+    dw C2SceneQuestion
+    dw PunchC2Conductor
+    dw TalkYoungWoman
 
 C2Act0_47:
-    dw C2Sc0_43
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform2
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_48:
-    dw C2Sc0_44
+    dw ReadPlatform3
 jr_007_439c:
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_49:
-    dw C2Sc0_45
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform4
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_4A:
-    dw C2Sc0_46
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadPlatform5
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_4B:
-    dw C2Sc0_47
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookOldBench
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_4C:
-    dw C2Sc0_48
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ViewTrains2To5
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_4D:
-    dw C2Sc0_48
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ViewTrains2To5
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_4E:
-    dw C2Sc0_49
-    dw C2Sc0_A8
-    dw C2Sc0_79
-    dw C2Sc0_B2
+    dw LookNewsStand
+    dw TryNewsShutter
+    dw C2SceneQuestion
+    dw NewsShutterClose
 
 C2Act0_4F:
-    dw C2Sc0_4A
-    dw C2Sc0_79
-    dw C2Sc0_8A
-    dw C2Sc0_A0
+    dw LookNewsSeller
+    dw C2SceneQuestion
+    dw DogDefendsNews
+    dw TalkNewsSeller
 
 C2Act0_50:
-    dw C2Sc0_4B
-    dw C2Sc0_79
-    dw C2Sc0_7C
-    dw C2Sc0_B6
-    dw C2Sc0_B7
-    dw C2Sc0_79
-    dw C2Sc0_8B
-    dw C2Sc0_A1
-    dw C2Sc0_79
+    dw LookNewsDog
+    dw C2SceneQuestion
+    dw UseDogTarget
+    dw SceneDropReply
+    dw PetC2Dog
+    dw C2SceneQuestion
+    dw DieFromC2Dog
+    dw TalkC2Dog
+    dw C2SceneQuestion
 
 C2Act0_51:
-    dw C2Sc0_4C
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookChiStnSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_52:
-    dw C2Sc0_4D
-    dw C2Sc0_79
-    dw C2Sc0_93
-    dw C2Sc0_79
+    dw LookChiWindow1
+    dw C2SceneQuestion
+    dw BreakChiWindow1
+    dw C2SceneQuestion
 
 C2Act0_53:
-    dw C2Sc0_4E
-    dw C2Sc0_79
-    dw C2Sc0_94
-    dw C2Sc0_79
+    dw LookChiWindow2
+    dw C2SceneQuestion
+    dw BreakChiWindow2
+    dw C2SceneQuestion
 
 C2Act0_54:
-    dw C2Sc0_4F
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCabMirror
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_55:
-    dw C2Sc0_50
-    dw C2Sc0_79
-    dw C2Sc0_8C
-    dw C2Sc0_A2
+    dw LookGabby
+    dw C2SceneQuestion
+    dw GabbyPunchReply
+    dw TalkGabby
 
 C2Act0_56:
-    dw C2Sc0_51
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCabMeter
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_57:
-    dw C2Sc0_52
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookCabPoster
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_58:
-    dw C2Sc0_53
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookVacancySign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_59:
-    dw C2Sc0_5E
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookSpiderWeb
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_5A:
 jr_007_4434:
-    dw C2Sc0_54
-    dw C2Sc0_A9
-    dw C2Sc0_79
-    dw C2Sc0_B3
+    dw LookLockMarks
+    dw C2LockedReply
+    dw C2SceneQuestion
+    dw MailClosedReply
 
 C2Act0_5B:
-    dw C2Sc0_55
-    dw C2Sc0_A9
-    dw C2Sc0_79
-    dw C2Sc0_B3
+    dw LookDentedMail
+    dw C2LockedReply
+    dw C2SceneQuestion
+    dw MailClosedReply
 
 C2Act0_5C:
-    dw C2Sc0_56
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookC2ElkHead
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_5D:
-    dw C2Sc0_57
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookOMalleyPhoto
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_5E:
-    dw C2Sc0_58
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookHomeCouch
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_5F:
-    dw C2Sc0_59
-    dw C2Sc0_AA
+    dw LookHomeCurtain
+    dw OpenHomeCurtain
     ; Pointer to $4945; split bytes retain the interior label.
     db $45
 jr_007_4461:
     db $49
-    dw C2Sc0_AB
+    dw CloseHomeCurtain
 
 C2Act0_60:
-    dw C2Sc0_5A
-    dw C2Sc0_79
-    dw C2Sc0_95
-    dw C2Sc0_79
+    dw LookJoeWindow1
+    dw C2SceneQuestion
+    dw JoeWindowNoHit
+    dw C2SceneQuestion
 
 C2Act0_61:
-    dw C2Sc0_5C
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Lamppost
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_62:
-    dw C2Sc0_5C
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookC2Lamppost
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_63:
-    dw C2Sc0_5D
-    dw C2Sc0_79
-    dw C2Sc0_79
-    dw C2Sc0_B6
-    dw C2Sc0_B8
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
-    dw C2Sc0_79
+    dw LookNailedBoards
+    dw C2SceneQuestion
+    dw C2SceneQuestion
+    dw SceneDropReply
+    dw NeedPullBoard
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
+    dw C2SceneQuestion
 
 C2Act0_64:
-    dw C2Sc0_5E
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookSpiderWeb
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_65:
-    dw C2Sc0_5F
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookDustWeb
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_66:
-    dw C2Sc0_60
-    dw C2Sc0_79
-    dw C2Sc0_79
-    dw C2Sc0_79
+    dw LookDustCounter
+    dw C2SceneQuestion
+    dw C2SceneQuestion
+    dw C2SceneQuestion
 
 C2Act0_67:
-    dw C2Sc0_61
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookFlyWeb
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_68:
-    dw C2Sc0_5B
-    dw C2Sc0_79
-    dw C2Sc0_96
-    dw C2Sc0_79
+    dw LookJoeWindow2
+    dw C2SceneQuestion
+    dw BreakJoeWindow
+    dw C2SceneQuestion
 
 C2Act0_69:
-    dw C2Sc0_62
-    dw C2Sc0_79
-    dw C2Sc0_83
-    dw C2Sc0_79
+    dw LookCleanBottle
+    dw C2SceneQuestion
+    dw HitWineBottle
+    dw C2SceneQuestion
 
 C2Act0_6A:
-    dw C2Sc0_63
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookWineCask
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_6B:
-    dw C2Sc0_64
-    dw C2Sc0_AC
-    dw C2Sc0_79
-    dw C2Sc0_B4
+    dw LookWineSpigot
+    dw OpenWineTap
+    dw C2SceneQuestion
+    dw CloseWineTap
 
 C2Act0_6C:
-    dw C2Sc0_65
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBottleRack
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_6D:
-    dw C2Sc0_66
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBareBulb
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_6E:
-    dw C2Sc0_67
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookRoulette
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_6F:
-    dw C2Sc0_68
-    dw C2Sc0_79
-    dw C2Sc0_84
-    dw C2Sc0_79
+    dw LookSplinterBoard
+    dw C2SceneQuestion
+    dw PunchLooseBoard
+    dw C2SceneQuestion
 
 C2Act0_70:
-    dw C2Sc0_69
-    dw C2Sc0_79
-    dw C2Sc0_79
-    dw C2Sc0_B6
-    dw C2Sc0_B8
-    dw C2Sc0_79
-    dw C2Sc0_85
-    dw C2Sc0_79
-    dw C2Sc0_7A
+    dw LookBoardWindow
+    dw C2SceneQuestion
+    dw C2SceneQuestion
+    dw SceneDropReply
+    dw NeedPullBoard
+    dw C2SceneQuestion
+    dw KnockLooseBoard
+    dw C2SceneQuestion
+    dw WindowBoarded
 
 C2Act0_71:
-    dw C2Sc0_6A
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookFireEscape
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_72:
-    dw C2Sc0_6B
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBoardGap
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_73:
-    dw C2Sc0_6C
-    dw C2Sc0_AD
-    dw C2Sc0_79
-    dw C2Sc0_B5
+    dw LookOpenShade
+    dw ShadeIsOpen
+    dw C2SceneQuestion
+    dw ShadeBrokenReply
 
 C2Act0_74:
-    dw C2Sc0_6D
-    dw C2Sc0_79
+    dw LookAcePoster
+    dw C2SceneQuestion
 jr_007_451c:
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_75:
-    dw C2Sc0_6E
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBoxer1
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_76:
-    dw C2Sc0_6F
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookBoxer2
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_77:
-    dw C2Sc0_70
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookStreetLamp
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_78:
-    dw C2Sc0_71
-    dw C2Sc0_79
-    dw C2Sc0_97
-    dw C2Sc0_79
+    dw LookPeepWindow
+    dw C2SceneQuestion
+    dw BreakPeepWindow
+    dw C2SceneQuestion
 
 C2Act0_79:
-    dw C2Sc0_72
-    dw C2Sc0_79
-    dw C2Sc0_7D
+    dw LookBarWindow
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
     ; Pointer to $4945; split bytes retain the interior label.
     db $45
 Call_007_4547:
@@ -947,138 +947,138 @@ Call_007_4547:
 
 C2Act0_7A:
 Jump_007_4548:
-    dw C2Sc0_73
-    dw C2Sc0_79
-    dw C2Sc0_8D
-    dw C2Sc0_A3
+    dw LookC2Hobo
+    dw C2SceneQuestion
+    dw PunchC2Hobo
+    dw TalkC2Hobo
 
 C2Act0_7B:
-    dw C2Sc0_74
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookSugarLamp
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_7C:
-    dw C2Sc0_75
-    dw C2Sc0_79
-    dw C2Sc0_7E
-    dw C2Sc0_79
+    dw LookSugarBed
+    dw C2SceneQuestion
+    dw C2SceneHitReply
+    dw C2SceneQuestion
 
 C2Act0_7D:
-    dw C2Sc0_76
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw LookSugarTable
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_7E:
-    dw C2Sc0_77
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadMorgueSign
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_7F:
-    dw C2Sc0_78
-    dw C2Sc0_79
-    dw C2Sc0_7D
-    dw C2Sc0_79
+    dw ReadMorgueBoard
+    dw C2SceneQuestion
+    dw C2SceneNoEffect
+    dw C2SceneQuestion
 
 C2Act0_80:
-    dw C2Sc0_BA
-    dw C2Sc0_F9
-    dw C2Sc0_E4
-    dw C2Sc0_102
+    dw LookMorgueDesk
+    dw MorgueDeskBlocked
+    dw SceneQuestion2
+    dw DeskCloseReply
 
 C2Act0_81:
-    dw C2Sc0_BB
+    dw LookMorgueGate
     ; Pointer to $51fb; split bytes retain the interior label.
     db $fb
 jr_007_4583:
     db $51
-    dw C2Sc0_E4
-    dw C2Sc0_103
+    dw SceneQuestion2
+    dw CloseMorgueGate
 
 C2Act0_82:
-    dw C2Sc0_BC
+    dw ReadStaffSign
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_458b:
     db $4f
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_83:
-    dw C2Sc0_BD
-    dw C2Sc0_E4
-    dw C2Sc0_F7
-    dw C2Sc0_F8
+    dw LookMorgueClerk
+    dw SceneQuestion2
+    dw PunchMorgueClerk
+    dw TalkMorgueClerk
 
 C2Act0_84:
-    dw C2Sc0_BE
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw ReadPlate1
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_85:
-    dw C2Sc0_BF
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw ReadPlate2
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_86:
-    dw C2Sc0_C0
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E5
+    dw LookMorgueBody
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw NoSceneAnswer
 
 C2Act0_87:
-    dw C2Sc0_C1
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E5
+    dw LookScarBody
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw NoSceneAnswer
 
 C2Act0_88:
-    dw C2Sc0_C2
-    dw C2Sc0_FB
-    dw C2Sc0_E4
-    dw C2Sc0_104
+    dw LookColdDrawer
+    dw OpenDrawer1
+    dw SceneQuestion2
+    dw CloseDrawer1
 
 C2Act0_89:
-    dw C2Sc0_C3
-    dw C2Sc0_FC
-    dw C2Sc0_E4
-    dw C2Sc0_105
+    dw LookMorgueRows
+    dw OpenDrawer2
+    dw SceneQuestion2
+    dw CloseDrawer2
 
 C2Act0_8A:
-    dw C2Sc0_C4
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw ReadDrawerSign
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_8B:
-    dw C2Sc0_C5
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw LookHamper
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_8C:
-    dw C2Sc0_C6
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw LookDustWeb2
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_45df:
     db $4f
 
 C2Act0_8D:
-    dw C2Sc0_C8
+    dw LookC2Rope
     dw UseC2Rope
-    dw C2Sc0_EB
-    dw C2Sc0_E4
+    dw CheckHandsHit
+    dw SceneQuestion2
 
 C2Act0_8E:
-    dw C2Sc0_C9
+    dw LookTiedHands
     dw C2HandsTied
-    dw C2Sc0_EB
+    dw CheckHandsHit
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_45ef:
@@ -1087,55 +1087,55 @@ jr_007_45ef:
 C2Act0_8F:
     dw LookNailCrate
     dw UseNailCrate
-    dw C2Sc0_EC
+    dw PunchNailCrate
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_45f7:
     db $4f
 
 C2Act0_90:
-    dw C2Sc0_CB
-    dw C2Sc0_E4
-    dw C2Sc0_F2
+    dw LookCleanHallWin
+    dw SceneQuestion2
+    dw BreakGoonsGlass
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_45ff:
     db $4f
 
 C2Act0_91:
-    dw C2Sc0_CC
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw ReadCleanPrices
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_4607:
     db $4f
 
 C2Act0_92:
-    dw C2Sc0_CD
-    dw C2Sc0_FD
-    dw C2Sc0_E4
-    dw C2Sc0_106
+    dw LookLaundryDesk
+    dw OpenCleanCounter
+    dw SceneQuestion2
+    dw CloseCleanCounter
 
 C2Act0_93:
-    dw C2Sc0_CE
-    dw C2Sc0_E4
-    dw C2Sc0_ED
-    dw C2Sc0_E4
+    dw LookDartBoard
+    dw SceneQuestion2
+    dw HitDartBoard
+    dw SceneQuestion2
 
 C2Act0_94:
-    dw C2Sc0_CF
-    dw C2Sc0_FE
-    dw C2Sc0_E4
+    dw LookOfficeDrape
+    dw OpenOfficeDrape
+    dw SceneQuestion2
     ; Pointer to $52e9; split bytes retain the interior label.
     db $e9
 jr_007_461f:
     db $52
 
 C2Act0_95:
-    dw C2Sc0_D0
-    dw C2Sc0_E4
-    dw C2Sc0_F4
+    dw LookSunWindow
+    dw SceneQuestion2
+    dw BreakSunWindow
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_4627:
@@ -1147,85 +1147,85 @@ C2Act0_96:
 Call_007_4629:
 Jump_007_4629:
     db $4e
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_462f:
     db $4f
 
 C2Act0_97:
-    dw C2Sc0_D2
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw ReadCleanSign
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_98:
-    dw C2Sc0_D3
-    dw C2Sc0_E4
-    dw C2Sc0_F3
-    dw C2Sc0_E4
+    dw LookCleanWindow
+    dw SceneQuestion2
+    dw BreakCleanWindow
+    dw SceneQuestion2
 
 C2Act0_99:
-    dw C2Sc0_D4
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw LookDryTree
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_9A:
-    dw C2Sc0_D5
-    dw C2Sc0_E4
-    dw C2Sc0_EE
-    dw C2Sc0_E4
+    dw LookCleanGlass
+    dw SceneQuestion2
+    dw BreakCleanGlass
+    dw SceneQuestion2
 
 C2Act0_9B:
-    dw C2Sc0_D6
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw LookSwivelChair
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_4657:
     db $4f
 
 C2Act0_9C:
-    dw C2Sc0_D7
-    dw C2Sc0_E4
+    dw LookCityWindow
+    dw SceneQuestion2
 Jump_007_465c:
-    dw C2Sc0_EF
+    dw BreakCityWin
 Jump_007_465e:
-    dw C2Sc0_E4
+    dw SceneQuestion2
 
 C2Act0_9D:
-    dw C2Sc0_D8
-    dw C2Sc0_E4
-    dw C2Sc0_F0
-    dw C2Sc0_E4
+    dw LookVegasWindow
+    dw SceneQuestion2
+    dw BreakVegasWin1
+    dw SceneQuestion2
 
 C2Act0_9E:
-    dw C2Sc0_D9
-    dw C2Sc0_FF
-    dw C2Sc0_E4
-    dw C2Sc0_108
+    dw LookThinBlinds
+    dw OpenThinBlinds
+    dw SceneQuestion2
+    dw CloseThinBlinds
 
 C2Act0_9F:
-    dw C2Sc0_DA
-    dw C2Sc0_100
-    dw C2Sc0_E4
-    dw C2Sc0_109
+    dw LookWhiteBlinds
+    dw OpenWhiteBlinds
+    dw SceneQuestion2
+    dw CloseWhiteBlinds
 
 C2Act0_A0:
     dw LookOfficeChair
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_467f:
     db $4f
 
 C2Act0_A1:
-    dw C2Sc0_DC
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw LookFishPhoto
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_4687:
@@ -1233,65 +1233,65 @@ jr_007_4687:
 
 C2Act0_A2:
     dw LookMobPhoto
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_A3:
-    dw C2Sc0_D8
-    dw C2Sc0_E4
-    dw C2Sc0_F1
+    dw LookVegasWindow
+    dw SceneQuestion2
+    dw BreakVegasWin2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_4697:
     db $4f
 
 C2Act0_A4:
-    dw C2Sc0_DE
+    dw LookSilkCurtain
     ; Pointer to $5297; split bytes retain the interior label.
     db $97
 jr_007_469b:
     db $52
-    dw C2Sc0_E4
-    dw C2Sc0_10A
+    dw SceneQuestion2
+    dw CloseSilkCurtain
 
 C2Act0_A5:
-    dw C2Sc0_DF
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw LookSwivelChair2
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_46a7:
     db $4f
 
 C2Act0_A6:
-    dw C2Sc0_E0
-    dw C2Sc0_E9
-    dw C2Sc0_E4
-    dw C2Sc0_E4
+    dw LookC2Self
+    dw CheckHandsForUse
+    dw SceneQuestion2
+    dw SceneQuestion2
 
 C2Act0_A7:
-    dw C2Sc0_E1
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw LookEmptyPlace
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_A8:
-    dw C2Sc0_C7
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw LookStickyWeb
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_A9:
-    dw C2Sc0_C7
-    dw C2Sc0_E4
-    dw C2Sc0_EA
-    dw C2Sc0_E4
+    dw LookStickyWeb
+    dw SceneQuestion2
+    dw SceneNoEffect2
+    dw SceneQuestion2
 
 C2Act0_AA:
-    dw C2Sc0_E2
-    dw C2Sc0_E4
-    dw C2Sc0_EA
+    dw ReadPoliceSign
+    dw SceneQuestion2
+    dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_46cf:
@@ -1299,18 +1299,18 @@ jr_007_46cf:
 
 C2Act0_AB:
 jr_007_46d0:
-    dw C2Sc0_D5
-    dw C2Sc0_E4
-    dw C2Sc0_F5
+    dw LookCleanGlass
+    dw SceneQuestion2
+    dw BreakPoliceWin1
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_46d7:
     db $4f
 
 C2Act0_AC:
-    dw C2Sc0_E3
-    dw C2Sc0_E4
-    dw C2Sc0_F6
+    dw LookArchWindow
+    dw SceneQuestion2
+    dw BreakPoliceWin2
     ; Pointer to $4f49; split bytes retain the interior label.
     db $49
 jr_007_46df:

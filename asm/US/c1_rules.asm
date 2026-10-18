@@ -6,13 +6,13 @@ CheckC1Rooms:
 Call_002_6d28:
     ld a, [wRoomId]
     cp $1e
-    jr z, jr_002_6d4d
+    jr z, C1Room1EEvent
 
     cp $20
-    jr z, jr_002_6d76
+    jr z, C1Room20Event
 
     cp $24
-    jr z, jr_002_6da4
+    jr z, C1Room24Event
 
     cp $4a
     jp z, C1Room4AFx
@@ -21,15 +21,17 @@ Call_002_6d28:
     jp z, C1Room4AFx
 
     cp $4c
-    jr z, jr_002_6dc2
+    jr z, C1Room4AFx
 
     cp $4d
-    jr z, jr_002_6dc2
+    jr z, C1Room4AFx
 
     call ClearResult
     ret
 
 
+; Run the room-$1e effect, cash removal, and message sequence.
+C1Room1EEvent:
 jr_002_6d4d:
     ld a, $06
     ld [wFxId], a
@@ -49,6 +51,8 @@ jr_002_6d4d:
     ret
 
 
+; Run the room-$20 effects and set result bit six.
+C1Room20Event:
 jr_002_6d76:
     ld a, $07
     ld [wFxId], a
@@ -70,6 +74,8 @@ jr_002_6d76:
     ret
 
 
+; Run the room-$24 reply and effect sequence.
+C1Room24Event:
 jr_002_6da4:
     ld a, $37
     call ShowMsg1
@@ -103,15 +109,17 @@ jr_002_6dc2:
     ld a, [wStateResult]
     or $40
     ld [wStateResult], a
-    ld a, $07
+    ld a, C1MuggerHit3
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_6df5
+    jr z, C1MuggerRoomHandled
 
-    ld a, $95
+    ld a, C1MuggerFatalEncounter
     call SetObjFlag
 
+; Return a handled result after checking the third mugger-hit flag.
+C1MuggerRoomHandled:
 jr_002_6df5:
     call SetResult
     ret
@@ -132,22 +140,24 @@ Call_002_6df9:
 
     ld a, [wSelAction]
     cp $01
-    jr z, jr_002_6e14
+    jr z, C1SpigotOpenCheck
 
     cp $05
-    jr z, jr_002_6e44
+    jr z, C1SpigotCloseCheck
 
     ret
 
 
+; Check whether the spigot is already open before changing its flags.
+C1SpigotOpenCheck:
 jr_002_6e14:
-    ld a, $04
+    ld a, C1SpigotOpen
     call ReadObjFlag
     ld a, $6a
     ld [wTextName0], a
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_6e2e
+    jr z, C1SpigotSetOpen
 
     ld a, $01
     call ShowMsg2
@@ -155,26 +165,30 @@ jr_002_6e14:
     ret
 
 
+; Clear the closed flag, set the open flag, and refresh objects.
+C1SpigotSetOpen:
 jr_002_6e2e:
     ld a, $00
     call ShowMsg2
-    ld a, $03
+    ld a, C1SpigotClosed
     call ClearObjFlag
-    ld a, $04
+    ld a, C1SpigotOpen
     call SetObjFlag
     call RefreshObjs
     call SetResult
     ret
 
 
+; Check whether the spigot is already closed before changing its flags.
+C1SpigotCloseCheck:
 jr_002_6e44:
-    ld a, $03
+    ld a, C1SpigotClosed
     call ReadObjFlag
     ld a, $6a
     ld [wTextName0], a
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_6e5e
+    jr z, C1SpigotSetClosed
 
     ld a, $03
     call ShowMsg2
@@ -182,12 +196,14 @@ jr_002_6e44:
     ret
 
 
+; Clear the open flag, set the closed flag, and refresh objects.
+C1SpigotSetClosed:
 jr_002_6e5e:
     ld a, $02
     call ShowMsg2
-    ld a, $04
+    ld a, C1SpigotOpen
     call ClearObjFlag
-    ld a, $03
+    ld a, C1SpigotClosed
     call SetObjFlag
     call RefreshObjs
     call SetResult
@@ -220,7 +236,7 @@ Call_002_6e74:
     ld a, $47
     ld [wItemId], a
     call ClearSelStateView
-    ld a, $5d
+    ld a, C1TrunkUnlocked
     call ClearObjFlag
     call SetResult
     ret

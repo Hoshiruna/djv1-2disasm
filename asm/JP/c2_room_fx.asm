@@ -20,15 +20,15 @@ jr_003_4c7b:
     ld h, a
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_4c98
+    jr z, DefaultC2RoomFx
 
     ld a, [hl+]
     and $7f
     cp d
-    jr z, jr_003_4c93
+    jr z, SetC2RoomFx
 
     call NextC2State
-    jr jr_003_4c7b
+    jr ScanC2FxRows
 
 ; Store the matching room record effect byte in scene effect state.
 SetC2RoomFx:

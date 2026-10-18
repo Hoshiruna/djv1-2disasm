@@ -77,6 +77,8 @@ Jump_000_224e:
     ld hl, wListValue
     ld bc, wAltSlot+15
 
+; Swap the next byte of the two operation-slot records.
+SwapOpSlotsNextByte:
 jr_000_2262:
     ld a, [hl]
 
@@ -92,6 +94,6 @@ Jump_000_2266:
     ld [bc], a
     dec bc
     dec e
-    jr nz, jr_000_2262
+    jr nz, SwapOpSlotsNextByte
 
     ret

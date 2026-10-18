@@ -19,56 +19,66 @@ Jump_004_4508:
     jp z, EndAudioSlot
 
     cp $7e
-    jr z, jr_004_4563
+    jr z, AudioSetNoteFlag08
 
     cp $08
-    jr z, jr_004_4534
+    jr z, AudioSetNoteShift
 
     cp $02
-    jr z, jr_004_453b
+    jr z, AudioSetPan01
 
     cp $03
-    jr z, jr_004_4543
+    jr z, AudioSetPan03
 
     cp $04
-    jr z, jr_004_454b
+    jr z, AudioSetPan02
 
     cp $80
-    jr c, jr_004_4553
+    jr c, AudioReturnTimedByte
 
     cp $c0
-    jr c, jr_004_456e
+    jr c, AudioSetNoteLength
 
     cp $e0
-    jr nc, jr_004_4593
+    jr nc, AudioDispatchInstrument
 
     jp AudioLoop
 
 
+; Read the next stream byte into the note shift field.
+AudioSetNoteShift:
 jr_004_4534:
     ld a, [hl+]
     ld [wNoteShift], a
     jp NextAudio
 
 
+; Set note pan to one.
+AudioSetPan01:
 jr_004_453b:
     ld a, $01
     ld [wNotePan], a
     jp NextAudio
 
 
+; Set note pan to three.
+AudioSetPan03:
 jr_004_4543:
     ld a, $03
     ld [wNotePan], a
     jp NextAudio
 
 
+; Set note pan to two.
+AudioSetPan02:
 jr_004_454b:
     ld a, $02
     ld [wNotePan], a
     jp NextAudio
 
 
+; Advance note time and return the current stream byte with carry set.
+AudioReturnTimedByte:
 jr_004_4553:
     call AddNoteTime
     ld a, l
@@ -80,6 +90,8 @@ jr_004_4553:
     ret
 
 
+; Set bit three in the staged note flags.
+AudioSetNoteFlag08:
 jr_004_4563:
     ld a, [wNoteFlags]
     or $08
@@ -87,6 +99,8 @@ jr_004_4563:
     jp NextAudio
 
 
+; Select a two-byte duration from the audio time table.
+AudioSetNoteLength:
 jr_004_456e:
     push hl
     and $1f
@@ -116,6 +130,8 @@ Jump_004_4586:
     ret
 
 
+; Read an instrument operand and dispatch commands E0 through E2.
+AudioDispatchInstrument:
 jr_004_4593:
     ld a, [hl+]
     ld c, a
@@ -127,7 +143,7 @@ jr_004_4593:
     jr z, jr_004_45a8
 
     cp $e2
-    jr z, jr_004_45d4
+    jr z, LoadWaveInst
 
     jp NextAudio
 
@@ -192,12 +208,14 @@ jr_004_45d4:
     ld c, $30
     ld b, $10
 
+; Copy sixteen bytes from the selected waveform into wave RAM.
+AudioCopyWaveBytes:
 jr_004_4601:
     ld a, [hl+]
     ldh [c], a
     inc c
     dec b
-    jr nz, jr_004_4601
+    jr nz, AudioCopyWaveBytes
 
     pop hl
     ld a, [de]
@@ -216,9 +234,9 @@ AudioLoop:
 
 Jump_004_461f:
     cp $cf
-    jr z, jr_004_4657
+    jr z, AudioAdvanceLoop
 
-    jr nc, jr_004_4684
+    jr nc, AudioTestLoopDepth
 
     and $0f
     ld [wAudioLoopTmp], a
@@ -251,10 +269,12 @@ Jump_004_461f:
     jp NextAudio
 
 
+; Increment a loop counter and either rewind or leave the loop.
+AudioAdvanceLoop:
 jr_004_4657:
     ld a, [wLoopPos]
     call AudioLoopPtr
-    jr nc, jr_004_4679
+    jr nc, AudioSkipLoopMarkers
 
     ld a, [bc]
     inc a
@@ -263,7 +283,7 @@ jr_004_4657:
     inc bc
     ld a, [bc]
     cp d
-    jr z, jr_004_4671
+    jr z, AudioPopLoopRecord
 
     inc bc
     ld a, [bc]
@@ -274,21 +294,27 @@ jr_004_4657:
     jp NextAudio
 
 
+; Move the staged loop position back by four bytes.
+AudioPopLoopRecord:
 jr_004_4671:
     ld a, [wLoopPos]
     sub $04
     ld [wLoopPos], a
 
+; Skip consecutive D0-class loop markers in the stream.
+AudioSkipLoopMarkers:
 jr_004_4679:
     ld a, [hl+]
     and $f0
     cp $d0
-    jr z, jr_004_4679
+    jr z, AudioSkipLoopMarkers
 
     dec hl
     jp NextAudio
 
 
+; Compare the loop marker depth with the current loop counter.
+AudioTestLoopDepth:
 jr_004_4684:
     and $0f
     dec a
@@ -297,20 +323,22 @@ jr_004_4684:
     call AudioLoopPtr
     ld a, [bc]
     cp d
-    jr z, jr_004_4679
+    jr z, AudioSkipLoopMarkers
 
+; Scan forward to a CF or D0-class loop marker.
+AudioScanLoopMarker:
 jr_004_4692:
     ld a, [hl+]
     ld [wAudioLoopTmp], a
     cp $cf
-    jr z, jr_004_4657
+    jr z, AudioAdvanceLoop
 
     and $f0
     cp $d0
-    jr nz, jr_004_4692
+    jr nz, AudioScanLoopMarker
 
     ld a, [wAudioLoopTmp]
-    jr jr_004_4684
+    jr AudioTestLoopDepth
 
 ; Decode group/depth from A into BC; return carry for a nonzero depth and retain the original empty-depth address.
 AudioLoopPtr:
@@ -321,7 +349,7 @@ Call_004_46a5:
     ld c, a
     ld a, b
     and $0f
-    jr z, jr_004_46bc
+    jr z, AudioLoopEmptyDepth
 
     sub $04
     or c
@@ -335,6 +363,8 @@ Call_004_46a5:
     ret
 
 
+; Return the original empty-depth address with carry clear.
+AudioLoopEmptyDepth:
 jr_004_46bc:
     ld a, $d1
     add c
@@ -354,23 +384,25 @@ Call_004_46c8:
     ld a, [wLoopPos]
     and $f0
     cp $40
-    jr z, jr_004_46e2
+    jr z, RetrigBasePulse2
 
     cp $50
-    jr z, jr_004_46f3
+    jr z, RetrigBasePulse1
 
     cp $60
-    jr z, jr_004_46fc
+    jr z, RetrigBaseWave
 
     cp $70
-    jr z, jr_004_46eb
+    jr z, RetrigAltAndBasePulse1
 
     cp $80
-    jr z, jr_004_472f
+    jr z, RetrigBaseNoise
 
     ret
 
 
+; Set the retrigger bit in the base pulse-two slot.
+RetrigBasePulse2:
 jr_004_46e2:
     ld a, [wBaseP2]
     or $40
@@ -378,11 +410,15 @@ jr_004_46e2:
     ret
 
 
+; Set the retrigger bit in the alternate pulse-one and base pulse-one slots.
+RetrigAltAndBasePulse1:
 jr_004_46eb:
     ld a, [wAltP1]
     or $40
     ld [wAltP1], a
 
+; Set the retrigger bit in the base pulse-one slot.
+RetrigBasePulse1:
 jr_004_46f3:
     ld a, [wBaseP1]
     or $40
@@ -390,6 +426,8 @@ jr_004_46f3:
     ret
 
 
+; Set the base wave retrigger bit and compare waveform IDs.
+RetrigBaseWave:
 jr_004_46fc:
     ld a, [wBaseWave]
     or $40
@@ -400,7 +438,7 @@ jr_004_46fc:
     ld b, a
     ld a, [wWaveId]
     xor b
-    jr z, jr_004_472e
+    jr z, RetrigWaveDone
 
     ld a, [wBaseWave+20]
     sla a
@@ -414,17 +452,23 @@ jr_004_46fc:
     ld c, $30
     ld b, $10
 
+; Copy sixteen bytes of the base waveform into wave RAM.
+RetrigCopyBaseWave:
 jr_004_4728:
     ld a, [hl+]
     ldh [c], a
     inc c
     dec b
-    jr nz, jr_004_4728
+    jr nz, RetrigCopyBaseWave
 
+; Return after the waveform ID check or copy.
+RetrigWaveDone:
 jr_004_472e:
     ret
 
 
+; Set the retrigger bit in the base noise slot.
+RetrigBaseNoise:
 jr_004_472f:
     ld a, [wBaseNoise]
     or $40

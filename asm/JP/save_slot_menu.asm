@@ -14,49 +14,53 @@ Jump_002_7584:
     ld d, [hl]
     ld a, [wSaveSlotsMask]
     and d
-    jr z, jr_002_75f3
+    jr z, ChooseNewCase
 
     xor a
     ld [wSaveMenuRow], a
     call DrawSaveOptions
 
+; Draw and poll the three operations for an occupied slot.
+SaveOpInputLoop:
 jr_002_75a0:
     call DrawSaveMenu
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr nz, jr_002_75e4
+    jr nz, DispatchSaveOp
 
     bit 1, a
     jp nz, CancelSaveMenu
 
     bit 7, a
-    jr nz, jr_002_75cf
+    jr nz, SaveOpMoveDown
 
     bit 6, a
-    jr z, jr_002_75a0
+    jr z, SaveOpInputLoop
 
     ld a, $19
     call PlayAudio
     ld a, [wSaveMenuRow]
     cp $00
-    jr z, jr_002_75a0
+    jr z, SaveOpInputLoop
 
     dec a
     ld [wSaveMenuRow], a
-    jr jr_002_75a0
+    jr SaveOpInputLoop
 
+; Move the occupied-slot operation cursor down, up to row two.
+SaveOpMoveDown:
 jr_002_75cf:
     ld a, $19
     call PlayAudio
     ld a, [wSaveMenuRow]
     cp $02
-    jr z, jr_002_75a0
+    jr z, SaveOpInputLoop
 
     inc a
     ld [wSaveMenuRow], a
-    jr jr_002_75a0
+    jr SaveOpInputLoop
 
 SaveSlotMasks:
     db $01, $02, $04
@@ -101,44 +105,50 @@ jr_002_75f3:
     xor a
     ld [wSaveMenuRow], a
 
+; Draw and poll the two choices for an empty slot.
+NewCaseInputLoop:
 jr_002_7624:
     call DrawSaveMenu
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr nz, jr_002_7670
+    jr nz, StartNewCase
 
     bit 1, a
-    jr nz, jr_002_7665
+    jr nz, CancelNewCase
 
     bit 7, a
-    jr nz, jr_002_7652
+    jr nz, NewCaseMoveDown
 
     bit 6, a
-    jr z, jr_002_7624
+    jr z, NewCaseInputLoop
 
     ld a, $19
     call PlayAudio
     ld a, [wSaveMenuRow]
     cp $00
-    jr z, jr_002_7624
+    jr z, NewCaseInputLoop
 
     xor a
     ld [wSaveMenuRow], a
-    jr jr_002_7624
+    jr NewCaseInputLoop
 
+; Move the new-case cursor to row two.
+NewCaseMoveDown:
 jr_002_7652:
     ld a, $19
     call PlayAudio
     ld a, [wSaveMenuRow]
     cp $02
-    jr z, jr_002_7624
+    jr z, NewCaseInputLoop
 
     ld a, $02
     ld [wSaveMenuRow], a
-    jr jr_002_7624
+    jr NewCaseInputLoop
 
+; Return from the new-case selector to the slot list.
+CancelNewCase:
 jr_002_7665:
     ld a, $2f
     call PlayAudio
@@ -156,7 +166,7 @@ jr_002_7670:
     srl a
     ld [wCaseId], a
     xor a
-    jr jr_002_768a
+    jr SetSaveStart
 
 ; Load the selected saved game and enter the shared start path with A $ff.
 StartSavedGame:
@@ -195,10 +205,12 @@ EraseSaveSlot:
     call ConfirmEraseSlot
     ld a, [wSaveAnswer]
     cp $00
-    jr nz, jr_002_76a8
+    jr nz, RescanAfterErase
 
     call EraseGame
 
+; Rescan saves after the erase decision.
+RescanAfterErase:
 jr_002_76a8:
     call ScanGames
-    jr jr_002_7695
+    jr RedrawSaveSlots

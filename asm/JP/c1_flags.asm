@@ -13,6 +13,9 @@ Call_001_45ef:
     ld d, $00
     ld hl, C1StartBits
 
+; Set the next initial state bit and stop after the original $23 entries.
+C1InitStateBitLoop:
+
 jr_001_45fd:
     ld a, [hl+]
     push hl
@@ -23,7 +26,7 @@ jr_001_45fd:
     inc d
     ld a, d
     cp $23
-    jr c, jr_001_45fd
+    jr c, C1InitStateBitLoop
 
     pop hl
     push af
@@ -52,15 +55,21 @@ Call_001_4638:
     push hl
     ld hl, C1StartAbsent
 
+; Clear the next initial presence bit until the $ff terminator.
+C1InitAbsentLoop:
+
 jr_001_4644:
     ld a, [hl+]
     cp $ff
-    jr z, jr_001_4650
+    jr z, C1InitAbsentRestore
 
     push hl
     call ClearObjPresent
     pop hl
-    jr jr_001_4644
+    jr C1InitAbsentLoop
+
+; Restore the caller's HRAM item-slot index after initial presence setup.
+C1InitAbsentRestore:
 
 jr_001_4650:
     pop hl

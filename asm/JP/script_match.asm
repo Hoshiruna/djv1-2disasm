@@ -7,7 +7,7 @@ jr_000_2c56:
     call ReadArgs4
     ld a, [wArg0]
     cp $fe
-    jr z, jr_000_2c81
+    jr z, MatchItemApplyBranch
 
     ld d, a
     ld bc, wItemType
@@ -18,7 +18,7 @@ jr_000_2c56:
     add hl, bc
     ld a, [hl]
     cp d
-    jr nz, jr_000_2c56
+    jr nz, MatchItemScript
 
     ld a, [wArg1]
     ld d, a
@@ -30,8 +30,10 @@ jr_000_2c56:
     add hl, bc
     ld a, [hl]
     cp d
-    jr nz, jr_000_2c56
+    jr nz, MatchItemScript
 
+; Replace the script pointer with the matching table target.
+MatchItemApplyBranch:
 jr_000_2c81:
     ld a, [wArg2]
     ld [wScriptPtr], a

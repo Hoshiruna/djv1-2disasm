@@ -14,7 +14,7 @@ Call_000_32ff:
 Jump_000_32ff:
     ldh a, [hItemSlot]
     cp $00
-    jr z, jr_000_3319
+    jr z, CopyWorkList
 
     ld a, [wWorkSrc]
     ld c, a
@@ -63,6 +63,8 @@ Call_000_333c:
     ldh [hChangePos+1], a
     ld a, d
 
+; Read the next of six source bytes from the selected work-list source.
+CopyWorkListScan:
 jr_000_333f:
     ldh a, [hChangePos]
     ld l, a
@@ -75,7 +77,7 @@ jr_000_333f:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_000_3367
+    jr z, CopyWorkListAdvance
 
     ld b, a
     ldh a, [hItemSlot]
@@ -92,6 +94,8 @@ jr_000_333f:
     ldh [hItemSlot], a
     ld a, d
 
+; Advance the source offset and continue until six bytes have been checked.
+CopyWorkListAdvance:
 jr_000_3367:
     ld d, a
     ldh a, [hChangePos]
@@ -104,7 +108,7 @@ Call_000_336a:
     ldh a, [hChangePos]
     cp $06
     ld a, d
-    jr c, jr_000_333f
+    jr c, CopyWorkListScan
 
     pop hl
     push af

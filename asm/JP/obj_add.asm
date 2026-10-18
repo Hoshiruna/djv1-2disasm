@@ -36,14 +36,18 @@ Call_002_7289:
     add hl, hl
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_729c
+    jr nz, ObjAddCaseIIPositions
 
     ld bc, C1ObjPos
-    jr jr_002_729f
+    jr ObjAddStorePosition
 
+; Select the Case II object-position table.
+ObjAddCaseIIPositions:
 jr_002_729c:
     ld bc, C2ObjPos
 
+; Store the selected object position and ID in the room list.
+ObjAddStorePosition:
 jr_002_729f:
     add hl, bc
     ld a, l

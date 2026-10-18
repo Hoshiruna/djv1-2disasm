@@ -62,7 +62,7 @@ Jump_001_55db:
     call HideC1MarkId
     ld a, [wStateResult]
     and $01
-    jr nz, jr_001_565c
+    jr nz, C1NextTarget
 
     ld a, [wRoomDataPtr]
     ld c, a
@@ -79,7 +79,7 @@ Jump_001_55db:
     ld b, a
     ld a, c
     cp b
-    jr nz, jr_001_565c
+    jr nz, C1NextTarget
 
     ld d, a
     ldh a, [hRoomHitPos]
@@ -97,7 +97,7 @@ Jump_001_55db:
     add hl, bc
     ld a, [hl]
     bit 7, a
-    jr z, jr_001_563c
+    jr z, C1StoreMarkTarget
 
     call C1MarkCond
     ld a, [wStateResult]
@@ -105,6 +105,9 @@ Jump_001_55db:
     ret nz
 
     ld a, [wRoomHitId]
+
+; Store the resolved mark ID as a type-five target in the selected slot and initialize its action.
+C1StoreMarkTarget:
 
 jr_001_563c:
     ld b, a

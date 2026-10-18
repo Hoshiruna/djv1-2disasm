@@ -12,6 +12,8 @@ Call_003_58b6:
     call PlayBankAnim
     ld c, $08
 
+; Play the next repeated mob-war animation frame.
+MobWarNextFrame:
 jr_003_58c5:
     ld a, $31
     ldh [hSpriteX], a
@@ -22,6 +24,6 @@ jr_003_58c5:
     call PlayBankAnim
     pop bc
     dec c
-    jr nz, jr_003_58c5
+    jr nz, MobWarNextFrame
 
     ret

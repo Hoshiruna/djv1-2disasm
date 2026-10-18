@@ -58,5 +58,7 @@ jr_003_577b:
     call WaitTicks
     call PlayEndCredits
 
+; Remain in the final ending loop.
+C2EndingHold:
 jr_003_57fb:
-    jr jr_003_57fb
+    jr C2EndingHold

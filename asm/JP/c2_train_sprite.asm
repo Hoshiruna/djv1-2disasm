@@ -7,6 +7,8 @@ PlayC2Anim70:
 Call_003_685d:
     ld c, $08
 
+; Play the next odd-room train sprite animation.
+TrainOddSpriteNext:
 jr_003_685f:
     ld a, $20
     ldh [hSpriteX], a
@@ -17,7 +19,7 @@ jr_003_685f:
     call PlayBankAnim
     pop bc
     dec c
-    jr nz, jr_003_685f
+    jr nz, TrainOddSpriteNext
 
     ret
 
@@ -29,6 +31,8 @@ PlayC2Anim71:
 Call_003_6872:
     ld c, $08
 
+; Play the next even-room train sprite animation.
+TrainEvenSpriteNext:
 jr_003_6874:
     ld a, $40
     ldh [hSpriteX], a
@@ -39,6 +43,6 @@ jr_003_6874:
     call PlayBankAnim
     pop bc
     dec c
-    jr nz, jr_003_6874
+    jr nz, TrainEvenSpriteNext
 
     ret

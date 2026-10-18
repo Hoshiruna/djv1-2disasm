@@ -47,7 +47,7 @@ Call_000_08ad:
     ld [wSceneFx], a
     ld a, [wCaseId]
     cp $01
-    jr z, jr_000_092e
+    jr z, StartC2Game
 
 ; Run the initial Case I fixed-bank helper, then fall through to ResumeC1Game.
 StartC1Game:
@@ -87,7 +87,7 @@ jr_000_08d4:
 
     ld a, [wStateResult]
     and $40
-    jr z, jr_000_08d4
+    jr z, LoopC1Game
 
     xor a
 
@@ -140,7 +140,7 @@ Jump_000_0931:
     call PopRomBank
     ld a, [wCaseResume]
     cp $ff
-    jr z, jr_000_0965
+    jr z, ResumeC2Game
 
     ld hl, wObjPresent
     ld bc, $0180
@@ -191,7 +191,7 @@ Call_000_0987:
     call PopRomBank
     ld a, [wStateResult]
     and $40
-    jr z, jr_000_0977
+    jr z, LoopC2Game
 
     xor a
     ld [wSpriteScrollY], a

@@ -75,17 +75,17 @@ C1FxFlags:
     call DrawC1FxObj
     ld a, $78
     call WaitTicks
-    ld a, $78
+    ld a, C1MemoWritingRevealed
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_7048
+    jr nz, C1FxRevealedMemoReply
 
-    ld a, $b2
+    ld a, C1SternwoodViewShown
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_703d
+    jr nz, C1FxSternwoodReply
 
     ld a, $0a
     call ShowText1
@@ -95,6 +95,8 @@ C1FxFlags:
     ret
 
 
+; Show the alternate effect text for the Sternwood-view flag.
+C1FxSternwoodReply:
 jr_002_703d:
     ld a, $32
     call ShowText2
@@ -103,6 +105,8 @@ jr_002_703d:
     ret
 
 
+; Show the revealed-memo effect text without clearing the effect object.
+C1FxRevealedMemoReply:
 jr_002_7048:
     ld a, $fc
     call ShowText2

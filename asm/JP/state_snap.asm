@@ -25,7 +25,7 @@ jr_001_6ad0:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6ad0
+    jr nz, FillCountData
 
     ret
 
@@ -38,20 +38,26 @@ SaveSnapshot:
     push de
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_6af1
+    jr nz, SnapshotCheckC2Room
 
-    ld a, $b0
+    ld a, C1SkipNextSnapshot
     call ReadObjFlag
-    jr z, jr_001_6af8
+    jr z, SnapshotWriteState
 
-    ld a, $b0
+    ld a, C1SkipNextSnapshot
     call ClearObjFlag
-    jr jr_001_6b23
+    jr SnapshotWriteReturn
+
+; In Case II, skip snapshot writing for room IDs at least $62.
+SnapshotCheckC2Room:
 
 jr_001_6af1:
     ld a, [wRoomId]
     cp $62
-    jr nc, jr_001_6b23
+    jr nc, SnapshotWriteReturn
+
+; Enable cartridge RAM and prepare the state-snapshot copy and checksum.
+SnapshotWriteState:
 
 jr_001_6af8:
     call EnableRam
@@ -59,6 +65,9 @@ jr_001_6af8:
     ld de, SaveDataLen
     ld hl, wObjPresent
     ld bc, sStateSnap
+
+; Copy the next state byte to SRAM, update the checksum, and continue for SaveDataLen bytes.
+SnapshotWriteLoop:
 
 jr_001_6b07:
     ld a, [hl+]
@@ -69,13 +78,16 @@ jr_001_6b07:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6b07
+    jr nz, SnapshotWriteLoop
 
     ld a, [wSaveSum]
     ld [sStateSum], a
     ld a, [wSaveSum+1]
     ld [sStateSum+1], a
     call DisableRam
+
+; Restore the caller's DE, BC, and HL registers after writing or skipping the snapshot.
+SnapshotWriteReturn:
 
 jr_001_6b23:
     pop de
@@ -96,6 +108,9 @@ LoadSnapshot:
     ld hl, wObjPresent
     ld bc, sStateSnap
 
+; Copy the next SRAM snapshot byte to state memory and update the checksum.
+SnapshotReadLoop:
+
 jr_001_6b39:
     ld a, [bc]
     inc bc
@@ -105,24 +120,27 @@ jr_001_6b39:
     ld a, d
     or e
     cp $00
-    jr nz, jr_001_6b39
+    jr nz, SnapshotReadLoop
 
     ld a, [sStateSum]
     ld b, a
     ld a, [wSaveSum]
     cp b
-    jr nz, jr_001_6b5e
+    jr nz, SnapshotReadFallback
 
     ld a, [sStateSum+1]
     ld b, a
     ld a, [wSaveSum+1]
     cp b
-    jr nz, jr_001_6b5e
+    jr nz, SnapshotReadFallback
 
     pop de
     pop bc
     pop hl
     ret
+
+; Load the regular save when either snapshot checksum byte differs, then restore the caller's registers.
+SnapshotReadFallback:
 
 
 jr_001_6b5e:

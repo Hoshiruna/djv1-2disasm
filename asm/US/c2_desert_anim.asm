@@ -10,28 +10,34 @@ PlayC2RoomAnim:
     ld e, a
     ld hl, FlatDesertRooms
 
+; Scan for a room using the flat travel animation.
+DesertFindFlatRoom:
 jr_003_6d6d:
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_6d79
+    jr z, DesertStartSlopeSearch
 
     cp e
-    jr nz, jr_003_6d6d
+    jr nz, DesertFindFlatRoom
 
     call MoveDesertFlat
     ret
 
 
+; Start checking rooms with the sloping travel animation.
+DesertStartSlopeSearch:
 jr_003_6d79:
     ld hl, SlopeDesertRooms
 
+; Scan for a room using the sloping travel animation.
+DesertFindSlopeRoom:
 jr_003_6d7c:
     ld a, [hl+]
     cp $ff
     ret z
 
     cp e
-    jr nz, jr_003_6d7c
+    jr nz, DesertFindSlopeRoom
 
     call MoveDesertSlope
     ret
@@ -48,6 +54,8 @@ Call_003_6d87:
     ld [wC2AnimFrame], a
     ld [wC2AnimTick], a
 
+; Draw the next frame of flat travel.
+DesertFlatNextFrame:
 jr_003_6d93:
     ld a, [wDesertObjX]
     ldh [hSpriteX], a
@@ -61,7 +69,7 @@ jr_003_6d93:
     dec a
     ld [wDesertObjX], a
     cp $f0
-    jr nz, jr_003_6d93
+    jr nz, DesertFlatNextFrame
 
     ret
 
@@ -79,6 +87,8 @@ Call_003_6db3:
     ld [wC2AnimFrame], a
     ld [wC2AnimTick], a
 
+; Draw the next frame of sloping travel.
+DesertSlopeNextFrame:
 jr_003_6dc4:
     ld a, [wDesertObjX]
     ldh [hSpriteX], a
@@ -92,16 +102,18 @@ jr_003_6dc4:
     dec a
     ld [wDesertObjX], a
     and $03
-    jr nz, jr_003_6deb
+    jr nz, DesertSlopeCheckEnd
 
     ld a, [wDesertObjY]
     dec a
     ld [wDesertObjY], a
 
+; Check whether sloping travel reached its end position.
+DesertSlopeCheckEnd:
 jr_003_6deb:
     ld a, [wDesertObjX]
     cp $f0
-    jr nz, jr_003_6dc4
+    jr nz, DesertSlopeNextFrame
 
     ret
 

@@ -14,6 +14,8 @@ MapC2ListItem:
     ld e, a
     ld bc, $0000
 
+; Compare the packed item with the next counted category.
+C2ListMapNextKind:
 jr_003_4eb2:
     ld hl, C2ListItemKinds
     add hl, bc
@@ -22,12 +24,14 @@ jr_003_4eb2:
     ret z
 
     cp e
-    jr z, jr_003_4ec1
+    jr z, C2ListMapCountKind
 
     inc bc
     inc bc
-    jr jr_003_4eb2
+    jr C2ListMapNextKind
 
+; Update the matched category count and derive its item flag.
+C2ListMapCountKind:
 jr_003_4ec1:
     ld hl, C2ListItemKinds+1
     add hl, bc
@@ -39,14 +43,16 @@ jr_003_4ec1:
     add hl, bc
     ld a, [hl]
     cp $00
-    jr z, jr_003_4ed5
+    jr z, C2ListMapCheckExisting
 
     dec a
 
+; Check whether the mapped item is already present.
+C2ListMapCheckExisting:
 jr_003_4ed5:
     push af
     call ReadItemFlag
-    jr nz, jr_003_4eed
+    jr nz, C2ListMapRefreshExisting
 
     pop af
     ld b, a
@@ -62,6 +68,8 @@ jr_003_4ed5:
     ret
 
 
+; Refresh the list for an already mapped item.
+C2ListMapRefreshExisting:
 jr_003_4eed:
     pop af
     ld [wFindListValue], a
@@ -111,7 +119,7 @@ AddC2Word1:
 
 
     ld a, $01
-    jr jr_003_4f0e
+    jr AddC2Cash
 
 ; Add one Case II quarter with byte wrap.
 AddC2Quarter:

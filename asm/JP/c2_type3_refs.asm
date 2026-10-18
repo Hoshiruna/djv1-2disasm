@@ -95,514 +95,514 @@ C2Type3Refs:
     dw C2Act3_5B
 
 C2Act3_00:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_01:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_02:
-    dw C2Sc3_01
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Bullet
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_03:
-    dw C2Sc3_02
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Cell
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_04:
-    dw C2Sc3_03
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Chip
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_05:
-    dw C2Sc3_04
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Towel
+    dw UseC2Item
+    dw PutC2Item
     dw C2Sc3_08
 
 C2Act3_06:
-    dw C2Sc3_09
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key1
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_07:
-    dw C2Sc3_0B
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookBoxingClip
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_08:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_09:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_0A:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_0B:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_0C:
-    dw C2Sc3_0C
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw ReadC2License1
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_0D:
-    dw C2Sc3_0D
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookEmptyPack
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_0E:
     dw ReadStogieRing
-    dw C2Sc3_06
+    dw UseC2Item
     dw UseC2Ring
-    dw C2Sc3_0F
+    dw TakeC2Ring
 
 C2Act3_0F:
-    dw C2Sc3_10
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_11
+    dw LookC2Pillow
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Pillow
 
 C2Act3_10:
     dw ReadPayNote
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_11:
-    dw C2Sc3_13
-    dw C2Sc3_14
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_15
-    dw C2Sc3_16
+    dw ReadC2Timetable
+    dw OpenC2Timetable
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Timetable
+    dw CloseC2Timetable
 
 C2Act3_12:
-    dw C2Sc3_17
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_18
+    dw LookC2Plant1
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Plant1
 
 C2Act3_13:
-    dw C2Sc3_19
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_1A
+    dw LookC2Pot
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Pot
 
 C2Act3_14:
-    dw C2Sc3_1B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_1C
+    dw LookC2Ashtray
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Ashtray
 
 C2Act3_15:
-    dw C2Sc3_1D
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_1E
+    dw LookC2Plant2
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Plant2
 
 C2Act3_16:
-    dw C2Sc3_1F
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_20
+    dw LookC2Plant3
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Plant3
 
 C2Act3_17:
-    dw C2Sc3_21
-    dw C2Sc3_6B
-    dw C2Sc3_05
-    dw C2Sc3_7F
-    dw C2Sc3_22
+    dw LookLiftButton
+    dw ItemCannotOpen
+    dw UseLift4Button
+    dw PutC2Item
+    dw TakeLiftButton
     dw RejectC2Item
-    dw C2Sc3_23
-    dw C2Sc3_32
+    dw PressLift4
+    dw ItemNoAnswer
     dw RejectC2Item
 
 C2Act3_18:
-    dw C2Sc3_24
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw ReadC2Photo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Photo
 
 C2Act3_19:
     dw ReadBondLetter
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
 jr_007_5727:
     dw TakeC2Item
 
 C2Act3_1A:
-    dw C2Sc3_27
-    dw C2Sc3_28
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_29
-    dw C2Sc3_2A
+    dw ReadC2Pamphlet
+    dw OpenC2Pamphlet
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Pamphlet
+    dw CloseC2Pamphlet
 
 C2Act3_1B:
-    dw C2Sc3_2B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_2C
+    dw ReadC2News3
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2News3
 
 C2Act3_1C:
-    dw C2Sc3_2D
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_2E
+    dw ReadC2News4
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2News4
 
 C2Act3_1D:
-    dw C2Sc3_2F
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw ReadVinnyLetter
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_1E:
-    dw C2Sc3_30
-    dw C2Sc3_6B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_31
+    dw LookC2Bottle
+    dw ItemCannotOpen
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Bottle
     dw RejectC2Item
-    dw C2Sc3_33
-    dw C2Sc3_32
+    dw BreakC2Bottle
+    dw ItemNoAnswer
     dw RejectC2Item
 
 C2Act3_1F:
-    dw C2Sc3_34
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_35
+    dw LookCrackedLamp
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeCrackedLamp
 
 C2Act3_20:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_21:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_22:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_23:
-    dw C2Sc3_36
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Knife
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_24:
-    dw C2Sc3_36
-    dw C2Sc3_37
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Knife
+    dw OpenC2Knife
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
-    dw C2Sc3_38
+    dw CloseC2Knife
 
 C2Act3_25:
-    dw C2Sc3_39
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key2
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_26:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_27:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_28:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_29:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_2A:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_2B:
-    dw C2Sc3_3A
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Ammo
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_2C:
-    dw C2Sc3_3B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_3C
+    dw LookJuiceCan
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeJuiceCan
 
 C2Act3_2D:
-    dw C2Sc3_3D
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key3
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_2E:
-    dw C2Sc3_3E
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Duck
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_2F:
     dw LookSiegelDiary
     dw OpenSiegelDiary
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
     dw CloseSiegelDiary
 
 C2Act3_30:
-    dw C2Sc3_42
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw ReadSugarCard
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_31:
-    dw C2Sc3_43
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookPencil
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_32:
-    dw C2Sc3_44
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key4
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_33:
-    dw C2Sc3_45
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_46
+    dw LookTissue
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeTissue
 
 C2Act3_34:
-    dw C2Sc3_47
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_48
+    dw LookPillow
+    dw UseC2Item
+    dw PutC2Item
+    dw TakePillow
 
 C2Act3_35:
-    dw C2Sc3_49
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_4A
+    dw LookPerfume
+    dw UseC2Item
+    dw PutC2Item
+    dw TakePerfume
 
 C2Act3_36:
-    dw C2Sc3_4B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_4C
+    dw ReadSugarNews
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeSugarNews
 
 C2Act3_37:
-    dw C2Sc3_4D
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Dress
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_38:
-    dw C2Sc3_4E
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookSugarClothes
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_39:
     dw ReadMcMNote
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_3A:
-    dw C2Sc3_50
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookMcMUniform
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_3B:
-    dw C2Sc3_51
-    dw C2Sc3_52
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookDeposits
+    dw OpenDeposits
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
-    dw C2Sc3_53
+    dw CloseDeposits
 
 C2Act3_3C:
-    dw C2Sc3_54
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key5
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_3D:
-    dw C2Sc3_00
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Money
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_3E:
-    dw C2Sc3_55
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookBondLicense
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_3F:
-    dw C2Sc3_56
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookClaimTicket
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_40:
-    dw C2Sc3_57
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookSoap
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_41:
-    dw C2Sc3_58
-    dw C2Sc3_0A
-    dw C2Sc3_7F
+    dw LookC2Key6
+    dw UseC2Key
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_42:
-    dw C2Sc3_59
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_5A
+    dw LookMagnet
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeMagnet
 
 C2Act3_43:
-    dw C2Sc3_5B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_5C
+    dw ReadFramePhoto
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeFramePhoto
 
 C2Act3_44:
     dw LookC2Ledger
     dw OpenC2Ledger
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
     dw CloseC2Ledger
 
 C2Act3_45:
-    dw C2Sc3_60
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_61
+    dw LookC2HatRack
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2HatRack
 
 C2Act3_46:
-    dw C2Sc3_62
-    dw C2Sc3_6B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_63
+    dw LookPaperweight
+    dw ItemCannotOpen
+    dw UseC2Item
+    dw PutC2Item
+    dw TakePaperweight
     dw NoC2ItemEffect
-    dw C2Sc3_07
-    dw C2Sc3_32
+    dw SplitPaperweight
+    dw ItemNoAnswer
     dw RejectC2Item
 
 C2Act3_47:
-    dw C2Sc3_64
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_65
+    dw LookC2Dart
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeC2Dart
 
 C2Act3_48:
-    dw C2Sc3_66
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_67
+    dw LookDartBase
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeDartBase
 
 C2Act3_49:
-    dw C2Sc3_68
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookC2Opener
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_4A:
-    dw C2Sc3_69
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookOldSandwich
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_4B:
-    dw C2Sc3_6A
-    dw C2Sc3_6B
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_6C
+    dw LookDeskMat
+    dw ItemCannotOpen
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeDeskMat
     dw RejectC2Item
 
 C2Act3_4C:
-    dw C2Sc3_6D
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw LookFramedPhoto
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_4D:
     dw ReadBondLetter
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_4E:
-    dw C2Sc3_6E
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw ReadCompanyList
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_4F:
     dw LookC2Banana
     dw PeelC2Banana
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Banana
     dw RejectC2Item
 
@@ -613,75 +613,75 @@ C2Act3_50:
     db $81
 jr_007_590e:
     db $59
-    dw C2Sc3_7F
+    dw PutC2Item
     dw TakeC2Item
     dw CloseBlackBook
 
 C2Act3_51:
-    dw C2Sc3_75
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_76
+    dw LookTag1
+    dw UseC2Item
+    dw PutC2Item
+    dw TakeTag1
 
 C2Act3_52:
-    dw C2Sc3_77
+    dw LookTag2
     ; Pointer to $5981; split bytes retain the interior label.
     db $81
 jr_007_5920:
     db $59
-    dw C2Sc3_7F
-    dw C2Sc3_78
+    dw PutC2Item
+    dw TakeTag2
 
 C2Act3_53:
     dw LookC2Peel
-    dw C2Sc3_06
-    dw C2Sc3_7F
+    dw UseC2Item
+    dw PutC2Item
     dw TakeC2Item
 
 C2Act3_54:
-    dw C2Sc3_7A
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7A
+    dw ItemSilentAction
+    dw UseC2Item
+    dw PutC2Item
+    dw ItemSilentAction
 
 C2Act3_55:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_56:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_57:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_58:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_59:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_5A:
-    dw C2Sc3_7C
-    dw C2Sc3_06
-    dw C2Sc3_7F
-    dw C2Sc3_7D
+    dw LookC2AmmoAlt
+    dw UseC2Item
+    dw PutC2Item
+    dw AmmoNotNeeded
 
 C2Act3_5B:
     dw ReadStogieRing
-    dw C2Sc3_06
+    dw UseC2Item
     dw UseC2Ring
-    dw C2Sc3_7B
+    dw TakeC2Ring2

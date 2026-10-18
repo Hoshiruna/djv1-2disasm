@@ -13,7 +13,7 @@ Mode2Text:
 
 Call_000_10ad:
     call SetTextMode2
-    jr jr_000_10b8
+    jr ReadTextLoop
 
 ; Select text mode one, initialize the regional text buffer, and enter the loop.
 StartTextMsg:
@@ -46,10 +46,10 @@ jr_000_10b8:
     jr z, jr_000_10fb
 
     cp $0f
-    jr z, jr_000_10e4
+    jr z, WaitTextRelease
 
     cp $30
     jr c, jr_000_1137
 
     call DrawTextGlyph
-    jr jr_000_10b8
+    jr ReadTextLoop

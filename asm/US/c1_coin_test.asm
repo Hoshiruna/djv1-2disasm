@@ -10,12 +10,16 @@ TestListCount:
     ld c, a
     ld a, [wC1Coins]
     cp c
-    jr z, jr_000_2b6a
+    jr z, C1CoinLimitMet
 
-    jr nc, jr_000_2b6d
+    jr nc, C1CoinLimitReturn
 
+; Set the result when the coin count is at or below the argument.
+C1CoinLimitMet:
 jr_000_2b6a:
     call SetResult
 
+; Return after the coin-limit comparison.
+C1CoinLimitReturn:
 jr_000_2b6d:
     ret

@@ -6,17 +6,21 @@ ApplyC2Schedule:
 Call_003_63c7:
     ld de, $0000
 
+; Inspect the next scheduled train record.
+TrainApplyNextRecord:
 jr_003_63ca:
     ld hl, wTrainRecs+3
     add hl, de
     ld a, [hl]
     cp TrainNone
-    jr z, jr_003_63e2
+    jr z, TrainApplyClearInactive
 
     push de
     call DispatchTrain
     pop de
 
+; Advance four bytes to the next train record.
+TrainApplyAdvance:
 jr_003_63d8:
     inc e
     inc e
@@ -24,14 +28,16 @@ jr_003_63d8:
     inc e
     ld a, TrainRecsLen
     cp e
-    jr nz, jr_003_63ca
+    jr nz, TrainApplyNextRecord
 
     ret
 
 
+; Clear access for a train with no active record.
+TrainApplyClearInactive:
 jr_003_63e2:
     call ClearTrainAccess
-    jr jr_003_63d8
+    jr TrainApplyAdvance
 
 ; Dispatch the selected train phase through the sixteen-entry table; DE is the four-byte record offset.
 DispatchTrain:

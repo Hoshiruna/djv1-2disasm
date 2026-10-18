@@ -4,14 +4,18 @@ DrawSceneMap:
 Call_000_0d87:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0d92
+    jr nz, SceneDrawCase2Cue
 
     ld a, $27
-    jr jr_000_0d94
+    jr SceneDrawInitSteps
 
+; Select audio cue 1D for Case II scene drawing.
+SceneDrawCase2Cue:
 jr_000_0d92:
     ld a, $1d
 
+; Play the selected cue and load the effect step count.
+SceneDrawInitSteps:
 jr_000_0d94:
     call PlayAudio
     call ReadSceneMap
@@ -29,10 +33,14 @@ jr_000_0d94:
     xor a
     ld [wDrawStep], a
 
+; Reset the row index at the start of an effect step.
+SceneDrawNextStep:
 jr_000_0db0:
     xor a
     ld [wDrawRow], a
 
+; Read the effect mask for the current row.
+SceneDrawNextRow:
 jr_000_0db4:
     push af
     ld a, $01
@@ -42,30 +50,34 @@ jr_000_0db4:
     call PopRomBank
     ld de, $0000
 
+; Shift out the next of fourteen row-mask bits.
+SceneDrawNextColumn:
 jr_000_0dc4:
     ; Consume bits 0 through 13 as columns from left to right.
     ld hl, wDrawMask+1
     srl [hl]
     dec hl
     rr [hl]
-    jr nc, jr_000_0dd3
+    jr nc, SceneDrawAdvanceColumn
 
 Call_000_0dce:
     push de
     call DrawSceneCell
     pop de
 
+; Advance the column, row, or effect step after the mask bit.
+SceneDrawAdvanceColumn:
 jr_000_0dd3:
     inc e
     ld a, e
     cp $0e
-    jr nz, jr_000_0dc4
+    jr nz, SceneDrawNextColumn
 
     ld a, [wDrawRow]
     inc a
     ld [wDrawRow], a
     cp $0e
-    jr nz, jr_000_0db4
+    jr nz, SceneDrawNextRow
 
     call SubmitMapQueue
     call WaitFrame
@@ -74,7 +86,7 @@ jr_000_0dd3:
     ld [wDrawStep], a
     ld hl, wDrawSteps
     cp [hl]
-    jr nz, jr_000_0db0
+    jr nz, SceneDrawNextStep
 
     ret
 
@@ -101,7 +113,7 @@ StageSceneCell:
 Call_000_0e14:
     ld a, [wSceneBlank]
     cp $00
-    jr z, jr_000_0e26
+    jr z, StageSceneMapCell
 
     ld a, $ff
     ld [wCellTile], a
@@ -110,6 +122,8 @@ Call_000_0e14:
     ret
 
 
+; Read a tile and attribute from the selected scene map cell.
+StageSceneMapCell:
 jr_000_0e26:
     ld a, [wDrawRow]
     add a

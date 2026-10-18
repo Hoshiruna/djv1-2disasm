@@ -28,7 +28,7 @@ DropC1ItemObj:
     cp $2c
     ret nz
 
-    ld a, $87
+    ld a, C1GagRemoved
     call ClearObjFlag
     ret
 

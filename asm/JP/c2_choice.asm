@@ -1,5 +1,7 @@
 
-; Display the two-choice prompt, process the selected choice, and retain the original text-hold handling.
+; Ask whether Ace knows blackjack rules and branch on the selected answer.
+Ask21Rules:
+
 RunC2Choice:
     ld a, $48
     call ShowMsg3
@@ -12,19 +14,24 @@ RunC2Choice:
     call ChooseC2Menu
     ld a, [wC2MenuPick]
     cp $00
-    jr nz, jr_003_555c
+    jr nz, Explain21Rules
 
-; Show message $46 through the existing message-three handler.
+; Explain that blackjack requires chips obtained at the cashier.
+ShowChipHint:
+
 ShowC2Choice46:
 
 Call_003_5557:
     ld a, $46
     jp ShowMsg3
 
+; Show blackjack rules and the chip hint, then resume the text UI.
+Explain21Rules:
+
 
 jr_003_555c:
     call ScriptHoldText
     ld a, $91
     call ShowMsg0
-    call ShowC2Choice46
+    call ShowChipHint
     jp ResumeTextUI

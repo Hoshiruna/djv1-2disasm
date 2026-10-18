@@ -7,7 +7,7 @@ Jump_000_1b2b:
     call ReadArgs2
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_1b41
+    jr nz, BranchScript
 
     ret
 
@@ -21,7 +21,7 @@ Jump_000_1b36:
 
 Jump_000_1b3c:
     and $01
-    jr z, jr_000_1b41
+    jr z, BranchScript
 
     ret
 

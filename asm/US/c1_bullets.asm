@@ -74,7 +74,7 @@ UseBullet1:
 
     ld a, [wBullet1Count]
     cp $00
-    jr z, jr_000_2c7e
+    jr z, C1Bullet1Empty
 
 Jump_000_2c5f:
     dec a
@@ -91,8 +91,10 @@ Jump_000_2c5f:
     ret
 
 
+; Clear the alternate-target bypass and show the first empty-reserve reply.
+C1Bullet1Empty:
 jr_000_2c7e:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $77
     call ShowMsg2
@@ -105,7 +107,7 @@ UseBullet2:
 
     ld a, [wBullet2Count]
     cp $00
-    jr z, jr_000_2cb2
+    jr z, C1Bullet2Empty
 
     dec a
     ld [wBullet2Count], a
@@ -121,8 +123,10 @@ UseBullet2:
     ret
 
 
+; Clear the alternate-target bypass and show the second empty-reserve reply.
+C1Bullet2Empty:
 jr_000_2cb2:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $78
     call ShowMsg2

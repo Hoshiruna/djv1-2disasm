@@ -11,11 +11,11 @@ CheckRoomExit:
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_1eed
+    jr nz, PrepRoomMove
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1ee0
+    jr nz, RejectCase2RoomExit
 
     ld a, $63
     call ShowMsg2
@@ -23,6 +23,8 @@ CheckRoomExit:
     jp EndBankAction
 
 
+; Show the Case II message when the selected exit is unavailable.
+RejectCase2RoomExit:
 jr_000_1ee0:
     ld a, $d1
     call ShowMsg0
@@ -42,7 +44,7 @@ PrepRoomMove:
 jr_000_1eed:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1f4a
+    jr nz, RoomMoveSaveState
 
     push af
     ld a, $02
@@ -64,17 +66,19 @@ Jump_000_1f07:
     add hl, bc
     ld a, [hl]
     cp $23
-    jr nz, jr_000_1f17
+    jr nz, RoomMoveCheckItem28
 
     ld a, $bb
 
 Jump_000_1f12:
     call ClearObjFlag
-    jr jr_000_1f20
+    jr RoomMoveCheckCabFare
 
+; Check whether item 28 should set object flag BB.
+RoomMoveCheckItem28:
 jr_000_1f17:
     cp $28
-    jr nz, jr_000_1f20
+    jr nz, RoomMoveCheckCabFare
 
     ld a, $bb
 
@@ -82,36 +86,46 @@ Call_000_1f1d:
     call SetObjFlag
 
 Jump_000_1f20:
+; Read the pending cab fare flag before leaving the room.
+RoomMoveCheckCabFare:
 jr_000_1f20:
-    ld a, $a9
+    ld a, C1CabFarePending
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_000_1f45
+    jr z, RoomMoveClearCabFare
 
     ld a, [wRoomId]
     cp $26
-    jr z, jr_000_1f39
+    jr z, RoomMoveSetBlueCabDebt
 
     cp $27
-    jr z, jr_000_1f40
+    jr z, RoomMoveSetYellowCabDebt
 
-    jr jr_000_1f45
+    jr RoomMoveClearCabFare
 
+; Set the blue cab debt flag when leaving room 26h.
+RoomMoveSetBlueCabDebt:
 jr_000_1f39:
-    ld a, $81
+    ld a, C1BlueCabDebt
     call SetObjFlag
-    jr jr_000_1f45
+    jr RoomMoveClearCabFare
 
 Call_000_1f40:
+; Set the yellow cab debt flag when leaving room 27h.
+RoomMoveSetYellowCabDebt:
 jr_000_1f40:
-    ld a, $a0
+    ld a, C1YellowCabDebt
     call SetObjFlag
 
+; Clear the pending cab fare flag after the room check.
+RoomMoveClearCabFare:
 jr_000_1f45:
-    ld a, $a9
+    ld a, C1CabFarePending
     call ClearObjFlag
 
+; Save the current state before flushing room changes.
+RoomMoveSaveState:
 jr_000_1f4a:
     call SaveState
 
@@ -127,7 +141,7 @@ Call_000_1f53:
     call PopRomBank
     ld a, [wChangeMode]
     cp $01
-    jr nz, jr_000_1f69
+    jr nz, MoveRoom
 
     ld a, $02
     ld [wChangeMode], a
@@ -141,21 +155,25 @@ jr_000_1f69:
     ld [wPrevRoom], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1f7b
+    jr nz, RoomMoveReadCase2Args
 
     call ReadArg
-    jr jr_000_1f7e
+    jr RoomMoveChooseDestination
 
+; Read two destination arguments for a Case II room move.
+RoomMoveReadCase2Args:
 jr_000_1f7b:
     call ReadArgs2
 
 Call_000_1f7e:
+; Use argument zero unless it matches the current room, then use argument one.
+RoomMoveChooseDestination:
 jr_000_1f7e:
     ld a, [wRoomId]
     ld d, a
     ld a, [wArg0]
     cp d
-    jr nz, jr_000_1f8b
+    jr nz, EnterRoom
 
     ld a, [wArg1] ; Case I only reads arg 0 here; arg 1 can retain its previous value.
 
@@ -169,7 +187,7 @@ jr_000_1f8b:
     call ResetObjScroll
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1fce
+    jr nz, EnterCase2Room
 
     push af
     ld a, $01
@@ -195,8 +213,10 @@ jr_000_1f8b:
     pop af
     call DrawC1Marks
     call PopRomBank
-    jr jr_000_2002
+    jr EnterRoomDrawScene
 
+; Select Case II scene effects, art, panel, and object marks.
+EnterCase2Room:
 jr_000_1fce:
     push af
     ld a, $03
@@ -232,6 +252,8 @@ Jump_000_1fff:
     call PopRomBank
 
 Jump_000_2002:
+; Draw the selected scene and build the room object list.
+EnterRoomDrawScene:
 jr_000_2002:
     call ShowScene
     call BuildObjList
@@ -243,16 +265,20 @@ jr_000_2002:
     call PopRomBank
     ld a, [wRoomId]
     cp RoomTracksA
-    jr c, jr_000_2022
+    jr c, ResetEscapeSteps
 
     ld a, [wC2EscapeSteps]
     inc a
-    jr jr_000_2023
+    jr StoreEscapeSteps
 
+; Clear the escape-step counter outside the tracked room range.
+ResetEscapeSteps:
 jr_000_2022:
     xor a
 
 Call_000_2023:
+; Store the updated escape-step counter before the end check.
+StoreEscapeSteps:
 jr_000_2023:
     ld [wC2EscapeSteps], a
     push af

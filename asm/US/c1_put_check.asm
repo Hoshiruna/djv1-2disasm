@@ -5,48 +5,58 @@ CheckC1Put:
 
     ld a, [wItemType]
     cp $03
-    jr nz, jr_002_6a8a
+    jr nz, C1PutDispatchSavedSlots
 
     ld a, [wItemId]
     cp $00
-    jr nz, jr_002_6a66
+    jr nz, C1PutCheckBullet1
 
     ld a, [wC1Coins]
     cp $00
-    jr nz, jr_002_6a7e
+    jr nz, C1PutCountRejected
 
+; Show the empty-count reply and leave the nested action.
+C1PutCountEmpty:
 jr_002_6a5a:
     ld a, $29
     call ShowMsg2
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
-    jr jr_002_6aae
+    jr C1PutEndNested
 
+; Check the first ammunition count for item eight.
+C1PutCheckBullet1:
 jr_002_6a66:
     cp $08
-    jr nz, jr_002_6a73
+    jr nz, C1PutCheckBullet2
 
     ld a, [wBullet1Count]
     cp $00
-    jr nz, jr_002_6a7e
+    jr nz, C1PutCountRejected
 
-    jr jr_002_6a5a
+    jr C1PutCountEmpty
 
+; Check the second ammunition count for item $2d.
+C1PutCheckBullet2:
 jr_002_6a73:
     cp $2d
-    jr nz, jr_002_6a8a
+    jr nz, C1PutDispatchSavedSlots
 
     ld a, [wBullet2Count]
     cp $00
-    jr z, jr_002_6a5a
+    jr z, C1PutCountEmpty
 
+; Reject placing a count-backed item whose count is nonzero.
+C1PutCountRejected:
 jr_002_6a7e:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $7d
     call ShowMsg2
-    jr jr_002_6aae
+    jr C1PutEndNested
 
+; Save selection scratch values around the put dispatcher.
+C1PutDispatchSavedSlots:
 jr_002_6a8a:
     ldh a, [hChangePos]
     push af
@@ -56,7 +66,7 @@ jr_002_6a8a:
     and $ef
     ld [wStateResult], a
     call DispatchC1Put
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     pop af
     ldh [hItemSlot], a
@@ -64,11 +74,13 @@ jr_002_6a8a:
     ldh [hChangePos], a
     ld a, [wStateResult]
     and $10
-    jr nz, jr_002_6aae
+    jr nz, C1PutEndNested
 
     ret
 
 
+; Clear the nested-action result bit and return through EndNestedAction.
+C1PutEndNested:
 jr_002_6aae:
     ld a, [wStateResult]
     and $ef
@@ -106,12 +118,14 @@ PutC1Group:
 
     ld a, [wAltSlot+1]
     cp $04
-    jr nz, jr_002_6ade
+    jr nz, C1PutFindGroupSlot
 
     call SetResult
     ret
 
 
+; Calculate the group offset before scanning its seven slots.
+C1PutFindGroupSlot:
 jr_002_6ade:
     add a
     add a
@@ -119,6 +133,8 @@ jr_002_6ade:
     ldh [hChangePos], a
     ld e, $00
 
+; Find an empty group byte while retaining the original scratch high byte.
+C1PutGroupSlotLoop:
 jr_002_6ae5:
     ld bc, wGroupData
     ldh a, [hChangePos]
@@ -139,7 +155,7 @@ jr_002_6ae5:
     inc a
     ld e, a
     cp $07
-    jr c, jr_002_6ae5
+    jr c, C1PutGroupSlotLoop
 
     ld a, $76
     call ShowMsg2

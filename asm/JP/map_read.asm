@@ -10,22 +10,24 @@ Call_000_05ce:
     jp z, ReadMapRle
 
     cp $21
-    jr z, jr_000_060c
+    jr z, ReadMapRaw
 
     cp $17
-    jr z, jr_000_062d
+    jr z, ReadRlePair
 
     cp $18
-    jr z, jr_000_05ed
+    jr z, ReadMapPair
 
     cp $07
-    jr z, jr_000_0651
+    jr z, ReadMapRle
 
     cp $08
-    jr z, jr_000_060c
+    jr z, ReadMapRaw
 
+; Remain in the original loop for an unrecognized map format byte.
+ReadMapUnknownFormat:
 jr_000_05eb:
-    jr jr_000_05eb
+    jr ReadMapUnknownFormat
 
 ; Copy raw tiles, restore dimensions, then copy attributes in VRAM bank 1.
 ReadMapPair:
@@ -73,12 +75,14 @@ jr_000_0612:
     ldh a, [hReadWidth]
     ld e, a
 
+; Copy the next raw tile or attribute byte in the current row.
+CopyMapRawByte:
 jr_000_0616:
     ld a, [hl+]
     ld [bc], a
     inc bc
     dec e
-    jr nz, jr_000_0616
+    jr nz, CopyMapRawByte
 
     pop bc
     ld a, $20
@@ -94,7 +98,7 @@ Call_000_0620:
     ldh a, [hReadHeight]
     dec a
     ldh [hReadHeight], a
-    jr nz, jr_000_0612
+    jr nz, CopyMapRaw
 
     ret
 
@@ -156,6 +160,8 @@ jr_000_065c:
     ldh a, [hReadWidth]
     push af
 
+; Decode and write the next byte in the current RLE row.
+CopyMapRleByte:
 jr_000_0660:
     call ReadRleByte
     ld [bc], a
@@ -163,7 +169,7 @@ jr_000_0660:
     ldh a, [hReadWidth]
     dec a
     ldh [hReadWidth], a
-    jr nz, jr_000_0660
+    jr nz, CopyMapRleByte
 
     pop af
     ldh [hReadWidth], a
@@ -182,7 +188,7 @@ Jump_000_0675:
     ldh a, [hReadHeight]
     dec a
     ldh [hReadHeight], a
-    jr nz, jr_000_065c
+    jr nz, CopyMapRle
 
 Call_000_067f:
     ret

@@ -6,7 +6,7 @@ UseC2Count2:
 
     ld a, [wC2Cells]
     cp $00
-    jr z, jr_000_318e
+    jr z, C2CellEmpty
 
     dec a
     ld [wC2Cells], a
@@ -15,6 +15,8 @@ UseC2Count2:
     ret
 
 
+; Clear the result when no Case II battery remains.
+C2CellEmpty:
 jr_000_318e:
     call ClearResult
     ret

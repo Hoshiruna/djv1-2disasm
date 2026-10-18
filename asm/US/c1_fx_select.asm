@@ -6,13 +6,13 @@ SaveC1FxScene:
     ld [wFxScene], a
     ld a, [wFxId]
     cp $06
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     cp $07
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     cp $08
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     ld e, a
     ld d, $00
@@ -36,13 +36,13 @@ Call_002_718c:
     ld [wFxScene], a
     ld a, [wFxId]
     cp $06
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     cp $07
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     cp $08
-    jr z, jr_002_71ba
+    jr z, ReloadC1FxScene
 
     ld e, a
     ld d, $00

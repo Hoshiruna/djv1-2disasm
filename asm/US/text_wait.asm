@@ -4,30 +4,36 @@ DelayTextInput:
     call SubmitMapQueue
     ld d, $14
 
+; Wait for the first twenty frames of text-input delay.
+TextDelayInitialFrame:
 jr_000_16a4:
     call WaitFrame
     dec d
-    jr nz, jr_000_16a4
+    jr nz, TextDelayInitialFrame
 
     ld a, [wJoyPress]
     push af
     ld d, $1e
 
+; Wait while A or B remains held, up to thirty frames.
+TextDelayHeldButtons:
 jr_000_16b0:
     push de
     call WaitFrame
     call PollJoy
     pop de
     dec d
-    jr z, jr_000_16c6
+    jr z, TextDelayRestorePress
 
     ld a, [wJoyHeld]
     bit 0, a
-    jr nz, jr_000_16b0
+    jr nz, TextDelayHeldButtons
 
     bit 1, a
-    jr nz, jr_000_16b0
+    jr nz, TextDelayHeldButtons
 
+; Restore the saved button-press byte.
+TextDelayRestorePress:
 jr_000_16c6:
     pop af
     ld [wJoyPress], a
@@ -40,32 +46,40 @@ WaitTextConfirm:
 Call_000_16cb:
     call SubmitMapQueue
 
+; Update the room and wait for an A press.
+TextConfirmPollPress:
 jr_000_16ce:
     call StepTextWait
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr z, jr_000_16ce
+    jr z, TextConfirmPollPress
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_16e6
+    jr nz, TextConfirmCaseIICue
 
     ld a, $31
-    jr jr_000_16e8
+    jr TextConfirmPlayCue
 
+; Select the Case II confirmation cue.
+TextConfirmCaseIICue:
 jr_000_16e6:
     ld a, $18
 
+; Play the selected confirmation cue.
+TextConfirmPlayCue:
 jr_000_16e8:
     call PlayAudio
 
+; Wait for the A button to be released.
+TextConfirmPollRelease:
 jr_000_16eb:
     call StepTextWait
     call PollJoy
     ld a, [wJoyHeld]
     bit 0, a
-    jr nz, jr_000_16eb
+    jr nz, TextConfirmPollRelease
 
     xor a
     ld [wWaitFrame], a
@@ -99,4 +113,4 @@ Call_000_1706:
     call PopRomBank
 
 Call_000_1720:
-    jr jr_000_16ff
+    jr RefreshObjOam

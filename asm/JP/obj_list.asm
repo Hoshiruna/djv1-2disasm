@@ -5,18 +5,22 @@ BuildObjList:
 Call_000_0ed5:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0ee3
+    jr nz, ObjListUseCase2Refs
 
     ld a, $05
     ld de, C1EntryRefs
 
 Jump_000_0ee1:
-    jr jr_000_0ee8
+    jr ObjListReadRoomPtr
 
+; Use the Case II room-object pointer table.
+ObjListUseCase2Refs:
 jr_000_0ee3:
     ld a, $05
     ld de, Case2RoomObjects
 
+; Resolve the current room to its seven-byte object records.
+ObjListReadRoomPtr:
 jr_000_0ee8:
     call PushRomBank
     ld a, [wRoomId]
@@ -44,6 +48,8 @@ Call_000_0eff:
 Jump_000_0f03:
     ld [wObjListPtr+1], a
 
+; Read the next room-object record or append the end marker.
+ObjListScanRecord:
 jr_000_0f06:
     ld a, [wRoomObjPtr]
     ld l, a
@@ -56,7 +62,7 @@ Jump_000_0f0f:
 
 Call_000_0f11:
 Jump_000_0f11:
-    jr nz, jr_000_0f21
+    jr nz, ObjListCheckRule
 
     push af
     ld a, [wObjListPtr]
@@ -68,16 +74,20 @@ Jump_000_0f11:
     jp PopRomBank
 
 
+; Read the rule byte from a nonterminal room-object record.
+ObjListCheckRule:
 jr_000_0f21:
     ld bc, $0004
     add hl, bc
     ld a, [hl]
     bit 7, a
-    jr nz, jr_000_0f2f
+    jr nz, ObjListApplyRule
 
     call NextRoomObj
-    jr jr_000_0f06
+    jr ObjListScanRecord
 
+; Run the object rule and attempt to add its drawable object.
+ObjListApplyRule:
 jr_000_0f2f:
     ld [wObjRule], a
     inc hl
@@ -101,18 +111,20 @@ Jump_000_0f46:
     call AddRoomObj
     call PopRomBank
 
+; Advance to the next room-object record.
+ObjListNextRecord:
 jr_000_0f52:
     call NextRoomObj
 
 Call_000_0f55:
-    jr jr_000_0f06
+    jr ObjListScanRecord
 ; Unwind the rule call and restore the room bank, then advance the room record.
 SkipRoomObj:
 
 Jump_000_0f57:
     call PopRomBank
     pop af
-    jr jr_000_0f52
+    jr ObjListNextRecord
 ; Advance the room-object record pointer by seven bytes.
 NextRoomObj:
 

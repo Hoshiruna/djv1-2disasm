@@ -5,7 +5,7 @@ C1RoomEvt1E:
     call ReadItemFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6688
+    jr nz, C1Room1ECheckCash
 
     ld a, $54
     call ReadItemFlag
@@ -13,6 +13,8 @@ C1RoomEvt1E:
     and $01
     ret z
 
+; Check the coin count after finding either twenty-dollar bill item flag.
+C1Room1ECheckCash:
 jr_002_6688:
     call ClearResult
     ld a, [wC1Coins]
@@ -23,12 +25,14 @@ jr_002_6688:
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_66a1
+    jr z, C1Room1ERandomCheck
 
     call ClearResult
     ret
 
 
+; Test random mask three before drawing the target room.
+C1Room1ERandomCheck:
 jr_002_66a1:
     call ClearResult
     call NextRandom
@@ -47,26 +51,30 @@ jr_002_66a1:
 C1RoomEvt20:
 
 
-    ld a, $92
+    ld a, C1ArmedLadyDown
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_66cb
+    jr z, C1Room20RandomCheck
 
     call ClearResult
     ret
 
 
+; Test random bit zero while the armed-lady-down flag is clear.
+C1Room20RandomCheck:
 jr_002_66cb:
     call NextRandom
     ldh a, [hRandByte]
     and $01
-    jr nz, jr_002_66d8
+    jr nz, C1Room20ShowEvent
 
     call ClearResult
     ret
 
 
+; Draw the target room and show the room-$20 event reply.
+C1Room20ShowEvent:
 jr_002_66d8:
     ld a, [wArg3]
     call DrawRoomAt
@@ -83,7 +91,7 @@ C1RoomEvt24:
     call ReadProp4Bit0
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_66fe
+    jr nz, C1Room24CountVisit
 
     ld a, $07
     call ReadProp4Bit0
@@ -91,6 +99,8 @@ C1RoomEvt24:
     and $01
     ret z
 
+; Increment the visit counter when either relevant property is carried.
+C1Room24CountVisit:
 jr_002_66fe:
     ld a, [wRoomEvtCount]
     inc a
@@ -119,22 +129,24 @@ C1RoomEvt1F:
     call NextRandom
     ldh a, [hRandByte]
     and $01
-    jr z, jr_002_6732
+    jr z, C1BumStartEvent
 
     call ClearResult
     ret
 
 
+; Set the bum-event flag and choose a reply using the heard-hint flag.
+C1BumStartEvent:
 jr_002_6732:
-    ld a, $a8
+    ld a, C1BumEventActive
     call SetObjFlag
     ld a, [wArg3]
     call DrawRoomAt
-    ld a, $91
+    ld a, C1BumHintHeard
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6752
+    jr nz, C1BumRepeatEventReply
 
     ld a, $db
     call ShowMsg2
@@ -142,6 +154,8 @@ jr_002_6732:
     ret
 
 
+; Show the alternate bum-event reply after the hint has been heard.
+C1BumRepeatEventReply:
 jr_002_6752:
     ld a, $de
     call ShowMsg2
@@ -152,37 +166,43 @@ jr_002_6752:
 C1RoomEvt4A:
 
 
-    ld a, $05
+    ld a, C1MuggerHit1
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_676b
+    jr z, C1Mugger1CheckPaid
 
     call ClearResult
     ret
 
 
+; Test the payment flag after confirming the first mugger-hit flag is clear.
+C1Mugger1CheckPaid:
 jr_002_676b:
-    ld a, $2a
+    ld a, C1MuggerPaid
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_677b
+    jr z, C1Mugger1RandomCheck
 
     call ClearResult
     ret
 
 
+; Check random mask $18 before the first mugger event.
+C1Mugger1RandomCheck:
 jr_002_677b:
     call ClearResult
     call NextRandom
     ldh a, [hRandByte]
     and $18
-    jr z, jr_002_6788
+    jr z, C1Mugger1ShowEvent
 
     ret
 
 
+; Draw the target room and show the first mugger-event reply.
+C1Mugger1ShowEvent:
 jr_002_6788:
     ld a, [wArg3]
     call DrawRoomAt
@@ -195,48 +215,56 @@ jr_002_6788:
 C1RoomEvt4D:
 
 
-    ld a, $06
+    ld a, C1MuggerHit2
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_67a7
+    jr z, C1Mugger2CheckPaid
 
     call ClearResult
     ret
 
 
+; Check payment after confirming the second mugger-hit flag is clear.
+C1Mugger2CheckPaid:
 jr_002_67a7:
-    ld a, $2a
+    ld a, C1MuggerPaid
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_67b7
+    jr z, C1Mugger2CheckHit1
 
     call ClearResult
     ret
 
 
+; Require the first hit flag before the second mugger event.
+C1Mugger2CheckHit1:
 jr_002_67b7:
-    ld a, $05
+    ld a, C1MuggerHit1
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_67c7
+    jr nz, C1Mugger2RandomCheck
 
     call ClearResult
     ret
 
 
+; Check random mask $18 before the second mugger event.
+C1Mugger2RandomCheck:
 jr_002_67c7:
     call ClearResult
     call NextRandom
     ldh a, [hRandByte]
     and $18
-    jr z, jr_002_67d4
+    jr z, C1Mugger2ShowEvent
 
     ret
 
 
+; Draw the target room and show the second mugger-event reply.
+C1Mugger2ShowEvent:
 jr_002_67d4:
     ld a, [wArg3]
     call DrawRoomAt
@@ -249,38 +277,44 @@ jr_002_67d4:
 C1RoomEvt4B:
 
 
-    ld a, $07
+    ld a, C1MuggerHit3
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_67f3
+    jr z, C1Mugger3CheckPaid
 
     call ClearResult
     ret
 
 
+; Check payment after confirming the third mugger-hit flag is clear.
+C1Mugger3CheckPaid:
 jr_002_67f3:
-    ld a, $2a
+    ld a, C1MuggerPaid
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_6803
+    jr z, C1Mugger3CheckHit2
 
     call ClearResult
     ret
 
 
+; Require the second hit flag before the third mugger event.
+C1Mugger3CheckHit2:
 jr_002_6803:
-    ld a, $06
+    ld a, C1MuggerHit2
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6813
+    jr nz, C1Mugger3RandomCheck
 
     call ClearResult
     ret
 
 
+; Test random mask $18 before drawing the third mugger event.
+C1Mugger3RandomCheck:
 jr_002_6813:
     call ClearResult
     call NextRandom
@@ -299,44 +333,50 @@ jr_002_6813:
 C1RoomEvt4C:
 
 
-    ld a, $2a
+    ld a, C1MuggerPaid
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_002_683d
+    jr z, C1MuggerFinalCheckHit3
 
     call ClearResult
     ret
 
 
+; Require the third hit flag after confirming the mugger has not been paid.
+C1MuggerFinalCheckHit3:
 jr_002_683d:
-    ld a, $07
+    ld a, C1MuggerHit3
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_684d
+    jr nz, C1MuggerFinalCheckBills
 
     call ClearResult
     ret
 
 
+; Check either twenty-dollar bill item flag before the final event.
+C1MuggerFinalCheckBills:
 jr_002_684d:
     ld a, $07
     call ReadItemFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6869
+    jr nz, C1MuggerFinalRandomCheck
 
     ld a, $54
     call ReadItemFlag
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_6869
+    jr nz, C1MuggerFinalRandomCheck
 
     call ClearResult
     ret
 
 
+; Test random mask $1c before drawing the final mugger event.
+C1MuggerFinalRandomCheck:
 jr_002_6869:
     call ClearResult
     call NextRandom

@@ -8,11 +8,13 @@ Call_029_6c6c:
     call ScoreBJHand
     ld [wBJPlayer], a
     cp $00
-    jr z, jr_029_6c7b
+    jr z, BJPlayerChooseAction
 
     bit 7, a
     ret nz
 
+; Show the action prompt and read the next hit or stand choice.
+BJPlayerChooseAction:
 jr_029_6c7b:
     ld a, $02
     call ShowBJText
@@ -22,11 +24,11 @@ jr_029_6c7b:
     call ChooseBJAction
     ld a, [wBJChoice]
     cp $00
-    jr nz, jr_029_6ce4
+    jr nz, BJPlayerStand
 
     ld a, [wBJBias]
     cp $00
-    jr z, jr_029_6cb4
+    jr z, BJPlayerDealRandom
 
     ld a, [wBJPlayer]
     ld [wBJTarget], a
@@ -34,20 +36,26 @@ jr_029_6c7b:
     ldh [hBJSlot], a
     ld a, [wBJBias]
     cp $01
-    jr nz, jr_029_6caf
+    jr nz, BJPlayerDealNear21
 
     call DealBJBelow
-    jr jr_029_6cbc
+    jr BJPlayerShowNewCard
 
+; Use the near-21 dealing path for this bias mode.
+BJPlayerDealNear21:
 jr_029_6caf:
     call DealBJNear21
-    jr jr_029_6cbc
+    jr BJPlayerShowNewCard
 
+; Use the unbiased random dealing path.
+BJPlayerDealRandom:
 jr_029_6cb4:
     ld a, [wBJNextP]
     ldh [hBJSlot], a
     call DealBJRandom
 
+; Draw the new card, pause, and rescore the player hand.
+BJPlayerShowNewCard:
 jr_029_6cbc:
     ld a, [wBJNextP]
     call ShowBJHandCard
@@ -57,21 +65,25 @@ jr_029_6cbc:
     call ScoreBJHand
     ld [wBJPlayer], a
     cp $00
-    jr z, jr_029_6ce3
+    jr z, BJPlayerDone
 
     bit 7, a
-    jr nz, jr_029_6ce3
+    jr nz, BJPlayerDone
 
     ld a, [wBJNextP]
     inc a
     ld [wBJNextP], a
     cp $0c
-    jr nz, jr_029_6c7b
+    jr nz, BJPlayerChooseAction
 
+; Return after a special total or the sixth card.
+BJPlayerDone:
 jr_029_6ce3:
     ret
 
 
+; Finish the player turn after a stand choice.
+BJPlayerStand:
 jr_029_6ce4:
     call SubmitOam
     call ShowBJPause

@@ -40,7 +40,7 @@ InitC2View:
     ld [hl], a
     ld a, [wCaseResume]
     cp $00
-    jr nz, jr_003_40a8
+    jr nz, C2ViewFinishInit
 
     xor a
     call ShowMsg0
@@ -69,6 +69,8 @@ InitC2View:
     ld a, $03
     call ShowMsg0
 
+; Finish view setup after either the opening sequence or a resumed view.
+C2ViewFinishInit:
 jr_003_40a8:
     ld a, $fe
     ld [wCaseResume], a

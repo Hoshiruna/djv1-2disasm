@@ -39,20 +39,22 @@ Call_001_679f:
     ld bc, $a000
     ld d, $08
 
+; Compare the next signature byte with saved RAM.
+TextSetCompareTag:
 jr_001_67a7:
     ld a, [bc]
     inc bc
     ld e, a
     ld a, [hl+]
     cp e
-    jr nz, jr_001_67c4
+    jr nz, ResetTextSet
 
     dec d
-    jr nz, jr_001_67a7
+    jr nz, TextSetCompareTag
 
     ld a, [bc]
     cp $05
-    jr nc, jr_001_67c4
+    jr nc, ResetTextSet
 
     ld [wTextSet], a
     ret
@@ -87,12 +89,14 @@ Call_001_67ce:
     ld hl, TextSetTag
     ld bc, $a000
 
+; Copy the next signature or default byte to saved RAM.
+TextSetWriteTagByte:
 jr_001_67d4:
     ld a, [hl+]
     ld [bc], a
     inc bc
     dec d
-    jr nz, jr_001_67d4
+    jr nz, TextSetWriteTagByte
 
     ret
 

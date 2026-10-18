@@ -55,10 +55,12 @@ ReturnScript:
 
     ld a, [wCallBank]
     cp $00
-    jr z, jr_000_1ba9
+    jr z, ReturnScriptRestorePtr
 
     call PopRomBank
 
+; Restore the saved script pointer after an optional bank pop.
+ReturnScriptRestorePtr:
 jr_000_1ba9:
     call PopHramByte
     ld [wScriptPtr+1], a

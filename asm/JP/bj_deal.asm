@@ -9,10 +9,10 @@ jr_029_6d8a:
     call NextRandom
     ldh a, [hRandByte]
     cp $00
-    jr z, jr_029_6d8a
+    jr z, DealBJRandom
 
     cp $35
-    jr nc, jr_029_6d8a
+    jr nc, DealBJRandom
 
     ld [wBJDraw], a
     ld [wBJBitId], a
@@ -49,14 +49,16 @@ Jump_029_6da7:
     add hl, bc
     pop af
     and [hl]
-    jr z, jr_029_6de1
+    jr z, BJStoreUnusedCard
 
     ld a, [wBJCard]
     ldh [hBJLoop], a
     ld a, [wBJFace]
     ldh [hBJSlot], a
-    jr jr_029_6d8a
+    jr DealBJRandom
 
+; Mark the unused card, store it in the current hand slot, and decrement the deck count.
+BJStoreUnusedCard:
 jr_029_6de1:
     ldh a, [hBJByte]
     ld l, a

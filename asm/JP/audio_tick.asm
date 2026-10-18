@@ -3,7 +3,7 @@
 UpdateAudio:
 
     bit 7, [hl]
-    jr z, jr_004_41f0
+    jr z, StepAudio
 
     res 7, [hl]
     call StepAudio
@@ -18,107 +18,127 @@ jr_004_41f0:
     ld bc, wBaseP2
     ld a, [bc]
     sla a
-    jr nc, jr_004_4208
+    jr nc, StepAudioBasePulse1
 
     call StageAudioSlot
     call StepPulse
     call PulseEnv
     call SaveAudioSlot
 
+; Advance the base pulse-one slot when active.
+StepAudioBasePulse1:
 jr_004_4208:
     ld bc, wBaseP1
     ld a, [bc]
     sla a
-    jr nc, jr_004_421c
+    jr nc, StepAudioBaseWave
 
     call StageAudioSlot
     call StepPulse
     call PulseEnv
     call SaveAudioSlot
 
+; Advance the base wave slot when active.
+StepAudioBaseWave:
 jr_004_421c:
     ld bc, wBaseWave
     ld a, [bc]
     sla a
-    jr nc, jr_004_4230
+    jr nc, StepAudioBaseNoise
 
     call StageAudioSlot
     call StepWave
     call WaveVolume
     call SaveAudioSlot
 
+; Advance the base noise slot when active.
+StepAudioBaseNoise:
 jr_004_4230:
     ld bc, wBaseNoise
     ld a, [bc]
     sla a
-    jr nc, jr_004_4241
+    jr nc, StepAudioAltPulse2
 
     call StageAudioSlot
     call StepNoise
     call SaveAudioSlot
 
+; Advance the alternate pulse-two slot when active.
+StepAudioAltPulse2:
 jr_004_4241:
     ld bc, wAltP2
     ld a, [bc]
     sla a
-    jr nc, jr_004_4255
+    jr nc, StepAudioAltPulse1
 
     call StageAudioSlot
     call StepPulse
     call PulseEnv
     call SaveAudioSlot
 
+; Advance the alternate pulse-one slot when active.
+StepAudioAltPulse1:
 jr_004_4255:
     ld bc, wAltP1
     ld a, [bc]
     sla a
-    jr nc, jr_004_4269
+    jr nc, StepAudioAltWave
 
     call StageAudioSlot
     call StepPulse
     call PulseEnv
     call SaveAudioSlot
 
+; Advance the alternate wave slot when active.
+StepAudioAltWave:
 jr_004_4269:
     ld bc, wAltWave
     ld a, [bc]
     sla a
-    jr nc, jr_004_427d
+    jr nc, StepAudioTopPulse1
 
     call StageAudioSlot
     call StepWave
     call WaveVolume
     call SaveAudioSlot
 
+; Advance the top pulse-one slot when active.
+StepAudioTopPulse1:
 jr_004_427d:
     ld bc, wTopP1
     ld a, [bc]
     sla a
-    jr nc, jr_004_4291
+    jr nc, StepAudioTopNoise
 
     call StageAudioSlot
     call StepPulse
     call SaveAudioSlot
     call PulseEnv
 
+; Advance the top noise slot when active.
+StepAudioTopNoise:
 jr_004_4291:
     ld bc, wTopNoise
     ld a, [bc]
     sla a
-    jr nc, jr_004_42a2
+    jr nc, StepAudioMix
 
     call StageAudioSlot
     call StepNoise
     call SaveAudioSlot
 
+; Mix the updated slots and check for base audio completion.
+StepAudioMix:
 jr_004_42a2:
     call MixAudio
     ld a, [wAudioDone]
     cp $00
-    jr z, jr_004_42af
+    jr z, StepAudioDone
 
     call EndAudio
 
+; Return after the completion check.
+StepAudioDone:
 jr_004_42af:
     ret
 
@@ -134,12 +154,14 @@ Call_004_42b0:
     ld hl, wAudioSlot
     ld d, AudioRecLen
 
+; Copy the next byte of the selected slot into the stage buffer.
+StageAudioSlotCopyByte:
 jr_004_42bd:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_004_42bd
+    jr nz, StageAudioSlotCopyByte
 
     ret
 
@@ -155,12 +177,14 @@ Call_004_42c4:
     ld bc, wAudioSlot
     ld d, AudioRecLen
 
+; Copy the next staged byte back to the selected slot.
+SaveAudioSlotCopyByte:
 jr_004_42d1:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_004_42d1
+    jr nz, SaveAudioSlotCopyByte
 
     ret
 

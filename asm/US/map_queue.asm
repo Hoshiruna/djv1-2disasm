@@ -19,6 +19,8 @@ Call_000_02a5:
 Call_000_02ab:
     ldh [hMapHeight], a
 
+; Locate the current map queue write position.
+QueueMapRectBuffer:
 jr_000_02ad:
     ldh a, [hMapQueueLen]
     add $a0
@@ -27,6 +29,8 @@ jr_000_02ad:
     adc $c0
     ld d, a
 
+; Queue tile and attribute bytes for the next map row.
+QueueMapRectNextRow:
 jr_000_02b7:
     ldh a, [hMapWidth]
 
@@ -41,23 +45,27 @@ Call_000_02c0:
 Jump_000_02c2:
     ldh [hMapHeight], a
     cp $00
-    jr z, jr_000_02d3
+    jr z, QueueMapRectFinish
 
     ldh a, [hMapQueueLen]
     cp $80
-    jr c, jr_000_02b7
+    jr c, QueueMapRectNextRow
 
     call SubmitMapQueue
-    jr jr_000_02ad
+    jr QueueMapRectBuffer
 
+; Submit a final full queue before returning.
+QueueMapRectFinish:
 jr_000_02d3:
     ldh a, [hMapQueueLen]
     cp $80
-    jr c, jr_000_02dc
+    jr c, QueueMapRectDone
 
 Jump_000_02d9:
     call SubmitMapQueue
 
+; Restore registers and return from map rectangle queuing.
+QueueMapRectDone:
 jr_000_02dc:
     pop de
     pop af
@@ -170,6 +178,6 @@ jr_000_0327:
 
 Jump_000_0330:
     cp $00
-    jr nz, jr_000_0327
+    jr nz, QueueMapRun
 
     ret

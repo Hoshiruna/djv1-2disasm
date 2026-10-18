@@ -16,26 +16,30 @@ Jump_029_6c26:
     ld [wBJPayout], a
     ld a, [wBJResult]
     cp $00
-    jr z, jr_029_6c63
+    jr z, BJResultReturnBet
 
     cp $01
-    jr z, jr_029_6c69
+    jr z, BJResultPayChips
 
     ld a, [wBJBet]
     add a
     ld [wBJPayout], a
     ld a, [wBJPlayer]
     cp $ff
-    jr nz, jr_029_6c69
+    jr nz, BJResultPayChips
 
     ld a, [wBJPayout]
     add a
     ld [wBJPayout], a
-    jr jr_029_6c69
+    jr BJResultPayChips
 
+; Set a tie payout equal to the original bet.
+BJResultReturnBet:
 jr_029_6c63:
     ld a, [wBJBet]
     ld [wBJPayout], a
 
+; Pass the calculated payout to the chip update routine.
+BJResultPayChips:
 jr_029_6c69:
     jp PayBJChips

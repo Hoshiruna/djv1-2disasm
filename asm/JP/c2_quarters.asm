@@ -17,12 +17,14 @@ TestC2Count:
 
     ld a, [wC2Quarters]
     cp $00
-    jr z, jr_000_2ca4
+    jr z, C2QuartersEmpty
 
     call SetResult
     ret
 
 
+; Clear the result when no Case II quarter remains.
+C2QuartersEmpty:
 jr_000_2ca4:
     call ClearResult
     ret

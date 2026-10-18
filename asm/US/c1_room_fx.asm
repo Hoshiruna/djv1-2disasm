@@ -26,10 +26,10 @@ jr_001_6500:
     ld a, [hl+]
     and $7f
     cp d
-    jr z, jr_001_6517
+    jr z, SetC1RoomFx
 
     call NextC1State
-    jr jr_001_6500
+    jr ScanC1FxRows
 
 ; Store the matching room record effect byte in the scene effect state.
 SetC1RoomFx:

@@ -42,12 +42,14 @@ Call_000_1a48:
     ld d, $40
     ld hl, wBgPalNext
 
+; Copy the next background-palette byte into staging.
+StageBgPalNextByte:
 jr_000_1a76:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_000_1a76
+    jr nz, StageBgPalNextByte
 
     call PopRomBank
     pop de
@@ -89,12 +91,14 @@ Call_000_1a83:
     ld d, $40
     ld hl, wObjPalNext
 
+; Copy the next object-palette byte into staging.
+StageObjPalNextByte:
 jr_000_1ab1:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_000_1ab1
+    jr nz, StageObjPalNextByte
 
     call PopRomBank
     pop de

@@ -1,5 +1,5 @@
 
-; Run the case-two two-choice prompt in bank three and restore the previous bank.
+; Ask about blackjack rules in bank three and restore the previous bank.
 C2ChoiceCall:
 
 
@@ -7,6 +7,6 @@ C2ChoiceCall:
     ld a, $03
     call PushRomBank
     pop af
-    call RunC2Choice
+    call Ask21Rules
     call PopRomBank
     ret

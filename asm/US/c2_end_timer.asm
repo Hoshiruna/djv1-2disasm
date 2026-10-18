@@ -6,12 +6,14 @@ StepC2TimedFx:
 Call_003_5649:
     ld a, C2EndFlag
     call ReadObjFlag
-    jr nz, jr_003_5656
+    jr nz, C2EndAdvanceTimer
 
     ld a, C2RingFlag
     call ReadObjFlag
     ret z
 
+; Advance the ending timer when either ending condition flag is set.
+C2EndAdvanceTimer:
 jr_003_5656:
     ld a, [wC2EndTick]
     inc a
@@ -91,7 +93,7 @@ jr_003_56a6:
     call C2NewsCue10
     ld a, $42
     call ShowMsg3
-    jr jr_003_5681
+    jr FailC2Deadline
 
 ; Check for conflicting desk items; failed cleanliness leads to Stogie's blackmail accusation.
 CheckEndClean:
@@ -115,7 +117,7 @@ jr_003_56c9:
     call C2NewsCue10
     ld a, $ca
     call ShowMsg1
-    jr jr_003_5681
+    jr FailC2Deadline
 
 ; Begin Stogie effect $10 and play audio nine after his appearance message.
 StartStogieFx:
@@ -152,7 +154,8 @@ jr_003_5701:
     call ShowMsg1
     jp FailC2Deadline
 
-; With both desk checks passed, retain the 82-step comparison and show failure to get far enough from the mob war.
+; With both desk checks passed, retain the $52 comparison and show failure to get far enough from the mob war.
+; Entry from StepC2End requires the counter to equal $34, so its early return cannot be taken on that path.
 EndNearVegas:
 
 

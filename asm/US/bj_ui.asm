@@ -13,14 +13,18 @@ Jump_029_7014:
     ld [wBJRect+1], a
     ld a, [wBJDigits]
     cp $00
-    jr nz, jr_029_702f
+    jr nz, BJLeftNonzeroTens
 
     ld a, $7f
-    jr jr_029_7031
+    jr BJLeftWriteDigits
 
+; Set the visible tens digit when it is nonzero.
+BJLeftNonzeroTens:
 jr_029_702f:
     or $80
 
+; Write the remaining-card digits to the map queue.
+BJLeftWriteDigits:
 jr_029_7031:
     ld [wBJDigits], a
     ld a, [wBJDigits+1]
@@ -42,10 +46,12 @@ Call_029_704a:
     xor a
     ld [wBJDigits], a
 
+; Subtract tens until the remainder is below ten.
+BJSplitDigitsLoop:
 jr_029_7051:
     ld a, [wBJDigits+1]
     cp $0a
-    jr c, jr_029_7069
+    jr c, BJSplitDigitsDone
 
     ld a, [wBJDigits+1]
     sub $0a
@@ -53,8 +59,10 @@ jr_029_7051:
     ld a, [wBJDigits]
     inc a
     ld [wBJDigits], a
-    jr jr_029_7051
+    jr BJSplitDigitsLoop
 
+; Return the decimal tens and remainder.
+BJSplitDigitsDone:
 jr_029_7069:
     ret
 
@@ -65,8 +73,10 @@ PayBJChips:
 Jump_029_706a:
     ld a, [wBJPayout]
     cp $00
-    jr z, jr_029_709b
+    jr z, BJPayNothing
 
+; Add and display one chip from the pending payout.
+BJPayNextChip:
 jr_029_7071:
     ld a, [wChips]
     inc a
@@ -78,19 +88,23 @@ jr_029_7071:
     call WaitTicks
     ld a, [wChips]
     cp $ff
-    jr z, jr_029_7095
+    jr z, BJPayDelay
 
     ld a, [wBJPayout]
     dec a
     ld [wBJPayout], a
-    jr nz, jr_029_7071
+    jr nz, BJPayNextChip
 
+; Wait after the payout reaches zero or chips reach $ff.
+BJPayDelay:
 jr_029_7095:
     ld a, $28
     call WaitTicks
     ret
 
 
+; Display the chip total when the payout is zero.
+BJPayNothing:
 jr_029_709b:
     call ShowBJChips
     ld a, $3c
@@ -129,14 +143,16 @@ Call_029_70bf:
     call ShowBJLeft
     ld a, [wChips]
     cp $00
-    jr z, jr_029_70e3
+    jr z, BJTableFadeIn
 
     ld a, [wBJLeft]
     cp $10
-    jr c, jr_029_70e3
+    jr c, BJTableFadeIn
 
     call ShowBJChips
 
+; Fade in the prepared blackjack table.
+BJTableFadeIn:
 jr_029_70e3:
     call FadeIn
     ret

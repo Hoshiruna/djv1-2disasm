@@ -20,14 +20,18 @@ DrawCaseSprite:
     add hl, hl
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_5f5f
+    jr nz, DrawCaseSpriteUseC2Defs
 
     ld bc, C1SpriteDefs
-    jr jr_002_5f62
+    jr DrawCaseSpriteResolve
 
+; Use the Case II sprite definition table.
+DrawCaseSpriteUseC2Defs:
 jr_002_5f5f:
     ld bc, C2SpriteDefs
 
+; Resolve the sprite ID and emit its parts.
+DrawCaseSpriteResolve:
 jr_002_5f62:
     add hl, bc
     ld a, [hl+]
@@ -44,14 +48,18 @@ DrawObjFrame:
     add hl, hl
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_5f7c
+    jr nz, DrawObjFrameUseC2Defs
 
     ld bc, C1SpriteDefs
-    jr jr_002_5f7f
+    jr DrawObjFrameResolve
 
+; Use the Case II object sprite definition table.
+DrawObjFrameUseC2Defs:
 jr_002_5f7c:
     ld bc, C2SpriteDefs
 
+; Resolve the object frame before writing shadow OAM.
+DrawObjFrameResolve:
 jr_002_5f7f:
     add hl, bc
     ld a, [hl+]
@@ -77,33 +85,37 @@ jr_002_5f7f:
     ld d, a
     ld a, [hl+]
 
+; Read the next part and check its Y clipping limits.
+DrawObjFrameNextPart:
 jr_002_5f9f:
     ldh [hSpriteLeft], a
     ld a, [hl+]
     add e
     ld [bc], a
     cp $a8
-    jr nc, jr_002_5fd6
+    jr nc, DrawObjFrameSkipY
 
     ld a, [wSpriteClip]
     cp $00
-    jr z, jr_002_5fb4
+    jr z, DrawObjFrameWritePart
 
     ld a, [bc]
     cp $54
-    jr nc, jr_002_5fd6
+    jr nc, DrawObjFrameSkipY
 
+; Check X and tile ID, then write a visible sprite part.
+DrawObjFrameWritePart:
 jr_002_5fb4:
     inc bc
     ld a, [hl+]
     add d
     ld [bc], a
     cp $b0
-    jr nc, jr_002_5fdb
+    jr nc, DrawObjFrameSkipX
 
     ld a, [hl]
     cp $ff
-    jr z, jr_002_5fdb
+    jr z, DrawObjFrameSkipX
 
     inc bc
     ld a, [hl+]
@@ -118,22 +130,28 @@ jr_002_5fb4:
     cp $28
     ret z
 
+; Decrement the remaining sprite-part count.
+DrawObjFrameAdvancePart:
 jr_002_5fd0:
     ldh a, [hSpriteLeft]
     dec a
-    jr nz, jr_002_5f9f
+    jr nz, DrawObjFrameNextPart
 
     ret
 
 
+; Skip X, tile, and attribute bytes after Y clipping.
+DrawObjFrameSkipY:
 jr_002_5fd6:
     inc hl
     inc hl
     inc hl
-    jr jr_002_5fd0
+    jr DrawObjFrameAdvancePart
 
+; Skip tile and attribute bytes after X or tile rejection.
+DrawObjFrameSkipX:
 jr_002_5fdb:
     inc hl
     inc hl
     dec bc
-    jr jr_002_5fd0
+    jr DrawObjFrameAdvancePart

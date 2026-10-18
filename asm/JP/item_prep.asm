@@ -17,7 +17,7 @@ PickOpClass:
 Call_001_5673:
     ld a, [wCaseId]
     cp $00
-    jr z, jr_001_569a
+    jr z, PickOpClassDefault
 
     ld a, [wItemType]
     ld d, a
@@ -25,30 +25,38 @@ Call_001_5673:
     ld e, a
     ld hl, C2OpClasses
 
+; Compare the next Case II type and value triple.
+PickOpClassNextTriple:
 jr_001_5685:
     ld a, [hl+]
     cp $ff
-    jr z, jr_001_569a
+    jr z, PickOpClassDefault
 
     cp d
-    jr nz, jr_001_5696
+    jr nz, PickOpClassSkipType
 
     ld a, [hl+]
     cp e
-    jr nz, jr_001_5697
+    jr nz, PickOpClassSkipResult
 
     ld a, [hl]
     ld [wOpClass], a
     ret
 
 
+; Skip the value byte after an unmatched operation type.
+PickOpClassSkipType:
 jr_001_5696:
     inc hl
 
+; Skip the class byte and continue the triple scan.
+PickOpClassSkipResult:
 jr_001_5697:
     inc hl
-    jr jr_001_5685
+    jr PickOpClassNextTriple
 
+; Use the first item type when no Case II triple matches.
+PickOpClassDefault:
 jr_001_569a:
     ld a, [wItemType]
     ld [wOpClass], a
@@ -195,7 +203,7 @@ ReadOpBits:
     ld b, a
     pop af
     and b
-    jr z, jr_001_5767
+    jr z, ReadOpBitsState
 
     ld a, $01
     ld b, a
@@ -208,6 +216,8 @@ ReadOpBits:
     add hl, bc
     ld [hl], a
 
+; Check the selected state bitmap after the item flag bitmap.
+ReadOpBitsState:
 jr_001_5767:
     ld d, a
     ld a, [wOpByte]
@@ -239,11 +249,13 @@ jr_001_5767:
     ld b, a
     pop af
     and b
-    jr nz, jr_001_5798
+    jr nz, ReadOpBitsSetState
 
     ret
 
 
+; Set operation attribute bit one for the selected item state.
+ReadOpBitsSetState:
 jr_001_5798:
     ld a, $02
     push af
@@ -345,11 +357,13 @@ ReadOpState:
     ld b, a
     pop af
     and b
-    jr nz, jr_001_5823
+    jr nz, ReadOpStateSetAttr
 
     ret
 
 
+; Set operation attribute value four when the state bit is set.
+ReadOpStateSetAttr:
 jr_001_5823:
     ld a, $04
     ld b, a

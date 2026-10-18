@@ -7,29 +7,35 @@ TestC2Required:
 Call_003_560a:
     ld bc, C2ProofIds
 
+; Check the next required item against the desk contents.
+DeskProofNextRequired:
 jr_003_560d:
     ld a, [bc]
     ld hl, wDeskItems
 
+; Compare the required item with the next desk slot.
+DeskProofScanNext:
 jr_003_5611:
     cp [hl]
-    jr z, jr_003_561f
+    jr z, DeskProofFound
 
     inc hl
     ld e, a
     ld a, DeskEndLo
     cp l
     ld a, e
-    jr nz, jr_003_5611
+    jr nz, DeskProofScanNext
 
     jp ClearResult
 
 
+; Advance to the next required evidence item.
+DeskProofFound:
 jr_003_561f:
     inc bc
     ld a, ProofEndLo
     cp c
-    jr nz, jr_003_560d
+    jr nz, DeskProofNextRequired
 
     jp SetResult
 
@@ -44,10 +50,14 @@ TestC2Absent:
 Call_003_562b:
     ld bc, C2BadProof
 
+; Check the next forbidden item against the desk contents.
+DeskCleanNextForbidden:
 jr_003_562e:
     ld a, [bc]
     ld hl, wDeskItems
 
+; Compare the forbidden item with the next desk slot.
+DeskCleanScanNext:
 jr_003_5632:
     cp [hl]
     jp z, ClearResult
@@ -57,12 +67,12 @@ jr_003_5632:
     ld a, DeskEndLo
     cp l
     ld a, e
-    jr nz, jr_003_5632
+    jr nz, DeskCleanScanNext
 
     inc bc
     ld a, BadProofEndLo
     cp c
-    jr nz, jr_003_562e
+    jr nz, DeskCleanNextForbidden
 
     jp SetResult
 

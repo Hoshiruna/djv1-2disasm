@@ -11,13 +11,15 @@ Call_003_59cf:
     cp $42
     ret nc
 
+; Scan rooms excluded from the Stogie visit and uniform check.
+C2WatchScanRoom:
 jr_003_59d9:
     ld a, [hl+]
     cp e
     ret z
 
     cp $ff
-    jr nz, jr_003_59d9
+    jr nz, C2WatchScanRoom
 
     ld a, [wSceneId]
     cp $17
@@ -92,7 +94,7 @@ C2TimedMsg0D:
     call WaitTicks
     ld a, $0d
     call ShowMsg1
-    jr jr_003_5a7e
+    jr EndC2DebtVisit
 
 ; Run the second Stogie warning: the boss expects the money.
 C2DebtWarn2:
@@ -103,7 +105,7 @@ C2TimedMsg0E:
     call WaitTicks
     ld a, $0e
     call ShowMsg1
-    jr jr_003_5a7e
+    jr EndC2DebtVisit
 
 ; Run the third Stogie warning: roughly half the time has passed.
 C2DebtWarn3:
@@ -114,7 +116,7 @@ C2TimedMsg0F:
     call WaitTicks
     ld a, $0f
     call ShowMsg1
-    jr jr_003_5a7e
+    jr EndC2DebtVisit
 
 ; Run the fourth Stogie warning: the boss will not forgive the theft.
 C2DebtWarn4:
@@ -125,7 +127,7 @@ C2TimedMsg10:
     call WaitTicks
     ld a, $10
     call ShowMsg1
-    jr jr_003_5a7e
+    jr EndC2DebtVisit
 
 ; Run the fifth Stogie warning: the next visit will be the last.
 C2DebtWarn5:

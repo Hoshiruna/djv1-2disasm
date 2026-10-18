@@ -16,78 +16,78 @@ C2Type1Refs:
     dw C2Act1_0C
 
 C2Act1_00:
-    dw C2Sc1_00
+    dw LookC2Dresser
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_01:
-    dw C2Sc1_02
+    dw LookNightstand1
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_02:
-    dw C2Sc1_03
-    dw C2Sc1_04
+    dw LookC2Mailbox
+    dw OpenC2Mailbox
     dw RejectC2Container
-    dw C2Sc1_05
+    dw CloseC2Mailbox
 
 C2Act1_03:
-    dw C2Sc1_06
-    dw C2Sc1_07
+    dw LookDiarySlot
+    dw OpenDiarySlot
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_04:
-    dw C2Sc1_08
-    dw C2Sc1_09
+    dw LookEmptySlot
+    dw OpenEmptySlot
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_05:
-    dw C2Sc1_0A
+    dw LookSiegelDesk
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_06:
-    dw C2Sc1_0B
-    dw C2Sc1_0C
+    dw LookSiegelSafe
+    dw OpenSiegelSafe
     dw RejectC2Container
-    dw C2Sc1_0D
+    dw CloseSiegelSafe
 
 C2Act1_07:
-    dw C2Sc1_0E
-    dw C2Sc1_0F
+    dw LookJoePhone
+    dw OpenJoePhone
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_08:
-    dw C2Sc1_10
+    dw LookNightstand2
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_09:
-    dw C2Sc1_11
-    dw C2Sc1_12
+    dw LookC2Wardrobe
+    dw OpenC2Wardrobe
     dw RejectC2Container
-    dw C2Sc1_13
-    dw C2Sc1_14
-    dw C2Sc1_15
-    dw C2Sc1_16
-    dw C2Sc1_17
-    dw C2Sc1_18
+    dw WardrobeDropReply
+    dw WardrobeCantDo
+    dw CloseC2Wardrobe
+    dw BreakWardMirror
+    dw WardrobeNoAnswer
+    dw WardrobeQuestion
 
 C2Act1_0A:
-    dw C2Sc1_19
+    dw LookMahogDesk
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container
 
 C2Act1_0B:
-    dw C2Sc1_1A
+    dw LookSolidDesk
     dw OpenC2Container
     dw RejectC2Container
     dw CloseC2Container

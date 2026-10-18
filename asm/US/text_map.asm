@@ -8,14 +8,18 @@ Jump_000_1620:
     push hl
     ld a, [wTextMode]
     bit 0, a
-    jr nz, jr_000_162d
+    jr nz, TextMapUseWindow
 
     ld bc, _SCRN0
-    jr jr_000_1630
+    jr TextMapComputeOffset
 
+; Select the window tile-map base.
+TextMapUseWindow:
 jr_000_162d:
     ld bc, _SCRN1
 
+; Add the row and column offset to the selected tile-map base.
+TextMapComputeOffset:
 jr_000_1630:
     ld a, [wTextMapY]
     ld l, a

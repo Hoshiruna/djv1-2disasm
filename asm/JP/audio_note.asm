@@ -11,10 +11,10 @@ Call_004_431d:
     jp nc, PulseStepEnd
 
     call ReadAudio
-    jr nc, jr_004_438a
+    jr nc, PulseMarkAudioDone
 
     cp $7f
-    jr z, jr_004_4362
+    jr z, PulseMarkRest
 
     call ReadNoteFreq
     ld a, c
@@ -25,11 +25,11 @@ Call_004_431d:
     ld [wNoteRegs+3], a
     ld a, [wNoteFlags]
     and $08
-    jr nz, jr_004_4361
+    jr nz, PulseStepEnd
 
     ld a, [wEnvMode]
     sla a
-    jr nc, jr_004_436f
+    jr nc, PulseStartEnvelope
 
     ld a, $00
     ld [wEnvOn], a
@@ -46,6 +46,8 @@ jr_004_4361:
     ret
 
 
+; Disable the envelope and set the pulse rest flag.
+PulseMarkRest:
 jr_004_4362:
     xor a
     ld [wEnvOn], a
@@ -55,6 +57,8 @@ jr_004_4362:
     ret
 
 
+; Reset the pulse envelope state and enable it.
+PulseStartEnvelope:
 jr_004_436f:
     ld a, $ff
     ld [wNoteLevel], a
@@ -70,6 +74,8 @@ jr_004_436f:
     ret
 
 
+; Mark the audio stream complete after a pulse event.
+PulseMarkAudioDone:
 jr_004_438a:
     ld a, $ff
     ld [wAudioDone], a
@@ -82,7 +88,7 @@ PulseEnv:
 Call_004_4390:
     ld a, [wEnvOn]
     cp $00
-    jr z, jr_004_43cb
+    jr z, PulseEnvDone
 
     ld a, [wEnvTick]
     ld d, a
@@ -95,23 +101,29 @@ Call_004_4390:
     add hl, bc
     ld b, $00
 
+; Find the current envelope tick among eight time and level pairs.
+PulseEnvScanPair:
 jr_004_43ab:
     ld a, [hl+]
     cp d
-    jr z, jr_004_43b8
+    jr z, PulseEnvSetLevel
 
     inc hl
     inc b
     ld a, b
     cp $08
-    jr nz, jr_004_43ab
+    jr nz, PulseEnvScanPair
 
-    jr jr_004_43bc
+    jr PulseEnvAdvanceTick
 
+; Store the level paired with the matched envelope tick.
+PulseEnvSetLevel:
 jr_004_43b8:
     ld a, [hl+]
     ld [wNoteLevel], a
 
+; Mark pulse output updated and increment the envelope tick.
+PulseEnvAdvanceTick:
 jr_004_43bc:
     ld a, [wNoteRegs]
     or $20
@@ -120,6 +132,8 @@ jr_004_43bc:
     inc a
     ld [wEnvTick], a
 
+; Return from pulse envelope processing.
+PulseEnvDone:
 jr_004_43cb:
     ret
 
@@ -135,10 +149,10 @@ Call_004_43cc:
     jp nc, WaveStepEnd
 
     call ReadAudio
-    jr nc, jr_004_4439
+    jr nc, WaveMarkAudioDone
 
     cp $7f
-    jr z, jr_004_4411
+    jr z, WaveMarkRest
 
     call ReadNoteFreq
     ld a, c
@@ -149,11 +163,11 @@ Call_004_43cc:
     ld [wNoteRegs+3], a
     ld a, [wNoteFlags]
     and $08
-    jr nz, jr_004_4410
+    jr nz, WaveStepEnd
 
     ld a, [wEnvMode]
     sla a
-    jr nc, jr_004_441e
+    jr nc, WaveStartEnvelope
 
     ld a, $00
     ld [wEnvOn], a
@@ -170,6 +184,8 @@ jr_004_4410:
     ret
 
 
+; Disable the envelope and set the wave rest flag.
+WaveMarkRest:
 jr_004_4411:
     xor a
     ld [wEnvOn], a
@@ -179,6 +195,8 @@ jr_004_4411:
     ret
 
 
+; Reset the wave envelope state and enable it.
+WaveStartEnvelope:
 jr_004_441e:
     ld a, $ff
     ld [wNoteLevel], a
@@ -194,6 +212,8 @@ jr_004_441e:
     ret
 
 
+; Mark the audio stream complete after a wave event.
+WaveMarkAudioDone:
 jr_004_4439:
     ld a, $ff
     ld [wAudioDone], a
@@ -225,10 +245,10 @@ Call_004_444e:
     jp nc, NoiseStepEnd
 
     call ReadAudio
-    jr nc, jr_004_44a3
+    jr nc, NoiseMarkAudioDone
 
     cp $7f
-    jr z, jr_004_44a9
+    jr z, NoiseMarkRest
 
     push bc
     ld b, a
@@ -236,13 +256,15 @@ Call_004_444e:
     and $08
     ld a, b
     pop bc
-    jr nz, jr_004_44b1
+    jr nz, NoiseStepEnd
 
     sub $04
 
+; Subtract twelve repeatedly before scaling to a four-byte instrument row.
+NoiseReduceInstrumentIndex:
 jr_004_4472:
     sub $0c
-    jr nc, jr_004_4472
+    jr nc, NoiseReduceInstrumentIndex
 
     add $0c
     sla a
@@ -269,12 +291,16 @@ jr_004_4472:
     ret
 
 
+; Mark the audio stream complete after a noise event.
+NoiseMarkAudioDone:
 jr_004_44a3:
     ld a, $ff
     ld [wAudioDone], a
     ret
 
 
+; Set the noise rest flag.
+NoiseMarkRest:
 jr_004_44a9:
     ld a, [wNoteFlags]
     or $20

@@ -97,12 +97,12 @@ DrawWindowGlyph:
 Jump_000_1498:
     ld a, [wTextFast]
     cp $00
-    jr nz, jr_000_14be
+    jr nz, WindowGlyphPosition
 
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr z, jr_000_14be
+    jr z, WindowGlyphPosition
 
     ld a, $ff
     ld [wTextFast], a
@@ -114,6 +114,8 @@ Jump_000_1498:
     call PopRomBank
     call RefreshObjOam
 
+; Compute the window-map coordinates for the current glyph.
+WindowGlyphPosition:
 jr_000_14be:
     ld a, [wTextOriginX]
     inc a
@@ -139,16 +141,20 @@ Jump_000_14cf:
     call QueueTileRect
     ld a, [wC1Exit]
     cp $ff
-    jr z, jr_000_14f8
+    jr z, WindowGlyphSubmit
 
     ld a, [wTextFast]
     cp $00
-    jr nz, jr_000_1515
+    jr nz, WindowGlyphStoreBuffer
 
+; Submit the glyph map update before the short display delay.
+WindowGlyphSubmit:
 jr_000_14f8:
     call SubmitMapQueue
     ld a, $03
 
+; Update room objects during the short glyph delay.
+WindowGlyphDelayFrame:
 jr_000_14fd:
     push af
     push af
@@ -163,8 +169,10 @@ Jump_000_1504:
     call SubmitOam
     pop af
     dec a
-    jr nz, jr_000_14fd
+    jr nz, WindowGlyphDelayFrame
 
+; Store the glyph in the text buffer and advance the column.
+WindowGlyphStoreBuffer:
 jr_000_1515:
     ld a, [wTextRow]
     ld e, a
@@ -191,12 +199,14 @@ jr_000_1515:
 
     ld a, [wTextNoWrap]
     cp $00
-    jr nz, jr_000_1548
+    jr nz, WindowGlyphNoWrap
 
     call TextNewline
     ret
 
 
+; Keep the column at the no-wrap position.
+WindowGlyphNoWrap:
 jr_000_1548:
     ld a, $11
     ld [wTextCol], a

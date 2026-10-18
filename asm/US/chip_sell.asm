@@ -6,10 +6,12 @@ SellChips:
     ld [wChipCount], a
     ld a, [wChips]
     cp $32
-    jr nc, jr_003_4e63
+    jr nc, ChipSellChooseCount
 
     ld [wChipCount], a
 
+; Set the sale limit and request a chip quantity.
+ChipSellChooseCount:
 jr_003_4e63:
     ld a, [wChipCount]
     ld [wChipLimit], a

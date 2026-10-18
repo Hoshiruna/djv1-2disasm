@@ -12,7 +12,7 @@ Call_000_1b87:
     call PopRomBank
     ld a, [wActionCode]
     cp $ff
-    jr nz, jr_000_1ba9
+    jr nz, C1ActionStartScript
 
     push af
     ld a, $02
@@ -23,6 +23,8 @@ Call_000_1b87:
     ret
 
 
+; Enter the Case I script bank after a nonfallback action code.
+C1ActionStartScript:
 jr_000_1ba9:
     ld a, $06
     call PushRomBank
@@ -53,13 +55,15 @@ RunAltAction:
 Call_000_1bc1:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1bd0
+    jr nz, C2AltSelectScriptBank
 
     ld a, $06
     call PushRomBank
     jp LoopC1Script
 
 
+; Select the Case II operation-type bank for the alternate script path.
+C2AltSelectScriptBank:
 jr_000_1bd0:
     ld a, [wItemType]
     ld c, a

@@ -9,18 +9,22 @@ Jump_000_0a00:
     call LoadHudGfx
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0a17
+    jr nz, BaseGfxCaseII
 
     ld a, $3f
     call PushRomBank
     ld hl, C1ObjGfxRefs
-    jr jr_000_0a1f
+    jr BaseGfxReadEntry
 
+; Choose the Case II object-graphics bank and table.
+BaseGfxCaseII:
 jr_000_0a17:
     ld a, $32
     call PushRomBank
     ld hl, C2ObjGfxRefs
 
+; Read the selected object or HUD graphics pointer.
+BaseGfxReadEntry:
 jr_000_0a1f:
     ld a, [hl+]
     ld c, a
@@ -38,19 +42,23 @@ LoadFontGfx:
 Call_000_0a2b:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_0a3c
+    jr nz, FontGfxCaseII
 
     ld a, $33
     call PushRomBank
     ld hl, C1Gfx0Refs
-    jr jr_000_0a44
+    jr FontGfxReadEntry
 
+; Choose the Case II font-graphics bank and table.
+FontGfxCaseII:
 jr_000_0a3c:
     ld a, $2a
     call PushRomBank
     ld hl, C2Gfx0Refs
 
 Jump_000_0a44:
+; Read the selected font-graphics pointer.
+FontGfxReadEntry:
 jr_000_0a44:
     ld a, [hl+]
 
@@ -87,18 +95,20 @@ Jump_000_0a53:
     cp $00
 
 Jump_000_0a55:
-    jr nz, jr_000_0a61
+    jr nz, HudGfxCaseII
 
 Jump_000_0a57:
     ld a, $33
     call PushRomBank
     ld hl, C1Gfx0Refs+2
-    jr jr_000_0a1f
+    jr BaseGfxReadEntry
 
+; Choose the Case II HUD graphics bank and table.
+HudGfxCaseII:
 jr_000_0a61:
     ld a, $2a
     call PushRomBank
 
 Call_000_0a66:
     ld hl, C2Gfx0Refs+2
-    jr jr_000_0a1f
+    jr BaseGfxReadEntry

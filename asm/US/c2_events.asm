@@ -34,7 +34,7 @@ StepC2Events:
     call TestC2Exit
     ret nz
 
-    call StepC2Dump
+    call StepC2Hamper
     call TestC2Exit
     ret nz
 

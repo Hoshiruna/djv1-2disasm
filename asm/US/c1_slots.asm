@@ -15,7 +15,7 @@ Call_002_6183:
     call StopSlots
     ld a, [wSlotPrize]
     cp $00
-    jr z, jr_002_61c8
+    jr z, C1SlotsNoPrize
 
     ld [wTextName1], a
     ld [wArg0], a
@@ -33,6 +33,8 @@ Call_002_6183:
     ret
 
 
+; Play the no-prize cue and show the failure reply.
+C1SlotsNoPrize:
 jr_002_61c8:
     ld a, $16
     call PlayAudio
@@ -47,17 +49,19 @@ PickSlotResult:
 Call_002_61d3:
     ld a, [wC1Coins]
     cp $00
-    jr z, jr_002_61e9
+    jr z, C1SlotsChooseMatch
 
     cp $46
-    jr nc, jr_002_6206
+    jr nc, C1SlotsChooseMismatch
 
     call NextRandom
     ldh a, [hRandByte]
     and $07
     cp $06
-    jr c, jr_002_6206
+    jr c, C1SlotsChooseMismatch
 
+; Use one random reel value for all three results and read its prize.
+C1SlotsChooseMatch:
 jr_002_61e9:
     call NextRandom
     ldh a, [hRandByte]
@@ -75,13 +79,19 @@ jr_002_61e9:
     ret
 
 
+; Clear the prize before choosing three nonmatching reel results.
+C1SlotsChooseMismatch:
 jr_002_6206:
     xor a
     ld [wSlotPrize], a
 
+; Restart the three-result selection if all reel values match.
+C1SlotsRetryMismatch:
 jr_002_620a:
     ld bc, $0000
 
+; Choose and store each of the three random reel values.
+C1SlotsReelPickLoop:
 jr_002_620d:
     call NextRandom
     ldh a, [hRandByte]
@@ -92,16 +102,18 @@ jr_002_620d:
     inc c
     ld a, $03
     cp c
-    jr nz, jr_002_620d
+    jr nz, C1SlotsReelPickLoop
 
     ld a, [wSlotResult+1]
     ld hl, wSlotResult
     cp [hl]
-    jr nz, jr_002_622e
+    jr nz, C1SlotsResultReady
 
     ld a, [wSlotResult+2]
     cp [hl]
-    jr z, jr_002_620a
+    jr z, C1SlotsRetryMismatch
 
+; Return with the selected reel results.
+C1SlotsResultReady:
 jr_002_622e:
     ret

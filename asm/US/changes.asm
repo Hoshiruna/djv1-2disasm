@@ -3,13 +3,15 @@ FlushChanges:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_6582
+    jr nz, ChangeFlushInitIndex
 
     ld a, $18
     call ClearObjPresent
     ld a, $19
     call ClearObjPresent
 
+; Initialize the pending-change pair offset.
+ChangeFlushInitIndex:
 jr_002_6582:
     ld d, a
     ld a, $00
@@ -18,6 +20,8 @@ jr_002_6582:
     ldh [hChangePos+1], a
     ld a, d
 
+; Read the next pending change pair.
+ChangeFlushNextPair:
 jr_002_658c:
     ldh a, [hChangePos]
     ld l, a
@@ -27,11 +31,11 @@ jr_002_658c:
     add hl, bc
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_65af
+    jr nz, ChangeFlushCaseII
 
     ld a, [hl]
     cp $ff
-    jr z, jr_002_65c1
+    jr z, ChangeFlushClearBuffer
 
     call ApplyC1Change
     ldh a, [hChangePos]
@@ -39,13 +43,15 @@ jr_002_658c:
     inc a
     ldh [hChangePos], a
     cp $08
-    jr c, jr_002_658c
+    jr c, ChangeFlushNextPair
 
 ; Case I falls through after its fourth pair; UndoC2Change returns before dispatch.
+; Dispatch the pending pair through the banked change handler.
+ChangeFlushCaseII:
 jr_002_65af:
     ld a, [hl]
     cp $ff
-    jr z, jr_002_65c1
+    jr z, ChangeFlushClearBuffer
 
     call UndoChangeBank
     ldh a, [hChangePos]
@@ -53,17 +59,21 @@ jr_002_65af:
     inc a
     ldh [hChangePos], a
     cp $08
-    jr c, jr_002_658c
+    jr c, ChangeFlushNextPair
 
+; Prepare to fill the pending-change buffer with $ff.
+ChangeFlushClearBuffer:
 jr_002_65c1:
     ld c, $0a
     ld hl, wPending
     ld a, $ff
 
+; Write the next $ff byte to the pending-change buffer.
+ChangeFlushClearNext:
 jr_002_65c8:
     ld [hl+], a
     dec c
-    jr nz, jr_002_65c8
+    jr nz, ChangeFlushClearNext
 
     ret
 

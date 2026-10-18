@@ -30,6 +30,8 @@ Call_000_0342:
     ld a, [hl+]
     ld [wFillAttr], a
 
+; Locate the current map queue position for a fill row.
+QueueMapFillBuffer:
 jr_000_0349:
     ldh a, [hMapQueueLen]
     add $a0
@@ -39,6 +41,8 @@ jr_000_0349:
     ld d, a
 
 Call_000_0353:
+; Queue the constant tile and attribute runs for one row.
+QueueMapFillNextRow:
 jr_000_0353:
     ldh a, [hMapWidth]
     ldh [hMapRunLeft], a
@@ -52,15 +56,17 @@ Jump_000_0363:
     dec a
     ldh [hMapHeight], a
     cp $00
-    jr z, jr_000_0375
+    jr z, QueueMapFillDone
 
     ldh a, [hMapQueueLen]
     cp $80
-    jr c, jr_000_0353
+    jr c, QueueMapFillNextRow
 
     call SubmitMapQueue
-    jr jr_000_0349
+    jr QueueMapFillBuffer
 
+; Submit a final full queue and restore registers.
+QueueMapFillDone:
 jr_000_0375:
     ldh a, [hMapQueueLen]
     cp $80
@@ -94,6 +100,8 @@ Jump_000_0383:
     ld a, [wFillTile]
     ld b, a
 
+; Append one constant tile byte to the map queue.
+QueueFillTileByte:
 jr_000_0396:
     ld a, b
     ld [de], a
@@ -102,7 +110,7 @@ jr_000_0396:
     dec a
     ldh [hMapRunLeft], a
     cp $00
-    jr nz, jr_000_0396
+    jr nz, QueueFillTileByte
 
     pop bc
     ret
@@ -133,6 +141,8 @@ Call_000_03a8:
     ld a, [wFillAttr]
     ld b, a
 
+; Append one constant attribute byte to the map queue.
+QueueFillAttrByte:
 jr_000_03bd:
     ld a, b
     ld [de], a
@@ -141,7 +151,7 @@ jr_000_03bd:
     dec a
     ldh [hMapRunLeft], a
     cp $00
-    jr nz, jr_000_03bd
+    jr nz, QueueFillAttrByte
 
     pop bc
     ld a, $20

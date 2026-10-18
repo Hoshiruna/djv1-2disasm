@@ -8,7 +8,7 @@ PickListRoom:
     ld [wListRow], a
     ld a, [wChangeMode]
     cp $00
-    jr z, jr_000_297b
+    jr z, ListRoomChooseRow
 
     ld [wSavedListMode], a
 
@@ -17,6 +17,8 @@ Call_000_2974:
     ld [wChangeMode], a
     call RefreshLists
 
+; Prepare the room-list cursor and choose a row.
+ListRoomChooseRow:
 jr_000_297b:
     call ResumeTextUI
     ld a, $04
@@ -39,14 +41,18 @@ jr_000_297b:
     call PopRomBank
     ld a, [wListPick]
     cp $ff
-    jr nz, jr_000_29b5
+    jr nz, ListRoomResolveRow
 
+; Restore text and lists after a cancelled or empty selection.
+ListRoomCancelled:
 jr_000_29ae:
     call RestoreTextLists
     call SetResult
     ret
 
 
+; Resolve the selected list byte and choose the case-specific room mapper.
+ListRoomResolveRow:
 jr_000_29b5:
     sub $0d
     ld c, a
@@ -55,40 +61,44 @@ jr_000_29b5:
     add hl, bc
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_29f7
+    jr nz, C2ListRoomDispatch
 
     ld a, [hl]
     cp $ff
-    jr z, jr_000_29ae
+    jr z, ListRoomCancelled
 
     ld c, $00
     cp $a3
-    jr z, jr_000_29e0
+    jr z, C1ListRoomLookup
 
     inc c
     cp $a0
-    jr z, jr_000_29e0
+    jr z, C1ListRoomLookup
 
     inc c
     cp $a1
-    jr z, jr_000_29e0
+    jr z, C1ListRoomLookup
 
     inc c
     cp $a2
-    jr z, jr_000_29e0
+    jr z, C1ListRoomLookup
 
     inc c
 
+; Read the destination pair and adjust it using the current room parity.
+C1ListRoomLookup:
 jr_000_29e0:
     ld hl, C1RoomPick
     add hl, bc
     ld c, [hl]
     ld a, [wRoomId]
     and $01
-    jr z, jr_000_29ed
+    jr z, C1ListRoomStore
 
     inc c
 
+; Store the selected destination in argument three.
+C1ListRoomStore:
 jr_000_29ed:
     ld a, c
     ld [wArg3], a
@@ -97,6 +107,8 @@ jr_000_29ed:
 C1RoomPick:
     db $26, $42, $44, $46, $48
 
+; Call the Case II cab-stop selector in bank three.
+C2ListRoomDispatch:
 jr_000_29f7:
     push af
 

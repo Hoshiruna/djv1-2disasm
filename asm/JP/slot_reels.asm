@@ -10,7 +10,7 @@ jr_002_62cf:
     and $07
     ld hl, wSlotShown
     cp [hl]
-    jr z, jr_002_62cf
+    jr z, StepSlot0
 
     ld [hl], a
     ld e, $00
@@ -28,7 +28,7 @@ jr_002_62e3:
     and $07
     ld hl, wSlotShown+1
     cp [hl]
-    jr z, jr_002_62e3
+    jr z, StepSlot1
 
     ld [hl], a
     ld e, $01
@@ -46,7 +46,7 @@ jr_002_62f7:
     and $07
     ld hl, wSlotShown+2
     cp [hl]
-    jr z, jr_002_62f7
+    jr z, StepSlot2
 
     ld [hl], a
     ld e, $02

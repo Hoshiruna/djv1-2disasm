@@ -24,6 +24,6 @@ jr_000_2ad5:
     call WaitFrame
     pop af
     dec a
-    jr nz, jr_000_2ad5
+    jr nz, WaitObjFrames
 
     ret

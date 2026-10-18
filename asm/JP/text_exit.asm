@@ -6,6 +6,8 @@ Jump_000_10e4:
 jr_000_10e4:
     call SubmitMapQueue
 
+; Draw objects and poll for A release.
+TextReleasePoll:
 jr_000_10e7:
     call SubmitMapQueue
     call DrawRoomObjs
@@ -15,7 +17,7 @@ Jump_000_10f0:
     call PollJoy
     ld a, [wJoyHeld]
     bit 0, a
-    jr nz, jr_000_10e7
+    jr nz, TextReleasePoll
 
     ret
 

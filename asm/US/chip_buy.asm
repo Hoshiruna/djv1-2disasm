@@ -7,10 +7,12 @@ BuyChips:
     ld hl, wChips
     sub [hl]
     cp $32
-    jr c, jr_003_4d98
+    jr c, ChipBuySetLimit
 
     ld a, $32
 
+; Set the capped number of chips available for this purchase.
+ChipBuySetLimit:
 jr_003_4d98:
     ld [wChipLimit], a
     call ScriptHoldText
@@ -23,18 +25,20 @@ jr_003_4d98:
     call ChooseChipCount
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_4dba
+    jr z, ChipBuyAttemptPurchase
 
     call ResumeTextUI
     ret
 
 
+; Calculate the selected cost and attempt to spend cash.
+ChipBuyAttemptPurchase:
 jr_003_4dba:
     call CalcChipCost
     call SpendC2Cash
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_4de9
+    jr z, ChipBuyInsufficientCash
 
     ld a, $37
     call ShowMsg3
@@ -54,6 +58,8 @@ jr_003_4dba:
     ret
 
 
+; Show the failed-purchase message and restore the text interface.
+ChipBuyInsufficientCash:
 jr_003_4de9:
     ld a, $99
     call ShowMsg0

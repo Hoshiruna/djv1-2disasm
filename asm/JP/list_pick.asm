@@ -4,11 +4,13 @@ ChooseListRow:
 
     ld a, [wListBase]
     cp $ff
-    jr z, jr_001_6238
+    jr z, ListPickNoEntries
 
     ld a, $0d
     ld [wInputSel], a
 
+; Wait for list input and redraw the selected cursor.
+ListPickInputLoop:
 jr_001_621c:
     call WaitListPick
     call CommitCursor
@@ -17,24 +19,34 @@ jr_001_621c:
     call SubmitOam
     ld a, [wJoyPress]
 
+; Check whether A confirmed the current list row.
+ListPickCheckConfirm:
 jr_001_622e:
     bit 0, a
-    jr nz, jr_001_6241
+    jr nz, ListPickConfirm
 
+; Check whether B canceled list selection.
+ListPickCheckCancel:
 jr_001_6232:
     bit 1, a
-    jr nz, jr_001_623d
+    jr nz, ListPickCancel
 
-    jr jr_001_621c
+    jr ListPickInputLoop
 
+; Show the message used when the list has no entries.
+ListPickNoEntries:
 jr_001_6238:
     ld a, $69
     call ShowMsg2
 
+; Return FF as the list selection.
+ListPickCancel:
 jr_001_623d:
     ld a, $ff
-    jr jr_001_6259
+    jr ListPickRestoreCursor
 
+; Mark the selected list row and play the confirm cue.
+ListPickConfirm:
 jr_001_6241:
     ld a, $19
     call PlayAudio
@@ -46,6 +58,8 @@ jr_001_6241:
     call WaitTicks
     ld a, [wInputSel]
 
+; Store the result and return the cursor to its action position.
+ListPickRestoreCursor:
 jr_001_6259:
     ld [wListPick], a
     ld a, $10
@@ -80,7 +94,7 @@ jr_001_626f:
     add hl, de
     ld a, [hl]
     cp $04
-    jr z, jr_001_626f
+    jr z, WaitListPick
 
     ld e, a
     ld a, [wInputSel]
@@ -93,7 +107,7 @@ jr_001_626f:
     add hl, de
     ld a, [hl]
     cp $ff
-    jr z, jr_001_626f
+    jr z, WaitListPick
 
     ld [wInputSel], a
     call SnapCursor

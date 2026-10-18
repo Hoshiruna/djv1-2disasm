@@ -9,7 +9,7 @@ Call_000_2eef:
     call ReadItemFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_000_2f0a
+    jr z, C1ClearCashSecondBill
 
     ld a, $07
     call DropListValue
@@ -18,6 +18,8 @@ Call_000_2eef:
     ld a, $07
     call SetItemState
 
+; Check and remove the second twenty-dollar bill instance.
+C1ClearCashSecondBill:
 jr_000_2f0a:
     ld a, $54
     call ReadItemFlag
@@ -25,7 +27,7 @@ jr_000_2f0a:
 Jump_000_2f0f:
     ld a, [wStateResult]
     and $01
-    jr z, jr_000_2f25
+    jr z, C1ClearCashCoins
 
     ld a, $54
     call DropListValue
@@ -34,6 +36,8 @@ Jump_000_2f0f:
     ld a, $54
     call SetItemState
 
+; Clear the coin count after checking both bill instances.
+C1ClearCashCoins:
 jr_000_2f25:
     call ResumeTextUI
     xor a

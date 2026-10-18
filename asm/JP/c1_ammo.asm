@@ -6,23 +6,27 @@ IncC1Count0:
 
     ld a, [wGun1Ammo]
     cp $06
-    jr nc, jr_000_2e29
+    jr nc, C1Gun1LoadFull
 
     ld a, [wBullet1Count]
     cp $00
-    jr z, jr_000_2e25
+    jr z, C1Gun1LoadResult
 
     ld a, [wGun1Ammo]
     inc a
     ld [wGun1Ammo], a
 
+; Set the result after the first-gun reserve-count check.
+C1Gun1LoadResult:
 jr_000_2e25:
     call SetResult
     ret
 
 
+; Clear the alternate-target bypass and result when the first gun is full.
+C1Gun1LoadFull:
 jr_000_2e29:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
 
 Call_000_2e2e:
@@ -36,7 +40,7 @@ DecC1Count0:
 
     ld a, [wGun1Ammo]
     cp $00
-    jr z, jr_000_2e41
+    jr z, C1Gun1FireEmpty
 
     dec a
     ld [wGun1Ammo], a
@@ -44,6 +48,8 @@ DecC1Count0:
     ret
 
 
+; Clear the result when the first gun has no loaded rounds.
+C1Gun1FireEmpty:
 jr_000_2e41:
     call ClearResult
     ret
@@ -55,11 +61,11 @@ IncC1Count2:
 
     ld a, [wGun3Ammo]
     cp $06
-    jr nc, jr_000_2e78
+    jr nc, C1Gun3LoadFull
 
     ld a, [wBullet2Count]
     cp $00
-    jr z, jr_000_2e6b
+    jr z, C1Gun3LoadResult
 
     ld a, [wGun3Ammo]
     inc a
@@ -70,12 +76,14 @@ IncC1Count2:
 Jump_000_2e5f:
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_2e6f
+    jr nz, C1Gun3LoadFlagSet
 
 Jump_000_2e66:
     ld a, $4b
     call ClearItemFlag
 
+; Set the result after the third-gun loading checks.
+C1Gun3LoadResult:
 jr_000_2e6b:
     call SetResult
 
@@ -83,6 +91,8 @@ Call_000_2e6e:
     ret
 
 
+; Retain the original branch that sets an already-tested flag $b1.
+C1Gun3LoadFlagSet:
 jr_000_2e6f:
     ld a, $b1
     call SetObjFlag
@@ -90,8 +100,10 @@ jr_000_2e6f:
     ret
 
 
+; Clear the alternate-target bypass and result when the third gun is full.
+C1Gun3LoadFull:
 jr_000_2e78:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     call ClearResult
     ret
@@ -104,7 +116,7 @@ DecC1Count2:
     call ClearResult
     ld a, [wGun3Ammo]
     cp $00
-    jr z, jr_000_2e97
+    jr z, C1Gun3FireReturn
 
     ld d, a
     ld a, [wGun3Ammo]
@@ -113,6 +125,8 @@ DecC1Count2:
     ld a, d
     call SetResult
 
+; Return after the third-gun round-consumption check.
+C1Gun3FireReturn:
 jr_000_2e97:
     ret
 
@@ -123,23 +137,27 @@ IncC1Count1:
 
     ld a, [wGun2Ammo]
     cp $06
-    jr nc, jr_000_2eb1
+    jr nc, C1Gun2LoadFull
 
     ld a, [wBullet1Count]
     cp $00
-    jr z, jr_000_2ead
+    jr z, C1Gun2LoadResult
 
     ld a, [wGun2Ammo]
     inc a
     ld [wGun2Ammo], a
 
+; Set the result after the second-gun reserve-count check.
+C1Gun2LoadResult:
 jr_000_2ead:
     call SetResult
     ret
 
 
+; Clear the alternate-target bypass and result when the second gun is full.
+C1Gun2LoadFull:
 jr_000_2eb1:
-    ld a, $80
+    ld a, C1AltTargetBypass
     call ClearObjFlag
     call ClearResult
     ret
@@ -152,7 +170,7 @@ DecC1Count1:
     call ClearResult
     ld a, [wGun2Ammo]
     cp $00
-    jr z, jr_000_2ed0
+    jr z, C1Gun2FireReturn
 
     ld d, a
     ld a, [wGun2Ammo]
@@ -163,5 +181,7 @@ Call_000_2ecc:
     ld a, d
     call SetResult
 
+; Return after the second-gun round-consumption check.
+C1Gun2FireReturn:
 jr_000_2ed0:
     ret

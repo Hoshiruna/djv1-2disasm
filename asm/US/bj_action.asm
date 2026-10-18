@@ -13,32 +13,38 @@ jr_029_6ceb:
     call DrawBankCursor
     call SubmitOam
 
+; Poll the hit-or-stand input.
+BJActionPollInput:
 jr_029_6cfe:
     call NextRandom
     call PollJoy
     ld a, [wJoyPress]
     and $31
-    jr z, jr_029_6cfe
+    jr z, BJActionPollInput
 
     bit 0, a
-    jr nz, jr_029_6d2a
+    jr nz, BJActionConfirm
 
     and $20
-    jr z, jr_029_6d1e
+    jr z, BJActionSelectStand
 
     ld a, $19
     call PlayAudio
     xor a
     ld [wBJChoice], a
-    jr jr_029_6ceb
+    jr ChooseBJAction
 
+; Move the action cursor to stand.
+BJActionSelectStand:
 jr_029_6d1e:
     ld a, $19
     call PlayAudio
     ld a, $2c
     ld [wBJChoice], a
-    jr jr_029_6ceb
+    jr ChooseBJAction
 
+; Confirm the selected action.
+BJActionConfirm:
 jr_029_6d2a:
     ld a, $19
     call PlayAudio

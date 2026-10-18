@@ -9,10 +9,12 @@ Call_000_0420:
     res 0, a
     ldh [rIE], a
 
+; Wait for scanline $91 before clearing the LCD enable bit.
+DisableLcdWaitLine:
 jr_000_0429:
     ldh a, [rLY]
     cp $91
-    jr nz, jr_000_0429
+    jr nz, DisableLcdWaitLine
 
 Call_000_042f:
     ldh a, [rLCDC]

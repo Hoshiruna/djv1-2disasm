@@ -6,22 +6,25 @@ StepC2FourRooms:
 Call_003_5b25:
     ld a, [wRoomId]
     cp $0a
-    jr z, jr_003_5b37
+    jr z, TickGuardAttack
 
     cp $0e
-    jr z, jr_003_5b37
+    jr z, TickGuardAttack
 
     cp $0f
-    jr z, jr_003_5b37
+    jr z, TickGuardAttack
 
     cp $10
     ret nz
+
+; Advance the guard timer and attack only on the original fortieth step.
+TickGuardAttack:
 
 jr_003_5b37:
     ld a, [wC2GuardTick]
     inc a
     ld [wC2GuardTick], a
-    cp $28
+    cp GuardAttackStep
     ret nz
 
     call ResetObjScroll
@@ -29,10 +32,13 @@ jr_003_5b37:
     call ShowMsg0
     ld a, $09
     call PlayAudio
-    ld a, $0e
+    ld a, FxBouncer
     call BeginC2Fx
     ld a, $78
     call WaitTicks
+
+; Show the remaining guard attack text, mark its event and play the exit effect.
+EndGuardAttack:
 
 jr_003_5b58:
     ld a, $6c
@@ -47,6 +53,9 @@ jr_003_5b58:
     ld [wC2EventBits], a
     jp PlayExitEffect
 
+; In the Vegas hamper, start transport on timer step five and retain the original frisking outcomes.
+StepC2Hamper:
+
 ; In room $0d, start dumpster transport on timer step five; retain the item-dependent capture and room transition.
 StepC2Dump:
 StepC2Room0D:
@@ -54,20 +63,20 @@ StepC2Room0D:
 
 Call_003_5b75:
     ld a, [wRoomId]
-    cp $0d
+    cp RoomVegasHamper
     ret nz
 
-    ld a, [wC2DumpTick]
+    ld a, [wC2HamperTick]
     inc a
-    ld [wC2DumpTick], a
-    cp $05
+    ld [wC2HamperTick], a
+    cp HamperRideWait
     ret nz
 
     call ResetObjScroll
     call ScriptHoldText
     ld a, $0d
     call ReadStateBit
-    jr z, jr_003_5ba1
+    jr z, StartHamperRide
 
     ld a, $a8
     call ShowMsg2
@@ -75,6 +84,9 @@ Call_003_5b75:
     call PlayAudio
     ld a, $0d
     call ClearStateView
+
+; Play the original transport and arrival sequence, then search the carried items.
+StartHamperRide:
 
 jr_003_5ba1:
     xor a
@@ -92,31 +104,37 @@ jr_003_5ba1:
     call WaitTicks
     ld a, $a6
     call ShowMsg2
-    ld a, $19
+    ld a, C2FriskLetter
     ld [wFindListValue], a
     call FindListValue
     ld a, [wStateResult]
     and $01
-    jr nz, jr_003_5c54
+    jr nz, FriskLooseLetter
 
-    ld a, $86
+    ld a, C2Envelope1
     ld [wFindListValue], a
     call FindListValue
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_5beb
+    jr z, CheckFriskPhoto
 
-    ld a, $19
+    ld a, C2FriskLetter
     call ReadItemFlag
-    jr z, jr_003_5c2e
+    jr z, FriskPackedLetter
+
+; Check for the original photo after no qualifying letter was found.
+CheckFriskPhoto:
 
 jr_003_5beb:
-    ld a, $18
+    ld a, C2Photo
     ld [wFindListValue], a
     call FindListValue
     ld a, [wStateResult]
     and $01
-    jr nz, jr_003_5c14
+    jr nz, DieFriskPhoto
+
+; Show the original fatal frisking reply when neither the qualifying letter nor photo was found.
+DieFriskEmpty:
 
     ld a, $ab
     call ShowMsg2
@@ -128,6 +146,9 @@ jr_003_5beb:
     ld a, $3c
     call WaitTicks
     jp PlayExitEffect
+
+; Play the original fatal frisking outcome when only the photo is found.
+DieFriskPhoto:
 
 
 jr_003_5c14:
@@ -142,6 +163,9 @@ jr_003_5c14:
     call WaitTicks
     jp PlayExitEffect
 
+; Handle the original letter found through the packed list path.
+FriskPackedLetter:
+
 
 jr_003_5c2e:
     ld a, $ad
@@ -154,11 +178,14 @@ jr_003_5c2e:
     ld [wArg1], a
     call AddChange
     ld a, $01
-    ld a, $19
+    ld a, C2FriskLetter
     ld [wArg0], a
     call DropHeadValue
     ld a, $01
-    jr jr_003_5c64
+    jr TakeFriskLetter
+
+; Remove the original letter found directly in the list.
+FriskLooseLetter:
 
 jr_003_5c54:
     ld a, $ad
@@ -168,15 +195,18 @@ jr_003_5c54:
     ld a, $01
     call WaitTicks
 
+; Set the original letter state and remove a carried photo if present.
+TakeFriskLetter:
+
 jr_003_5c64:
-    ld a, $19
+    ld a, C2FriskLetter
     call SetItemState
-    ld a, $18
+    ld a, C2Photo
     ld [wFindListValue], a
     call FindListValue
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_5c87
+    jr z, TakeFriskGun
 
     call DropFoundList
     ld a, $01
@@ -184,14 +214,20 @@ jr_003_5c64:
     ld a, [wPendingLast]
     inc a
     ld [wPendingCur], a
+
+; Remove the original packed gun item if present before entering the laundry.
+TakeFriskGun:
+
+; Remove original packed value 89 if present before entering the laundry.
+TakeFriskGroup:
 
 jr_003_5c87:
-    ld a, $89
+    ld a, C2Gun
     ld [wFindListValue], a
     call FindListValue
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_5ca5
+    jr z, FinishFrisk
 
     call DropFoundList
     ld a, $01
@@ -200,10 +236,13 @@ jr_003_5c87:
     inc a
     ld [wPendingCur], a
 
+; Enter the laundry room and set the original capture flag.
+FinishFrisk:
+
 jr_003_5ca5:
-    ld a, $47
+    ld a, RoomLaundry
     call EnterRoom
-    ld a, $77
+    ld a, C2Frisked
     call SetObjFlag
     call RoomCueCall
     ret

@@ -14,11 +14,11 @@ AppendSelList:
 Call_000_23df:
     ld a, [wInputKind]
     cp $02
-    jr nz, jr_000_240f
+    jr nz, AppendSelListCheckCase
 
     ld a, [wChangeMode]
     cp $01
-    jr nz, jr_000_240f
+    jr nz, AppendSelListCheckCase
 
     ld bc, wSelMode
     ldh a, [hItemSlot]
@@ -43,18 +43,22 @@ Call_000_2403:
     call DropListHead
     call StoreWorkGroup
 
+; Set the selected attribute and check Case II list restrictions.
+AppendSelListCheckCase:
 jr_000_240f:
     call SetAttr0
     ld a, [wCaseId]
     cp $00
-    jr z, jr_000_2423
+    jr z, AppendSelListStorePacked
 
     call CheckC2ListItem
     ld a, [wStateResult]
     and $01
-    jr nz, jr_000_245a
+    jr nz, AppendSelListFinishInput
 
 Jump_000_2423:
+; Append the selected packed value and update list end state.
+AppendSelListStorePacked:
 jr_000_2423:
     call GetListEndPos
     ld bc, wListPacked
@@ -89,10 +93,12 @@ Jump_000_244a:
     call IncListEnd
     call PopRomBank
 
+; Refresh object visibility or handle delayed list input.
+AppendSelListFinishInput:
 jr_000_245a:
     ld a, [wInputKind]
     cp $02
-    jr z, jr_000_2472
+    jr z, AppendSelListWaitForList
 
     ld a, [wHitObj]
     call ClearObjVisible
@@ -108,6 +114,8 @@ Jump_000_2467:
     ret
 
 
+; Wait before restoring list mode unless the wait is skipped.
+AppendSelListWaitForList:
 jr_000_2472:
     ld a, [wSkipListWait]
     cp $01
@@ -126,13 +134,15 @@ AddItemList:
 
 Call_000_2486:
     call SetItemFlag
-    jr jr_000_248e
+    jr AddArgListStore
 
 ; Read and set an item flag, append argument zero at the list end, and refresh objects.
 AddArgList:
 
     call SetItemArg
 
+; Append argument zero to the active list and refresh objects.
+AddArgListStore:
 jr_000_248e:
     call GetListEndPos
     ld a, [wArg0]

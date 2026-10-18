@@ -7,15 +7,17 @@ SetRoomArg3:
     ld a, [wRoomId]
     ld hl, wArg3
     cp [hl]
-    jr nz, jr_000_2b7f
+    jr nz, C1CabChangeRoom
 
     call SetResult
     ret
 
 
+; Store the changed destination and set the cab-trip flag.
+C1CabChangeRoom:
 jr_000_2b7f:
     ld a, [wArg3]
     ld [wRoomId], a
-    ld a, $83
+    ld a, C1CabTripMade
     call SetObjFlag
     ret

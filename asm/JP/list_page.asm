@@ -6,14 +6,16 @@ StepListPage:
 Call_001_4c84:
     ld a, [wListSel]
     cp $0b
-    jr z, jr_001_4c90
+    jr z, StepListNext
 
     cp $0c
-    jr z, jr_001_4caa
+    jr z, StepListPrevious
 
     ret
 
 
+; Advance the page and check whether the saved selection mark belongs to this mode.
+StepListNext:
 jr_001_4c90:
     call NextListPage
     ld a, [wChangeMode]
@@ -22,11 +24,13 @@ jr_001_4c90:
     ld b, a
     ld a, c
     cp b
-    jr z, jr_001_4ca0
+    jr z, StepListRestoreMark
 
     ret
 
 
+; Draw the saved row mark in its matching list mode.
+StepListRestoreMark:
 jr_001_4ca0:
     ld a, [wSelRow]
     ld [wListMarkRow], a
@@ -34,6 +38,8 @@ jr_001_4ca0:
     ret
 
 
+; Move to the previous page and check the saved selection mode.
+StepListPrevious:
 jr_001_4caa:
     call PrevListPage
     ld a, [wChangeMode]
@@ -42,7 +48,7 @@ jr_001_4caa:
     ld b, a
     ld a, c
     cp b
-    jr z, jr_001_4ca0
+    jr z, StepListRestoreMark
 
     ret
 
@@ -57,6 +63,8 @@ Call_001_4cba:
     ld [wListSel], a
     ld [wListNavNext], a
 
+; Move the page cursor while preserving the operation-slot offset.
+NextListMoveCursor:
 jr_001_4cc8:
     push af
     ldh a, [hItemSlot]
@@ -73,12 +81,14 @@ jr_001_4cc8:
     ld a, h
     ldh [hItemSlot+1], a
     pop af
-    jr jr_001_4ce6
+    jr NextListCheckMaximum
 
     ld a, [wSelAction]
     cp $ff
-    jr z, jr_001_4cc8
+    jr z, NextListMoveCursor
 
+; Compare the current mode with the active list maximum.
+NextListCheckMaximum:
 jr_001_4ce6:
     ld a, [wChangeMode]
     ld c, a
@@ -86,29 +96,33 @@ jr_001_4ce6:
     ld b, a
     ld a, c
     cp b
-    jr c, jr_001_4cf3
+    jr c, NextListCheckMode
 
     ret
 
 
+; Apply the regional upper mode limit before advancing a mode or record.
+NextListCheckMode:
 jr_001_4cf3:
     ld a, [wChangeMode]
     cp $0b
-    jr nc, jr_001_4d26
+    jr nc, NextListReturn
 
     cp $02
-    jr nc, jr_001_4d17
+    jr nc, NextListAdvanceMode
 
     cp $01
-    jr z, jr_001_4d07
+    jr z, NextListCheckRecords
 
     ld a, $ff
     ld [wPendingCur], a
 
+; Check whether pending records exist for the next-page path.
+NextListCheckRecords:
 jr_001_4d07:
     ld a, [wPendingLast]
     cp $ff
-    jr nz, jr_001_4d27
+    jr nz, NextListAdvanceRecord
 
     ld d, a
     ld a, [wChangeMode]
@@ -116,6 +130,8 @@ jr_001_4d07:
     ld [wChangeMode], a
     ld a, d
 
+; Increment the list mode before redrawing.
+NextListAdvanceMode:
 jr_001_4d17:
     ld d, a
     ld a, [wChangeMode]
@@ -123,15 +139,21 @@ jr_001_4d17:
     ld [wChangeMode], a
     ld a, d
 
+; Draw the list UI and retain the original second item draw.
+NextListRedraw:
 jr_001_4d20:
     ; DrawListUI already draws items; the original second draw is retained.
     call DrawListUI
     call DrawListItems
 
+; Return after the next-page limit or redraw path.
+NextListReturn:
 jr_001_4d26:
     ret
 
 
+; Advance the pending record index and prepare its list.
+NextListAdvanceRecord:
 jr_001_4d27:
     ld d, a
     ld a, [wPendingCur]
@@ -144,7 +166,7 @@ jr_001_4d27:
     ld b, a
     ld a, c
     cp b
-    jr c, jr_001_4d17
+    jr c, NextListAdvanceMode
 
     call ReadChange
     call PrepChangeList
@@ -156,9 +178,9 @@ jr_001_4d27:
     call CopyWorkList
     ld a, [wChangeMode]
     cp $00
-    jr z, jr_001_4d17
+    jr z, NextListAdvanceMode
 
-    jr jr_001_4d20
+    jr NextListRedraw
 
 ; Save the selected slot around the cursor update, then move back through modes or records and redraw.
 PrevListPage:
@@ -189,19 +211,21 @@ Call_001_4d5b:
     ret z
 
     cp $03
-    jr nc, jr_001_4da3
+    jr nc, PrevListDecreaseMode
 
     cp $01
-    jr z, jr_001_4d93
+    jr z, PrevListCheckRecords
 
     ld a, [wPendingLast]
     inc a
     ld [wPendingCur], a
 
+; Check whether pending records exist for the previous-page path.
+PrevListCheckRecords:
 jr_001_4d93:
     ld a, [wPendingLast]
     cp $ff
-    jr nz, jr_001_4db3
+    jr nz, PrevListDecreaseRecord
 
     ld d, a
     ld a, [wChangeMode]
@@ -209,6 +233,8 @@ jr_001_4d93:
     ld [wChangeMode], a
     ld a, d
 
+; Decrement the list mode before redrawing.
+PrevListDecreaseMode:
 jr_001_4da3:
     ld d, a
     ld a, [wChangeMode]
@@ -216,6 +242,8 @@ jr_001_4da3:
     ld [wChangeMode], a
     ld a, d
 
+; Draw the list UI and retain the original second item draw.
+PrevListRedraw:
 jr_001_4dac:
     ; DrawListUI already draws items; the original second draw is retained.
     call DrawListUI
@@ -223,6 +251,8 @@ jr_001_4dac:
     ret
 
 
+; Decrease the pending record index and check mode boundaries.
+PrevListDecreaseRecord:
 jr_001_4db3:
     ld d, a
     ld a, [wPendingCur]
@@ -231,12 +261,14 @@ jr_001_4db3:
     ld a, d
     ld a, [wChangeMode]
     cp $02
-    jr z, jr_001_4dca
+    jr z, PrevListReadRecord
 
     ld a, [wPendingCur]
     cp $ff
-    jr z, jr_001_4da3
+    jr z, PrevListDecreaseMode
 
+; Read the selected pending record and prepare its work list.
+PrevListReadRecord:
 jr_001_4dca:
     call ReadChange
     call PrepChangeList
@@ -249,6 +281,6 @@ jr_001_4dca:
     call CopyWorkList
     ld a, [wChangeMode]
     cp $02
-    jr z, jr_001_4da3
+    jr z, PrevListDecreaseMode
 
-    jr jr_001_4dac
+    jr PrevListRedraw

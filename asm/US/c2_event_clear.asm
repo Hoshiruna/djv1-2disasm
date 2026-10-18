@@ -16,9 +16,11 @@ Call_002_7892:
     ld a, [wC2EventBits]
     ld c, $08
 
+; Check the next saved Case II event bit.
+C2EventScanNextBit:
 jr_002_78ab:
     srl a
-    jr nc, jr_002_78b8
+    jr nc, C2EventAdvanceBit
 
     push de
     push bc
@@ -28,10 +30,12 @@ jr_002_78ab:
     pop bc
     pop de
 
+; Advance to the next Case II event and counter index.
+C2EventAdvanceBit:
 jr_002_78b8:
     inc de
     dec c
-    jr nz, jr_002_78ab
+    jr nz, C2EventScanNextBit
 
     ret
 
@@ -42,7 +46,7 @@ ClearC2Event:
 Call_002_78bd:
     ld a, $07
     cp e
-    jr z, jr_002_78dc
+    jr z, ClearC2Event7
 
     ld hl, C2EventCounters
     add hl, de
@@ -71,9 +75,9 @@ ClearC2Event7:
 
 jr_002_78dc:
     call ClearC2EventBit
-    ld a, $4e
+    ld a, C2LampHasCell
     call ClearObjFlag
-    ld a, $a8
+    ld a, C2LampWeak
     call ClearObjFlag
     ld a, $3a
     ld [wRoomId], a

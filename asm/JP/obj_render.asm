@@ -2,6 +2,8 @@
 RenderObjList:
     push hl
 
+; Start rendering the room-object list.
+ObjRenderStartList:
 jr_002_7447:
     push de
     push bc
@@ -13,7 +15,7 @@ DrawNextRoomObj:
 jr_002_744c:
     ld a, [hl+]
     cp $ff
-    jr z, jr_002_7465
+    jr z, EndRoomObjDraw
 
     ldh [hSpriteX], a
     ld a, [hl+]
@@ -23,13 +25,15 @@ jr_002_744c:
     ld c, a
     ld a, b
 
+; Subtract the sprite scroll offset from the object Y coordinate.
+ObjRenderApplyScroll:
 jr_002_745b:
     sub c
     pop bc
     ldh [hSpriteY], a
     ld a, [hl+]
     call DrawObjSprite
-    jr jr_002_744c
+    jr DrawNextRoomObj
 
 ; Restore BC, DE, and HL saved by the object-list renderer.
 EndRoomObjDraw:

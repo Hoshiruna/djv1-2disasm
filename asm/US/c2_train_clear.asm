@@ -9,10 +9,12 @@ Call_003_633c:
     ld a, TrainNone
     ld c, TrainRecsLen
 
+; Fill the next train-record byte with TrainNone.
+TrainClearNextByte:
 jr_003_6343:
     ld [hl+], a
     dec c
-    jr nz, jr_003_6343
+    jr nz, TrainClearNextByte
 
     ret
 

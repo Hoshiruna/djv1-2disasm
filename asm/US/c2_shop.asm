@@ -34,27 +34,30 @@ C2ShopCalls:
 BuyC2Cells:
 BuyC2Count2:
     ld a, [wC2Cells]
-    cp $64
-    jr nc, jr_003_5463
+    cp ShopCellStop
+    jr nc, ShopStockStop
 
-    ld a, $32
+    ld a, ShopCellPrice
     ld [wArg0], a
     call SpendC2Cash
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_545b
+    jr z, ShopCashShort
 
     ld a, [wC2Cells]
-    add $03
+    add ShopCellQty
     ld [wC2Cells], a
     call RefreshLists
     ld a, $03
     call ReadItemFlag
-    jr nz, jr_003_5431
+    jr nz, ShopBoughtReply
 
     ld a, $03
     ld [wArg0], a
     call AddItemList
+
+; Show the purchase thanks and original buy-again choice.
+ShopBoughtReply:
 
 jr_003_5431:
     ld a, $39
@@ -76,11 +79,17 @@ jr_003_5431:
 
     jp C2ShopMenu
 
+; Show the insufficient cash reply and clear the text hold.
+ShopCashShort:
+
 
 jr_003_545b:
     ld a, $9b
     call ShowMsg0
     jp ClearTextHold
+
+; Show the original stop-buying reply at the pre-purchase stock threshold.
+ShopStockStop:
 
 
 jr_003_5463:
@@ -94,25 +103,25 @@ BuyC2Count1:
 
 
     ld a, [wC2Bullets]
-    cp $78
-    jr nc, jr_003_5463
+    cp ShopBulletStop
+    jr nc, ShopStockStop
 
-    ld a, $64
+    ld a, ShopBulletPrice
     ld [wArg0], a
     call SpendC2Cash
     ld a, [wStateResult]
     and $01
-    jr z, jr_003_545b
+    jr z, ShopCashShort
 
     ld a, [wC2Bullets]
-    add $06
+    add ShopBulletQty
     ld [wC2Bullets], a
     call RefreshLists
     ld a, $02
     call ReadItemFlag
-    jr nz, jr_003_5431
+    jr nz, ShopBoughtReply
 
     ld a, $02
     ld [wArg0], a
     call AddItemList
-    jr jr_003_5431
+    jr ShopBoughtReply

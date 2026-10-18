@@ -80,11 +80,13 @@ CheckC2BitItem:
     ld b, a
     pop af
     and b
-    jr z, jr_003_61c1
+    jr z, C2StoreBitItem
 
     jp SkipRoomItem
 
 
+; Store an item whose bitmap bit was clear.
+C2StoreBitItem:
 jr_003_61c1:
     ld a, [wRoomItem]
     ld b, a
@@ -112,11 +114,13 @@ CheckC2ObjItem:
     add hl, bc
     ld a, [hl]
     and $01
-    jr z, jr_003_61e9
+    jr z, C2StoreObjItem
 
     jp SkipRoomItem
 
 
+; Store an object-backed item whose property bit was clear.
+C2StoreObjItem:
 jr_003_61e9:
     ld d, a
     ldh a, [hRoomIndex]
@@ -138,10 +142,10 @@ PickC2RoomItem:
 
     ld a, [wRoomId]
     cp $1b
-    jr c, jr_003_621e
+    jr c, C2StoreDefaultRoomItem
 
     cp $2b
-    jr nc, jr_003_621e
+    jr nc, C2StoreDefaultRoomItem
 
     sub $1b
     ld l, a
@@ -161,6 +165,8 @@ PickC2RoomItem:
     ret
 
 
+; Store the original room-item ID outside the remapped room range.
+C2StoreDefaultRoomItem:
 jr_003_621e:
     ld a, [wRoomItem]
     ld b, a

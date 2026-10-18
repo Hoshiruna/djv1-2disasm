@@ -9,18 +9,22 @@ Call_001_4a6f:
     ld hl, wBgPal
     ld d, $40
 
+; Compare the next live palette color with RGB555 white.
+PalsAreWhiteNextColor:
 jr_001_4a76:
     ld a, [hl+]
     cp $ff
-    jr nz, jr_001_4a83
+    jr nz, PalsAreWhiteDone
 
     ld a, [hl+]
     cp $7f
-    jr nz, jr_001_4a83
+    jr nz, PalsAreWhiteDone
 
     dec d
-    jr nz, jr_001_4a76
+    jr nz, PalsAreWhiteNextColor
 
+; Return after a mismatch or after all 64 colors match.
+PalsAreWhiteDone:
 jr_001_4a83:
     pop hl
     pop de
@@ -37,7 +41,7 @@ Call_001_4a86:
     ld hl, wBgPal
     ld bc, wBgPalNext
     ld d, $40
-    jr jr_001_4a9e
+    jr ComparePalsNextByte
 
 ; Compare all 128 live BG/object palette bytes with their staged bytes.
 PalsMatch:
@@ -50,17 +54,21 @@ Call_001_4a93:
     ld bc, wBgPalNext
     ld d, $80
 
+; Compare the next live and staged palette bytes.
+ComparePalsNextByte:
 jr_001_4a9e:
     ld a, [bc]
     inc bc
     ld e, a
     ld a, [hl+]
     cp e
-    jr nz, jr_001_4aa8
+    jr nz, ComparePalsDone
 
     dec d
-    jr nz, jr_001_4a9e
+    jr nz, ComparePalsNextByte
 
+; Return after a mismatch or after the requested byte count.
+ComparePalsDone:
 jr_001_4aa8:
     pop hl
     pop bc
@@ -80,13 +88,15 @@ Call_001_4aac:
     ld bc, $7fff
     xor a
 
+; Store white into the next live palette color.
+FillWhitePalsNextColor:
 jr_001_4ab8:
     ld a, c
     ld [hl+], a
     ld a, b
     ld [hl+], a
     dec d
-    jr nz, jr_001_4ab8
+    jr nz, FillWhitePalsNextColor
 
     pop bc
     pop hl

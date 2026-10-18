@@ -69,6 +69,8 @@ SwapOpSlots:
     ld hl, wListValue
     ld bc, wAltSlot+15
 
+; Swap the next byte of the two operation-slot records.
+SwapOpSlotsNextByte:
 jr_000_23b2:
     ld a, [hl]
     ld d, a
@@ -78,6 +80,6 @@ jr_000_23b2:
     ld [bc], a
     dec bc
     dec e
-    jr nz, jr_000_23b2
+    jr nz, SwapOpSlotsNextByte
 
     ret

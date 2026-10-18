@@ -32,14 +32,18 @@ Jump_003_527b:
     ld [wSceneId], a
     call ShowScene
 
+; Play cue $1a only for the policeman effect before selecting the effect object.
+C2FxCheckPoliceCue:
 jr_003_529c:
     ld a, [wFxId]
-    cp $08
-    jr nz, jr_003_52a8
+    cp FxPoliceman
+    jr nz, C2FxSelectObject
 
     ld a, $1a
     call PlayAudio
 
+; Select the effect object and draw it unless the table returns $ff.
+C2FxSelectObject:
 jr_003_52a8:
     xor a
     ld [wRoomCueHold], a
@@ -52,11 +56,13 @@ jr_003_52a8:
     ld [wObjList], a
     ld [wDrawObj], a
     cp $ff
-    jr z, jr_003_52c7
+    jr z, C2FxRestoreScratch
 
     call DrawEffectObj
     call SubmitOam
 
+; Restore the saved change and item-slot low bytes before returning.
+C2FxRestoreScratch:
 jr_003_52c7:
     pop af
     ldh [hChangePos], a

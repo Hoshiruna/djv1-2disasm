@@ -9,11 +9,17 @@ C2Sc2_00:
     ; End script.
     db $ff
 
+; Describe the woven wastebasket using the original regional wording.
+LookWickerBin:
+
 C2Sc2_01:
     ; Show message 2.
     db $02, $fc
     ; End script.
     db $ff
+
+; Describe the foul-smelling food garbage using the original regional wording.
+LookFoodTrash:
 
 C2Sc2_02:
     ; Show message 1.

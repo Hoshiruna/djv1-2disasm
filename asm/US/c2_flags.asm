@@ -6,6 +6,8 @@ InitC2Bits:
 Call_003_412a:
     ld hl, C2StartBits
 
+; Set the next initial Case II state bit.
+C2InitNextStateBit:
 jr_003_412d:
     ld a, [hl+]
     cp $ff
@@ -14,7 +16,7 @@ jr_003_412d:
     push hl
     call SetStateBit
     pop hl
-    jr jr_003_412d
+    jr C2InitNextStateBit
 
 ; Case II initial state-bit IDs, terminated by $ff.
 C2StartBits:
@@ -31,6 +33,8 @@ InitC2Visible:
 Call_003_4174:
     push af
 
+; Save the caller operation-slot offset.
+C2VisibleSaveSlot:
 jr_003_4175:
     ldh a, [hItemSlot]
     ld l, a
@@ -39,19 +43,25 @@ jr_003_4175:
     pop af
     push hl
 
+; Start reading initial object visibility IDs.
+C2VisibleStartList:
 jr_003_417d:
     ld hl, Case2InitialObjectFlags
 
+; Set visibility for the next initial object ID.
+C2VisibleNextObject:
 jr_003_4180:
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_418c
+    jr z, C2VisibleRestoreSlot
 
     push hl
     call SetObjVisible
     pop hl
-    jr jr_003_4180
+    jr C2VisibleNextObject
 
+; Restore the caller operation-slot offset.
+C2VisibleRestoreSlot:
 jr_003_418c:
     pop hl
     push af

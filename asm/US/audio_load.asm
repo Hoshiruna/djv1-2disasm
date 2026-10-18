@@ -156,11 +156,13 @@ Call_004_41c2:
     ld [hl+], a
     inc de
     or b
-    jr nz, jr_004_41db
+    jr nz, InitNonemptyAudioSlot
 
     pop bc
     ld [bc], a
 
+; Advance the slot pointer by one audio record.
+AdvanceAudioSlot:
 jr_004_41d4:
     ld hl, AudioRecLen
     add hl, bc
@@ -169,6 +171,8 @@ jr_004_41d4:
     ret
 
 
+; Initialize the active fields for a nonzero stream pointer.
+InitNonemptyAudioSlot:
 jr_004_41db:
     inc hl
     inc hl
@@ -179,4 +183,4 @@ jr_004_41db:
     inc hl
     ld [hl+], a
     pop bc
-    jr jr_004_41d4
+    jr AdvanceAudioSlot

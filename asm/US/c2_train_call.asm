@@ -9,21 +9,23 @@ C2SchedMsg7D:
     ld hl, TrainCarA
     add hl, bc
     cp [hl]
-    jr z, jr_003_6493
+    jr z, TrainLastCallPassenger
 
     ld hl, TrainCarB
     add hl, bc
     cp [hl]
-    jr z, jr_003_6493
+    jr z, TrainLastCallPassenger
 
     ld hl, TrainPlatforms
     add hl, bc
     cp [hl]
-    jr z, jr_003_64a9
+    jr z, TrainLastCallPlatform
 
     ret
 
 
+; Warn an unprotected passenger that departure is near.
+TrainLastCallPassenger:
 jr_003_6493:
     ld hl, TrainPassFlags
     add hl, bc
@@ -39,6 +41,8 @@ jr_003_6493:
     ret
 
 
+; Announce last call at the train platform.
+TrainLastCallPlatform:
 jr_003_64a9:
     ld a, $1b
     call PlayAudio
@@ -60,16 +64,18 @@ C2SchedMsg7E:
     ld hl, TrainCarA
     add hl, bc
     cp [hl]
-    jr z, jr_003_64d4
+    jr z, TrainFareWarnPassenger
 
     ld hl, TrainCarB
     add hl, bc
     cp [hl]
-    jr z, jr_003_64d4
+    jr z, TrainFareWarnPassenger
 
     ret
 
 
+; Warn a passenger whose fare clearance is absent.
+TrainFareWarnPassenger:
 jr_003_64d4:
     ld hl, TrainPassFlags
     add hl, bc

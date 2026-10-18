@@ -14,23 +14,29 @@ Call_001_69fa:
     ld bc, SaveTag
     ld d, SaveTagLen
 
+; Compare one SRAM tag byte with the expected tag.
+CheckSaveTagByte:
 jr_001_6a0a:
     ld a, [hl+]
     ld e, a
     ld a, [bc]
     inc bc
     cp e
-    jr nz, jr_001_6a17
+    jr nz, RejectSaveTag
 
     dec d
-    jr nz, jr_001_6a0a
+    jr nz, CheckSaveTagByte
 
     xor a
-    jr jr_001_6a19
+    jr CheckSaveTagDone
 
+; Force a nonzero result after a tag mismatch.
+RejectSaveTag:
 jr_001_6a17:
     or $ff
 
+; Restore registers and return the tag comparison result.
+CheckSaveTagDone:
 jr_001_6a19:
     pop de
     pop bc
@@ -52,12 +58,14 @@ Call_001_6a1d:
     ld bc, SaveTag
     ld d, SaveTagLen
 
+; Copy one expected tag byte into SRAM.
+WriteSaveTagByte:
 jr_001_6a2d:
     ld a, [bc]
     inc bc
     ld [hl+], a
     dec d
-    jr nz, jr_001_6a2d
+    jr nz, WriteSaveTagByte
 
     pop de
     pop bc

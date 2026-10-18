@@ -4,13 +4,15 @@
 ReadC2Prev:
 Call_003_463d:
     ld a, [wPrevRoom]
-    jr jr_003_4645
+    jr C2ResolveRoomRecords
 
 ; Resolve the current room to its four-byte state records.
 ReadC2Room:
 Call_003_4642:
     ld a, [wRoomId]
 
+; Index the Case II room reference table and store the selected record pointer.
+C2ResolveRoomRecords:
 jr_003_4645:
     ld l, a
     ld h, $00
@@ -35,13 +37,13 @@ C2RoomRefs:
     dw C2Room04
     dw C2Room05
     dw C2RoomNone
-    dw C2Room07
-    dw C2Room08
-    dw C2Room09
-    dw C2Room0A
+    dw VegasLift1States
+    dw VegasLift2States
+    dw VegasLift3States
+    dw VegasLift4States
     dw C2Room0B
-    dw C2Room0C
-    dw C2Room0D
+    dw VegasHall3States
+    dw VegasHamperStates
     dw C2Room0E
     dw C2Room0F
     dw C2Room10
@@ -77,7 +79,7 @@ C2RoomRefs:
     dw C2Room2E
     dw C2Room2F
     dw C2Room30
-    dw C2Room31
+    dw CabChiStates
     dw C2Room32
 jr_003_46bf:
     dw C2Room33
@@ -126,10 +128,10 @@ jr_003_4701:
     dw C2RoomNone
     dw C2RoomNone
     dw C2RoomNone
-    dw C2Room5E
-    dw C2Room5F
-    dw C2Room60
-    dw C2Room61
+    dw CabAdisonStates
+    dw CabCottageStates
+    dw CabPeoriaStates
+    dw CabMorgueStates
     dw C2Room62
     dw C2Room63
     dw C2RoomNone
@@ -230,17 +232,29 @@ C2Room05:
     db $42, $07, $00, $fe
     db $ff
 
+; Original floor 1 lift room state record.
+VegasLift1States:
+
 C2Room07:
     db $42, $04, $00, $0c
     db $ff
+
+; Original floor 2 lift room state record.
+VegasLift2States:
 
 C2Room08:
     db $42, $09, $00, $0c
     db $ff
 
+; Original floor 3 lift room state record.
+VegasLift3States:
+
 C2Room09:
     db $42, $0c, $00, $0c
     db $ff
+
+; Original floor 4 lift room state record.
+VegasLift4States:
 
 C2Room0A:
     db $42, $0e, $00, $0c
@@ -253,6 +267,7 @@ C2Room0B:
     db $20, $0b, $02, $fe
     db $ff
 
+VegasHall3States:
 C2Room0C:
     db $91, $0d, $03, $0e
     db $42, $03, $00, $fe
@@ -261,6 +276,7 @@ C2Room0C:
     db $24, $0c, $05, $fe
     db $ff
 
+VegasHamperStates:
 C2Room0D:
     db $20, $0d, $04, $68
     db $ff
@@ -272,16 +288,16 @@ C2Room0E:
     db $ff
 
 C2Room0F:
-    db $55, $96, $02, $14
+    db $55, C2ThinShadeShut, $02, $14
     db $55, $97, $02, $14
-    db $55, $98, $02, $18
+    db $55, C2WhiteShadeShut, $02, $18
     db $55, $99, $02, $18
     db $55, $9a, $02, $1c
     db $24, $0f, $05, $fe
     db $ff
 
 C2Room10:
-    db $55, $9b, $02, $20
+    db $55, C2SilkShut, $02, $20
     db $55, $9c, $02, $20
     db $01, $10
 jr_003_4850:
@@ -514,12 +530,14 @@ C2Room2F:
     db $ff
 
 C2Room30:
-    db $55, $b2, $00, $84
-    db $55, $b3, $00, $86
+    db $55, C2ChiGlass2, $00, $84
+    db $55, C2ChiGlass1, $00, $86
     db $21, $39, $02, $30
     db $33, $46, $02, $fe
     db $ff
 
+CabChiStates:
+ChiStnStates:
 C2Room31:
     db $55, $a1, $00, $32
     db $02, $46, $01, $fe
@@ -686,7 +704,7 @@ OuterRoomStates:
 C2Room49:
     db $a1, $6d, $02, $7e
     db $55, $b0, $00, $80
-    db $55, $b1, $00, $80
+    db $55, C2DrapeOpen, $00, $80
     db $04, $6c, $05, $fe
     db $ff
 
@@ -696,24 +714,32 @@ C2Room4A:
 jr_003_4bd3:
     db $fe, $ff
 
+CabAdisonStates:
+AdisonStates:
 C2Room5E:
     db $55, $a1, $00, $32
     db $42, $47, $00, $fe
     db $02, $48, $01, $fe
     db $ff
 
+CabCottageStates:
+CottageStates:
 C2Room5F:
     db $55, $a1, $00, $32
     db $42, $47, $00, $fe
     db $02, $49, $01, $fe
     db $ff
 
+CabPeoriaStates:
+PeoriaStates:
 C2Room60:
     db $55, $a1, $00, $32
     db $42, $47, $00, $fe
     db $02, $4a, $01, $fe
     db $ff
 
+CabMorgueStates:
+MorgueStates:
 C2Room61:
     db $55
 jr_003_4bfd:

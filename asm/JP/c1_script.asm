@@ -44,12 +44,15 @@ LoopC1Script:
 jr_006_4038:
     call ReadArg
     cp $ff
-    jr nz, jr_006_4045
+    jr nz, C1RunOpcode
 
     call ClearTextUI
     jp PopRomBank
 
+; Dispatch a nonterminal Case I opcode and return to the script loop.
+C1RunOpcode:
+
 
 jr_006_4045:
     call DispatchC1Op
-    jr jr_006_4038
+    jr LoopC1Script

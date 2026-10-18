@@ -6,7 +6,7 @@ PlayBJDealer:
 Call_029_6b89:
     ld a, [wBJPlayer]
     cp $ff
-    jr nz, jr_029_6b95
+    jr nz, BJDealerCheckPlayerZero
 
 ; Set result two and enter the shared blackjack settlement.
 BJPlayerWin:
@@ -17,9 +17,11 @@ jr_029_6b90:
     jp PayBJResult
 
 
+; Check the zero player result before revealing the dealer hand.
+BJDealerCheckPlayerZero:
 jr_029_6b95:
     cp $00
-    jr nz, jr_029_6b9e
+    jr nz, BJDealerReveal
 
 ; Set result one and enter the shared blackjack settlement.
 BJPlayerLose:
@@ -30,6 +32,8 @@ jr_029_6b99:
     jp PayBJResult
 
 
+; Reveal the dealer card and score the hand.
+BJDealerReveal:
 jr_029_6b9e:
     xor a
     call ShowBJHandCard
@@ -37,29 +41,35 @@ jr_029_6b9e:
     call ScoreBJHand
     ld [wBJDealer], a
 
+; Pause and decide whether the dealer should draw again.
+BJDealerTurnLoop:
 jr_029_6ba9:
     ld a, $20
     call WaitTicks
     ld a, [wBJDealer]
     cp $11
-    jr nc, jr_029_6c16
+    jr nc, BJDealerCompareFinal
 
     ld a, [wBJDealer]
     ld hl, wBJPlayer
     cp [hl]
-    jr nz, jr_029_6bc5
+    jr nz, BJDealerCheckLead
 
     ld a, [wBJBias]
     cp $00
-    jr nz, jr_029_6bce
+    jr nz, BJDealerDealBiased
 
+; Compare dealer and player totals before another draw.
+BJDealerCheckLead:
 jr_029_6bc5:
-    jr nc, jr_029_6b99
+    jr nc, BJPlayerLose
 
     ld a, [wBJBias]
     cp $00
-    jr z, jr_029_6bea
+    jr z, BJDealerDealRandom
 
+; Choose a bias-specific target for the dealer draw.
+BJDealerDealBiased:
 jr_029_6bce:
     ld a, [wBJDealer]
     ld [wBJTarget], a
@@ -67,20 +77,26 @@ jr_029_6bce:
     ldh [hBJSlot], a
     ld a, [wBJBias]
     cp $01
-    jr nz, jr_029_6be5
+    jr nz, BJDealerDealBelow
 
     call DealBJNear21
-    jr jr_029_6bf2
+    jr BJDealerShowNewCard
 
+; Use the below-target dealing path for this bias mode.
+BJDealerDealBelow:
 jr_029_6be5:
     call DealBJBelow
-    jr jr_029_6bf2
+    jr BJDealerShowNewCard
 
+; Use the unbiased random dealing path.
+BJDealerDealRandom:
 jr_029_6bea:
     ld a, [wBJNextD]
     ldh [hBJSlot], a
     call DealBJRandom
 
+; Draw and score the newly dealt dealer card.
+BJDealerShowNewCard:
 jr_029_6bf2:
     ld a, [wBJNextD]
     call ShowBJHandCard
@@ -88,30 +104,34 @@ jr_029_6bf2:
     call ScoreBJHand
     ld [wBJDealer], a
     cp $00
-    jr z, jr_029_6b90
+    jr z, BJPlayerWin
 
     cp $ff
-    jr z, jr_029_6b99
+    jr z, BJPlayerLose
 
     bit 7, a
-    jr nz, jr_029_6c16
+    jr nz, BJDealerCompareFinal
 
     ld a, [wBJNextD]
     inc a
     ld [wBJNextD], a
     cp $06
-    jr nz, jr_029_6ba9
+    jr nz, BJDealerTurnLoop
 
+; Compare final dealer and player totals.
+BJDealerCompareFinal:
 jr_029_6c16:
     ld a, [wBJDealer]
     ld hl, wBJPlayer
     cp [hl]
-    jr z, jr_029_6c25
+    jr z, BJDealerTie
 
     jp nc, BJPlayerLose
 
     jp BJPlayerWin
 
 
+; Pass result zero into the shared settlement path.
+BJDealerTie:
 jr_029_6c25:
     xor a

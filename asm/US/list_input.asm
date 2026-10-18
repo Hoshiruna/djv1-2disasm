@@ -17,23 +17,25 @@ SelectInput:
 
     ld a, [wInputSel]
     cp $16
-    jr z, jr_001_5bd0
+    jr z, SelectInputDispatch
 
     cp $15
-    jr z, jr_001_5bd0
+    jr z, SelectInputDispatch
 
     ld [wListSel], a
     cp $0a
-    jr z, jr_001_5bc9
+    jr z, SelectInputCheckAction
 
     cp $09
-    jr nc, jr_001_5bd0
+    jr nc, SelectInputDispatch
 
     ld hl, wStateResult
     ld a, [hl]
     and $04
-    jr nz, jr_001_5bd0
+    jr nz, SelectInputDispatch
 
+; Move the cursor while preserving the operation-slot offset.
+SelectInputMoveCursor:
 jr_001_5bb2:
     push af
     ldh a, [hItemSlot]
@@ -50,13 +52,17 @@ jr_001_5bb2:
     ld a, h
     ldh [hItemSlot+1], a
     pop af
-    jr jr_001_5bd0
+    jr SelectInputDispatch
 
+; Allow selection ten to move the cursor only when no action is selected.
+SelectInputCheckAction:
 jr_001_5bc9:
     ld a, [wSelAction]
     cp $ff
-    jr z, jr_001_5bb2
+    jr z, SelectInputMoveCursor
 
+; Dispatch the classified input kind.
+SelectInputDispatch:
 jr_001_5bd0:
     ld a, [wInputKind]
     rst RST_00
@@ -74,22 +80,26 @@ InputKinds:
 PickAction:
     ld a, [wListSel]
     cp $09
-    jr nc, jr_001_5c0b
+    jr nc, PickActionTargetDispatch
 
     ld hl, wStateResult
     ld a, [hl]
     and $04
-    jr z, jr_001_5c04
+    jr z, PickActionStore
 
     ret
 
 
+; Store the selected action after checking result bit two.
+PickActionStore:
 jr_001_5c04:
     ld a, [wListSel]
     ld [wSelAction], a
     ret
 
 
+; Dispatch selections nine and above through the target table.
+PickActionTargetDispatch:
 jr_001_5c0b:
     sub $09
     rst RST_00
@@ -126,7 +136,7 @@ SelectAux:
     call SavePromptCall
     ldh a, [hItemSlot]
     cp $10
-    jr nz, jr_001_5c5d
+    jr nz, SelectAuxReset
 
     call ClearAltSlot
     ld a, [wStateResult]
@@ -134,19 +144,25 @@ SelectAux:
     ld [wStateResult], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_5c52
+    jr nz, SelectAuxCase2Flag
 
-    ld a, $7f
-    jr jr_001_5c54
+    ld a, C1AltTargetCancelled
+    jr SelectAuxCancelAlt
 
+; Choose the Case II alternate-selection cancellation flag.
+SelectAuxCase2Flag:
 jr_001_5c52:
     ld a, $8f
 
+; Set the cancellation flag and restore the previous list selection.
+SelectAuxCancelAlt:
 jr_001_5c54:
     call SetObjFlag
     ld a, [wListPrev]
     ld [wListSel], a
 
+; Reset selection state and clear the list cursor after the auxiliary prompt.
+SelectAuxReset:
 jr_001_5c5d:
     call ResetSelect
     call ClearListCursor
@@ -162,11 +178,13 @@ PickFixedTarget:
 
     ld a, [wSelAction]
     cp $ff
-    jr nz, jr_001_5c76
+    jr nz, PickFixedTargetDraw
 
     ret
 
 
+; Draw the fixed-target cursor and set the selected slot type to zero.
+PickFixedTargetDraw:
 jr_001_5c76:
     ld hl, CursorOn09
     ld a, [CursorDst+18]
@@ -188,14 +206,18 @@ jr_001_5c76:
     ld [hl], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_5ca3
+    jr nz, PickFixedTargetCase2
 
     ld a, $73
-    jr jr_001_5ca5
+    jr PickFixedTargetStore
 
+; Choose fixed target $a6 for Case II.
+PickFixedTargetCase2:
 jr_001_5ca3:
     ld a, $a6
 
+; Write the case-specific fixed target ID into the selected operation slot.
+PickFixedTargetStore:
 jr_001_5ca5:
     ld b, a
     ldh a, [hItemSlot]

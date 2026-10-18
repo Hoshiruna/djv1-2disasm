@@ -4,7 +4,7 @@ GoNextList:
 
 Jump_001_4c36:
     ld b, $0b
-    jr jr_001_4c3c
+    jr TempListPage
 
 ; Select page command $0c in B and enter the shared temporary-selection path.
 GoPrevList:
@@ -34,11 +34,13 @@ Call_001_4c49:
     call ClearListCursor
     ld a, [wSelAction]
     cp $ff
-    jr z, jr_001_4c7d
+    jr z, ListPageStoreCommand
 
     ld a, [wListNavPrev]
     ld [wListSel], a
 
+; Move the restored selection cursor while preserving the operation-slot offset.
+ListPageRestoreCursor:
 jr_001_4c5f:
     push af
     ldh a, [hItemSlot]
@@ -55,12 +57,14 @@ jr_001_4c5f:
     ld a, h
     ldh [hItemSlot+1], a
     pop af
-    jr jr_001_4c7d
+    jr ListPageStoreCommand
 
     ld a, [wSelAction]
     cp $ff
-    jr z, jr_001_4c5f
+    jr z, ListPageRestoreCursor
 
+; Store the saved navigation command after updating the page cursor.
+ListPageStoreCommand:
 jr_001_4c7d:
     ld a, [wListNavNext]
     ld [wListSel], a

@@ -9,6 +9,8 @@ Call_003_629e:
     xor a
     ld [wTrainIndex], a
 
+; Select a time window for the next of eight trains.
+TrainBuildNextRecord:
 jr_003_62a5:
     ld a, [wTrainIndex]
     ld l, a
@@ -30,6 +32,6 @@ jr_003_62a5:
     inc a
     ld [wTrainIndex], a
     cp TrainCount
-    jr c, jr_003_62a5
+    jr c, TrainBuildNextRecord
 
     ret

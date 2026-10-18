@@ -20,6 +20,8 @@ LoadUiPal:
     ld d, $40
     ld hl, wBgPal
 
+; Copy the next UI palette byte into the live buffer.
+LoadUiPalNextByte:
 jr_000_1ad8:
     ld a, [bc]
 
@@ -27,7 +29,7 @@ Call_000_1ad9:
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_000_1ad8
+    jr nz, LoadUiPalNextByte
 
     call PopRomBank
     call RequestPals
@@ -43,7 +45,7 @@ Call_000_1ae6:
     push af
     ld hl, UiMapPalRefs
     ld a, $0a
-    jr jr_000_1af6
+    jr StageUiPalSelectEntry
 
 ; Stage 64 BG palette bytes from bank $0a table $4000 through the shared copy path.
 StageUiBg:
@@ -53,6 +55,8 @@ StageUiBg:
     ld hl, UiPalRefs
     ld a, $0a
 
+; Select a UI or map palette table entry.
+StageUiPalSelectEntry:
 jr_000_1af6:
     call PushRomBank
     pop af
@@ -69,12 +73,14 @@ Call_000_1b03:
     ld d, $40
     ld hl, wBgPalNext
 
+; Copy the next UI background-palette byte into staging.
+StageUiBgNextByte:
 jr_000_1b09:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_000_1b09
+    jr nz, StageUiBgNextByte
 
     call PopRomBank
     pop de
@@ -104,12 +110,14 @@ Jump_000_1b1e:
     ld d, $40
     ld hl, wObjPalNext
 
+; Copy the next UI object-palette byte into staging.
+StageUiObjNextByte:
 jr_000_1b2e:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_000_1b2e
+    jr nz, StageUiObjNextByte
 
     call PopRomBank
     pop de

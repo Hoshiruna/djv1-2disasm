@@ -10,18 +10,22 @@ Call_003_5ec1:
     ld e, a
     ld c, $0c
 
+; Compare the next masked room ID in the twelve-entry timer table.
+C2DoorFindRoom:
 jr_003_5eca:
     ld a, [hl+]
     and $7f
     cp e
-    jr z, jr_003_5ed4
+    jr z, C2DoorMatchedRoom
 
     dec c
-    jr nz, jr_003_5eca
+    jr nz, C2DoorFindRoom
 
     ret
 
 
+; Read the matching state bit and advance the door timer when it is set.
+C2DoorMatchedRoom:
 jr_003_5ed4:
     ld bc, $000b
     add hl, bc
@@ -38,7 +42,7 @@ jr_003_5ed4:
     ld bc, $fff4
     add hl, bc
     bit 7, [hl]
-    jr nz, jr_003_5efd
+    jr nz, C2DoorClearBit
 
     ld bc, $000c
     add hl, bc
@@ -49,6 +53,8 @@ jr_003_5ed4:
     ret
 
 
+; Clear the matched state bit for a room entry marked with bit seven.
+C2DoorClearBit:
 jr_003_5efd:
     ld bc, $000c
     add hl, bc
@@ -58,6 +64,6 @@ jr_003_5efd:
 
 ; Room low seven bits select the paired state ID; bit seven selects ClearStateBit.
 C2TimerRooms:
-    db $02, $07, $83, $0b, $08, $0c, $09, $8d, $0e, $0a, $8f, $90
+    db $02, RoomVegasLift1, $83, $0b, RoomVegasLift2, $0c, RoomVegasLift3, $8d, $0e, RoomVegasLift4, $8f, $90
 C2TimerStates:
     db $04, $04, $04, $09, $09, $0c, $0c, $0c, $0e, $0e, $0e, $0e

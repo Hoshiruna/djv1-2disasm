@@ -148,716 +148,716 @@ jr_008_40cb:
     dw GridUpActs
 
 C2Act5_00:
-    dw C2Sc5_00
-    dw C2Sc5_01
-    dw C2Sc5_02
-    dw C2Sc5_03
+    dw LookClosedDoor
+    dw OpenVegasBathDoor
+    dw CloseVegasBathDoor
+    dw UseVegasBathDoor
 
 C2Act5_01:
-    dw C2Sc5_04
-    dw C2Sc5_05
-    dw C2Sc5_06
-    dw C2Sc5_07
+    dw LookVegasRoomDoor
+    dw OpenVegasRoomDoor
+    dw CloseVegasRoomDoor
+    dw UseVegasRoomDoor
 
 C2Act5_02:
-    dw C2Sc5_00
-    dw C2Sc5_08
-    dw C2Sc5_2E
-    dw C2Sc5_09
+    dw LookClosedDoor
+    dw OpenSceneDoor
+    dw CloseSceneDoor
+    dw UseVegasLobbyDoor
 
 C2Act5_03:
-    dw C2Sc5_0A
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookQuietGuestDoor
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_04:
-    dw C2Sc5_0B
-    dw C2Sc5_0C
-    dw C2Sc5_E5
-    dw C2Sc5_11
+    dw LookVegasLift1
+    dw OpenVegasLift1
+    dw DoorNoEffect
+    dw UseVegasLift1
 
 C2Act5_05:
-    dw C2Sc5_12
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_14
+    dw LookCashierWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseCashierWay
 
 C2Act5_06:
-    dw C2Sc5_15
-    dw C2Sc5_16
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_17
-    dw C2Sc5_18
-    dw C2Sc5_EB
-    dw C2Sc5_19
+    dw LookCasinoDoor
+    dw OpenCasinoDoor
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseCasinoDoor
+    dw BreakCasinoDoor
+    dw DoorNoAnswer
+    dw UseCasinoDoor
 
 C2Act5_07:
-    dw C2Sc5_1A
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_1B
+    dw LookDealerWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseDealerWay
 
 C2Act5_08:
-    dw C2Sc5_1C
-    dw C2Sc5_1C
-    dw C2Sc5_1C
-    dw C2Sc5_1C
+    dw LookVegasLift2
+    dw LookVegasLift2
+    dw LookVegasLift2
+    dw LookVegasLift2
 
 C2Act5_09:
-    dw C2Sc5_1C
-    dw C2Sc5_0F
-    dw C2Sc5_E5
-    dw C2Sc5_1E
+    dw LookVegasLift2
+    dw OpenTimedLiftDoor
+    dw DoorNoEffect
+    dw UseVegasLift2
 
 C2Act5_0A:
-    dw C2Sc5_1F
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookGuestDoor2
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_0B:
-    dw C2Sc5_20
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookGuestDoor3
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_0C:
-    dw C2Sc5_21
-    dw C2Sc5_0E
-    dw C2Sc5_E5
-    dw C2Sc5_22
+    dw LookVegasLift3
+    dw OpenVegasLift3
+    dw DoorNoEffect
+    dw UseVegasLift3
 
 C2Act5_0D:
-    dw C2Sc5_23
-    dw C2Sc5_24
-    dw C2Sc5_25
-    dw C2Sc5_26
+    dw LookVegasLid
+    dw OpenVegasLid
+    dw CloseVegasLid
+    dw UseVegasHamper
 
 C2Act5_0E:
-    dw C2Sc5_27
-    dw C2Sc5_0D
-    dw C2Sc5_E5
-    dw C2Sc5_28
+    dw LookVegasLift4
+    dw OpenVegasLift4
+    dw DoorNoEffect
+    dw UseVegasLift4
 
 C2Act5_0F:
-    dw C2Sc5_29
-    dw C2Sc5_2A
-    dw C2Sc5_2B
-    dw C2Sc5_2C
+    dw LookVentiniDoor
+    dw OpenVentiniDoor
+    dw CloseVentiniDoor
+    dw UseVentiniDoor
 
 C2Act5_10:
-    dw C2Sc5_2D
-    dw C2Sc5_08
-    dw C2Sc5_2E
-    dw C2Sc5_2F
+    dw LookMaloneDoor
+    dw OpenSceneDoor
+    dw CloseSceneDoor
+    dw UseMaloneDoor
 
 C2Act5_11:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D4
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseHotelDesert
 
 C2Act5_12:
-    dw C2Sc5_30
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D5
+    dw LookHotelStationWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseHotelTracks
 
 C2Act5_13:
-    dw C2Sc5_31
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_33
+    dw StreetWayReply
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseHotelStationWay
 
 C2Act5_14:
-    dw C2Sc5_34
-    dw C2Sc5_35
-    dw C2Sc5_36
-    dw C2Sc5_37
+    dw LookLaundryDoor
+    dw OpenLaundryDoor
+    dw CloseLaundryDoor
+    dw UseLaundryDoor
 
 C2Act5_15:
-    dw C2Sc5_38
-    dw C2Sc5_39
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_3A
-    dw C2Sc5_3B
-    dw C2Sc5_EB
-    dw C2Sc5_3C
+    dw LookCleanEntry
+    dw OpenCleanEntry
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseCleanEntry
+    dw BreakGoonsDoor
+    dw DoorNoAnswer
+    dw UseCleanEntry
 
 C2Act5_16:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D6
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseOutskirtsTracks
 
 C2Act5_17:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D7
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseOutskirtsSand1
 
 C2Act5_18:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D8
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseOutskirtsSand2
 
 C2Act5_19:
-    dw C2Sc5_E7
-    dw C2Sc5_3D
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_3E
-    dw C2Sc5_3F
-    dw C2Sc5_EB
-    dw C2Sc5_40
+    dw LookEntrance
+    dw OpenVegasDoor
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseVegasDoor
+    dw BreakVegasDoor
+    dw DoorNoAnswer
+    dw UseVegasDoor
 
 C2Act5_1A:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D9
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseStationSand1
 
 C2Act5_1B:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_DA
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseStationSand2
 
 C2Act5_1C:
-    dw C2Sc5_41
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_42
+    dw LookLuggageWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseLuggageWay
 
 C2Act5_1D:
-    dw C2Sc5_43
-    dw C2Sc5_E4
-    dw C2Sc5_E4
+    dw LookPlatform6Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
     ; Pointer to $49d3; split bytes retain the interior label.
     db $d3
 jr_008_4205:
     db $49
 
 C2Act5_1E:
-    dw C2Sc5_45
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_46
+    dw LookPlatform7Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform7Way
 
 C2Act5_1F:
-    dw C2Sc5_47
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_48
+    dw LookPlatform8Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform8Way
 
 C2Act5_20:
-    dw C2Sc5_49
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_4A
+    dw LookPlatform9Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform9Way
 
 C2Act5_21:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_4D
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain6Door
 
 C2Act5_22:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_4E
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain6Door2
 
 C2Act5_23:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_24:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_51
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain7Door1
 
 C2Act5_25:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_52
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain7Door2
 
 C2Act5_26:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_27:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_53
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain8Door1
 
 C2Act5_28:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_54
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain8Door2
 
 C2Act5_29:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_2A:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_55
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain9Door1
 
 C2Act5_2B:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_56
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain9Door2
 
 C2Act5_2C:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_2D:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_58
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain6Pass
 
 C2Act5_2E:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_59
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain7Pass
 
 C2Act5_2F:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5A
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain8Pass
 
 C2Act5_30:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5B
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain9Pass
 
 C2Act5_31:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5C
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain2Pass
 
 C2Act5_32:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5D
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain3Pass
 
 C2Act5_33:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5E
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain4Pass
 
 C2Act5_34:
-    dw C2Sc5_57
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_5F
+    dw LookCarPassage
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTrain5Pass
 
 C2Act5_35:
-    dw C2Sc5_60
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_61
+    dw LookPlatform2Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform2Way
 
 C2Act5_36:
-    dw C2Sc5_62
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_63
+    dw LookPlatform3Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform3Way
 
 C2Act5_37:
-    dw C2Sc5_64
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_65
+    dw LookPlatform4Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform4Way
 
 C2Act5_38:
-    dw C2Sc5_66
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_67
+    dw LookPlatform5Way
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePlatform5Way
 
 C2Act5_39:
-    dw C2Sc5_68
-    dw C2Sc5_69
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_6A
-    dw C2Sc5_6B
-    dw C2Sc5_EB
-    dw C2Sc5_6C
+    dw LookChiDoor
+    dw OpenChiDoor
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseChiDoor
+    dw BreakChiDoor
+    dw DoorNoAnswer
+    dw UseChiDoor
 
 C2Act5_3A:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_6D
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain2Door1
 
 C2Act5_3B:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_6E
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain2Door2
 
 C2Act5_3C:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_3D:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_6F
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain3Door1
 
 C2Act5_3E:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_70
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain3Door2
 
 C2Act5_3F:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_40:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_71
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain4Door1
 
 C2Act5_41:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_72
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain4Door2
 
 C2Act5_42:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_43:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_73
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain5Door1
 
 C2Act5_44:
-    dw C2Sc5_4B
-    dw C2Sc5_4C
-    dw C2Sc5_E5
-    dw C2Sc5_74
+    dw LookTrainDoor
+    dw TryTrainDoor
+    dw DoorNoEffect
+    dw UseTrain5Door2
 
 C2Act5_45:
-    dw C2Sc5_4F
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_50
+    dw LookTrainExit
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw TryTrainExit
 
 C2Act5_46:
-    dw C2Sc5_75
-    dw C2Sc5_E3
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E5
-    dw C2Sc5_77
-    dw C2Sc5_EB
-    dw C2Sc5_78
+    dw LookCabChicago
+    dw DoorIsOpen
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorNoEffect
+    dw RefuseCabDamage
+    dw DoorNoAnswer
+    dw UseCabChicago
 
 C2Act5_47:
-    dw C2Sc5_76
-    dw C2Sc5_79
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookCabDoor
+    dw CabDoorJammed
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_48:
-    dw C2Sc5_7A
-    dw C2Sc5_E3
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E5
-    dw C2Sc5_77
-    dw C2Sc5_EB
-    dw C2Sc5_7B
+    dw LookCabAdison
+    dw DoorIsOpen
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorNoEffect
+    dw RefuseCabDamage
+    dw DoorNoAnswer
+    dw UseCabAdison
 
 C2Act5_49:
     ; Pointer to $4d8a; split bytes retain the interior label.
     db $8a
 jr_008_437d:
     db $4d
-    dw C2Sc5_E3
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E5
-    dw C2Sc5_77
-    dw C2Sc5_EB
-    dw C2Sc5_7D
+    dw DoorIsOpen
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorNoEffect
+    dw RefuseCabDamage
+    dw DoorNoAnswer
+    dw UseCabCottage
 
 C2Act5_4A:
-    dw C2Sc5_7E
-    dw C2Sc5_E3
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E5
-    dw C2Sc5_77
-    dw C2Sc5_EB
-    dw C2Sc5_7F
+    dw LookCabPeoria
+    dw DoorIsOpen
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorNoEffect
+    dw RefuseCabDamage
+    dw DoorNoAnswer
+    dw UseCabPeoria
 
 C2Act5_4B:
-    dw C2Sc5_80
-    dw C2Sc5_E3
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E5
-    dw C2Sc5_77
-    dw C2Sc5_EB
-    dw C2Sc5_81
+    dw LookCabMorgue
+    dw DoorIsOpen
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorNoEffect
+    dw RefuseCabDamage
+    dw DoorNoAnswer
+    dw UseCabMorgue
 
 C2Act5_4C:
-    dw C2Sc5_82
-    dw C2Sc5_83
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_84
-    dw C2Sc5_85
-    dw C2Sc5_EB
-    dw C2Sc5_86
+    dw LookHomeEntry
+    dw OpenHomeEntry
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseHomeEntry
+    dw BreakHomeEntry
+    dw DoorNoAnswer
+    dw UseHomeEntry
 
 C2Act5_4D:
-    dw C2Sc5_87
-    dw C2Sc5_88
-    dw C2Sc5_89
-    dw C2Sc5_8A
+    dw LookHomeDoor
+    dw OpenHomeDoor
+    dw CloseHomeDoor
+    dw UseHomeDoor
 
 C2Act5_4E:
-    dw C2Sc5_8B
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookNeighborDoor1
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_4F:
-    dw C2Sc5_8C
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookNeighborDoor2
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_50:
-    dw C2Sc5_13
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_8D
+    dw QuietPlaceReply
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UsePoliceWay
 
 C2Act5_51:
-    dw C2Sc5_8E
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_8F
+    dw LookJoeAlleyWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseJoeAlleyWay
 
 C2Act5_52:
-    dw C2Sc5_90
-    dw C2Sc5_91
-    dw C2Sc5_92
-    dw C2Sc5_92
+    dw LookManhole
+    dw OpenManholeReply
+    dw ManholeClosed
+    dw ManholeClosed
 
 C2Act5_53:
-    dw C2Sc5_BC
-    dw C2Sc5_E6
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_E8
-    dw C2Sc5_BD
-    dw C2Sc5_EB
-    dw C2Sc5_E2
+    dw LookKeyedEntry
+    dw DoorLockedReply
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw DoorIsClosed
+    dw BreakJoeFront
+    dw DoorNoAnswer
+    dw DoorNeedsOpen
 
 C2Act5_54:
-    dw C2Sc5_93
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_94
+    dw LookWorksBarrier
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw WorksBlocked
 
 C2Act5_55:
-    dw C2Sc5_95
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_97
+    dw LookJoeFireEscape
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseJoeFireEscape
 
 C2Act5_56:
-    dw C2Sc5_98
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_99
+    dw LookJoeRearWay
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseJoeRearWay
 
 C2Act5_57:
-    dw C2Sc5_9A
-    dw C2Sc5_91
-    dw C2Sc5_E5
-    dw C2Sc5_E2
+    dw LookRearManhole
+    dw OpenManholeReply
+    dw DoorNoEffect
+    dw DoorNeedsOpen
 
 C2Act5_58:
-    dw C2Sc5_9B
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_9C
+    dw LookJoeOfficeWin
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseJoeOfficeWin
 
 C2Act5_59:
-    dw C2Sc5_96
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_9D
+    dw JoeEscapeUp
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw JoeLadderBlocked
 
 C2Act5_5A:
-    dw C2Sc5_1D
-    dw C2Sc5_B3
-    dw C2Sc5_E4
-    dw C2Sc5_B3
+    dw LiftInnerDoorReply
+    dw JoeLiftNoPower
+    dw PuzzledSceneReply
+    dw JoeLiftNoPower
 
 C2Act5_5B:
-    dw C2Sc5_9E
-    dw C2Sc5_9F
-    dw C2Sc5_A0
-    dw C2Sc5_A1
+    dw LookJoeRearDoor
+    dw OpenJoeRearDoor
+    dw CloseJoeRearDoor
+    dw UseJoeRearDoor
 
 C2Act5_5C:
-    dw C2Sc5_A2
-    dw C2Sc5_A3
-    dw C2Sc5_A4
-    dw C2Sc5_A5
+    dw LookJoeBarDoor
+    dw OpenJoeBarDoor
+    dw CloseJoeBarDoor
+    dw UseJoeBarDoor
 
 C2Act5_5D:
-    dw C2Sc5_A6
-    dw C2Sc5_10
-    dw C2Sc5_E5
-    dw C2Sc5_E2
+    dw LookJoeLadies
+    dw DoorCannotOpen
+    dw DoorNoEffect
+    dw DoorNeedsOpen
 
 C2Act5_5E:
-    dw C2Sc5_A7
-    dw C2Sc5_10
-    dw C2Sc5_E5
-    dw C2Sc5_E2
+    dw LookJoeMens
+    dw DoorCannotOpen
+    dw DoorNoEffect
+    dw DoorNeedsOpen
 
 C2Act5_5F:
-    dw C2Sc5_A8
-    dw C2Sc5_A9
-    dw C2Sc5_AA
-    dw C2Sc5_AB
+    dw LookJoeCellarDoor
+    dw OpenJoeCellarDoor
+    dw CloseJoeCellarDoor
+    dw UseJoeCellarDoor
 
 C2Act5_60:
-    dw C2Sc5_AC
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_AD
+    dw LookJoeStairs
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseJoeStairs
 
 C2Act5_61:
-    dw C2Sc5_AE
-    dw C2Sc5_AF
-    dw C2Sc5_B0
-    dw C2Sc5_B1
+    dw LookJoeShelfWay
+    dw OpenJoeShelves
+    dw CloseJoeShelves
+    dw UseJoeShelfWay
 
 C2Act5_62:
-    dw C2Sc5_00
-    dw C2Sc5_08
-    dw C2Sc5_2E
-    dw C2Sc5_B2
+    dw LookClosedDoor
+    dw OpenSceneDoor
+    dw CloseSceneDoor
+    dw UseJoeCasinoWay
 
 C2Act5_63:
-    dw C2Sc5_1D
-    dw C2Sc5_B3
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LiftInnerDoorReply
+    dw JoeLiftNoPower
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_64:
-    dw C2Sc5_B4
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookJoeUpperDoor
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_65:
-    dw C2Sc5_B5
-    dw C2Sc5_08
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_2E
-    dw C2Sc5_B6
-    dw C2Sc5_EB
-    dw C2Sc5_B7
+    dw LookPoliceDoor
+    dw OpenSceneDoor
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseSceneDoor
+    dw BreakPoliceDoor
+    dw DoorNoAnswer
+    dw UsePoliceEntry
 
 C2Act5_66:
-    dw C2Sc5_B8
-    dw C2Sc5_B9
-    dw C2Sc5_BA
-    dw C2Sc5_BB
+    dw LookSugarDoor
+    dw OpenSugarDoor
+    dw CloseSugarDoor
+    dw UseSugarDoor
 
 C2Act5_67:
-    dw C2Sc5_BC
-    dw C2Sc5_E6
-    dw C2Sc5_E5
-    dw C2Sc5_E2
+    dw LookKeyedEntry
+    dw DoorLockedReply
+    dw DoorNoEffect
+    dw DoorNeedsOpen
 
 C2Act5_68:
-    dw C2Sc5_BE
-    dw C2Sc5_BF
-    dw C2Sc5_E5
-    dw C2Sc5_E9
-    dw C2Sc5_EA
-    dw C2Sc5_C0
-    dw C2Sc5_C1
-    dw C2Sc5_EB
-    dw C2Sc5_C2
+    dw LookMorgueEntry
+    dw OpenMorgueEntry
+    dw DoorNoEffect
+    dw SceneDropRefusal
+    dw SceneTakeRefusal
+    dw CloseMorgueEntry
+    dw BreakMorgueEntry
+    dw DoorNoAnswer
+    dw UseMorgueEntry
 
 C2Act5_69:
-    dw C2Sc5_C3
-    dw C2Sc5_C4
-    dw C2Sc5_C5
-    dw C2Sc5_C6
+    dw LookMorgueDoor
+    dw OpenMorgueDoor
+    dw CloseMorgueDoor
+    dw UseMorgueDoor
 
 C2Act5_6A:
     dw LookLaundryStairs
-    dw C2Sc5_E4
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
     dw UseLaundryStairs
 
 C2Act5_6B:
@@ -867,28 +867,28 @@ C2Act5_6B:
     dw UseC2Hamper
 
 C2Act5_6C:
-    dw C2Sc5_CD
-    dw C2Sc5_CE
-    dw C2Sc5_CF
-    dw C2Sc5_D0
+    dw LookCleanOffice
+    dw OpenCleanOffice
+    dw CloseCleanOffice
+    dw UseCleanOffice
 
 C2Act5_6D:
     dw LookSecretDoor
-    dw C2Sc5_E3
-    dw C2Sc5_E5
+    dw DoorIsOpen
+    dw DoorNoEffect
     dw UseSecretDoor
 
 C2Act5_6E:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_D3
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTracksLink
 
 C2Act5_6F:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_DB
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTracksASand1
 
 C2Act5_70:
     dw LookDesert
@@ -896,8 +896,8 @@ C2Act5_70:
     db $60
 jr_008_44fd:
     db $53
-    dw C2Sc5_E4
-    dw C2Sc5_DC
+    dw PuzzledSceneReply
+    dw UseTracksASand2
 
 C2Act5_71:
     dw LookDesert
@@ -905,71 +905,71 @@ C2Act5_71:
     db $60
 jr_008_4505:
     db $53
-    dw C2Sc5_E4
-    dw C2Sc5_DD
+    dw PuzzledSceneReply
+    dw UseTracksBSand1
 
 C2Act5_72:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
-    dw C2Sc5_DE
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
+    dw UseTracksBSand2
 
 C2Act5_73:
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
 
 C2Act5_74:
-    dw C2Sc5_E0
-    dw C2Sc5_E6
-    dw C2Sc5_E8
-    dw C2Sc5_E2
+    dw LookSecretaryDoor
+    dw DoorLockedReply
+    dw DoorIsClosed
+    dw DoorNeedsOpen
 
 C2Act5_75:
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
 
 C2Act5_76:
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
 
 C2Act5_77:
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
-    dw C2Sc5_E1
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
+    dw EndC2Path
 
 GridRightActs:
 C2Act5_78:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
     dw WalkDesert
 
 GridLeftActs:
 C2Act5_79:
 jr_008_4542:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
     dw WalkDesert
 
 GridDownActs:
 C2Act5_7A:
     dw LookDesert
-    dw C2Sc5_E4
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
+    dw PuzzledSceneReply
     dw WalkDesert
 
 GridUpActs:
 C2Act5_7B:
     dw LookDesert
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
 jr_008_4556:
-    dw C2Sc5_E4
+    dw PuzzledSceneReply
     dw WalkDesert

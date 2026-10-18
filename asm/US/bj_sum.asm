@@ -9,6 +9,8 @@ Call_029_6a89:
     ld [wBJCount], a
     ld de, $0005
 
+; Read the next of six hand slots in reverse order.
+BJSumNextSlot:
 jr_029_6a96:
     ld a, [wBJHandPtr]
     ld l, a
@@ -17,7 +19,7 @@ jr_029_6a96:
     add hl, de
     ld a, [hl]
     cp $00
-    jr z, jr_029_6aad
+    jr z, BJSumCardFace
 
     push af
     ld a, [wBJCount]
@@ -25,6 +27,8 @@ jr_029_6a96:
     ld [wBJCount], a
     pop af
 
+; Look up the card face and count aces.
+BJSumCardFace:
 jr_029_6aad:
     ld l, a
     ld h, $00
@@ -33,7 +37,7 @@ jr_029_6aad:
     ld a, [hl]
     and $0f
     cp $0b
-    jr nz, jr_029_6ac4
+    jr nz, BJSumAddFace
 
     push af
     ld a, [wBJAces]
@@ -41,40 +45,48 @@ jr_029_6aad:
     ld [wBJAces], a
     pop af
 
+; Add the face value to the running hand total.
+BJSumAddFace:
 jr_029_6ac4:
     ld hl, wBJTotal
     add [hl]
     ld [hl], a
     dec de
     bit 7, d
-    jr z, jr_029_6a96
+    jr z, BJSumNextSlot
 
+; Distinguish a two-card 21 from a longer 21.
+BJSumCheckTwentyOne:
 jr_029_6ace:
     cp $15
-    jr nz, jr_029_6ae5
+    jr nz, BJSumReduceAces
 
     ld a, [wBJCount]
     cp $02
-    jr nz, jr_029_6adf
+    jr nz, BJSumLongTwentyOne
 
     ld a, $ff
     ld [wBJTotal], a
     ret
 
 
+; Store marker 95h for a hand of 21 with more than two cards.
+BJSumLongTwentyOne:
 jr_029_6adf:
     ld a, $95
     ld [wBJTotal], a
     ret
 
 
+; Reduce an ace by ten while the total exceeds 21.
+BJSumReduceAces:
 jr_029_6ae5:
     cp $16
-    jr c, jr_029_6b02
+    jr c, BJSumStoreTotal
 
     ld a, [wBJAces]
     cp $00
-    jr z, jr_029_6b01
+    jr z, BJSumBust
 
     ld a, [wBJAces]
     dec a
@@ -82,11 +94,15 @@ jr_029_6ae5:
     ld a, [wBJTotal]
     sub $0a
     ld [wBJTotal], a
-    jr jr_029_6ace
+    jr BJSumCheckTwentyOne
 
+; Use zero when the hand exceeds 21 without an adjustable ace.
+BJSumBust:
 jr_029_6b01:
     xor a
 
+; Store the final total or bust marker.
+BJSumStoreTotal:
 jr_029_6b02:
     ld [wBJTotal], a
     ret

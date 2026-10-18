@@ -9,14 +9,17 @@ PickC2Room:
     ld hl, CabPickKeys
     ld d, CabStops
 
+; Compare the selected menu code with the next cab key.
+FindCabKey:
+
 jr_003_4cbe:
     cp [hl]
-    jr z, jr_003_4cd5
+    jr z, CheckCabStop
 
     inc hl
     inc c
     dec d
-    jr nz, jr_003_4cbe
+    jr nz, FindCabKey
 
     ld a, [wListPick]
     sub $0d
@@ -24,6 +27,9 @@ jr_003_4cbe:
     call ClearListMarkCall
     call WaitFrame
     ret
+
+; Read the matching destination and compare it with the current room.
+CheckCabStop:
 
 
 jr_003_4cd5:
@@ -36,15 +42,18 @@ jr_003_4cd5:
 
     push af
     ld a, [wRoomId]
-    cp $31
-    jr nz, jr_003_4cf4
+    cp CabAtChicago
+    jr nz, SetCabRoom
 
-    ld a, $79
+    ld a, C2NewsBoth
     call ReadObjFlag
-    jr z, jr_003_4cf4
+    jr z, SetCabRoom
 
-    ld a, $a1
+    ld a, C2NewsLeft
     call SetObjFlag
+
+; Restore the selected destination, set the room, and finish the ride.
+SetCabRoom:
 
 jr_003_4cf4:
     pop af
@@ -83,19 +92,19 @@ Call_003_4d05:
 
 CabPickKeys:
 C2PickKeys:
-    db $e0
-    db $e1
-    db $e2
-    db $e3
-    db $e4
+    db CabChicago
+    db CabAdison
+    db CabPeoria
+    db CabCottage
+    db CabMorgue
 
 CabPickRooms:
 C2PickRooms:
-    db $31
-    db $5e
-    db $60
-    db $5f
-    db $61
+    db CabAtChicago
+    db CabAtAdison
+    db CabAtPeoria
+    db CabAtCottage
+    db CabAtMorgue
 
 ; Play the cab animation eight times; cue audio when the remaining counter reaches two.
 PlayCabRide:
@@ -103,6 +112,9 @@ PlayC2PickFx:
 
 Call_003_4d2e:
     ld c, CabRideLoops
+
+; Reset the sprite position and play one cab animation.
+CabRideLoop:
 
 jr_003_4d30:
     ld a, $48
@@ -115,13 +127,16 @@ jr_003_4d30:
     pop bc
     ld a, $02
     cp c
-    jr nz, jr_003_4d49
+    jr nz, NextCabLoop
 
     ld a, $33
     call PlayAudio
 
+; Count down the remaining cab animations.
+NextCabLoop:
+
 jr_003_4d49:
     dec c
-    jr nz, jr_003_4d30
+    jr nz, CabRideLoop
 
     ret

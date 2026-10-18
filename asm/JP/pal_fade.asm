@@ -6,7 +6,7 @@ FadeBg:
     push hl
     push bc
     ld a, $02
-    jr jr_001_4934
+    jr FadeSetMode
 
 ; Fill both live palette sets white, then run the original mode-0 transition.
 FadeFromWhite:
@@ -16,7 +16,7 @@ Call_001_4928:
     push bc
     call FillWhitePals
     xor a
-    jr jr_001_4934
+    jr FadeSetMode
 
 ; Select mode 1 and raise both live palette sets toward white.
 FadeToWhite:
@@ -26,27 +26,35 @@ Call_001_4930:
     push bc
     ld a, $01
 
+; Store the selected palette transition mode.
+FadeSetMode:
 jr_001_4934:
     ld [wFadeMode], a
 
+; Run a fade step until the selected palette target is reached.
+FadeStepLoop:
 jr_001_4937:
     call StepFade
-    jr nz, jr_001_493f
+    jr nz, FadeWaitFourFrames
 
     pop bc
     pop hl
     ret
 
 
+; Start the four-frame delay before the next fade step.
+FadeWaitFourFrames:
 jr_001_493f:
     ld c, $04
 
+; Wait for the next frame of the fade delay.
+FadeWaitFrame:
 jr_001_4941:
     call WaitFrame
     dec c
-    jr nz, jr_001_4941
+    jr nz, FadeWaitFrame
 
-    jr jr_001_4937
+    jr FadeStepLoop
 
 ; Dispatch the current fade mode through the inline three-pointer table.
 StepFade:
@@ -61,11 +69,13 @@ FadeCalls:
 ; Stop when both palette sets are white; otherwise lighten both and request upload.
 StepWhiteFade:
     call PalsAreWhite
-    jr nz, jr_001_4959
+    jr nz, StepWhiteFadeLighten
 
     ret
 
 
+; Lighten both live palette sets and request an upload.
+StepWhiteFadeLighten:
 jr_001_4959:
     push hl
     push bc
@@ -88,6 +98,8 @@ LightPal:
 Call_001_4971:
     ld d, $20
 
+; Lighten each component of the next live palette color.
+LightPalNextColor:
 jr_001_4973:
     ld a, [hl+]
     ld c, a
@@ -109,7 +121,7 @@ jr_001_4973:
     ld a, b
     ld [hl+], a
     dec d
-    jr nz, jr_001_4973
+    jr nz, LightPalNextColor
 
     ret
 
@@ -118,11 +130,13 @@ StepBgFade:
 
 
     call BgPalMatches
-    jr nz, jr_001_49a6
+    jr nz, StepBgFadeUpdate
 
     ret
 
 
+; Move the live BG palette toward its staged target.
+StepBgFadeUpdate:
 jr_001_49a6:
     push hl
     push bc
@@ -144,6 +158,8 @@ StepBgPal:
 Call_001_49bb:
     ld b, $20
 
+; Move the next BG color toward its target components.
+StepBgPalNextColor:
 jr_001_49bd:
     push bc
     ld a, [hl+]
@@ -182,7 +198,7 @@ jr_001_49bd:
     pop de
     pop bc
     dec b
-    jr nz, jr_001_49bd
+    jr nz, StepBgPalNextColor
 
     ret
 
@@ -191,11 +207,13 @@ StepAllFade:
 
 
     call PalsMatch
-    jr nz, jr_001_4a09
+    jr nz, StepAllFadeUpdate
 
     ret
 
 
+; Darken both live palette sets toward staged targets.
+StepAllFadeUpdate:
 jr_001_4a09:
     push hl
     push bc
@@ -220,6 +238,8 @@ DarkPal:
 Call_001_4a27:
     ld b, $20
 
+; Apply the downward step to the next palette color.
+DarkPalNextColor:
 jr_001_4a29:
     push bc
     ld a, [hl+]
@@ -258,6 +278,6 @@ jr_001_4a29:
     pop de
     pop bc
     dec b
-    jr nz, jr_001_4a29
+    jr nz, DarkPalNextColor
 
     ret

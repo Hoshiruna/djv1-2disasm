@@ -81,7 +81,7 @@ Jump_000_05a2:
 
 Call_000_05ac:
     dec d
-    jr nz, jr_000_0598
+    jr nz, DecodeRlePlane
 
 Call_000_05af:
     ret
@@ -92,24 +92,28 @@ ReadRleByte:
 
 Call_000_05b0:
     bit 0, d
-    jr z, jr_000_05bd
+    jr z, RleReadToken
 
     xor a
     cp e
-    jr z, jr_000_05bc
+    jr z, RleEndRun
 
     dec e
     ldh a, [hRleValue]
     ret
 
 
+; Clear the active-run flag after its remaining count reaches zero.
+RleEndRun:
 jr_000_05bc:
     ld d, a
 
+; Compare the next source byte with the run marker.
+RleReadToken:
 jr_000_05bd:
     ldh a, [hRleMark]
     cp [hl]
-    jr z, jr_000_05c4
+    jr z, RleStartRun
 
     ld a, [hl+]
 
@@ -117,6 +121,8 @@ Jump_000_05c3:
     ret
 
 
+; Read the repeated value and remaining count after a marker.
+RleStartRun:
 jr_000_05c4:
     inc hl
     ld a, [hl+]

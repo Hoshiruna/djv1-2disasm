@@ -6,10 +6,10 @@ ShowText0:
 Call_000_0f72:
     push af
     bit 7, a
-    jr nz, jr_000_0f97
+    jr nz, ShowText0HighGroup
 
     bit 6, a
-    jr nz, jr_000_0f89
+    jr nz, ShowText0Record1
 
     ld a, [wTextCfg0]
     ld c, a
@@ -19,6 +19,8 @@ Call_000_0f72:
     jp ShowTextPtr
 
 
+; Load the second pointer and bank record for text family zero.
+ShowText0Record1:
 jr_000_0f89:
     ld a, [wTextCfg0+3]
     ld c, a
@@ -28,9 +30,11 @@ jr_000_0f89:
     jp ShowTextPtr
 
 
+; Choose between the third and fourth records for text family zero.
+ShowText0HighGroup:
 jr_000_0f97:
     bit 6, a
-    jr nz, jr_000_0fa9
+    jr nz, ShowText0Record3
 
     ld a, [wTextCfg0+6]
     ld c, a
@@ -40,6 +44,8 @@ jr_000_0f97:
     jp ShowTextPtr
 
 
+; Load the fourth pointer and bank record for text family zero.
+ShowText0Record3:
 jr_000_0fa9:
     ld a, [wTextCfg0+9]
     ld c, a
@@ -55,10 +61,10 @@ ShowText1:
 Call_000_0fb7:
     push af
     bit 7, a
-    jr nz, jr_000_0fdb
+    jr nz, ShowText1HighGroup
 
     bit 6, a
-    jr nz, jr_000_0fce
+    jr nz, ShowText1Record1
 
     ld a, [wTextCfg1]
 
@@ -70,6 +76,8 @@ Call_000_0fc3:
     jp ShowTextPtr
 
 
+; Load the second pointer and bank record for text family one.
+ShowText1Record1:
 jr_000_0fce:
     ld a, [wTextCfg1+3]
     ld c, a
@@ -78,9 +86,11 @@ jr_000_0fce:
     ld a, [wTextCfg1+5]
     jr jr_000_1057
 
+; Choose between the third and fourth records for text family one.
+ShowText1HighGroup:
 jr_000_0fdb:
     bit 6, a
-    jr nz, jr_000_0fec
+    jr nz, ShowText1Record3
 
     ld a, [wTextCfg1+6]
     ld c, a
@@ -89,6 +99,8 @@ jr_000_0fdb:
     ld a, [wTextCfg1+8]
     jr jr_000_1057
 
+; Load the fourth pointer and bank record for text family one.
+ShowText1Record3:
 jr_000_0fec:
     ld a, [wTextCfg1+9]
     ld c, a
@@ -105,12 +117,12 @@ ShowText2:
 Call_000_0ff9:
     push af
     bit 7, a
-    jr nz, jr_000_101c
+    jr nz, ShowText2HighGroup
 
     bit 6, a
 
 Jump_000_1000:
-    jr nz, jr_000_100f
+    jr nz, ShowText2Record1
 
     ld a, [wTextCfg2]
     ld c, a
@@ -119,6 +131,8 @@ Jump_000_1000:
     ld a, [wTextCfg2+2]
     jr jr_000_1057
 
+; Load the second pointer and bank record for text family two.
+ShowText2Record1:
 jr_000_100f:
     ld a, [wTextCfg2+3]
     ld c, a
@@ -127,9 +141,11 @@ jr_000_100f:
     ld a, [wTextCfg2+5]
     jr jr_000_1057
 
+; Choose between the third and fourth records for text family two.
+ShowText2HighGroup:
 jr_000_101c:
     bit 6, a
-    jr nz, jr_000_102d
+    jr nz, ShowText2Record3
 
     ld a, [wTextCfg2+6]
 
@@ -140,6 +156,8 @@ Jump_000_1023:
     ld a, [wTextCfg2+8]
     jr jr_000_1057
 
+; Load the fourth pointer and bank record for text family two.
+ShowText2Record3:
 jr_000_102d:
     ld a, [wTextCfg2+9]
     ld c, a
@@ -154,7 +172,7 @@ ShowText3:
 Call_000_103a:
     push af
     bit 6, a
-    jr nz, jr_000_104c
+    jr nz, ShowText3Record1
 
     ld a, [wTextCfg3]
     ld c, a
@@ -165,6 +183,8 @@ Jump_000_1043:
     ld a, [wTextCfg3+2]
     jr jr_000_1057
 
+; Load the second pointer and bank record for text family three.
+ShowText3Record1:
 jr_000_104c:
     ld a, [wTextCfg3+3]
     ld c, a

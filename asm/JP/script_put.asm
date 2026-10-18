@@ -5,7 +5,7 @@ ScriptPutItem:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_29bd
+    jr nz, ScriptPutCaseII
 
     push af
     ld a, $02
@@ -16,6 +16,8 @@ ScriptPutItem:
     ret
 
 
+; Read and apply the Case II item-placement mode.
+ScriptPutCaseII:
 jr_000_29bd:
     call ReadArg
     ld [wPutMode], a

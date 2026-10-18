@@ -6,6 +6,8 @@ DrawListMark:
 Call_001_5dbc:
     ld hl, ListMarkOn
 
+; Queue the selected or cleared row mark unless the row is FF.
+DrawListMarkCore:
 jr_001_5dbf:
     ld a, [wListMarkRow]
     cp $ff
@@ -41,7 +43,7 @@ ClearListMark:
 
 Call_001_5dec:
     ld hl, ListMarkOff
-    jr jr_001_5dbf
+    jr DrawListMarkCore
 
 ; Clear the previous cursor, set the slot offset to zero, save the new selection and draw its cursor.
 MoveListCursor:

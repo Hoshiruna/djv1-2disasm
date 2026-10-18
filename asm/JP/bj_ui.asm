@@ -13,14 +13,18 @@ Jump_029_704c:
     ld [wBJRect+1], a
     ld a, [wBJDigits]
     cp $00
-    jr nz, jr_029_7067
+    jr nz, BJLeftNonzeroTens
 
     ld a, $7f
-    jr jr_029_7069
+    jr BJLeftWriteDigits
 
+; Set the visible tens digit when it is nonzero.
+BJLeftNonzeroTens:
 jr_029_7067:
     or $80
 
+; Write the remaining-card digits to the map queue.
+BJLeftWriteDigits:
 jr_029_7069:
     ld [wBJDigits], a
     ld a, [wBJDigits+1]
@@ -42,10 +46,12 @@ Call_029_7082:
     xor a
     ld [wBJDigits], a
 
+; Subtract tens until the remainder is below ten.
+BJSplitDigitsLoop:
 jr_029_7089:
     ld a, [wBJDigits+1]
     cp $0a
-    jr c, jr_029_70a1
+    jr c, BJSplitDigitsDone
 
     ld a, [wBJDigits+1]
     sub $0a
@@ -53,8 +59,10 @@ jr_029_7089:
     ld a, [wBJDigits]
     inc a
     ld [wBJDigits], a
-    jr jr_029_7089
+    jr BJSplitDigitsLoop
 
+; Return the decimal tens and remainder.
+BJSplitDigitsDone:
 jr_029_70a1:
     ret
 
@@ -67,8 +75,10 @@ Jump_029_70a2:
     call ShowBJText
     ld a, [wBJPayout]
     cp $00
-    jr z, jr_029_70d8
+    jr z, BJPayNothing
 
+; Add and display one chip from the pending payout.
+BJPayNextChip:
 jr_029_70ae:
     ld a, [wChips]
     inc a
@@ -80,19 +90,23 @@ jr_029_70ae:
     call WaitTicks
     ld a, [wChips]
     cp $ff
-    jr z, jr_029_70d2
+    jr z, BJPayDelay
 
     ld a, [wBJPayout]
     dec a
     ld [wBJPayout], a
-    jr nz, jr_029_70ae
+    jr nz, BJPayNextChip
 
+; Wait after the payout reaches zero or chips reach $ff.
+BJPayDelay:
 jr_029_70d2:
     ld a, $28
     call WaitTicks
     ret
 
 
+; Display the chip total when the payout is zero.
+BJPayNothing:
 jr_029_70d8:
     call ShowBJChips
     ld a, $3c
@@ -131,16 +145,18 @@ Call_029_70fc:
     call ShowBJLeft
     ld a, [wChips]
     cp $00
-    jr z, jr_029_7125
+    jr z, BJTableFadeIn
 
     ld a, [wBJLeft]
     cp $10
-    jr c, jr_029_7125
+    jr c, BJTableFadeIn
 
     ld a, $15
     call ShowBJText
     call ShowBJChips
 
+; Fade in the prepared blackjack table.
+BJTableFadeIn:
 jr_029_7125:
     call FadeIn
     ret

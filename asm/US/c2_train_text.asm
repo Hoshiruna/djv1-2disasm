@@ -11,6 +11,8 @@ ShowC2SchedHigh:
     ld [wTrainRepeat], a
     ld a, TrainRecsLen
 
+; Set the upper train page range before displaying its rows.
+TrainHighPageInit:
 jr_003_6266:
     ld [wTrainPageEnd], a
     xor a

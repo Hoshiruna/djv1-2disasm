@@ -6,6 +6,8 @@ WaitTextRelease:
 jr_000_118c:
     call SubmitMapQueue
 
+; Draw objects and poll for A release.
+TextReleasePoll:
 jr_000_118f:
     call SubmitMapQueue
     call DrawRoomObjs
@@ -13,7 +15,7 @@ jr_000_118f:
     call PollJoy
     ld a, [wJoyHeld]
     bit 0, a
-    jr nz, jr_000_118f
+    jr nz, TextReleasePoll
 
     ret
 

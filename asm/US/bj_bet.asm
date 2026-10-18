@@ -11,10 +11,12 @@ Call_029_6b06:
     ld a, [wBJBet]
     ld hl, wChips
     cp [hl]
-    jr nc, jr_029_6b1c
+    jr nc, BJBetDrawAmount
 
     ld [wChips], a
 
+; Draw the current bet amount in the chip display.
+BJBetDrawAmount:
 jr_029_6b1c:
     ld a, $00
     ld [wTextX], a
@@ -25,42 +27,48 @@ jr_029_6b1c:
     call ShowListText
     call SubmitMapQueue
 
+; Poll confirmation and increase or decrease presses.
+BJBetPollInput:
 jr_029_6b31:
     call NextRandom
     call PollJoy
     ld a, [wJoyPress]
     and $f1
-    jr z, jr_029_6b31
+    jr z, BJBetPollInput
 
     bit 0, a
-    jr nz, jr_029_6b6c
+    jr nz, BJBetConfirm
 
     and $90
-    jr z, jr_029_6b5c
+    jr z, BJBetDecrease
 
     ld a, [wChips]
     cp $0a
-    jr z, jr_029_6b31
+    jr z, BJBetPollInput
 
     ld hl, wBJFunds
     cp [hl]
-    jr z, jr_029_6b31
+    jr z, BJBetPollInput
 
     ld a, [wChips]
     inc a
     ld [wChips], a
-    jr jr_029_6b1c
+    jr BJBetDrawAmount
 
+; Lower the proposed bet unless it is already one.
+BJBetDecrease:
 jr_029_6b5c:
     ld a, [wChips]
     cp $01
-    jr z, jr_029_6b31
+    jr z, BJBetPollInput
 
     ld a, [wChips]
     dec a
     ld [wChips], a
-    jr jr_029_6b1c
+    jr BJBetDrawAmount
 
+; Store and deduct the chosen bet from available chips.
+BJBetConfirm:
 jr_029_6b6c:
     ld a, $01
     call ShowBJText

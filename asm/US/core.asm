@@ -10,7 +10,7 @@ jr_000_0461:
     dec bc
     ld a, c
     or b
-    jr nz, jr_000_0461
+    jr nz, ZeroBytes
 
     ret
 
@@ -46,7 +46,7 @@ jr_000_0487:
     dec bc
     ld a, b
     or c
-    jr nz, jr_000_0487
+    jr nz, FillReverse
 
     ret
 
@@ -63,7 +63,7 @@ jr_000_048f:
     or c
 
 Call_000_0495:
-    jr nz, jr_000_048f
+    jr nz, CopyBytes
 
     ret
 
@@ -95,11 +95,13 @@ Wait3Frames:
 
     ld a, $03
 
+; Wait for the next of three frames.
+Wait3FramesNext:
 jr_000_04aa:
     push af
     call WaitFrame
     pop af
     dec a
-    jr nz, jr_000_04aa
+    jr nz, Wait3FramesNext
 
     ret

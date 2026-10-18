@@ -3,7 +3,7 @@
 HandleInput:
     ld a, [wInputMode]
     cp $00
-    jr nz, jr_001_5aa1
+    jr nz, HandleInputDispatch
 
 ; Copy candidate coordinates to the current cursor without changing the operation slot.
 ApplyCursor:
@@ -16,6 +16,8 @@ Call_001_5a94:
     ret
 
 
+; Save the current operation slot and dispatch input in the primary slot.
+HandleInputDispatch:
 jr_001_5aa1:
     push af
     ldh a, [hItemSlot]
@@ -33,23 +35,27 @@ jr_001_5aa1:
     call DispatchInput
     ld a, [wSelAction]
     cp $ff
-    jr z, jr_001_5b15
+    jr z, HandleInputRestoreSlot
 
     ld a, [wItemType]
     cp $ff
-    jr z, jr_001_5b15
+    jr z, HandleInputRestoreSlot
 
     call PrepItem
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_5ad4
+    jr nz, HandleInputCase2Action
 
     call RunC1Action
-    jr jr_001_5ad7
+    jr HandleInputActionDone
 
+; Run the Case II action for the prepared primary target.
+HandleInputCase2Action:
 jr_001_5ad4:
     call RunC2Action
 
+; Clear target marks, write operation slots, and process case-specific events.
+HandleInputActionDone:
 jr_001_5ad7:
     ld a, [wSelRow]
     ld [wListMarkRow], a
@@ -61,10 +67,12 @@ jr_001_5ad7:
     call WriteOpSlots
     ld a, [wCaseId]
     cp $00
-    jr z, jr_001_5af9
+    jr z, HandleInputClearSlots
 
     call C2EventsCall
 
+; Clear both operation slots and check whether the selected action must reset.
+HandleInputClearSlots:
 jr_001_5af9:
     call ClearSelect
     call ClearAltSlot
@@ -72,13 +80,15 @@ jr_001_5af9:
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_5b15
+    jr z, HandleInputRestoreSlot
 
     ld a, $ff
     ld [wSelAction], a
     ld a, $bf
     call ClearObjFlag
 
+; Restore the saved operation-slot offset before returning.
+HandleInputRestoreSlot:
 jr_001_5b15:
     pop hl
     push af
@@ -98,12 +108,14 @@ HandleAltInput:
     ld [wStateResult], a
     ld a, [wInputMode]
     cp $00
-    jr nz, jr_001_5b32
+    jr nz, HandleAltInputDispatch
 
     call ApplyCursor
     ret
 
 
+; Dispatch input in the alternate slot and run a completed alternate target.
+HandleAltInputDispatch:
 jr_001_5b32:
     ld d, a
     ld a, $10
@@ -120,7 +132,7 @@ jr_001_5b32:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_001_5b75
+    jr z, HandleAltInputReturn
 
     call PrepItem
     call RunAltAction
@@ -139,6 +151,8 @@ jr_001_5b32:
     and $fb
     ld [wStateResult], a
 
+; Return after checking the alternate target, preserving the incomplete-selection path.
+HandleAltInputReturn:
 jr_001_5b75:
     ret
 

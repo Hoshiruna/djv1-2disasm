@@ -6,7 +6,7 @@ UseC2Bullet:
 
     ld a, [wC2Bullets]
     cp $00
-    jr nz, jr_003_4f44
+    jr nz, C2BulletUseReady
 
     ld a, $2d
     call ShowMsg0
@@ -14,16 +14,20 @@ UseC2Bullet:
     ret
 
 
+; Start scanning loaded bullet flags when inventory count is nonzero.
+C2BulletUseReady:
 jr_003_4f44:
     ld hl, C2BulletIds
 
+; Scan the six bullet flags for the first loaded slot.
+C2BulletFindLoaded:
 jr_003_4f47:
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_4f77
+    jr z, C2BulletNoLoaded
 
     call ReadItemFlag
-    jr z, jr_003_4f47
+    jr z, C2BulletFindLoaded
 
     dec hl
     ld a, [hl]
@@ -46,6 +50,8 @@ jr_003_4f47:
     ret
 
 
+; Report that no loaded bullet flag is set.
+C2BulletNoLoaded:
 jr_003_4f77:
     ld a, $8f
     call ShowMsg1
@@ -59,13 +65,15 @@ TakeC2Bullet:
 
     ld hl, C2BulletIds
 
+; Scan the six bullet flags for the first empty slot.
+C2BulletFindEmpty:
 jr_003_4f83:
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_4f9b
+    jr z, C2BulletAllLoaded
 
     call ReadItemFlag
-    jr nz, jr_003_4f83
+    jr nz, C2BulletFindEmpty
 
     dec hl
     ld a, [hl]
@@ -76,6 +84,8 @@ jr_003_4f83:
     ret
 
 
+; Report that all six bullet flags are already set.
+C2BulletAllLoaded:
 jr_003_4f9b:
     ld a, $90
     call ShowMsg1

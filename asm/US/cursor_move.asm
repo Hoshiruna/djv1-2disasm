@@ -6,13 +6,13 @@ StepCursorFine:
 Call_001_5f91:
     ld a, [wJoyHeld]
     bit 4, a
-    jr nz, jr_001_5fb8
+    jr nz, CursorFineRight
 
     bit 5, a
-    jr nz, jr_001_5fbf
+    jr nz, CursorFineLeft
 
     bit 7, a
-    jr nz, jr_001_5fb1
+    jr nz, CursorFineDown
 
     bit 6, a
     ret z
@@ -22,37 +22,47 @@ Call_001_5f91:
     ret z
 
     dec a
-    jr z, jr_001_5fad
+    jr z, CursorFineStoreY
 
     dec a
 
+; Store the two-pixel vertical candidate, retaining the zero boundary on upward movement.
+CursorFineStoreY:
 jr_001_5fad:
     ld [wInputY], a
     ret
 
 
+; Advance the vertical candidate by two pixels.
+CursorFineDown:
 jr_001_5fb1:
     ld a, [wCursorY]
     inc a
     inc a
-    jr jr_001_5fad
+    jr CursorFineStoreY
 
+; Advance the horizontal candidate by two pixels.
+CursorFineRight:
 jr_001_5fb8:
     ld a, [wCursorX]
     inc a
     inc a
-    jr jr_001_5fc9
+    jr CursorFineStoreX
 
+; Decrease the horizontal candidate unless it is already zero.
+CursorFineLeft:
 jr_001_5fbf:
     ld a, [wCursorX]
     cp $00
     ret z
 
     dec a
-    jr z, jr_001_5fc9
+    jr z, CursorFineStoreX
 
     dec a
 
+; Store the two-pixel horizontal candidate.
+CursorFineStoreX:
 jr_001_5fc9:
     ld [wInputX], a
     ret
@@ -64,20 +74,22 @@ StepCursorGrid:
 Call_001_5fcd:
     ld a, [wJoyHeld]
     bit 4, a
-    jr nz, jr_001_5fe1
+    jr nz, CursorGridRight
 
     bit 5, a
-    jr nz, jr_001_5fed
+    jr nz, CursorGridLeft
 
     bit 7, a
-    jr nz, jr_001_5fff
+    jr nz, CursorGridDown
 
     bit 6, a
-    jr nz, jr_001_5ff6
+    jr nz, CursorGridUp
 
     ret
 
 
+; Advance eight pixels only while the candidate stays below $a0.
+CursorGridRight:
 jr_001_5fe1:
     ld a, [wCursorX]
     add $08
@@ -88,6 +100,8 @@ jr_001_5fe1:
     ret
 
 
+; Subtract eight pixels from the horizontal candidate.
+CursorGridLeft:
 jr_001_5fed:
     ld a, [wCursorX]
     sub $08
@@ -95,6 +109,8 @@ jr_001_5fed:
     ret
 
 
+; Subtract eight pixels from the vertical candidate.
+CursorGridUp:
 jr_001_5ff6:
     ld a, [wCursorY]
     sub $08
@@ -102,6 +118,8 @@ jr_001_5ff6:
     ret
 
 
+; Add eight pixels to the vertical candidate.
+CursorGridDown:
 jr_001_5fff:
     ld a, [wCursorY]
     add $08
@@ -150,10 +168,10 @@ MoveCursor:
 Jump_001_6030:
     ld a, [wInputSel]
     cp $17
-    jr z, jr_001_6073
+    jr z, CursorGridHitTest
 
     cp $15
-    jr nc, jr_001_60a2
+    jr nc, CursorFineHitTest
 
     ld a, [wJoyHeld]
     swap a
@@ -191,47 +209,59 @@ Jump_001_6030:
     ret
 
 
+; Classify the grid cursor position for selection $17.
+CursorGridHitTest:
 jr_001_6073:
     call StepCursorGrid
     ld a, [wInputX]
     cp $78
-    jr c, jr_001_609a
+    jr c, CursorGridLeftArea
 
     ld a, [wInputY]
     cp $30
-    jr c, jr_001_608b
+    jr c, CursorGridTopRight
 
     cp $58
     ret c
 
     ld a, $08
-    jr jr_001_609c
+    jr CursorGridSnap
 
+; Choose the upper-right grid selection from candidate coordinates.
+CursorGridTopRight:
 jr_001_608b:
     ld a, [wInputX]
     cp $90
-    jr c, jr_001_6096
+    jr c, CursorGridTopMiddle
 
     ld a, $0a
-    jr jr_001_609c
+    jr CursorGridSnap
 
+; Choose the upper-middle grid selection.
+CursorGridTopMiddle:
 jr_001_6096:
     ld a, $09
-    jr jr_001_609c
+    jr CursorGridSnap
 
+; Choose selection $15 for the left grid area.
+CursorGridLeftArea:
 jr_001_609a:
     ld a, $15
 
+; Store the classified selection and snap to its coordinate pair.
+CursorGridSnap:
 jr_001_609c:
     ld [wInputSel], a
     jp SnapCursor
 
 
+; Classify fine cursor movement using the horizontal or vertical hit table.
+CursorFineHitTest:
 jr_001_60a2:
     call StepCursorFine
     ld a, [wInputX]
     cp $70
-    jr nc, jr_001_60d8
+    jr nc, CursorFineRightArea
 
     ld a, [wInputY]
     cp $70
@@ -252,6 +282,8 @@ jr_001_60a2:
 CursorHitX:
     db $00, $00, $00, $02, $02, $04, $04, $01, $01, $01, $05, $05, $05, $07, $07
 
+; Use the vertical hit table for positions at or beyond X $70.
+CursorFineRightArea:
 jr_001_60d8:
     ld a, [wInputY]
     srl a

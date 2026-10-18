@@ -70,7 +70,7 @@ Jump_003_60cf:
     ld b, a
     ld a, c
     cp b
-    jr nz, jr_003_614e
+    jr nz, C2NextTarget
 
     ld a, [wRoomDataPtr]
     ld c, a
@@ -83,7 +83,7 @@ Jump_003_60cf:
     add hl, bc
     ld a, [hl]
     bit 7, a
-    jr z, jr_003_6124
+    jr z, C2StoreTarget
 
     call C2MarkCond
     ld a, [wStateResult]

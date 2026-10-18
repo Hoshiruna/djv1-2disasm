@@ -9,16 +9,20 @@ Call_003_66fb:
     push bc
     ld a, [wRoomId]
     and $01
-    jr z, jr_003_670c
+    jr z, TrainRideBeginEven
 
     call PlayTrainOdd
     call FadeTrainOddIn
-    jr jr_003_6712
+    jr TrainRideBeginRestore
 
+; Play the even-room passenger animation and fade in.
+TrainRideBeginEven:
 jr_003_670c:
     call PlayTrainEven
     call FadeTrainEvenIn
 
+; Restore saved registers after the ride-start animation.
+TrainRideBeginRestore:
 jr_003_6712:
     pop bc
     pop de
@@ -34,14 +38,18 @@ Call_003_6715:
     push bc
     ld a, [wRoomId]
     and $01
-    jr z, jr_003_6723
+    jr z, TrainRideEndEven
 
     call FadeTrainOddOut
-    jr jr_003_6726
+    jr TrainRideEndRestore
 
+; Fade out the even-room passenger palettes.
+TrainRideEndEven:
 jr_003_6723:
     call FadeTrainEvenOut
 
+; Restore saved registers after the ride-end fade.
+TrainRideEndRestore:
 jr_003_6726:
     pop bc
     pop de

@@ -8,11 +8,11 @@ StepC2TextObj:
     push af
     ld a, [wCaseId]
     cp $00
-    jr z, jr_003_50ab
+    jr z, C2WarTextRestoreArg
 
     ld a, C2TextAnim
     call ReadObjFlag
-    jr z, jr_003_50ab
+    jr z, C2WarTextRestoreArg
 
     call DrawWarText
     pop af
@@ -20,6 +20,8 @@ StepC2TextObj:
     ret
 
 
+; Restore wArg0 when the animation is skipped.
+C2WarTextRestoreArg:
 jr_003_50ab:
     pop af
     ld [wArg0], a

@@ -6,26 +6,30 @@ TestC2SchedRoom:
 Call_003_68ca:
     ld de, $0000
 
+; Scan passenger room IDs before reading clearance.
+TrainPassFindRoom:
 jr_003_68cd:
     ld a, [wRoomId]
     ld hl, TrainCarA
     add hl, de
     cp [hl]
-    jr z, jr_003_68e5
+    jr z, TrainPassReadFlag
 
     ld hl, TrainCarB
     add hl, de
     cp [hl]
-    jr z, jr_003_68e5
+    jr z, TrainPassReadFlag
 
     inc e
     ld a, TrainCount
     cp e
-    jr nz, jr_003_68cd
+    jr nz, TrainPassFindRoom
 
     ret
 
 
+; Read the clearance flag for the matching train.
+TrainPassReadFlag:
 jr_003_68e5:
     ld hl, TrainPassFlags
     add hl, de

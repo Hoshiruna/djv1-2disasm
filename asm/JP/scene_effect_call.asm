@@ -12,7 +12,7 @@ Call_000_2fab:
     pop af
     call TrainRoomFx
     call PopRomBank
-    jr jr_000_2fbf
+    jr EffectValue
 
 ; Reset object scrolling, read one effect index, and enter the case-specific effect path.
 ScriptEffect:
@@ -27,7 +27,7 @@ jr_000_2fbf:
     ld [wFxId], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_2fd7
+    jr nz, EffectValueCaseII
 
     push af
     ld a, $02
@@ -40,6 +40,8 @@ Jump_000_2fd3:
     ret
 
 
+; Dispatch the selected effect to the Case II bank.
+EffectValueCaseII:
 jr_000_2fd7:
     push af
     ld a, $03
@@ -72,7 +74,7 @@ FinishEffect:
 Jump_000_2ff9:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_3017
+    jr nz, FinishEffectCaseII
 
 Jump_000_3000:
     call ResetObjScroll
@@ -87,6 +89,8 @@ Jump_000_3000:
     ret
 
 
+; Restore the saved Case II scene effect.
+FinishEffectCaseII:
 jr_000_3017:
     push af
 

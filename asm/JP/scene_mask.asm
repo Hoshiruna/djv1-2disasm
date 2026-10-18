@@ -13,6 +13,8 @@ ReadSceneMask:
     ld a, [hl]
     ld [wDrawMaskPtr+1], a
 
+; Index the selected mask table by step times 28 and row times two.
+ReadSceneMaskRow:
 jr_001_5030:
     ld a, [wDrawStep]
     add a
@@ -36,6 +38,8 @@ jr_001_5030:
     add hl, bc
     ld a, [hl+]
 
+; Store the two selected mask bytes in the current draw mask.
+StoreSceneMask:
 jr_001_504e:
     ld [wDrawMask], a
     ld a, [hl]

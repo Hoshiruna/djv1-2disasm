@@ -9,6 +9,8 @@ Call_000_1a94:
     ld a, [hl+]
     ld [wArg0], a
 
+; Store the advanced script pointer and return the first argument.
+ReadArgAdvancePointer:
 jr_000_1aa0:
     ld a, l
     ld [wScriptPtr], a
@@ -29,7 +31,7 @@ Call_000_1aac:
     ld [wArg0], a
     ld a, [hl+]
     ld [wArg1], a
-    jr jr_000_1aa0
+    jr ReadArgAdvancePointer
 
 ; Read three script bytes into args 0..2; advance the pointer and return arg 0.
 ReadArgs3:
@@ -49,7 +51,7 @@ Jump_000_1aca:
     ld [wArg1], a
     ld a, [hl+]
     ld [wArg2], a
-    jr jr_000_1aa0
+    jr ReadArgAdvancePointer
 
 ; Read four script bytes into args 0..3; advance the pointer and return arg 0.
 ReadArgs4:
@@ -67,4 +69,4 @@ Call_000_1ad4:
     ld [wArg2], a
     ld a, [hl+]
     ld [wArg3], a
-    jr jr_000_1aa0
+    jr ReadArgAdvancePointer

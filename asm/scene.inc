@@ -1319,3 +1319,999 @@ DEF CabRideLoops EQU $0008
 
 ; Case II cab ride animation ID.
 DEF AnimCabRide EQU $006a
+
+; Case II cab menu key: Chicago station.
+DEF CabChicago EQU $00e0
+
+; Case II cab menu key: Adison.
+DEF CabAdison EQU $00e1
+
+; Case II cab menu key: Peoria.
+DEF CabPeoria EQU $00e2
+
+; Case II cab menu key: Cottage.
+DEF CabCottage EQU $00e3
+
+; Case II cab menu key: Morgue.
+DEF CabMorgue EQU $00e4
+
+; Case II cab interior at stop: Chicago station.
+DEF CabAtChicago EQU $0031
+
+; Case II cab interior at stop: Adison.
+DEF CabAtAdison EQU $005e
+
+; Case II cab interior at stop: Peoria.
+DEF CabAtPeoria EQU $0060
+
+; Case II cab interior at stop: Cottage.
+DEF CabAtCottage EQU $005f
+
+; Case II cab interior at stop: Morgue.
+DEF CabAtMorgue EQU $0061
+
+; Case II newspaper payment available for the next pickup.
+DEF C2NewsPaid EQU $004a
+
+; Case II at least one newspaper has been taken at the stand.
+DEF C2NewsTaken EQU $007a
+
+; Case II a subsequent newspaper pickup has been recorded.
+DEF C2NewsBoth EQU $0079
+
+; Case II left Chicago station by cab after the subsequent newspaper pickup.
+DEF C2NewsLeft EQU $00a1
+
+; Case II morgue destination was added after reading a newspaper.
+DEF C2MorgueKnown EQU $0038
+
+; Legacy cab destination room name.
+DEF RoomChiStn EQU $0031
+
+; Legacy cab destination room name.
+DEF RoomAdison EQU $005e
+
+; Legacy cab destination room name.
+DEF RoomCottage EQU $005f
+
+; Legacy cab destination room name.
+DEF RoomPeoria EQU $0060
+
+; Legacy cab destination room name.
+DEF RoomMorgue EQU $0061
+
+; Case II the first meeting with Gabby has been shown.
+DEF C2GabbyMet EQU $0043
+
+; Case II the initial apartment-front description has been shown.
+DEF C2HomeSeen EQU $0044
+
+; Case II the initial Cottage street description has been shown.
+DEF C2CottageSeen EQU $0069
+
+; Case II the initial Peoria street description has been shown.
+DEF C2PeoriaSeen EQU $0051
+
+; Case II Chicago was added to the cab destination list.
+DEF C2ChicagoKnown EQU $0027
+
+; Case II the folded timetable is open.
+DEF C2TimetableOpen EQU $0007
+
+; Case II the magnetic lift button was taken.
+DEF C2ButtonTaken EQU $000f
+
+; Case II the carried photo has been read.
+DEF C2PhotoSeen EQU $0039
+
+; Case II photo and hamper mark have suggested hiding for the cleaners trip.
+DEF C2HamperPlan EQU $001c
+
+; Case II Vegas third-floor hall.
+DEF RoomVegasHall3 EQU $000c
+
+; Case II Vegas hamper interior.
+DEF RoomVegasHamper EQU $000d
+
+; Case II Vegas hamper transport timer.
+DEF wC2HamperTick EQU $c581
+
+; Original action count before hamper transport.
+DEF HamperRideWait EQU $0005
+
+; Case II the hamper transfer and frisking ended in the laundry room.
+DEF C2Frisked EQU $0077
+
+; Case II casino guard attacks on this original timer step.
+DEF GuardAttackStep EQU $0028
+
+; Case II the railway pamphlet is open.
+DEF C2PamphletOpen EQU $0014
+
+; Case II the Adison cab destination was added from the license.
+DEF C2AdisonKnown EQU $0035
+
+; Case II Peoria was added from the newspaper clipping.
+DEF C2PeoriaKnown EQU $0036
+
+; Case II Cottage was added from Sugar's business card.
+DEF C2CottageKnown EQU $0037
+
+; Case II the old clipping discovery text has been shown while opening the newspaper.
+DEF C2ClipFound EQU $0042
+
+; Case II the original trench coat was taken.
+DEF C2TrenchTaken EQU $0028
+
+; Case II the original pants were taken.
+DEF C2PantsTaken EQU $0029
+
+; Case II the original suitcase was taken.
+DEF C2SuitcaseTaken EQU $00a4
+
+; Case II the original laundry envelope and photo discovery was shown.
+DEF C2LaundrySearched EQU $0013
+
+; Case II the spare coat pocket inspection flag has been set.
+DEF C2CoatPocketSeen EQU $005a
+
+; Case II the vacuum was opened.
+DEF C2VacOpened EQU $0072
+
+; Case II the first vacuum description was shown.
+DEF C2VacSeen EQU $0073
+
+; Case II the vacuum bag was torn.
+DEF C2VacBagTorn EQU $0075
+
+; Case II the folding knife is open.
+DEF C2KnifeOpen EQU $0068
+
+; Case II the flashlight has an installed cell.
+DEF C2LampHasCell EQU $004e
+
+; Case II the original flashlight weak-cell flag was set at timer step 29.
+DEF C2LampWeak EQU $00a8
+
+; Original flashlight dimming step.
+DEF LampDimStep EQU $001d
+
+; Original flashlight expiry step.
+DEF LampEndStep EQU $003b
+
+; Case II the flashlight can be switched on with its original cell state.
+DEF C2LampReady EQU $0076
+
+; Case II the original Bondwell box was taken.
+DEF C2Box2Taken EQU $00a5
+
+; Case II packed envelope 1: type 4, item 6.
+DEF C2Envelope1 EQU $0086
+
+; Case II packed gun: type 4, item 9.
+DEF C2Gun EQU $0089
+
+; Case II original photo item.
+DEF C2Photo EQU $0018
+
+; Case II original letter item searched for during the hamper capture.
+DEF C2FriskLetter EQU $0019
+
+; Case II the trench coat is worn.
+DEF C2TrenchWorn EQU $000d
+
+; Case II the pants are worn.
+DEF C2PantsWorn EQU $000c
+
+; Case II packed type 4 item $00.
+DEF C2Trench EQU $0080
+
+; Case II packed type 4 item $01.
+DEF C2Pants EQU $0081
+
+; Case II packed type 4 item $08.
+DEF C2Coat EQU $0088
+
+; Case II packed type 4 item $0a.
+DEF C2Lamp EQU $008a
+
+; Case II the bottle is broken.
+DEF C2BottleBroken EQU $004c
+
+; Case II the bottle has been taken.
+DEF C2BottleTaken EQU $00a2
+
+; Case II packed type 3 item $1e.
+DEF C2Bottle EQU $001e
+
+; Case II packed type 3 item $24.
+DEF C2Knife EQU $0024
+
+; Case II packed type 3 item $49.
+DEF C2Opener EQU $0049
+
+; Case II Rudy recognized Ace after seeing the old clipping.
+DEF C2RudyKnows EQU $000e
+
+; Case II the attendant has brought out the suitcase.
+DEF C2CaseShown EQU $001b
+
+; Case II the lock on Joe's rear door has been broken.
+DEF C2JoeLockGone EQU $005d
+
+; Case II the lock on Sugar's apartment door has been broken.
+DEF C2SugLockGone EQU $006b
+
+; Case II the rear door lock hint flag; the original description sets it before checking it.
+DEF C2JoeLockHint EQU $005e
+
+; Case II Sugar's cheap lock has been described.
+DEF C2SugLockHint EQU $006c
+
+; Case II Sugar's apartment entry description has been shown.
+DEF C2SugarSeen EQU $006e
+
+; Case II the paperweight has been inspected.
+DEF C2WeightSeen EQU $0012
+
+; Case II the dartboard bullseye sequence has run.
+DEF C2Bullseye EQU $009e
+
+; Case II the detached bird has been thrown to reveal the secret passage.
+DEF C2DartUsed EQU $0086
+
+; Case II packed type 3 item $46.
+DEF C2Paperweight EQU $0046
+
+; Case II packed type 3 item $47.
+DEF C2Dart EQU $0047
+
+; Case II packed type 3 item $48.
+DEF C2DartBase EQU $0048
+
+; Case II packed type 3 item $3f.
+DEF C2ClaimTicket EQU $003f
+
+; Case II the diary slot machine lock is unlocked.
+DEF DiaryUnlocked EQU $005b
+
+; Case II the second slot machine lock is unlocked.
+DEF EmptyUnlocked EQU $005c
+
+; Case II the diary slot machine initial description has been shown.
+DEF DiarySlotSeen EQU $0063
+
+; Case II the second slot machine initial description has been shown.
+DEF EmptySlotSeen EQU $0065
+
+; Case II key 4 has unlocked the second machine at least once.
+DEF EmptyKeyUsed EQU $0066
+
+; Case II packed type 3 item $06.
+DEF C2Key1 EQU $0006
+
+; Case II packed type 3 item $25.
+DEF C2Key2 EQU $0025
+
+; Case II packed type 3 item $2d.
+DEF C2Key3 EQU $002d
+
+; Case II packed type 3 item $32.
+DEF C2Key4 EQU $0032
+
+; Case II packed type 3 item $3c.
+DEF C2Key5 EQU $003c
+
+; Case II packed type 3 item $41.
+DEF C2Key6 EQU $0041
+
+; Case II Ace's mailbox lock is unlocked.
+DEF C2MailUnlocked EQU $0048
+
+; Case II the laundry door lock is unlocked.
+DEF LaundryUnlocked EQU $0026
+
+; Case II Ace's apartment door lock is unlocked.
+DEF HomeUnlocked EQU $0047
+
+; Case II Ace's apartment first-entry sequence has run.
+DEF C2HomeEntered EQU $0049
+
+; Case II state bit for the open curtain in Ace's apartment.
+DEF C2HomeCurtain EQU $00a3
+
+; Case II the wall safe contents hint has been shown.
+DEF C2SafeSeen EQU $0057
+
+; Case II the old telephone has been opened.
+DEF C2PhoneOpened EQU $0058
+
+; Original name for the movable shelf flag; retained for compatibility.
+DEF C2BottleHit EQU $009d
+
+; Case II the passage behind the wine rack has been found.
+DEF C2WinePassage EQU $0061
+
+; Case II the wine tap has been turned open.
+DEF C2TapOpen EQU $005f
+
+; Case II the dog has been asked to give its paw.
+DEF C2DogPawAsked EQU $003d
+
+; Case II the cold water tap is open.
+DEF C2ColdTapOn EQU $0001
+
+; Case II the hot water tap is open.
+DEF C2HotTapOn EQU $0002
+
+; Case II the grimy room window glass is broken.
+DEF C2WindowBroken EQU $0005
+
+; Case II the initial conversation with the hobo has occurred.
+DEF C2HoboTalked EQU $006d
+
+; Case II the young woman has been approached once.
+DEF C2WomanTalked EQU $0016
+
+; Case II the young woman has reached the repeated-conversation slap branch.
+DEF C2WomanFedUp EQU $0017
+
+; Case II the male passenger dozing reply has been shown.
+DEF C2SeatManAsleep EQU $0018
+
+; Case II the seller introduction dialogue has been shown.
+DEF C2SellerMet EQU $0032
+
+; Battery stock threshold tested before adding the purchased cells.
+DEF ShopCellStop EQU $0064
+
+; Cash price of one three-cell purchase.
+DEF ShopCellPrice EQU $0032
+
+; Battery quantity added by one purchase.
+DEF ShopCellQty EQU $0003
+
+; Bullet stock threshold tested before adding the purchased rounds.
+DEF ShopBulletStop EQU $0078
+
+; Cash price of one six-bullet purchase.
+DEF ShopBulletPrice EQU $0064
+
+; Bullet quantity added by one purchase.
+DEF ShopBulletQty EQU $0006
+
+; Set after a passenger train journey; enables the seller purchase dialogue.
+DEF C2TrainTaken EQU $0031
+
+; Case II state bit for the open morgue reception gate.
+DEF C2GateOpen EQU $00a9
+
+; Case II state bit for the first open morgue drawer.
+DEF C2Drawer1Open EQU $00aa
+
+; Case II state bit for the second open morgue drawer.
+DEF C2Drawer2Open EQU $00ab
+
+; Case II nametag one has been handed to the clerk.
+DEF C2Tag1Given EQU $007f
+
+; Case II nametag two has been handed to the clerk for Bondwell's belongings.
+DEF C2Tag2Given EQU $007e
+
+; Case II the clerk has given the initial gate access warning.
+DEF C2MorgueWarned EQU $007c
+
+; Case II the clerk has seen license one without the uniform.
+DEF C2ClerkSawID EQU $007d
+
+; Case II the cold morgue back room has been entered in uniform.
+DEF C2ColdRoomSeen EQU $0080
+
+; Case II the spare coat is currently worn.
+DEF C2CoatWorn EQU $0050
+
+; Case II the bank deposit bundle is open.
+DEF C2DepositsOpen EQU $004f
+
+; Case II the small magnet has been picked up.
+DEF C2MagnetTaken EQU $0019
+
+; Case II Ventini has been recognized from the framed Malone photo.
+DEF C2VentiniKnown EQU $00a7
+
+; Case II the tissue has been used to blow the nose.
+DEF C2TissueUsed EQU $0070
+
+; Case II policeman effect.
+DEF FxPoliceman EQU $0008
+
+; Case II scene for the policeman effect.
+DEF ScenePoliceman EQU $003c
+
+; Case II handcuffs effect.
+DEF FxHandcuffs EQU $0009
+
+; Case II scene for the handcuffs effect.
+DEF SceneHandcuffs EQU $003d
+
+; Case II casino bouncer effect.
+DEF FxBouncer EQU $000e
+
+; Case II scene for the bouncer effect.
+DEF SceneBouncer EQU $003f
+
+; Case II effect for SceneDog.
+DEF FxDog EQU $0007
+
+; Case II effect for SceneConductor1.
+DEF FxConductor1 EQU $000b
+
+; Case II effect for SceneConductor2.
+DEF FxConductor2 EQU $000c
+
+; Case II scene used by FxDog.
+DEF SceneDog EQU $003b
+
+; Case II scene used by FxConductor1.
+DEF SceneConductor1 EQU $0017
+
+; Case II scene used by FxConductor2.
+DEF SceneConductor2 EQU $0019
+
+; Case II Ace grave scene; effect table entry 0A.
+DEF SceneAceGrave EQU $003e
+
+; Case II state bit for the broken casino entrance glass.
+DEF C2CasinoGlass EQU $009d
+
+; Case II state bit for the broken Vegas station entrance glass.
+DEF C2VegasGlass EQU $009e
+
+; Case II train 6 passenger room A.
+DEF RoomTrain6A EQU $001b
+
+; Case II train 6 passenger room B.
+DEF RoomTrain6B EQU $001c
+
+; Case II train 7 passenger room A.
+DEF RoomTrain7A EQU $001d
+
+; Case II train 7 passenger room B.
+DEF RoomTrain7B EQU $001e
+
+; Case II train 8 passenger room A.
+DEF RoomTrain8A EQU $001f
+
+; Case II train 8 passenger room B.
+DEF RoomTrain8B EQU $0020
+
+; Case II train 9 passenger room A.
+DEF RoomTrain9A EQU $0021
+
+; Case II train 9 passenger room B.
+DEF RoomTrain9B EQU $0022
+
+; Case II train 2 passenger room A.
+DEF RoomTrain2A EQU $0023
+
+; Case II train 2 passenger room B.
+DEF RoomTrain2B EQU $0024
+
+; Case II train 3 passenger room A.
+DEF RoomTrain3A EQU $0025
+
+; Case II train 3 passenger room B.
+DEF RoomTrain3B EQU $0026
+
+; Case II train 4 passenger room A.
+DEF RoomTrain4A EQU $0027
+
+; Case II train 4 passenger room B.
+DEF RoomTrain4B EQU $0028
+
+; Case II train 5 passenger room A.
+DEF RoomTrain5A EQU $0029
+
+; Case II train 5 passenger room B.
+DEF RoomTrain5B EQU $002a
+
+; Case II the Chicago station entrance glass is broken.
+DEF C2ChiGlass EQU $003f
+
+; Case II the first Chicago station front description has been shown.
+DEF C2ChiFrontSeen EQU $0040
+
+; Case II the apartment building hallway has been described once.
+DEF C2LobbySeen EQU $0046
+
+; Case II state bit for the broken apartment building entrance glass.
+DEF C2LobbyGlass EQU $00a2
+
+; Case II state bit for the broken morgue front entrance glass.
+DEF C2MorgueGlass EQU $00a8
+
+; Case II state bit for the broken Joe front entrance glass.
+DEF C2JoeFrontGlass EQU $00a4
+
+; Case II object flag set on the first Joe fire escape platform visit.
+DEF C2JoeEscapeSeen EQU $0054
+
+; Case II object flag set by the lit Joe bar arrival; no reader confirmed.
+DEF C2JoeBarVisited EQU $0060
+
+; Case II object flag set when the shelves open and cleared when they close.
+DEF C2ShelvesOpen EQU $009d
+
+; Case II object flag suppressing the repeated office framed-picture hint.
+DEF C2FrameHint EQU $00a6
+
+; Case II state bit for the raised Reliant counter.
+DEF C2CounterRaised EQU $00af
+
+; Case II object flag set after Stogie first appears in the hotel room.
+DEF C2StogieMet EQU $0008
+
+; Case II object flag set on the first permitted hotel hallway visit.
+DEF C2VegasHallSeen EQU $0009
+
+; Case II object flag set after the first fourth-floor hallway memory sequence.
+DEF C2VegasHall4Seen EQU $000b
+
+; Case II state bit for broken glass in the Reliant main entrance.
+DEF C2CleanGlass EQU $00ae
+
+; Case II object flag blocking the outside Reliant entrance opening path.
+DEF C2CleanLock EQU $003b
+
+; Case II floor 1 lift interior.
+DEF RoomVegasLift1 EQU $0007
+
+; Case II floor 2 lift interior.
+DEF RoomVegasLift2 EQU $0008
+
+; Case II floor 3 lift interior.
+DEF RoomVegasLift3 EQU $0009
+
+; Case II floor 4 lift interior.
+DEF RoomVegasLift4 EQU $000a
+
+; Case II object flag set after the first newspaper seller dog description.
+DEF C2NewsDogSeen EQU $003c
+
+; Case II state bit for broken Chicago window 1 glass.
+DEF C2ChiGlass1 EQU $00b3
+
+; Case II state bit for broken Chicago window 2 glass.
+DEF C2ChiGlass2 EQU $00b2
+
+; Case II object flag set by desk mat pickup; no reader confirmed.
+DEF C2DeskMatTaken EQU $009f
+
+; Case II state bit set when the brass hat rack is taken.
+DEF C2HatRackTaken EQU $009a
+
+; Case II state bit for office drape open.
+DEF C2DrapeOpen EQU $00b1
+
+; Case II state bit for shade or silk curtain closed.
+DEF C2ThinShadeShut EQU $0096
+
+; Case II state bit for shade or silk curtain closed.
+DEF C2WhiteShadeShut EQU $0098
+
+; Case II state bit for shade or silk curtain closed.
+DEF C2SilkShut EQU $009b
+
+; Case I object flag: first washroom mirror is broken.
+DEF C1Mirror1Broken EQU $0000
+
+; Case I object flag: second washroom mirror is broken.
+DEF C1Mirror2Broken EQU $0001
+
+; Case I object flag: street-facing window is broken.
+DEF C1StreetWinBroken EQU $0002
+
+; Case I object flag: round mirror is broken.
+DEF C1RoundMirrorBroken EQU $0009
+
+; Case I object flag: wall mirror is broken.
+DEF C1WallMirrorBroken EQU $0014
+
+; Case I object flag: gun-shop window is broken.
+DEF C1GunShopWinBroken EQU $0015
+
+; Case I object flag set after the first mirror's memory effect; also permits leaving the washroom.
+DEF C1Mirror1Seen EQU $0017
+
+; Case I object flag set after shooting the office shadow; suppresses the gunman's attack.
+DEF C1ShadowShot EQU $0016
+
+; Case I object flag set by the final Bisodiumitis recovery step; selects recovered-memory paths.
+DEF C1MemoryRecovered EQU $0025
+
+; Case I object flag: key three unlocks door $06; closing it with the key clears this flag.
+DEF C1Door06Unlocked EQU $005a
+
+; Case I object flag: key one unlocks office door $14; its key-closing path clears this flag.
+DEF C1OfficeDoorUnlocked EQU $005b
+
+; Case I object flag: key two unlocks car door $1b; its key-closing path clears this flag.
+DEF C1CarDoorUnlocked EQU $005c
+
+; Case I object flag: key four unlocks the trunk; its key-closing path clears this flag.
+DEF C1TrunkUnlocked EQU $005d
+
+; Case I object flag: key five unlocks shadow door $38; its key-closing path clears this flag.
+DEF C1ShadowDoorUnlocked EQU $005e
+
+; Case I object flag: key five unlocks doctor's door $36; its key-closing path clears this flag.
+DEF C1DoctorDoorUnlocked EQU $005f
+
+; Case I object flag set after shooting the lock of bungalow door $31.
+DEF C1BungalowUnlocked EQU $0060
+
+; Case I object flag set after shooting the locked cabinet; permits its opening action.
+DEF C1CabinetUnlocked EQU $001f
+
+; Case I object flag set by the first door-$00 introduction or room-$01 entry description.
+DEF C1Washroom1IntroSeen EQU $0030
+
+; Case I object flag set after the first hallway room-$02 description.
+DEF C1Hall02Seen EQU $0031
+
+; Case I object flag set after the first women's washroom room-$03 description.
+DEF C1Washroom3Seen EQU $0032
+
+; Case I object flag set after the first bar room-$05 description.
+DEF C1BarRoomSeen EQU $0033
+
+; Case I object flag set after the first women's stall room-$04 description; also changes the puddle view.
+DEF C1WomenStallSeen EQU $0034
+
+; Case I object flag set after the first cellar room-$06 description.
+DEF C1CellarSeen EQU $0035
+
+; Case I object flag set after the first street room-$11 description.
+DEF C1JoeStreetSeen EQU $0036
+
+; Case I object flag set by the normal first upstairs-hall entry; the effect-$18 path leaves it unchanged.
+DEF C1JoeUpHallSeen EQU $0037
+
+; Case I object flag set after the first wine-rack passage room-$07 description.
+DEF C1RackPassageSeen EQU $0038
+
+; Case I object flag set after the first sewer room-$3a description.
+DEF C1Sewer3ASeen EQU $0039
+
+; Case I object flag set after the first casino room-$08 description.
+DEF C1CasinoSeen EQU $003a
+
+; Case I object flag selecting the small elevator's first or repeat entry text across its room IDs.
+DEF C1SmallLiftSeen EQU $003b
+
+; Case I object flag set after the hidden-elevator sliding-wall explanation.
+DEF C1HiddenLiftSeen EQU $003c
+
+; Case I object flag set after the first room-$0b description.
+DEF C1Room0BSeen EQU $003d
+
+; Case I object flag set after the first secretary-office room-$0d description.
+DEF C1SecretaryRoomSeen EQU $003e
+
+; Case I object flag set after the first newsstand street room-$12 description.
+DEF C1NewsstandSeen EQU $003f
+
+; Case I object flag set by the shared first manhole-entry sewer description.
+DEF C1ManholeSewerSeen EQU $0040
+
+; Case I object flag set after the first car-rear description.
+DEF C1CarRearSeen EQU $0041
+
+; Case I object flag set after the first luxury-car interior description.
+DEF C1CarInteriorSeen EQU $0042
+
+; Case I object flag set after the first gun-shop interior description.
+DEF C1GunShopSeen EQU $0045
+
+; Case I object flag set after the first Stanford Arms street description.
+DEF C1StanfordStreetSeen EQU $0048
+
+; Case I object flag set after the first bungalow street description.
+DEF C1BungalowStreetSeen EQU $0049
+
+; Case I object flag set after the first estate-exterior description.
+DEF C1EstateStreetSeen EQU $004b
+
+; Case I object flag set after the first Stanford Arms lobby description.
+DEF C1Lobby28Seen EQU $004c
+
+; Case I object flag set after the first bungalow-interior description.
+DEF C1BungalowRoomSeen EQU $004d
+
+; Case I object flag set after the first Ace-office landing sequence, with either recovery branch.
+DEF C1AceOfficeFrontSeen EQU $004e
+
+; Case I object flag set after the first doctor's office interior description.
+DEF C1DoctorRoomSeen EQU $004f
+
+; Case I object flag set after the first recovered-memory entry to Ace's office room $30.
+DEF C1AceOfficeRoomSeen EQU $0050
+
+; Case I object flag set after the first master-bedroom description.
+DEF C1MasterBedroomSeen EQU $0051
+
+; Case I object flag set after the first guestroom description.
+DEF C1GuestBedroomSeen EQU $0052
+
+; Case I object flag set after the first sewer room-$3b description.
+DEF C1Sewer3BSeen EQU $0053
+
+; Case I object flag set after the first sewer room-$39 description.
+DEF C1Sewer39Seen EQU $0054
+
+; Case I object flag set after the first sewer room-$38 description.
+DEF C1Sewer38Seen EQU $0055
+
+; Case I object flag set after the first deepest-sewer room-$3c description.
+DEF C1Sewer3CSeen EQU $0056
+
+; Case I object flag set after the first office room-$0c description outside the hidden-lift path.
+DEF C1OfficeDescribed EQU $0057
+
+; Case I object flag set after reading NOTE2 and adding quick-list destination $a0.
+DEF C1Note2RouteKnown EQU $007b
+
+; Case I object flag set when the photograph supplies quick-list destination $a1.
+DEF C1PhotoRouteKnown EQU $007c
+
+; Case I object flag set when the bill supplies quick-list destination $a2.
+DEF C1BillRouteKnown EQU $007d
+
+; Case I object flag set after using the pencil to reveal writing on the memo.
+DEF C1MemoWritingRevealed EQU $0078
+
+; Case I object flag set by the first Bisodiumitis step; also selects the FILE4 description.
+DEF C1BisodiumitisStage1Done EQU $0071
+
+; Case I object flag set by the second Bisodiumitis step before the final memory recovery.
+DEF C1BisodiumitisStage2Done EQU $002c
+
+; Case I object flag set when trash can one opens and cleared when it closes.
+DEF C1Trash1Open EQU $0020
+
+; Case I object flag set when trash can two opens and cleared when it closes.
+DEF C1Trash2Open EQU $0021
+
+; Case I object flag set when trash can three opens and cleared when it closes.
+DEF C1Trash3Open EQU $0022
+
+; Case I object flag set when trash can four opens and cleared when it closes.
+DEF C1Trash4Open EQU $0023
+
+; Case I object flag set by the first medicine-tool pickup; controls its trash-can hint and repeat pickup.
+DEF C1MedToolTakenOnce EQU $0024
+
+; Case I object flag set after punching the butler; permits the inner mansion paths.
+DEF C1ButlerDown EQU $0027
+
+; Case I object flag set when NOTE3 opens the wall safe; changes its later description.
+DEF C1WallSafeUnlocked EQU $001c
+
+; Case I object flag set by the cabinet opening script; selects its later short description.
+DEF C1CabinetOpenedOnce EQU $001e
+
+; Case I object flag set when the coat pocket is opened; suppresses its initial hint.
+DEF C1CoatPocketOpenedOnce EQU $0018
+
+; Case I object flag set after the coat pickup's initial comment.
+DEF C1CoatTakeCommentSeen EQU $001d
+
+; Case I object flag set after reading the revealed memo timetable.
+DEF C1MemoTimetableRead EQU $001a
+
+; Case I object flag set after reading FILE5; changes the later Siegel description.
+DEF C1File5Read EQU $001b
+
+; Case I object flag set after the detailed FILE4 description; changes medicine-related descriptions.
+DEF C1File4Read EQU $0026
+
+; Case I object flag set after buying the newspaper; permits repeat pickup and changes seller dialogue.
+DEF C1NewspaperPaid EQU $0028
+
+; Case I object flag set after the first bungalow locked-door explanation.
+DEF C1BungalowLockHintSeen EQU $002d
+
+; Case I object flag set after the first barrel description.
+DEF C1BarrelSeen EQU $002e
+
+; Case I object flag set after pushing the wine-rack bottle.
+DEF C1RackBottlePressed EQU $006f
+
+; Case I object flag set after the trunk's first key-opening sequence.
+DEF C1TrunkIntroSeen EQU $0075
+
+; Case I object flag set by the car key's initial unlock-only path.
+DEF C1CarKeyUsedOnce EQU $0079
+
+; Case I object flag set by the sleeping-woman description; also changes photograph interpretation.
+DEF C1SleepWomanSeen EQU $0074
+
+; Case I object flag set after the detailed Mrs. Sternwood description.
+DEF C1MrsSternwoodSeen EQU $0070
+
+; Case I object flag set by the initial seven-coin pickup; changes the slot-machine description.
+DEF C1InitialCoinsTaken EQU $008c
+
+; Case I object flag marking the first BULLET1 list insertion, shared by purchases and the six-round pickup.
+DEF C1Bullet1Listed EQU $008d
+
+; Case I object flag marking the first BULLET2 purchase and list insertion.
+DEF C1Bullet2Listed EQU $008e
+
+; Case I object flag set after taking the bookmark; changes the diary's descriptions.
+DEF C1BookmarkTaken EQU $008f
+
+; Case I object flag set after taking NOTE1; changes the folder description.
+DEF C1Note1Taken EQU $0090
+
+; Case I object flag set by either six-round pickup path; gates ammo-case placement.
+DEF C1SixBulletsTaken EQU $0096
+
+; Case I object flag set after taking LETTER1; gates its envelope's burning and placement.
+DEF C1Letter1Taken EQU $0097
+
+; Case I object flag set after taking LETTER2; gates its envelope's burning and placement.
+DEF C1Letter2Taken EQU $0098
+
+; Case I object flag set after taking the alternate bill; gates handbag placement.
+DEF C1AltBillTaken EQU $0099
+
+; Case I object flag set after taking key four; gates box placement.
+DEF C1Key4Taken EQU $009d
+
+; Case I object flag set when a coin cost cannot be paid in blue-cab room $26; cleared by repayment.
+DEF C1BlueCabDebt EQU $0081
+
+; Case I object flag set when a coin cost cannot be paid in yellow-cab room $27; cleared by repayment.
+DEF C1YellowCabDebt EQU $00a0
+
+; Case I object flag marking the accepted current fare; debt repayment retains its separate native branch.
+DEF C1CabFarePaid EQU $0082
+
+; Case I object flag set when SetRoomArg3 changes the selected cab destination and cleared on exit.
+DEF C1CabTripMade EQU $0083
+
+; Case I object flag set after the first unpaid-fare warning and cleared on exit.
+DEF C1CabFareWarned EQU $0084
+
+; Case I object flag set after choosing cab travel and cleared by the coin-payment or free-ride reply.
+DEF C1CabFarePending EQU $00a9
+
+; Case I object flag set after Mrs. Sternwood's Pentothal reply and address reveal.
+DEF C1MrsPentothalUsed EQU $0085
+
+; Case I object flag set after giving Medrezine to Mrs. Sternwood.
+DEF C1MrsMedrezineGiven EQU $0086
+
+; Case I object flag set when the gag is taken and cleared by its original placement path.
+DEF C1GagRemoved EQU $0087
+
+; Case I object flag set after giving Medrezine to Mr. Sternwood.
+DEF C1MrMedrezineGiven EQU $0088
+
+; Case I object flag set after Mr. Sternwood's Pentothal reply; blocks its repetition.
+DEF C1MrPentothalUsed EQU $0089
+
+; Case I object flag set after giving Medrezine to the sleeping woman.
+DEF C1SleepMedrezineGiven EQU $008a
+
+; Case I object flag set after the sleeping woman's Pentothal reply; blocks its repetition.
+DEF C1SleepPentothalUsed EQU $008b
+
+; Case I object flag set after the allowed gun-one placement; tested by the police ending.
+DEF C1Gun1Placed EQU $00a1
+
+; Case I object flag set after burning the map or completing its allowed placement.
+DEF C1MapDisposed EQU $00a2
+
+; Case I object flag set after burning FILE5 or completing its allowed placement.
+DEF C1File5Disposed EQU $00a3
+
+; Case I object flag set after burning NOTE1 or completing its allowed placement.
+DEF C1Note1Disposed EQU $00a4
+
+; Case I object flag set alongside C1File5Read; gates FILE5 disposal and NOTE1 interpretation.
+DEF C1File5Examined EQU $00a5
+
+; Case I object flag set at the start of map inspection; gates map disposal.
+DEF C1MapExamined EQU $00a6
+
+; Case I object flag set at the start of NOTE1 inspection; gates NOTE1 disposal.
+DEF C1Note1Examined EQU $00a7
+
+; Case I object flag checked before BULLET1 use or placement; separate from the ammunition count.
+DEF C1Bullet1UseAllowed EQU $00aa
+
+; Case I object flag checked before BULLET2 use or placement; separate from the ammunition count.
+DEF C1Bullet2UseAllowed EQU $00ab
+
+; Case I object flag set after the access card opens the lift door; changes card and slot descriptions.
+DEF C1AccessCardUsed EQU $00ac
+
+; Case I object flag set after the first penthouse room-$2a description.
+DEF C1PenthouseSeen EQU $00ad
+
+; Case I object flag set after either bill pays for gun three; allows later pickup without another payment.
+DEF C1Gun3Paid EQU $00af
+
+; Case I object flag set after opening the trunk; enables its later opening audio path.
+DEF C1TrunkOpenedOnce EQU $00b4
+
+; Case I object flag set after drinking the seltzer; selects the empty-glass replies.
+DEF C1SeltzerDrunk EQU $00b6
+
+; Case I object flag set by closing the barrel spigot and cleared by opening it.
+DEF C1SpigotClosed EQU $0003
+
+; Case I object flag set by opening the barrel spigot and cleared by closing it.
+DEF C1SpigotOpen EQU $0004
+
+; Case I object flag set after the mugger's first punch sequence.
+DEF C1MuggerHit1 EQU $0005
+
+; Case I object flag set after the mugger's second punch sequence.
+DEF C1MuggerHit2 EQU $0006
+
+; Case I object flag set after the mugger's third punch sequence; selects armed retaliation.
+DEF C1MuggerHit3 EQU $0007
+
+; Case I object flag set after a bill pays off the recurring mugger; suppresses his random encounters.
+DEF C1MuggerPaid EQU $002a
+
+; Case I object flag set by the separate paid-mugger exit path.
+DEF C1OtherMuggerPaid EQU $002b
+
+; Case I object flag set after paying the bum for his hint; changes later bum and dead-man text.
+DEF C1BumHintHeard EQU $0091
+
+; Case I object flag set after punching the armed woman; suppresses her random encounter.
+DEF C1ArmedLadyDown EQU $0092
+
+; Case I object flag set on the original fatal mugger paths.
+DEF C1MuggerFatalEncounter EQU $0095
+
+; Case I object flag set after the initial opening view; suppresses its replay on later view initialization.
+DEF C1OpeningShown EQU $00be
+
+; Case I object flag that bypasses PickAltTarget's carried-item check; cleared by entry and failure paths.
+DEF C1AltTargetBypass EQU $0080
+
+; Case I object flag set when alternate selection is cancelled; consumed by PickAltTarget.
+DEF C1AltTargetCancelled EQU $007f
+
+; Case I object flag set when the access card opens the lift door and cleared by its card-closing path.
+DEF C1CardLiftDoorOpen EQU $0059
+
+; Case I object flag cleared when trash can one opens and set when it closes.
+DEF C1Trash1Closed EQU $009a
+
+; Case I object flag cleared when trash can two opens and set when it closes.
+DEF C1Trash2Closed EQU $009b
+
+; Case I object flag cleared when trash can three opens and set when it closes.
+DEF C1Trash3Closed EQU $009c
+
+; Case I object flag set alongside quick-list destination $a3 by map reading or Peoria arrival paths.
+DEF C1PeoriaStopKnown EQU $007a
+
+; Case I object flag set when the revealed memo is read; selects the map's alternate explanatory text.
+DEF C1MemoReadForMap EQU $009f
+
+; Case I object flag set by the random bum encounter and cleared by the gun-shop street entry script.
+DEF C1BumEventActive EQU $00a8
+
+; Case I object flag consumed by SaveSnapshot to skip one state-snapshot write.
+DEF C1SkipNextSnapshot EQU $00b0
+
+; Case I object flag set by either detailed Mrs. Sternwood view path; also selects effect text.
+DEF C1SternwoodViewShown EQU $00b2

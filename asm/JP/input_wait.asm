@@ -11,17 +11,21 @@ PollCursor:
     ret
 
 
+; Use the selection index to choose the directional repeat delay.
+WaitCursorSetDirectionalDelay:
 jr_001_5f8d:
     ld a, [wInputSel]
     cp $08
-    jr c, jr_001_5f98
+    jr c, WaitCursorSetLongDelay
 
     ld d, $07
-    jr jr_001_5fb4
+    jr WaitCursorPollRepeat
 
+; Use the longer repeat delay for selection indices below eight.
+WaitCursorSetLongDelay:
 jr_001_5f98:
     ld d, $12
-    jr jr_001_5fb4
+    jr WaitCursorPollRepeat
 
 ; Redraw and poll input with the original repeat delay; preserve direction priority and button mode/selection handling.
 WaitCursor:
@@ -29,59 +33,65 @@ WaitCursor:
 Call_001_5f9c:
     ld a, [wInputSel]
     cp $17
-    jr z, jr_001_5f8d
+    jr z, WaitCursorSetDirectionalDelay
 
     cp $15
-    jr nc, jr_001_5fc9
+    jr nc, WaitCursorPollButtons
 
     ld a, [wJoyHeld]
     bit 6, a
-    jr nz, jr_001_5f8d
+    jr nz, WaitCursorSetDirectionalDelay
 
     bit 7, a
-    jr nz, jr_001_5f8d
+    jr nz, WaitCursorSetDirectionalDelay
 
     ld d, $0c
 
+; Poll held input while the repeat delay counts down.
+WaitCursorPollRepeat:
 jr_001_5fb4:
     call PollJoy
     ld a, [wJoyHeld]
     cp $00
-    jr z, jr_001_5fc9
+    jr z, WaitCursorPollButtons
 
     push de
     call DrawCursorObjs
     call SubmitOam
     pop de
     dec d
-    jr nz, jr_001_5fb4
+    jr nz, WaitCursorPollRepeat
 
+; Keep drawing the cursor until held or newly pressed input arrives.
+WaitCursorPollButtons:
 jr_001_5fc9:
     call DrawCursorObjs
     call SubmitOam
     call PollJoy
     ld a, [wJoyHeld]
     cp $00
-    jr z, jr_001_5fc9
+    jr z, WaitCursorPollButtons
 
     and $f0
     jp nz, MoveCursor
 
     ld a, [wJoyPress]
     cp $00
-    jr z, jr_001_5fc9
+    jr z, WaitCursorPollButtons
 
     bit 0, a
-    jr nz, jr_001_6002
+    jr nz, WaitCursorPressA
 
     bit 1, a
-    jr nz, jr_001_6012
+    jr nz, WaitCursorPressB
 
     bit 3, a
-    jr nz, jr_001_5ff3
+    jr nz, WaitCursorSetSpecialSelection
 
-    jr jr_001_5fc9
+    jr WaitCursorPollButtons
 
+; Set selection 16 and center the candidate position.
+WaitCursorSetSpecialSelection:
 jr_001_5ff3:
     ld a, $16
     ld [wInputSel], a
@@ -94,6 +104,8 @@ jr_001_5ff3:
     ret
 
 
+; Play the select sound and return input mode one.
+WaitCursorPressA:
 jr_001_6002:
     ld a, $19
     call PlayAudio
@@ -104,6 +116,8 @@ jr_001_6002:
     ret
 
 
+; Return input mode two.
+WaitCursorPressB:
 jr_001_6012:
     ld a, $02
     ld [wInputMode], a

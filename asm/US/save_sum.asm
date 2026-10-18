@@ -57,19 +57,23 @@ Call_001_69d9:
     ld b, a
     ld a, [wSaveSum]
     cp b
-    jr nz, jr_001_69f5
+    jr nz, RejectSaveSum
 
     ld a, [hl+]
     ld b, a
     ld a, [wSaveSum+1]
-    jr nz, jr_001_69f5
+    jr nz, RejectSaveSum
 
     xor a
-    jr jr_001_69f7
+    jr CheckSaveSumDone
 
+; Force a nonzero result after the low checksum byte differs.
+RejectSaveSum:
 jr_001_69f5:
     or $ff
 
+; Restore registers and return the checksum result.
+CheckSaveSumDone:
 jr_001_69f7:
     pop bc
     pop hl

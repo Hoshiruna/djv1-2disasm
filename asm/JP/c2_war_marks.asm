@@ -7,13 +7,15 @@ BuildC2FxObjs:
     xor a
     ld [wWarMarkIndex], a
 
+; Append the next ending mark until all seven are written.
+C2WarMarkBuildNext:
 jr_003_5843:
     call WriteWarMark
     ld a, [wWarMarkIndex]
     inc a
     ld [wWarMarkIndex], a
     cp WarMarkCount
-    jr c, jr_003_5843
+    jr c, C2WarMarkBuildNext
 
     ret
 
@@ -26,6 +28,8 @@ Call_003_5852:
     xor a
     ld [wWarMarkIndex], a
 
+; Render the next ending mark with its waits and audio cues.
+C2WarMarkAnimateNext:
 jr_003_5856:
     call WriteWarMark
     call RenderObjsCall
@@ -42,7 +46,7 @@ jr_003_5856:
     inc a
     ld [wWarMarkIndex], a
     cp WarMarkCount
-    jr c, jr_003_5856
+    jr c, C2WarMarkAnimateNext
 
     ret
 

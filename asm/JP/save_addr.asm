@@ -45,13 +45,15 @@ Call_001_6a09:
     xor a
     ld [wSaveCopy], a
 
+; Partially clear the next of four save copies.
+ClearNextSaveCopy:
 jr_001_6a0d:
     call ClearSaveCopy
     ld a, [wSaveCopy]
     inc a
     ld [wSaveCopy], a
     cp SaveCopies
-    jr nz, jr_001_6a0d
+    jr nz, ClearNextSaveCopy
 
     ret
 
@@ -70,10 +72,12 @@ Call_001_6a1c:
     xor a
     ld d, a
 
+; Clear one of the first 256 bytes in the selected save copy.
+ClearSaveCopyByte:
 jr_001_6a2b:
     ld [hl+], a
     inc d
-    jr nz, jr_001_6a2b
+    jr nz, ClearSaveCopyByte
 
     pop de
     pop hl

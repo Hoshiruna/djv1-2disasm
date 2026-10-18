@@ -29,11 +29,13 @@ Jump_000_1bca:
 Call_000_1be9:
     ld a, [hl]
     and d
-    jr z, jr_000_1bf0
+    jr z, ReadBitRestorePointers
 
     call SetResult
 
 Jump_000_1bf0:
+; Restore the saved bit-index state after testing the selected bit.
+ReadBitRestorePointers:
 jr_000_1bf0:
     pop hl
     push af
@@ -71,7 +73,7 @@ BranchC2FlagClr:
     pop af
     call TrainPassFlag
     call PopRomBank
-    jr jr_000_1c26
+    jr BranchTestFlagClear
 
 ; Read an object flag ID, test it, then read a branch target and branch when set.
 BranchFlagSet:
@@ -86,6 +88,8 @@ BranchFlagClr:
 
     call ReadArg
 
+; Read the selected object flag before a clear-flag branch.
+BranchTestFlagClear:
 jr_000_1c26:
     call ReadObjFlag
     jp BranchIfClear
@@ -153,7 +157,7 @@ Jump_000_1c68:
     pop af
     call TrainPassFlag
     call PopRomBank
-    jr jr_000_1c8a
+    jr SetObjFlag
 ; Read an object ID; run the Case I presence hook before setting its object flag.
 ScriptSetFlag:
 
@@ -161,7 +165,7 @@ ScriptSetFlag:
     push af
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1c89
+    jr nz, ScriptSetFlagReady
 
     push af
     ld a, $02
@@ -172,6 +176,8 @@ ScriptSetFlag:
 Jump_000_1c86:
     call PopRomBank
 
+; Restore the flag ID after the Case I presence hook.
+ScriptSetFlagReady:
 jr_000_1c89:
     pop af
 ; A = object ID; set its third-bitmap flag.
@@ -368,7 +374,7 @@ ClearStateBit:
 Call_000_1d47:
     call SelectStateBit
     ld bc, ClearMasks
-    jr jr_000_1cdc
+    jr ClearBit
 ; Select the state bit ID and bitmap at wStateBits.
 SelectStateBit:
 

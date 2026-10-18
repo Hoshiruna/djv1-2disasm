@@ -10,12 +10,14 @@ Call_000_15d2:
 
     ld a, [wTextPageReady]
     cp $00
-    jr nz, jr_000_15e7
+    jr nz, TextBufferResetPosition
 
     call InitTextFrame
     ld a, $ff
     ld [wTextPageReady], a
 
+; Reset the buffer cursor before clearing its tiles.
+TextBufferResetPosition:
 jr_000_15e7:
     xor a
     ld [wTextCol], a
@@ -24,15 +26,17 @@ jr_000_15e7:
     ld bc, $0120
     ld d, $7f
 
+; Fill the next buffer tile with the blank glyph.
+TextBufferBlankNextTile:
 jr_000_15f6:
     ld a, d
     ld [hl+], a
     dec bc
     ld a, b
     or c
-    jr nz, jr_000_15f6
+    jr nz, TextBufferBlankNextTile
 
-    jr jr_000_15ff
+    jr SubmitTextBuffer
 
 ; Queue the text buffer at $9c21 and submit the map queue.
 SubmitTextBuffer:

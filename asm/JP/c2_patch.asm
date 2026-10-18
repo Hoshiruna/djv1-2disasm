@@ -20,6 +20,8 @@ ApplyC2Patches:
 
     ld de, wPatchList
 
+; Read the next scene patch ID from the active list.
+C2PatchNextId:
 jr_029_66a6:
     xor a
     ld [wPatchBits], a
@@ -28,15 +30,17 @@ jr_029_66a6:
     ret z
 
     cp $f0
-    jr c, jr_029_66b5
+    jr c, C2PatchApplyId
 
     inc de
-    jr jr_029_66a6
+    jr C2PatchNextId
 
+; Copy the selected patch before advancing the list.
+C2PatchApplyId:
 jr_029_66b5:
     call CopyC2Patch
     inc de
-    jr jr_029_66a6
+    jr C2PatchNextId
 
 ; A = patch ID; copy tile and attribute rows into the staged 14x14 map.
 CopyC2Patch:
@@ -82,16 +86,20 @@ Call_029_66bb:
     ld b, a
 
 ; Each source row stores width tile IDs followed by width attributes.
+; Copy the next tile row and its attribute row.
+C2PatchNextRow:
 jr_029_66f9:
     ld a, [wPatchWidth]
     ld e, a
 
+; Copy the next tile ID into the staged scene map.
+C2PatchNextTile:
 jr_029_66fd:
     ld a, [hl+]
     ld [bc], a
     inc bc
     dec e
-    jr nz, jr_029_66fd
+    jr nz, C2PatchNextTile
 
     ld a, [wPatchDst]
     add $0e
@@ -104,12 +112,14 @@ jr_029_66fd:
     ld a, [wPatchWidth]
     ld e, a
 
+; Copy the next tile attribute into the staged scene map.
+C2PatchNextAttribute:
 jr_029_6719:
     ld a, [hl+]
     ld [bc], a
     inc bc
     dec e
-    jr nz, jr_029_6719
+    jr nz, C2PatchNextAttribute
 
     ld a, [wPatchDst]
     add $0e
@@ -122,7 +132,7 @@ jr_029_6719:
     ld a, [wPatchHeight]
     dec a
     ld [wPatchHeight], a
-    jr nz, jr_029_66f9
+    jr nz, C2PatchNextRow
 
     pop de
     ret

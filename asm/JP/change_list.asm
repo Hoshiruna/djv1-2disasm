@@ -28,14 +28,18 @@ Call_005_59a7:
     ld h, $00
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_005_59d8
+    jr nz, ListDecodeCase2Types
 
     ld bc, C1ListTypes
-    jr jr_005_59db
+    jr ListDecodeStoreType
 
+; Use the Case II packed-item type table.
+ListDecodeCase2Types:
 jr_005_59d8:
     ld bc, C2ListTypes
 
+; Read and store the decoded list-item type.
+ListDecodeStoreType:
 jr_005_59db:
     add hl, bc
     ld a, [hl]
@@ -49,7 +53,7 @@ jr_005_59db:
     add hl, bc
     ld [hl], a
     cp $03
-    jr z, jr_005_5a08
+    jr z, ListDecodeReturn
 
     ld bc, wListValue
     ldh a, [hItemSlot]
@@ -69,6 +73,8 @@ jr_005_59db:
     add hl, bc
     ld [hl], a
 
+; Return after optionally masking a non-item value to five bits.
+ListDecodeReturn:
 jr_005_5a08:
     ret
 
@@ -84,16 +90,20 @@ ReadChangeList:
     ld h, $00
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_005_5a2c
+    jr nz, ReadChangeCase2Kinds
 
     ld bc, C1ListKinds
     ld de, C1ChangeRefs
-    jr jr_005_5a32
+    jr ReadChangeResolve
 
+; Use the Case II list-kind and change-reference tables.
+ReadChangeCase2Kinds:
 jr_005_5a2c:
     ld bc, C2ListKinds
     ld de, C2ChangeRefs
 
+; Resolve a change record to its terminated item list.
+ReadChangeResolve:
 jr_005_5a32:
     add hl, bc
     ld a, [hl]
@@ -125,6 +135,8 @@ jr_005_5a32:
     ld [wListScratch+5], a
     ld bc, wListScratch
 
+; Filter each item byte into the six-byte scratch list.
+ReadChangeFilterLoop:
 jr_005_5a64:
     ld a, [hl+]
     cp $ff
@@ -137,7 +149,7 @@ jr_005_5a64:
     pop bc
     ld [bc], a
     inc bc
-    jr jr_005_5a64
+    jr ReadChangeFilterLoop
 
 C1ListKinds:
     db $ff, $00, $ff, $ff, $01, $ff
@@ -151,7 +163,7 @@ FilterListItem:
 
     ld a, [wListKind]
     cp $02
-    jr z, jr_005_5af8
+    jr z, FilterListKeepRaw
 
     ld a, [wListRaw]
     call DecodeListItem
@@ -163,7 +175,7 @@ FilterListItem:
     add hl, bc
     ld a, [hl]
     cp $04
-    jr z, jr_005_5acb
+    jr z, FilterListProperty
 
     ld bc, wListValue
     ldh a, [hItemSlot]
@@ -188,11 +200,13 @@ FilterListItem:
     ld a, [wStateResult]
     or d
     and $01
-    jr z, jr_005_5af8
+    jr z, FilterListKeepRaw
 
     ld a, $ff
     ret
 
+; Test both property-four bits before accepting a property entry.
+FilterListProperty:
 jr_005_5acb:
     ld bc, wListValue
     ldh a, [hItemSlot]
@@ -217,11 +231,13 @@ jr_005_5acb:
     ld a, [wStateResult]
     or d
     and $01
-    jr z, jr_005_5af8
+    jr z, FilterListKeepRaw
 
     ld a, $ff
     ret
 
+; Return the original packed item byte when the filter allows it.
+FilterListKeepRaw:
 jr_005_5af8:
     ld a, [wListRaw]
     ret

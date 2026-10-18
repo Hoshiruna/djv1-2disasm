@@ -30,15 +30,21 @@ CheckListVisible:
     call ClearResult
     ld a, [wRoomVisId]
     cp $ff
-    jr z, jr_001_6c3f
+    jr z, C1ListVisibleResult
 
     call ReadObjVisible
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_6c42
+    jr z, C1ListVisibleReturn
+
+; Set the result for an unrestricted or visible room-list entry.
+C1ListVisibleResult:
 
 jr_001_6c3f:
     call SetResult
+
+; Return the room-list visibility result.
+C1ListVisibleReturn:
 
 jr_001_6c42:
     ret
@@ -49,39 +55,48 @@ CheckC1RoomItem:
 
     ld a, [wRoomItem]
     cp $6b
-    jr nz, jr_001_6c54
+    jr nz, C1FilterButlerItem
 
     ld a, [wSceneId]
     cp $73
-    jr z, jr_001_6c54
+    jr z, C1FilterButlerItem
 
     jp SkipRoomItem
+
+; Keep room item $5f only in scene $7a, otherwise continue to the next exception.
+C1FilterButlerItem:
 
 
 jr_001_6c54:
     ld a, [wRoomItem]
     cp $5f
-    jr nz, jr_001_6c65
+    jr nz, C1FilterRackItem
 
     ld a, [wSceneId]
     cp $7a
-    jr z, jr_001_6c7b
+    jr z, C1StoreRoomItem
 
     jp SkipRoomItem
+
+; Skip room item $13 when state bit $08 is set.
+C1FilterRackItem:
 
 
 jr_001_6c65:
     ld a, [wRoomItem]
     cp $13
-    jr nz, jr_001_6c7b
+    jr nz, C1StoreRoomItem
 
     ld a, $08
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_6c7b
+    jr z, C1StoreRoomItem
 
     jp SkipRoomItem
+
+; Copy the accepted room-item ID into the selected operation slot.
+C1StoreRoomItem:
 
 
 jr_001_6c7b:
@@ -150,9 +165,12 @@ CheckC1BitItem:
     ld b, a
     pop af
     and b
-    jr z, jr_001_6cd8
+    jr z, C1StoreBitItem
 
     jp SkipRoomItem
+
+; Store the item ID after its item-bitmap bit was found clear.
+C1StoreBitItem:
 
 
 jr_001_6cd8:
@@ -174,17 +192,23 @@ CheckC1ObjItem:
 
     ld a, [wRoomItem]
     cp $00
-    jr z, jr_001_6cf4
+    jr z, C1ObjItemScene00
 
     cp $02
-    jr nz, jr_001_6cfe
+    jr nz, C1ObjItemPropertyCheck
+
+; Keep object-backed items $00 and $02 only in scene $00.
+C1ObjItemScene00:
 
 jr_001_6cf4:
     ld a, [wSceneId]
     cp $00
-    jr z, jr_001_6cfe
+    jr z, C1ObjItemPropertyCheck
 
     jp SkipRoomItem
+
+; Test property-four bit zero for the candidate object-backed item.
+C1ObjItemPropertyCheck:
 
 
 jr_001_6cfe:
@@ -198,9 +222,12 @@ jr_001_6cfe:
     add hl, bc
     ld a, [hl]
     and $01
-    jr z, jr_001_6d15
+    jr z, C1StoreObjItem
 
     jp SkipRoomItem
+
+; Store the accepted object-backed item and preserve the original returned A value.
+C1StoreObjItem:
 
 
 jr_001_6d15:
@@ -224,39 +251,45 @@ CheckC1MarkItem:
 
     ld a, [wRoomItem]
     cp $47
-    jr z, jr_001_6d6c
+    jr z, C1TrunkMarkSceneCheck
 
     cp $24
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $25
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $26
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $27
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $29
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $2a
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $2b
-    jr z, jr_001_6d4e
+    jr z, C1FilterSpecialMark
 
     cp $2c
-    jr nz, jr_001_6d5b
+    jr nz, C1StoreMarkItem
+
+; Use the flag-$bb mark rule to keep or skip the selected special passage ID.
+C1FilterSpecialMark:
 
 jr_001_6d4e:
     call HideC1MarkBB
     ld a, [wStateResult]
     and $01
-    jr z, jr_001_6d5b
+    jr z, C1StoreMarkItem
 
     jp SkipRoomItem
+
+; Store the accepted passage item ID in the selected operation slot.
+C1StoreMarkItem:
 
 
 jr_001_6d5b:
@@ -272,10 +305,13 @@ jr_001_6d5b:
     ld [hl], a
     ret
 
+; Keep passage item $47 only in scene $43.
+C1TrunkMarkSceneCheck:
+
 
 jr_001_6d6c:
     ld a, [wSceneId]
     cp $43
-    jr z, jr_001_6d5b
+    jr z, C1StoreMarkItem
 
     jp SkipRoomItem

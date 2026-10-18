@@ -21,24 +21,28 @@ jr_003_6356:
     ; The exclusive end may wrap; carry skips its upper-bound comparison.
     add $0c
     ld [wTrainEnd], a
-    jr nc, jr_003_6375
+    jr nc, TrainSelectCheckEnd
 
     ld a, [wC2Time]
-    jr jr_003_6388
+    jr TrainSelectWriteRecord
 
+; Check the upper bound of the current train time window.
+TrainSelectCheckEnd:
 jr_003_6375:
     ld a, [wC2Time]
     ld hl, wTrainEnd
     cp [hl]
-    jr nc, jr_003_63ba
+    jr nc, TrainSelectNextPair
 
     ld a, [wTrainStart]
     ; Preserve the original adjustment for arrivals below four.
     sub $fc
-    jr c, jr_003_6388
+    jr c, TrainSelectWriteRecord
 
     ld [wTrainStart], a
 
+; Store the selected train record when the current time is in range.
+TrainSelectWriteRecord:
 jr_003_6388:
     ld a, [wC2Time]
     ld hl, wTrainStart
@@ -75,6 +79,8 @@ jr_003_6388:
     ret
 
 
+; Advance to the next arrival and destination pair.
+TrainSelectNextPair:
 jr_003_63ba:
     ld a, [wTrainPtr]
     add $02
@@ -82,4 +88,4 @@ jr_003_63ba:
     ld a, [wTrainPtr+1]
     adc $00
     ld [wTrainPtr+1], a
-    jr jr_003_6356
+    jr PickTrain

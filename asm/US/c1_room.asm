@@ -4,13 +4,15 @@
 ReadC1Prev:
 Call_001_4341:
     ld a, [wPrevRoom]
-    jr jr_001_4349
+    jr C1ResolveRoomRecord
 
 ; Resolve the current room to its three-byte state records.
 ReadC1Room:
 Call_001_4346:
     ld a, [wRoomId]
 
+; Resolve the room ID in A to the room-state record pointer.
+C1ResolveRoomRecord:
 jr_001_4349:
     ld l, a
     ld h, $00

@@ -20,7 +20,7 @@ Call_003_5ab7:
     ret nz
 
     call ResetObjScroll
-    ld a, $08
+    ld a, FxPoliceman
     call BeginC2Fx
     ld a, $78
     call WaitTicks
@@ -30,7 +30,7 @@ Call_003_5ab7:
     call WaitTicks
     ld a, $09
     call PlayAudio
-    ld a, $09
+    ld a, FxHandcuffs
     call BeginC2Fx
     ld a, $78
     call WaitTicks

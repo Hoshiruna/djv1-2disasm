@@ -7,6 +7,8 @@ FadeC2OddIn:
 Call_003_6724:
     ld de, $0002
 
+; Apply the next odd-room fade-in palette pair.
+TrainOddFadeInStep:
 jr_003_6727:
     ld hl, TrainOddBgRefs
     add hl, de
@@ -31,7 +33,7 @@ jr_003_6727:
     inc e
     ld a, $0a
     cp e
-    jr nz, jr_003_6727
+    jr nz, TrainOddFadeInStep
 
     ret
 
@@ -43,6 +45,8 @@ FadeC2OddOut:
 Call_003_6757:
     ld de, $0006
 
+; Apply the next odd-room fade-out palette pair.
+TrainOddFadeOutStep:
 jr_003_675a:
     ld hl, TrainOddBgRefs
     add hl, de
@@ -66,7 +70,7 @@ jr_003_675a:
     dec e
     dec e
     bit 7, e
-    jr z, jr_003_675a
+    jr z, TrainOddFadeOutStep
 
     ret
 
@@ -78,6 +82,8 @@ FadeC2EvenIn:
 Call_003_6789:
     ld de, $0002
 
+; Apply the next even-room fade-in palette pair.
+TrainEvenFadeInStep:
 jr_003_678c:
     ld hl, TrainEvenBgRefs
     add hl, de
@@ -102,7 +108,7 @@ jr_003_678c:
     inc e
     ld a, $0a
     cp e
-    jr nz, jr_003_678c
+    jr nz, TrainEvenFadeInStep
 
     ret
 
@@ -114,6 +120,8 @@ FadeC2EvenOut:
 Call_003_67bc:
     ld de, $0006
 
+; Apply the next even-room fade-out palette pair.
+TrainEvenFadeOutStep:
 jr_003_67bf:
     ld hl, TrainEvenBgRefs
     add hl, de
@@ -137,7 +145,7 @@ jr_003_67bf:
     dec e
     dec e
     bit 7, e
-    jr z, jr_003_67bf
+    jr z, TrainEvenFadeOutStep
 
     ret
 
@@ -149,6 +157,8 @@ CopyC2FadeBg:
 Call_003_67ee:
     ld bc, $0000
 
+; Copy the next train background-palette byte.
+TrainCopyBgPalByte:
 jr_003_67f1:
     ld a, [wTrainPalPtr]
     ld l, a
@@ -162,7 +172,7 @@ jr_003_67f1:
     inc c
     ld a, $38
     cp c
-    jr nz, jr_003_67f1
+    jr nz, TrainCopyBgPalByte
 
     ret
 
@@ -174,6 +184,8 @@ CopyC2FadeObj:
 Call_003_6807:
     ld bc, $0000
 
+; Copy the next train object-palette byte.
+TrainCopyObjPalByte:
 jr_003_680a:
     ld a, [wTrainPalPtr]
     ld l, a
@@ -187,6 +199,6 @@ jr_003_680a:
     inc c
     ld a, $08
     cp c
-    jr nz, jr_003_680a
+    jr nz, TrainCopyObjPalByte
 
     ret

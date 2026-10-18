@@ -85,7 +85,7 @@ Jump_000_1900:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr nz, jr_000_193f
+    jr nz, RoomItemReadRecord
 
     ld a, $00
     ld b, a
@@ -99,7 +99,7 @@ Jump_000_1900:
     ld [hl], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_192f
+    jr nz, RoomItemEndCase2
 
     ld a, $6f
     ld b, a
@@ -114,6 +114,8 @@ Jump_000_1900:
     ret
 
 
+; Write the Case II end-of-list item ID after the terminal record.
+RoomItemEndCase2:
 jr_000_192f:
     ld a, $a7
     ld b, a
@@ -130,6 +132,8 @@ Call_000_193e:
     ret
 
 
+; Load type, item ID, and visibility ID from the next room record.
+RoomItemReadRecord:
 jr_000_193f:
     ld hl, wRoomObjPtr
     ld a, [hl+]
@@ -152,16 +156,16 @@ jr_000_193f:
     call PopRomBank
     ld a, [wStateResult]
     and $01
-    jr z, jr_000_1993
+    jr z, RoomItemSkipRecord
 
     call ReadCursorBox
     ld a, [wStateResult]
     bit 7, a
-    jr z, jr_000_1993
+    jr z, RoomItemSkipRecord
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_1988
+    jr nz, RoomItemBuildCase2
 
     ld a, $01
     call PushRomBank
@@ -169,6 +173,8 @@ jr_000_193f:
     jp PopRomBank
 
 
+; Build the visible Case II room item through bank three.
+RoomItemBuildCase2:
 jr_000_1988:
     ld a, $03
     call PushRomBank
@@ -176,6 +182,8 @@ jr_000_1988:
     jp PopRomBank
 
 
+; Advance past a hidden or unmatched room record.
+RoomItemSkipRecord:
 jr_000_1993:
     call NextRoomObj
     jp ScanRoomItems

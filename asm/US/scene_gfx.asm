@@ -4,23 +4,27 @@ LoadSceneGfx:
 Call_000_0a76:
     ldh a, [hBgLoaded]
     cp $ff
-    jr z, jr_000_0a82
+    jr z, SceneGfxLoadBackground
 
     ld b, a
     ldh a, [hBgGfx]
     cp b
-    jr z, jr_000_0a89
+    jr z, SceneGfxCheckObjects
 
 Jump_000_0a82:
+; Load the requested background graphics after a cache miss.
+SceneGfxLoadBackground:
 jr_000_0a82:
     ldh a, [hBgGfx]
     ldh [hBgLoaded], a
     call LoadSceneBg
 
+; Check whether object graphics need updating.
+SceneGfxCheckObjects:
 jr_000_0a89:
     ldh a, [hObjLoaded]
     cp $ff
-    jr z, jr_000_0a97
+    jr z, SceneGfxLoadObjects
 
     ld b, a
     ldh a, [hObjGfx]
@@ -30,6 +34,8 @@ jr_000_0a89:
     cp $7f
     ret z
 
+; Load the requested object graphics after a cache miss.
+SceneGfxLoadObjects:
 jr_000_0a97:
     ldh a, [hObjGfx]
     ldh [hObjLoaded], a
@@ -189,14 +195,16 @@ Jump_000_0b63:
 
     and $ef
     cp $0c
-    jr z, jr_000_0b74
+    jr z, SceneGfxDecodeAccepted
 
     cp $0d
-    jr z, jr_000_0b74
+    jr z, SceneGfxDecodeAccepted
 
     and $ec
-    jr nz, jr_000_0b7c
+    jr nz, SceneGfxInvalidFormatLoop
 
+; Decode an accepted scene-graphics resource.
+SceneGfxDecodeAccepted:
 jr_000_0b74:
     push bc
     push de
@@ -206,8 +214,10 @@ jr_000_0b74:
     ret
 
 
+; Remain in the invalid scene-graphics format branch.
+SceneGfxInvalidFormatLoop:
 jr_000_0b7c:
-    jr jr_000_0b7c
+    jr SceneGfxInvalidFormatLoop
 
 ; The first tile selects $d000 + tile*16; dispatch LZ or planar RLE.
 DecodeSceneGfx:

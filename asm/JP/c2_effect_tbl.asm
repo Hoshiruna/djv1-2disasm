@@ -7,14 +7,14 @@ C2EffectScenes:
     db $39 ; Effect $04.
     db $39 ; Effect $05.
     db SceneGoons ; Effect $06.
-    db $3b ; Effect $07.
-    db $3c ; Effect $08.
-    db $3d ; Effect $09.
-    db $3e ; Effect $0a.
-    db $17 ; Effect $0b.
-    db $19 ; Effect $0c.
+    db SceneDog ; Effect $07.
+    db ScenePoliceman ; Effect $08.
+    db SceneHandcuffs ; Effect $09.
+    db SceneAceGrave ; Effect $0a.
+    db SceneConductor1 ; Effect $0b.
+    db SceneConductor2 ; Effect $0c.
     db $39 ; Effect $0d.
-    db $3f ; Effect $0e.
+    db SceneBouncer ; Effect $0e.
     db SceneMirage ; Effect $0f.
     db SceneStogie ; Effect $10.
     db SceneVegasNews2 ; Effect $11.

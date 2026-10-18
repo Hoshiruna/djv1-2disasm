@@ -6,12 +6,14 @@ RepeatCue10:
 Call_000_31cc:
     ld e, $18
 
+; Play cue ten and wait six ticks for each remaining iteration.
+RepeatCue10Loop:
 jr_000_31ce:
     ld a, $10
     call PlayAudio
     ld a, $06
     call WaitTicks
     dec e
-    jr nz, jr_000_31ce
+    jr nz, RepeatCue10Loop
 
     ret
