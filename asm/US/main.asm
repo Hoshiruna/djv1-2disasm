@@ -212,9 +212,10 @@ Jump_000_09a2:
     ld a, [wInputMode]
     rst RST_00
 
+; The shared answer/input byte selects resume (0) or soft reset (1).
 C2LoopCalls:
     dw ResumeC2Game
-    db $7e
+    db LOW(SoftReset)
 Call_000_09c0:
 Jump_000_09c0:
-    db $01
+    db HIGH(SoftReset)

@@ -6,7 +6,12 @@
 SECTION "ROM Bank $00d", ROMX[$4000], BANK[$d]
 
 ; Encoded text bank, with original label addresses retained.
-    INCBIN "../../res/text/US/banks/0d.bin", $0, $ea
+; Sixty-four message pointers for one text group.
+Text0DMsgs0:
+    INCBIN "../../res/text/US/banks/0d.bin", $0, $80
+; Sixty-four message pointers for one text group.
+Text0DMsgs1:
+    INCBIN "../../res/text/US/banks/0d.bin", $80, $6a
 jr_00d_40ea:
     INCBIN "../../res/text/US/banks/0d.bin", $ea, $4d
 jr_00d_4137:

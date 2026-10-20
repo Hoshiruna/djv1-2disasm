@@ -1,7 +1,7 @@
 
 ; Describe the industrial washer.
 LookC2Washer:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc2_00:
     ; Show message 2.

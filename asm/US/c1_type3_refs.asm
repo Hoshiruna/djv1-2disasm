@@ -11,9 +11,9 @@ C1Type3Refs:
     dw C1Act3_07
     dw C1Act3_08
     ; Pointer to C1Act3_09; split bytes retain the interior label.
-    db $64
+    db LOW(C1Act3_09)
 jr_006_4d75:
-    db $4e
+    db HIGH(C1Act3_09)
     dw C1Act3_0A
     dw C1Act3_0B
     dw C1Act3_0C
@@ -130,9 +130,9 @@ C1Act3_04:
 
 C1Act3_05:
     ; Pointer to $5d76; split bytes retain the interior label.
-    db $76
+    db LOW(LookC1Key1)
 Call_006_4e45:
-    db $5d
+    db HIGH(LookC1Key1)
     dw TakeC1Key1
     dw PlaceC1Item
     dw UseC1Key1
@@ -229,14 +229,14 @@ C1Act3_14:
 
 C1Act3_15:
     ; Pointer to $6344; split bytes retain the interior label.
-    db $44
+    db LOW(LookC1Key5)
 jr_006_4ec5:
-    db $63
+    db HIGH(LookC1Key5)
     dw TakeC1Key5
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_4ec9:
-    db $57
+    db HIGH(PlaceC1Item)
     dw UseC1Key5
 
 C1Act3_16:
@@ -291,9 +291,9 @@ C1Act3_1E:
     dw LookC1Letter1
     dw TakeC1Letter1
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_4f11:
-    db $57
+    db HIGH(PlaceC1Item)
     dw C1ItemNoHere
 
 C1Act3_1F:
@@ -593,81 +593,81 @@ C1Act3_4F:
 
 C1Act3_50:
     ; Pointer to $6413; split bytes retain the interior label.
-    db $13
+    db LOW(LookC1Bullet2)
 jr_006_509d:
-    db $64
+    db HIGH(LookC1Bullet2)
     dw BuyC1Bullet2
     ; Pointer to $57f8; split bytes retain the interior label.
-    db $f8
+    db LOW(PlaceC1Bullet2)
 jr_006_50a1:
-    db $57
+    db HIGH(PlaceC1Bullet2)
     ; Pointer to $5aa1; split bytes retain the interior label.
-    db $a1
+    db LOW(C1UseNeedsTaken)
 jr_006_50a3:
-    db $5a
+    db HIGH(C1UseNeedsTaken)
 
 C1Act3_51:
     ; Pointer to $6413; split bytes retain the interior label.
-    db $13
+    db LOW(LookC1Bullet2)
 jr_006_50a5:
-    db $64
+    db HIGH(LookC1Bullet2)
     dw BuyC1Bullet2
     ; Pointer to $57f8; split bytes retain the interior label.
-    db $f8
+    db LOW(PlaceC1Bullet2)
 jr_006_50a9:
-    db $57
+    db HIGH(PlaceC1Bullet2)
     ; Pointer to $5aa1; split bytes retain the interior label.
-    db $a1
+    db LOW(C1UseNeedsTaken)
 jr_006_50ab:
-    db $5a
+    db HIGH(C1UseNeedsTaken)
 
 C1Act3_52:
     ; Pointer to $6413; split bytes retain the interior label.
-    db $13
+    db LOW(LookC1Bullet2)
 jr_006_50ad:
-    db $64
+    db HIGH(LookC1Bullet2)
     dw BuyC1Bullet2
     ; Pointer to $57f8; split bytes retain the interior label.
-    db $f8
+    db LOW(PlaceC1Bullet2)
 jr_006_50b1:
-    db $57
+    db HIGH(PlaceC1Bullet2)
     ; Pointer to $5aa1; split bytes retain the interior label.
-    db $a1
+    db LOW(C1UseNeedsTaken)
 jr_006_50b3:
-    db $5a
+    db HIGH(C1UseNeedsTaken)
 
 C1Act3_53:
     ; Pointer to $6413; split bytes retain the interior label.
-    db $13
+    db LOW(LookC1Bullet2)
 jr_006_50b5:
-    db $64
+    db HIGH(LookC1Bullet2)
     dw BuyC1Bullet2
     ; Pointer to $57f8; split bytes retain the interior label.
-    db $f8
+    db LOW(PlaceC1Bullet2)
 jr_006_50b9:
-    db $57
+    db HIGH(PlaceC1Bullet2)
     ; Pointer to $5aa1; split bytes retain the interior label.
-    db $a1
+    db LOW(C1UseNeedsTaken)
 jr_006_50bb:
-    db $5a
+    db HIGH(C1UseNeedsTaken)
 
 C1Act3_54:
     ; Pointer to $5d84; split bytes retain the interior label.
-    db $84
+    db LOW(LookC1Bill20)
 jr_006_50bd:
-    db $5d
+    db HIGH(LookC1Bill20)
     ; Pointer to $54db; split bytes retain the interior label.
-    db $db
+    db LOW(TakeC1Bill20Alt)
 jr_006_50bf:
-    db $54
+    db HIGH(TakeC1Bill20Alt)
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_50c1:
-    db $57
+    db HIGH(PlaceC1Item)
     ; Pointer to $5d87; split bytes retain the interior label.
-    db $87
+    db LOW(UseC1Bill20Alt)
 jr_006_50c3:
-    db $5d
+    db HIGH(UseC1Bill20Alt)
 
 C1Act3_55:
     dw LookC1Pentothal
@@ -683,59 +683,59 @@ C1Act3_56:
 
 C1Act3_57:
     ; Pointer to $648c; split bytes retain the interior label.
-    db $8c
+    db LOW(LookC1Pentothal)
 jr_006_50d5:
-    db $64
+    db HIGH(LookC1Pentothal)
     ; Pointer to $6491; split bytes retain the interior label.
-    db $91
+    db LOW(TakeC1Pentothal)
 jr_006_50d7:
-    db $64
+    db HIGH(TakeC1Pentothal)
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_50d9:
-    db $57
+    db HIGH(PlaceC1Item)
     dw UseC1Pentothal57
 
 C1Act3_58:
     ; Pointer to $63c9; split bytes retain the interior label.
-    db $c9
+    db LOW(LookC1Meds2)
 jr_006_50dd:
-    db $63
+    db HIGH(LookC1Meds2)
     dw TakeC1Meds2
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_50e1:
-    db $57
+    db HIGH(PlaceC1Item)
     ; Pointer to $5ca7; split bytes retain the interior label.
-    db $a7
+    db LOW(UseC1Medrezine58)
 jr_006_50e3:
-    db $5c
+    db HIGH(UseC1Medrezine58)
 
 C1Act3_59:
     ; Pointer to $63c9; split bytes retain the interior label.
-    db $c9
+    db LOW(LookC1Meds2)
 jr_006_50e5:
-    db $63
+    db HIGH(LookC1Meds2)
     dw TakeC1Meds2
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_50e9:
-    db $57
+    db HIGH(PlaceC1Item)
     dw UseC1Medrezine59
 
 C1Act3_5A:
     ; Pointer to $6506; split bytes retain the interior label.
-    db $06
+    db LOW(LookC1Ofreeall)
 jr_006_50ed:
-    db $65
+    db HIGH(LookC1Ofreeall)
     ; Pointer to $64f7; split bytes retain the interior label.
-    db $f7
+    db LOW(TakeC1Meds4)
 jr_006_50ef:
-    db $64
+    db HIGH(TakeC1Meds4)
     ; Pointer to $57d3; split bytes retain the interior label.
-    db $d3
+    db LOW(PlaceC1Item)
 jr_006_50f1:
-    db $57
+    db HIGH(PlaceC1Item)
     dw UseC1Ofreeall5A
 
 C1Act3_5B:

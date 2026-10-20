@@ -34,7 +34,7 @@ Jump_000_3a9a:
     call PopRomBank
     ld a, [wActionCode]
     cp $ff
-    jr nz, jr_000_3ab6
+    jr nz, StartC2Script
 
     push af
     ld a, $03
@@ -95,6 +95,8 @@ jr_000_3aea:
     cp $ff
     jr nz, C2ActionDispatchOpcode
 
+; End the action directly through mode-dependent UI cleanup, then restore its bank.
+EndC2ScriptAction:
     call ClearTextUI
     jp PopRomBank
 
@@ -103,4 +105,4 @@ jr_000_3aea:
 C2ActionDispatchOpcode:
 jr_000_3af7:
     call DispatchC2Op
-    jr jr_000_3aea
+    jr RunBankScript

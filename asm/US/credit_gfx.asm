@@ -36,11 +36,13 @@ Call_03e_4019:
     ld d, $40
     ld hl, wBgPalNext
 
+; Copy the next of sixty-four credit background-palette bytes into staging.
+CreditPalCopyNextByte:
 jr_03e_402a:
     ld a, [bc]
     ld [hl+], a
     inc bc
     dec d
-    jr nz, jr_03e_402a
+    jr nz, CreditPalCopyNextByte
 
     ret

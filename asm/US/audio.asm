@@ -5,12 +5,7 @@
 
 SECTION "ROM Bank $004", ROMX[$4000], BANK[$4]
 
-INCLUDE "audio_start.asm"
-INCLUDE "audio_load.asm"
-INCLUDE "audio_tick.asm"
-INCLUDE "audio_note.asm"
-INCLUDE "audio_cmd.asm"
-INCLUDE "audio_out.asm"
+INCLUDE "audio_engine.asm"
 INCLUDE "audio_c1.asm"
 INCLUDE "audio_c2.asm"
 INCLUDE "audio_tbl.asm"

@@ -27,6 +27,7 @@ Call_003_700f:
     ret
 
 ; Select the indexed text pointer, reset text coordinates, render room objects, read the text and clear mode bit seven.
+; Credit records select map $9800; map coordinates add one to their stored column and row.
 DrawCreditText:
 
 

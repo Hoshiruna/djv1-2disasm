@@ -1,5 +1,6 @@
 
-; In case one, call the existing put checks; in case two, read the put mode and call group placement.
+; Case I uses the current selection without an operand.
+; Case II reads one placement-mode byte before calling group placement.
 ScriptPutItem:
 
 

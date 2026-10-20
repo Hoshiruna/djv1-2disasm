@@ -17,11 +17,13 @@ RunRestorePrompt:
     call ChooseSaveAnswer
     ld a, [wSaveAnswer]
     cp $00
-    jr nz, jr_002_788e
+    jr nz, RestorePromptFadeOut
 
     call RestoreState
     call ClearC2Events
 
+; Fade out after restoring state or declining the restore prompt.
+RestorePromptFadeOut:
 jr_002_788e:
     call FadeOut
     ret

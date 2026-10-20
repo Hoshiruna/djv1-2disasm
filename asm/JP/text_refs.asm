@@ -13,12 +13,14 @@ InitTextRefs:
     ld bc, wTextRefs
     ld d, $2d
 
+; Copy the next of forty-five text-reference bytes into WRAM.
+InitTextRefsNextByte:
 jr_002_7b8e:
     ld a, [hl+]
     ld [bc], a
     inc bc
     dec d
-    jr nz, jr_002_7b8e
+    jr nz, InitTextRefsNextByte
 
     ret
 
@@ -28,65 +30,65 @@ CaseTextRefs:
     dw TextRefsC1
     dw TextRefsC2
 TextRefsC1:
-    dw $5018
+    dw C1ObjectNames
     db $10
-    dw $4000
+    dw Text0CMsgs0
     db $0c
-    dw $4080
+    dw Text0CMsgs1
     db $0c
-    dw $4000
+    dw Text0DMsgs0
     db $0d
-    dw $4080
+    dw Text0DMsgs1
     db $0d
-    dw $4000
+    dw Text0EMsgs0
     db $0e
-    dw $4080
+    dw Text0EMsgs1
     db $0e
-    dw $4000
+    dw Text0FMsgs0
     db $0f
-    dw $4080
+    dw Text0FMsgs1
 jr_002_7bb3:
     db $0f
-    dw $4000
+    dw Text10Msgs0
     db $10
-    dw $4080
+    dw Text10Msgs1
     db $10
-    dw $4000
+    dw Text0DMsgs0
     db $0d
-    dw $4080
+    dw Text0DMsgs1
     db $0d
 TextRefsC2:
-    dw $4d03
+    dw C2ObjectNames
     db $18
-    db $00
+    db LOW(Text12Msgs0)
 jr_002_7bc4:
-    db $40
+    db HIGH(Text12Msgs0)
     db $12
-    dw $4080
+    dw Text12Msgs1
     db $12
-    dw $4000
+    dw Text13Msgs0
     db $13
-    dw $4080
+    dw Text13Msgs1
     db $13
-    dw $4000
+    dw Text14Msgs0
     db $14
-    dw $4080
+    dw Text14Msgs1
     db $14
-    dw $4000
+    dw Text15Msgs0
     db $15
-    dw $4080
+    dw Text15Msgs1
     db $15
-    dw $4000
+    dw Text16Msgs0
     db $16
-    dw $4080
+    dw Text16Msgs1
     db $16
-    dw $4000
+    dw Text17Msgs0
     db $17
-    dw $4080
+    dw Text17Msgs1
     db $17
-    dw $4000
+    dw Text18Msgs0
     db $18
-    db $80
+    db LOW(Text18Msgs1)
 jr_002_7beb:
-    db $40
+    db HIGH(Text18Msgs1)
     db $18

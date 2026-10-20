@@ -58,13 +58,15 @@ jr_001_420b:
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr nz, jr_001_421e
+    jr nz, TitleConfirmStart
 
     bit 3, a
-    jr nz, jr_001_421e
+    jr nz, TitleConfirmStart
 
-    jr jr_001_420b
+    jr WaitStart
 
+; Play cue $19 after a newly pressed A or Start button.
+TitleConfirmStart:
 jr_001_421e:
     ld a, $19
     call PlayAudio

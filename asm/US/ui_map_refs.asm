@@ -8,6 +8,6 @@ UiMapRefs:
     dw UiMap5
     dw UiMap6
     ; Pointer to UiMap7; split bytes retain the interior label.
-    db $f7
+    db LOW(UiMap7)
 Call_009_400f:
-    db $45
+    db HIGH(UiMap7)

@@ -17,16 +17,16 @@ Jump_000_3b13:
 Jump_000_3b21:
     dw ScriptSetFlag ; opcode $09
     dw ScriptClrFlag ; opcode $0a
-    dw ReadStateBit ; opcode $0b
-    dw SetStateBit ; opcode $0c
-    dw ClearStateBit ; opcode $0d
+    dw ReadStateBit ; opcode $0b; no operand; dispatch A selects state $16
+    dw SetStateBit ; opcode $0c; no operand; dispatch A selects state $18
+    dw ClearStateBit ; opcode $0d; no operand; dispatch A selects state $1a
     dw ScriptGetState ; opcode $0e
     dw ScriptSetState ; opcode $0f
     dw ScriptClrState ; opcode $10
     ; Pointer to ReadItemArg; split bytes retain the original interior label.
-    db $ae ; opcode $11
+    db LOW(ReadItemArg) ; opcode $11
 Jump_000_3b32:
-    db $1e
+    db HIGH(ReadItemArg)
     dw SetItemArg ; opcode $12
     dw ClearItemArg ; opcode $13
     dw ReadItem2Arg ; opcode $14
@@ -42,13 +42,13 @@ jr_000_3b45:
     dw BranchAttr2 ; opcode $1d
     dw SetAttr2 ; opcode $1e
     dw ClearAttr2 ; opcode $1f
-    dw CheckRoomExit ; opcode $20
+    dw CheckRoomExit ; opcode $20; 2 destination bytes on success
     dw SetSelStateView ; opcode $21
     dw ScriptSetStateDraw ; opcode $22
     ; Pointer to ClearSelStateView; split bytes retain the original interior label.
-    db $bc ; opcode $23
+    db LOW(ClearSelStateView) ; opcode $23
 jr_000_3b56:
-    db $22
+    db HIGH(ClearSelStateView)
     dw ScriptClrStateView ; opcode $24
     dw BranchRoomIs ; opcode $25
     dw AddSelList ; opcode $26
@@ -57,12 +57,12 @@ jr_000_3b56:
     dw ScriptShowObj ; opcode $29
     dw ScriptHideObj ; opcode $2a
     ; Pointer to RefreshObjs; split bytes retain the original interior label.
-    db $b6 ; opcode $2b
+    db LOW(RefreshObjs) ; opcode $2b
 Jump_000_3b66:
-    db $27
+    db HIGH(RefreshObjs)
     dw ScriptMsg3 ; opcode $2c
     dw PickAltTarget ; opcode $2d
-    dw ScriptHoldText ; opcode $2e
+    dw ScriptHoldText ; opcode $2e; no operand
     dw ResumeTextUI ; opcode $2f
     dw ScriptName0 ; opcode $30
     dw ScriptName1 ; opcode $31
@@ -71,20 +71,20 @@ Jump_000_3b66:
     dw DropListArg ; opcode $34
     dw SelectSlot0 ; opcode $35
     dw SelectSlot1 ; opcode $36
-    dw ExitActionFx ; opcode $37
+    dw ExitActionFx ; opcode $37; no operand; ends the action
     ; Pointer to RemoveChange; split bytes retain the original interior label.
-    db $86 ; opcode $38
+    db LOW(RemoveChange) ; opcode $38
 Call_000_3b80:
-    db $25
+    db HIGH(RemoveChange)
     dw ScriptEffect ; opcode $39
-    dw FinishEffect ; opcode $3a
-    dw PrepRoomMove ; opcode $3b
+    dw FinishEffect ; opcode $3a; no operand
+    dw PrepRoomMove ; opcode $3b; 2 destination bytes; no exit-state check
     dw DrawC2Panel ; opcode $3c
     dw ScriptDropHead ; opcode $3d
     ; Pointer to ScriptPlayAudio; split bytes retain the original interior label.
-    db $25 ; opcode $3e
+    db LOW(ScriptPlayAudio) ; opcode $3e
 jr_000_3b8c:
-    db $30
+    db HIGH(ScriptPlayAudio)
     dw ScriptDropChange ; opcode $3f
     dw C2CounterCall ; opcode $40
     dw ScriptNoop ; opcode $41
@@ -92,31 +92,31 @@ jr_000_3b8c:
     dw TestRandomLow2 ; opcode $43
     dw AddQuickArg ; opcode $44
     ; Pointer to FirstName0; split bytes retain the original interior label.
-    db $de ; opcode $45
+    db LOW(FirstName0) ; opcode $45
 Call_000_3b9a:
-    db $2b
+    db HIGH(FirstName0)
     ; Pointer to BranchPackedIs; split bytes retain the original interior label.
-    db $03 ; opcode $46
+    db LOW(BranchPackedIs) ; opcode $46
 jr_000_3b9c:
-    db $2c
+    db HIGH(BranchPackedIs)
     dw ScriptWaitObjs ; opcode $47
     dw SlotName0 ; opcode $48
 Jump_000_3ba1:
     dw ScriptValue0 ; opcode $49
     dw ScriptValues01 ; opcode $4a
     ; Pointer to ScriptBuildObjs; split bytes retain the interior label.
-    db $52 ; opcode $4b
+    db LOW(ScriptBuildObjs) ; opcode $4b
 jr_000_3ba6:
-    db $2c
+    db HIGH(ScriptBuildObjs)
     dw AddArgList ; opcode $4c
     dw TestSelNameArg ; opcode $4d
     dw DropItemChange ; opcode $4e
-    dw MoveRoomFlush ; opcode $4f
+    dw MoveRoomFlush ; opcode $4f; 2 destination bytes; skip state save
     dw ScriptSetRoom ; opcode $50
     ; Pointer to SlotName1; split bytes retain the original interior label.
-    db $f4 ; opcode $51
+    db LOW(SlotName1) ; opcode $51
 Call_000_3bb2:
-    db $2b
+    db HIGH(SlotName1)
     dw UseBulletCall ; opcode $52
     dw TakeBulletCall ; opcode $53
     dw BranchFlagClr ; opcode $54
@@ -125,9 +125,10 @@ Call_000_3bb2:
     dw BlackjackCall ; opcode $57
     dw Trains2To5Call ; opcode $58
     dw Trains6To9Call ; opcode $59
-    db $66 ; opcode $5a
+    ; Pointer to RoomCueCall; split bytes retain the original interior label.
+    db LOW(RoomCueCall) ; opcode $5a
 Jump_000_3bc4:
-    db $39
+    db HIGH(RoomCueCall)
     dw BranchNoAttr2 ; opcode $5b
     dw TestC2Quarters ; opcode $5c
     dw DecC2Quarter ; opcode $5d
@@ -138,12 +139,12 @@ Jump_000_3bc4:
     dw ShowCarFare ; opcode $62
     dw TrainRoomEffect ; opcode $63
     dw SetTrainPass ; opcode $64
-    dw ScriptPutItem ; opcode $65
+    dw ScriptPutItem ; opcode $65; 1 placement-mode byte
     dw ScriptC2Effect ; opcode $66
     ; Pointer to SpendCashOne; split bytes retain the original interior label.
-    db $0c ; opcode $67
+    db LOW(SpendCashOne) ; opcode $67
 jr_000_3bde:
-    db $31
+    db HIGH(SpendCashOne)
     dw SpendCashCost ; opcode $68
     dw BuyChipsCall ; opcode $69
     dw SellChipsCall ; opcode $6a
@@ -161,9 +162,9 @@ jr_000_3bde:
     dw MapStepsCall ; opcode $76
     dw RepeatCue10 ; opcode $77
     ; Pointer to RefreshItemList; split bytes retain the original interior label.
-    db $dc ; opcode $78
+    db LOW(RefreshItemList) ; opcode $78
 Jump_000_3c00:
-    db $31
+    db HIGH(RefreshItemList)
     dw BranchNoFunds ; opcode $79
     dw BlinkObjTwice ; opcode $7a
     dw C2ChoiceCall ; opcode $7b

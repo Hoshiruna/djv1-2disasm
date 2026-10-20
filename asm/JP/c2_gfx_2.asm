@@ -8,7 +8,7 @@ SECTION "ROM Bank $02c", ROMX[$4000], BANK[$2c]
     dw GfxC2_G20 ; $00
     dw GfxC2_G21 ; $01
     dw GfxC2_G22 ; $02
-    dw $4b9f ; $03
+    dw GfxC2_G23Empty ; $03
     dw GfxC2_G24 ; $04
     dw GfxC2_G25 ; $05
     dw GfxC2_G26 ; $06
@@ -21,7 +21,7 @@ jr_02c_4010:
     dw GfxC2_G2C ; $0c
     dw GfxC2_G2D ; $0d
     dw GfxC2_G2E ; $0e
-    dw $6ee5 ; $0f
+    dw GfxC2_G2FEmpty ; $0f
 
 GfxC2_G20:
     INCBIN "../../res/scene/case2/common/JP/g20.bin", $0, $21
@@ -163,7 +163,9 @@ jr_02c_4b3f:
     INCBIN "../../res/scene/case2/common/JP/g22.bin", $3dc, $4
 jr_02c_4b43:
     INCBIN "../../res/scene/case2/common/JP/g22.bin", $3e0, $5c
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G23Empty:
+    db $ff
 
 GfxC2_G24:
     INCBIN "../../res/scene/case2/common/JP/g24.bin", $0, $5e
@@ -563,7 +565,9 @@ jr_02c_6e7d:
     INCBIN "../../res/scene/case2/common/JP/g2e.bin", $355, $11
 jr_02c_6e8e:
     INCBIN "../../res/scene/case2/common/JP/g2e.bin", $366, $57
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G2FEmpty:
+    db $ff
     nop
     nop
     nop

@@ -38,7 +38,8 @@ Jump_000_1bb1:
     call ClearTextUI
     jp PopRomBank
 
-; Internal continuation: restore one bank, pop the saved BC, run completion, then restore the outer bank.
+; Internal early-exit continuation: pop the nested bank, discard the opcode-loop
+; CPU return address into BC, clear the text UI, then pop the outer action bank.
 EndNestedAction:
 
 
@@ -48,7 +49,8 @@ Jump_000_1bb7:
     call ClearTextUI
     jp PopRomBank
 
-; Case I enters the bank 6 script loop; Case II selects the first operation type bank and uses the existing script pointer.
+; Resume the existing script pointer without looking up another action entry.
+; Case I selects bank six; Case II selects the bank from the primary wItemType.
 RunAltAction:
 
 

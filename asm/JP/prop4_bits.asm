@@ -23,10 +23,12 @@ ReadProp4:
     add hl, bc
     ld a, [hl]
     and $04
-    jr z, jr_000_362a
+    jr z, ReadProp4RestoreIndex
 
     call SetResult
 
+; Restore the saved HRAM index after testing property-four bit two.
+ReadProp4RestoreIndex:
 jr_000_362a:
     pop hl
     push af
@@ -148,10 +150,12 @@ Call_000_36a4:
     add hl, bc
     ld a, [hl]
     and $02
-    jr z, jr_000_36cd
+    jr z, ReadProp4Bit1RestoreIndex
 
     call SetResult
 
+; Restore the saved HRAM index after testing property-four bit one.
+ReadProp4Bit1RestoreIndex:
 jr_000_36cd:
     pop hl
     push af
@@ -284,10 +288,12 @@ Call_000_3761:
     add hl, bc
     ld a, [hl]
     and $01
-    jr z, jr_000_3773
+    jr z, ReadProp4Bit0RestoreIndex
 
     call SetResult
 
+; Restore the saved HRAM index after testing property-four bit zero.
+ReadProp4Bit0RestoreIndex:
 jr_000_3773:
     pop hl
     push af

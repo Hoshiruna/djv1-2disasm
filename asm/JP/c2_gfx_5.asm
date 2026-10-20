@@ -18,7 +18,7 @@ SECTION "ROM Bank $02f", ROMX[$4000], BANK[$2f]
     dw GfxC2_G5A ; $0a
     dw GfxC2_G5B ; $0b
     dw GfxC2_G5C ; $0c
-    dw $7439 ; $0d
+    dw GfxC2_G5DEmpty ; $0d
     dw GfxC2_G5E ; $0e
     dw GfxC2_G5F ; $0f
 
@@ -726,7 +726,9 @@ jr_02f_7425:
     INCBIN "../../res/scene/case2/common/JP/g5c.bin", $4d0, $5
 jr_02f_742a:
     INCBIN "../../res/scene/case2/common/JP/g5c.bin", $4d5, $f
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G5DEmpty:
+    db $ff
 
 GfxC2_G5E:
     INCBIN "../../res/scene/case2/common/JP/g5e.bin", $0, $100

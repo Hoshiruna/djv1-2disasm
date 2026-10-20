@@ -19,7 +19,7 @@ SpendWordCost:
 
     ld a, [wTrainFare]
     ld [wArg0], a
-    jr jr_000_2fc1
+    jr SpendCashArg
 
 ; Set wArg0 to one before spending one dollar of Case II cash.
 SpendCashOne:

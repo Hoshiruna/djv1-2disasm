@@ -109,9 +109,9 @@ C2Act4_09:
 C2Act4_0A:
     dw LookC2Lamp
     ; Pointer to $686b; split bytes retain the interior label.
-    db $6b
+    db LOW(UsePackOnTarget)
 jr_007_67bc:
-    db $68
+    db HIGH(UsePackOnTarget)
     dw UseC2Pack
     dw TakeC2Lamp
 
@@ -120,9 +120,9 @@ C2Act4_0B:
     dw OpenC2Pack
     dw UsePackOnTarget
     ; Pointer to $6ea4; split bytes retain the interior label.
-    db $a4
+    db LOW(UseC2Pack)
 jr_007_67c8:
-    db $6e
+    db HIGH(UseC2Pack)
     dw TakeC2Drawer
     dw CloseC2Pack
 

@@ -40,6 +40,8 @@ Call_000_3496:
     ldh [hChangePos+1], a
     ld a, d
 
+; Compare the target with the next stored list byte.
+FindListNextValue:
 jr_000_34a9:
     ld bc, wListBase
     ldh a, [hChangePos]
@@ -51,13 +53,13 @@ jr_000_34a9:
     ld d, a
     ld a, [wFindListValue]
     cp d
-    jr z, jr_000_34e4
+    jr z, FindListMatched
 
     ld a, [wFoundRow]
     inc a
     ld [wFoundRow], a
     cp $08
-    jr nz, jr_000_34d1
+    jr nz, FindListAdvance
 
     xor a
     ld [wFoundRow], a
@@ -67,6 +69,8 @@ Call_000_34cd:
     inc a
     ld [wFoundGroup], a
 
+; Advance the byte offset and continue until the regional full-list limit.
+FindListAdvance:
 jr_000_34d1:
     ld d, a
     ldh a, [hChangePos]
@@ -77,12 +81,14 @@ jr_000_34d1:
     ldh a, [hChangePos]
     cp $58
     ld a, d
-    jr c, jr_000_34a9
+    jr c, FindListNextValue
 
     call ClearResult
     ret
 
 
+; Set result bit zero with the matched group and row retained.
+FindListMatched:
 jr_000_34e4:
     call SetResult
     ret

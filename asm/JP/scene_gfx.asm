@@ -19,6 +19,8 @@ jr_000_0a77:
     call LoadSceneBg
 
 ; Check whether object graphics need updating.
+; An invalid cache enters the load path before the requested-$7f retention test.
+; A valid-cache return retains both the cached object ID and VRAM bank-zero bytes.
 SceneGfxCheckObjects:
 jr_000_0a7e:
     ldh a, [hObjLoaded]
@@ -81,6 +83,7 @@ CaseGfxBanks:
     db $33, $2a
 
 ; A = first ID; unpack it and ID+1 in WRAM bank 2, then upload $1000 bytes.
+; Header ranges can leave staging bytes untouched; all four $400-byte blocks are still uploaded.
 LoadSceneBg:
 Call_000_0ac1:
     push bc
@@ -159,6 +162,9 @@ Call_000_0b18:
     ret
 
 ; A = ID; unpack in WRAM bank 2 and upload $400 bytes to VRAM bank 0.
+; Decode destination follows the header; upload source stays at $d000 regardless of that destination.
+; An empty resource leaves staging bytes intact; this caller still uploads the buffer.
+; Case I object ID zero decodes above this window, so its lower upload retains staging too.
 LoadSceneObj:
 Call_000_0b27:
     call GetGfxPtr

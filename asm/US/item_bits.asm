@@ -4,7 +4,7 @@ ReadItemArg:
 
 
     call ReadArg
-    jr jr_000_1d66
+    jr ReadItemFlag
 
 ; Test the first item-bitmap bit using the absolute first-slot item value.
 GetItemFirst:
@@ -25,7 +25,7 @@ SetItemArg:
 
 Call_000_1d6d:
     call ReadArg
-    jr jr_000_1d75
+    jr SetItemFlag
 
 ; Set the first item-bitmap bit using the absolute first-slot item value.
 SetItemFirst:

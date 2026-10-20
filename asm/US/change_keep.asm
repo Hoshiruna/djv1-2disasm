@@ -5,7 +5,7 @@ KeepSelChange:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_23d5
+    jr nz, KeepChangeCheckCapacity
 
     ld bc, wItemType
     ldh a, [hItemSlot]
@@ -15,7 +15,7 @@ KeepSelChange:
     add hl, bc
     ld a, [hl]
     cp $01
-    jr nz, jr_000_23d5
+    jr nz, KeepChangeCheckCapacity
 
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -25,19 +25,21 @@ KeepSelChange:
     add hl, bc
     ld a, [hl]
     cp $06
-    jr z, jr_000_23f9
+    jr z, KeepChangeAppendSelected
 
+; Accept an empty pending list or a last index below three.
+KeepChangeCheckCapacity:
 jr_000_23d5:
     ld a, [wPendingLast]
     cp $ff
-    jr z, jr_000_23f9
+    jr z, KeepChangeAppendSelected
 
     cp $03
-    jr c, jr_000_23f9
+    jr c, KeepChangeAppendSelected
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_23f0
+    jr nz, KeepChangeFullCase2
 
     ld a, $71
     call ShowMsg2
@@ -45,6 +47,8 @@ jr_000_23d5:
     ret
 
 
+; Show the Case II pending-list limit reply and clear selected attribute two.
+KeepChangeFullCase2:
 jr_000_23f0:
     ld a, $9d
     call ShowMsg1
@@ -52,6 +56,8 @@ jr_000_23f0:
     ret
 
 
+; Apply the Case I presence hook, append the selected pair, and copy its list.
+KeepChangeAppendSelected:
 jr_000_23f9:
     push af
     ld a, $02

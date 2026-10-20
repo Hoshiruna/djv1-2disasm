@@ -13,12 +13,14 @@ TestSelNameArg:
     add hl, bc
     ld a, [hl]
     cp c
-    jr z, jr_000_2b6b
+    jr z, SelNameMatchesCb
 
     call ClearResult
     ret
 
 
+; Set result bit zero when the selected name equals the overwritten C value $cb.
+SelNameMatchesCb:
 jr_000_2b6b:
     call SetResult
     ret

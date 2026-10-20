@@ -1,14 +1,14 @@
 ; Room pointers select seven-byte entry lists ending with $ff.
 C2EntryRefs:
 Case2RoomObjects:
-    db $13
+    db LOW(C2Entry00)
 jr_005_48d2:
-    db $4a
+    db HIGH(C2Entry00)
     dw C2Entry01
     dw C2Entry02
-    db $fd
+    db LOW(C2Entry03)
 jr_005_48d8:
-    db $4a
+    db HIGH(C2Entry03)
     dw C2Entry04
     dw C2Entry05
     dw C2Entry06
@@ -23,14 +23,14 @@ jr_005_48e5:
     dw C2Entry0C
     dw C2Entry0D
     dw C2Entry0E
-    db $43
+    db LOW(C2Entry0F)
 jr_005_48f0:
-    db $4e
+    db HIGH(C2Entry0F)
     dw C2Entry10
     dw C2Entry11
-    db $f5
+    db LOW(C2Entry12)
 jr_005_48f6:
-    db $4e
+    db HIGH(C2Entry12)
     dw C2Entry13
     dw C2Entry14
 jr_005_48fb:
@@ -44,9 +44,9 @@ jr_005_48fb:
     dw C2Entry1C
     dw C2Entry1B
     dw C2Entry1C
-    db $6a
+    db LOW(C2Entry1B)
 jr_005_4910:
-    db $50
+    db HIGH(C2Entry1B)
     dw C2Entry1C
     dw C2Entry1B
     dw C2Entry1C
@@ -66,14 +66,14 @@ jr_005_492d:
     dw C2Entry2F
     dw C2Entry30
     dw C2Entry31
-    db $79
+    db LOW(C2Entry32)
 jr_005_4936:
-    db $52
+    db HIGH(C2Entry32)
     dw C2Entry33
     dw C2Entry34
-    db $40
+    db LOW(C2Entry35)
 jr_005_493c:
-    db $53
+    db HIGH(C2Entry35)
 jr_005_493d:
     dw C2Entry36
     dw C2Entry37

@@ -359,9 +359,9 @@ C1Act0_25:
 
 C1Act0_26:
     ; Pointer to $4766; split bytes retain the interior label.
-    db $66
+    db LOW(LookC1BoxPoster2)
 jr_006_4346:
-    db $47
+    db HIGH(LookC1BoxPoster2)
     dw C1WhoTalkReply
     dw C1PunchFixture
     dw C1ActionRefusal
@@ -682,9 +682,9 @@ C1Act0_5A:
 C1Act0_5B:
     dw LookC1GrimyWin2
     ; Pointer to $45d8; split bytes retain the interior label.
-    db $d8
+    db LOW(C1WhoTalkReply)
 jr_006_44f0:
-    db $45
+    db HIGH(C1WhoTalkReply)
     dw C1PunchFixture
     dw C1CantDoHere
 

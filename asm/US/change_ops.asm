@@ -102,19 +102,23 @@ AppendChange:
     ld hl, wListScratch
     ld e, $00
 
+; Copy the next non-$ff scratch value into the regional working-list base.
+AppendChangeCopyNext:
 jr_003_5080:
     ld a, [hl+]
     cp $ff
-    jr z, jr_003_5087
+    jr z, AppendChangeAdvance
 
     ld [bc], a
     inc bc
 
+; Advance the source count until all six scratch slots are checked.
+AppendChangeAdvance:
 jr_003_5087:
     inc e
     ld a, $06
     cp e
-    jr nz, jr_003_5080
+    jr nz, AppendChangeCopyNext
 
     call SelectListMode1
     ret

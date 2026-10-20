@@ -33,6 +33,8 @@ Call_000_2696:
     ldh [hChangePos+1], a
     ld a, d
 
+; Find the first $ff byte among the five quick-list entries.
+QuickListFindEmpty:
 jr_000_26a0:
     ld bc, wListBase
     ldh a, [hChangePos]
@@ -42,17 +44,19 @@ jr_000_26a0:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_000_26b9
+    jr z, QuickListStoreValue
 
     ldh a, [hChangePos]
     inc a
     ldh [hChangePos], a
     cp $05
-    jr c, jr_000_26a0
+    jr c, QuickListFindEmpty
 
     ret
 
 
+; Store wArg0 in the empty quick-list byte and choose the mode refresh path.
+QuickListStoreValue:
 jr_000_26b9:
     ld a, [wArg0]
     ld b, a
@@ -66,7 +70,7 @@ jr_000_26b9:
     ld [hl], a
     ld a, [wChangeMode]
     cp $00
-    jr z, jr_000_26eb
+    jr z, QuickListRefreshMode0
 
     push af
     call ResumeTextUI
@@ -82,6 +86,8 @@ jr_000_26b9:
     ret
 
 
+; Refresh mode zero directly when it was already selected.
+QuickListRefreshMode0:
 jr_000_26eb:
     xor a
     ld [wOpByte], a

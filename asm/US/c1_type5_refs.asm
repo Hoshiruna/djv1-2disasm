@@ -29,9 +29,9 @@ C1Type5Refs:
     dw C1Act5_19
     dw C1Act5_1A
     ; Pointer to C1Act5_1B; split bytes retain the interior label.
-    db $4a
+    db LOW(C1Act5_1B)
 jr_006_700d:
-    db $71
+    db HIGH(C1Act5_1B)
     dw C1Act5_1C
     dw C1Act5_1D
     dw C1Act5_1E
@@ -209,9 +209,9 @@ C1Act5_14:
     dw OpenC1Door14
     dw CloseC1Door
     ; Pointer to $7688; split bytes retain the interior label.
-    db $88
+    db LOW(MoveC1Door14)
 jr_006_7119:
-    db $76
+    db HIGH(MoveC1Door14)
 
 C1Act5_15:
     dw LookC1Door15
@@ -413,9 +413,9 @@ C1Act5_35:
 
 C1Act5_36:
     ; Pointer to $7b82; split bytes retain the interior label.
-    db $82
+    db LOW(LookC1DoctorDoor)
 jr_006_7223:
-    db $7b
+    db HIGH(LookC1DoctorDoor)
     dw OpenC1Door36
     dw CloseC1Door
     dw MoveC1DoctorDoor

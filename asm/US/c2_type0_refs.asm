@@ -155,17 +155,17 @@ C2Type0Refs:
     dw C2Act0_97
     dw C2Act0_98
     ; Pointer to C2Act0_99; split bytes retain the interior label.
-    db $40
+    db LOW(C2Act0_99)
 jr_007_4133:
-    db $46
+    db HIGH(C2Act0_99)
     ; Pointer to C2Act0_9A; split bytes retain the interior label.
-    db $48
+    db LOW(C2Act0_9A)
 jr_007_4135:
-    db $46
+    db HIGH(C2Act0_9A)
     ; Pointer to C2Act0_9B; split bytes retain the interior label.
-    db $50
+    db LOW(C2Act0_9B)
 jr_007_4137:
-    db $46
+    db HIGH(C2Act0_9B)
     dw C2Act0_9C
     dw C2Act0_9D
     dw C2Act0_9E
@@ -558,19 +558,19 @@ C2Act0_3D:
     dw LookCeilPlatform
     dw C2SceneQuestion
     ; Pointer to $4985; split bytes retain the interior label.
-    db $85
+    db LOW(C2SceneNoEffect)
 Call_007_4347:
 Jump_007_4347:
-    db $49
+    db HIGH(C2SceneNoEffect)
 Call_007_4348:
     dw C2SceneQuestion
 
 C2Act0_3E:
     dw LookC2Train
     ; Pointer to $4943; split bytes retain the interior label.
-    db $43
+    db LOW(C2SceneQuestion)
 Jump_007_434d:
-    db $49
+    db HIGH(C2SceneQuestion)
     dw C2SceneNoEffect
     dw C2SceneQuestion
 
@@ -976,9 +976,9 @@ C2Act0_7E:
 C2Act0_7F:
     dw ReadMorgueBoard
     ; Pointer to $4943; split bytes retain the interior label.
-    db $43
+    db LOW(C2SceneQuestion)
 jr_007_4573:
-    db $49
+    db HIGH(C2SceneQuestion)
     dw C2SceneNoEffect
     dw C2SceneQuestion
 
@@ -1116,10 +1116,10 @@ C2Act0_95:
 
 C2Act0_96:
     ; Pointer to $4ebe; split bytes retain the interior label.
-    db $be
+    db LOW(LookLeatherChair)
 Call_007_4629:
 Jump_007_4629:
-    db $4e
+    db HIGH(LookLeatherChair)
     dw SceneQuestion2
     dw SceneNoEffect2
     dw SceneQuestion2
@@ -1141,9 +1141,9 @@ C2Act0_99:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f47; split bytes retain the interior label.
-    db $47
+    db LOW(SceneQuestion2)
 jr_007_4647:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_9A:
     dw LookCleanGlass
@@ -1161,9 +1161,9 @@ C2Act0_9C:
     dw LookCityWindow
     dw SceneQuestion2
     ; Pointer to $515b; split bytes retain the interior label.
-    db $5b
+    db LOW(BreakCityWin)
 Call_007_465d:
-    db $51
+    db HIGH(BreakCityWin)
     dw SceneQuestion2
 
 C2Act0_9D:
@@ -1207,16 +1207,16 @@ C2Act0_A3:
     dw SceneQuestion2
     dw BreakVegasWin2
     ; Pointer to $4f47; split bytes retain the interior label.
-    db $47
+    db LOW(SceneQuestion2)
 jr_007_4697:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_A4:
     dw LookSilkCurtain
     ; Pointer to $5295; split bytes retain the interior label.
-    db $95
+    db LOW(OpenSilkCurtain)
 jr_007_469b:
-    db $52
+    db HIGH(OpenSilkCurtain)
     dw SceneQuestion2
     dw CloseSilkCurtain
 

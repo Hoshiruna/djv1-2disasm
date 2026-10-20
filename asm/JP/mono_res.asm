@@ -2,9 +2,9 @@
 
 MonoMapRef:
     ; Pointer to MonoMap; split bytes retain the interior label.
-    db $64
+    db LOW(MonoMap)
 jr_009_7563:
-    db $75
+    db HIGH(MonoMap)
 
 MonoMap:
     db $20, $14, $12, $06, $06, $00, $2b, $4e, $61, $62, $63, $64, $65, $66, $67, $68

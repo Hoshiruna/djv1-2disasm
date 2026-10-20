@@ -43,7 +43,7 @@ CopyC2Item:
 KeepC2Item:
     ret
 
-; Skip entries whose state bit is set; store the remaining item ID.
+; Skip entries whose first item-bitmap bit is set; store the remaining item ID.
 CheckC2BitItem:
 
 
@@ -100,7 +100,7 @@ jr_003_61c1:
     ld [hl], a
     ret
 
-; Check the object flag before storing the item ID.
+; Check property-four bit zero before storing the item ID.
 CheckC2ObjItem:
 
 

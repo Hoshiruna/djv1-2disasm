@@ -86,6 +86,7 @@ jr_002_5f7f:
     ld a, [hl+]
 
 ; Read the next part and check its Y clipping limits.
+; Unlike generic EmitSprite, wSpriteClip adds the hardware-Y $54 threshold.
 DrawObjFrameNextPart:
 jr_002_5f9f:
     ldh [hSpriteLeft], a

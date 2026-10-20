@@ -1,7 +1,7 @@
 
 ; Describe a quarter.
 LookC1Coin:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc3_00:
     ; Show message 0.
@@ -65,10 +65,10 @@ C1Loc3_1D:
     dw C1CoinMuggerDeath
     db $00, $75
     ; Target C1CoinMuggerDeath; retain the interior label.
-    db $78
+    db LOW(C1CoinMuggerDeath)
 
 jr_006_5131:
-    db $51
+    db HIGH(C1CoinMuggerDeath)
     db $00, $76
     dw C1CoinMuggerDeath
     db $00, $77
@@ -122,10 +122,10 @@ C1Loc3_20:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1CoinSlotEnd; retain the interior label.
-    db $6c
+    db LOW(C1CoinSlotEnd)
 
 jr_006_5169:
-    db $51
+    db HIGH(C1CoinSlotEnd)
     ; Show message 0.
     db $00, $61
 
@@ -154,10 +154,10 @@ C1Loc3_23:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1PayAfterTaking; retain the interior label.
-    db $6d
+    db LOW(C1PayAfterTaking)
 
 jr_006_5174:
-    db $51
+    db HIGH(C1PayAfterTaking)
     ; Show message 2.
     db $02, $c7
     ; End script.
@@ -3032,10 +3032,10 @@ C1Loc3_5F:
     ; Match alternate item against type, ID and script target rows.
     db $29, $03, $03
     ; Target BurnC1Hanky; retain the interior label.
-    db $2d
+    db LOW(BurnC1Hanky)
 
 jr_006_58b7:
-    db $59
+    db HIGH(BurnC1Hanky)
     db $03, $0e
     dw BurnC1Note1
     db $03, $10
@@ -3048,10 +3048,10 @@ jr_006_58b7:
     dw BurnC1Snapshot
     db $03, $16
     ; Target BurnC1Bookmark; retain the interior label.
-    db $9c
+    db LOW(BurnC1Bookmark)
 
 jr_006_58cf:
-    db $59
+    db HIGH(BurnC1Bookmark)
     db $03, $17
     dw BurnC1File1
     db $03, $18
@@ -3096,7 +3096,7 @@ jr_006_58cf:
     dw BurnC1Envelope3
     db $fe, $fe
     dw C1ItemNoHere
-    ; Unreferenced sequence; these interpretations follow its byte pattern.
+    ; Unreferenced from indexed roots in the explicit script graph.
     ; Resume text.
     db $45
     ; End script.
@@ -3899,10 +3899,10 @@ C1Loc3_82:
     dw C1KeySafeReply
     db $01, $06
     ; Target C1KeyNoFit; retain the interior label.
-    db $2f
+    db LOW(C1KeyNoFit)
 
 jr_006_5b4c:
-    db $52
+    db HIGH(C1KeyNoFit)
     db $01, $08
     dw C1KeyNoFit
     db $05, $06
@@ -5231,10 +5231,10 @@ C1Sc3_6E:
     ; Branch if result bit 0 is set.
     db $04
     ; Target C1ToolMedrezineView; retain the interior label.
-    db $87
+    db LOW(C1ToolMedrezineView)
 
 jr_006_5f6a:
-    db $5f
+    db HIGH(C1ToolMedrezineView)
     ; Test held item.
     db $4b, $5a
     ; Branch if result bit 0 is set.
@@ -5245,10 +5245,10 @@ jr_006_5f6a:
     ; Branch if result bit 0 is set.
     db $04
     ; Target C1ToolBisodiumitisView; retain the interior label.
-    db $96
+    db LOW(C1ToolBisodiumitisView)
 
 jr_006_5f74:
-    db $5f
+    db HIGH(C1ToolBisodiumitisView)
     ; Test held item.
     db $4b, $5c
     ; Branch if result bit 0 is set.

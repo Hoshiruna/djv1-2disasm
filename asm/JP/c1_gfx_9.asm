@@ -6,21 +6,21 @@
 SECTION "ROM Bank $03c", ROMX[$4000], BANK[$3c]
 
     dw GfxC1_G90 ; $00
-    dw $4680 ; $01
+    dw GfxC1_G91Empty ; $01
     dw GfxC1_G92 ; $02
     dw GfxC1_G93 ; $03
     dw GfxC1_G94 ; $04
     dw GfxC1_G95 ; $05
     dw GfxC1_G96 ; $06
-    dw $5dd6 ; $07
+    dw GfxC1_G97Empty ; $07
     dw GfxC1_G98 ; $08
-    dw $620f ; $09
+    dw GfxC1_G99Empty ; $09
     dw GfxC1_G9A ; $0a
-    dw $660b ; $0b
+    dw GfxC1_G9BEmpty ; $0b
     dw GfxC1_G9C ; $0c
-    dw $6b4e ; $0d
+    dw GfxC1_G9DEmpty ; $0d
     dw GfxC1_G9E ; $0e
-    dw $705a ; $0f
+    dw GfxC1_G9FEmpty ; $0f
 
 GfxC1_G90:
     INCBIN "../../res/scene/case1/common/JP/g90.bin", $0, $15
@@ -96,7 +96,9 @@ jr_03c_4645:
     INCBIN "../../res/scene/case1/common/JP/g90.bin", $625, $24
 jr_03c_4669:
     INCBIN "../../res/scene/case1/common/JP/g90.bin", $649, $17
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G91Empty:
+    db $ff
 
 GfxC1_G92:
     INCBIN "../../res/scene/case1/common/JP/g92.bin", $0, $69
@@ -260,7 +262,9 @@ Call_03c_5d91:
     INCBIN "../../res/scene/case1/common/JP/g96.bin", $657, $21
 jr_03c_5db2:
     INCBIN "../../res/scene/case1/common/JP/g96.bin", $678, $24
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G97Empty:
+    db $ff
 
 GfxC1_G98:
     INCBIN "../../res/scene/case1/common/JP/g98.bin", $0, $b
@@ -322,7 +326,9 @@ jr_03c_6195:
     INCBIN "../../res/scene/case1/common/JP/g98.bin", $3be, $22
 jr_03c_61b7:
     INCBIN "../../res/scene/case1/common/JP/g98.bin", $3e0, $58
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G99Empty:
+    db $ff
 
 GfxC1_G9A:
     INCBIN "../../res/scene/case1/common/JP/g9a.bin", $0, $a1
@@ -354,7 +360,9 @@ jr_03c_6559:
     INCBIN "../../res/scene/case1/common/JP/g9a.bin", $349, $36
 jr_03c_658f:
     INCBIN "../../res/scene/case1/common/JP/g9a.bin", $37f, $7c
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G9BEmpty:
+    db $ff
 
 GfxC1_G9C:
     INCBIN "../../res/scene/case1/common/JP/g9c.bin", $0, $49
@@ -374,7 +382,9 @@ jr_03c_6996:
     INCBIN "../../res/scene/case1/common/JP/g9c.bin", $38a, $170
 jr_03c_6b06:
     INCBIN "../../res/scene/case1/common/JP/g9c.bin", $4fa, $48
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G9DEmpty:
+    db $ff
 
 GfxC1_G9E:
     INCBIN "../../res/scene/case1/common/JP/g9e.bin", $0, $49
@@ -400,7 +410,9 @@ jr_03c_6ea8:
     INCBIN "../../res/scene/case1/common/JP/g9e.bin", $359, $158
 Call_03c_7000:
     INCBIN "../../res/scene/case1/common/JP/g9e.bin", $4b1, $5a
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G9FEmpty:
+    db $ff
     nop
     nop
     nop

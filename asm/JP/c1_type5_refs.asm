@@ -54,9 +54,9 @@ jr_006_7037:
     dw C1Act5_31
     dw C1Act5_32
     ; Pointer to C1Act5_33; split bytes retain the interior label.
-    db $1f
+    db LOW(C1Act5_33)
 jr_006_7052:
-    db $72
+    db HIGH(C1Act5_33)
     dw C1Act5_34
     dw C1Act5_35
     dw C1Act5_36

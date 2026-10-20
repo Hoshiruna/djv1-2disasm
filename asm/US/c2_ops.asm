@@ -15,9 +15,9 @@ C2OpCalls:
     dw BranchFlagSet ; opcode $08
     dw ScriptSetFlag ; opcode $09
     dw ScriptClrFlag ; opcode $0a
-    dw ReadStateBit ; opcode $0b
-    dw SetStateBit ; opcode $0c
-    dw ClearStateBit ; opcode $0d
+    dw ReadStateBit ; opcode $0b; no operand; dispatch A selects state $16
+    dw SetStateBit ; opcode $0c; no operand; dispatch A selects state $18
+    dw ClearStateBit ; opcode $0d; no operand; dispatch A selects state $1a
     dw ScriptGetState ; opcode $0e
     dw ScriptSetState ; opcode $0f
 Jump_000_3a00:
@@ -34,19 +34,19 @@ Jump_000_3a00:
     dw TestAttr1 ; opcode $1a
     dw SetAttr1 ; opcode $1b
     ; Pointer to ClearAttr1; split bytes retain the original interior label.
-    db $6d ; opcode $1c
+    db LOW(ClearAttr1) ; opcode $1c
 jr_000_3a19:
-    db $1e
+    db HIGH(ClearAttr1)
     dw BranchAttr2 ; opcode $1d
     ; Pointer to SetAttr2; split bytes retain the original interior label.
-    db $9d ; opcode $1e
+    db LOW(SetAttr2) ; opcode $1e
 jr_000_3a1d:
-    db $1e
+    db HIGH(SetAttr2)
     dw ClearAttr2 ; opcode $1f
     ; Pointer to CheckRoomExit; split bytes retain the original interior label.
-    db $bb ; opcode $20
+    db LOW(CheckRoomExit) ; opcode $20; 2 destination bytes on success
 Jump_000_3a21:
-    db $1e
+    db HIGH(CheckRoomExit)
     dw SetSelStateView ; opcode $21
     dw ScriptSetStateDraw ; opcode $22
     dw ClearSelStateView ; opcode $23
@@ -54,23 +54,24 @@ Jump_000_3a21:
     dw BranchRoomIs ; opcode $25
     dw AddSelList ; opcode $26
     ; Pointer to KeepSelChange; split bytes retain the original interior label.
-    db $b0 ; opcode $27
+    db LOW(KeepSelChange) ; opcode $27
 Call_000_3a2f:
-    db $23
-    db $00 ; opcode $28
+    db HIGH(KeepSelChange)
+    ; Pointer to ScriptObjVisible; split bytes retain the original interior label.
+    db LOW(ScriptObjVisible) ; opcode $28
 Jump_000_3a31:
-    db $26
+    db HIGH(ScriptObjVisible)
     dw ScriptShowObj ; opcode $29
     dw ScriptHideObj ; opcode $2a
     dw RefreshObjs ; opcode $2b
     dw ScriptMsg3 ; opcode $2c
     dw PickAltTarget ; opcode $2d
-    dw ScriptHoldText ; opcode $2e
+    dw ScriptHoldText ; opcode $2e; no operand
     dw ResumeTextUI ; opcode $2f
     ; Pointer to ScriptName0; split bytes retain the original interior label.
-    db $80 ; opcode $30
+    db LOW(ScriptName0) ; opcode $30
 jr_000_3a41:
-    db $2a
+    db HIGH(ScriptName0)
 jr_000_3a42:
     dw ScriptName1 ; opcode $31
     dw MatchItemScript ; opcode $32
@@ -78,17 +79,17 @@ jr_000_3a42:
     dw DropListArg ; opcode $34
     dw SelectSlot0 ; opcode $35
     dw SelectSlot1 ; opcode $36
-    dw ExitActionFx ; opcode $37
+    dw ExitActionFx ; opcode $37; no operand; ends the action
     dw RemoveChange ; opcode $38
     dw ScriptEffect ; opcode $39
-    dw FinishEffect ; opcode $3a
-    dw PrepRoomMove ; opcode $3b
+    dw FinishEffect ; opcode $3a; no operand
+    dw PrepRoomMove ; opcode $3b; 2 destination bytes; no exit-state check
     dw DrawC2Panel ; opcode $3c
     dw ScriptDropHead ; opcode $3d
     ; Pointer to ScriptPlayAudio; split bytes retain the original interior label.
-    db $d5 ; opcode $3e
+    db LOW(ScriptPlayAudio) ; opcode $3e
 jr_000_3a5d:
-    db $2e
+    db HIGH(ScriptPlayAudio)
     dw ScriptDropChange ; opcode $3f
     dw C2CounterCall ; opcode $40
     dw ScriptNoop ; opcode $41
@@ -106,7 +107,7 @@ jr_000_3a70:
     dw AddArgList ; opcode $4c
     dw TestSelNameArg ; opcode $4d
     dw DropItemChange ; opcode $4e
-    dw MoveRoomFlush ; opcode $4f
+    dw MoveRoomFlush ; opcode $4f; 2 destination bytes; skip state save
     dw ScriptSetRoom ; opcode $50
     dw SlotName1 ; opcode $51
     dw UseBulletCall ; opcode $52
@@ -118,10 +119,9 @@ jr_000_3a86:
     dw BlackjackCall ; opcode $57
     dw Trains2To5Call ; opcode $58
     ; Pointer to Trains6To9Call; split bytes retain the interior label.
-    ; Pointer to Trains6To9Call; split bytes retain the interior label.
-    db $8a ; opcode $59
+    db LOW(Trains6To9Call) ; opcode $59
 jr_000_3a93:
-    db $2f
+    db HIGH(Trains6To9Call)
     dw RoomCueCall ; opcode $5a
     dw BranchNoAttr2 ; opcode $5b
     dw TestC2Quarters ; opcode $5c
@@ -134,7 +134,7 @@ Jump_000_3a9a:
     dw ShowCarFare ; opcode $62
     dw TrainRoomEffect ; opcode $63
     dw SetTrainPass ; opcode $64
-    dw ScriptPutItem ; opcode $65
+    dw ScriptPutItem ; opcode $65; 1 placement-mode byte
     dw ScriptC2Effect ; opcode $66
     dw SpendCashOne ; opcode $67
     dw SpendCashCost ; opcode $68

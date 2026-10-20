@@ -1,7 +1,7 @@
 
 ; Describe door $00 from room $00, with first and repeat views controlled by flag $30.
 LookC1Door00:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc5_00:
     ; Test current room.
@@ -2318,7 +2318,7 @@ C1Sc5_54:
     db $5a, $17
     ; End script.
     db $ff
-    ; Unreferenced sequence; these interpretations follow its byte pattern.
+    ; Unreferenced from indexed roots in the explicit script graph.
     ; Show message 2.
     db $02, $63
     ; End script.
@@ -2935,10 +2935,10 @@ jr_006_7984:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1BlueCabExteriorView; retain the interior label.
-    db $9a
+    db LOW(C1BlueCabExteriorView)
 
 jr_006_7987:
-    db $78
+    db HIGH(C1BlueCabExteriorView)
     ; End script.
     db $ff
 

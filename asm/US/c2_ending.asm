@@ -32,6 +32,7 @@ jr_003_577b:
     ld [wC2AnimTick], a
     ld a, C2TextAnim
     call SetObjFlag
+    ; Mode-one END clears clipping only when result bit 3 is clear.
     ld a, $e7
     call ShowMsg1
     ld a, C2TextAnim
@@ -41,6 +42,7 @@ jr_003_577b:
     ld a, $ab
     call SetObjFlag
     call AnimateWarMarks
+    ; Starting this message enables text clipping again.
     ld a, $e8
     call ShowMsg1
     ld a, $ab

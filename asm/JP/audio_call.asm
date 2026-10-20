@@ -12,12 +12,14 @@ Call_000_07ba:
     bit 5, a
 
 Jump_000_07c3:
-    jr z, jr_000_07c8
+    jr z, TickAudioRunEngine
 
     set 7, [hl]
     ret
 
 
+; Run the audio update with its ROM bank selected and WRAM bank seven active.
+TickAudioRunEngine:
 jr_000_07c8:
     ld a, [wAudioBank]
     ld [rROMB0], a

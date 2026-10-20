@@ -31,7 +31,9 @@ Call_000_2e2e:
     call WaitTicks
     ret
 
-; Reset object scrolling, wait one tick, play the exit effect, discard a caller return address, and jump to EndBankAction.
+; Reset scrolling, wait one tick, and play the exit effect.
+; Discard the opcode-loop CPU return address and finish through EndBankAction.
+; Consume no script operand; a following script $ff is left unread.
 ExitActionFx:
 
 
@@ -42,7 +44,9 @@ ExitActionFx:
     pop bc
     jp EndBankAction
 
-; Reset object scrolling, wait one tick, set state bit six, discard a caller return address, and jump to EndBankAction.
+; Reset scrolling, wait one tick, and set result bit six.
+; Discard the opcode-loop CPU return address and finish through EndBankAction.
+; Consume no script operand; a following script $ff is left unread.
 ExitActionFlag:
 
 

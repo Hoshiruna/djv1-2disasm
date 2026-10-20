@@ -27,6 +27,7 @@ Call_002_7271:
     and $01
     ret z
 ; Append the selected object position and ID; advance the list write pointer.
+; Write one X/Y/ID triple; the builder writes the final X=$ff terminator.
 AppendRoomObj:
 
 Call_002_7289:

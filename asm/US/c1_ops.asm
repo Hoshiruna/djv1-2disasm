@@ -11,7 +11,7 @@ C1OpCalls:
     dw BranchIfSet ; opcode $03
     dw BranchIfSet ; opcode $04
     dw BranchIfClear ; opcode $05
-    dw CheckRoomExit ; opcode $06
+    dw CheckRoomExit ; opcode $06; 1 destination byte on success
     dw TestAttr0 ; opcode $07
     dw SetAttr0 ; opcode $08
     dw ClearAttr0 ; opcode $09
@@ -33,7 +33,7 @@ C1OpCalls:
     dw ScriptRoomIs ; opcode $19
     dw SetSelStateView ; opcode $1a
     dw ClearSelStateView ; opcode $1b
-    dw JumpScript ; opcode $1c
+    dw JumpScript ; opcode $1c; two-byte target
     dw AddSelList ; opcode $1d
     dw ScriptName0 ; opcode $1e
     dw ScriptName1 ; opcode $1f
@@ -55,7 +55,7 @@ C1OpCalls:
     dw ScriptSetState ; opcode $2f
     dw ScriptClrState ; opcode $30
     dw CheckAltRoomObj ; opcode $31
-    dw ScriptPutItem ; opcode $32
+    dw ScriptPutItem ; opcode $32; no operand
     dw ScriptSetStateView ; opcode $33
     dw ScriptClrStateView ; opcode $34
     dw ScriptSetRoom ; opcode $35
@@ -64,17 +64,17 @@ C1OpCalls:
     dw ScriptName1 ; opcode $38
     dw AddC1CoinsArg ; opcode $39
     ; PickBullet1: split pointer retains the original interior label.
-    db $00 ; opcode $3a
+    db LOW(PickBullet1) ; opcode $3a
 jr_006_40c0:
-    db $2c
+    db HIGH(PickBullet1)
     dw PickBullet2 ; opcode $3b
     dw SpendC1Coins ; opcode $3c
     dw UseBullet1 ; opcode $3d
     ; UseBullet2: split pointer retains the original interior label.
-    db $8c ; opcode $3e
+    db LOW(UseBullet2) ; opcode $3e
 jr_006_40c8:
-    db $2c
-    dw ScriptHoldText ; opcode $3f
+    db HIGH(UseBullet2)
+    dw ScriptHoldText ; opcode $3f; 1 extra byte
     dw UseC1Coin ; opcode $40
     dw PickListRoom ; opcode $41
     dw AddQuickArg ; opcode $42
@@ -83,7 +83,7 @@ jr_006_40c8:
     dw ResumeTextUI ; opcode $45
     dw ScriptEffect ; opcode $46
     dw RemoveChange ; opcode $47
-    dw ExitActionFlag ; opcode $48
+    dw ExitActionFlag ; opcode $48; no operand; ends the action
     dw DropSelList ; opcode $49
     dw TestC1Coins ; opcode $4a
     dw TestHeldArg ; opcode $4b
@@ -96,15 +96,15 @@ jr_006_40c8:
     dw ReadItemArg ; opcode $52
     dw SetItem2ArgA ; opcode $53
     ; ScriptProp4Bit1: split pointer retains the original interior label.
-    db $8b ; opcode $54
+    db LOW(ScriptProp4Bit1) ; opcode $54
 jr_006_40f4:
-    db $35
+    db HIGH(ScriptProp4Bit1)
     dw DropListArg ; opcode $55
     dw AddBullet1Arg ; opcode $56
     dw AddBullet2 ; opcode $57
     dw IncGun2Ammo ; opcode $58
     dw DecGun2Ammo ; opcode $59
-    dw FinishEffect ; opcode $5a
+    dw FinishEffect ; opcode $5a; 1 effect byte
     dw C1PutFinishCall ; opcode $5b
     dw ScriptFirstItem ; opcode $5c
     dw TestProp4 ; opcode $5d
@@ -120,9 +120,9 @@ jr_006_40f4:
     dw SpendTwoCoins ; opcode $67
     dw ScriptWait60 ; opcode $68
     ; Pointer to ScriptRoomDraw; split bytes retain the original interior label.
-    db $77 ; opcode $69
+    db LOW(ScriptRoomDraw) ; opcode $69
 jr_006_411e:
-    db $20
+    db HIGH(ScriptRoomDraw)
     dw PlayPickEffect ; opcode $6a
     dw ScriptAltItem ; opcode $6b
     dw ClearItemObj ; opcode $6c

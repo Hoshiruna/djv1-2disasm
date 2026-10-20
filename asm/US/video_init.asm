@@ -55,11 +55,13 @@ Call_001_4051:
     ld b, $0c
     ld hl, OamDmaCode
 
+; Copy the next of twelve DMA-routine bytes into HRAM.
+InstallOamDmaNextByte:
 jr_001_4058:
     ld a, [hl+]
     ldh [c], a
     inc c
     dec b
-    jr nz, jr_001_4058
+    jr nz, InstallOamDmaNextByte
 
     ret

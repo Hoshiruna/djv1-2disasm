@@ -1,7 +1,7 @@
 
 ; Use the already-open reply or the shared closed-door description.
 LookClosedDoor:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc5_00:
     ; Test attribute bit 2 and branch when set.
@@ -25,7 +25,7 @@ C2Sc5_01:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $00
+    db $55, RoomVegasBath
     dw OpenBathDoorOuter
     ; Call script.
     db $05
@@ -90,7 +90,7 @@ C2Sc5_02:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $01
+    db $25, RoomVegasBedroom
     dw CloseBathDoorOuter
     ; Set text name 0.
     db $30, $b0
@@ -153,12 +153,12 @@ UseVegasBathDoor:
 
 C2Sc5_03:
     ; Move using two room arguments if the selected state permits.
-    db $20, $00
+    db $20, RoomVegasBath
 
 jr_008_45b8:
-    db $01
+    db RoomVegasBedroom
     ; Test room argument and branch on inequality.
-    db $55, $00
+    db $55, RoomVegasBath
     dw EnterVegasRoom
     ; Show message 0.
     db $00, $08
@@ -219,7 +219,7 @@ C2Sc5_04:
     ; Show message 0.
     db $00, $2a
     ; Test room argument and branch on equality.
-    db $25, $01
+    db $25, RoomVegasBedroom
     dw EndC2Path
 
 ; Show the shared key hint, retaining the original regional wording.
@@ -239,7 +239,7 @@ C2Sc5_05:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $02
+    db $25, RoomVegasHall1
     dw DoorLockedReply
     ; Jump to script.
     db $07
@@ -253,7 +253,7 @@ C2Sc5_06:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $02
+    db $25, RoomVegasHall1
     dw EndC2Path
     ; Jump to script.
     db $07
@@ -264,11 +264,11 @@ UseVegasRoomDoor:
 
 C2Sc5_07:
     ; Move using two room arguments if the selected state permits.
-    db $20, $01, $02
+    db $20, RoomVegasBedroom, RoomVegasHall1
 
 jr_008_4602:
     ; Test room argument and branch on equality.
-    db $25, $01
+    db $25, RoomVegasBedroom
     dw EnterVegasRoom
     ; Test object flag and branch when set.
     db $08, C2VegasHallSeen
@@ -304,7 +304,7 @@ C2Loc5_07:
     ; Wait sixty ticks.
     db $7e
     ; Prepare room move and read two room arguments.
-    db $3b, $02, $01
+    db $3b, RoomVegasHall1, RoomVegasBedroom
     ; Show message 0.
     db $00, $82
     ; End script.
@@ -343,12 +343,12 @@ UseVegasLobbyDoor:
 
 C2Sc5_09:
     ; Move using two room arguments if the selected state permits.
-    db $20, $02, $03
+    db $20, RoomVegasHall1, RoomVegasLobby
     ; Test room argument and branch on equality.
     db $25
 
 jr_008_4637:
-    db $02
+    db RoomVegasHall1
     dw VegasHallReply
 
 ; Describe the Lucky Dice lobby and its chip sounds using the regional text.
@@ -380,7 +380,7 @@ C2Sc5_0B:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $02
+    db $25, RoomVegasHall1
     dw LiftPaintReply
     ; Show message 0.
     db $00, $a4
@@ -403,10 +403,10 @@ C2Sc5_0C:
     ; Test attribute bit 2 and branch when set.
     db $1d
     ; Target DoorNoEffect; retain the interior label.
-    db $63
+    db LOW(DoorNoEffect)
 
 jr_008_4652:
-    db $53
+    db HIGH(DoorNoEffect)
     ; Clear the room-state closure timer.
     db $42, C2DoorIx
     ; Jump to script.
@@ -456,12 +456,12 @@ UseVegasLift1:
 
 C2Sc5_11:
     ; Move using two room arguments if the selected state permits.
-    db $20, $02, RoomVegasLift1
+    db $20, RoomVegasHall1, RoomVegasLift1
     ; Test room argument and branch on equality.
     db $25
 
 jr_008_466d:
-    db $02
+    db RoomVegasHall1
     dw VegasHallReply
     ; Hide object.
     db $2a, $13
@@ -484,7 +484,7 @@ LookCashierWay:
 
 C2Sc5_12:
     ; Test room argument and branch on inequality.
-    db $55, $03
+    db $55, RoomVegasLobby
     dw QuietPlaceReply
 
 ; Show the shared busy-place description.
@@ -510,9 +510,9 @@ UseCashierWay:
 
 C2Sc5_14:
     ; Move using two room arguments if the selected state permits.
-    db $20, $03, $04
+    db $20, RoomVegasLobby, RoomVegasCashier
     ; Test room argument and branch on equality.
-    db $25, $03
+    db $25, RoomVegasLobby
 
 jr_008_4687:
     dw LuckyLobbyReply
@@ -573,7 +573,7 @@ C2Loc5_12:
     ; Play room audio cue.
     db $5a
     ; Prepare room move and read two room arguments.
-    db $3b, $04, $11
+    db $3b, RoomVegasCashier, RoomHotelFront
 
 ; Show the bouncer throwing Ace out and clear state 06.
 CasinoEjectReply:
@@ -636,7 +636,7 @@ C2Sc5_16:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $11
+    db $25, RoomHotelFront
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -650,7 +650,7 @@ C2Sc5_17:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $03
+    db $25, RoomVegasLobby
     dw CloseDoorAttr
     ; Jump to script.
     db $07
@@ -671,7 +671,7 @@ C2Sc5_18:
     ; Play audio.
     db $3e, $13
     ; Test room argument and branch on equality.
-    db $25, $11
+    db $25, RoomHotelFront
     dw BreakCasinoOut
     ; Set state bit.
     db $0f, C2CasinoGlass
@@ -696,7 +696,7 @@ EjectCasinoDoor:
 
 C2Loc5_15:
     ; Prepare room move and read two room arguments.
-    db $3b, $03, $11
+    db $3b, RoomVegasLobby, RoomHotelFront
     ; Jump to script.
     db $07
     dw CasinoEjectReply
@@ -730,9 +730,9 @@ UseCasinoDoor:
 
 C2Sc5_19:
     ; Move using two room arguments if the selected state permits.
-    db $20, $03, $11
+    db $20, RoomVegasLobby, RoomHotelFront
     ; Test room argument and branch on equality.
-    db $25, $03
+    db $25, RoomVegasLobby
     dw LuckyLobbyReply
     ; Show message 0.
     db $00, $cc
@@ -747,7 +747,7 @@ C2Sc5_1A:
     db $55
 
 jr_008_4713:
-    db $04
+    db RoomVegasCashier
     dw QuietPlaceReply
     ; Show message 0.
     db $00, $89
@@ -759,14 +759,14 @@ UseDealerWay:
 
 C2Sc5_1B:
     ; Move using two room arguments if the selected state permits.
-    db $20, $04, $05
+    db $20, RoomVegasCashier, RoomVegasBlackjack
     ; Test room argument and branch on inequality.
-    db $55, $04
+    db $55, RoomVegasCashier
     ; Target CheckDealerDress; retain the interior label.
-    db $23
+    db LOW(CheckDealerDress)
 
 jr_008_471f:
-    db $47
+    db HIGH(CheckDealerDress)
     ; Jump to script.
     db $07
     dw CheckCashierDress
@@ -842,7 +842,7 @@ C2Loc5_1D:
     ; Play room audio cue.
     db $5a
     ; Prepare room move and read two room arguments.
-    db $3b, $05, $11
+    db $3b, RoomVegasBlackjack, RoomHotelFront
     ; Jump to script.
     db $07
     dw CasinoEjectReply
@@ -891,7 +891,7 @@ UseVegasLift2:
 
 C2Sc5_1E:
     ; Move using two room arguments if the selected state permits.
-    db $20, $0b, RoomVegasLift2
+    db $20, RoomVegasHall2, RoomVegasLift2
     ; Test room argument and branch on equality.
     db $25, RoomVegasLift2
     dw EnterVegasLift2
@@ -980,10 +980,10 @@ C2Loc5_22:
 
 jr_008_4797:
     ; Target VegasLiftReply; retain the interior label.
-    db $74
+    db LOW(VegasLiftReply)
 
 jr_008_4798:
-    db $46
+    db HIGH(VegasLiftReply)
 
 ; Inspect the Vegas hamper lid, retaining its open and room checks.
 LookVegasLid:
@@ -995,10 +995,10 @@ C2Sc5_23:
     ; Test room argument and branch on inequality.
     db $55, RoomVegasHall3
     ; Target VegasLidText; retain the interior label.
-    db $bb
+    db LOW(VegasLidText)
 
 jr_008_479f:
-    db $47
+    db HIGH(VegasLidText)
 
 ; Read the Reliant Cleaners mark and use the photo knowledge to form the original plan.
 ReadHamperMark:
@@ -1177,7 +1177,7 @@ UseVegasLift4:
 
 C2Sc5_28:
     ; Move using two room arguments if the selected state permits.
-    db $20, $0e, RoomVegasLift4
+    db $20, RoomVegasHall4, RoomVegasLift4
     ; Test room argument and branch on equality.
     db $25, RoomVegasLift4
     dw EnterVegasLift4
@@ -1242,7 +1242,7 @@ C2Sc5_29:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $0e
+    db $55, RoomVegasHall4
     dw ClosedDoorReply
     ; Show message 0.
     db $00, $69
@@ -1257,7 +1257,7 @@ C2Sc5_2A:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $0e
+    db $25, RoomVegasHall4
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -1271,7 +1271,7 @@ C2Sc5_2B:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $0e
+    db $25, RoomVegasHall4
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -1282,9 +1282,9 @@ UseVentiniDoor:
 
 C2Sc5_2C:
     ; Move using two room arguments if the selected state permits.
-    db $20, $0e, $0f
+    db $20, RoomVegasHall4, RoomVegasVentiniOffice
     ; Test room argument and branch on equality.
-    db $25, $0e
+    db $25, RoomVegasHall4
     dw VegasHall4Reply
     ; Show message 0.
     db $00, $a7
@@ -1299,12 +1299,12 @@ C2Sc5_2D:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $0e
+    db $55, RoomVegasHall4
     ; Target ClosedDoorReply; retain the interior label.
-    db $5d
+    db LOW(ClosedDoorReply)
 
 jr_008_485f:
-    db $45
+    db HIGH(ClosedDoorReply)
     ; Show message 0.
     db $00, $6a
     ; End script.
@@ -1326,9 +1326,9 @@ UseMaloneDoor:
 
 C2Sc5_2F:
     ; Move using two room arguments if the selected state permits.
-    db $20, $0e, $10
+    db $20, RoomVegasHall4, RoomVegasMaloneOffice
     ; Test room argument and branch on equality.
-    db $25, $0e
+    db $25, RoomVegasHall4
     dw VegasHall4Reply
     ; Hold text.
     db $2e
@@ -1349,7 +1349,7 @@ LookHotelStationWay:
 
 C2Sc5_30:
     ; Test room argument and branch on inequality.
-    db $55, $11
+    db $55, RoomHotelFront
     dw LookDesert
 
 ; Show the original regional street passage description.
@@ -1375,9 +1375,9 @@ UseHotelStationWay:
 
 C2Sc5_33:
     ; Move using two room arguments if the selected state permits.
-    db $20, $11, $14
+    db $20, RoomHotelFront, RoomStation
     ; Test room argument and branch on equality.
-    db $25, $11
+    db $25, RoomHotelFront
     dw C2HotelFront
 
 ; Describe the Las Vegas station front and clear desert exposure.
@@ -1399,7 +1399,7 @@ C2Sc5_34:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $13
+    db $55, RoomOutskirts
     dw LookLaundryChute
 
 jr_008_4899:
@@ -1428,7 +1428,7 @@ C2Sc5_35:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $13
+    db $55, RoomOutskirts
     dw ChuteClimbReply
     ; Test object flag and branch when clear.
     db $54, LaundryUnlocked
@@ -1458,7 +1458,7 @@ C2Sc5_36:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on inequality.
-    db $55, $13
+    db $55, RoomOutskirts
     dw ChuteClimbReply
     ; Show object.
     db $29, $9b
@@ -1473,10 +1473,10 @@ UseLaundryDoor:
 
 C2Sc5_37:
     ; Test room argument and branch on inequality.
-    db $55, $13
+    db $55, RoomOutskirts
     dw ChuteClimbReply
     ; Move using two room arguments if the selected state permits.
-    db $20, $13, RoomLaundry
+    db $20, RoomOutskirts, RoomLaundry
     ; Show message 2.
     db $02, $ae
     ; End script.
@@ -1489,7 +1489,7 @@ C2Sc5_38:
     ; Hold text.
     db $2e
     ; Test room argument and branch on equality.
-    db $25, $13
+    db $25, RoomOutskirts
     dw LookCleanEntryOut
     ; Show message 1.
     db $01, $43
@@ -1526,7 +1526,7 @@ C2Sc5_39:
     db $54, C2HandsFree
     dw DoorLockedReply
     ; Test room argument and branch on equality.
-    db $25, $13
+    db $25, RoomOutskirts
     dw OpenCleanEntryOut
     ; Jump to script.
     db $07
@@ -1573,7 +1573,7 @@ C2Sc5_3B:
     ; Set state and refresh without cue.
     db $22, C2CleanGlass
     ; Test room argument and branch on equality.
-    db $25, $13
+    db $25, RoomOutskirts
     dw DoorGlassReply
     ; Hold text.
     db $2e
@@ -1588,7 +1588,7 @@ UseCleanEntry:
 
 C2Sc5_3C:
     ; Move using two room arguments if the selected state permits.
-    db $20, $13, $48
+    db $20, RoomOutskirts, $48
     ; Test room argument and branch on equality.
     db $25, $48
     dw CleanHallReply
@@ -1656,7 +1656,7 @@ C2Sc5_3D:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $14
+    db $25, RoomStation
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -1670,7 +1670,7 @@ C2Sc5_3E:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $14
+    db $25, RoomStation
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -1693,7 +1693,7 @@ C2Sc5_3F:
     ; Set state bit.
     db $0f, C2VegasGlass
     ; Test room argument and branch on equality.
-    db $25, $15
+    db $25, RoomVegasStationLobby
     dw DoorGlassReply
     ; Set state and refresh without cue.
     db $22, C2VegasGlass
@@ -1706,12 +1706,12 @@ UseVegasDoor:
 
 C2Sc5_40:
     ; Test room argument and branch on inequality.
-    db $55, $14
+    db $55, RoomStation
     dw ExitVegasStn
 
 jr_008_4968:
     ; Move using two room arguments if the selected state permits.
-    db $20, $14, $15
+    db $20, RoomStation, RoomVegasStationLobby
     ; Hold text.
     db $2e
     ; Show message 0.
@@ -1778,7 +1778,7 @@ ExitVegasStn:
 
 C2Loc5_37:
     ; Move using two room arguments if the selected state permits.
-    db $20, $14, $15
+    db $20, RoomStation, RoomVegasStationLobby
     ; Jump to script.
     db $07
     dw C2StationFront
@@ -1788,7 +1788,7 @@ LookLuggageWay:
 
 C2Sc5_41:
     ; Test room argument and branch on inequality.
-    db $55, $15
+    db $55, RoomVegasStationLobby
     dw BusyPlaceReply
     ; Show message 0.
     db $00, $fa
@@ -1800,7 +1800,7 @@ UseLuggageWay:
 
 C2Sc5_42:
     ; Test room argument and branch on inequality.
-    db $55, $15
+    db $55, RoomVegasStationLobby
     dw LeaveClaimDesk
     ; Test object flag and branch when clear.
     db $54, C2CaseShown
@@ -1820,7 +1820,7 @@ EnterLuggageDesk:
 
 C2Loc5_38:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15, $16
+    db $20, RoomVegasStationLobby, RoomVegasLuggageClaim
     ; Hold text.
     db $2e
     ; Show message 0.
@@ -1857,10 +1857,10 @@ LeaveClaimDesk:
 
 C2Loc5_3B:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15
+    db $20, RoomVegasStationLobby
 
 jr_008_49c3:
-    db $16
+    db RoomVegasLuggageClaim
     ; Hold text.
     db $2e
     ; Show message 0.
@@ -1874,7 +1874,7 @@ LookPlatform6Way:
 
 C2Sc5_43:
     ; Test room argument and branch on equality.
-    db $25, $17
+    db $25, RoomVegasPlatform6
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $06
@@ -1888,9 +1888,9 @@ UsePlatform6Way:
 
 C2Sc5_44:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15, $17
+    db $20, RoomVegasStationLobby, RoomVegasPlatform6
     ; Test room argument and branch on equality.
-    db $25, $15
+    db $25, RoomVegasStationLobby
 
 jr_008_49d8:
     dw ReturnVegasLobby
@@ -2060,7 +2060,7 @@ LookPlatform7Way:
 
 C2Sc5_45:
     ; Test room argument and branch on equality.
-    db $25, $18
+    db $25, RoomVegasPlatform7
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $07
@@ -2074,14 +2074,14 @@ UsePlatform7Way:
 
 C2Sc5_46:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15, $18
+    db $20, RoomVegasStationLobby, RoomVegasPlatform7
 
 ; Select the platform or Vegas lobby reply after the passage move.
 PlatformOrLobby:
 
 C2Loc5_43:
     ; Test room argument and branch on inequality.
-    db $55, $15
+    db $55, RoomVegasStationLobby
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2092,7 +2092,7 @@ LookPlatform8Way:
 
 C2Sc5_47:
     ; Test room argument and branch on equality.
-    db $25, $19
+    db $25, RoomVegasPlatform8
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $08
@@ -2106,7 +2106,7 @@ UsePlatform8Way:
 
 C2Sc5_48:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15, $19
+    db $20, RoomVegasStationLobby, RoomVegasPlatform8
     ; Jump to script.
     db $07
 
@@ -2118,7 +2118,7 @@ LookPlatform9Way:
 
 C2Sc5_49:
     ; Test room argument and branch on equality.
-    db $25, $1a
+    db $25, RoomVegasPlatform9
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $09
@@ -2132,7 +2132,7 @@ UsePlatform9Way:
 
 C2Sc5_4A:
     ; Move using two room arguments if the selected state permits.
-    db $20, $15, $1a
+    db $20, RoomVegasStationLobby, RoomVegasPlatform9
     ; Jump to script.
     db $07
     dw PlatformOrLobby
@@ -2144,10 +2144,10 @@ C2Sc5_4B:
     ; Test attribute bit 2 and branch when set.
     db $1d
     ; Target DoorIsOpen; retain the interior label.
-    db $5b
+    db LOW(DoorIsOpen)
 
 jr_008_4a7f:
-    db $53
+    db HIGH(DoorIsOpen)
     ; Show message 1.
     db $01, $2c
     ; End script.
@@ -2172,9 +2172,9 @@ UseTrain6Door:
 
 C2Sc5_4D:
     ; Move using two room arguments if the selected state permits.
-    db $20, $17, $1b
+    db $20, RoomVegasPlatform6, RoomTrain6A
     ; Test room argument and branch on equality.
-    db $25, $17
+    db $25, RoomVegasPlatform6
 
 jr_008_4a8e:
     dw ShowPlatform
@@ -2193,36 +2193,36 @@ TrainFareDispatch:
 
 C2Loc5_45:
     ; Test room argument and branch on equality.
-    db $25, $23
+    db $25, RoomTrain2A
     dw CheckTrainCash
     ; Test room argument and branch on equality.
-    db $25, $24
+    db $25, RoomTrain2B
     dw CheckTrainCash
     ; Test room argument and branch on equality.
-    db $25, $25
+    db $25, RoomTrain3A
     dw CheckTrainCash
     ; Test room argument and branch on equality.
-    db $25, $26
+    db $25, RoomTrain3B
     ; Target CheckTrainCash; retain the interior label.
-    db $bb
+    db LOW(CheckTrainCash)
 
 jr_008_4aa2:
-    db $4a
+    db HIGH(CheckTrainCash)
     ; Test room argument and branch on equality.
-    db $25, $27
+    db $25, RoomTrain4A
     dw CheckTrainCash
     ; Test room argument and branch on equality.
-    db $25, $28
+    db $25, RoomTrain4B
     dw CheckTrainCash
     ; Test room argument and branch on equality.
-    db $25, $29
+    db $25, RoomTrain5A
     ; Target CheckTrainCash; retain the interior label.
-    db $bb
+    db LOW(CheckTrainCash)
 
 jr_008_4aae:
-    db $4a
+    db HIGH(CheckTrainCash)
     ; Test room argument and branch on equality.
-    db $25, $2a
+    db $25, RoomTrain5B
     dw CheckTrainCash
 
 ; Offer the fare when the current room clearance flag is clear; otherwise restore the car view.
@@ -2286,9 +2286,9 @@ UseTrain6Door2:
 
 C2Sc5_4E:
     ; Move using two room arguments if the selected state permits.
-    db $20, $17, $1c
+    db $20, RoomVegasPlatform6, RoomTrain6B
     ; Test room argument and branch on equality.
-    db $25, $17
+    db $25, RoomVegasPlatform6
 
 jr_008_4ad2:
     dw ShowPlatform
@@ -2361,9 +2361,9 @@ UseTrain7Door1:
 
 C2Sc5_51:
     ; Move using two room arguments if the selected state permits.
-    db $20, $18, $1d
+    db $20, RoomVegasPlatform7, RoomTrain7A
     ; Test room argument and branch on equality.
-    db $25, $18
+    db $25, RoomVegasPlatform7
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2374,9 +2374,9 @@ UseTrain7Door2:
 
 C2Sc5_52:
     ; Move using two room arguments if the selected state permits.
-    db $20, $18, $1e
+    db $20, RoomVegasPlatform7, RoomTrain7B
     ; Test room argument and branch on equality.
-    db $25, $18
+    db $25, RoomVegasPlatform7
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2387,9 +2387,9 @@ UseTrain8Door1:
 
 C2Sc5_53:
     ; Move using two room arguments if the selected state permits.
-    db $20, $19, $1f
+    db $20, RoomVegasPlatform8, RoomTrain8A
     ; Test room argument and branch on equality.
-    db $25, $19
+    db $25, RoomVegasPlatform8
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2400,9 +2400,9 @@ UseTrain8Door2:
 
 C2Sc5_54:
     ; Move using two room arguments if the selected state permits.
-    db $20, $19, $20
+    db $20, RoomVegasPlatform8, RoomTrain8B
     ; Test room argument and branch on equality.
-    db $25, $19
+    db $25, RoomVegasPlatform8
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2413,9 +2413,9 @@ UseTrain9Door1:
 
 C2Sc5_55:
     ; Move using two room arguments if the selected state permits.
-    db $20, $21, $1a
+    db $20, RoomTrain9A, RoomVegasPlatform9
     ; Test room argument and branch on equality.
-    db $25, $1a
+    db $25, RoomVegasPlatform9
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2426,9 +2426,9 @@ UseTrain9Door2:
 
 C2Sc5_56:
     ; Move using two room arguments if the selected state permits.
-    db $20, $1a, $22
+    db $20, RoomVegasPlatform9, RoomTrain9B
     ; Test room argument and branch on equality.
-    db $25, $1a
+    db $25, RoomVegasPlatform9
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -2455,10 +2455,10 @@ C2Sc5_58:
     ; Call script.
     db $05
     ; Target ClearTrainDropA; retain the interior label.
-    db $02
+    db LOW(ClearTrainDropA)
 
 jr_008_4b39:
-    db $4a
+    db HIGH(ClearTrainDropA)
     ; Test room argument and branch on equality.
     db $25, RoomTrain6A
     dw TrainCarReply
@@ -2610,7 +2610,7 @@ LookPlatform2Way:
 
 C2Sc5_60:
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $02
@@ -2624,10 +2624,10 @@ UsePlatform2Way:
 
 C2Sc5_61:
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
     dw LeavePlatform2
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2c
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform2
     ; Jump to script.
     db $07
     dw ShowPlatform
@@ -2643,7 +2643,7 @@ C2Loc5_4A:
     db $05
     dw HideNewsStand
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2c
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform2
 
 ; Show the Chicago lobby sounds without the separate discovery or clothing flow.
 ChiLobbyPlain:
@@ -2687,7 +2687,7 @@ ReturnChi2:
 
 C2Loc5_4D:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2c
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform2
 
 ; Show the Chicago station lobby description and discover its cab destination.
 EnterChiLobby:
@@ -2739,7 +2739,7 @@ LookPlatform3Way:
 
 C2Sc5_62:
     ; Test room argument and branch on equality.
-    db $25, $2d
+    db $25, RoomChicagoPlatform3
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $03
@@ -2756,13 +2756,13 @@ C2Sc5_63:
     db $25
 
 jr_008_4c09:
-    db $2d
+    db RoomChicagoPlatform3
     dw LeavePlatform3
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b
+    db $20, RoomChicagoStationLobby
 
 jr_008_4c0e:
-    db $2d
+    db RoomChicagoPlatform3
     ; Jump to script.
     db $07
     dw ShowPlatform
@@ -2778,7 +2778,7 @@ C2Loc5_51:
     db $05
     dw HideNewsStand
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2d
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform3
     ; Jump to script.
     db $07
     dw ChiLobbyPlain
@@ -2788,7 +2788,7 @@ ReturnChi3:
 
 C2Loc5_52:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2d
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform3
     ; Jump to script.
     db $07
     dw EnterChiLobby
@@ -2798,7 +2798,7 @@ LookPlatform4Way:
 
 C2Sc5_64:
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $04
@@ -2812,10 +2812,10 @@ UsePlatform4Way:
 
 C2Sc5_65:
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     dw LeavePlatform4
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2e
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform4
     ; Jump to script.
     db $07
     dw ShowPlatform
@@ -2834,7 +2834,7 @@ jr_008_4c39:
     db $05
     dw HideNewsStand
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2e
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform4
     ; Jump to script.
     db $07
     dw ChiLobbyPlain
@@ -2844,7 +2844,7 @@ ReturnChi4:
 
 C2Loc5_54:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2e
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform4
     ; Jump to script.
     db $07
     dw EnterChiLobby
@@ -2857,7 +2857,7 @@ C2Sc5_66:
     db $25
 
 jr_008_4c4c:
-    db $2f
+    db RoomChicagoPlatform5
     dw BusyPlaceReply
     ; Set script value 0.
     db $49, $05
@@ -2873,10 +2873,10 @@ UsePlatform5Way:
 
 C2Sc5_67:
     ; Test room argument and branch on equality.
-    db $25, $2f
+    db $25, RoomChicagoPlatform5
     dw LeavePlatform5
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2f
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform5
     ; Jump to script.
     db $07
     dw ShowPlatform
@@ -2895,7 +2895,7 @@ jr_008_4c5f:
     db $05
     dw HideNewsStand
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2f
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform5
     ; Jump to script.
     db $07
     dw ChiLobbyPlain
@@ -2905,7 +2905,7 @@ ReturnChi5:
 
 C2Loc5_56:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $2f
+    db $20, RoomChicagoStationLobby, RoomChicagoPlatform5
     ; Jump to script.
     db $07
     dw EnterChiLobby
@@ -2934,7 +2934,7 @@ C2Sc5_69:
     db $54, C2ChiGlass
     dw OpenChiIntact
     ; Test room argument and branch on inequality.
-    db $55, $30
+    db $55, RoomChicagoStationFront
     dw ChiOpenAttr
     ; Call script.
     db $05
@@ -2961,6 +2961,8 @@ C2Loc5_57:
     db $ff
 
 ; Show the opening reply, hide glass object 32, and return to the script.
+; This same-bank helper calls DoorOpening, giving two script-call frames.
+; Both calls set wCallBank to zero, so neither return pops a ROM bank.
 ChiHideGlass:
 
 C2Loc5_58:
@@ -2979,7 +2981,7 @@ OpenChiIntact:
 
 C2Loc5_59:
     ; Test room argument and branch on equality.
-    db $25, $30
+    db $25, RoomChicagoStationFront
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -2998,7 +3000,7 @@ C2Sc5_6A:
     db $54, C2ChiGlass
     dw CloseChiIntact
     ; Test room argument and branch on inequality.
-    db $55, $30
+    db $55, RoomChicagoStationFront
     dw ChiCloseAttr
     ; Call script.
     db $05
@@ -3031,7 +3033,7 @@ CloseChiIntact:
 
 C2Loc5_A9:
     ; Test room argument and branch on equality.
-    db $25, $30
+    db $25, RoomChicagoStationFront
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -3054,7 +3056,7 @@ C2Sc5_6B:
     ; Show object.
     db $29, $32
     ; Test room argument and branch on equality.
-    db $25, $2b
+    db $25, RoomChicagoStationLobby
     dw DoorGlassReply
     ; Refresh room objects.
     db $2b
@@ -3067,10 +3069,10 @@ UseChiDoor:
 
 C2Sc5_6C:
     ; Test room argument and branch on inequality.
-    db $55, $2b
+    db $55, RoomChicagoStationLobby
     dw LeaveChiFront
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $30
+    db $20, RoomChicagoStationLobby, RoomChicagoStationFront
     ; Test object flag and branch when set.
     db $08, C2ChiFrontSeen
     dw ChiFrontAgain
@@ -3102,7 +3104,7 @@ C2Loc5_5B:
     db $05
     dw HideNewsStand
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $30
+    db $20, RoomChicagoStationLobby, RoomChicagoStationFront
     ; Jump to script.
     db $07
     dw ChiLobbyPlain
@@ -3112,23 +3114,23 @@ ReturnChiLobby:
 
 C2Loc5_5C:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2b, $30
+    db $20, RoomChicagoStationLobby, RoomChicagoStationFront
     ; Jump to script.
     db $07
     ; Target EnterChiLobby; retain the interior label.
-    db $e4
+    db LOW(EnterChiLobby)
 
 jr_008_4cf5:
-    db $4b
+    db HIGH(EnterChiLobby)
 
 ; Move between platform 2 and its first car, then select the platform or car reply.
 UseTrain2Door1:
 
 C2Sc5_6D:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2c, RoomTrain2A
+    db $20, RoomChicagoPlatform2, RoomTrain2A
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
 
 jr_008_4cfb:
     dw ShowPlatform
@@ -3141,9 +3143,9 @@ UseTrain2Door2:
 
 C2Sc5_6E:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2c, RoomTrain2B
+    db $20, RoomChicagoPlatform2, RoomTrain2B
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -3154,9 +3156,9 @@ UseTrain3Door1:
 
 C2Sc5_6F:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2d, RoomTrain3A
+    db $20, RoomChicagoPlatform3, RoomTrain3A
     ; Test room argument and branch on equality.
-    db $25, $2d
+    db $25, RoomChicagoPlatform3
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -3167,9 +3169,9 @@ UseTrain3Door2:
 
 C2Sc5_70:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2d, RoomTrain3B
+    db $20, RoomChicagoPlatform3, RoomTrain3B
     ; Test room argument and branch on equality.
-    db $25, $2d
+    db $25, RoomChicagoPlatform3
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -3180,14 +3182,14 @@ UseTrain4Door1:
 
 C2Sc5_71:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2e, RoomTrain4A
+    db $20, RoomChicagoPlatform4, RoomTrain4A
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     ; Target ShowPlatform; retain the interior label.
-    db $da
+    db LOW(ShowPlatform)
 
 jr_008_4d24:
-    db $49
+    db HIGH(ShowPlatform)
     ; Jump to script.
     db $07
     dw TrainCarReply
@@ -3197,14 +3199,14 @@ UseTrain4Door2:
 
 C2Sc5_72:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2e, RoomTrain4B
+    db $20, RoomChicagoPlatform4, RoomTrain4B
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     ; Target ShowPlatform; retain the interior label.
-    db $da
+    db LOW(ShowPlatform)
 
 jr_008_4d2e:
-    db $49
+    db HIGH(ShowPlatform)
     ; Jump to script.
     db $07
     dw TrainCarReply2
@@ -3214,9 +3216,9 @@ UseTrain5Door1:
 
 C2Sc5_73:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2f, RoomTrain5A
+    db $20, RoomChicagoPlatform5, RoomTrain5A
     ; Test room argument and branch on equality.
-    db $25, $2f
+    db $25, RoomChicagoPlatform5
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -3227,9 +3229,9 @@ UseTrain5Door2:
 
 C2Sc5_74:
     ; Move using two room arguments if the selected state permits.
-    db $20, $2f, RoomTrain5B
+    db $20, RoomChicagoPlatform5, RoomTrain5B
     ; Test room argument and branch on equality.
-    db $25, $2f
+    db $25, RoomChicagoPlatform5
     dw ShowPlatform
     ; Jump to script.
     db $07
@@ -3282,9 +3284,9 @@ UseCabChicago:
 
 C2Sc5_78:
     ; Move using two room arguments if the selected state permits.
-    db $20, $30, CabAtChicago
+    db $20, RoomChicagoStationFront, CabAtChicago
     ; Test room argument and branch on equality.
-    db $25, $30
+    db $25, RoomChicagoStationFront
     dw ChiFrontAgain
     ; Test object flag and branch when set.
     db $08, C2GabbyMet
@@ -3332,9 +3334,9 @@ UseCabAdison:
 
 C2Sc5_7B:
     ; Move using two room arguments if the selected state permits.
-    db $20, $32, CabAtAdison
+    db $20, RoomAdisonApartmentFront, CabAtAdison
     ; Test room argument and branch on inequality.
-    db $55, $32
+    db $55, RoomAdisonApartmentFront
     dw SitInC2Cab
     ; Test object flag and branch when set.
     db $08, C2HomeSeen
@@ -3374,7 +3376,7 @@ UseCabCottage:
 
 C2Sc5_7D:
     ; Move using two room arguments if the selected state permits.
-    db $20, CabAtCottage, $41
+    db $20, CabAtCottage, RoomSugarApartmentFront
     ; Test room argument and branch on equality.
     db $25, CabAtCottage
     dw SitInC2Cab
@@ -3415,7 +3417,7 @@ UseCabPeoria:
 C2Sc5_7F:
 jr_008_4dab:
     ; Move using two room arguments if the selected state permits.
-    db $20, CabAtPeoria, $35
+    db $20, CabAtPeoria, RoomJoeFront
     ; Test room argument and branch on equality.
     db $25, CabAtPeoria
     dw SitInC2Cab
@@ -3455,7 +3457,7 @@ UseCabMorgue:
 
 C2Sc5_81:
     ; Move using two room arguments if the selected state permits.
-    db $20, CabAtMorgue, $43
+    db $20, CabAtMorgue, RoomMorgueFront
     ; Test room argument and branch on equality.
     db $25, CabAtMorgue
     dw SitInC2Cab
@@ -3477,7 +3479,7 @@ C2Sc5_82:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $32
+    db $25, RoomAdisonApartmentFront
     dw LookEntrance
     ; Jump to script.
     db $07
@@ -3491,7 +3493,7 @@ C2Sc5_83:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $32
+    db $25, RoomAdisonApartmentFront
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -3505,7 +3507,7 @@ C2Sc5_84:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $32
+    db $25, RoomAdisonApartmentFront
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -3528,7 +3530,7 @@ jr_008_4df2:
     ; Play audio.
     db $3e, $13
     ; Test room argument and branch on inequality.
-    db $55, $32
+    db $55, RoomAdisonApartmentFront
     dw BreakHomeInside
     ; Set state and refresh without cue.
     db $22, C2LobbyGlass
@@ -3552,9 +3554,9 @@ UseHomeEntry:
 
 C2Sc5_86:
     ; Move using two room arguments if the selected state permits.
-    db $20, $32, $33
+    db $20, RoomAdisonApartmentFront, RoomAdisonHallway
     ; Test room argument and branch on equality.
-    db $25, $32
+    db $25, RoomAdisonApartmentFront
     dw HomeEntryFront
     ; Test object flag and branch when set.
     db $08, C2LobbySeen
@@ -3616,7 +3618,7 @@ jr_008_4e28:
     ; Hold text.
     db $2e
     ; Test room argument and branch on inequality.
-    db $55, $33
+    db $55, RoomAdisonHallway
     dw HomeDoorInside
     ; Show message 1.
     db $01, $61
@@ -3646,7 +3648,7 @@ jr_008_4e39:
     db $54, HomeUnlocked
     dw DoorLockedReply
     ; Test room argument and branch on equality.
-    db $25, $33
+    db $25, RoomAdisonHallway
     dw OpenDoorState
     ; Test state bit.
     db $0e, C2HomeCurtain
@@ -3673,7 +3675,7 @@ C2Sc5_89:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $33
+    db $25, RoomAdisonHallway
     dw CloseDoorState
     ; Test state bit.
     db $0e, C2HomeCurtain
@@ -3689,7 +3691,7 @@ UseHomeDoor:
 
 C2Sc5_8A:
     ; Test room argument and branch on equality.
-    db $25, $33
+    db $25, RoomAdisonHallway
     dw MoveHomeRoom
     ; Test state bit.
     db $0e, C2HomeCurtain
@@ -3702,9 +3704,9 @@ MoveHomeRoom:
 
 C2Loc5_69:
     ; Move using two room arguments if the selected state permits.
-    db $20, $33, $34
+    db $20, RoomAdisonHallway, RoomAdisonApartment
     ; Test room argument and branch on equality.
-    db $25, $33
+    db $25, RoomAdisonHallway
     dw HomeHallAgain
     ; Test object flag and branch when set.
     db $08, C2HomeEntered
@@ -3787,9 +3789,9 @@ UsePoliceWay:
 
 C2Sc5_8D:
     ; Move using two room arguments if the selected state permits.
-    db $20, $35, $40
+    db $20, RoomJoeFront, RoomPoliceStationFront
     ; Test room argument and branch on equality.
-    db $25, $35
+    db $25, RoomJoeFront
     dw PeoriaAgain
     ; Show message 2.
     db $02, $19
@@ -3801,7 +3803,7 @@ LookJoeAlleyWay:
 
 C2Sc5_8E:
     ; Test room argument and branch on inequality.
-    db $55, $35
+    db $55, RoomJoeFront
     dw QuietPlaceReply
     ; Show message 1.
     db $01, $9c
@@ -3813,9 +3815,9 @@ UseJoeAlleyWay:
 
 C2Sc5_8F:
     ; Move using two room arguments if the selected state permits.
-    db $20, $35, $36
+    db $20, RoomJoeFront, RoomJoeAlley
     ; Test room argument and branch on equality.
-    db $25, $35
+    db $25, RoomJoeFront
     dw PeoriaAgain
     ; Jump to script.
     db $07
@@ -3871,7 +3873,7 @@ LookJoeFireEscape:
 
 C2Sc5_95:
     ; Test room argument and branch on equality.
-    db $25, $37
+    db $25, RoomJoeFireEscape
     dw JoeEscapeDown
 
 ; Describe the fire escape and retain the climbing hint until its first visit.
@@ -3926,14 +3928,14 @@ UseJoeFireEscape:
 C2Sc5_97:
 jr_008_4ee7:
     ; Move using two room arguments if the selected state permits.
-    db $20, $36, $37
+    db $20, RoomJoeAlley, RoomJoeFireEscape
     ; Test room argument and branch on equality.
-    db $25, $36
+    db $25, RoomJoeAlley
     ; Target JoeAlleyReply; retain the interior label.
-    db $f3
+    db LOW(JoeAlleyReply)
 
 jr_008_4eed:
-    db $4e
+    db HIGH(JoeAlleyReply)
     ; Show message 1.
     db $01, $a9
     ; Set object flag.
@@ -3964,9 +3966,9 @@ UseJoeRearWay:
 
 C2Sc5_99:
     ; Move using two room arguments if the selected state permits.
-    db $20, $36, $39
+    db $20, RoomJoeAlley, RoomJoeRearAlley
     ; Test room argument and branch on equality.
-    db $25, $36
+    db $25, RoomJoeAlley
     dw JoeAlleyReply
 
 ; Describe the dirty alley immediately behind Joe.
@@ -3992,7 +3994,7 @@ LookJoeOfficeWin:
 
 C2Sc5_9B:
     ; Test room argument and branch on inequality.
-    db $55, $37
+    db $55, RoomJoeFireEscape
     dw JoeEscapeReply
     ; Show message 1.
     db $01, $ad
@@ -4013,12 +4015,12 @@ UseJoeOfficeWin:
 
 C2Sc5_9C:
     ; Test room argument and branch on inequality.
-    db $55, $37
+    db $55, RoomJoeFireEscape
     dw LeaveJoeOfficeWin
     ; Clear state bit.
     db $10, $75
     ; Move using two room arguments if the selected state permits.
-    db $20, $37, $38
+    db $20, RoomJoeFireEscape, RoomJoeOffice
     ; Show message 1.
     db $01, $b8
 
@@ -4031,7 +4033,7 @@ LeaveJoeOfficeWin:
 
 C2Loc5_70:
     ; Move using two room arguments if the selected state permits.
-    db $20, $37, $38
+    db $20, RoomJoeFireEscape, RoomJoeOffice
     ; Jump to script.
     db $07
     dw JoeEscapeHint
@@ -4052,12 +4054,12 @@ C2Sc5_9E:
     ; Test attribute bit 2 and branch when set.
     db $1d
     ; Target DoorIsOpen; retain the interior label.
-    db $5b
+    db LOW(DoorIsOpen)
 
 jr_008_4f27:
-    db $53
+    db HIGH(DoorIsOpen)
     ; Test room argument and branch on equality.
-    db $25, $3a
+    db $25, RoomJoeRearHallway
     dw ClosedDoorReply
     ; Hold text.
     db $2e
@@ -4100,7 +4102,7 @@ C2Sc5_9F:
     db $54, C2JoeLockGone
     dw DoorLockedReply
     ; Test room argument and branch on equality.
-    db $25, $39
+    db $25, RoomJoeRearAlley
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -4115,12 +4117,12 @@ jr_008_4f4f:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $39
+    db $25, RoomJoeRearAlley
     ; Target CloseDoorState; retain the interior label.
-    db $74
+    db LOW(CloseDoorState)
 
 jr_008_4f55:
-    db $53
+    db HIGH(CloseDoorState)
     ; Jump to script.
     db $07
     dw CloseDoorAttr
@@ -4130,10 +4132,10 @@ UseJoeRearDoor:
 
 C2Sc5_A1:
     ; Test room argument and branch on inequality.
-    db $55, $39
+    db $55, RoomJoeRearAlley
     dw LeaveJoeRearDoor
     ; Move using two room arguments if the selected state permits.
-    db $20, $39, $3a
+    db $20, RoomJoeRearAlley, RoomJoeRearHallway
     ; Test object flag and branch when clear.
     db $54, C2LampFlag
     dw JoeRearDark
@@ -4147,7 +4149,7 @@ LeaveJoeRearDoor:
 
 C2Loc5_72:
     ; Move using two room arguments if the selected state permits.
-    db $20, $39, $3a
+    db $20, RoomJoeRearAlley, RoomJoeRearHallway
     ; Jump to script.
     db $07
     dw JoeRearAlleyReply
@@ -4169,7 +4171,7 @@ C2Sc5_A2:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $3b
+    db $25, RoomJoeBar
     dw ClosedDoorReply
     ; Show message 1.
     db $01, $e6
@@ -4184,7 +4186,7 @@ C2Sc5_A3:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $3a
+    db $25, RoomJoeRearHallway
     dw OpenDoorState
     ; Jump to script.
     db $07
@@ -4198,7 +4200,7 @@ C2Sc5_A4:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $3a
+    db $25, RoomJoeRearHallway
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -4209,10 +4211,10 @@ UseJoeBarDoor:
 
 C2Sc5_A5:
     ; Test room argument and branch on inequality.
-    db $55, $3a
+    db $55, RoomJoeRearHallway
     dw LeaveJoeBar
     ; Move using two room arguments if the selected state permits.
-    db $20, $3a, $3b
+    db $20, RoomJoeRearHallway, RoomJoeBar
 
 ; Require the lit lamp for the bar description and set the bar visit flag.
 JoeBarArrival:
@@ -4221,10 +4223,10 @@ C2Loc5_74:
     ; Test object flag and branch when clear.
     db $54, C2LampFlag
     ; Target JoeDarkFall; retain the interior label.
-    db $a8
+    db LOW(JoeDarkFall)
 
 jr_008_4f98:
-    db $4f
+    db HIGH(JoeDarkFall)
     ; Show message 1.
     db $01, $ec
     ; Set object flag.
@@ -4242,7 +4244,7 @@ C2Loc5_75:
 
 jr_008_4fa2:
     ; Move using two room arguments if the selected state permits.
-    db $20, $3a, $3b
+    db $20, RoomJoeRearHallway, RoomJoeBar
     ; Show message 1.
     db $01, $e0
     ; End script.
@@ -4295,7 +4297,7 @@ C2Sc5_A8:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $3b
+    db $55, RoomJoeBar
     dw ClosedDoorReply
     ; Show message 1.
     db $01, $f1
@@ -4319,7 +4321,7 @@ C2Sc5_A9:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $3b
+    db $25, RoomJoeBar
     dw OpenDoorState
 
 jr_008_4fce:
@@ -4335,7 +4337,7 @@ C2Sc5_AA:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $3b
+    db $25, RoomJoeBar
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -4348,16 +4350,16 @@ C2Sc5_AB:
     ; Test object flag and branch when clear.
     db $54, C2LampFlag
     ; Target JoeDarkFall; retain the interior label.
-    db $a8
+    db LOW(JoeDarkFall)
 
 jr_008_4fde:
-    db $4f
+    db HIGH(JoeDarkFall)
     ; Move using two room arguments if the selected state permits.
-    db $20, $3b, $3c
+    db $20, RoomJoeBar, RoomJoeCellar
 
 jr_008_4fe2:
     ; Test room argument and branch on equality.
-    db $25, $3b
+    db $25, RoomJoeBar
     dw JoeBarArrival
 
 ; Show the storage cellar arrival description.
@@ -4374,7 +4376,7 @@ LookJoeStairs:
 
 C2Sc5_AC:
     ; Test room argument and branch on inequality.
-    db $55, $3b
+    db $55, RoomJoeBar
     dw JoeStairsAlt
     ; Show message 1.
     db $01, $ed
@@ -4390,9 +4392,9 @@ jr_008_4ff0:
     db $54, C2LampFlag
     dw JoeDarkFall
     ; Move using two room arguments if the selected state permits.
-    db $20, $3b, $3f
+    db $20, RoomJoeBar, RoomJoeUpstairsHallway
     ; Test room argument and branch on equality.
-    db $25, $3b
+    db $25, RoomJoeBar
     dw JoeBarArrival
     ; Show message 2.
     db $02, $13
@@ -4404,7 +4406,7 @@ LookJoeShelfWay:
 
 C2Sc5_AE:
     ; Test room argument and branch on equality.
-    db $25, $3c
+    db $25, RoomJoeCellar
     dw JoeShelfWayReply
     ; Test attribute bit 2 and branch when set.
     db $1d
@@ -4431,7 +4433,7 @@ C2Sc5_AF:
     db $25
 
 jr_008_500c:
-    db $3d
+    db RoomJoeChamber
     dw OpenJoeShelfState
 
 ; Show the already-open reply using the original shelf name.
@@ -4478,7 +4480,7 @@ C2Sc5_B0:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $3d
+    db $25, RoomJoeChamber
     dw CloseJoeShelfInner
     ; Call script.
     db $05
@@ -4534,9 +4536,9 @@ C2Sc5_B1:
     db $54, C2LampFlag
     dw JoeDarkFall
     ; Move using two room arguments if the selected state permits.
-    db $20, $3c, $3d
+    db $20, RoomJoeCellar, RoomJoeChamber
     ; Test room argument and branch on equality.
-    db $25, $3c
+    db $25, RoomJoeCellar
     dw JoeCellarReply
 
 ; Describe the small foul-smelling chamber.
@@ -4556,9 +4558,9 @@ C2Sc5_B2:
     db $54, C2LampFlag
     dw JoeDarkFall
     ; Move using two room arguments if the selected state permits.
-    db $20, $3d, $3e
+    db $20, RoomJoeChamber, RoomJoeCasino
     ; Test room argument and branch on equality.
-    db $25, $3d
+    db $25, RoomJoeChamber
     dw JoeChamberReply
     ; Show message 2.
     db $02, $05
@@ -4633,10 +4635,10 @@ C2Sc5_B6:
     ; Jump to script in bank $07.
     db $7d
     ; Target DrawPoliceGlass; retain the interior label.
-    db $a4
+    db LOW(DrawPoliceGlass)
 
 jr_008_5083:
-    db $51
+    db HIGH(DrawPoliceGlass)
     db $07
 
 ; Require the open door before the original arrest and fatal Stogie sequence.
@@ -4687,7 +4689,7 @@ C2Sc5_B8:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $41
+    db $55, RoomSugarApartmentFront
     dw LookCabDoor
     ; Test object flag and branch when set.
     db $08, C2SugLockGone
@@ -4732,7 +4734,7 @@ C2Sc5_B9:
     db $25
 
 jr_008_50c0:
-    db $41
+    db RoomSugarApartmentFront
     dw FinishSugarOpen
     ; Jump to script.
     db $07
@@ -4762,7 +4764,7 @@ C2Sc5_BA:
     ; Hide object.
     db $2a, $46
     ; Test room argument and branch on equality.
-    db $25, $41
+    db $25, RoomSugarApartmentFront
     dw FinishSugarClose
     ; Jump to script.
     db $07
@@ -4787,10 +4789,10 @@ UseSugarDoor:
 
 C2Sc5_BB:
     ; Test room argument and branch on equality.
-    db $25, $41
+    db $25, RoomSugarApartmentFront
     dw EnterSugarRoom
     ; Move using two room arguments if the selected state permits.
-    db $20, $41, $42
+    db $20, RoomSugarApartmentFront, RoomSugarApartment
     ; Jump to script.
     db $07
     dw CottageAgain
@@ -4802,7 +4804,7 @@ C2Loc5_80:
     ; Clear state bit.
     db $10, $ac
     ; Move using two room arguments if the selected state permits.
-    db $20, $41, $42
+    db $20, RoomSugarApartmentFront, RoomSugarApartment
     ; Test object flag and branch when set.
     db $08, C2SugarSeen
     dw SugarRoomAgain
@@ -4846,7 +4848,7 @@ C2Sc5_BD:
     ; Play audio.
     db $3e, $13
     ; Test room argument and branch on inequality.
-    db $55, $35
+    db $55, RoomJoeFront
     dw BreakJoeGlassAlt
     ; Set state and refresh without cue.
     db $22, C2JoeFrontGlass
@@ -4875,7 +4877,7 @@ C2Sc5_BE:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $43
+    db $25, RoomMorgueFront
     dw LookEntrance
     ; Jump to script.
     db $07
@@ -4889,7 +4891,7 @@ C2Sc5_BF:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $43
+    db $25, RoomMorgueFront
 
 jr_008_5125:
     dw OpenDoorState
@@ -4907,7 +4909,7 @@ C2Sc5_C0:
 
 jr_008_512d:
     ; Test room argument and branch on equality.
-    db $25, $43
+    db $25, RoomMorgueFront
     dw CloseDoorState
     ; Jump to script.
     db $07
@@ -4928,7 +4930,7 @@ C2Sc5_C1:
     ; Play audio.
     db $3e, $13
     ; Test room argument and branch on equality.
-    db $25, $44
+    db $25, RoomMorgueReception
     dw BreakMorgueInside
     ; Set state and refresh without cue.
     db $22, C2MorgueGlass
@@ -4951,9 +4953,9 @@ UseMorgueEntry:
 
 C2Sc5_C2:
     ; Move using two room arguments if the selected state permits.
-    db $20, $43, $44
+    db $20, RoomMorgueFront, RoomMorgueReception
     ; Test room argument and branch on equality.
-    db $25, $43
+    db $25, RoomMorgueFront
     dw MorgueFront
 
 ; Show the exchanged belongings box unless it has already been taken.
@@ -5015,10 +5017,10 @@ C2Loc5_B2:
     ; Jump to script.
     db $07
     ; Target PoliceArrest; retain the interior label.
-    db $7b
+    db LOW(PoliceArrest)
 
 jr_008_5176:
-    db $49
+    db HIGH(PoliceArrest)
 
 ; Choose the morgue door view from its attribute and the current room.
 LookMorgueDoor:
@@ -5028,7 +5030,7 @@ C2Sc5_C3:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $44
+    db $25, RoomMorgueReception
     dw LookColdDoor
     ; Show message 2.
     db $02, $a5
@@ -5062,7 +5064,7 @@ C2Sc5_C4:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on equality.
-    db $25, $45
+    db $25, RoomMorgueColdRoom
     dw OpenDoorAttr
 
 jr_008_5191:
@@ -5086,7 +5088,7 @@ C2Sc5_C5:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on equality.
-    db $25, $45
+    db $25, RoomMorgueColdRoom
     dw CloseDoorAttr
     ; Test state bit.
     db $0e, C2GateOpen
@@ -5105,7 +5107,7 @@ UseMorgueDoor:
 
 C2Sc5_C6:
     ; Test room argument and branch on equality.
-    db $25, $45
+    db $25, RoomMorgueColdRoom
     dw ExitMorgueBack
     ; Test state bit.
     db $0e, C2GateOpen
@@ -5124,7 +5126,7 @@ ExitMorgueBack:
 
 C2Loc5_89:
     ; Move using two room arguments if the selected state permits.
-    db $20, $44, $45
+    db $20, RoomMorgueReception, RoomMorgueColdRoom
     ; Jump to script.
     db $07
     dw RestoreMorgueBox
@@ -5137,7 +5139,7 @@ C2Loc5_8A:
     db $54, C2Uniform
     dw MorgueGateStop
     ; Move using two room arguments if the selected state permits.
-    db $20, $44, $45
+    db $20, RoomMorgueReception, RoomMorgueColdRoom
     ; Show message 2.
     db $02, $99
     ; Set object flag.
@@ -5539,7 +5541,7 @@ UseTracksLink:
 
 C2Sc5_D3:
     ; Move using two room arguments if the selected state permits.
-    db $20, $62, $63
+    db $20, RoomTracksA, RoomTracksB
     ; Show message 3.
     db $2c, $49
     ; End script.
@@ -5550,21 +5552,21 @@ UseHotelDesert:
 
 C2Sc5_D4:
     ; Move using two room arguments if the selected state permits.
-    db $20, $11, $7d
+    db $20, RoomHotelFront, $7d
 
 ; Select the hotel, sand, or track description after this boundary move.
 HotelEdgeReply:
 
 C2Loc5_9A:
     ; Test room argument and branch on equality.
-    db $25, $11
+    db $25, RoomHotelFront
     dw C2HotelFront
     ; Hold text.
     db $2e
     ; Show message 0.
     db $00, $d0
     ; Test room argument and branch on equality.
-    db $25, $63
+    db $25, RoomTracksB
     dw C2TracksB
     ; End script.
     db $ff
@@ -5583,7 +5585,7 @@ UseHotelTracks:
 
 C2Sc5_D5:
     ; Move using two room arguments if the selected state permits.
-    db $20, $11, $63
+    db $20, RoomHotelFront, RoomTracksB
     ; Jump to script.
     db $07
     dw HotelEdgeReply
@@ -5604,21 +5606,21 @@ UseOutskirtsTracks:
 
 C2Sc5_D6:
     ; Move using two room arguments if the selected state permits.
-    db $20, $13, $62
+    db $20, RoomOutskirts, RoomTracksA
 
 ; Select the outskirts, sand, or track description after this boundary move.
 OutskirtsEdgeReply:
 
 C2Loc5_9D:
     ; Test room argument and branch on equality.
-    db $25, $13
+    db $25, RoomOutskirts
     dw C2Outskirts
     ; Hold text.
     db $2e
     ; Show message 0.
     db $00, $d4
     ; Test room argument and branch on equality.
-    db $25, $62
+    db $25, RoomTracksA
     dw C2TracksA
     ; End script.
     db $ff
@@ -5648,7 +5650,7 @@ UseOutskirtsSand1:
 
 C2Sc5_D7:
     ; Move using two room arguments if the selected state permits.
-    db $20, $13, $76
+    db $20, RoomOutskirts, $76
     ; Jump to script.
     db $07
     dw OutskirtsEdgeReply
@@ -5658,30 +5660,30 @@ UseOutskirtsSand2:
 
 C2Sc5_D8:
     ; Move using two room arguments if the selected state permits.
-    db $20, $13, $7a
+    db $20, RoomOutskirts, $7a
     ; Jump to script.
     db $07
 
 jr_008_530d:
     ; Target OutskirtsEdgeReply; retain the interior label.
-    db $ef
+    db LOW(OutskirtsEdgeReply)
 
 jr_008_530e:
-    db $52
+    db HIGH(OutskirtsEdgeReply)
 
 ; Move between the station front and desert room 77.
 UseStationSand1:
 
 C2Sc5_D9:
     ; Move using two room arguments if the selected state permits.
-    db $20, $14, $77
+    db $20, RoomStation, $77
 
 ; Select the station front or sand description after this boundary move.
 StationEdgeReply:
 
 C2Loc5_A0:
     ; Test room argument and branch on equality.
-    db $25, $14
+    db $25, RoomStation
     dw C2StationFront
     ; Show message 0.
     db $00, $d0
@@ -5695,21 +5697,21 @@ UseStationSand2:
 
 C2Sc5_DA:
     ; Move using two room arguments if the selected state permits.
-    db $20, $14, $7e
+    db $20, RoomStation, $7e
     ; Jump to script.
     db $07
     ; Target StationEdgeReply; retain the interior label.
-    db $12
+    db LOW(StationEdgeReply)
 
 jr_008_531e:
-    db $53
+    db HIGH(StationEdgeReply)
 
 ; Move between track area 62 and desert room 70 without adding a description.
 UseTracksASand1:
 
 C2Sc5_DB:
     ; Move using two room arguments if the selected state permits.
-    db $20, $62
+    db $20, RoomTracksA
 
 jr_008_5321:
     db $70
@@ -5721,7 +5723,7 @@ UseTracksASand2:
 
 C2Sc5_DC:
     ; Move using two room arguments if the selected state permits.
-    db $20, $62
+    db $20, RoomTracksA
 
 jr_008_5325:
     db $7b
@@ -5733,7 +5735,7 @@ UseTracksBSand1:
 
 C2Sc5_DD:
     ; Move using two room arguments if the selected state permits.
-    db $20, $63, $71
+    db $20, RoomTracksB, $71
     ; End script.
     db $ff
 
@@ -5743,7 +5745,7 @@ UseTracksBSand2:
 C2Sc5_DE:
 jr_008_532b:
     ; Move using two room arguments if the selected state permits.
-    db $20, $63
+    db $20, RoomTracksB
 
 jr_008_532d:
     db $7c
@@ -5751,6 +5753,7 @@ jr_008_532d:
     db $ff
 
 ; Move through the desert grid and dispatch the five special destination descriptions.
+; Destination descriptions run only if the native room-entry ending check returns.
 WalkDesert:
 
 C2Sc5_DF:

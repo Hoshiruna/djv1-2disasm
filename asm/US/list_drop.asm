@@ -7,6 +7,8 @@ Call_000_32f8:
     ld a, $54
     ld [wDropEnd], a
 
+; Save the scratch index and resolve the row before shifting list entries.
+DropListStart:
 jr_000_32fd:
     push af
     ldh a, [hChangePos]
@@ -23,17 +25,21 @@ jr_000_32fd:
     ld hl, wListBase
     add hl, bc
 
+; Move each following byte left until the selected deletion limit.
+DropListShiftNext:
 jr_000_3313:
     ld a, [wDropEnd]
     cp c
-    jr z, jr_000_331f
+    jr z, DropListFinish
 
     ld a, [hl-]
     ld [hl+], a
     inc hl
     inc c
-    jr jr_000_3313
+    jr DropListShiftNext
 
+; Write the final $ff byte and restore the saved scratch index.
+DropListFinish:
 jr_000_331f:
     ld a, $ff
     dec hl
@@ -54,4 +60,4 @@ DropListHead:
 Call_000_332d:
     ld a, $0e
     ld [wDropEnd], a
-    jr jr_000_32fd
+    jr DropListStart

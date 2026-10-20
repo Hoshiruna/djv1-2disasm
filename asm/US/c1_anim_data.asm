@@ -109,9 +109,9 @@ jr_002_4947:
     dw C1Anim00
     dw C1Anim00
     ; Pointer to C1Anim00; split bytes retain the interior label.
-    db $dd
+    db LOW(C1Anim00)
 jr_002_49ac:
-    db $49
+    db HIGH(C1Anim00)
     dw C1Anim6A
     dw C1Anim00
     dw C1Anim00

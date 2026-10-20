@@ -25,10 +25,12 @@ TestProp1Arg:
     add hl, bc
     ld a, [hl]
     and $04
-    jr z, jr_000_3422
+    jr z, TestProp1RestoreIndex
 
     call SetResult
 
+; Restore the saved HRAM scratch index after testing property-one bit two.
+TestProp1RestoreIndex:
 jr_000_3422:
     pop hl
     push af

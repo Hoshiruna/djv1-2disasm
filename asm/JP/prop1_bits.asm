@@ -39,15 +39,17 @@ Call_000_357b:
     ld [hl], a
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_35bc
+    jr nz, SetProp1RestoreIndex
 
     ld a, [wArg0]
     cp $06
-    jr nz, jr_000_35bc
+    jr nz, SetProp1RestoreIndex
 
     ld a, $18
     call SetObjPresent
 
+; Restore the saved index after the property-one write and optional presence hook.
+SetProp1RestoreIndex:
 jr_000_35bc:
     pop hl
     push af

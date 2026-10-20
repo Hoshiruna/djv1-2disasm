@@ -610,9 +610,9 @@ C2Act3_50:
     dw LookBlackBook
     dw OpenBlackBook
     ; Pointer to $5981; split bytes retain the interior label.
-    db $81
+    db LOW(UseC2Item)
 jr_007_590e:
-    db $59
+    db HIGH(UseC2Item)
     dw PutC2Item
     dw TakeC2Item
     dw CloseBlackBook
@@ -626,9 +626,9 @@ C2Act3_51:
 C2Act3_52:
     dw LookTag2
     ; Pointer to $5981; split bytes retain the interior label.
-    db $81
+    db LOW(UseC2Item)
 jr_007_5920:
-    db $59
+    db HIGH(UseC2Item)
     dw PutC2Item
     dw TakeTag2
 

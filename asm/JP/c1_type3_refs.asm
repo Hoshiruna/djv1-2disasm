@@ -11,9 +11,9 @@ C1Type3Refs:
     dw C1Act3_07
     dw C1Act3_08
     ; Pointer to C1Act3_09; split bytes retain the interior label.
-    db $64
+    db LOW(C1Act3_09)
 jr_006_4d75:
-    db $4e
+    db HIGH(C1Act3_09)
     dw C1Act3_0A
     dw C1Act3_0B
     dw C1Act3_0C
@@ -130,9 +130,9 @@ C1Act3_04:
 
 C1Act3_05:
     ; Pointer to $5d8b; split bytes retain the interior label.
-    db $8b
+    db LOW(LookC1Key1)
 Call_006_4e45:
-    db $5d
+    db HIGH(LookC1Key1)
     dw TakeC1Key1
     dw PlaceC1Item
     dw UseC1Key1
@@ -501,9 +501,9 @@ C1Act3_41:
 
 C1Act3_42:
     ; Pointer to $5f4a; split bytes retain the interior label.
-    db $4a
+    db LOW(LookC1Bullet1)
 jr_006_502d:
-    db $5f
+    db HIGH(LookC1Bullet1)
     dw BuyC1Bullet1
     dw PlaceC1Bullet1
     dw C1UseNeedsTaken

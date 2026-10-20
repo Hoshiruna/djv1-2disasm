@@ -149,12 +149,14 @@ ApplyScenePal:
     ld hl, wBgPal
     ld d, $80
 
+; Copy the next staged background or object palette byte into the active sets.
+ApplyScenePalNextByte:
 jr_001_4920:
     ld a, [bc]
     inc bc
     ld [hl+], a
     dec d
-    jr nz, jr_001_4920
+    jr nz, ApplyScenePalNextByte
 
     call WaitVideo
     call RequestPals

@@ -8,6 +8,8 @@ Call_001_6e22:
     ld [wClearCellX], a
     ld [wClearCellY], a
 
+; Queue the next regional blank glyph at the current text-cell coordinates.
+ClearUiTextNextCell:
 jr_001_6e2a:
     ld a, [wClearCellY]
     ld l, a
@@ -31,7 +33,7 @@ jr_001_6e2a:
     ld a, [wClearCellX]
     inc a
     cp $13
-    jr nz, jr_001_6e5e
+    jr nz, ClearUiTextStoreColumn
 
     ld a, [wClearCellY]
     inc a
@@ -41,9 +43,11 @@ jr_001_6e2a:
     ld [wClearCellY], a
     xor a
 
+; Store the advanced or reset column before clearing the next UI cell.
+ClearUiTextStoreColumn:
 jr_001_6e5e:
     ld [wClearCellX], a
-    jr jr_001_6e2a
+    jr ClearUiTextNextCell
 
 ; Width, height, blank tile(s).
 UiBlankGlyph:

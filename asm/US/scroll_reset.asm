@@ -27,4 +27,4 @@ jr_001_6173:
     ld [wScrollY], a
     call DrawRoomObjs
     call SubmitOam
-    jr jr_001_6173
+    jr DrainScroll

@@ -88,6 +88,7 @@ Jump_000_06c2:
     jr LzWrapReference
 
 ; Compare the low reference offset with the current output offset.
+; Equality repeats this comparison without advancing the source or output.
 LzCheckReferenceLow:
 jr_000_06da:
     ld a, e

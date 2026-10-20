@@ -25,7 +25,7 @@ Call_000_1f40:
     ld bc, wProp4
     add hl, bc
     ld a, [hl]
-    jr jr_000_1f58
+    jr TestAttrBit0Value
 
 ; Clear result bit 0, then test bit 0 of the selected operation attribute.
 TestAttr0:
@@ -40,6 +40,8 @@ Call_000_1f4a:
     add hl, bc
     ld a, [hl]
 
+; Set the result when A bit zero is set; otherwise retain the current result.
+TestAttrBit0Value:
 jr_000_1f58:
     bit 0, a
     ret z
@@ -69,16 +71,18 @@ ClearAttr0:
 Call_000_1f6d:
     ldh a, [hItemSlot]
     cp $00
-    jr z, jr_000_1f81
+    jr z, ClearAttr0Primary
 
     ld a, [wItemType+16]
     cp $03
-    jr nz, jr_000_1f81
+    jr nz, ClearAttr0Primary
 
     ld a, [wItemId+16]
     cp $01
-    jr z, jr_000_1f8a
+    jr z, ClearAttr0Selected
 
+; Clear bit zero of the primary attribute outside the alternate-item exception.
+ClearAttr0Primary:
 jr_000_1f81:
     ld a, [wOpAttr]
     and $fe
@@ -86,6 +90,8 @@ jr_000_1f81:
     ret
 
 
+; Clear bit zero in the selected slot for alternate type three and ID one.
+ClearAttr0Selected:
 jr_000_1f8a:
     ld bc, wOpAttr
     ldh a, [hItemSlot]

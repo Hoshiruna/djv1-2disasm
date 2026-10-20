@@ -20,7 +20,8 @@ Call_000_1cb6:
     ldh [hItemSlot+1], a
     ret
 
-; Read a target, save the next script pointer on the HRAM stack, clear the call-bank byte, then branch.
+; Save the pointer after the two target bytes: push low, then high on the shared HRAM stack.
+; Set wCallBank to zero so ReturnScript restores only the pointer.
 CallScript:
 
 
@@ -33,7 +34,8 @@ CallScript:
     ld [wCallBank], a
     jp BranchScript
 
-; Read target and bank, save the next pointer, store the call bank, push the ROM bank, then branch.
+; Save the pointer after all three operands: push low, high, then the old ROM bank.
+; wCallBank holds the target bank and is not itself saved on the HRAM stack.
 CallBankScript:
 
 
@@ -49,7 +51,8 @@ Jump_000_1ce3:
     call PushRomBank
     jp BranchScript
 
-; Pop the ROM bank when the call-bank byte is nonzero, then restore the saved script pointer.
+; A nonzero wCallBank pops the saved ROM bank before the return pointer.
+; This path neither clears wCallBank nor restores an earlier value of it.
 ReturnScript:
 
 
@@ -79,7 +82,8 @@ JumpScript:
     call ReadArgs2
     jp BranchScript
 
-; Read target and bank, replace the active ROM bank directly, then replace the script pointer.
+; Replace the ROM bank and script pointer without pushing either.
+; Keep the outer action bank save and the existing wCallBank value.
 JumpBankScript:
 
 

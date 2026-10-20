@@ -67,7 +67,7 @@ Jump_000_2ff5:
     call PopRomBank
     ret
 
-; In case one, reset scrolling, read an index, and run the end effect; in case two, restore the saved scene effect.
+; Case I reads one end-effect index; Case II reads no operand and restores the saved effect.
 FinishEffect:
 
 

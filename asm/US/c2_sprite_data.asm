@@ -51,9 +51,9 @@ Case2SpriteDefinitions:
     dw C2Sprite2D
     dw C2Sprite2E
     ; Pointer to C2Sprite2F; split bytes retain the interior label.
-    db $03
+    db LOW(C2Sprite2F)
 jr_002_4bd9:
-    db $52
+    db HIGH(C2Sprite2F)
     dw C2Sprite30
     dw C2Sprite31
     dw C2Sprite32

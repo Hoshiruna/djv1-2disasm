@@ -49,6 +49,7 @@ SaveSnapshot:
     jr SnapshotWriteReturn
 
 ; In Case II, skip snapshot writing for room IDs at least $62.
+; Read the current room here, rather than a pending movement destination.
 SnapshotCheckC2Room:
 
 jr_001_6af1:
@@ -96,6 +97,7 @@ jr_001_6b23:
     ret
 
 ; Restore the SRAM snapshot, compare both sum bytes, and fall back to LoadSave on mismatch.
+; A direct match leaves RAM enabled; the LoadSave fallback disables it.
 LoadSnapshot:
 
 

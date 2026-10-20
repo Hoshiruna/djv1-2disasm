@@ -8,10 +8,12 @@ Call_000_0e52:
     ld d, $38
     xor a
 
+; Clear the next byte of the first seven background palettes.
+ClearScenePalNextByte:
 jr_000_0e58:
     ld [hl+], a
     dec d
-    jr nz, jr_000_0e58
+    jr nz, ClearScenePalNextByte
 
     call RequestPals
     call WaitFrame

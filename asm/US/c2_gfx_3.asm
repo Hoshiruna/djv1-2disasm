@@ -21,7 +21,7 @@ Jump_02d_4000:
     dw GfxC2_G3C ; $0c
     dw GfxC2_G3D ; $0d
     dw GfxC2_G3E ; $0e
-    dw $7c34 ; $0f
+    dw GfxC2_G3FEmpty ; $0f
 
 GfxC2_G30:
     INCBIN "../../res/scene/case2/common/US/g30.bin", $0, $1
@@ -853,6 +853,8 @@ jr_02d_7bbc:
     INCBIN "../../res/scene/case2/common/US/g3e.bin", $4b3, $67
 jr_02d_7c23:
     INCBIN "../../res/scene/case2/common/US/g3e.bin", $51a, $11
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G3FEmpty:
     db $ff, $00
     nop
     nop

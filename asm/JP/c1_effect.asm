@@ -1,5 +1,6 @@
 
 ; Preserve AF and both scratch index low bytes, hide text, run the case-one effect, restore its view, and replay the saved audio byte.
+; Submit the saved state byte unchanged, including its base-reload bit.
 PlayC1Effect:
     push af
     ldh a, [hItemSlot]

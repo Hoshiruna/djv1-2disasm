@@ -8,24 +8,26 @@ SECTION "ROM Bank $033", ROMX[$4000], BANK[$33]
 ; Bank-local resource pointers, indexed by the low nibble of the resource ID.
 ResourcePointers_033:
 C1Gfx0Refs:
-    dw Resource_JP_033_4020 ; $00
-    dw Resource_JP_033_4547 ; $01
+    dw C1FontGfx ; $00
+    dw C1HudGfx ; $01
     dw GfxC1_G02 ; $02
-    dw $4f85 ; $03
+    dw GfxC1_G03Empty ; $03
     dw GfxC1_G04 ; $04
-    dw $54e6 ; $05
+    dw GfxC1_G05Empty ; $05
     dw GfxC1_G06 ; $06
-    dw $5a1f ; $07
+    dw GfxC1_G07Empty ; $07
     dw GfxC1_G08 ; $08
-    dw $5ef7 ; $09
+    dw GfxC1_G09Empty ; $09
     dw GfxC1_G0A ; $0a
-    dw $641b ; $0b
+    dw GfxC1_G0BEmpty ; $0b
     dw GfxC1_G0C ; $0c
-    dw $690a ; $0d
+    dw GfxC1_G0DEmpty ; $0d
     dw GfxC1_G0E ; $0e
-    dw $6f2e ; $0f
+    dw GfxC1_G0FEmpty ; $0f
 
 ; Compressed font data: 128 tiles, decoded to 2048 bytes.
+; Case I font graphics selected by font/HUD table entry zero.
+C1FontGfx:
 Resource_JP_033_4020:
     INCBIN "../../res/ui/font/JP/case1_font.bin", $0, $22
 jr_033_4042:
@@ -54,6 +56,8 @@ jr_033_452a:
     INCBIN "../../res/ui/font/JP/case1_font.bin", $50a, $1d
 
 ; Compressed HUD graphics: 112 tiles, decoded to 1792 bytes.
+; Case I HUD graphics selected by font/HUD table entry one.
+C1HudGfx:
 Resource_JP_033_4547:
     INCBIN "../../res/ui/hud/JP/hud_tiles.bin", $0, $1e
 jr_033_4565:
@@ -173,7 +177,9 @@ jr_033_4e15:
     INCBIN "../../res/scene/case1/common/JP/g02.bin", $3f4, $158
 jr_033_4f6d:
     INCBIN "../../res/scene/case1/common/JP/g02.bin", $54c, $18
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G03Empty:
+    db $ff
 
 GfxC1_G04:
     INCBIN "../../res/scene/case1/common/JP/g04.bin", $0, $43
@@ -247,7 +253,9 @@ jr_033_549d:
     INCBIN "../../res/scene/case1/common/JP/g04.bin", $517, $20
 jr_033_54bd:
     INCBIN "../../res/scene/case1/common/JP/g04.bin", $537, $29
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G05Empty:
+    db $ff
 
 GfxC1_G06:
     INCBIN "../../res/scene/case1/common/JP/g06.bin", $0, $43
@@ -321,7 +329,9 @@ jr_033_5a0b:
     INCBIN "../../res/scene/case1/common/JP/g06.bin", $524, $14
 
 jr_033_5a1f:
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G07Empty:
+    db $ff
 
 GfxC1_G08:
     INCBIN "../../res/scene/case1/common/JP/g08.bin", $0, $8
@@ -375,7 +385,9 @@ jr_033_5eda:
     INCBIN "../../res/scene/case1/common/JP/g08.bin", $4ba, $e
 jr_033_5ee8:
     INCBIN "../../res/scene/case1/common/JP/g08.bin", $4c8, $f
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G09Empty:
+    db $ff
 
 GfxC1_G0A:
     INCBIN "../../res/scene/case1/common/JP/g0a.bin", $0, $43
@@ -453,7 +465,9 @@ jr_033_6395:
     INCBIN "../../res/scene/case1/common/JP/g0a.bin", $49d, $9
 jr_033_639e:
     INCBIN "../../res/scene/case1/common/JP/g0a.bin", $4a6, $7d
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G0BEmpty:
+    db $ff
 
 GfxC1_G0C:
     INCBIN "../../res/scene/case1/common/JP/g0c.bin", $0, $33
@@ -527,7 +541,9 @@ jr_033_6880:
     INCBIN "../../res/scene/case1/common/JP/g0c.bin", $464, $6c
 jr_033_68ec:
     INCBIN "../../res/scene/case1/common/JP/g0c.bin", $4d0, $1e
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G0DEmpty:
+    db $ff
 
 GfxC1_G0E:
     INCBIN "../../res/scene/case1/common/JP/g0e.bin", $0, $49
@@ -585,7 +601,9 @@ Call_033_6f00:
     INCBIN "../../res/scene/case1/common/JP/g0e.bin", $5f5, $20
 jr_033_6f20:
     INCBIN "../../res/scene/case1/common/JP/g0e.bin", $615, $e
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G0FEmpty:
+    db $ff
     nop
     nop
     nop

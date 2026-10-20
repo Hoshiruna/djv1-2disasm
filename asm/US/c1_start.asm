@@ -1,5 +1,6 @@
 
 ; Reload the HUD and current Case I view; run the original opening path when required.
+; Resumed setup also invalidates graphics caches and re-applies initial state bits.
 InitC1View:
     ld a, $ff
     ldh [hBgLoaded], a

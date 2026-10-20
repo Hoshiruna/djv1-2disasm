@@ -1,5 +1,6 @@
 ; Advance and draw the case-specific wait animation at X=$90, Y=$80.
 ; Transition calls draw the new pair with tick zero; initial calls increment it first.
+; The stored wait sequence returns to zero counters after sum(duration + 1) calls.
 StepWaitAnim:
 
     ld a, $90
@@ -134,6 +135,7 @@ jr_002_605e:
 
 ; A = Case II sequence ID; advance one tick and loop at the next $ff duration.
 ; Caller supplies X/Y and resets both counters when starting a different sequence.
+; Each transition draws at tick zero; the actual FF-ended inputs cycle in sum(duration + 1) calls.
 StepC2Anim:
 
     ld l, a

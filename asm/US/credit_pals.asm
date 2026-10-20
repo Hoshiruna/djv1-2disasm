@@ -5,6 +5,7 @@ CreditPal00:
     db $24, $00, $79, $2a, $92, $11, $92, $11, $24, $00, $79, $2a, $92, $11, $ed, $00
     db $3f, $02, $1f, $7c, $1f, $7c, $00, $00, $80, $7f, $e0, $03, $1e, $00, $00, $00
 
+; Palette zero gives the retained tile $ff four distinct colors in CreditMap01.
 CreditPal01:
     db $24, $00, $ed, $00, $92, $11, $79, $2a, $24, $00, $ed, $00, $92, $11, $92, $11
     db $1e, $00, $1e, $00, $1e, $00, $1e, $00, $24, $00, $92, $11, $79, $2a, $ed, $00

@@ -128,7 +128,7 @@ CopyC1Item:
     ld [hl], a
     ret
 
-; Skip entries whose state bit is set; store the remaining item ID.
+; Skip entries whose first item-bitmap bit is set; store the remaining item ID.
 CheckC1BitItem:
 
 
@@ -186,7 +186,7 @@ jr_001_6d5f:
     ld [hl], a
     ret
 
-; Apply the scene exceptions and object flag before storing the item ID.
+; Apply scene exceptions and property-four bit zero before storing the item ID.
 CheckC1ObjItem:
 
 

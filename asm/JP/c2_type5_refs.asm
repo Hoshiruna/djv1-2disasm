@@ -40,13 +40,13 @@ C2Type5Refs:
     dw C2Act5_24
     dw C2Act5_25
     ; Pointer to C2Act5_26; split bytes retain the interior label.
-    db $46
+    db LOW(C2Act5_26)
 jr_008_404d:
-    db $42
+    db HIGH(C2Act5_26)
     ; Pointer to C2Act5_27; split bytes retain the interior label.
-    db $4e
+    db LOW(C2Act5_27)
 jr_008_404f:
-    db $42
+    db HIGH(C2Act5_27)
     dw C2Act5_28
     dw C2Act5_29
     dw C2Act5_2A
@@ -105,25 +105,25 @@ jr_008_404f:
     dw C2Act5_5F
     dw C2Act5_60
     ; Pointer to C2Act5_61; split bytes retain the interior label.
-    db $6e
+    db LOW(C2Act5_61)
 jr_008_40c3:
-    db $44
+    db HIGH(C2Act5_61)
     ; Pointer to C2Act5_62; split bytes retain the interior label.
-    db $76
+    db LOW(C2Act5_62)
 jr_008_40c5:
-    db $44
+    db HIGH(C2Act5_62)
     ; Pointer to C2Act5_63; split bytes retain the interior label.
-    db $7e
+    db LOW(C2Act5_63)
 jr_008_40c7:
-    db $44
+    db HIGH(C2Act5_63)
     ; Pointer to C2Act5_64; split bytes retain the interior label.
-    db $86
+    db LOW(C2Act5_64)
 jr_008_40c9:
-    db $44
+    db HIGH(C2Act5_64)
     ; Pointer to C2Act5_65; split bytes retain the interior label.
-    db $8e
+    db LOW(C2Act5_65)
 jr_008_40cb:
-    db $44
+    db HIGH(C2Act5_65)
     dw C2Act5_66
     dw C2Act5_67
     dw C2Act5_68
@@ -341,9 +341,9 @@ C2Act5_1D:
     dw PuzzledSceneReply
     dw PuzzledSceneReply
     ; Pointer to $49d3; split bytes retain the interior label.
-    db $d3
+    db LOW(UsePlatform6Way)
 jr_008_4205:
-    db $49
+    db HIGH(UsePlatform6Way)
 
 C2Act5_1E:
     dw LookPlatform7Way
@@ -620,9 +620,9 @@ C2Act5_48:
 
 C2Act5_49:
     ; Pointer to $4d8a; split bytes retain the interior label.
-    db $8a
+    db LOW(LookCabCottage)
 jr_008_437d:
-    db $4d
+    db HIGH(LookCabCottage)
     dw DoorIsOpen
     dw DoorNoEffect
     dw SceneDropRefusal
@@ -893,18 +893,18 @@ C2Act5_6F:
 C2Act5_70:
     dw LookDesert
     ; Pointer to $5360; split bytes retain the interior label.
-    db $60
+    db LOW(PuzzledSceneReply)
 jr_008_44fd:
-    db $53
+    db HIGH(PuzzledSceneReply)
     dw PuzzledSceneReply
     dw UseTracksASand2
 
 C2Act5_71:
     dw LookDesert
     ; Pointer to $5360; split bytes retain the interior label.
-    db $60
+    db LOW(PuzzledSceneReply)
 jr_008_4505:
-    db $53
+    db HIGH(PuzzledSceneReply)
     dw PuzzledSceneReply
     dw UseTracksBSand1
 

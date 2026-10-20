@@ -17,6 +17,7 @@ C1ListTexts:
     dw C1Lbl0d
     dw C1Lbl0e
     dw C1Lbl0f
+; All Case II labels use END; their mode-two reader returns in mode one.
 C2ListTexts:
     dw C2Lbl00
     dw C2Lbl01

@@ -20,7 +20,8 @@ Jump_000_0775:
     ld [wAudioBank], a
     ret
 
-; A = bank; save the previous ROM bank on the bank stack.
+; A = bank; save the previous ROM bank on the shared HRAM byte stack.
+; Script calls also store return-pointer bytes on this stack.
 PushRomBank:
 Call_000_0781:
     push af

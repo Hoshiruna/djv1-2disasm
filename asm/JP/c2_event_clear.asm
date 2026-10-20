@@ -1,5 +1,5 @@
 
-; In case two, clear text hold and state bit two, then process each set bit of the saved event bitmap.
+; In case two, clear text hold and state bit two, then process each set bit of the live event latch.
 ClearC2Events:
 
 
@@ -16,7 +16,7 @@ Call_002_7892:
     ld a, [wC2EventBits]
     ld c, $08
 
-; Check the next saved Case II event bit.
+; Visit the next originally latched bit; restore shifted A after its cleanup call.
 C2EventScanNextBit:
 jr_002_78ab:
     srl a
@@ -70,6 +70,7 @@ Call_002_78d0:
     ret
 
 ; Clear event bit seven and object flags $4e/$a8, then set room $3a.
+; This special event path does not zero the flashlight-age counter.
 ClearC2Event7:
 
 

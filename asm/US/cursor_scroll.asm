@@ -15,10 +15,10 @@ ScrollCursor:
 Call_001_6133:
     ld a, [wInputSel]
     cp $15
-    jr c, jr_001_613d
+    jr c, ScrollSelection
 
     xor a
-    jr jr_001_6145
+    jr ScrollCursorCheckTarget
 
 ; A = selection; read its scroll target; ignore $ff, animate the two endpoints and assign other targets directly.
 ScrollSelection:
@@ -31,32 +31,38 @@ jr_001_613d:
     add hl, de
     ld a, [hl]
 
+; Ignore $ff, animate regional endpoints, and assign other scroll targets directly.
+ScrollCursorCheckTarget:
 jr_001_6145:
     cp $ff
     ret z
 
     cp $00
-    jr z, jr_001_6157
+    jr z, ScrollCursorAnimateEndpoint
 
     cp $58
-    jr z, jr_001_6157
+    jr z, ScrollCursorAnimateEndpoint
 
     ld [wSpriteScrollY], a
     ld [wScrollY], a
     ret
 
 
+; Compare the current sprite scroll with the zero or regional bottom endpoint.
+ScrollCursorAnimateEndpoint:
 jr_001_6157:
     ld b, a
     ld a, [wSpriteScrollY]
     cp b
     ret z
 
-    jr c, jr_001_6163
+    jr c, ScrollCursorIncrease
 
     sub $08
-    jr jr_001_6124
+    jr StepCursorScroll
 
+; Increase the scroll by eight before drawing and rechecking the selection.
+ScrollCursorIncrease:
 jr_001_6163:
     add $08
-    jr jr_001_6124
+    jr StepCursorScroll

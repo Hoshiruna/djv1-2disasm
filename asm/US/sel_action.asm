@@ -42,27 +42,31 @@ PickBitAction:
 
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_74a3
+    jr nz, DefaultActionReadState
 
     ld a, [wItemId]
     cp $23
-    jr c, jr_002_74a3
+    jr c, DefaultActionReadState
 
     cp $2c
-    jr c, jr_002_74b6
+    jr c, DefaultActionEight
 
+; Use the selected room-state bit outside the Case I forced-action range.
+DefaultActionReadState:
 jr_002_74a3:
     ld a, [wItemId]
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr nz, jr_002_74b6
+    jr nz, DefaultActionEight
 
     ld a, $01
     ld [wSelAction], a
     ret
 
 
+; Select action eight when the state bit or Case I ID exception requires it.
+DefaultActionEight:
 jr_002_74b6:
     ld a, $08
     ld [wSelAction], a

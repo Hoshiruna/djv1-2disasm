@@ -6,9 +6,14 @@
 SECTION "ROM Bank $018", ROMX[$4000], BANK[$18]
 
 ; Encoded text bank, with original label addresses retained.
+; Sixty-four message pointers for one text group.
+Text18Msgs0:
     INCBIN "../../res/text/JP/banks/18.bin", $0, $49
 jr_018_4049:
-    INCBIN "../../res/text/JP/banks/18.bin", $49, $15d
+    INCBIN "../../res/text/JP/banks/18.bin", $49, $37
+; Sixty-four message pointers for one text group.
+Text18Msgs1:
+    INCBIN "../../res/text/JP/banks/18.bin", $80, $126
 jr_018_41a6:
     INCBIN "../../res/text/JP/banks/18.bin", $1a6, $1bf
 jr_018_4365:
@@ -30,7 +35,10 @@ jr_018_4693:
 jr_018_470a:
     INCBIN "../../res/text/JP/banks/18.bin", $70a, $5f1
 jr_018_4cfb:
-    INCBIN "../../res/text/JP/banks/18.bin", $cfb, $8b
+    INCBIN "../../res/text/JP/banks/18.bin", $cfb, $8
+; Fixed-width object-name records.
+C2ObjectNames:
+    INCBIN "../../res/text/JP/banks/18.bin", $d03, $83
 jr_018_4d86:
     INCBIN "../../res/text/JP/banks/18.bin", $d86, $158
 jr_018_4ede:

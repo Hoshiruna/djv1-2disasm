@@ -12,11 +12,11 @@ Call_001_5b04:
     rst RST_00
 
 InputModes:
-    dw $5b80
+    dw InputMode0Return
     dw SelectInput
     dw CancelSelect
-    dw $5b7e
-    dw $5b7f
+    dw InputMode3Return
+    dw InputMode4Return
 
 ; Cancel the alternate slot when its offset is $10; otherwise reset selection and clear the previous cursor.
 CancelSelect:
@@ -108,12 +108,15 @@ jr_001_5b79:
 
 
 ; Input mode 3 returns here.
+InputMode3Return:
     ret
 
 
 ; Input mode 4 returns here.
+InputMode4Return:
     ret
 
 
 ; Input mode 0 returns here.
+InputMode0Return:
     ret

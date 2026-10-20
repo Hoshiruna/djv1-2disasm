@@ -1,7 +1,7 @@
 
 ; Describe a quarter.
 LookC1Coin:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc3_00:
     ; Show message 0.
@@ -18,10 +18,10 @@ C1Sc3_01:
     ; Branch if result bit 0 is set.
     db $04
     ; Target C1TakeRefuse; retain the interior label.
-    db $12
+    db LOW(C1TakeRefuse)
 
 jr_006_510a:
-    db $5d
+    db HIGH(C1TakeRefuse)
     ; Set text name 1.
     db $38, $07
     ; Show message 2.
@@ -71,10 +71,10 @@ C1Loc3_1D:
     dw C1CoinMuggerDeath
     db $00, $75
     ; Target C1CoinMuggerDeath; retain the interior label.
-    db $78
+    db LOW(C1CoinMuggerDeath)
 
 jr_006_5131:
-    db $51
+    db HIGH(C1CoinMuggerDeath)
     db $00, $76
     dw C1CoinMuggerDeath
     db $00, $77
@@ -97,10 +97,10 @@ jr_006_5131:
     dw C1ButlerOfferRefuse
     db $fe, $fe
     ; Target C1ItemNoHere; retain the interior label.
-    db $4f
+    db LOW(C1ItemNoHere)
 
 jr_006_515d:
-    db $59
+    db HIGH(C1ItemNoHere)
 
 ; Spend one coin and run slot machine effect $00 on success.
 C1CoinSlot1:
@@ -134,10 +134,10 @@ C1Loc3_20:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1CoinSlotEnd; retain the interior label.
-    db $6c
+    db LOW(C1CoinSlotEnd)
 
 jr_006_5169:
-    db $51
+    db HIGH(C1CoinSlotEnd)
     ; Show message 0.
     db $00, $61
 
@@ -166,10 +166,10 @@ C1Loc3_23:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1PayAfterTaking; retain the interior label.
-    db $6d
+    db LOW(C1PayAfterTaking)
 
 jr_006_5174:
-    db $51
+    db HIGH(C1PayAfterTaking)
     ; Show message 2.
     db $02, $c7
     ; End script.
@@ -3042,10 +3042,10 @@ C1Loc3_5F:
     ; Match alternate item against type, ID and script target rows.
     db $29, $03, $02
     ; Target C1LightCigarette; retain the interior label.
-    db $2c
+    db LOW(C1LightCigarette)
 
 jr_006_58b7:
-    db $59
+    db HIGH(C1LightCigarette)
     db $03, $03
     dw BurnC1Hanky
     db $03, $0e
@@ -3058,10 +3058,10 @@ jr_006_58b7:
     dw BurnC1Map
     db $03, $13
     ; Target BurnC1Snapshot; retain the interior label.
-    db $a4
+    db LOW(BurnC1Snapshot)
 
 jr_006_58cf:
-    db $59
+    db HIGH(BurnC1Snapshot)
     db $03, $16
     dw BurnC1Bookmark
     db $03, $17
@@ -3109,7 +3109,7 @@ jr_006_58cf:
     db $fe, $fe
     dw C1ItemNoHere
 
-; Require the cigarettes to be taken, light one, and check flag $25 for the follow-up.
+; Require taken cigarettes; choose the follow-up by the recovered-memory flag.
 C1LightCigarette:
 
 C1Loc3_60:
@@ -3132,7 +3132,7 @@ C1Loc3_60:
     ; End script.
     db $ff
 
-; Resume text after lighting a cigarette when flag $25 is set.
+; Resume text after lighting a cigarette once memory has been recovered.
 C1CigaretteResume:
 
 C1Loc3_61:
@@ -3937,10 +3937,10 @@ C1Loc3_84:
     dw C1KeySafeReply
     db $01, $06
     ; Target C1KeyNoFit; retain the interior label.
-    db $2f
+    db LOW(C1KeyNoFit)
 
 jr_006_5b61:
-    db $52
+    db HIGH(C1KeyNoFit)
     db $01, $08
     dw C1KeyNoFit
     db $05, $06

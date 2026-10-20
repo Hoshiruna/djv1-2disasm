@@ -1,7 +1,7 @@
 
 ; Describe the battered dresser.
 LookC2Dresser:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc1_00:
     ; Show message 0.
@@ -525,10 +525,10 @@ C2Sc1_1C:
     ; Test object flag and branch when clear.
     db $54, C2BribeKnown
     ; Target HintDeskLoot; retain the interior label.
-    db $f4
+    db LOW(HintDeskLoot)
 
 jr_007_54e3:
-    db $54
+    db HIGH(HintDeskLoot)
     ; Test object flag and branch when set.
     db $08, C2RingFlag
     dw EndC2Container

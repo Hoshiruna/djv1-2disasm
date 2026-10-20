@@ -88,7 +88,7 @@ jr_000_0fd9:
     ld a, [wTextCfg1+4]
     ld b, a
     ld a, [wTextCfg1+5]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Choose between the third and fourth records for text family one.
 ShowText1HighGroup:
@@ -101,7 +101,7 @@ jr_000_0fe6:
     ld a, [wTextCfg1+7]
     ld b, a
     ld a, [wTextCfg1+8]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Load the fourth pointer and bank record for text family one.
 ShowText1Record3:
@@ -114,7 +114,7 @@ jr_000_0ff7:
 Call_000_0fff:
 Jump_000_0fff:
     ld a, [wTextCfg1+11]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Save the message code and select a family 2 pointer/bank record with bits 7 and 6.
 ShowText2:
@@ -134,7 +134,7 @@ Jump_000_1010:
     ld a, [wTextCfg2+1]
     ld b, a
     ld a, [wTextCfg2+2]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Load the second pointer and bank record for text family two.
 ShowText2Record1:
@@ -148,7 +148,7 @@ Call_000_1021:
     ld a, [wTextCfg2+5]
 
 Jump_000_1025:
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Choose between the third and fourth records for text family two.
 ShowText2HighGroup:
@@ -164,7 +164,7 @@ jr_000_1027:
 Call_000_1033:
 Jump_000_1033:
     ld a, [wTextCfg2+8]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Load the fourth pointer and bank record for text family two.
 ShowText2Record3:
@@ -178,7 +178,7 @@ Call_000_1040:
     ld a, [wTextCfg2+11]
 
 Jump_000_1043:
-    jr jr_000_1062
+    jr ShowTextPtr
 
 ; Save the message code and select a family 3 pointer/bank record with bit 6.
 ShowText3:
@@ -197,7 +197,7 @@ Jump_000_104d:
     ld a, [wTextCfg3+1]
     ld b, a
     ld a, [wTextCfg3+2]
-    jr jr_000_1062
+    jr ShowTextPtr
 
 Call_000_1057:
 ; Load the second pointer and bank record for text family three.

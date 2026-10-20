@@ -113,9 +113,9 @@ C2PatchRefs:
     dw C2Patch6E
     dw C2Patch6F
     ; Pointer to C2Patch70; split bytes retain the interior label.
-    db $00
+    db LOW(C2Patch70)
 jr_029_40e1:
-    db $57
+    db HIGH(C2Patch70)
     dw C2Patch71
     dw C2Patch72
     dw C2Patch73
@@ -138,9 +138,9 @@ jr_029_40e1:
     dw C2Patch84
     dw C2Patch85
     ; Pointer to C2Patch86; split bytes retain the interior label.
-    db $42
+    db LOW(C2Patch86)
 jr_029_410d:
-    db $5b
+    db HIGH(C2Patch86)
     dw C2Patch87
     dw C2Patch88
     dw C2Patch89

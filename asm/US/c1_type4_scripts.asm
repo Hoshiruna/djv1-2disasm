@@ -1,7 +1,7 @@
 
 ; Describe the coat; flag $18 clear also shows the pocket hint.
 LookC1Coat:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc4_00:
     ; Hold text; consume the Case I extra argument.
@@ -2476,10 +2476,10 @@ C1Loc4_56:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1GunEmpty; retain the interior label.
-    db $35
+    db LOW(C1GunEmpty)
 
 jr_006_6bd3:
-    db $6b
+    db HIGH(C1GunEmpty)
     ; Jump to script.
     db $1c
     dw C1ShootStreetWin
@@ -3480,10 +3480,10 @@ C1Sc4_47:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1Gun2TargetPrompt; retain the interior label.
-    db $fb
+    db LOW(C1Gun2TargetPrompt)
 
 jr_006_6df7:
-    db $6d
+    db HIGH(C1Gun2TargetPrompt)
     ; Show message 1.
     db $01, $60
     ; End script.

@@ -1,5 +1,6 @@
 
-; Return without consuming script arguments or changing state.
+; Return to the native opcode loop without consuming arguments or a script-call frame.
+; The loop continues at the next script byte; this is not the $ff terminator.
 ScriptRet:
 
     ret

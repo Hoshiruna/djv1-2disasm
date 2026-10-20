@@ -18,12 +18,14 @@ Call_000_3288:
     ld hl, wWorkList+1
     ld d, $00
 
+; Write the next $ff working-list byte using the regional row length.
+ClearWorkListNextByte:
 jr_000_328d:
     ld a, $ff
     ld [hl+], a
     inc d
     ld a, d
     cp $08
-    jr c, jr_000_328d
+    jr c, ClearWorkListNextByte
 
     ret

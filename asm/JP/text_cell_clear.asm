@@ -33,7 +33,7 @@ jr_003_7056:
     ld a, [wClearCellX]
     inc a
     cp $13
-    jr nz, jr_003_708b
+    jr nz, NextClearCell
 
     ld a, [wClearCellY]
     inc a
@@ -49,7 +49,7 @@ NextClearCell:
 
 jr_003_708b:
     ld [wClearCellX], a
-    jr jr_003_7056
+    jr ClearTextCell
 
 ClearCellTile:
     db $01, $01, $7f

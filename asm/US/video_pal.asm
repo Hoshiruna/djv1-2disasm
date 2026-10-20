@@ -14,7 +14,7 @@ Call_001_4179:
     ld a, $80
     ldh [rBCPS], a
     ld c, $69
-    jr jr_001_4191
+    jr UploadPalNextByte
 
 ; Copy wObjPal to the eight CGB object palettes.
 UploadObjPal:
@@ -25,10 +25,12 @@ Call_001_4186:
     ldh [rOCPS], a
     ld c, $6b
 
+; Write the next of sixty-four palette bytes through the selected CGB data port.
+UploadPalNextByte:
 jr_001_4191:
     ld a, [hl+]
     ldh [c], a
     dec d
-    jr nz, jr_001_4191
+    jr nz, UploadPalNextByte
 
     ret

@@ -38,9 +38,9 @@ C2BgPalRefs:
     dw PalC2_B21
     dw PalC2_B22
     ; Pointer to PalC2_B23; split bytes retain the interior label.
-    db $58
+    db LOW(PalC2_B23)
 jr_00b_4047:
-    db $49
+    db HIGH(PalC2_B23)
     dw PalC2_B24
     dw PalC2_B25
     dw PalC2_B26
@@ -51,9 +51,9 @@ jr_00b_4050:
     dw PalC2_B2A
     dw PalC2_B2B
     ; Pointer to PalC2_B2C; split bytes retain the interior label.
-    db $98
+    db LOW(PalC2_B2C)
 jr_00b_4059:
-    db $4b
+    db HIGH(PalC2_B2C)
     dw PalC2_B2D
     dw PalC2_B2E
     dw PalC2_B2F
@@ -64,9 +64,9 @@ jr_00b_4062:
     dw PalC2_B33
     dw PalC2_B34
     ; Pointer to PalC2_B35; split bytes retain the interior label.
-    db $d8
+    db LOW(PalC2_B35)
 jr_00b_406b:
-    db $4d
+    db HIGH(PalC2_B35)
     dw PalC2_B36
     dw PalC2_B37
     dw PalC2_B38
@@ -87,9 +87,9 @@ jr_00b_4086:
     dw PalC2_B45
     dw PalC2_B46
     ; Pointer to PalC2_B47; split bytes retain the interior label.
-    db $58
+    db LOW(PalC2_B47)
 jr_00b_408f:
-    db $52
+    db HIGH(PalC2_B47)
     dw PalC2_B48
     dw PalC2_B49
     dw PalC2_B4A

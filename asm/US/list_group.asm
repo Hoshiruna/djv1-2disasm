@@ -22,13 +22,15 @@ Call_000_236a:
     ld h, $00
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_239d
+    jr nz, StoreWorkGroupCase2
 
     ld bc, wGroupData
     add hl, bc
     ld bc, wWorkList
     ld e, $00
 
+; Copy the next of seven Case I group-content bytes.
+StoreWorkGroupCase1Next:
 jr_000_2393:
     ld a, [bc]
     ld [hl+], a
@@ -36,17 +38,21 @@ jr_000_2393:
     inc e
     ld a, e
     cp $07
-    jr c, jr_000_2393
+    jr c, StoreWorkGroupCase1Next
 
     ret
 
 
+; Skip the Case II group header before copying six content bytes.
+StoreWorkGroupCase2:
 jr_000_239d:
     ld bc, wGroupData+1
     add hl, bc
     ld bc, wWorkList
     ld e, $00
 
+; Copy the next of six Case II group-content bytes.
+StoreWorkGroupCase2Next:
 jr_000_23a6:
     ld a, [bc]
     ld [hl+], a
@@ -54,6 +60,6 @@ jr_000_23a6:
     inc e
     ld a, e
     cp $06
-    jr c, jr_000_23a6
+    jr c, StoreWorkGroupCase2Next
 
     ret

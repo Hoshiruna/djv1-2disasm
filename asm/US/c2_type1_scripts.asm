@@ -1,7 +1,7 @@
 
 ; Describe the battered dresser.
 LookC2Dresser:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc1_00:
     ; Show message 0.
@@ -297,10 +297,10 @@ C2Sc1_0F:
     ; Test attribute bit 2 and branch when set.
     db $1d
     ; Target ContainerIsOpen; retain the interior label.
-    db $0b
+    db LOW(ContainerIsOpen)
 
 Call_007_5464:
-    db $55
+    db HIGH(ContainerIsOpen)
     ; Set object flag.
     db $09, C2PhoneOpened
     ; Jump to script.

@@ -1,7 +1,7 @@
 
 ; Show the shared original cash and coin description.
 LookC2Money:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc3_00:
     ; Show message 1.
@@ -150,10 +150,10 @@ C2Loc3_01:
     ; Test packed item argument and branch on inequality.
     db $56, $05
     ; Target NoC2ItemEffect; retain the interior label.
-    db $e5
+    db LOW(NoC2ItemEffect)
 
 jr_007_5a0e:
-    db $66
+    db HIGH(NoC2ItemEffect)
     ; Show message 0.
     db $00, $22
     ; End script.
@@ -194,10 +194,10 @@ jr_007_5a27:
     ; Test packed item argument and branch on equality.
     db $46, $04
     ; Target PlayC2Blackjack; retain the interior label.
-    db $53
+    db LOW(PlayC2Blackjack)
 
 jr_007_5a30:
-    db $5a
+    db HIGH(PlayC2Blackjack)
     ; Jump to script.
     db $07
     dw NoC2ItemEffect
@@ -317,7 +317,7 @@ EvictDealerAttack:
 
 C2Loc3_0D:
     ; Prepare room move and read two room arguments.
-    db $3b, $05, $11
+    db $3b, RoomVegasBlackjack, RoomHotelFront
     ; Jump to script in bank $08.
     db $7d
     dw CasinoEjectReply
@@ -351,10 +351,10 @@ C2Loc3_0F:
     ; Test packed item argument and branch on equality.
     db $46, C2Bottle
     ; Target BottleWorkerCheck; retain the interior label.
-    db $dd
+    db LOW(BottleWorkerCheck)
 
 jr_007_5a8e:
-    db $5a
+    db HIGH(BottleWorkerCheck)
     ; Test packed item argument and branch on equality.
     db $46, C2Knife
     dw KnifeWorkerCheck
@@ -1502,10 +1502,10 @@ C2Loc3_57:
     ; Test object flag and branch when clear.
     db $54, C2LampFlag
     ; Target FinishLampCell; retain the interior label.
-    db $68
+    db LOW(FinishLampCell)
 
 Jump_007_5d66:
-    db $5d
+    db HIGH(FinishLampCell)
     ; Load Case II palette and reload scene.
     db $73
 
@@ -1688,6 +1688,7 @@ C2Loc3_5F:
     ; Clear the train-room fare view and refresh.
     db $6f
     ; Call script in bank $08.
+    ; The helper returns to bank $07 before the clearance flag is set.
     db $7c
     dw TrainCarView
     db $08
@@ -2006,10 +2007,10 @@ C2Loc3_73:
     ; Call script.
     db $05
     ; Target ConsumeSlot0Item; retain the interior label.
-    db $69
+    db LOW(ConsumeSlot0Item)
 
 jr_007_5eb7:
-    db $5c
+    db HIGH(ConsumeSlot0Item)
     ; Show message 1.
     db $01, $21
     ; End script.
@@ -2131,7 +2132,7 @@ EvictCashierHit:
 
 C2Loc3_7C:
     ; Prepare room move and read two room arguments.
-    db $3b, $04, $11
+    db $3b, RoomVegasCashier, RoomHotelFront
     ; Jump to script in bank $08.
     db $7d
     dw CasinoEjectReply
@@ -2199,10 +2200,10 @@ C2Loc3_81:
     ; Test packed item argument and branch on equality.
     db $46, C2Bottle
     ; Target BottlePerson; retain the interior label.
-    db $4b
+    db LOW(BottlePerson)
 
 jr_007_5f29:
-    db $5f
+    db HIGH(BottlePerson)
     ; Test packed item argument and branch on equality.
     db $46, C2Knife
     dw KnifePerson
@@ -3099,7 +3100,7 @@ jr_007_61b0:
     db $00, $79
     ; End script.
     db $ff
-    ; Not reached from the recovered action and branch entries.
+    ; Unreferenced extra $ff after the preceding end opcode.
     db $ff
 
 ; Hide the original Pot object and finish adding the selected item.
@@ -3403,7 +3404,7 @@ ReadC2News3:
 
 C2Sc3_2B:
     ; Test room argument and branch on inequality.
-    db $55, $2b
+    db $55, RoomChicagoStationLobby
     dw News3Article
     ; Test attribute bit 0 and branch when clear.
     db $6e
@@ -3433,7 +3434,7 @@ C2Sc3_2C:
     db $17
     dw RejectC2Item
     ; Test room argument and branch on inequality.
-    db $55, $2b
+    db $55, RoomChicagoStationLobby
     dw TakeC2ItemNow
     ; Test object flag and branch when clear.
     db $54, C2NewsPaid
@@ -3495,7 +3496,7 @@ ReadC2News4:
 
 C2Sc3_2D:
     ; Test room argument and branch on inequality.
-    db $55, $2b
+    db $55, RoomChicagoStationLobby
     dw News4Article
     ; Test attribute bit 0 and branch when clear.
     db $6e
@@ -3525,7 +3526,7 @@ C2Sc3_2E:
     db $17
     dw RejectC2Item
     ; Test room argument and branch on inequality.
-    db $55, $2b
+    db $55, RoomChicagoStationLobby
     dw TakeC2ItemNow
     ; Test object flag and branch when clear.
     db $54, C2NewsPaid
@@ -4884,10 +4885,10 @@ C2Sc3_73:
     ; Test object flag and branch when set.
     db $08, C2BlackOpen
     ; Target C2AlreadyOpen; retain the interior label.
-    db $ec
+    db LOW(C2AlreadyOpen)
 
 jr_007_65eb:
-    db $66
+    db HIGH(C2AlreadyOpen)
     ; Call script.
     db $05
     dw ShowC2Opening
@@ -5146,10 +5147,10 @@ C2Loc3_D2:
     ; Test packed item argument and branch on equality.
     db $46, C2Banana
     ; Target DeskItemRefusal; retain the interior label.
-    db $b0
+    db LOW(DeskItemRefusal)
 
 jr_007_66ac:
-    db $66
+    db HIGH(DeskItemRefusal)
 
 ; Place the selected item in the desk group.
 PutItemDesk:
@@ -5188,10 +5189,10 @@ C2Loc3_D6:
     ; Test object flag and branch when clear.
     db $54, C2PantsWorn
     ; Target PutItemDesk; retain the interior label.
-    db $ad
+    db LOW(PutItemDesk)
 
 jr_007_66bd:
-    db $66
+    db HIGH(PutItemDesk)
     ; Show message 2.
     db $02, $c7
     ; End script.

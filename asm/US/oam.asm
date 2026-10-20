@@ -34,6 +34,7 @@ Call_000_04ce:
     ld a, [hl+]
 
 ; Process the next count-prefixed sprite part.
+; Rejected parts can touch pending Y/X bytes without increasing hOamCount.
 EmitSpriteNextPart:
 jr_000_04d4:
     ldh [hSpriteLeft], a

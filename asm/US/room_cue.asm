@@ -3,7 +3,7 @@
 PlayRoomCue:
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_002_68a7
+    jr nz, RoomCueCase2
 
     ld a, [wRoomId]
     cp $33
@@ -19,6 +19,8 @@ PlayRoomCue:
     ret
 
 
+; Respect the Case II hold byte before choosing a room cue.
+RoomCueCase2:
 jr_002_68a7:
     ld a, [wRoomCueHold]
     cp $00
@@ -26,13 +28,15 @@ jr_002_68a7:
 
     ld a, [wRoomId]
     cp $64
-    jr c, jr_002_68ba
+    jr c, RoomCueReadCase2Table
 
     ld a, $03
     call PlayAudio
     ret
 
 
+; Read the full table byte while retaining flags from the room-$64 comparison.
+RoomCueReadCase2Table:
 jr_002_68ba:
     ld l, a
     ld h, $00

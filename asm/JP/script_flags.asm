@@ -331,6 +331,7 @@ ScriptGetState:
     call ReadArg
 
 ; A = bit index in the wStateBits state bitmap; return its value in A and result bit 0.
+; Direct Case II opcode $0b supplies dispatcher A = $16, without an immediate byte.
 ReadStateBit:
 Call_000_1e81:
     call SelectStateBit
@@ -343,6 +344,7 @@ ScriptSetState:
 
     call ReadArg
 ; A = state bit ID; set its bit in the wStateBits bitmap.
+; Direct Case II opcode $0c supplies dispatcher A = $18, without an immediate byte.
 SetStateBit:
 
 Call_000_1e8b:
@@ -356,6 +358,7 @@ ScriptClrState:
 
     call ReadArg
 ; A = state bit ID; clear its bit in the wStateBits bitmap.
+; Direct Case II opcode $0d supplies dispatcher A = $1a, without an immediate byte.
 ClearStateBit:
 
 Call_000_1e97:

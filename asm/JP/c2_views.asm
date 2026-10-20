@@ -42,9 +42,9 @@ C2SceneRefs:
     dw C2View1C
     dw C2View1B
     dw C2View1C
-    db $b9
+    db LOW(C2View1B)
 jr_003_4368:
-    db $44
+    db HIGH(C2View1B)
     dw C2View1C
     dw C2View2B
     dw C2View2C
@@ -56,9 +56,9 @@ jr_003_4368:
     dw C2View32
     dw C2View33
     dw C2View34
-    db $d9
+    db LOW(C2View35)
 jr_003_4380:
-    db $44
+    db HIGH(C2View35)
     dw C2View36
     dw C2View37
     dw C2View38
@@ -115,51 +115,51 @@ jr_003_4380:
     dw C2View65
     dw C2View06
     dw C2View63
-    db $3a
+    db LOW(C2View65)
 jr_003_43f2:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_43f6:
-    db $45
-    db $3a
+    db HIGH(C2View63)
+    db LOW(C2View65)
 jr_003_43f8:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_43fc:
-    db $45
-    db $3a
+    db HIGH(C2View63)
+    db LOW(C2View65)
 jr_003_43fe:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4402:
-    db $45
-    db $39
+    db HIGH(C2View63)
+    db LOW(C2View63)
 jr_003_4404:
-    db $45
-    db $3a
+    db HIGH(C2View63)
+    db LOW(C2View65)
 jr_003_4406:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_440a:
-    db $45
-    db $3a
+    db HIGH(C2View63)
+    db LOW(C2View65)
 jr_003_440c:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4410:
-    db $45
-    db $3a
+    db HIGH(C2View63)
+    db LOW(C2View65)
 jr_003_4412:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4416:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
     dw C2View63
@@ -168,45 +168,45 @@ jr_003_4416:
     dw C2View63
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4428:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_442e:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4434:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_443a:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4440:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
-    db $39
+    db LOW(C2View63)
 jr_003_4446:
-    db $45
+    db HIGH(C2View63)
     dw C2View65
     dw C2View06
     dw C2View63
-    db $3a
+    db LOW(C2View65)
 jr_003_444e:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
     dw C2View63
-    db $3a
+    db LOW(C2View65)
 jr_003_4454:
-    db $45
+    db HIGH(C2View65)
     dw C2View06
 
 C2View00:

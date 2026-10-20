@@ -67,7 +67,10 @@ Call_000_0495:
 
     ret
 
-; Use A to index words at the popped return address and jump to the target; preserve DE.
+; Pop the RST return address as the inline word-table base; preserve DE.
+; Double A with carry into D, then jump to the indexed handler.
+; Its RET uses the CPU return address below the consumed table pointer.
+; Handler entry keeps A = (2 * input index) & $ff; BC and DE are preserved.
 DispatchTable:
 
 

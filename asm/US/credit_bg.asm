@@ -1,5 +1,6 @@
 
 ; Clear and submit OAM, read the scene background in bank one, then continue into ending graphics loading.
+; The winning path retains object cache $83: ReadSceneBg requests $7f without replacing a valid ID.
 LoadCreditBg:
 
 

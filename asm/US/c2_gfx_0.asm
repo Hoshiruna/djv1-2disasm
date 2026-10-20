@@ -8,24 +8,26 @@ SECTION "ROM Bank $02a", ROMX[$4000], BANK[$2a]
 ; Bank-local resource pointers; entries $00/$01 load the Case II font/HUD.
 ResourcePointers_02a:
 C2Gfx0Refs:
-    dw Resource_US_02a_4020 ; $00
-    dw Resource_US_02a_4398 ; $01
+    dw C2FontGfx ; $00
+    dw C2HudGfx ; $01
     dw GfxC2_G02 ; $02
     dw GfxC2_G03 ; $03
     dw GfxC2_G04 ; $04
-    dw $5583 ; $05
+    dw GfxC2_G05Empty ; $05
     dw GfxC2_G06 ; $06
     dw GfxC2_G07 ; $07
     dw GfxC2_G08 ; $08
-    dw $625d ; $09
+    dw GfxC2_G09Empty ; $09
     dw GfxC2_G0A ; $0a
-    dw $675a ; $0b
+    dw GfxC2_G0BEmpty ; $0b
     dw GfxC2_G0C ; $0c
-    dw $6baa ; $0d
+    dw GfxC2_G0DEmpty ; $0d
     dw GfxC2_G0E ; $0e
     dw GfxC2_G0F ; $0f
 
 ; Case II font: 128 tiles (2048 decoded bytes).
+; Case II font graphics selected by font/HUD table entry zero.
+C2FontGfx:
 Resource_US_02a_4020:
     INCBIN "../../res/ui/font/US/case2_font.bin", $0, $22
 jr_02a_4042:
@@ -52,6 +54,8 @@ jr_02a_4336:
     INCBIN "../../res/ui/font/US/case2_font.bin", $316, $62
 
 ; Case II HUD graphics: 128 tiles (2048 decoded bytes).
+; Case II HUD graphics selected by font/HUD table entry one.
+C2HudGfx:
 Resource_US_02a_4398:
     INCBIN "../../res/ui/hud/US/case2_hud_tiles.bin", $0, $1
 jr_02a_4399:
@@ -287,6 +291,8 @@ jr_02a_5515:
     INCBIN "../../res/scene/case2/common/US/g04.bin", $4fc, $64
 jr_02a_5579:
     INCBIN "../../res/scene/case2/common/US/g04.bin", $560, $a
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G05Empty:
     db $ff
 
 GfxC2_G06:
@@ -447,7 +453,9 @@ Call_02a_6231:
     INCBIN "../../res/scene/case2/common/US/g08.bin", $541, $7
 jr_02a_6238:
     INCBIN "../../res/scene/case2/common/US/g08.bin", $548, $25
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G09Empty:
+    db $ff
 
 GfxC2_G0A:
     INCBIN "../../res/scene/case2/common/US/g0a.bin", $0, $41
@@ -497,7 +505,9 @@ jr_02a_6717:
     INCBIN "../../res/scene/case2/common/US/g0a.bin", $4b9, $21
 jr_02a_6738:
     INCBIN "../../res/scene/case2/common/US/g0a.bin", $4da, $22
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G0BEmpty:
+    db $ff
 
 GfxC2_G0C:
     INCBIN "../../res/scene/case2/common/US/g0c.bin", $0, $43
@@ -547,7 +557,9 @@ jr_02a_6b64:
     INCBIN "../../res/scene/case2/common/US/g0c.bin", $409, $10
 jr_02a_6b74:
     INCBIN "../../res/scene/case2/common/US/g0c.bin", $419, $36
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G0DEmpty:
+    db $ff
 
 GfxC2_G0E:
     INCBIN "../../res/scene/case2/common/US/g0e.bin", $0, $10

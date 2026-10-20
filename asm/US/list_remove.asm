@@ -53,4 +53,4 @@ Call_000_2df7:
     ld [wListRow], a
 
 Jump_000_2e03:
-    jr jr_000_2de4
+    jr FinishListDrop

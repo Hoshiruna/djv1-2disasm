@@ -6,7 +6,12 @@
 SECTION "ROM Bank $016", ROMX[$4000], BANK[$16]
 
 ; Encoded text bank, with original label addresses retained.
-    INCBIN "../../res/text/JP/banks/16.bin", $0, $393
+; Sixty-four message pointers for one text group.
+Text16Msgs0:
+    INCBIN "../../res/text/JP/banks/16.bin", $0, $80
+; Sixty-four message pointers for one text group.
+Text16Msgs1:
+    INCBIN "../../res/text/JP/banks/16.bin", $80, $313
 jr_016_4393:
     INCBIN "../../res/text/JP/banks/16.bin", $393, $48
 jr_016_43db:

@@ -396,16 +396,16 @@ C2Act3_2E:
 
 C2Act3_2F:
     ; Pointer to $635e; split bytes retain the interior label.
-    db $5e
+    db LOW(LookSiegelDiary)
 jr_007_57e2:
-    db $63
+    db HIGH(LookSiegelDiary)
     dw OpenSiegelDiary
     dw UseC2Item
     dw PutC2Item
     ; Pointer to $66d0; split bytes retain the interior label.
-    db $d0
+    db LOW(TakeC2Item)
 jr_007_57ea:
-    db $66
+    db HIGH(TakeC2Item)
     dw CloseSiegelDiary
 
 C2Act3_30:

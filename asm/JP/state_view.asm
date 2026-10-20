@@ -46,7 +46,7 @@ jr_000_226c:
     call ResetObjScroll
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_000_2291
+    jr nz, RefreshStateCase2
 
     push af
     ld a, $01
@@ -63,6 +63,8 @@ jr_000_226c:
     ret
 
 
+; Select the Case II scene in bank three and reload it.
+RefreshStateCase2:
 jr_000_2291:
     push af
     ld a, $03
@@ -87,7 +89,7 @@ Jump_000_22a2:
     pop af
     call TrainRoomState
     call PopRomBank
-    jr jr_000_22b4
+    jr SetStateDraw
 
 ; Read a state ID and use the state-only refresh path.
 ScriptSetStateDraw:
@@ -101,7 +103,7 @@ Call_000_22b4:
 jr_000_22b4:
     call SetStateBit
     ld a, [wArg0]
-    jr jr_000_226c
+    jr RefreshStateView
 
 ; Clear the selected item state and attribute 2, play the case cue, and refresh the scene.
 ClearSelStateView:

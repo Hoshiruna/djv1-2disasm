@@ -28,6 +28,7 @@ jr_03e_413a:
     db $0d, $02, $09, $09, $00, $0d, $03, $0c, $00, $0a, $03, $00, $07, $05, $00, $0d
     db $08, $0c, $09, $00, $0a, $02, $00, $07, $8e
 
+; Bank-one tile $ff at column 12, row 9 retains the entry staging tile at $dff0.
 CreditMap01:
     db $17, $14, $12, $01, $01, $7f, $16, $ff, $27, $66, $01, $68, $02, $67, $01, $37
     db $05, $28, $01, $7f

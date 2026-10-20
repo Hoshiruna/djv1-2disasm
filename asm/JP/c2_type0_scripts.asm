@@ -1,7 +1,7 @@
 
 ; Show the original worn bathtub description.
 LookC2Tub:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc0_00:
     ; Show message 0.
@@ -99,10 +99,10 @@ C2Loc0_01:
     ; Test object flag and branch when set.
     db $08, C2HotTapOn
     ; Target BothSinkText; retain the interior label.
-    db $16
+    db LOW(BothSinkText)
 
 jr_007_470f:
-    db $47
+    db HIGH(BothSinkText)
     ; Show message 0.
     db $00, $10
     ; End script.
@@ -375,7 +375,7 @@ C2Sc0_1C:
     db $28, $0f
     ; Branch if result bit 0 is set.
     db $03
-    dw LiftPanelNoReply
+    dw LiftPanelButtonVisible
     ; Hold text.
     db $2e
     ; Show message 0.
@@ -394,7 +394,9 @@ C2Loc0_06:
     ; End script.
     db $ff
 
-; End the panel inspection without additional text.
+; Describe the magnetic button fitted at the top of the panel.
+; Handle visible lift button $0f; JP shows message $a1 before ending.
+LiftPanelButtonVisible:
 LiftPanelNoReply:
 
 C2Loc0_07:
@@ -691,25 +693,25 @@ LookCeilPlatform:
 
 C2Sc0_39:
     ; Test room argument and branch on equality.
-    db $25, $17
+    db $25, RoomVegasPlatform6
     dw ReadCeilSign6
     ; Test room argument and branch on equality.
-    db $25, $18
+    db $25, RoomVegasPlatform7
     dw ReadCeilSign7
     ; Test room argument and branch on equality.
-    db $25, $19
+    db $25, RoomVegasPlatform8
     dw ReadCeilSign8
     ; Test room argument and branch on equality.
-    db $25, $1a
+    db $25, RoomVegasPlatform9
     dw ReadCeilSign9
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
     dw ReadCeilSign2
     ; Test room argument and branch on equality.
-    db $25, $2d
+    db $25, RoomChicagoPlatform3
     dw ReadCeilSign3
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     dw ReadCeilSign4
 
 ; Show the platform 5 ceiling sign through the original default branch.
@@ -1718,10 +1720,10 @@ C2Loc0_72:
     ; Branch if result bit 0 is clear.
     db $04
     ; Target RideLift1From2; retain the interior label.
-    db $14
+    db LOW(RideLift1From2)
 
 jr_007_49d3:
-    db $4a
+    db HIGH(RideLift1From2)
 
 jr_007_49d4:
     ; Clear state and refresh.
@@ -2375,10 +2377,10 @@ C2Sc0_83:
     ; Test object flag and branch when set.
     db $08, C2ShelvesOpen
     ; Target C2SceneNoEffect; retain the interior label.
-    db $87
+    db LOW(C2SceneNoEffect)
 
 jr_007_4b8a:
-    db $49
+    db HIGH(C2SceneNoEffect)
     ; Play audio.
     db $3e, $16
     ; Show message 1.
@@ -2460,7 +2462,7 @@ EvictCashierFist:
 
 C2Loc0_1B:
     ; Prepare room move and read two room arguments.
-    db $3b, $04, $11
+    db $3b, RoomVegasCashier, RoomHotelFront
     ; Show message 0.
     db $00, $83
     ; Play audio.
@@ -2508,7 +2510,7 @@ EvictDealerFist:
 
 C2Loc0_1E:
     ; Prepare room move and read two room arguments.
-    db $3b, $05, $11
+    db $3b, RoomVegasBlackjack, RoomHotelFront
     ; Show message 0.
     db $00, $83
     ; Play audio.
@@ -2601,6 +2603,7 @@ C2Loc0_20:
     db $2f
 
 ; Clear both train-drop groups, leave the train and show the platform reply.
+; Each bank-eight helper returns before the next call; these calls are sequential.
 EjectTrainFight:
 
 C2Loc0_90:
@@ -3125,10 +3128,10 @@ C2Sc0_A1:
     ; Test object flag and branch when set.
     db $08, C2DogPawAsked
     ; Target DogLieDown; retain the interior label.
-    db $35
+    db LOW(DogLieDown)
 
 jr_007_4d2f:
-    db $4d
+    db HIGH(DogLieDown)
     ; Show message 1.
     db $01, $19
     ; Set object flag.
@@ -3392,10 +3395,10 @@ C2Sc0_AC:
     ; Test object flag and branch when set.
     db $08, C2TapOpen
     ; Target WineTapNoFlow; retain the interior label.
-    db $cd
+    db LOW(WineTapNoFlow)
 
 jr_007_4dc7:
-    db $4d
+    db HIGH(WineTapNoFlow)
     ; Show message 1.
     db $01, $fd
     ; Set object flag.
@@ -3421,10 +3424,10 @@ C2Sc0_AD:
     ; Jump to script.
     db $07
     ; Target SceneIsOpen; retain the interior label.
-    db $57
+    db LOW(SceneIsOpen)
 
 jr_007_4dd4:
-    db $4d
+    db HIGH(SceneIsOpen)
 
 ; Close the cold tap and hide water only if the hot tap is off.
 CloseColdTap:
@@ -4331,10 +4334,10 @@ C2Loc0_3E:
     dw ToggleColdTap
     db $00, $02
     ; Target ToggleHotTap; retain the interior label.
-    db $43
+    db LOW(ToggleHotTap)
 
 jr_007_4f93:
-    db $50
+    db HIGH(ToggleHotTap)
     db $00, $05
     dw SinkWaterSelf
     db $00, $09
@@ -5034,10 +5037,10 @@ C2Sc0_F0:
     ; Jump to script.
     db $07
     ; Target GlassGuardEnd; retain the interior label.
-    db $49
+    db LOW(GlassGuardEnd)
 
 jr_007_516a:
-    db $51
+    db HIGH(GlassGuardEnd)
 
 ; Set the other Vegas window state 9C and enter the guard discovery.
 BreakVegasWin2:
@@ -5335,10 +5338,10 @@ jr_007_520e:
     ; Test object flag and branch when set.
     db $08, C2Tag1Given
     ; Target DrawOpenDrawer1; retain the interior label.
-    db $24
+    db LOW(DrawOpenDrawer1)
 
 jr_007_521c:
-    db $52
+    db HIGH(DrawOpenDrawer1)
     ; Test item state.
     db $14, $51
     ; Branch if result bit 0 is set.
@@ -5587,10 +5590,10 @@ C2Sc0_103:
     ; Branch if result bit 0 is clear.
     db $04
     ; Target SceneClosedReply; retain the interior label.
-    db $0f
+    db LOW(SceneClosedReply)
 
 jr_007_52b1:
-    db $53
+    db HIGH(SceneClosedReply)
     ; Jump to script.
     db $07
     dw GateCloseObjs
@@ -5639,10 +5642,10 @@ C2Sc0_105:
     ; Branch if result bit 0 is clear.
     db $04
     ; Target SceneClosedReply; retain the interior label.
-    db $0f
+    db LOW(SceneClosedReply)
 
 jr_007_52d0:
-    db $53
+    db HIGH(SceneClosedReply)
     ; Show message 3.
     db $2c, $03
     ; Clear state and refresh.

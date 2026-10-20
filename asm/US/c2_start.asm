@@ -1,5 +1,6 @@
 
 ; Reload the HUD and current Case II view; show opening messages only for resume marker zero.
+; Resumed setup also invalidates graphics caches and re-applies initial state bits.
 InitC2View:
     ld a, $ff
     ldh [hBgLoaded], a
@@ -136,6 +137,6 @@ Call_003_4125:
 jr_003_4125:
     ld [hl+], a
     dec d
-    jr nz, jr_003_4125
+    jr nz, FillC2Bytes
 
     ret

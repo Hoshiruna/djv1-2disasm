@@ -36,7 +36,7 @@ Call_000_2051:
     call PopRomBank
     ld a, [wChangeMode]
     cp $01
-    jr nz, jr_000_2070
+    jr nz, StorePreviousRoom
 
     ld a, $02
     ld [wChangeMode], a
@@ -44,6 +44,8 @@ Call_000_2051:
 Jump_000_206d:
     call RefreshLists
 
+; Store the current room as the previous room after optional list-mode promotion.
+StorePreviousRoom:
 jr_000_2070:
     ld a, [wRoomId]
 
@@ -68,7 +70,7 @@ Jump_000_207a:
 
 Jump_000_2083:
     cp $00
-    jr nz, jr_000_20b0
+    jr nz, DrawRoomCase2
 
 Jump_000_2087:
     push af
@@ -91,8 +93,10 @@ Jump_000_209e:
     pop af
     call DrawC1Marks
     call PopRomBank
-    jr jr_000_20d7
+    jr DrawRoomFinish
 
+; Select the Case II scene, panel, and marks before the shared drawing tail.
+DrawRoomCase2:
 jr_000_20b0:
     push af
     ld a, $03
@@ -115,6 +119,8 @@ Call_000_20b6:
     call DrawC2Marks
     call PopRomBank
 
+; Retain the shared Case I mark call, show the scene, and build room objects.
+DrawRoomFinish:
 jr_000_20d7:
     push af
     ld a, $01

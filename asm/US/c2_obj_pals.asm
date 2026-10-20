@@ -70,9 +70,9 @@ jr_00b_5412:
     dw PalC2_O3F
     dw PalC2_O40
     ; Pointer to PalC2_O41; split bytes retain the interior label.
-    db $70
+    db LOW(PalC2_O41)
 jr_00b_541b:
-    db $64
+    db HIGH(PalC2_O41)
     dw PalC2_O42
     dw PalC2_O43
     dw PalC2_O44
@@ -83,9 +83,9 @@ jr_00b_5424:
     dw PalC2_O48
     dw PalC2_O49
     ; Pointer to PalC2_O4A; split bytes retain the interior label.
-    db $b0
+    db LOW(PalC2_O4A)
 jr_00b_542d:
-    db $66
+    db HIGH(PalC2_O4A)
     dw PalC2_O4B
 Case2BathroomObjectPalettes:
 PalC2_O00:

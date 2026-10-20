@@ -11,7 +11,7 @@ jr_000_16c1:
     jp z, WaitTextRelease
 
     call DispatchAscii
-    jr jr_000_16c1
+    jr ReadAsciiText
 
 ; Handle single-row text line, position, map, and mode-bit controls.
 DispatchAscii:
@@ -58,7 +58,7 @@ Jump_000_16fb:
     cp $d0
 
 Jump_000_1700:
-    jr nc, jr_000_170a
+    jr nc, AsciiGlyphStoreTile
 
     ld e, a
     ld d, $00
@@ -66,6 +66,8 @@ Jump_000_1700:
     add hl, de
     ld a, [hl]
 
+; Store the mapped or direct single-row glyph tile before choosing its output mode.
+AsciiGlyphStoreTile:
 jr_000_170a:
     ld [wTextTile], a
     ld a, [wTextMode]
@@ -109,23 +111,29 @@ QueueTextGlyph:
 Call_000_178f:
     ld a, [wTextMode]
     bit 6, a
-    jr nz, jr_000_179a
+    jr nz, AsciiGlyphCheckAttributes
 
     call QueueTileRect
     ret
 
 
+; Select attribute six or seven for the single-row glyph according to mode bit seven.
+AsciiGlyphCheckAttributes:
 jr_000_179a:
     ld a, [wTextMode]
     bit 7, a
-    jr z, jr_000_17a5
+    jr z, AsciiGlyphAttribute7
 
     ld a, $06
-    jr jr_000_17a7
+    jr AsciiGlyphQueueAttributes
 
+; Use attribute seven when single-row text mode bit seven is clear.
+AsciiGlyphAttribute7:
 jr_000_17a5:
     ld a, $07
 
+; Store the selected attribute and queue the single-row glyph with attributes.
+AsciiGlyphQueueAttributes:
 jr_000_17a7:
     ld [wTextAux], a
     call QueueMapRect
@@ -138,12 +146,12 @@ DrawAsciiWindow:
 Jump_000_17ae:
     ld a, [wTextFast]
     cp $00
-    jr nz, jr_000_17d4
+    jr nz, AsciiWindowPosition
 
     call PollJoy
     ld a, [wJoyPress]
     bit 0, a
-    jr z, jr_000_17d4
+    jr z, AsciiWindowPosition
 
     ld a, $ff
     ld [wTextFast], a
@@ -157,6 +165,8 @@ Call_000_17ce:
     call PopRomBank
     call RefreshObjOam
 
+; Compute single-row window coordinates from origin, row and column.
+AsciiWindowPosition:
 jr_000_17d4:
     ld a, [wTextOriginX]
     inc a
@@ -178,17 +188,21 @@ jr_000_17d4:
     call QueueTextGlyph
     ld a, [wC1Exit]
     cp $ff
-    jr z, jr_000_180b
+    jr z, AsciiWindowSubmit
 
 Call_000_1804:
     ld a, [wTextFast]
     cp $00
-    jr nz, jr_000_1828
+    jr nz, AsciiWindowStoreBuffer
 
+; Submit the single-row glyph map update before the short display delay.
+AsciiWindowSubmit:
 jr_000_180b:
     call SubmitMapQueue
     ld a, $03
 
+; Update ending text and room objects during the three-iteration glyph delay.
+AsciiWindowDelayFrame:
 jr_000_1810:
     push af
     push af
@@ -203,8 +217,11 @@ Jump_000_1818:
     call SubmitOam
     pop af
     dec a
-    jr nz, jr_000_1810
+    jr nz, AsciiWindowDelayFrame
 
+; Store the single-row glyph using the shared Japanese row-offset table.
+; Buffer index addition is eight-bit; D is cleared after the offset plus column.
+AsciiWindowStoreBuffer:
 jr_000_1828:
     ld a, [wTextRow]
     ld e, a
@@ -234,12 +251,14 @@ Call_000_183b:
 Jump_000_1850:
     ld a, [wTextNoWrap]
     cp $00
-    jr nz, jr_000_185b
+    jr nz, AsciiWindowNoWrap
 
     call AsciiNewline
     ret
 
 
+; Retain column $11 on the single-row no-wrap path.
+AsciiWindowNoWrap:
 jr_000_185b:
     ld a, $11
     ld [wTextCol], a
@@ -261,7 +280,7 @@ Jump_000_1861:
     ld b, a
     ld a, [wTextHeight]
     cp b
-    jr nz, jr_000_1881
+    jr nz, AsciiLineResetColumn
 
     call ScrollTextRow
     ld a, [wTextRow]
@@ -269,6 +288,8 @@ Jump_000_1861:
     ld [wTextRow], a
 
 Jump_000_1881:
+; Clear the column after single-row newline or scroll processing.
+AsciiLineResetColumn:
 jr_000_1881:
     xor a
     ld [wTextCol], a

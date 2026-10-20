@@ -4,7 +4,7 @@ GetItem2First:
 
 
     ld a, [wItemId]
-    jr jr_000_1da4
+    jr ReadItemState
 
 ; Read a script item ID, then test its second item-bitmap bit.
 ReadItem2Arg:
@@ -24,13 +24,13 @@ jr_000_1da4:
 SetItem2ArgA:
 
     call ReadArg
-    jr jr_000_1db8
+    jr SetItemState
 
 ; Set the second item-bitmap bit using the absolute first-slot item value.
 SetItem2First:
 
     ld a, [wItemId]
-    jr jr_000_1db8
+    jr SetItemState
 
 ; Read a script item ID, then enter the second item-bitmap setter.
 SetItem2Arg:
@@ -50,7 +50,7 @@ jr_000_1db8:
 ClrItem2First:
 
     ld a, [wItemId]
-    jr jr_000_1dc9
+    jr ClearItemState
 
 ; Read a script item ID, then clear its second item-bitmap bit.
 ClearItem2Arg:

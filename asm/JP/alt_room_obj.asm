@@ -5,12 +5,14 @@ CheckAltRoomObj:
 
     ld a, [wAltSlot]
     cp $02
-    jr nz, jr_000_293b
+    jr nz, C1AltRoomLoadRecords
 
     call SetResult
     ret
 
 
+; Select bank five and resolve the current room object-record pointer.
+C1AltRoomLoadRecords:
 jr_000_293b:
     ld a, $05
     call PushRomBank
@@ -52,7 +54,7 @@ Call_000_2957:
     ld c, a
     ld a, [wItemType]
     cp c
-    jr nz, jr_000_29a2
+    jr nz, C1AltRoomNextRecord
 
     ld a, [hl-]
 
@@ -62,12 +64,12 @@ Call_000_2970:
 
 Call_000_2974:
     cp c
-    jr nz, jr_000_29a2
+    jr nz, C1AltRoomNextRecord
 
     call ReadCursorBox
     ld a, [wStateResult]
     and $80
-    jr z, jr_000_29a2
+    jr z, C1AltRoomNextRecord
 
     ld a, [hl+]
 
@@ -94,6 +96,8 @@ Jump_000_2996:
     ret
 
 
+; Advance seven bytes after a type, item ID, or cursor-bounds mismatch.
+C1AltRoomNextRecord:
 jr_000_29a2:
     call NextRoomObj
     jp ScanAltRoom

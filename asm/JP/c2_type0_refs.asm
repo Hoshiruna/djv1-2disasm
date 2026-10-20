@@ -155,17 +155,17 @@ C2Type0Refs:
     dw C2Act0_97
     dw C2Act0_98
     ; Pointer to C2Act0_99; split bytes retain the interior label.
-    db $40
+    db LOW(C2Act0_99)
 jr_007_4133:
-    db $46
+    db HIGH(C2Act0_99)
     ; Pointer to C2Act0_9A; split bytes retain the interior label.
-    db $48
+    db LOW(C2Act0_9A)
 jr_007_4135:
-    db $46
+    db HIGH(C2Act0_9A)
     ; Pointer to C2Act0_9B; split bytes retain the interior label.
-    db $50
+    db LOW(C2Act0_9B)
 jr_007_4137:
-    db $46
+    db HIGH(C2Act0_9B)
     dw C2Act0_9C
     dw C2Act0_9D
     dw C2Act0_9E
@@ -770,9 +770,9 @@ C2Act0_5F:
     dw LookHomeCurtain
     dw OpenHomeCurtain
     ; Pointer to $4945; split bytes retain the interior label.
-    db $45
+    db LOW(C2SceneQuestion)
 jr_007_4461:
-    db $49
+    db HIGH(C2SceneQuestion)
     dw CloseHomeCurtain
 
 C2Act0_60:
@@ -941,9 +941,9 @@ C2Act0_79:
     dw C2SceneQuestion
     dw C2SceneNoEffect
     ; Pointer to $4945; split bytes retain the interior label.
-    db $45
+    db LOW(C2SceneQuestion)
 Call_007_4547:
-    db $49
+    db HIGH(C2SceneQuestion)
 
 C2Act0_7A:
 Jump_007_4548:
@@ -991,18 +991,18 @@ C2Act0_80:
 C2Act0_81:
     dw LookMorgueGate
     ; Pointer to $51fb; split bytes retain the interior label.
-    db $fb
+    db LOW(OpenMorgueGate)
 jr_007_4583:
-    db $51
+    db HIGH(OpenMorgueGate)
     dw SceneQuestion2
     dw CloseMorgueGate
 
 C2Act0_82:
     dw ReadStaffSign
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_458b:
-    db $4f
+    db HIGH(SceneQuestion2)
     dw SceneNoEffect2
     dw SceneQuestion2
 
@@ -1065,9 +1065,9 @@ C2Act0_8C:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_45df:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_8D:
     dw LookC2Rope
@@ -1080,36 +1080,36 @@ C2Act0_8E:
     dw C2HandsTied
     dw CheckHandsHit
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_45ef:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_8F:
     dw LookNailCrate
     dw UseNailCrate
     dw PunchNailCrate
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_45f7:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_90:
     dw LookCleanHallWin
     dw SceneQuestion2
     dw BreakGoonsGlass
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_45ff:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_91:
     dw ReadCleanPrices
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_4607:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_92:
     dw LookLaundryDesk
@@ -1128,31 +1128,31 @@ C2Act0_94:
     dw OpenOfficeDrape
     dw SceneQuestion2
     ; Pointer to $52e9; split bytes retain the interior label.
-    db $e9
+    db LOW(CloseOfficeDrape)
 jr_007_461f:
-    db $52
+    db HIGH(CloseOfficeDrape)
 
 C2Act0_95:
     dw LookSunWindow
     dw SceneQuestion2
     dw BreakSunWindow
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_4627:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_96:
     ; Pointer to $4ec0; split bytes retain the interior label.
-    db $c0
+    db LOW(LookLeatherChair)
 Call_007_4629:
 Jump_007_4629:
-    db $4e
+    db HIGH(LookLeatherChair)
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_462f:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_97:
     dw ReadCleanSign
@@ -1183,9 +1183,9 @@ C2Act0_9B:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_4657:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_9C:
     dw LookCityWindow
@@ -1218,18 +1218,18 @@ C2Act0_A0:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_467f:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_A1:
     dw LookFishPhoto
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_4687:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_A2:
     dw LookMobPhoto
@@ -1242,16 +1242,16 @@ C2Act0_A3:
     dw SceneQuestion2
     dw BreakVegasWin2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_4697:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_A4:
     dw LookSilkCurtain
     ; Pointer to $5297; split bytes retain the interior label.
-    db $97
+    db LOW(OpenSilkCurtain)
 jr_007_469b:
-    db $52
+    db HIGH(OpenSilkCurtain)
     dw SceneQuestion2
     dw CloseSilkCurtain
 
@@ -1260,9 +1260,9 @@ C2Act0_A5:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_46a7:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_A6:
     dw LookC2Self
@@ -1293,9 +1293,9 @@ C2Act0_AA:
     dw SceneQuestion2
     dw SceneNoEffect2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_46cf:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_AB:
 jr_007_46d0:
@@ -1303,15 +1303,15 @@ jr_007_46d0:
     dw SceneQuestion2
     dw BreakPoliceWin1
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_46d7:
-    db $4f
+    db HIGH(SceneQuestion2)
 
 C2Act0_AC:
     dw LookArchWindow
     dw SceneQuestion2
     dw BreakPoliceWin2
     ; Pointer to $4f49; split bytes retain the interior label.
-    db $49
+    db LOW(SceneQuestion2)
 jr_007_46df:
-    db $4f
+    db HIGH(SceneQuestion2)

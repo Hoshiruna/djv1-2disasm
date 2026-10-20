@@ -1,5 +1,6 @@
 
 ; Call the case-two event chain in bank three and restore the previous ROM bank.
+; Dispatched after a returned primary action, outside the frame-wait service.
 C2EventsCall:
 
 

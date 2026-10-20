@@ -1,43 +1,81 @@
 
 AudioEnvs:
+; Eight envelope tick/value pairs; table index $00.
+AudioEnv00:
     db $00, $f4, $10, $b5, $29, $70, $ff, $70, $ff, $70, $ff, $70, $ff, $70, $ff, $70
+; Eight envelope tick/value pairs; table index $01.
+AudioEnv01:
     db $00, $76, $12, $40
 jr_004_7b7c:
     db $ff, $40, $ff, $40, $ff, $40, $ff, $40, $ff, $40, $ff, $40
+; Eight envelope tick/value pairs; table index $02.
+AudioEnv02:
     db $00, $f6, $18, $b0, $24, $a0, $ff, $90, $ff, $90, $ff, $90, $ff, $90, $ff, $90
+; Eight envelope tick/value pairs; table index $03.
+AudioEnv03:
     db $00, $f4, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00, $ff, $00
+; Eight envelope tick/value pairs; table index $04.
+AudioEnv04:
     db $00, $93, $12, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30
+; Eight envelope tick/value pairs; table index $05.
+AudioEnv05:
     db $00
 jr_004_7bb9:
     db $66, $12, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30, $ff, $30
+; Eight envelope tick/value pairs; table index $06.
+AudioEnv06:
     db $00
 jr_004_7bc9:
     db $94, $14, $45, $23, $16, $ff, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10
+; Eight envelope tick/value pairs; table index $07.
+AudioEnv07:
     db $00, $f3, $0f, $a4, $1b, $75, $ff, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10
+; Eight envelope tick/value pairs; table index $08.
+AudioEnv08:
     db $00, $f5, $19, $a6, $2b, $7f, $39, $97, $4b, $7f, $55, $97, $63, $7f, $71, $97
+; Eight envelope tick/value pairs; table index $09.
+AudioEnv09:
     db $00, $f4, $10, $b6, $22, $77, $4c, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10
+; Eight envelope tick/value pairs; table index $0a.
+AudioEnv0A:
     db $00, $87, $0e, $66, $2c, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10
+; Eight envelope tick/value pairs; table index $0b.
+AudioEnv0B:
     db $00, $e0, $ff, $e0, $ff, $e0, $ff, $e0, $ff, $e0, $ff, $e0, $ff, $e0, $ff, $e0
+; Eight envelope tick/value pairs; table index $0c.
+AudioEnv0C:
     db $00, $90, $ff, $90, $ff, $90, $ff, $90, $ff, $90, $ff, $90, $ff, $90, $ff, $90
+; Eight envelope tick/value pairs; table index $0d.
+AudioEnv0D:
     db $00, $59, $06, $a3, $0f, $70, $14, $60, $1b, $50, $26, $40, $30, $30, $ff, $30
+; Eight envelope tick/value pairs; table index $0e.
+AudioEnv0E:
     db $00
 jr_004_7c49:
     db $39, $06, $83, $0f, $50, $14, $40, $1b, $30, $26, $20, $30, $10, $ff, $10
+; Eight envelope tick/value pairs; table index $0f.
+AudioEnv0F:
     db $00, $72, $0c, $32, $0f, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10, $ff, $10
 
+; Two explicit levels; selector $03 reads AudioWave00+1, whose $77 becomes $60 at NR32.
 WaveLevels:
     db $20, $40
 
 WaveForms:
+; Sixteen waveform bytes; table index $00.
+AudioWave00:
     db $77, $77, $77, $77, $77, $77, $77, $77, $00, $00, $00, $00
 jr_004_7c76:
     db $00, $00, $00
 jr_004_7c79:
     db $00
+; Sixteen waveform bytes; table index $01.
+AudioWave01:
     db $99, $99, $99, $99, $99, $99, $99, $99, $00, $00, $00
 jr_004_7c85:
     db $00, $00, $00, $00, $00
 
+; Twenty duration words; AudioFreqs starts immediately after them.
 AudioTimes:
     dw $0600
     dw $0300
@@ -65,6 +103,7 @@ jr_004_7ca1:
 jr_004_7cb0:
     dw $0010
 
+; Seventy frequency words; the native address includes the staged byte offset wFreqOff.
 AudioFreqs:
     dw $002c
     dw $009d

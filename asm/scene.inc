@@ -433,7 +433,7 @@ DEF wTestTens          EQU $c5c6
 ; Nonzero suppresses case-two room cue selection during scene effects.
 DEF wRoomCueHold      EQU $c5c9
 
-; Case-two event bitmap; bank two clears its bits and associated counters.
+; Live Case II failure-event latch outside the saved payload; cleared after recovery.
 DEF wC2EventBits     EQU $c5d2
 
 ; One when both case-two final flags and group tests succeed.
@@ -528,7 +528,7 @@ DEF wC2MenuPick        EQU $c895
 DEF wC2MenuMax         EQU $c896
 DEF wC2MenuMode        EQU $c5c7
 
-; Save/load confirmation answer and cursor-row selection; shared UI scratch.
+; Confirmation answer aliases wInputMode; main recovery tails dispatch through this byte.
 DEF wSaveAnswer        EQU $c875
 DEF wSaveMenuRow       EQU $c884
 
@@ -843,25 +843,25 @@ DEF C2LampIx EQU $0a
 ; Case II counter index for the ending timer.
 DEF C2EndIx EQU $0b
 
-; Saved Case II event mask: desert death.
+; Latched Case II event mask: desert death.
 DEF EvtHeat EQU $01
 
-; Saved Case II event mask: goons return.
+; Latched Case II event mask: goons return.
 DEF EvtGoons EQU $02
 
-; Saved Case II event mask: recapture.
+; Latched Case II event mask: recapture.
 DEF EvtHunt EQU $04
 
-; Saved Case II event mask: casino guard attack.
+; Latched Case II event mask: casino guard attack.
 DEF EvtGuard EQU $08
 
-; Saved Case II event mask: final Stogie visit.
+; Latched Case II event mask: final Stogie visit.
 DEF EvtDebt EQU $10
 
-; Saved Case II event mask: ending sequence.
+; Latched Case II event mask: ending sequence.
 DEF EvtEnd EQU $20
 
-; Saved Case II event mask: flashlight expiry.
+; Latched Case II event mask: flashlight expiry.
 DEF EvtLamp EQU $80
 
 ; Case II desk contents; checks scan seven bytes, while placement stores up to six items.
@@ -1040,6 +1040,132 @@ DEF GridDown EQU $007a
 
 ; Desert movement object at hit cell $20: grid index minus eight.
 DEF GridUp EQU $007b
+
+; Case II Lucky Dice hotel bathroom.
+DEF RoomVegasBath EQU $00
+
+; Case II Lucky Dice hotel bedroom.
+DEF RoomVegasBedroom EQU $01
+
+; Case II Lucky Dice hotel first-floor hallway.
+DEF RoomVegasHall1 EQU $02
+
+; Case II Lucky Dice hotel lobby.
+DEF RoomVegasLobby EQU $03
+
+; Case II Lucky Dice casino cashier area.
+DEF RoomVegasCashier EQU $04
+
+; Case II Lucky Dice casino blackjack table.
+DEF RoomVegasBlackjack EQU $05
+
+; Case II Lucky Dice hotel second-floor hallway.
+DEF RoomVegasHall2 EQU $0b
+
+; Case II Lucky Dice hotel fourth-floor hallway.
+DEF RoomVegasHall4 EQU $0e
+
+; Case II Danny Ventini office on the Lucky Dice hotel fourth floor.
+DEF RoomVegasVentiniOffice EQU $0f
+
+; Case II Anthony Malone office on the Lucky Dice hotel fourth floor.
+DEF RoomVegasMaloneOffice EQU $10
+
+; Case II Las Vegas station lobby.
+DEF RoomVegasStationLobby EQU $15
+
+; Case II Las Vegas station luggage claim.
+DEF RoomVegasLuggageClaim EQU $16
+
+; Case II Las Vegas station platform six.
+DEF RoomVegasPlatform6 EQU $17
+
+; Case II Las Vegas station platform 7.
+DEF RoomVegasPlatform7 EQU $18
+
+; Case II Las Vegas station platform 8.
+DEF RoomVegasPlatform8 EQU $19
+
+; Case II Las Vegas station platform 9.
+DEF RoomVegasPlatform9 EQU $1a
+
+; Case II Chicago station lobby.
+DEF RoomChicagoStationLobby EQU $2b
+
+; Case II Chicago station platform two.
+DEF RoomChicagoPlatform2 EQU $2c
+
+; Case II Chicago station platform 3.
+DEF RoomChicagoPlatform3 EQU $2d
+
+; Case II Chicago station platform 4.
+DEF RoomChicagoPlatform4 EQU $2e
+
+; Case II Chicago station platform 5.
+DEF RoomChicagoPlatform5 EQU $2f
+
+; Case II street outside Chicago station; adjacent cab interior is $31.
+DEF RoomChicagoStationFront EQU $30
+
+; Case II street in front of Ace's apartment at the Adison cab stop.
+DEF RoomAdisonApartmentFront EQU $32
+
+; Case II hallway outside Ace's apartment at Adison.
+DEF RoomAdisonHallway EQU $33
+
+; Case II Ace's apartment interior at Adison.
+DEF RoomAdisonApartment EQU $34
+
+; Case II street in front of Joe's Place at the Peoria cab stop.
+DEF RoomJoeFront EQU $35
+
+; Case II street-connected alley at Joe's Place; rear alley is $39.
+DEF RoomJoeAlley EQU $36
+
+; Case II fire escape at Joe's Place.
+DEF RoomJoeFireEscape EQU $37
+
+; Case II office at Joe's Place.
+DEF RoomJoeOffice EQU $38
+
+; Case II alley immediately behind Joe's Place.
+DEF RoomJoeRearAlley EQU $39
+
+; Case II narrow hallway inside the rear entrance of Joe's Place.
+DEF RoomJoeRearHallway EQU $3a
+
+; Case II bar interior at Joe's Place.
+DEF RoomJoeBar EQU $3b
+
+; Case II cellar at Joe's Place.
+DEF RoomJoeCellar EQU $3c
+
+; Case II small chamber behind the wine shelves at Joe's Place.
+DEF RoomJoeChamber EQU $3d
+
+; Case II hidden casino at Joe's Place.
+DEF RoomJoeCasino EQU $3e
+
+; Case II upstairs hallway at Joe's Place.
+DEF RoomJoeUpstairsHallway EQU $3f
+
+; Case II street in front of the police station near Joe's Place.
+DEF RoomPoliceStationFront EQU $40
+
+; Case II street in front of Sugar's apartment at the Cottage cab stop.
+DEF RoomSugarApartmentFront EQU $41
+
+; Case II Sugar's apartment interior.
+DEF RoomSugarApartment EQU $42
+
+; Case II street in front of the city morgue.
+DEF RoomMorgueFront EQU $43
+
+; Case II city morgue reception.
+DEF RoomMorgueReception EQU $44
+
+; Case II cold room behind morgue reception.
+DEF RoomMorgueColdRoom EQU $45
 
 ; Lucky Dice hotel front.
 DEF RoomHotelFront EQU $11
@@ -1365,19 +1491,19 @@ DEF C2NewsLeft EQU $00a1
 ; Case II morgue destination was added after reading a newspaper.
 DEF C2MorgueKnown EQU $0038
 
-; Legacy cab destination room name.
+; Legacy alias for the Chicago cab interior ($31), not the station front ($30).
 DEF RoomChiStn EQU $0031
 
-; Legacy cab destination room name.
+; Legacy alias for the cab interior at Adison ($5e).
 DEF RoomAdison EQU $005e
 
-; Legacy cab destination room name.
+; Legacy alias for the cab interior at Cottage ($5f).
 DEF RoomCottage EQU $005f
 
-; Legacy cab destination room name.
+; Legacy alias for the cab interior at Peoria ($60).
 DEF RoomPeoria EQU $0060
 
-; Legacy cab destination room name.
+; Legacy alias for the cab interior at Morgue ($61).
 DEF RoomMorgue EQU $0061
 
 ; Case II the first meeting with Gabby has been shown.

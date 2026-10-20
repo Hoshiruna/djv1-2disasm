@@ -6,7 +6,12 @@
 SECTION "ROM Bank $011", ROMX[$4000], BANK[$11]
 
 ; Encoded text bank, with original label addresses retained.
-    INCBIN "../../res/text/US/banks/11.bin", $0, $eb
+; Sixty-four message pointers for one text group.
+Text11Msgs0:
+    INCBIN "../../res/text/US/banks/11.bin", $0, $80
+; Sixty-four message pointers for one text group.
+Text11Msgs1:
+    INCBIN "../../res/text/US/banks/11.bin", $80, $6b
 jr_011_40eb:
     INCBIN "../../res/text/US/banks/11.bin", $eb, $25
 jr_011_4110:
@@ -420,7 +425,10 @@ jr_011_587b:
 jr_011_58d1:
     INCBIN "../../res/text/US/banks/11.bin", $18d1, $1
 jr_011_58d2:
-    INCBIN "../../res/text/US/banks/11.bin", $18d2, $70
+    INCBIN "../../res/text/US/banks/11.bin", $18d2, $1a
+; Fixed-width object-name records.
+C1ObjectNames:
+    INCBIN "../../res/text/US/banks/11.bin", $18ec, $56
 jr_011_5942:
     INCBIN "../../res/text/US/banks/11.bin", $1942, $30
 jr_011_5972:

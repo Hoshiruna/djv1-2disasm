@@ -7,7 +7,7 @@ PickNameForm:
     push de
     ld c, $00
     cp $9e
-    jr nc, jr_000_10bf
+    jr nc, NameFormReturn
 
     ld a, [wTextRefs+2]
     call PushRomBank
@@ -30,29 +30,31 @@ Jump_000_1091:
     ld a, [hl]
     call PopRomBank
     cp $1f
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     cp $0c
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     inc c
     cp $05
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     inc c
     cp $0d
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     inc c
     cp $42
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     inc c
     cp $47
-    jr z, jr_000_10bf
+    jr z, NameFormReturn
 
     ld c, $00
 
+; Return the selected name-form value in A and restore DE and HL.
+NameFormReturn:
 jr_000_10bf:
     pop de
     pop hl

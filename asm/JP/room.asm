@@ -1,4 +1,6 @@
-; Check the selected item state bit before running the room transition.
+; Test the selected item state without fetching a script operand.
+; Accepted exits consume one destination byte in Case I, two in Case II.
+; Rejected exits consume neither destination byte and end the action.
 CheckRoomExit:
 
     ld bc, wItemId
@@ -41,6 +43,7 @@ SaveStateRet:
     ret
 
 ; Restore Case I objects and update room-dependent object flags before moving.
+; Case II opcode $3b enters here without checking the selected exit state.
 PrepRoomMove:
 
 Jump_000_203d:
@@ -137,6 +140,7 @@ jr_000_209a:
     call SaveState
 
 ; Flush pending changes, then read destination arguments and enter the room.
+; Direct entry through Case II opcode $4f skips the SaveState call above.
 MoveRoomFlush:
     push af
 
@@ -168,7 +172,7 @@ jr_000_20b9:
     call ReadArg
     jr RoomMoveChooseDestination
 
-; Read two destination arguments for a Case II room move.
+; Read two room IDs for a Case II move; arg 1 is not a bank or opcode.
 RoomMoveReadCase2Args:
 jr_000_20cb:
     call ReadArgs2

@@ -21,6 +21,7 @@ jr_000_1bf0:
     ret
 
 ; Read two script bytes into args 0..1; advance the pointer and return arg 0.
+; Conditional branches consume both target bytes even when the condition fails.
 ReadArgs2:
 
 Call_000_1bfc:

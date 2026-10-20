@@ -14,11 +14,10 @@ INCLUDE "ui_gfx.asm"
 INCLUDE "mono_res.asm"
 
 Bank9Pad:
-    db $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00, $00
-    db $00
+    ds $0011, $00
 jr_009_7ffa:
-    db $00, $00
+    ds $0002, $00
 jr_009_7ffc:
-    db $00, $00, $00, $00
+    ds $0004, $00
 
 ; End of bank 9.

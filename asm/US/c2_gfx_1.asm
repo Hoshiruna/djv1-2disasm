@@ -9,8 +9,8 @@ SECTION "ROM Bank $02b", ROMX[$4000], BANK[$2b]
     dw GfxC2_G11 ; $01
     dw GfxC2_G12 ; $02
     dw GfxC2_G13 ; $03
-    dw $4f90 ; $04
-    dw $4f91 ; $05
+    dw GfxC2_G14Empty ; $04
+    dw GfxC2_G15Empty ; $05
     dw GfxC2_G16 ; $06
     dw GfxC2_G17 ; $07
     dw GfxC2_G18 ; $08
@@ -187,7 +187,12 @@ jr_02b_4f61:
     INCBIN "../../res/scene/case2/common/US/g13.bin", $2c5, $24
 jr_02b_4f85:
     INCBIN "../../res/scene/case2/common/US/g13.bin", $2e9, $b
-    db $ff, $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G14Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC2_G15Empty:
+    db $ff
 
 GfxC2_G16:
     INCBIN "../../res/scene/case2/common/US/g16.bin", $0, $3

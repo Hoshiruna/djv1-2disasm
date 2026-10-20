@@ -12,7 +12,7 @@ SECTION "ROM Bank $03a", ROMX[$4000], BANK[$3a]
     dw GfxC1_G74 ; $04
     dw GfxC1_G75 ; $05
     dw GfxC1_G76 ; $06
-    dw $5b72 ; $07
+    dw GfxC1_G77Empty ; $07
     dw GfxC1_G78 ; $08
     dw GfxC1_G79 ; $09
     dw GfxC1_G7A ; $0a
@@ -352,6 +352,8 @@ jr_03a_5aef:
     INCBIN "../../res/scene/case1/common/US/g76.bin", $23e, $56
 jr_03a_5b45:
     INCBIN "../../res/scene/case1/common/US/g76.bin", $294, $2d
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G77Empty:
     db $ff
 
 GfxC1_G78:

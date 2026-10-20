@@ -162,7 +162,7 @@ Call_001_5862:
     add hl, bc
     ld a, [hl]
     and $01
-    jr nz, jr_001_5880
+    jr nz, WriteOpSetItemFlag
 
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -175,6 +175,8 @@ Call_001_5862:
     ret
 
 
+; Set the selected item flag when operation attribute bit zero is set.
+WriteOpSetItemFlag:
 jr_001_5880:
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -200,7 +202,7 @@ Call_001_588f:
     ld a, [hl]
     srl a
     and $01
-    jr nz, jr_001_58af
+    jr nz, WriteOpSetItemState
 
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -213,6 +215,8 @@ Call_001_588f:
     ret
 
 
+; Set the selected item-state bit when operation attribute bit one is set.
+WriteOpSetItemState:
 jr_001_58af:
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -238,7 +242,7 @@ WriteOpState:
     srl a
     srl a
     and $01
-    jr nz, jr_001_58e0
+    jr nz, WriteOpSetRoomState
 
     ld bc, wItemId
     ldh a, [hItemSlot]
@@ -251,6 +255,8 @@ WriteOpState:
     ret
 
 
+; Set the selected room-state bit when operation attribute bit two is set.
+WriteOpSetRoomState:
 jr_001_58e0:
     ld bc, wItemId
     ldh a, [hItemSlot]

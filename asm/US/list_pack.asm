@@ -30,19 +30,23 @@ Call_001_6325:
     ld h, $00
     ld a, [wCaseId]
     cp $00
-    jr nz, jr_001_633f
+    jr nz, EncodeListCase2Types
 
     ld bc, C1PackTypes
-    jr jr_001_6342
+    jr EncodeListReadPrefix
 
+; Select the Case II operation-type to packed-prefix table.
+EncodeListCase2Types:
 jr_001_633f:
     ld bc, C2PackTypes
 
+; Read the selected type prefix and retain the original unmasked value OR.
+EncodeListReadPrefix:
 jr_001_6342:
     add hl, bc
     ld a, [hl]
     cp $ff
-    jr z, jr_001_635f
+    jr z, EncodeListReturn
 
     add a
     add a
@@ -62,6 +66,8 @@ jr_001_6342:
     or b
     ld [wListCode], a
 
+; Return after encoding or leave wListCode unchanged for prefix $ff.
+EncodeListReturn:
 jr_001_635f:
     ret
 

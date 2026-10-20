@@ -1,7 +1,7 @@
 
 ; Show the original trench coat description.
 LookC2Trench:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C2Sc4_00:
     ; Show message 0.
@@ -293,111 +293,111 @@ CheckClothesRoom:
 
 C2Loc4_86:
     ; Test room argument and branch on equality.
-    db $25, $04
+    db $25, RoomVegasCashier
     dw CashierDressRoute
     ; Test room argument and branch on equality.
-    db $25, $05
+    db $25, RoomVegasBlackjack
     dw DealerDressRoute
     ; Test room argument and branch on equality.
-    db $25, $15
+    db $25, RoomVegasStationLobby
     dw StationDressCue
     ; Test room argument and branch on equality.
-    db $25, $16
+    db $25, RoomVegasLuggageClaim
     ; Target StationDressCue; retain the interior label.
-    db $04
+    db LOW(StationDressCue)
 
 jr_007_6996:
-    db $6a
+    db HIGH(StationDressCue)
     ; Test room argument and branch on equality.
-    db $25, $17
+    db $25, RoomVegasPlatform6
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $18
+    db $25, RoomVegasPlatform7
     ; Target DressPoliceRoute; retain the interior label.
-    db $00
+    db LOW(DressPoliceRoute)
 
 jr_007_699e:
-    db $6a
+    db HIGH(DressPoliceRoute)
     ; Test room argument and branch on equality.
-    db $25, $19
+    db $25, RoomVegasPlatform8
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $1a
+    db $25, RoomVegasPlatform9
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $2c
+    db $25, RoomChicagoPlatform2
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $2d
+    db $25, RoomChicagoPlatform3
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $2e
+    db $25, RoomChicagoPlatform4
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $2f
+    db $25, RoomChicagoPlatform5
     dw DressPoliceRoute
     ; Test room argument and branch on equality.
-    db $25, $2b
+    db $25, RoomChicagoStationLobby
     dw NewsSellerAlarm
     ; Test room argument and branch on equality.
-    db $25, $44
+    db $25, RoomMorgueReception
     dw MorgueDressRoute
 
 jr_007_69bf:
     ; Test room argument and branch on equality.
-    db $25, $1b
+    db $25, RoomTrain6A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $1c
+    db $25, RoomTrain6B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $1d
+    db $25, RoomTrain7A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $1e
+    db $25, RoomTrain7B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $1f
+    db $25, RoomTrain8A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $20
+    db $25, RoomTrain8B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $21
+    db $25, RoomTrain9A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $22
+    db $25, RoomTrain9B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $23
+    db $25, RoomTrain2A
     ; Target TrainDressAlarm; retain the interior label.
-    db $0c
+    db LOW(TrainDressAlarm)
 
 jr_007_69e2:
-    db $6a
+    db HIGH(TrainDressAlarm)
     ; Test room argument and branch on equality.
-    db $25, $24
+    db $25, RoomTrain2B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $25
+    db $25, RoomTrain3A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
     db $25
 
 jr_007_69ec:
-    db $26
+    db RoomTrain3B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $27
+    db $25, RoomTrain4A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $28
+    db $25, RoomTrain4B
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $29
+    db $25, RoomTrain5A
     dw TrainDressAlarm
     ; Test room argument and branch on equality.
-    db $25, $2a
+    db $25, RoomTrain5B
     dw TrainDressAlarm
     ; End script.
     db $ff
@@ -409,10 +409,10 @@ C2Loc4_0E:
     ; Jump to script in bank $08.
     db $7d
     ; Target PoliceArrest; retain the interior label.
-    db $7b
+    db LOW(PoliceArrest)
 
 jr_007_6a02:
-    db $49
+    db HIGH(PoliceArrest)
     db $08
 
 ; Prepare the man name before the shared clothing alarm caption.
@@ -584,7 +584,7 @@ C2Loc4_1B:
     db $46, C2Gun
     dw FireC2Away
     ; Test room argument and branch on inequality.
-    db $55, $42
+    db $55, RoomSugarApartment
     dw NoC2PackEffect
     ; Test packed item argument and branch on equality.
     db $46, $90
@@ -2231,7 +2231,7 @@ C2Sc4_24:
     db $17
     dw OpenC2PackNow
     ; Test room argument and branch on inequality.
-    db $55, $44
+    db $55, RoomMorgueReception
     dw OpenBox2Now
     ; Test object flag and branch when clear.
     db $54, C2Uniform
@@ -2286,7 +2286,7 @@ C2Sc4_25:
     db $17
     dw RejectC2Pack
     ; Test room argument and branch on inequality.
-    db $55, $44
+    db $55, RoomMorgueReception
     dw TakeBox2Now
     ; Test object flag and branch when clear.
     db $54, C2Uniform

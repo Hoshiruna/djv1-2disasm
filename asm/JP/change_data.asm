@@ -2,9 +2,9 @@
 ; CASE2 group 2 points to the original writable lists in WRAM.
 
 C1ChangeRefs:
-    db $a5
+    db LOW(C1Changes0)
 jr_005_5853:
-    db $58
+    db HIGH(C1Changes0)
     dw C1Changes1
 
 C1Changes1:
@@ -23,9 +23,9 @@ C1Changes1:
     dw C1Ch1_0C
     dw C1Ch1_0D
     dw C1Ch1_0E
-    db $a1
+    db LOW(C1Ch1_0F)
 jr_005_5875:
-    db $58
+    db HIGH(C1Ch1_0F)
     dw C1Ch1_10
     dw C1Ch1_11
 
@@ -151,9 +151,9 @@ jr_005_58ec:
 
 C2Changes0:
     dw C2Ch0_00
-    db $0f
+    db LOW(C2Ch0_01)
 jr_005_58f7:
-    db $59
+    db HIGH(C2Ch0_01)
     dw C2Ch0_02
     dw C2Ch0_03
     dw C2Ch0_00
@@ -210,9 +210,9 @@ C2Changes1:
     dw C2Ch1_07
     dw C2Ch1_08
     dw C2Ch1_09
-    db $83
+    db LOW(C2Ch1_0A)
 jr_005_5944:
-    db $59
+    db HIGH(C2Ch1_0A)
     dw C2Ch1_0B
     dw C2Ch1_0C
     dw C2Ch1_0D

@@ -59,7 +59,8 @@ Call_000_18e7:
     ld a, [hl]
     ld [wRoomObjPtr+1], a
 
-; Find a visible entry with its rule enabled, or write the original end marker.
+; Scan visible cursor matches through the case-specific type filter.
+; On exhaustion, store type zero with the original case-specific no-hit item ID.
 ScanRoomItems:
 
 Jump_000_18eb:

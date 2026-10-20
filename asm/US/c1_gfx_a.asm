@@ -6,21 +6,21 @@
 SECTION "ROM Bank $03d", ROMX[$4000], BANK[$3d]
 
     dw GfxC1_GA0 ; $00
-    dw $4548 ; $01
+    dw GfxC1_GA1Empty ; $01
     dw GfxC1_GA2 ; $02
     dw GfxC1_GA3 ; $03
-    dw $4a94 ; $04
-    dw $4a95 ; $05
-    dw $4a96 ; $06
-    dw $4a97 ; $07
-    dw $4a98 ; $08
-    dw $4a99 ; $09
-    dw $4a9a ; $0a
-    dw $4a9b ; $0b
-    dw $4a9c ; $0c
-    dw $4a9d ; $0d
-    dw $4a9e ; $0e
-    dw $4a9f ; $0f
+    dw GfxC1_GA4Empty ; $04
+    dw GfxC1_GA5Empty ; $05
+    dw GfxC1_GA6Empty ; $06
+    dw GfxC1_GA7Empty ; $07
+    dw GfxC1_GA8Empty ; $08
+    dw GfxC1_GA9Empty ; $09
+    dw GfxC1_GAAEmpty ; $0a
+    dw GfxC1_GABEmpty ; $0b
+    dw GfxC1_GACEmpty ; $0c
+    dw GfxC1_GADEmpty ; $0d
+    dw GfxC1_GAEEmpty ; $0e
+    dw GfxC1_GAFEmpty ; $0f
 
 GfxC1_GA0:
     INCBIN "../../res/scene/case1/common/US/ga0.bin", $0, $2f
@@ -66,7 +66,9 @@ jr_03d_44e0:
     INCBIN "../../res/scene/case1/common/US/ga0.bin", $4c0, $42
 jr_03d_4522:
     INCBIN "../../res/scene/case1/common/US/ga0.bin", $502, $26
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA1Empty:
+    db $ff
 
 GfxC1_GA2:
     INCBIN "../../res/scene/case1/common/US/ga2.bin", $0, $50
@@ -129,24 +131,48 @@ GfxC1_GA3:
     INCBIN "../../res/scene/case1/common/US/ga3.bin", $0, $2c
 jr_03d_4a8f:
     INCBIN "../../res/scene/case1/common/US/ga3.bin", $2c, $5
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA4Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA5Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA6Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA7Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA8Empty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GA9Empty:
+    db $ff
 
 jr_03d_4a9a:
-    rst RST_38
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GAAEmpty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GABEmpty:
+    db $ff
 
 jr_03d_4a9c:
-    rst RST_38
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GACEmpty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GADEmpty:
+    db $ff
 
 jr_03d_4a9e:
-    rst RST_38
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GAEEmpty:
+    db $ff
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_GAFEmpty:
+    db $ff
     nop
     nop
     nop

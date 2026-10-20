@@ -10,17 +10,17 @@ SECTION "ROM Bank $036", ROMX[$4000], BANK[$36]
     dw GfxC1_G32 ; $02
     dw GfxC1_G33 ; $03
     dw GfxC1_G34 ; $04
-    dw $5037 ; $05
+    dw GfxC1_G35Empty ; $05
     dw GfxC1_G36 ; $06
     dw GfxC1_G37 ; $07
     dw GfxC1_G38 ; $08
-    dw $5d62 ; $09
+    dw GfxC1_G39Empty ; $09
     dw GfxC1_G3A ; $0a
     dw GfxC1_G3B ; $0b
     dw GfxC1_G3C ; $0c
     dw GfxC1_G3D ; $0d
     dw GfxC1_G3E ; $0e
-    dw $73c4 ; $0f
+    dw GfxC1_G3FEmpty ; $0f
 
 GfxC1_G30:
     INCBIN "../../res/scene/case1/common/US/g30.bin", $0, $22
@@ -280,6 +280,8 @@ jr_036_4fa8:
     INCBIN "../../res/scene/case1/common/US/g34.bin", $4a8, $1d
 jr_036_4fc5:
     INCBIN "../../res/scene/case1/common/US/g34.bin", $4c5, $72
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G35Empty:
     db $ff
 
 GfxC1_G36:
@@ -442,7 +444,9 @@ jr_036_5c59:
     INCBIN "../../res/scene/case1/common/US/g38.bin", $4a3, $ce
 jr_036_5d27:
     INCBIN "../../res/scene/case1/common/US/g38.bin", $571, $3b
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G39Empty:
+    db $ff
 
 GfxC1_G3A:
     INCBIN "../../res/scene/case1/common/US/g3a.bin", $0, $b
@@ -662,7 +666,9 @@ jr_036_735b:
     INCBIN "../../res/scene/case1/common/US/g3e.bin", $514, $12
 jr_036_736d:
     INCBIN "../../res/scene/case1/common/US/g3e.bin", $526, $57
-    rst RST_38
+; Empty graphics resource: UnpackSceneGfx returns on $ff.
+GfxC1_G3FEmpty:
+    db $ff
     nop
     nop
     nop

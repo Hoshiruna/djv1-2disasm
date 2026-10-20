@@ -98,9 +98,9 @@ jr_003_46bf:
     dw C2Room40
     dw C2Room41
     dw C2Room42
-    db $69
+    db LOW(C2Room43)
 jr_003_46e0:
-    db $4b
+    db HIGH(C2Room43)
     dw C2Room44
     dw C2Room45
     dw HamperStates

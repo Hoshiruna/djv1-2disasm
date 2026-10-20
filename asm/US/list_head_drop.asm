@@ -39,10 +39,12 @@ Call_000_33d8:
     ld c, $07
     ld hl, wWorkList
 
+; Compare the target with the head row, retaining the original carry-controlled retry.
+FindHeadCompare:
 jr_000_33e1:
     ld a, [wFindListValue]
     cp [hl]
-    jr z, jr_000_33f5
+    jr z, FindHeadReturn
 
     ld a, [wFoundRow]
     inc a
@@ -54,7 +56,9 @@ jr_000_33e1:
 Call_000_33f2:
     cp c
     ; Keep the original carry test: the normal first mismatch returns row one.
-    jr c, jr_000_33e1
+    jr c, FindHeadCompare
 
+; Return the matched row or row one after the initial mismatch.
+FindHeadReturn:
 jr_000_33f5:
     ret

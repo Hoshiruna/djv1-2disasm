@@ -1,7 +1,7 @@
 
 ; Inspect the body and retain the original identified-name gate.
 LookC1Siegel:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc1_00:
     ; Test object flag.

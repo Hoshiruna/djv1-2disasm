@@ -4,6 +4,8 @@ RunMapSteps:
 
     ld e, $01
 
+; Queue the next forward step, submit its rectangle, and wait eight ticks.
+MapStepsNextForward:
 jr_029_6888:
     ld a, e
     push de
@@ -15,7 +17,7 @@ jr_029_6888:
     inc e
     ld a, $0d
     cp e
-    jr nz, jr_029_6888
+    jr nz, MapStepsNextForward
 
     ret
 
@@ -25,6 +27,8 @@ ReverseMapSteps:
 
     ld e, $0c
 
+; Queue the next reverse step through zero, submit it, and wait eight ticks.
+MapStepsNextReverse:
 jr_029_689f:
     ld a, e
     push de
@@ -36,7 +40,7 @@ jr_029_689f:
     dec e
     ld a, $ff
     cp e
-    jr nz, jr_029_689f
+    jr nz, MapStepsNextReverse
 
     ret
 

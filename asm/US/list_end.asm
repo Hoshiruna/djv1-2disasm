@@ -17,11 +17,13 @@ Jump_000_324b:
     ld a, [wChangeMode]
     ld [wPrevListMode], a
     cp d
-    jr z, jr_000_325b
+    jr z, RefreshListModeDraw
 
     ld a, [wOpByte]
     ld [wChangeMode], a
 
+; Refresh the list after retaining or changing its selected mode.
+RefreshListModeDraw:
 jr_000_325b:
     call RefreshLists
     ret
@@ -33,12 +35,14 @@ CheckListFull:
     call ClearResult
     ld a, [wListMax]
     cp $0c
-    jr c, jr_000_3271
+    jr c, CheckListFullReturn
 
     ld a, $73
     call ShowMsg2
     call SetResult
 
+; Return the capacity result after the optional full-list reply.
+CheckListFullReturn:
 jr_000_3271:
     ret
 

@@ -20,12 +20,14 @@ Jump_000_3138:
     ld d, $00
 
 Jump_000_313d:
+; Write the next $ff working-list byte using the regional row length.
+ClearWorkListNextByte:
 jr_000_313d:
     ld a, $ff
     ld [hl+], a
     inc d
     ld a, d
     cp $07
-    jr c, jr_000_313d
+    jr c, ClearWorkListNextByte
 
     ret

@@ -40,7 +40,7 @@ jr_003_54c0:
     sla a
     jr c, C2MenuPrev
 
-    jr jr_003_549d
+    jr ChooseC2Menu
 
 ; Advance one row unless the selection is already at the stored maximum.
 C2MenuNext:
@@ -49,7 +49,7 @@ jr_003_54cd:
     ld a, [wC2MenuPick]
     ld hl, wC2MenuMax
     cp [hl]
-    jr nc, jr_003_549d
+    jr nc, ChooseC2Menu
 
     inc a
     ld [wC2MenuPick], a
@@ -63,7 +63,7 @@ jr_003_54df:
     call DrawC2Menu
     ld a, $08
     call WaitTicks
-    jr jr_003_549d
+    jr ChooseC2Menu
 
 ; Move back one row unless the selection is already zero.
 C2MenuPrev:
@@ -71,7 +71,7 @@ C2MenuPrev:
 jr_003_54e9:
     ld a, [wC2MenuPick]
     cp $00
-    jr z, jr_003_549d
+    jr z, ChooseC2Menu
 
     dec a
     ld [wC2MenuPick], a

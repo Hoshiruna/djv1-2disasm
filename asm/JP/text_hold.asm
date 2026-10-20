@@ -1,5 +1,6 @@
 
-; Set result bit 3 and consume the original extra argument only in Case I.
+; Set result bit 3. Case I consumes one extra byte; Case II consumes none.
+; ReadArg still updates wArg0 even though this handler does not use the value.
 ScriptHoldText:
 
 
@@ -21,7 +22,7 @@ RestoreTextLists:
 Call_000_2bae:
     ld a, [wSavedListMode]
     cp $00
-    jr z, jr_000_2bbb
+    jr z, ResumeTextUI
 
     ld [wChangeMode], a
     call RefreshLists

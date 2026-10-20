@@ -71,6 +71,7 @@ jr_003_52c7:
     ret
 
 ; Run case-two scene selection, restore the saved scene and audio cue, and refresh room objects.
+; Submit wFxCue unchanged; a saved base state can still contain bit seven.
 RestoreC2Effect:
 
 

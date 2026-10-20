@@ -43,6 +43,7 @@ Call_000_0581:
 
 
 ; HL = marker byte, BC = low-plane destination; decode both interleaved planes.
+; Reset active-run state for each resource; retain run state between its two planes.
 DecodeRleTiles:
 Jump_000_0588:
 jr_000_0588:

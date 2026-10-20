@@ -51,6 +51,7 @@ jr_003_5856:
     ret
 
 ; Write one coordinate pair and object WarMarkId at wObjList plus three times the index, followed by $ff.
+; The seven-record builders leave their final terminator at $c615.
 WriteWarMark:
 WriteC2FxObj:
 
@@ -87,6 +88,7 @@ Call_003_587f:
     ret
 
 ; Seven X/Y coordinate pairs.
+; At zero scroll, text clipping rejects the last mark's bottom two parts.
 WarMarkPos:
 C2FxObjPos:
     db $48, $20

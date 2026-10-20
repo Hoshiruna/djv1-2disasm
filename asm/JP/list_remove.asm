@@ -51,4 +51,4 @@ Call_000_2f47:
     ld [wChangeMode], a
     ld a, [wFoundRow]
     ld [wListRow], a
-    jr jr_000_2f34
+    jr FinishListDrop

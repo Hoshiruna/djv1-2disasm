@@ -1,7 +1,7 @@
 
 ; Describe the coat; flag $18 clear also shows the pocket hint.
 LookC1Coat:
-; Confirmed script commands; unrecognized command sequences remain raw bytes.
+; Opcode starts are annotated; scalar operands and inline item-match rows remain data.
 
 C1Sc4_00:
     ; Hold text; consume the Case I extra argument.
@@ -3470,10 +3470,10 @@ C1Sc4_47:
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1Gun2TargetPrompt; retain the interior label.
-    db $10
+    db LOW(C1Gun2TargetPrompt)
 
 jr_006_6e0c:
-    db $6e
+    db HIGH(C1Gun2TargetPrompt)
     ; Show message 1.
     db $01, $60
     ; End script.

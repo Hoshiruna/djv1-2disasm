@@ -18,7 +18,7 @@ Call_001_67e4:
     ld bc, wObjPresent
     ld de, SaveDataLen
 
-; Copy one validated payload byte from SRAM into working memory.
+; Copy one copy-zero payload byte after the validation/recovery attempt.
 LoadSavePayloadByte:
 jr_001_6802:
     ld a, [hl+]
