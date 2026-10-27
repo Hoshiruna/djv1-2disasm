@@ -43,7 +43,7 @@ jr_002_66a1:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $e0
-    call ShowMsg1
+    call ShowMsg1 ; Message Text10Message20: SUDDENLY, A MUGGERJUMPS OUT IN FRONTOF YOU![PAGE] / "MA ALWAYS TOLD MEIT WAS WRONG TA...
     call SetResult
     ret
 
@@ -79,7 +79,7 @@ jr_002_66d8:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $e5
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage65: A WOMAN COMES OUT / OF NOWHERE AND / SAYS, "IT'S BEEN AWHILE, SUGAR. I / JUST GOT OUT...
     call SetResult
     ret
 
@@ -118,7 +118,7 @@ jr_002_66fe:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $33
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0EMessage33: YOU NEVER THOUGHT / YOU'D SEE THE DAY![PAGE] / AN ALLIGATOR IN / THE SEWERS OF / CHIC...
     call SetResult
     ret
 
@@ -149,7 +149,7 @@ jr_002_6732:
     jr nz, C1BumRepeatEventReply
 
     ld a, $db
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage5B: YOU RUN INTO A BUMWHO BLOCKS YOUR / WAY. THE STENCH OFHIM IS ALMOST TOO / MUCH TO BEA...
     call SetResult
     ret
 
@@ -158,7 +158,7 @@ jr_002_6732:
 C1BumRepeatEventReply:
 jr_002_6752:
     ld a, $de
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage5E: THERE'S A / VAGRANT CROSSING / THE STREET.[END]
     call SetResult
     ret
 
@@ -207,7 +207,7 @@ jr_002_6788:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $eb
-    call ShowMsg1
+    call ShowMsg1 ; Message Text10Message2B: A MUGGER BLOCKS / YOUR WAY. HE WANTSALL OF YOUR MONEY![PAGE] / YOU PONDER THE / WISDO...
     call SetResult
     ret
 
@@ -269,7 +269,7 @@ jr_002_67d4:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f1
-    call ShowMsg1
+    call ShowMsg1 ; Message Text10Message31: THE MUGGER BLOCKS / YOUR WAY.[PAGE] / HIS BLACK EYE / SHINES AS A / SOUVENIR OF YOUR ...
     call SetResult
     ret
 
@@ -325,7 +325,7 @@ jr_002_6813:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f4
-    call ShowMsg1
+    call ShowMsg1 ; Message Text10Message34: THE MUGGER BLOCKS / YOUR WAY AGAIN, / THIS TIME WITH / TWO NASTY SHINERS.[PAGE] / IN ...
     call SetResult
     ret
 
@@ -387,6 +387,6 @@ jr_002_6869:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f6
-    call ShowMsg1
+    call ShowMsg1 ; Message Text10Message36: THE MUGGER BLOCKS / YOUR WAY ONCE / AGAIN, OBVIOUSLY / SUFFERING FROM / A BROKEN NOSE...
     call SetResult
     ret

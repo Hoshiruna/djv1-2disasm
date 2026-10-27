@@ -102,7 +102,7 @@ Jump_000_1900:
     cp $00
     jr nz, RoomItemEndCase2
 
-    ld a, $6f
+    ld a, C1TargetNoHit
     ld b, a
     ldh a, [hItemSlot]
     ld l, a
@@ -118,7 +118,7 @@ Jump_000_1900:
 ; Write the Case II end-of-list item ID after the terminal record.
 RoomItemEndCase2:
 jr_000_192f:
-    ld a, $a7
+    ld a, C2TargetNoHit
     ld b, a
     ldh a, [hItemSlot]
     ld l, a

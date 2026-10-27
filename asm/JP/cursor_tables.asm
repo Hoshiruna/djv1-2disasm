@@ -26,29 +26,29 @@ CursorPos:
     db $8c, $44
 
 CursorLinks:
-    db $02, $03, $0c, $16
-    db $05, $04, $0b, $16
-    db $04, $00, $0c, $16
-    db $00, $06, $0b, $08
-    db $01, $02, $0c, $16
-    db $07, $01, $0b, $16
-    db $03, $07, $0b, $08
-    db $06, $05, $0b, $08
-    db $ff, $15, $03, $17
-    db $0a, $15, $17, $ff
-    db $ff, $09, $17, $ff
-    db $18, $0c, $11, $07
-    db $0b, $19, $0d, $00
-    db $11, $19, $0e, $0c
-    db $12, $19
+    db $02, $03, InputSelPrevPage, InputSelRoomFineStart
+    db $05, $04, InputSelNextPage, InputSelRoomFineStart
+    db $04, $00, InputSelPrevPage, InputSelRoomFineStart
+    db $00, $06, InputSelNextPage, $08
+    db $01, $02, InputSelPrevPage, InputSelRoomFineStart
+    db $07, $01, InputSelNextPage, InputSelRoomFineStart
+    db $03, $07, InputSelNextPage, $08
+    db $06, $05, InputSelNextPage, $08
+    db $ff, InputSelRoomFine, $03, InputSelRoomGrid
+    db InputSelAux, InputSelRoomFine, InputSelRoomGrid, $ff
+    db $ff, InputSelSelf, InputSelRoomGrid, $ff
+    db CursorLinkNextPage, InputSelPrevPage, $11, $07
+    db InputSelNextPage, CursorLinkPrevPage, InputSelListFirst, $00
+    db $11, CursorLinkPrevPage, $0e, InputSelPrevPage
+    db $12, CursorLinkPrevPage
 jr_001_6312:
-    db $0f, $0d
-    db $13, $19, $10, $0e
-    db $14, $19, $ff, $0f
-    db $18, $0d, $12, $0b
-    db $18, $0e, $13, $11
-    db $18, $0f, $14, $12
-    db $18, $10, $ff
+    db $0f, InputSelListFirst
+    db $13, CursorLinkPrevPage, $10, $0e
+    db $14, CursorLinkPrevPage, $ff, $0f
+    db CursorLinkNextPage, InputSelListFirst, $12, InputSelNextPage
+    db CursorLinkNextPage, $0e, $13, $11
+    db CursorLinkNextPage, $0f, $14, $12
+    db CursorLinkNextPage, $10, $ff
 jr_001_632b:
     db $13
 
@@ -70,10 +70,10 @@ jr_001_633a:
     db $ff, $ff, $ff, $ff
     db $ff, $ff, $ff, $ff
     db $11, $ff, $0e, $ff
-    db $12, $ff, $0f, $0d
+    db $12, $ff, $0f, InputSelListFirst
     db $13, $ff, $10, $0e
     db $14, $ff, $ff, $0f
-    db $ff, $0d, $12, $ff
+    db $ff, InputSelListFirst, $12, $ff
     db $ff, $0e, $13, $11
     db $ff, $0f, $14, $12
     db $ff, $10, $ff, $13

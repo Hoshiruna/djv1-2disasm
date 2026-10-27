@@ -2,7 +2,7 @@
 ; Mode zero applies cursor coordinates; other modes dispatch in slot zero and restore the original slot on return.
 HandleInput:
     ld a, [wInputMode]
-    cp $00
+    cp InputModeCursor
     jr nz, HandleInputDispatch
 
 ; Copy candidate coordinates to the current cursor without changing the operation slot.
@@ -27,7 +27,7 @@ jr_001_5aa1:
     pop af
     push hl
     ld d, a
-    ld a, $00
+    ld a, OpSlotPrimary
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a
@@ -60,7 +60,7 @@ jr_001_5ad7:
     ld a, [wSelRow]
     ld [wListMarkRow], a
     call ClearListMark
-    ld a, [wSelRow+16]
+    ld a, [wSelRow+OpSlotAlternate]
     ld [wListMarkRow], a
     call ClearListMark
     call ClearTargetMark
@@ -76,7 +76,7 @@ HandleInputClearSlots:
 jr_001_5af9:
     call ClearSelect
     call ClearAltSlot
-    ld a, $bf
+    ld a, AutoActionResetPending
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
@@ -84,7 +84,7 @@ jr_001_5af9:
 
     ld a, $ff
     ld [wSelAction], a
-    ld a, $bf
+    ld a, AutoActionResetPending
     call ClearObjFlag
 
 ; Restore the saved operation-slot offset before returning.
@@ -107,7 +107,7 @@ HandleAltInput:
     or $04
     ld [wStateResult], a
     ld a, [wInputMode]
-    cp $00
+    cp InputModeCursor
     jr nz, HandleAltInputDispatch
 
     call ApplyCursor
@@ -118,7 +118,7 @@ HandleAltInput:
 HandleAltInputDispatch:
 jr_001_5b32:
     ld d, a
-    ld a, $10
+    ld a, OpSlotAlternate
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a
@@ -137,12 +137,12 @@ jr_001_5b32:
     call PrepItem
     call RunAltAction
     call WaitFrame
-    ld a, [wSelRow+16]
+    ld a, [wSelRow+OpSlotAlternate]
     ld [wListMarkRow], a
     call ClearListMark
     call ClearTargetMark
     ld d, a
-    ld a, $00
+    ld a, OpSlotPrimary
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a

@@ -1,5 +1,5 @@
 
-; Keep the regional action-4 list limit; resolve the action code, then use the fallback or start its script.
+; Keep the regional take-action list limit; resolve the action code, then use the fallback or start its script.
 RunC2Action:
 
 
@@ -9,7 +9,7 @@ Call_000_3a79:
     jr z, C2ActionLookup
 
     ld a, [wSelAction]
-    cp $04
+    cp SelActionTake
     jr nz, C2ActionLookup
 
     ld a, [wListMax]

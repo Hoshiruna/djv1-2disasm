@@ -3,14 +3,14 @@
 RunC2Shop:
     call ScriptHoldText
     ld a, $9c
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message1C: おとこは ヒソヒソと いった。[PAGE] / 「おれは ブラックマーケットの /  ばいにんだ。 /  いっとくが うりものの ねだんは /  やすくないぜ・・・![P...
 
 ; Show and dispatch the shop menu, including repeat purchases.
 C2ShopMenu:
 
 Jump_003_53d8:
     ld a, $38
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message38: 「なにが ほしいんだい?」 /          でんち /          ピストルのたま /          いらない[WAIT_END]
     xor a
     ld [wC2MenuMode], a
     ld [wC2MenuPick], a
@@ -61,7 +61,7 @@ ShopBoughtReply:
 
 jr_003_5431:
     ld a, $39
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message39: 「まいどあり! /  ほかに なにか ほしいかい?」 /          は い /          いいえ[WAIT_END]
     ld a, $01
     ld [wC2MenuMode], a
     ld [wC2MenuMax], a
@@ -85,7 +85,7 @@ ShopCashShort:
 
 jr_003_545b:
     ld a, $9b
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message1B: 「かねが たりねえぜ・・・。」[END]
     jp ClearTextHold
 
 ; Show the original stop-buying reply at the pre-purchase stock threshold.
@@ -94,7 +94,7 @@ ShopStockStop:
 
 jr_003_5463:
     ld a, $4f
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message4F: おとこは かおを しかめながら / おれに いった。[PAGE] / 「おまえさん やめときな・・・。 /  これいじょうは かねの /  むだづかいさ!」[END]
     jp ClearTextHold
 
 ; Below 120 bullets, spend 100 dollars and add six; retain item registration and shared messages.

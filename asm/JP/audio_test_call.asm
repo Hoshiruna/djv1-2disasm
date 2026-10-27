@@ -5,7 +5,7 @@ AudioTestCall:
 
 Jump_000_1c45:
     push af
-    ld a, $02
+    ld a, AudioTestRomBank
     call PushRomBank
     pop af
     call AudioTest

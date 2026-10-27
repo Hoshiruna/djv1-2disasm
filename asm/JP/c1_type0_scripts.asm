@@ -5,7 +5,7 @@ LookC1CeilLamp1:
 
 C1Sc0_00:
     ; Show message 0.
-    db $00, $03
+    db $00, $03 ; Message Text0CMessage03: つりさげしきの でんとうだ。[END]
     ; End script.
     db $ff
 
@@ -14,7 +14,7 @@ C1WhoTalkReply:
 
 C1Sc0_01:
     ; Show message 0.
-    db $00, $1b
+    db $00, $1b ; Message Text0CMessage1B: だれに はなしかけているんだ?[END]
     ; End script.
     db $ff
 
@@ -30,7 +30,7 @@ C1PunchFixture:
 
 C1Sc0_03:
     ; Show message 0.
-    db $00, $1a
+    db $00, $1a ; Message Text0CMessage1A: コン コン! / ・・・・・・なにも おこらない。[END]
     ; End script.
     db $ff
 
@@ -39,7 +39,7 @@ C1SceneQuestion:
 
 C1Sc0_04:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: ははっ・・・。 / バカなことを してしまった。[END]
     ; End script.
     db $ff
 
@@ -48,7 +48,7 @@ LookC1ToiletRoll:
 
 C1Sc0_05:
     ; Show message 0.
-    db $00, $04
+    db $00, $04 ; Message Text0CMessage04: トイレットぺーパーだ。 / ざつぜんとしたなかに ぶんめいの / かおりを ただよわせている。[END]
     ; End script.
     db $ff
 
@@ -57,7 +57,7 @@ LookC1CeilLamp2:
 
 C1Sc0_06:
     ; Show message 0.
-    db $00, $20
+    db $00, $20 ; Message Text0CMessage20: でんとうだ。 / てんじょうから つりさがっている。[END]
     ; End script.
     db $ff
 
@@ -66,7 +66,7 @@ C1ActionRefusal:
 
 C1Sc0_07:
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: ・・・・・・むりか。[END]
     ; End script.
     db $ff
 
@@ -85,7 +85,7 @@ C1Sc0_08:
     db $04
     dw C1BrokenViewReply
     ; Run scene effect.
-    db $46, $05
+    db $46, C1FxIdMirrorReflection
     ; Set object flag.
     db $17, C1Mirror1Seen
     ; End script.
@@ -101,7 +101,7 @@ C1Loc0_00:
     db $04
     dw C1BrokenViewReply
     ; Show message 0.
-    db $00, $25
+    db $00, $25 ; Message Text0CMessage25: カガミだ。 / もくせいの ワクが ついている。[END]
     ; End script.
     db $ff
 
@@ -110,7 +110,7 @@ C1BrokenViewReply:
 
 C1Loc0_01:
     ; Show message 2.
-    db $02, $6a
+    db $02, $6a ; Message Text10Message6A: われてしまっている。 / それいがいの へんかは みられない。[END]
     ; End script.
     db $ff
 
@@ -119,7 +119,7 @@ LookC1Sink1:
 
 C1Sc0_09:
     ; Show message 0.
-    db $00, $21
+    db $00, $21 ; Message Text0CMessage21: ふつうの せんめんだいだ。[END]
     ; End script.
     db $ff
 
@@ -130,14 +130,14 @@ C1Sc0_0A:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 0.
-    db $00, $27
+    db $00, $27 ; Message Text0CMessage27: みずたまりが ある。[END]
     ; Test object flag.
     db $16, C1WomenStallSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1ResumeTextEnd
     ; Show message 2.
-    db $02, $38
+    db $02, $38 ; Message Text10Message38: それは ひだりがわの ドアから / ながれでた もののようだ。[PAGE] / ・・・イヤな よかんがする・・・。[END]
     ; End script.
     db $ff
 
@@ -155,7 +155,7 @@ C1HitObjectReply:
 
 C1Sc0_0B:
     ; Show message 2.
-    db $02, $3c
+    db $02, $3c ; Message Text10Message3C: こんなもの たたいて どうするんだ![END]
     ; End script.
     db $ff
 
@@ -164,7 +164,7 @@ LookC1OldLamp:
 
 C1Sc0_0C:
     ; Show message 0.
-    db $00, $2f
+    db $00, $2f ; Message Text0CMessage2F: ふるぼけた でんとうが / つりさがっている。[END]
     ; End script.
     db $ff
 
@@ -178,7 +178,7 @@ C1Sc0_0D:
     db $04
     dw C1BrokenViewReply
     ; Show message 0.
-    db $00, $2d
+    db $00, $2d ; Message Text0CMessage2D: あまり うつりのよくない カガミだ。どうやら みずあかのせいのようだ。[END]
     ; End script.
     db $ff
 
@@ -187,7 +187,7 @@ LookC1Sink2:
 
 C1Sc0_0E:
     ; Show message 0.
-    db $00, $30
+    db $00, $30 ; Message Text0CMessage30: どこにでもある せんめんだいだ。[END]
     ; End script.
     db $ff
 
@@ -196,7 +196,7 @@ LookC1Puddle2:
 
 C1Sc0_0F:
     ; Show message 0.
-    db $00, $35
+    db $00, $35 ; Message Text0CMessage35: みずたまりだ。 / すいそうから みずが もれている。[END]
     ; End script.
     db $ff
 
@@ -205,7 +205,7 @@ LookC1ToiletRoll2:
 
 C1Sc0_10:
     ; Show message 0.
-    db $00, $34
+    db $00, $34 ; Message Text0CMessage34: トイレットぺーパーだ。 / だれも つかった ようすはない。[END]
     ; End script.
     db $ff
 
@@ -214,7 +214,7 @@ LookC1BarCounter:
 
 C1Sc0_11:
     ; Show message 0.
-    db $00, $41
+    db $00, $41 ; Message Text0CMessage41: バーの カウンターだ。 / よく みがかれている。[END]
     ; End script.
     db $ff
 
@@ -228,7 +228,7 @@ C1Sc0_12:
     db $04
     dw C1BrokenViewReply
     ; Show message 0.
-    db $00, $3c
+    db $00, $3c ; Message Text0CMessage3C: マドごしに とおりが みえる。 / ・・・・・・だれも いないようだ。[END]
     ; End script.
     db $ff
 
@@ -237,7 +237,7 @@ LookC1SpiderWeb:
 
 C1Sc0_13:
     ; Show message 0.
-    db $00, $4d
+    db $00, $4d ; Message Text0CMessage4D: クモのすが はっている。 / ・・・クモは いないようだ。[END]
     ; End script.
     db $ff
 
@@ -246,7 +246,7 @@ LookC1CellarLamp:
 
 C1Sc0_14:
     ; Show message 0.
-    db $00, $4a
+    db $00, $4a ; Message Text0CMessage4A: ふつうの でんとうだ。 / かわった ところは ない。[END]
     ; End script.
     db $ff
 
@@ -260,7 +260,7 @@ C1Sc0_15:
     db $04
     dw C1BarrelAgain
     ; Show message 0.
-    db $00, $4b
+    db $00, $4b ; Message Text0CMessage4B: おおきな ワインの たるだ。 / なかに ワインが / はいっているのだろうか・・・?[END]
     ; Set object flag.
     db $17, C1BarrelSeen
     ; End script.
@@ -271,7 +271,7 @@ C1BarrelAgain:
 
 C1Loc0_02:
     ; Show message 0.
-    db $00, $53
+    db $00, $53 ; Message Text0CMessage53: おおきな ワインの たるだ。[END]
     ; End script.
     db $ff
 
@@ -280,7 +280,7 @@ LookC1Spigot:
 
 C1Sc0_16:
     ; Show message 0.
-    db $00, $4c
+    db $00, $4c ; Message Text0CMessage4C: ワインの たるの せんだ。[END]
     ; End script.
     db $ff
 
@@ -294,7 +294,7 @@ C1Sc0_17:
     db $04
     dw C1RackBottleKnown
     ; Show message 0.
-    db $00, $4f
+    db $00, $4f ; Message Text0CMessage4F: きれいな ワインの ビンだ。 / 1つだけ ほこりが ついていない。[PAGE] / ・・・・・・なにか ありそうだな。[END]
     ; End script.
     db $ff
 
@@ -303,7 +303,7 @@ C1RackBottleKnown:
 
 C1Loc0_03:
     ; Show message 2.
-    db $02, $3e
+    db $02, $3e ; Message Text10Message3E: かくしドアを あけるための ワインのビンだ。[END]
     ; End script.
     db $ff
 
@@ -317,11 +317,11 @@ C1Sc0_18:
     db $04
     dw C1RackOpenAgain
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Set state and refresh.
-    db $36, $08
+    db $36, C1StateRackPassageOpen
     ; Show message 0.
-    db $00, $51
+    db $00, $51 ; Message Text0CMessage51: こっ これは・・・![PAGE] / ギーッという にぶいおとと ともに / ビンだなが スライドして つうろが / あらわれた。[PAGE] / ・・・・・・かくしべや...
     ; Set object flag.
     db $17, C1RackBottlePressed
     ; End script.
@@ -332,11 +332,11 @@ C1RackOpenAgain:
 
 C1Loc0_04:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Set state and refresh.
-    db $36, $08
+    db $36, C1StateRackPassageOpen
     ; Show message 2.
-    db $02, $3f
+    db $02, $3f ; Message Text10Message3F: ・・・・・・!![PAGE] / ビンだなが スライドして つうろが / あらわれた。[END]
     ; End script.
     db $ff
 
@@ -345,7 +345,7 @@ LookC1BareBulb:
 
 C1Sc0_19:
     ; Show message 0.
-    db $00, $57
+    db $00, $57 ; Message Text0CMessage57: はだかでんきゅうだ。 / ひみつの つうろの イメージに / ぴったりだな。[END]
     ; End script.
     db $ff
 
@@ -359,7 +359,7 @@ C1Sc0_1A:
     db $04
     dw C1RouletteAgain
     ; Show message 0.
-    db $00, $5f
+    db $00, $5f ; Message Text0CMessage5D: ルーレットだ。 / みているだけで こうふんしてくる。[PAGE] / まえに やったことが / あるのだろうか。[END]
     ; End script.
     db $ff
 
@@ -368,7 +368,7 @@ C1RouletteAgain:
 
 C1Loc0_05:
     ; Show message 0.
-    db $00, $66
+    db $00, $66 ; Message Text0CMessage66: ルーレットだ。[END]
     ; End script.
     db $ff
 
@@ -389,13 +389,13 @@ C1Sc0_1B:
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 0.
-    db $00, $60
+    db $00, $60 ; Message Text0CMessage60: スロットマシンだ。 / こいつで おれの うんを / ためしてみようか・・・。[END]
     ; Show message 2.
-    db $02, $5f
+    db $02, $5f ; Message Text10Message5F: あっ・・・! / うけざらの ところに コインが / 1まい おちているぞ![END]
     ; Set text name 1.
     db $38, $01
     ; Show message 2.
-    db $02
+    db $02 ; Message Text10Message13: コイン [NUM8_WRAM:38C5]まいを とった。[END]
 
 jr_006_468f:
     db $15
@@ -409,7 +409,7 @@ C1SlotPlainView:
 
 C1Loc0_06:
     ; Show message 0.
-    db $00, $60
+    db $00, $60 ; Message Text0CMessage60: スロットマシンだ。 / こいつで おれの うんを / ためしてみようか・・・。[END]
     ; End script.
     db $ff
 
@@ -418,7 +418,7 @@ C1SlotNeedsCoin:
 
 C1Sc0_1C:
     ; Show message 2.
-    db $02, $64
+    db $02, $64 ; Message Text10Message64: そう そう・・・! / コインを いれるんだったな・・・![END]
     ; End script.
     db $ff
 
@@ -427,14 +427,14 @@ OpenC1LiftDoor:
 
 C1Sc0_1D:
     ; Test state bit.
-    db $2e, $0c
+    db $2e, C1StateCasinoLiftDoorOpen
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftDoorOpen
     ; Show message 2.
-    db $02, $67
+    db $02, $67 ; Message Text10Message67: ウィーン・・・。 / エレべータの ドアが あいた。[END]
     ; Set state and refresh.
-    db $33, $0c
+    db $33, C1StateCasinoLiftDoorOpen
     ; End script.
     db $ff
 
@@ -445,7 +445,7 @@ C1Loc0_18:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -454,7 +454,7 @@ LookC1TopButton:
 
 C1Sc0_1E:
     ; Show message 0.
-    db $00, $6c
+    db $00, $6c ; Message Text0CMessage6C: いちばん うえのフロアの / ボタンだろう。[END]
     ; End script.
     db $ff
 
@@ -463,21 +463,21 @@ RideC1LiftTop:
 
 C1Sc0_1F:
     ; Test current room.
-    db $19, $0a
+    db $19, C1RoomIdCasinoLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftTopFrom0A
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftTopFrom3F
     ; Clear state and refresh.
-    db $34, $0f
+    db $34, C1StateTopFloorLiftDoorOpen
     ; Show message 0.
-    db $00, $71
+    db $00, $71 ; Message Text0CMessage71: ボタンを おすと ドアが しまった。[PAGE] / すぐに ドアが ひらいた。 / ・・・・・・おや? / さっきと おなじ ばしょじゃないか![END]
     ; Set state and refresh.
-    db $33, $0f
+    db $33, C1StateTopFloorLiftDoorOpen
     ; End script.
     db $ff
 
@@ -486,18 +486,18 @@ C1LiftTopFrom0A:
 
 C1Loc0_19:
     ; Clear state and refresh.
-    db $34, $0c
+    db $34, C1StateCasinoLiftDoorOpen
 
 ; Enter room 40, show the lift travel reply, and open its original door state.
 C1LiftTopArrival:
 
 C1Loc0_1A:
     ; Set current room.
-    db $35, $40
+    db $35, C1RoomIdTopFloorLift
     ; Show message 0.
-    db $00, $70
+    db $00, $70 ; Message Text0CMessage70: ボタンを おすと エレべータが / うごきはじめた。 / ウィーン・・・・・・。[PAGE] / ・・・・・・ゴウウウン。 / エレべータが とまって ドアが / ひらい...
     ; Set state and refresh.
-    db $33, $0f
+    db $33, C1StateTopFloorLiftDoorOpen
     ; End script.
     db $ff
 
@@ -506,7 +506,7 @@ C1LiftTopFrom3F:
 
 C1Loc0_1B:
     ; Clear state and refresh.
-    db $34, $0e
+    db $34, C1StateHiddenOfficeLiftDoorOpen
     ; Jump to script.
     db $1c
     dw C1LiftTopArrival
@@ -516,7 +516,7 @@ LookC1BlankButton:
 
 C1Sc0_20:
     ; Show message 0.
-    db $00, $6d
+    db $00, $6d ; Message Text0CMessage6D: なんの しるしもない ボタンだ。[END]
     ; End script.
     db $ff
 
@@ -525,28 +525,28 @@ C1LiftToRoom3F:
 
 C1Sc0_21:
     ; Test current room.
-    db $19, $0a
+    db $19, C1RoomIdCasinoLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1Lift0ATo3F
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftReopen3F
     ; Clear state and refresh.
-    db $34, $0f
+    db $34, C1StateTopFloorLiftDoorOpen
 
 ; Set room $3f, show the travel reply, and open state $0e.
 C1LiftArrive3F:
 
 C1Loc0_1C:
     ; Set current room.
-    db $35, $3f
+    db $35, C1RoomIdHiddenOfficeLift
     ; Show message 0.
-    db $00, $70
+    db $00, $70 ; Message Text0CMessage70: ボタンを おすと エレべータが / うごきはじめた。 / ウィーン・・・・・・。[PAGE] / ・・・・・・ゴウウウン。 / エレべータが とまって ドアが / ひらい...
     ; Set state and refresh.
-    db $33, $0e
+    db $33, C1StateHiddenOfficeLiftDoorOpen
     ; End script.
     db $ff
 
@@ -555,7 +555,7 @@ C1Lift0ATo3F:
 
 C1Loc0_1D:
     ; Clear state and refresh.
-    db $34, $0c
+    db $34, C1StateCasinoLiftDoorOpen
     ; Jump to script.
     db $1c
     dw C1LiftArrive3F
@@ -565,11 +565,11 @@ C1LiftReopen3F:
 
 C1Loc0_1E:
     ; Clear state and refresh.
-    db $34, $0e
+    db $34, C1StateHiddenOfficeLiftDoorOpen
     ; Show message 0.
-    db $00, $71
+    db $00, $71 ; Message Text0CMessage71: ボタンを おすと ドアが しまった。[PAGE] / すぐに ドアが ひらいた。 / ・・・・・・おや? / さっきと おなじ ばしょじゃないか![END]
     ; Set state and refresh.
-    db $33, $0e
+    db $33, C1StateHiddenOfficeLiftDoorOpen
     ; End script.
     db $ff
 
@@ -578,17 +578,17 @@ C1LiftToRoom0A:
 
 C1Sc0_22:
     ; Test current room.
-    db $19, $0a
+    db $19, C1RoomIdCasinoLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftReopen0A
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1Lift3FTo0A
     ; Clear state and refresh.
-    db $34, $0f
+    db $34, C1StateTopFloorLiftDoorOpen
     ; Jump to script.
     db $1c
     dw C1LiftArrive0A
@@ -598,11 +598,11 @@ C1LiftReopen0A:
 
 C1Loc0_1F:
     ; Clear state and refresh.
-    db $34, $0c
+    db $34, C1StateCasinoLiftDoorOpen
     ; Show message 0.
-    db $00, $71
+    db $00, $71 ; Message Text0CMessage71: ボタンを おすと ドアが しまった。[PAGE] / すぐに ドアが ひらいた。 / ・・・・・・おや? / さっきと おなじ ばしょじゃないか![END]
     ; Set state and refresh.
-    db $33, $0c
+    db $33, C1StateCasinoLiftDoorOpen
     ; End script.
     db $ff
 
@@ -611,18 +611,18 @@ C1Lift3FTo0A:
 
 C1Loc0_20:
     ; Clear state and refresh.
-    db $34, $0e
+    db $34, C1StateHiddenOfficeLiftDoorOpen
 
 ; Set room $0a, show the travel reply, and open state $0c.
 C1LiftArrive0A:
 
 C1Loc0_21:
     ; Set current room.
-    db $35, $0a
+    db $35, C1RoomIdCasinoLift
     ; Show message 0.
-    db $00, $70
+    db $00, $70 ; Message Text0CMessage70: ボタンを おすと エレべータが / うごきはじめた。 / ウィーン・・・・・・。[PAGE] / ・・・・・・ゴウウウン。 / エレべータが とまって ドアが / ひらい...
     ; Set state and refresh.
-    db $33, $0c
+    db $33, C1StateCasinoLiftDoorOpen
     ; End script.
     db $ff
 
@@ -631,7 +631,7 @@ LookC1LowButton:
 
 C1Sc0_23:
     ; Show message 0.
-    db $00, $6e
+    db $00, $6e ; Message Text0CMessage6E: いちばん したのフロアの / ボタンだろう。[END]
     ; End script.
     db $ff
 
@@ -640,32 +640,32 @@ RideC1LiftSewer:
 
 C1Sc0_24:
     ; Test current room.
-    db $19, $0a
+    db $19, C1RoomIdCasinoLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftSewerFrom0A
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftSewerFrom3F
     ; Clear state and refresh.
-    db $34, $0f
+    db $34, C1StateTopFloorLiftDoorOpen
 
 ; Prepare the original target, flag, and conditional move to room 38 before its sewer reply.
 C1LiftSewerMove:
 
 C1Loc0_22:
     ; Show message 0.
-    db $00, $70
+    db $00, $70 ; Message Text0CMessage70: ボタンを おすと エレべータが / うごきはじめた。 / ウィーン・・・・・・。[PAGE] / ・・・・・・ゴウウウン。 / エレべータが とまって ドアが / ひらい...
     ; Set first item type and ID.
-    db $5c, $05, $4c
+    db $5c, $05, C1DoorIdLiftSewerExit
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $38
+    db $06, C1RoomIdLiftSewer
     ; Show message 2.
-    db $02, $bb
+    db $02, $bb ; Message Text0DMessage3B: おや? / げすいどうに ついてしまった。[PAGE] / はっはあああーん・・・。 / どうも ここは カジノの きゃくの / ための にげみちらしい・・・。[END]
     ; End script.
     db $ff
 
@@ -674,7 +674,7 @@ C1LiftSewerFrom0A:
 
 C1Loc0_23:
     ; Clear state and refresh.
-    db $34, $0c
+    db $34, C1StateCasinoLiftDoorOpen
     ; Jump to script.
     db $1c
     dw C1LiftSewerMove
@@ -684,7 +684,7 @@ C1LiftSewerFrom3F:
 
 C1Loc0_24:
     ; Clear state and refresh.
-    db $34, $0e
+    db $34, C1StateHiddenOfficeLiftDoorOpen
     ; Jump to script.
     db $1c
     dw C1LiftSewerMove
@@ -694,7 +694,7 @@ LookC1LiftButton:
 
 C1Sc0_25:
     ; Show message 0.
-    db $00, $79
+    db $00, $79 ; Message Text0CMessage79: エレべータの ボタンだ。 / なんの しるしも ない。[END]
     ; End script.
     db $ff
 
@@ -703,14 +703,14 @@ OpenC1LiftTopDoor:
 
 C1Sc0_26:
     ; Test state bit.
-    db $2e, $0f
+    db $2e, C1StateTopFloorLiftDoorOpen
     ; Branch if result bit 0 is set.
     db $04
     dw C1LiftTopDoorOpen
     ; Show message 2.
-    db $02, $67
+    db $02, $67 ; Message Text10Message67: ウィーン・・・。 / エレべータの ドアが あいた。[END]
     ; Set state and refresh.
-    db $33, $0f
+    db $33, C1StateTopFloorLiftDoorOpen
     ; End script.
     db $ff
 
@@ -721,7 +721,7 @@ C1Loc0_25:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -735,7 +735,7 @@ C1Sc0_27:
     db $04
     dw C1ChairBrief
     ; Show message 0.
-    db $00, $73
+    db $00, $73 ; Message Text0CMessage73: でんきイスのようにみえるが コードはついていない。[PAGE] / あたまと うでの ささえが あって / ちょうど はいしゃの イスのようだ。[PAGE] / なにをす...
     ; End script.
     db $ff
 
@@ -744,7 +744,7 @@ C1ChairBrief:
 
 C1Loc0_07:
     ; Show message 2.
-    db $02, $4d
+    db $02, $4d ; Message Text10Message4D: かわった かたちの イスだ。 / なんだか きみが わるいな・・・。[END]
     ; End script.
     db $ff
 
@@ -753,7 +753,7 @@ LookC1LooseHandset:
 
 C1Sc0_28:
     ; Show message 2.
-    db $02, $83
+    db $02, $83 ; Message Text0DMessage03: じゅわきだ。 / コードが きれている![END]
     ; End script.
     db $ff
 
@@ -762,7 +762,7 @@ LookC1OldPhone:
 
 C1Sc0_29:
     ; Show message 2.
-    db $02, $86
+    db $02, $86 ; Message Text0DMessage06: こっとうひんの でんわきだ。 / じゅわきの コードが きれている![END]
     ; End script.
     db $ff
 
@@ -771,7 +771,7 @@ LookC1PlainWin1:
 
 C1Sc0_2A:
     ; Show message 2.
-    db $02, $98
+    db $02, $98 ; Message Text0DMessage18: マドからは なにも みえない。[END]
     ; End script.
     db $ff
 
@@ -780,7 +780,7 @@ LookC1DeskLamp:
 
 C1Sc0_2B:
     ; Show message 2.
-    db $02, $9a
+    db $02, $9a ; Message Text0DMessage1A: スタンダードな かたちをした / でんきスタンドだ。[END]
     ; End script.
     db $ff
 
@@ -789,7 +789,7 @@ LookC1Typewriter:
 
 C1Sc0_2C:
     ; Show message 2.
-    db $02, $9b
+    db $02, $9b ; Message Text0DMessage1B: タイプライターだ。 / うちだした ぶんしょは まわりに / みあたらない。[END]
     ; End script.
     db $ff
 
@@ -800,9 +800,9 @@ C1Sc0_2D:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $9c
+    db $02, $9c ; Message Text0DMessage1C: でんわだ。[END]
     ; Show message 2.
-    db $02, $70
+    db $02, $70 ; Message Text10Message70: べつに かわったところは ない。[END]
     ; End script.
     db $ff
 
@@ -811,7 +811,7 @@ LookC1BoxPoster1:
 
 C1Sc0_2E:
     ; Show message 2.
-    db $02, $a4
+    db $02, $a4 ; Message Text0DMessage24: ボクサーの ポスターだ。 / ・・・「ドッグホウス・リバー」?[END]
     ; End script.
     db $ff
 
@@ -820,7 +820,7 @@ LookC1BoxPoster2:
 
 C1Sc0_2F:
     ; Show message 2.
-    db $02, $a5
+    db $02, $a5 ; Message Text0DMessage25: ボクサーの ポスターだ。 / ・・・「パック・マクフォーレン」?[END]
     ; End script.
     db $ff
 
@@ -839,7 +839,7 @@ C1Sc0_30:
     db $04
     dw C1AcePosterFx0A
     ; Show message 2.
-    db $02, $a6
+    db $02, $a6 ; Message Text0DMessage26: ボクサーの ポスターだ。 / ・・・「エース・ハーディング」?[END]
     ; End script.
     db $ff
 
@@ -848,7 +848,7 @@ C1AcePosterFx0B:
 
 C1Loc0_08:
     ; Run scene effect.
-    db $46, $0b
+    db $46, C1FxIdPosterRecognized
     ; End script.
     db $ff
 
@@ -857,7 +857,7 @@ C1AcePosterFx0A:
 
 C1Loc0_09:
     ; Run scene effect.
-    db $46, $0a
+    db $46, C1FxIdPosterUncertain
     ; End script.
     db $ff
 
@@ -866,7 +866,7 @@ LookC1PlainWin2:
 
 C1Sc0_31:
     ; Show message 2.
-    db $02, $98
+    db $02, $98 ; Message Text0DMessage18: マドからは なにも みえない。[END]
     ; End script.
     db $ff
 
@@ -875,7 +875,7 @@ LookC1LuxuryCar:
 
 C1Sc0_32:
     ; Show message 2.
-    db $02, $b4
+    db $02, $b4 ; Message Text0DMessage34: くろい メルセデス べンツだ。 / だれも のっていない。[END]
     ; End script.
     db $ff
 
@@ -884,7 +884,7 @@ LookC1Newsstand:
 
 C1Sc0_33:
     ; Show message 2.
-    db $02, $c1
+    db $02, $c1 ; Message Text0DMessage41: しんぶんうりばだ。 / うすぎたない いたばりの こやだ。[END]
     ; End script.
     db $ff
 
@@ -893,7 +893,7 @@ LookC1NewsBoy:
 
 C1Sc0_34:
     ; Show message 2.
-    db $02, $c0
+    db $02, $c0 ; Message Text0DMessage40: くらくて かおは よくみえないが / どうも わかい おとこらしい。[END]
     ; End script.
     db $ff
 
@@ -907,7 +907,7 @@ C1Sc0_35:
     db $04
     dw C1NewsBoyWarn
     ; Show message 2.
-    db $02, $c3
+    db $02, $c3 ; Message Text0DMessage43: 「いちぶ 25セントだよ! /  したがわの いちばん みぎはしから とってくださいね。」[END]
     ; End script.
     db $ff
 
@@ -916,7 +916,7 @@ C1NewsBoyWarn:
 
 C1Loc0_0A:
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text0DMessage47: しんぶんうりは こえを ひそめて / おれに いった。[PAGE] / 「まだ ウロウロ しているのかい。 /  さっさと すがたを かくしたほうが いいと おもうよ!」...
     ; End script.
     db $ff
 
@@ -925,7 +925,7 @@ HitC1NewsBoy:
 
 C1Sc0_36:
     ; Show message 2.
-    db $02, $c9
+    db $02, $c9 ; Message Text0DMessage49: スカッ![PAGE] / あたらない! / つかれていて ちからが はいらない![END]
     ; End script.
     db $ff
 
@@ -939,7 +939,7 @@ C1Sc0_37:
     db $04
     dw C1BrokenViewReply
     ; Show message 2.
-    db $02, $cc
+    db $02, $cc ; Message Text0DMessage4C: おおきな マドだ。 / もじが かいてある。[PAGE] / ピストルと だんがんを / あつかっているらしい。[END]
     ; End script.
     db $ff
 
@@ -948,7 +948,7 @@ LookC1StreetLamp:
 
 C1Sc0_38:
     ; Show message 2.
-    db $02, $d7
+    db $02, $d7 ; Message Text0DMessage57: しゃれた かたちの がいとうだ。[END]
     ; End script.
     db $ff
 
@@ -957,13 +957,13 @@ C1MuggerShoots:
 
 C1Sc0_39:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $f0
+    db $01, $f0 ; Message Text0FMessage70: おとこは とつぜん トリガーを / ひいた![PAGE] / ちくしょう!!! / やられてしまった・・・。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Test object flag.
     db $16, C1MuggerHit3
     ; Branch if result bit 0 is set.
@@ -1005,17 +1005,17 @@ C1Sc0_3A:
     db $04
     dw C1MuggerPunch2
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $ef
+    db $01, $ef ; Message Text0FMessage6F: おれは おとこの めに いっぱつ / みまってやった![PAGE] / きまった!![PAGE] / ・・・おとこは フラフラと / たちあがった。[PAGE] / 「お...
     ; Set first item type and ID.
-    db $5c, $05, $19
+    db $5c, $05, C1DoorIdJoeStreetPoliceFront
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $11
+    db $06, C1RoomIdJoeStreet
     ; Show message 2.
-    db $02, $b9
+    db $02, $b9 ; Message Text0DMessage39: バーの まえの とおりだ。[END]
     ; Set object flag.
     db $17, C1MuggerHit1
     ; End script.
@@ -1026,13 +1026,13 @@ C1MuggerPunchDeath:
 
 C1Loc0_0B:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $f7
+    db $01, $f7 ; Message Text0FMessage77: おれの こぶしが くうを きった。[PAGE] / おとこは いままでの うらみを / こめて ピストルを うった![PAGE] / ゆっ ゆだんした・・・。[PAGE]...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set object flag.
     db $17, C1MuggerFatalEncounter
     ; Set exit flag and end this action.
@@ -1045,17 +1045,17 @@ C1MuggerPunch3:
 
 C1Loc0_0C:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $f5
+    db $01, $f5 ; Message Text0FMessage75: てごたえが あった! / おれは おとこの はなに つうれつなひだりフックを みまった。[PAGE] / おとこは なにもいわずに たちあがりヨタヨタと にげていった。 ...
     ; Set first item type and ID.
-    db $5c, $05, $17
+    db $5c, $05, C1DoorIdJoeStreetNewsstand
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $12
+    db $06, C1RoomIdNewsstandStreet
     ; Show message 2.
-    db $02, $c2
+    db $02, $c2 ; Message Text0DMessage42: しんぶんうりばの まえの とおりだ。[END]
     ; Set object flag.
     db $17, C1MuggerHit3
     ; End script.
@@ -1066,15 +1066,15 @@ C1MuggerPunch2:
 
 C1Loc0_0D:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $f2
+    db $01, $f2 ; Message Text0FMessage72: きまった![PAGE] / おれは さっきと はんたいがわの / めに パンチを くらわせた。[PAGE] / 「おぼえてろ!」[PAGE] / おとこは ヨロヨロと ち...
     ; Set first item type and ID.
-    db $5c, $05, $1d
+    db $5c, $05, C1DoorIdGunShopPeoria
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $14
+    db $06, C1RoomIdPeoriaBlueCabStop
     ; Set object flag.
     db $17, C1MuggerHit2
     ; Test object flag.
@@ -1083,7 +1083,7 @@ C1Loc0_0D:
     db $05
     dw C1MuggerPeoriaCab
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: ぺオリアどおりだ。[END]
     ; End script.
     db $ff
 
@@ -1094,7 +1094,7 @@ C1Loc0_29:
     ; Set text name 0.
     db $1e, $b1
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text10Message0B: ぺオリアどおりだ。 / [OBJECT_WRAM:37C5]が とまっている。[END]
     ; Add quick-list value.
     db $42, $a3
     ; Set object flag.
@@ -1107,17 +1107,17 @@ C1MuggerRobReply:
 
 C1Sc0_3B:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $e4
+    db $01, $e4 ; Message Text0FMessage64: 「バカに してるのか!」[PAGE] / おとこは いきなり おれに / なぐりかかってきた。[PAGE] / おとこの ひだりパンチが おれの / がんめんへ もろに ...
     ; Clear Case I cash and draw room $16.
     db $63
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $e5
+    db $01, $e5 ; Message Text0FMessage65: いつつつっ・・・。[PAGE] / どのくらいのじかん きを / うしなって いたのだろうか・・・。[PAGE] / めを あけようとして みぎめに / いたみを かんじ...
     ; Show message 1.
-    db $01, $e7
+    db $01, $e7 ; Message Text0FMessage67: ない!!! / コインが ぜんぶ![PAGE] / ・・・クソッ!! / なんてこった![END]
     ; End script.
     db $ff
 
@@ -1126,17 +1126,17 @@ C1MuggerRobFight:
 
 C1Sc0_3C:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $e2
+    db $01, $e2 ; Message Text0FMessage62: おれの みぎパンチは おとこの / ひだりパンチに わずかな おくれを / とってしまった![PAGE] / みも こころも つかれきっている / おれには この パンチ...
     ; Clear Case I cash and draw room $16.
     db $63
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $e5
+    db $01, $e5 ; Message Text0FMessage65: いつつつっ・・・。[PAGE] / どのくらいのじかん きを / うしなって いたのだろうか・・・。[PAGE] / めを あけようとして みぎめに / いたみを かんじ...
     ; Show message 1.
-    db $01, $e7
+    db $01, $e7 ; Message Text0FMessage67: ない!!! / コインが ぜんぶ![PAGE] / ・・・クソッ!! / なんてこった![END]
     ; End script.
     db $ff
 
@@ -1145,7 +1145,7 @@ LookC1HighEscape:
 
 C1Sc0_3D:
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text0DMessage53: ひじょうかいだんだ。 / たかすぎて あがるのは むりだ。[END]
     ; End script.
     db $ff
 
@@ -1154,7 +1154,7 @@ LookC1RustEscape:
 
 C1Sc0_3E:
     ; Show message 2.
-    db $02, $ad
+    db $02, $ad ; Message Text0DMessage2D: かなり さびついているようだ。[END]
     ; End script.
     db $ff
 
@@ -1163,7 +1163,7 @@ LookC1EscapeDrop:
 
 C1Sc0_3F:
     ; Show message 2.
-    db $02, $af
+    db $02, $af ; Message Text0DMessage2F: かいだんが とちゅうで きれている。とびおりると ろじに でるようだ。[END]
     ; End script.
     db $ff
 
@@ -1172,17 +1172,17 @@ C1LadyShoots:
 
 C1Sc0_40:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Finish Case I scene effect.
-    db $5a, $16
+    db $5a, C1FxIdArmedWomanFires
     ; Show message 2.
-    db $02, $e6
+    db $02, $e6 ; Message Text0DMessage66: ・・・・・・! / いきなり おんなは バッグから / ピストルを とりだして うった。[END]
     ; Wait sixty ticks.
     db $68
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -1193,19 +1193,19 @@ HitC1ArmedLady:
 
 C1Sc0_41:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 2.
-    db $02, $e7
+    db $02, $e7 ; Message Text0DMessage67: つよい パンチを おみまいした。 / おんなは バッグを おとして / たおれた。[END]
     ; Set object flag.
     db $17, C1ArmedLadyDown
     ; Set first item type and ID.
-    db $5c, $05, $19
+    db $5c, $05, C1DoorIdJoeStreetPoliceFront
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $21
+    db $06, C1RoomIdFallenWomanStreet
     ; Show message 2.
-    db $02, $e8
+    db $02, $e8 ; Message Text0DMessage68: おんなが ほどうに たおれている。[END]
     ; End script.
     db $ff
 
@@ -1214,7 +1214,7 @@ LookC1FallenLady:
 
 C1Sc0_42:
     ; Show message 2.
-    db $02, $e9
+    db $02, $e9 ; Message Text0DMessage69: きを うしなっているらしい。[PAGE] / ・・・こうしてみると なかなか / グラマーな おんなだ。[END]
     ; End script.
     db $ff
 
@@ -1223,7 +1223,7 @@ C1CantDoHere:
 
 C1Sc0_43:
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text10Message37: なにを しているんだ おれは?![END]
     ; End script.
     db $ff
 
@@ -1232,7 +1232,7 @@ LookC1Bum:
 
 C1Sc0_44:
     ; Show message 2.
-    db $02, $dc
+    db $02, $dc ; Message Text0DMessage5C: なにか とりつかれたような かおだ。うつろな めと めのしたの くまと / ねじれた くち・・・。[PAGE] / どうみても ふつうじゃない。 / あまり かかわらない...
     ; End script.
     db $ff
 
@@ -1241,7 +1241,7 @@ TalkC1Bum:
 
 C1Sc0_45:
     ; Show message 2.
-    db $02, $e0
+    db $02, $e0 ; Message Text0DMessage60: 「へっ へっ・・・。 /  50セントなんて やすいよ。 /  いのちの ねだんにしては・・・。[PAGE] /  このはなし きいて そんはないよ。 さっさと 50セン...
     ; End script.
     db $ff
 
@@ -1250,9 +1250,9 @@ HitC1Bum:
 
 C1Sc0_46:
     ; Run scene effect.
-    db $46, $06
+    db $46, C1FxIdImpact
     ; Show message 2.
-    db $02, $df
+    db $02, $df ; Message Text0DMessage5F: つよいパンチを いっぱつ / おみまいした。[PAGE] / ・・・・・・? / どうも きいていないらしい。 / よっぱらいには きかないのか?[PAGE] / パトカ...
     ; End script.
     db $ff
 
@@ -1261,7 +1261,7 @@ LookC1GasPedal:
 
 C1Sc0_47:
     ; Show message 1.
-    db $01, $01
+    db $01, $01 ; Message Text0EMessage01: アクセルだ。 / おもいっきり ふみこんだら / きぶんが いいだろうなあ・・・。[END]
     ; End script.
     db $ff
 
@@ -1270,7 +1270,7 @@ LookC1Brake:
 
 C1Sc0_48:
     ; Show message 2.
-    db $02, $51
+    db $02, $51 ; Message Text10Message51: ブレーキだ。[END]
     ; End script.
     db $ff
 
@@ -1279,7 +1279,7 @@ LookC1Clutch:
 
 C1Sc0_49:
     ; Show message 2.
-    db $02, $5c
+    db $02, $5c ; Message Text10Message5C: クラッチだ。[END]
     ; End script.
     db $ff
 
@@ -1288,7 +1288,7 @@ LookC1Steering:
 
 C1Sc0_4A:
     ; Show message 1.
-    db $01, $04
+    db $01, $04 ; Message Text0EMessage04: ハンドルだ。 / たかそうな かわの カバーが / つけてある。[END]
     ; End script.
     db $ff
 
@@ -1297,7 +1297,7 @@ LookC1Ignition:
 
 C1Sc0_4B:
     ; Show message 1.
-    db $01, $05
+    db $01, $05 ; Message Text0EMessage05: キーを さしこむ ところだ。 / キーは ついていない。[END]
     ; End script.
     db $ff
 
@@ -1306,7 +1306,7 @@ LookC1LuxuryCar2:
 
 C1Sc0_4C:
     ; Show message 2.
-    db $02, $f3
+    db $02, $f3 ; Message Text0DMessage73: くろい メルセデス べンツだ。[END]
     ; End script.
     db $ff
 
@@ -1315,7 +1315,7 @@ LookC1HoodRelease:
 
 C1Sc0_4D:
     ; Show message 1.
-    db $01, $08
+    db $01, $08 ; Message Text0EMessage08: ボンネットを あけるための / ボタンだろうか・・・?[END]
     ; End script.
     db $ff
 
@@ -1324,17 +1324,17 @@ C1HoodBombDeath:
 
 C1Sc0_4E:
     ; Finish Case I scene effect.
-    db $5a, $08
+    db $5a, C1FxIdExplosion
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $0d
+    db $01, $0d ; Message Text0EMessage0D: ボンネットを あけた とたんに / ばくはつした。[END]
     ; Show message 1.
-    db $01, $0e
+    db $01, $0e ; Message Text0EMessage0E: ボンネットの なかに ばくだんが / しかけてあったらしい![END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -1357,9 +1357,9 @@ C1Sc0_4F:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $f4
+    db $02, $f4 ; Message Text0DMessage74: おっ おんなだ・・・! / なぜ こんなところに・・・?[PAGE] / まさか しんでいるのか?[PAGE] / ・・・どうやら かすかに いしきは / あるようだ。[...
     ; Show message 2.
-    db $02, $21
+    db $02, $21 ; Message Text10Message21: かなりの デブだ。 / 100キロは ありそうだな。[PAGE] / ・・・まったく みおぼえのない / じょせいだ。[END]
     ; Set object flag.
     db $17, C1MrsSternwoodSeen
     ; Set object flag.
@@ -1372,7 +1372,7 @@ C1SternwoodBrief:
 
 C1Loc0_0E:
     ; Show message 2.
-    db $02, $fc
+    db $02, $fc ; Message Text0DMessage7C: スタンウッドふじんだ。 / ・・・かわいそうな ひとだな。[END]
     ; End script.
     db $ff
 
@@ -1381,7 +1381,7 @@ C1SternwoodView:
 
 C1Loc0_0F:
     ; Show message 2.
-    db $02, $21
+    db $02, $21 ; Message Text10Message21: かなりの デブだ。 / 100キロは ありそうだな。[PAGE] / ・・・まったく みおぼえのない / じょせいだ。[END]
     ; Set object flag.
     db $17, C1SternwoodViewShown
     ; End script.
@@ -1397,7 +1397,7 @@ C1Sc0_50:
     db $04
     dw C1WomanTalkRefuse
     ; Show message 2.
-    db $02, $fb
+    db $02, $fb ; Message Text0DMessage7B: おんなは すいじゃくが ひどく / はなしをするのは むりらしい。[PAGE] / ・・・なんとか はなしを ききだす / ほうほうは ないだろうか・・・?[END]
     ; End script.
     db $ff
 
@@ -1406,7 +1406,7 @@ C1WomanTalkRefuse:
 
 C1Loc0_10:
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: ・・・・・・むりか。[END]
     ; End script.
     db $ff
 
@@ -1415,7 +1415,7 @@ HitC1Sternwood:
 
 C1Sc0_51:
     ; Show message 2.
-    db $02, $ff
+    db $02, $ff ; Message Text0DMessage7E: つよい パンチを いれると おんなのしぼうだらけの からだは / なみうった。[PAGE] / だが なんの はんのうも ない。[PAGE] / ぶあつい ぜいにくが /...
     ; End script.
     db $ff
 
@@ -1424,7 +1424,7 @@ LookC1GunClerk:
 
 C1Sc0_52:
     ; Show message 1.
-    db $01, $11
+    db $01, $11 ; Message Text0EMessage11: はらの でかい おとこだ。 / みるからに ひとの よさそうな / かんじだ。[END]
     ; End script.
     db $ff
 
@@ -1433,7 +1433,7 @@ TalkC1GunClerk:
 
 C1Sc0_53:
     ; Show message 1.
-    db $01, $1e
+    db $01, $1e ; Message Text0EMessage1E: みせのおとこは げんきよく いった。[PAGE] / 「いらっしゃい! /  なにを おもとめですか?[PAGE] /  ピストルは 20ドル /  たまは 25セント!...
     ; End script.
     db $ff
 
@@ -1442,13 +1442,13 @@ C1GunClerkShoots:
 
 C1Sc0_54:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $1d
+    db $01, $1d ; Message Text0EMessage1D: なぐろうとした とたんに / みせのおとこが ピストルを うった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -1459,7 +1459,7 @@ LookC1GunPrice:
 
 C1Sc0_55:
     ; Show message 1.
-    db $01, $14
+    db $01, $14 ; Message Text0EMessage14: 「トゥナイト・スぺシャル $20」 / と かいてある。 / ピストルの ねふだらしい。[END]
     ; End script.
     db $ff
 
@@ -1468,7 +1468,7 @@ LookC1CabDriver1:
 
 C1Sc0_56:
     ; Show message 1.
-    db $01, $3d
+    db $01, $3d ; Message Text0EMessage3D: うんてんしゅだ。 / どうしたことか とても / イライラしている。[END]
     ; End script.
     db $ff
 
@@ -1484,7 +1484,7 @@ C1Sc0_57:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text0EMessage3A: うんてんしゅが ぶっきらぼうに / いった。[PAGE] / 「どこへ いくんだい?」[END]
     ; Choose room from list.
     db $41
     ; Branch if result bit 0 is set.
@@ -1498,11 +1498,11 @@ C1Sc0_57:
     ; Set object flag.
     db $17, C1CabFarePending
     ; Show message 0.
-    db $00, $64
+    db $00, $64 ; Message Text0CMessage64: タクシーは はっしんした。 / ・・・・・・。[END]
     ; Play pick effect.
     db $6a
     ; Show message 1.
-    db $01, $3b
+    db $01, $3b ; Message Text0EMessage3B: キキーッ![PAGE] / しばらくすると うんてんしゅは / いきなり タクシーをとめて いった。[PAGE] / 「おきゃくさん つきましたぜ。 /  ・・・75セン...
     ; Restore text lists and resume text.
     db $44
 
@@ -1518,7 +1518,7 @@ C1Cab1HereReply:
 
 C1Loc0_2B:
     ; Show message 2.
-    db $02, $c8
+    db $02, $c8 ; Message Text0DMessage48: うんてんしゅは めんどうくさそうに / いった。[PAGE] / 「バカに してるんですか! /  それは ここの アドレスですぜ!」[END]
     ; Restore text lists and resume text.
     db $44
     ; End script.
@@ -1529,7 +1529,7 @@ C1Cab1DebtReply:
 
 C1Loc0_11:
     ; Show message 2.
-    db $02, $6e
+    db $02, $6e ; Message Text10Message6E: くちもとを ヒクヒクさせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  このまえ かした かねを けえして くれねえと こまるぜ!」[END]
     ; End script.
     db $ff
 
@@ -1538,7 +1538,7 @@ HitC1CabGlass:
 
 C1Sc0_58:
     ; Show message 2.
-    db $02, $34
+    db $02, $34 ; Message Text10Message34: うんてんしゅを たたこうとしたが / うんてんせきとの さかいにある / ぼうだんガラスを たたいてしまった![END]
     ; End script.
     db $ff
 
@@ -1547,7 +1547,7 @@ LookC1FareMeter:
 
 C1Sc0_59:
     ; Show message 2.
-    db $02, $33
+    db $02, $33 ; Message Text10Message33: りょうきんメーターだ。 / ここに りょうきんが ひょうじ / されるんだな。[END]
     ; End script.
     db $ff
 
@@ -1556,7 +1556,7 @@ LookC1FareSlot1:
 
 C1Sc0_5A:
     ; Show message 1.
-    db $01, $3e
+    db $01, $3e ; Message Text0EMessage3E: りょうきんいれだ。 / ここに おかねを いれれば / よいのだろう。[END]
     ; End script.
     db $ff
 
@@ -1565,7 +1565,7 @@ C1MedicineImmuneReply:
 
 C1Sc0_5B:
     ; Show message 2.
-    db $02, $0d
+    db $02, $0d ; Message Text10Message0D: ・・・・なにも おこらない・・・? / どうやら かのじょには めんえきが / あって クスリが きかないらしい。[END]
     ; End script.
     db $ff
 
@@ -1574,7 +1574,7 @@ LookC1CabDriver2:
 
 C1Sc0_5C:
     ; Show message 1.
-    db $01, $43
+    db $01, $43 ; Message Text0EMessage43: うんてんしゅだ。 / えらく あいそうが いい。[END]
     ; End script.
     db $ff
 
@@ -1590,7 +1590,7 @@ C1Sc0_5D:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $46
+    db $01, $46 ; Message Text0EMessage46: うんてんしゅが えがおで いった。[PAGE] / 「おきゃくさん /  どこまで いきますか?」[END]
     ; Choose room from list.
     db $41
     ; Branch if result bit 0 is set.
@@ -1604,11 +1604,11 @@ C1Sc0_5D:
     ; Set object flag.
     db $17, C1CabFarePending
     ; Show message 0.
-    db $00, $67
+    db $00, $67 ; Message Text0CMessage67: タクシーは はっしんした。 / うんてんしゅは ニコニコしながら / ハンドルを にぎっている。[END]
     ; Play pick effect.
     db $6a
     ; Show message 1.
-    db $01, $45
+    db $01, $45 ; Message Text0EMessage45: 「ここですね。」[PAGE] / うんてんしゅは そういいながら / タクシーを とめた。 / そして いった。[PAGE] / 「75セント いただきます。 /  みぎ...
     ; Restore text lists and resume text.
     db $44
 
@@ -1624,7 +1624,7 @@ C1Cab2HereReply:
 
 C1Loc0_2D:
     ; Show message 2.
-    db $02, $d2
+    db $02, $d2 ; Message Text0DMessage52: うんてんしゅは わらいながら / いった。[PAGE] / 「おきゃくさん! /  ねぼけちゃいけませんよ! /  それは ここの アドレスですよ!」[END]
     ; Restore text lists and resume text.
     db $44
     ; End script.
@@ -1635,7 +1635,7 @@ C1Cab2DebtReply:
 
 C1Loc0_12:
     ; Show message 2.
-    db $02, $6f
+    db $02, $6f ; Message Text10Message6F: うんてんしゅは ニコニコして / いった。[PAGE] / 「このまえの おかねを かえして /  くださいね。」[END]
     ; End script.
     db $ff
 
@@ -1644,7 +1644,7 @@ LookC1FareSlot2:
 
 C1Sc0_5E:
     ; Show message 1.
-    db $01, $3e
+    db $01, $3e ; Message Text0EMessage3E: りょうきんいれだ。 / ここに おかねを いれれば / よいのだろう。[END]
     ; End script.
     db $ff
 
@@ -1653,7 +1653,7 @@ LookC1Building:
 
 C1Sc0_5F:
     ; Show message 1.
-    db $01, $48
+    db $01, $48 ; Message Text0EMessage48: きれいな ビルだ。 / たてられてから なんねんも / たっていないのだろう。[END]
     ; End script.
     db $ff
 
@@ -1669,9 +1669,9 @@ C1Sc0_60:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $4c
+    db $01, $4c ; Message Text0EMessage4C: みぞのようなものが ある。[END]
     ; Show message 2.
-    db $02, $40
+    db $02, $40 ; Message Text10Message40: おそらく カードか なにかを / さしこむのだろう・・・。[END]
     ; End script.
     db $ff
 
@@ -1680,7 +1680,7 @@ C1OuterSlotBrief:
 
 C1Loc0_13:
     ; Show message 1.
-    db $01, $4c
+    db $01, $4c ; Message Text0EMessage4C: みぞのようなものが ある。[END]
     ; End script.
     db $ff
 
@@ -1689,7 +1689,7 @@ LookC1InnerSlot:
 
 C1Sc0_61:
     ; Show message 1.
-    db $01, $50
+    db $01, $50 ; Message Text0EMessage50: ロビーに あったものと おなじだ。 / ・・・と いうことは さっきと / おなじやりかたで すれば いいのか。[END]
     ; End script.
     db $ff
 
@@ -1698,7 +1698,7 @@ LookC1Chandelier:
 
 C1Sc0_62:
     ; Show message 1.
-    db $01, $54
+    db $01, $54 ; Message Text0EMessage54: このへやに いやみなほど にあう / シャンデリアだ。[END]
     ; End script.
     db $ff
 
@@ -1707,7 +1707,7 @@ LookC1FineChair:
 
 C1Sc0_63:
     ; Show message 1.
-    db $01, $56
+    db $01, $56 ; Message Text0EMessage56: ひとりがけの イスだ。 / すわりごこちが よさそうだ。[END]
     ; End script.
     db $ff
 
@@ -1716,7 +1716,7 @@ LookC1LeatherSofa:
 
 C1Sc0_64:
     ; Show message 1.
-    db $01, $55
+    db $01, $55 ; Message Text0EMessage55: ながイスだ。 / カバーは かわで できている。[END]
     ; End script.
     db $ff
 
@@ -1725,7 +1725,7 @@ LookC1Fireplace:
 
 C1Sc0_65:
     ; Show message 1.
-    db $01, $58
+    db $01, $58 ; Message Text0EMessage58: だんろだ。 / えんとつが ないところを みると / たんなる かざりだろう。[END]
     ; End script.
     db $ff
 
@@ -1734,7 +1734,7 @@ LookC1Bookcase:
 
 C1Sc0_66:
     ; Show message 1.
-    db $01, $5d
+    db $01, $5d ; Message Text0EMessage5D: ほんだなだ。 / ひゃっかじてんなどの ぶあつい / ほんが いっぱい はいっている。[END]
     ; End script.
     db $ff
 
@@ -1743,7 +1743,7 @@ LookC1RoomArt:
 
 C1Sc0_67:
     ; Show message 1.
-    db $01, $57
+    db $01, $57 ; Message Text0EMessage57: きれいな いろづかいの えだ。 / とても モダンなかんじが する。[END]
     ; End script.
     db $ff
 
@@ -1752,7 +1752,7 @@ LookC1LowTable:
 
 C1Sc0_68:
     ; Show message 1.
-    db $01, $59
+    db $01, $59 ; Message Text0EMessage59: ひくい ちいさな テーブルだ。 / ソファーなどと よくいっしょに / おかれているものだ。[END]
     ; End script.
     db $ff
 
@@ -1766,7 +1766,7 @@ C1Sc0_69:
     db $04
     dw C1BrokenViewReply
     ; Show message 1.
-    db $01, $5b
+    db $01, $5b ; Message Text0EMessage5B: まるくて おおきな カガミだ。 / きれいに みがかれている。[END]
     ; End script.
     db $ff
 
@@ -1775,7 +1775,7 @@ LookC1CotBed:
 
 C1Sc0_6A:
     ; Show message 1.
-    db $01, $6b
+    db $01, $6b ; Message Text0EMessage6B: マットのかたそうな べッドだ。 / きちんと べッドメイキングが / してある。[END]
     ; End script.
     db $ff
 
@@ -1784,7 +1784,7 @@ LookC1GrimyWin1:
 
 C1Sc0_6B:
     ; Show message 1.
-    db $01, $91
+    db $01, $91 ; Message Text0FMessage11: マドだ。 / ここからは なにも みえない。[END]
     ; End script.
     db $ff
 
@@ -1793,7 +1793,7 @@ LookC1Bungalow:
 
 C1Sc0_6C:
     ; Show message 2.
-    db $02, $2c
+    db $02, $2c ; Message Text10Message2C: ひらやの たてものだ。[END]
     ; End script.
     db $ff
 
@@ -1802,7 +1802,7 @@ LookC1PlainBuilding:
 
 C1Sc0_6D:
     ; Show message 1.
-    db $01, $74
+    db $01, $74 ; Message Text0EMessage74: ビルだ。 / たかさは そんなに ない。[END]
     ; End script.
     db $ff
 
@@ -1811,7 +1811,7 @@ LookC1EyeChart:
 
 C1Sc0_6E:
     ; Show message 1.
-    db $01, $7d
+    db $01, $7d ; Message Text0EMessage7D: けんがんひょうだ。 / べつに めは わるくないようだ。[END]
     ; End script.
     db $ff
 
@@ -1820,7 +1820,7 @@ LookC1DrugCabinet:
 
 C1Sc0_6F:
     ; Show message 1.
-    db $01, $7b
+    db $01, $7b ; Message Text0EMessage7B: もくせいの クスリだなだ。 / かなり ふるいものらしい。[END]
     ; End script.
     db $ff
 
@@ -1829,7 +1829,7 @@ LookC1GrimyWin2:
 
 C1Sc0_70:
     ; Show message 1.
-    db $01, $91
+    db $01, $91 ; Message Text0FMessage11: マドだ。 / ここからは なにも みえない。[END]
     ; End script.
     db $ff
 
@@ -1843,7 +1843,7 @@ C1Sc0_71:
     db $04
     dw C1DeadManAltView
     ; Show message 1.
-    db $01, $8e
+    db $01, $8e ; Message Text0FMessage0E: しんぞうを うちぬいている。 / そくしだな。[END]
     ; End script.
     db $ff
 
@@ -1852,7 +1852,7 @@ C1DeadManAltView:
 
 C1Loc0_14:
     ; Show message 1.
-    db $01, $94
+    db $01, $94 ; Message Text0FMessage14: しんぞうを うちぬいている。 / おそらく そくしだろう。[PAGE] / このおとこが よっぱらいの / いっていた ころしやか・・・。[END]
     ; End script.
     db $ff
 
@@ -1868,7 +1868,7 @@ LookC1MansionDoor:
 
 C1Sc0_73:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: べっそうの げんかんだ。 / ドアには おおきくて りっぱな / ノッカーが ついている。[END]
     ; End script.
     db $ff
 
@@ -1877,21 +1877,21 @@ KnockC1Mansion:
 
 C1Sc0_74:
     ; Show message 1.
-    db $01, $a3
+    db $01, $a3 ; Message Text0FMessage23: おれは ノッカーを にぎりしめた。 / コン! コン![PAGE] / ・・・・・・。[END]
     ; Set first item type and ID.
-    db $5c, $05, $49
+    db $5c, $05, C1DoorIdMansionFrontDoor
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Set state bit.
-    db $2f, $3b
+    db $2f, C1StateMansionButlerPresent
     ; Move to the room argument if the selected state permits.
-    db $06, $32
+    db $06, C1RoomIdMansionVestibule
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 1.
-    db $01, $a4
+    db $01, $a4 ; Message Text0FMessage24: ドアが あいた。[PAGE] / ・・・しつじらしき ひとが でてきてジロッと にらんで こういった。[PAGE] / 「やくそくを していない /  おきゃくさまは と...
     ; End script.
     db $ff
 
@@ -1900,7 +1900,7 @@ LookC1Butler:
 
 C1Sc0_75:
     ; Show message 1.
-    db $01, $a5
+    db $01, $a5 ; Message Text0FMessage25: こわそうな かおの しつじだが / ほそくて わんりょくは なさそうだ。きっと おれなら たおせる![END]
     ; End script.
     db $ff
 
@@ -1909,15 +1909,15 @@ TalkC1Butler:
 
 C1Sc0_76:
     ; Show message 2.
-    db $02, $35
+    db $02, $35 ; Message Text10Message35: しつじは めいわくそうに いった。[PAGE] / 「おはなしする ことは なにも /  ございません。 /  どうぞ おひきとり ください。」[END]
     ; Set first item type and ID.
-    db $5c, $05, $49
+    db $5c, $05, C1DoorIdMansionFrontDoor
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $aa
+    db $01, $aa ; Message Text0FMessage2A: バタン!!![PAGE] / おれの たいどが きに / いらなかったのか しつじは ドアを / しめてしまった。[END]
     ; End script.
     db $ff
 
@@ -1926,13 +1926,13 @@ HitC1Butler:
 
 C1Sc0_77:
     ; Finish Case I scene effect.
-    db $5a, $06
+    db $5a, C1FxIdImpact
     ; Show message 1.
-    db $01, $ad
+    db $01, $ad ; Message Text0FMessage2D: おれは しつじを なぐった。 / しつじは そのばに たおれた。[PAGE] / これで もう おれの じゃまは / できないだろう。[END]
     ; Set object flag.
     db $17, C1ButlerDown
     ; Clear state and refresh.
-    db $34, $3b
+    db $34, C1StateMansionButlerPresent
     ; End script.
     db $ff
 
@@ -1941,7 +1941,7 @@ LookC1BigChandelier:
 
 C1Sc0_78:
     ; Show message 1.
-    db $01, $a8
+    db $01, $a8 ; Message Text0FMessage28: おおきな シャンデリアだ。 / ながいじかん みていると まぶしくてめが くらみそうだ。[END]
     ; End script.
     db $ff
 
@@ -1950,7 +1950,7 @@ LookC1FineTable:
 
 C1Sc0_79:
     ; Show message 1.
-    db $01, $b7
+    db $01, $b7 ; Message Text0FMessage37: しゃれた テーブルだ。 / よく キッチンなどに おいてある / ごく ありふれたものだ。[END]
     ; End script.
     db $ff
 
@@ -1959,7 +1959,7 @@ LookC1RoomLamp:
 
 C1Sc0_7A:
     ; Show message 1.
-    db $01, $be
+    db $01, $be ; Message Text0FMessage3E: でんきスタンドだ。 / べつに こった そうしょくは ない。[END]
     ; End script.
     db $ff
 
@@ -1968,7 +1968,7 @@ LookC1SternBed:
 
 C1Sc0_7B:
     ; Show message 1.
-    db $01, $bd
+    db $01, $bd ; Message Text0FMessage3D: ねごこちの よさそうな べッドだ。[END]
     ; End script.
     db $ff
 
@@ -1982,7 +1982,7 @@ C1Sc0_7C:
     db $04
     dw C1MrSternBrief
     ; Show message 1.
-    db $01, $c1
+    db $01, $c1 ; Message Text0FMessage41: おとこだ。 / スヤスヤと よくねむっている。[PAGE] / おこさないで しゃべらせることは / できないだろうか。[END]
     ; End script.
     db $ff
 
@@ -1991,7 +1991,7 @@ C1MrSternBrief:
 
 C1Loc0_15:
     ; Show message 2.
-    db $02, $47
+    db $02, $47 ; Message Text10Message47: おとこだ。 / よく ねむっている。[END]
     ; End script.
     db $ff
 
@@ -2000,7 +2000,7 @@ TalkC1MrSternwood:
 
 C1Sc0_7D:
     ; Show message 1.
-    db $01, $ca
+    db $01, $ca ; Message Text0FMessage4A: ねているので なにも はなさない。[END]
     ; End script.
     db $ff
 
@@ -2009,7 +2009,7 @@ HitC1Sleeper:
 
 C1Sc0_7E:
     ; Show message 2.
-    db $02, $36
+    db $02, $36 ; Message Text10Message36: じゅくすいしているのか / いくらたたいても めを さまさない。[END]
     ; End script.
     db $ff
 
@@ -2023,7 +2023,7 @@ C1Sc0_7F:
     db $04
     dw C1BrokenViewReply
     ; Show message 1.
-    db $01, $cc
+    db $01, $cc ; Message Text0FMessage4C: かべかけタイプの カガミだ。[END]
     ; End script.
     db $ff
 
@@ -2032,7 +2032,7 @@ LookC1FineLamp:
 
 C1Sc0_80:
     ; Show message 1.
-    db $01, $cd
+    db $01, $cd ; Message Text0FMessage4D: でんきスタンドだ。 / なかなか しゅみがいい。[END]
     ; End script.
     db $ff
 
@@ -2041,7 +2041,7 @@ LookC1VickersBed:
 
 C1Sc0_81:
     ; Show message 1.
-    db $01, $ce
+    db $01, $ce ; Message Text0FMessage4E: べッドだ。 / マットが やわらかそうだ。[END]
     ; End script.
     db $ff
 
@@ -2050,7 +2050,7 @@ LookC1SleepWoman:
 
 C1Sc0_82:
     ; Show message 1.
-    db $01, $cf
+    db $01, $cf ; Message Text0FMessage4F: この おんなが この かおりの / げんいんらしい。 / なかなかの びじんだ。[PAGE] / ・・・あっ! / この おんなは!![PAGE] / マンションに あっ...
     ; Set object flag.
     db $17, C1SleepWomanSeen
     ; End script.
@@ -2061,7 +2061,7 @@ TalkC1SleepWoman:
 
 C1Sc0_83:
     ; Show message 1.
-    db $01, $ca
+    db $01, $ca ; Message Text0FMessage4A: ねているので なにも はなさない。[END]
     ; End script.
     db $ff
 
@@ -2070,7 +2070,7 @@ LookC1Sewage:
 
 C1Sc0_84:
     ; Show message 1.
-    db $01, $23
+    db $01, $23 ; Message Text0EMessage23: げすいが ながれでている。 / とにかく ものすごい においだ。[END]
     ; End script.
     db $ff
 
@@ -2079,7 +2079,7 @@ LookC1Alligator:
 
 C1Sc0_85:
     ; Show message 1.
-    db $01, $34
+    db $01, $34 ; Message Text0EMessage34: くちを おおきく あけている! / かなり はらを すかせているようだ。はやく なんとか しなくては![END]
     ; End script.
     db $ff
 
@@ -2088,11 +2088,11 @@ C1AlligatorDeath:
 
 C1Sc0_86:
     ; Show message 1.
-    db $01, $37
+    db $01, $37 ; Message Text0EMessage37: ギャーッ![PAGE] / ・・・・・・むざんにも ワニに / くわれてしまった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2108,7 +2108,7 @@ C1Sc0_87:
     db $04
     dw C1ShadowDoorState
     ; Show message 1.
-    db $01, $89
+    db $01, $89 ; Message Text0FMessage09: ドアだ。 / あいかわらず ひとかげが ある。[END]
     ; End script.
     db $ff
 
@@ -2117,7 +2117,7 @@ C1ShadowDoorState:
 
 C1Loc0_16:
     ; Test state bit.
-    db $2e, $38
+    db $2e, C1StateAceOfficeDoorOpen
     ; Branch if result bit 0 is set.
     db $04
     dw C1ShadowDoorOpen
@@ -2127,7 +2127,7 @@ C1Loc0_16:
     db $04
     dw C1ShadowDoorShut
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text0FMessage0A: ひとの けはいは なくなった。 / だが ゆだんは きんもつだ。[END]
     ; End script.
     db $ff
 
@@ -2138,7 +2138,7 @@ C1Loc0_27:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -2149,7 +2149,7 @@ C1Loc0_28:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -2158,7 +2158,7 @@ LookC1CrackedWall:
 
 C1Sc0_88:
     ; Show message 2.
-    db $02, $65
+    db $02, $65 ; Message Text10Message65: かべが われている・・・。 / それいがい かわったものは / みられない。[END]
     ; End script.
     db $ff
 
@@ -2167,7 +2167,7 @@ LookC1WallMarks:
 
 C1Sc0_89:
     ; Show message 2.
-    db $02, $66
+    db $02, $66 ; Message Text10Message66: ただの かべの きずの ようだ。[END]
     ; End script.
     db $ff
 
@@ -2176,7 +2176,7 @@ C1NothingOddReply:
 
 C1Sc0_8A:
     ; Show message 2.
-    db $02, $70
+    db $02, $70 ; Message Text10Message70: べつに かわったところは ない。[END]
     ; End script.
     db $ff
 
@@ -2185,7 +2185,7 @@ LookC1OldShelf:
 
 C1Sc0_8B:
     ; Show message 1.
-    db $01, $90
+    db $01, $90 ; Message Text0FMessage10: たなだ。 / おもいものを のせたら / おちてきそうだな。[END]
     ; End script.
     db $ff
 
@@ -2194,7 +2194,7 @@ LookC1Self:
 
 C1Sc0_8C:
     ; Show message 2.
-    db $02, $60
+    db $02, $60 ; Message Text10Message60: おれいがいの なにものでも ない! / おれは おれだ![END]
     ; End script.
     db $ff
 
@@ -2203,7 +2203,7 @@ TalkC1Self:
 
 C1Sc0_8D:
     ; Show message 2.
-    db $02, $79
+    db $02, $79 ; Message Text10Message79: じぶんに はなしかけるほど おれの / あたまは おかしくなってないぞ![END]
     ; End script.
     db $ff
 
@@ -2212,7 +2212,7 @@ HitC1Self:
 
 C1Sc0_8E:
     ; Show message 2.
-    db $02, $7a
+    db $02, $7a ; Message Text10Message7A: ポコ ポコ! / なんで じぶんを たたかなくちゃ / いけないんだ?[END]
     ; End script.
     db $ff
 
@@ -2221,6 +2221,6 @@ LookC1SaleNews:
 
 C1Sc0_8F:
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text0DMessage3E: うりものの しんぶんだ。 / かってに よむと みせのおとこに / おこられそうだ。[END]
     ; End script.
     db $ff

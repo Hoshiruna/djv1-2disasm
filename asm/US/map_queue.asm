@@ -48,7 +48,7 @@ Jump_000_02c2:
     jr z, QueueMapRectFinish
 
     ldh a, [hMapQueueLen]
-    cp $80
+    cp MapQueueSubmitThreshold
     jr c, QueueMapRectNextRow
 
     call SubmitMapQueue
@@ -58,7 +58,7 @@ Jump_000_02c2:
 QueueMapRectFinish:
 jr_000_02d3:
     ldh a, [hMapQueueLen]
-    cp $80
+    cp MapQueueSubmitThreshold
     jr c, QueueMapRectDone
 
 Jump_000_02d9:
@@ -132,7 +132,7 @@ Call_000_0305:
     ldh a, [hMapWidth]
     ld [de], a
     inc de
-    add $03
+    add MapQueueEntryHeaderBytes
     add b
 
 Call_000_0310:
@@ -149,7 +149,7 @@ Call_000_0314:
     ldh a, [hMapQueueLen]
     ld b, a
     ldh a, [hMapWidth]
-    set 6, a
+    set MapQueueAttrBit, a
     ld [de], a
     ldh a, [hMapWidth]
 
@@ -157,7 +157,7 @@ Call_000_031f:
     inc de
 
 Jump_000_0320:
-    add $03
+    add MapQueueEntryHeaderBytes
     add b
     ldh [hMapQueueLen], a
     pop bc

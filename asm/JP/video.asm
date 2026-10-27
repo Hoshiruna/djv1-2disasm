@@ -27,7 +27,7 @@ Jump_001_4079:
     cp $00
     call nz, FlushMapQueue
 
-; Consume a palette request, then continue the timer and scroll update.
+; Clear palette request bit 0 before uploading both live sets in WRAM bank 1.
 VideoPalStep:
 
 Jump_001_4086:
@@ -113,7 +113,7 @@ Call_001_40ed:
     ld de, wMapQueue
     ld c, a
 
-; Read the destination and length of the next queued map write.
+; Read high/low destination and length/flags; an unflagged first entry keeps incoming VBK.
 MapQueueNextEntry:
 jr_001_40f2:
     ld a, [de]
@@ -125,22 +125,22 @@ jr_001_40f2:
     ld a, [de]
     ld b, a
     inc de
-    bit 6, b
+    bit MapQueueAttrBit, b
     jr z, MapQueueCheckColumn
 
-    res 6, b
+    res MapQueueAttrBit, b
     ld a, $01
     ldh [rVBK], a
 
 ; Choose row or column copying from length bit seven.
 MapQueueCheckColumn:
 jr_001_4105:
-    bit 7, b
+    bit MapQueueColumnBit, b
     jr nz, MapQueueBeginColumn
 
     ld a, c
     sub b
-    sub $03
+    sub MapQueueEntryHeaderBytes
     ld c, a
 
 ; Copy one queued byte to a consecutive VRAM address.
@@ -168,13 +168,13 @@ jr_001_4114:
 ; Clear the column flag and subtract this entry from queue length.
 MapQueueBeginColumn:
 jr_001_411e:
-    res 7, b
+    res MapQueueColumnBit, b
     ld a, c
     sub b
-    sub $03
+    sub MapQueueEntryHeaderBytes
     ld c, a
 
-; Copy one queued byte and advance its VRAM address by 32.
+; Write a column byte, add $20, then clear address bit 10 for the next byte.
 MapQueueWriteColumnByte:
 jr_001_4125:
     ld a, [de]

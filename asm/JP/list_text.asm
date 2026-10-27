@@ -20,7 +20,7 @@ Call_001_6438:
     ld bc, C1NameBase
     add hl, bc
     ld a, [hl]
-    cp $ff
+    cp ListUnavailableNameBase
     jr z, C1ListNameStore
 
     push af
@@ -58,7 +58,7 @@ jr_001_646c:
     ld bc, C2NameBase
     add hl, bc
     ld a, [hl]
-    cp $ff
+    cp ListUnavailableNameBase
     jr z, C2ListNameStore
 
     push af
@@ -90,7 +90,7 @@ Call_001_6496:
     ld hl, wListType
     add hl, bc
     ld a, [hl]
-    cp $03
+    cp ListDecodedRawItemType
     ret nz
 
     ld c, $00
@@ -183,8 +183,10 @@ jr_001_650b:
     ld [wListName], a
     ret
 
+; Case I display categories; remapping leaves the decoded item value unchanged.
 C1NameMap:
-    db $08, $2d, $07, $28, $29, $33, $35
+    db C1ListNameBullet1, C1ListNameBullet2, C1ListNameTwentyDollarBill, C1ListNameMeds1
+    db C1ListNameMeds2, C1ListNameMeds4, C1ListNameMeds6
 
 ; Decode the current row without saving its packed byte; result bit 1 marks a $ff terminator.
 ReadListRow:
@@ -249,7 +251,9 @@ jr_001_6567:
     ret
 
 C1NameBase:
-    db $ff, $d0, $e0, $00, $40, $ff
+    db ListUnavailableNameBase, $d0, $e0, $00
+    db $40, ListUnavailableNameBase
 
 C2NameBase:
-    db $ff, $90, $a0, $00, $70, $ff, $c0
+    db ListUnavailableNameBase, $90, $a0, $00
+    db $70, ListUnavailableNameBase, $c0

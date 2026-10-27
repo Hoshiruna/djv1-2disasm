@@ -25,7 +25,7 @@ jr_000_328d:
     ld [hl+], a
     inc d
     ld a, d
-    cp $08
+    cp JpWorkListClearBytes
     jr c, ClearWorkListNextByte
 
     ret

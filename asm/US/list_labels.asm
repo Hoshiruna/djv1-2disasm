@@ -1,23 +1,23 @@
 
 ; Regional text byte streams, including their original control bytes and terminators.
 C1Lbl00:
-    db $3e, $b6, $c8, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $1f
 C1Lbl01:
-    db $3e, $b6, $c8, $23, $3f, $3a, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wC1Coins), HIGH(wC1Coins), $1a, $1f
 C1Lbl02:
-    db $3e, $b6, $c8, $23, $3f, $5f, $c5, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wC1CoinQty), HIGH(wC1CoinQty), $1f
 C1Lbl03:
-    db $3e, $b6, $c8, $23, $3f, $63, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wBullet1Count), HIGH(wBullet1Count), $1a, $1f
 C1Lbl04:
-    db $3e, $b6, $c8, $23, $3f, $5c, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wGun1Ammo), HIGH(wGun1Ammo), $1a, $1f
 C1Lbl05:
-    db $3e, $b6, $c8, $23, $3f, $64, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wBullet2Count), HIGH(wBullet2Count), $1a, $1f
 C1Lbl08:
-    db $3e, $b6, $c8, $23, $3f, $5d, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wGun2Ammo), HIGH(wGun2Ammo), $1a, $1f
 C1Lbl09:
-    db $3e, $b6, $c8, $23, $3f, $60, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wC1AmmoQty), HIGH(wC1AmmoQty), $1a, $1f
 C1Lbl0a:
-    db $3e, $b6, $c8, $23, $3f, $5e, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $23, $3f, LOW(wGun3Ammo), HIGH(wGun3Ammo), $1a, $1f
 C1Lbl06:
     db $52, $02, $07, $08, $02, $00, $06, $0e, $21, $1a, $32, $1a, $00, $0c, $20, $1d
     db $13, $07, $04, $1a, $12, $08, $0b, $04, $0d, $02, $04, $1a, $08, $12, $1a, $12
@@ -57,39 +57,49 @@ C1Lbl0d:
 C1Lbl0e:
 C1Lbl0f:
 C2Lbl00:
-    db $3e, $b6, $c8, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $1f
 C2Lbl01:
-    db $3e, $b6, $c8, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $1f
+; Case II list label for cash, using the sixteen-bit number control.
+C2ListCashLabel:
 C2Lbl02:
-    db $41, $54, $8a, $c5, $1f
+    db $41, $54, LOW(wC2Cash), HIGH(wC2Cash), $1f
+; Case II list label for quarters, using its byte count.
+C2ListQuartersLabel:
 C2Lbl03:
-    db $3e, $b6, $c8, $12, $24, $3f, $3a, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $12, $24, $3f, LOW(wC2Quarters), HIGH(wC2Quarters), $1a, $1f
+; Case II list label for bullets, using its byte count.
+C2ListBulletsLabel:
 C2Lbl04:
-    db $3e, $b6, $c8, $12, $24, $3f, $90, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $12, $24, $3f, LOW(wC2Bullets), HIGH(wC2Bullets), $1a, $1f
+; Case II list label for batteries, using its byte count.
+C2ListCellsLabel:
 C2Lbl05:
-    db $3e, $b6, $c8, $12, $24, $3f, $8d, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $12, $24, $3f, LOW(wC2Cells), HIGH(wC2Cells), $1a, $1f
+; Case II list label for chips, using its byte count.
+C2ListChipsLabel:
 C2Lbl06:
-    db $3e, $b6, $c8, $12, $24, $3f, $8c, $c5, $1a, $1f
+    db $3e, LOW(wListName), HIGH(wListName), $12, $24, $3f, LOW(wChips), HIGH(wChips), $1a, $1f
 C2Lbl07:
     db $53, $50, $01, $51, $01, $3c, $ea, $50, $05, $3c, $eb, $50, $0a, $3c, $ec, $52
     db $1f
 C2Lbl08:
-    db $53, $50, $02, $3f, $5d, $c8, $50, $05, $3e, $5e, $c8, $50
+    db $53, $50, $02, $3f, LOW(wTrainNo), HIGH(wTrainNo), $50, $05, $3e, LOW(wTrainCity), HIGH(wTrainCity), $50
 jr_001_7041:
-    db $0a, $3e, $5f, $c8, $52, $1f
+    db $0a, $3e, LOW(wTrainState), HIGH(wTrainState), $52, $1f
 C2Lbl09:
-    db $3f, $75, $c8, $1a, $1f
+    db $3f, LOW(wBJTotal), HIGH(wBJTotal), $1a, $1f
 C2Lbl0a:
-    db $53, $50, $0a, $51, $05, $3f, $c3, $c5, $1a, $52, $1f
+    db $53, $50, $0a, $51, $05, $3f, LOW(wChipCount), HIGH(wChipCount), $1a, $52, $1f
 C2Lbl0b:
-    db $3f, $8c, $c5, $20, $1a, $1f
+    db $3f, LOW(wChips), HIGH(wChips), $20, $1a, $1f
 C2Lbl0c:
     db $07, $0e, $16, $1a, $0c, $00, $0d, $18, $1a, $02, $07, $08, $0f, $12, $1d, $16
     db $08, $0b, $0b, $1a, $18, $0e, $14, $1a, $01, $04, $13, $28, $1f
 C2Lbl0d:
     db $18, $0e, $14, $1a, $01, $04, $13
 jr_001_7081:
-    db $1a, $3f, $8c, $c5, $1a, $02, $07, $08, $0f, $12, $20, $1f
+    db $1a, $3f, LOW(wChips), HIGH(wChips), $1a, $02, $07, $08, $0f, $12, $20, $1f
 C2Lbl0e:
     db $03, $11, $00, $16, $1a, $00, $0d, $0e, $13, $07, $04, $11, $1a, $02, $00, $11
     db $03, $28, $1d, $1a, $1a, $1a, $1a, $1a, $18, $04, $12, $1a, $2c, $1a
@@ -152,7 +162,7 @@ C2Lbl1e:
 jr_001_7189:
     db $0b, $04, $05, $13, $1f
 C2Lbl1f:
-    db $3f, $8c, $c5, $1a, $1f
+    db $3f, LOW(wChips), HIGH(wChips), $1a, $1f
 C2Lbl20:
     db $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a
     db $1a, $1a, $1a, $1d, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a, $1a

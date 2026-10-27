@@ -475,9 +475,9 @@ jr_003_6498:
     ret nz
 
     ld a, $77
-    call ShowMsg2
+    call ShowMsg2 ; Message Text16Message77: しゃしょうは イライラして いった。[END]
     ld a, $7d
-    call ShowMsg2
+    call ShowMsg2 ; Message Text16Message7D: 「れっしゃは まもなく /  はっしゃします。[PAGE] /  ごりようのかたは はやく わたしに りょうきんを はらってください。」[END]
     ret
 
 
@@ -488,9 +488,9 @@ jr_003_64ae:
     call PlayAudio
     call ScriptHoldText
     ld a, $30
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message30: おれの ちかくにいる しゃしょうが / さけんでいる。[END]
     ld a, $2b
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message2B: 「いそぎ ごじょうしゃくださーい!」[END]
     call ResumeTextUI
     ret
 
@@ -528,9 +528,9 @@ jr_003_64d9:
 
     call ScriptHoldText
     ld a, $77
-    call ShowMsg2
+    call ShowMsg2 ; Message Text16Message77: しゃしょうは イライラして いった。[END]
     ld a, $7e
-    call ShowMsg2
+    call ShowMsg2 ; Message Text16Message7E: 「りょうきんを はらわないのなら /  さっさと おりてください!」[END]
     call ResumeTextUI
     ret
 
@@ -553,7 +553,7 @@ ShowTrainObj:
 ShowC2ObjA7:
 
 Call_003_6500:
-    ld a, $a7
+    ld a, C2VisIdPlatformTrainAndDoor
     call SetObjVisible
     ret
 
@@ -569,7 +569,7 @@ Call_003_6506:
     cp [hl]
     ret nz
 
-    ld a, $a7
+    ld a, C2VisIdPlatformTrainAndDoor
     call ClearObjVisible
     ret
 
@@ -589,7 +589,7 @@ C2SchedPhase4:
 
     call ResetObjScroll
     ld a, $2f
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message2F: シューと おとを たてながら / れっしゃが はいってきた。[END]
     ld a, $14
     call PlayAudio
     call MapStepsBank
@@ -667,7 +667,7 @@ jr_003_656f:
 
     call TrainWhistle
     ld a, $e1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message61: ドアが しまる ちょくぜんに / ストージー・マーチンが れっしゃに / とびのってきた![END]
     ld a, $09
     call PlayAudio
     ld a, FxStogie
@@ -676,7 +676,7 @@ jr_003_656f:
     ld a, $78
     call WaitTicks
     ld a, $e2
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message62: 「この れっしゃは ボスのいる /  ラスべガスいきでも おまえの /  いえがある シカゴいきでもない。[PAGE] /  ・・・と いうことは おまえ /  にげるつ...
     ld a, $05
     call WaitTicks
     ld a, $10
@@ -702,7 +702,7 @@ C2SchedMsg32:
 Call_003_65d0:
     push bc
     ld a, $32
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message32: とおくで きてきが なっている。[END]
     pop bc
 
 ; Update train visibility, clear the door states, and announce closure.
@@ -733,7 +733,7 @@ jr_003_65d7:
     call PlayAudio
     call RefreshStateView
     ld a, $31
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message31: はっしゃのため れっしゃの ドアが / しまった。[END]
     ret
 
 ; Clear the paired passenger states, move to the platform, announce the fare-related removal, and close the doors.
@@ -762,7 +762,7 @@ Jump_003_660b:
     ld a, $17
     call PlayAudio
     ld a, $74
-    call ShowMsg2
+    call ShowMsg2 ; Message Text16Message74: 「かねを はらわないなら とっとと /  でていけっ!」[PAGE] / おれは れっしゃから ほうりだされてしまった。[END]
     pop bc
     call TrainWhistle
     ret
@@ -818,19 +818,19 @@ TrainLeavesView:
 
 jr_003_6675:
     call ResetObjScroll
-    ld a, $a7
+    ld a, C2VisIdPlatformTrainAndDoor
     call ClearObjVisible
     ld a, $1b
     call PlayAudio
     ld a, $93
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message12: れっしゃは はっしゃを しらせる / きてきを ならした。[END]
     ld a, $14
     call PlayAudio
     call MapReverseBank
     call RoomCueCall
     call DrawC2Panel
     ld a, $a2
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message22: れっしゃは ゆっくりと はっしゃし / おれは ひとり のこされた・・・。[END]
     ld a, [wSceneId]
     dec a
     ld [wSceneId], a
@@ -846,16 +846,16 @@ jr_003_66a2:
     ld a, $14
     call PlayAudio
     ld a, $8b
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message0B: れっしゃは ゆっくりと ホームを / はなれた。[PAGE] / そして だんだんと スピードを / あげていく・・・。[END]
     call BeginTrainRide
     ld a, $8f
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message0F: ねぼけまなこで れっしゃのなかを / みまわして おだやかな / ねむりについた・・・。[END]
     ld a, $b4
     call WaitTicks
     call EndTrainRide
     ld a, $95
-    call ShowMsg2
-    ld a, $a7
+    call ShowMsg2 ; Message Text17Message15: めざめたときには もう たびの / おわりに ちかづいていた。[PAGE] / おれは みじたくを ととのえ / れっしゃを おりる じゅんびをした。[END]
+    ld a, C2VisIdPlatformTrainAndDoor
     call SetObjVisible
     pop bc
     push bc
@@ -874,7 +874,7 @@ jr_003_66a2:
     ld a, [wTrainName]
     ld [wTextName0], a
     ld a, $0d
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message0D: [OBJECT_WRAM:37C5]えきに ついた。[END]
     ld a, C2EndFlag
     call ReadObjFlag
     cp $00
@@ -948,7 +948,7 @@ FadeC2OddIn:
 
 
 Call_003_6729:
-    ld de, $0002
+    ld de, TrainFadeInFirstPointerOffset
 
 ; Apply the next odd-room fade-in palette pair.
 TrainOddFadeInStep:
@@ -969,12 +969,12 @@ jr_003_672c:
     push de
     call CopyTrainObj
     call RequestPals
-    ld a, $1e
+    ld a, TrainFadeWaitTicks
     call WaitTicks
     pop de
     inc e
     inc e
-    ld a, $0a
+    ld a, TrainFadeInEndPointerOffset
     cp e
     jr nz, TrainOddFadeInStep
 
@@ -986,7 +986,7 @@ FadeC2OddOut:
 
 
 Call_003_675c:
-    ld de, $0006
+    ld de, TrainFadeOutFirstPointerOffset
 
 ; Apply the next odd-room fade-out palette pair.
 TrainOddFadeOutStep:
@@ -1007,7 +1007,7 @@ jr_003_675f:
     push de
     call CopyTrainObj
     call RequestPals
-    ld a, $1e
+    ld a, TrainFadeWaitTicks
     call WaitTicks
     pop de
     dec e
@@ -1023,7 +1023,7 @@ FadeC2EvenIn:
 
 
 Call_003_678e:
-    ld de, $0002
+    ld de, TrainFadeInFirstPointerOffset
 
 ; Apply the next even-room fade-in palette pair.
 TrainEvenFadeInStep:
@@ -1044,12 +1044,12 @@ jr_003_6791:
     push de
     call CopyTrainObj
     call RequestPals
-    ld a, $1e
+    ld a, TrainFadeWaitTicks
     call WaitTicks
     pop de
     inc e
     inc e
-    ld a, $0a
+    ld a, TrainFadeInEndPointerOffset
     cp e
     jr nz, TrainEvenFadeInStep
 
@@ -1061,7 +1061,7 @@ FadeC2EvenOut:
 
 
 Call_003_67c1:
-    ld de, $0006
+    ld de, TrainFadeOutFirstPointerOffset
 
 ; Apply the next even-room fade-out palette pair.
 TrainEvenFadeOutStep:
@@ -1082,7 +1082,7 @@ jr_003_67c4:
     push de
     call CopyTrainObj
     call RequestPals
-    ld a, $1e
+    ld a, TrainFadeWaitTicks
     call WaitTicks
     pop de
     dec e
@@ -1113,7 +1113,7 @@ jr_003_67f6:
     add hl, bc
     ld [hl], a
     inc c
-    ld a, $38
+    ld a, TrainFadeBgCopyBytes
     cp c
     jr nz, TrainCopyBgPalByte
 
@@ -1140,7 +1140,7 @@ jr_003_680f:
     add hl, bc
     ld [hl], a
     inc c
-    ld a, $08
+    ld a, TrainFadeObjCopyBytes
     cp c
     jr nz, TrainCopyObjPalByte
 
@@ -1321,7 +1321,8 @@ C2SchedLines:
 
 ; --- c2_train_pass.asm ---
 
-; Read the clearance flag for either passenger room; return without reading a flag when no room matches.
+; Read a matched passenger-room clearance flag; an unmatched room returns Z without a flag read.
+; The unmatched return has A=TrainCount and Z from the final count comparison.
 ReadTrainPass:
 TestC2SchedRoom:
 
@@ -1541,17 +1542,19 @@ C2Sched7:
 ; Train access flags, indexed in train-number order.
 TrainAccessFlags:
 C2SchedObjs:
-    db $22, $23, $24, $25, $1e, $1f, $20, $21
+    db C2Train2AccessEnabled, C2Train3AccessEnabled, C2Train4AccessEnabled, C2Train5AccessEnabled
+    db C2Train6AccessEnabled, C2Train7AccessEnabled, C2Train8AccessEnabled, C2Train9AccessEnabled
 
 ; Passenger clearance flags; set after payment or the original no-cash bypass.
 TrainPassFlags:
 C2SchedTests:
-    db $2d, $2e, $2f, $30, $15, $2a, $2b, $2c
+    db C2Train2PassGranted, C2Train3PassGranted, C2Train4PassGranted, C2Train5PassGranted
+    db C2Train6PassGranted, C2Train7PassGranted, C2Train8PassGranted, C2Train9PassGranted
 
 ; Destination platform rooms selected after a journey.
 TrainDestRooms:
 C2SchedNextRooms:
-    db $17, $18, $19, $1a, $2c, $2d, $2e, $2f
+    db RoomVegasPlatform6, RoomVegasPlatform7, RoomVegasPlatform8, RoomVegasPlatform9, RoomChicagoPlatform2, RoomChicagoPlatform3, RoomChicagoPlatform4, RoomChicagoPlatform5
 
 ; Previous-room values written at the destination platform.
 TrainPrevRooms:
@@ -1575,37 +1578,42 @@ jr_003_6a11:
 ; Departure platform room for each train.
 TrainPlatforms:
 C2SchedRoomsC:
-    db $2c, $2d, $2e, $2f, $17, $18, $19, $1a
+    db RoomChicagoPlatform2, RoomChicagoPlatform3, RoomChicagoPlatform4, RoomChicagoPlatform5, RoomVegasPlatform6, RoomVegasPlatform7, RoomVegasPlatform8, RoomVegasPlatform9
 
 ; --- c2_train_states.asm ---
 
 ; First state bits set for boarding and retained while doors close.
 TrainStateA:
 C2SchedStatesA:
-    db $80, $81, $82, $83, $7c, $7d, $7e, $7f
+    db C2StateTrain2PlatformView, C2StateTrain3PlatformView, C2StateTrain4PlatformView, C2StateTrain5PlatformView
+    db C2StateTrain6PlatformView, C2StateTrain7PlatformView, C2StateTrain8PlatformView, C2StateTrain9PlatformView
 
 ; Second state bits set for boarding and cleared when doors close.
 TrainStateB:
 C2SchedStatesB:
-    db $3a, $3d, $40, $43, $21, $24, $27, $2a
+    db C2StateTrain2BoardingDoorOpen, C2StateTrain3BoardingDoorOpen, C2StateTrain4BoardingDoorOpen, C2StateTrain5BoardingDoorOpen
+    db C2StateTrain6BoardingDoorOpen, C2StateTrain7BoardingDoorOpen, C2StateTrain8BoardingDoorOpen, C2StateTrain9BoardingDoorOpen
 
 ; Third state bits set for boarding and cleared when doors close.
 TrainStateC:
 C2SchedStatesC:
-    db $3b, $3e, $41, $44, $22, $25, $28, $2b
+    db C2StateTrain2DestinationDoorOpen, C2StateTrain3DestinationDoorOpen, C2StateTrain4DestinationDoorOpen, C2StateTrain5DestinationDoorOpen
+    db C2StateTrain6DestinationDoorOpen, C2StateTrain7DestinationDoorOpen, C2StateTrain8DestinationDoorOpen, C2StateTrain9DestinationDoorOpen
 
 ; First passenger-room state bits cleared when a rider is removed.
 TrainDropA:
 C2SchedDropA:
 jr_003_6a35:
-    db $8d, $8f, $91, $93, $85, $87
+    db C2StateTrain2AFareView, C2StateTrain3AFareView, C2StateTrain4AFareView, C2StateTrain5AFareView
+    db C2StateTrain6AFareView, C2StateTrain7AFareView
 jr_003_6a3b:
-    db $89, $8b
+    db C2StateTrain8AFareView, C2StateTrain9AFareView
 
 ; Second passenger-room state bits cleared when a rider is removed.
 TrainDropB:
 C2SchedDropB:
-    db $8e, $90, $92, $94, $86, $88, $8a, $8c
+    db C2StateTrain2BFareView, C2StateTrain3BFareView, C2StateTrain4BFareView, C2StateTrain5BFareView
+    db C2StateTrain6BFareView, C2StateTrain7BFareView, C2StateTrain8BFareView, C2StateTrain9BFareView
 
 ; --- c2_train_pals.asm ---
 

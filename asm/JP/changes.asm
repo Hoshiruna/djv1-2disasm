@@ -42,11 +42,11 @@ jr_002_658c:
     inc a
     inc a
     ldh [hChangePos], a
-    cp $08
+    cp PendingFlushEndOffset
     jr c, ChangeFlushNextPair
 
-; Case I falls through after its fourth pair; UndoC2Change returns before dispatch.
-; Dispatch the pending pair through the banked change handler.
+; After the fourth Case I pair, HL is the handler return value, not a fifth pair.
+; A non-$ff read calls UndoC2Change (which returns for Case I), then advances offset 8 to 10.
 ChangeFlushCaseII:
 jr_002_65af:
     ld a, [hl]
@@ -58,13 +58,13 @@ jr_002_65af:
     inc a
     inc a
     ldh [hChangePos], a
-    cp $08
+    cp PendingFlushEndOffset
     jr c, ChangeFlushNextPair
 
-; Prepare to fill the pending-change buffer with $ff.
+; Clear both indices and four pairs (ten bytes); startup clears twelve bytes.
 ChangeFlushClearBuffer:
 jr_002_65c1:
-    ld c, $0a
+    ld c, PendingFlushClearBytes
     ld hl, wPending
     ld a, $ff
 

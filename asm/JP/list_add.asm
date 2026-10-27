@@ -13,7 +13,7 @@ AppendSelList:
 
 Call_000_23df:
     ld a, [wInputKind]
-    cp $02
+    cp InputKindListRow
     jr nz, AppendSelListCheckCase
 
     ld a, [wChangeMode]
@@ -97,7 +97,7 @@ Jump_000_244a:
 AppendSelListFinishInput:
 jr_000_245a:
     ld a, [wInputKind]
-    cp $02
+    cp InputKindListRow
     jr z, AppendSelListWaitForList
 
     ld a, [wHitObj]

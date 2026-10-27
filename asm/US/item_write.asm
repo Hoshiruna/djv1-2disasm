@@ -5,14 +5,14 @@ WriteOpSlots:
 
 Call_001_57ac:
     ld d, a
-    ld a, $10
+    ld a, OpSlotAlternate
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a
     ld a, d
     call WriteOpAttr
     ld d, a
-    ld a, $00
+    ld a, OpSlotPrimary
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a

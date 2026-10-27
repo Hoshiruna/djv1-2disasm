@@ -1,5 +1,5 @@
 
-; Load the case font and HUD, then entry 0 from Case I bank $3f or Case II bank $32.
+; Load the case font/HUD, then 64 base-object tiles at $8400-$87ff; restore each ROM bank.
 LoadBaseGfx:
 
 
@@ -11,7 +11,7 @@ Call_000_0a0b:
     jr nz, BaseGfxCaseII
 
 Call_000_0a18:
-    ld a, $3f
+    ld a, C1BaseObjGfxRomBank
     call PushRomBank
     ld hl, C1ObjGfxRefs
     jr BaseGfxReadEntry
@@ -19,7 +19,7 @@ Call_000_0a18:
 ; Choose the Case II object-graphics bank and table.
 BaseGfxCaseII:
 jr_000_0a22:
-    ld a, $32
+    ld a, C2BaseObjGfxRomBank
     call PushRomBank
     ld hl, C2ObjGfxRefs
 
@@ -37,7 +37,7 @@ jr_000_0a2a:
 Jump_000_0a33:
     jp PopRomBank
 
-; Read entry 0 of Case I bank $33 or Case II bank $2a and restore the ROM bank.
+; Read font table entry 0 to signed BG tiles $80-$ff ($8800-$8fff), then restore the ROM bank.
 LoadFontGfx:
 
 
@@ -46,7 +46,7 @@ Call_000_0a36:
     cp $00
     jr nz, FontGfxCaseII
 
-    ld a, $33
+    ld a, C1FontHudRomBank
     call PushRomBank
     ld hl, C1Gfx0Refs
     jr FontGfxReadEntry
@@ -54,7 +54,7 @@ Call_000_0a36:
 ; Choose the Case II font-graphics bank and table.
 FontGfxCaseII:
 jr_000_0a47:
-    ld a, $2a
+    ld a, C2FontHudRomBank
     call PushRomBank
     ld hl, C2Gfx0Refs
 
@@ -70,7 +70,7 @@ jr_000_0a4f:
     call ReadGfx
     jp PopRomBank
 
-; Read entry 1 of the case font/HUD bank through the shared pointer path.
+; Read font/HUD table entry 1; Case I leaves signed BG tiles $00-$0f untouched.
 LoadHudGfx:
 
 
@@ -79,7 +79,7 @@ Call_000_0a5b:
     cp $00
     jr nz, HudGfxCaseII
 
-    ld a, $33
+    ld a, C1FontHudRomBank
     call PushRomBank
     ld hl, C1Gfx0Refs+2
     jr BaseGfxReadEntry
@@ -87,7 +87,7 @@ Call_000_0a5b:
 ; Choose the Case II HUD graphics bank and table.
 HudGfxCaseII:
 jr_000_0a6c:
-    ld a, $2a
+    ld a, C2FontHudRomBank
     call PushRomBank
     ld hl, C2Gfx0Refs+2
     jr BaseGfxReadEntry

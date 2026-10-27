@@ -6,7 +6,7 @@
 SECTION "ROM Bank $03f", ROMX[$4000], BANK[$3f]
 
 C1ObjGfxRefs:
-    dw GfxC1_GC0
+    dw C1BaseObjGfx
     dw GfxC1_GC1
     dw GfxC1_GC2
     dw GfxC1_GC3
@@ -23,6 +23,8 @@ C1ObjGfxRefs:
     dw GfxC1_GCE
     dw GfxC1_GCF
 
+; Case I base objects: 64 unsigned tiles at $8400-$87ff, loaded by LoadBaseGfx.
+C1BaseObjGfx:
 GfxC1_GC0:
     db $10, $40, $17, $40, $0c, $02, $01, $5d, $1f, $b7, $a6, $46, $17, $00, $05, $32
     db $80, $17, $00, $03, $01, $11, $63, $01, $00, $40, $00, $80, $c8, $c0, $e0, $c0

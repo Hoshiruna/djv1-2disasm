@@ -43,7 +43,7 @@ ShowLampWeak:
 
 jr_003_5953:
     ld a, $86
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message06: THE FLASHLIGHT'S / LIGHT DIMS.[END]
     ld a, C2LampWeak
     jp SetObjFlag
 
@@ -58,10 +58,10 @@ jr_003_595d:
     jr nz, LampExpiryText
 
     ld a, [wRoomId]
-    cp $38
+    cp RoomJoeOffice
     jr z, LampExpiryText
 
-    cp $3a
+    cp RoomJoeRearHallway
     jr z, LampExpiryText
 
     call ResetObjScroll
@@ -75,16 +75,16 @@ jr_003_595d:
     call ReloadScene
     call ScriptHoldText
     ld a, $88
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message08: SUDDENLY, THE / FLASHLIGHT GOES / OUT.[END]
     ld a, $09
     call PlayAudio
     ld a, $e9
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message69: YOU GROPE ABOUT / BLINDLY THROUGH / THE DARKNESS.[PAGE] / YOU WERE NEVER / MUCH GOOD ...
     ld a, $17
     call PlayAudio
     call ScriptNoop
     ld a, $3b
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message3B: WHUMP![PAGE] / YOU FALL HARD AND / HIT YOUR HEAD / AGAINST THE FLOOR.[PAGE] / THE MEA...
     call ResumeTextUI
     call ClearLampFlags
     ld a, [wC2EventBits]
@@ -98,7 +98,7 @@ LampExpiryText:
 
 jr_003_59bb:
     ld a, $88
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message08: SUDDENLY, THE / FLASHLIGHT GOES / OUT.[END]
 
 ; Clear the original flags 76, lamp-on and cell-installed in order.
 ClearLampFlags:

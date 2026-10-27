@@ -13,7 +13,7 @@ ClosedDoorReply:
 
 C2Loc5_00:
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text12Message2A: MIGHT BE A DOOR. / YUP, HANDLE AND / HINGES- IT'S A / DOOR ALRIGHT![END]
     ; End script.
     db $ff
 
@@ -34,7 +34,7 @@ C2Sc5_01:
     db $08, C2TrenchTaken
     dw HideBathPants
     ; Hide object.
-    db $2a, $01
+    db $2a, C2VisIdBathTrench
     ; Refresh room objects.
     db $2b
 
@@ -46,7 +46,7 @@ C2Loc5_01:
     db $08, C2PantsTaken
     dw FinishBathDoorOpen
     ; Hide object.
-    db $2a, $02
+    db $2a, C2VisIdBathPants
     ; Refresh room objects.
     db $2b
 
@@ -67,7 +67,7 @@ C2Loc5_03:
     db $08, C2TrenchTaken
     dw HideBathPantsOuter
     ; Hide object.
-    db $2a, $01
+    db $2a, C2VisIdBathTrench
 
 ; Hide untaken pants and continue through the attribute opening helper.
 HideBathPantsOuter:
@@ -77,7 +77,7 @@ C2Loc5_04:
     db $08, C2PantsTaken
     dw OpenDoorAttr
     ; Hide object.
-    db $2a, $02
+    db $2a, C2VisIdBathPants
     ; Jump to script.
     db $07
     dw OpenDoorAttr
@@ -95,14 +95,14 @@ C2Sc5_02:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected state and refresh.
     db $23
     ; Test object flag and branch when set.
     db $08, C2TrenchTaken
     dw ShowBathPants
     ; Show object.
-    db $29, $01
+    db $29, C2VisIdBathTrench
     ; Refresh room objects.
     db $2b
 
@@ -114,7 +114,7 @@ C2Loc5_A4:
     db $08, C2PantsTaken
     dw EndC2Path
     ; Show object.
-    db $29, $02
+    db $29, C2VisIdBathPants
     ; Refresh room objects.
     db $2b
     ; End script.
@@ -127,14 +127,14 @@ C2Loc5_A5:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $1f
     ; Test object flag and branch when set.
     db $08, C2TrenchTaken
     dw ShowBathPantsOuter
     ; Show object.
-    db $29, $01
+    db $29, C2VisIdBathTrench
 
 ; Show untaken pants object 02 on the bedroom-side closing path.
 ShowBathPantsOuter:
@@ -144,7 +144,7 @@ C2Loc5_A6:
     db $08, C2PantsTaken
     dw EndC2Path
     ; Show object.
-    db $29, $02
+    db $29, C2VisIdBathPants
     ; End script.
     db $ff
 
@@ -161,7 +161,7 @@ jr_008_45b8:
     db $55, RoomVegasBath
     dw EnterVegasRoom
     ; Show message 0.
-    db $00, $08
+    db $00, $08 ; Message Text12Message08: YOU'RE IN A DINGY / HOTEL BATHROOM.[END]
     ; End script.
     db $ff
 
@@ -172,12 +172,12 @@ C2Loc5_05:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $30
+    db $00, $30 ; Message Text12Message30: YOU'RE IN A CHEAP,MESSY HOTEL ROOM. / BUT THEN AGAIN, / WHO'S COMPLAINING![END]
     ; Test object flag and branch when set.
     db $08, C2StogieMet
     dw EndC2Path
     ; Show message 0.
-    db $00, $32
+    db $00, $32 ; Message Text12Message32: A MAN REEKING OF / CIGAR SMOKE / APPEARS OUT OF / THE BLUE AND / SAYS...[END]
     ; Run scene effect.
     db $39, FxStogie
     ; Play audio.
@@ -187,7 +187,7 @@ C2Loc5_05:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $33
+    db $00, $33 ; Message Text12Message33: "JUST REMEMBER / PAL, I GOT / INSTRUCTIONS TO / KEEP MY EYES ON / YOU.[PAGE] / SO, DO...
     ; Resume text.
     db $2f
     ; Wait sixty ticks.
@@ -195,7 +195,7 @@ C2Loc5_05:
     ; Restore saved Case II effect.
     db $3a
     ; Show object.
-    db $29, $06
+    db $29, C2VisIdBedroomCigarRing
     ; Refresh room objects.
     db $2b
     ; Play audio.
@@ -203,7 +203,7 @@ C2Loc5_05:
     ; Set object flag.
     db $09, C2StogieMet
     ; Show message 0.
-    db $00, $34
+    db $00, $34 ; Message Text12Message34: STOGIE LEAVES / THE ROOM. A / DISCARDED CIGAR / RING IS THE ONLY / INDICATION THAT HE...
     ; End script.
     db $ff
 
@@ -217,7 +217,7 @@ C2Sc5_04:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text12Message2A: MIGHT BE A DOOR. / YUP, HANDLE AND / HINGES- IT'S A / DOOR ALRIGHT![END]
     ; Test room argument and branch on equality.
     db $25, RoomVegasBedroom
     dw EndC2Path
@@ -227,7 +227,7 @@ DoorKeyHint:
 
 C2Loc5_06:
     ; Show message 2.
-    db $02, $08
+    db $02, $08 ; Message Text16Message08: YOUR DETECTIVE / SKILLS TELL YOU / THAT A KEY WOULD / PROBABLY OPEN THISUP![END]
     ; End script.
     db $ff
 
@@ -279,7 +279,7 @@ jr_008_4602:
     db $54, C2PantsWorn
     dw VegasDressRebuff
     ; Show message 0.
-    db $00, $47
+    db $00, $47 ; Message Text12Message47: AS YOU STAND IN / THE HOTEL HALLWAY,YOU CAN HEAR THE / SOUNDS OF GAMBLINGIN THE DISTA...
     ; Set object flag.
     db $09, C2VegasHallSeen
     ; End script.
@@ -290,7 +290,7 @@ VegasDressRebuff:
 
 C2Loc5_07:
     ; Show message 0.
-    db $00, $81
+    db $00, $81 ; Message Text13Message01: AS YOU LEAVE THE / ROOM, A SEEDY / LOOKING MAN STEPS / IN FRONT OF YOU![END]
     ; Run scene effect.
     db $39, FxBouncer
     ; Play audio.
@@ -300,13 +300,13 @@ C2Loc5_07:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $ef
+    db $00, $ef ; Message Text13Message6F: "HEY! YOU CAN'T / WALK AROUND HERE / STARK NAKED!"[END]
     ; Wait sixty ticks.
     db $7e
     ; Prepare room move and read two room arguments.
     db $3b, RoomVegasHall1, RoomVegasBedroom
     ; Show message 0.
-    db $00, $82
+    db $00, $82 ; Message Text13Message02: YOU ARE FORCED / INTO THE ROOM.[END]
     ; End script.
     db $ff
 
@@ -323,7 +323,7 @@ VegasHallReply:
 
 C2Loc5_09:
     ; Show message 0.
-    db $00, $48
+    db $00, $48 ; Message Text12Message48: IT'S THE FIRST / FLOOR HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -356,7 +356,7 @@ LuckyLobbyReply:
 
 C2Loc5_0A:
     ; Show message 0.
-    db $00, $6e
+    db $00, $6e ; Message Text12Message6E: THE CLINKING / SOUNDS OF CHIPS / FLOATS OUT FROM / THE LOBBY.[END]
     ; End script.
     db $ff
 
@@ -367,7 +367,7 @@ C2Sc5_0A:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $50
+    db $00, $50 ; Message Text12Message50: YOU PUT YOUR EAR / TO THE DOOR, / HOPING TO HEAR / SOMETHING. BUT / ALL'S QUIET.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -383,7 +383,7 @@ C2Sc5_0B:
     db $25, RoomVegasHall1
     dw LiftPaintReply
     ; Show message 0.
-    db $00, $a4
+    db $00, $a4 ; Message Text13Message24: THAT'S QUITE THE / STYLISH DOOR.[PAGE] / YOU'VE NEVER SEEN / ANOTHER LIKE IT![END]
     ; End script.
     db $ff
 
@@ -392,7 +392,7 @@ LiftPaintReply:
 
 C2Loc5_0B:
     ; Show message 0.
-    db $00, $51
+    db $00, $51 ; Message Text12Message51: THESE ELEVATOR / DOORS MUST HAVE / RECENTLY BEEN / PAINTED. THEY / REEK![END]
     ; End script.
     db $ff
 
@@ -447,7 +447,7 @@ DoorCannotOpen:
 
 C2Sc5_10:
     ; Show message 0.
-    db $00, $d3
+    db $00, $d3 ; Message Text13Message53: HMM... / IT DOESN'T OPEN.[END]
     ; End script.
     db $ff
 
@@ -464,9 +464,9 @@ jr_008_466d:
     db RoomVegasHall1
     dw VegasHallReply
     ; Hide object.
-    db $2a, $13
+    db $2a, C2VisIdLiftFloor3
     ; Show object.
-    db $29, $11
+    db $29, C2VisIdLiftFloor1
 
 ; Refresh objects and show the original regional lift description.
 VegasLiftReply:
@@ -475,7 +475,7 @@ C2Loc5_0C:
     ; Refresh room objects.
     db $2b
     ; Show message 0.
-    db $00, $9d
+    db $00, $9d ; Message Text13Message1D: YOU'RE INSIDE THE / CRAMPED SPACE OF / THE ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -492,7 +492,7 @@ BusyPlaceReply:
 
 C2Loc5_0D:
     ; Show message 0.
-    db $00, $73
+    db $00, $73 ; Message Text12Message73: IT'S A BUSY PLACE.[END]
     ; End script.
     db $ff
 
@@ -501,7 +501,7 @@ QuietPlaceReply:
 
 C2Sc5_13:
     ; Show message 0.
-    db $00, $88
+    db $00, $88 ; Message Text13Message08: THIS SURE IS A / QUIET PLACE.[END]
     ; End script.
     db $ff
 
@@ -530,7 +530,7 @@ LookC2Cashier:
 
 C2Loc5_0F:
     ; Show message 0.
-    db $00, $7c
+    db $00, $7c ; Message Text12Message7C: THE PRETTY WOMAN / BEHIND THE COUNTERMUST BE THE CASINOCASHIER.[PAGE] / SHE'LL EXCHAN...
     ; End script.
     db $ff
 
@@ -559,12 +559,12 @@ C2Loc5_11:
     db $05
     dw BouncerDressCue
     ; Test state bit.
-    db $0e, $06
+    db $0e, C2StateCasinoFrontDoorOpen
     ; Branch if result bit 0 is set.
     db $03
     dw EvictCashierDress
     ; Set state bit.
-    db $0f, $06
+    db $0f, C2StateCasinoFrontDoorOpen
 
 ; Play the room cue and prepare the move from room 04 to 11.
 EvictCashierDress:
@@ -580,11 +580,11 @@ CasinoEjectReply:
 
 C2Loc5_13:
     ; Show message 0.
-    db $00, $70
+    db $00, $70 ; Message Text12Message70: THE BOUNCER / ROUGHLY THROWS YOUFROM THE CASINO.[END]
     ; Play audio.
     db $3e, $12
     ; Clear state and refresh.
-    db $24, $06
+    db $24, C2StateCasinoFrontDoorOpen
     ; End script.
     db $ff
 
@@ -593,7 +593,7 @@ BouncerDressCue:
 
 C2Loc5_14:
     ; Show message 3.
-    db $2c
+    db $2c ; Message Text18Message1E: [OBJECT_WRAM:37C5] / CALLED LOUDLY FOR / THE BODYGUARD.[END]
 
 jr_008_46b2:
     db $1e
@@ -608,7 +608,7 @@ jr_008_46b2:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text12Message6F: THE BOUNCER / QUICKLY STEPS / IN FRONT OF YOU / AND SAYS,[PAGE] / "HEY, 'DIS HERE ISA...
     ; Wait sixty ticks.
     db $7e
     ; Reset item slots.
@@ -624,7 +624,7 @@ C2Sc5_15:
     db $1d
     dw DoorIsOpen
     ; Show message 0.
-    db $00, $74
+    db $00, $74 ; Message Text12Message74: LOOKS LIKE THE / ENTRANCE.[END]
     ; End script.
     db $ff
 
@@ -678,18 +678,18 @@ C2Sc5_18:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $7a
+    db $00, $7a ; Message Text12Message7A: THE SOUND OF / SHATTERING GLASS / FILLS THE ROOM![END]
     ; Run scene effect.
     db $39, FxBouncer
     ; Play audio.
     db $3e, $09
     ; Show message 0.
-    db $00, $7b
+    db $00, $7b ; Message Text12Message7B: "AND JUST WHAT DO / YA THINK YOU'RE / DOING!?"[END]
     ; Test attribute bit 2 and branch when set.
     db $1d
     dw EjectCasinoDoor
     ; Set state bit.
-    db $0f, $06
+    db $0f, C2StateCasinoFrontDoorOpen
 
 ; Prepare the move from room 03 to 11 and enter the bouncer ejection reply.
 EjectCasinoDoor:
@@ -721,7 +721,7 @@ C2Loc5_17:
     ; Set text name 0.
     db $30, $ad
     ; Show message 3.
-    db $2c, $01
+    db $2c, $01 ; Message Text18Message01: THE [OBJECT_WRAM:37C5] / IS BROKEN.[END]
     ; End script.
     db $ff
 
@@ -735,7 +735,7 @@ C2Sc5_19:
     db $25, RoomVegasLobby
     dw LuckyLobbyReply
     ; Show message 0.
-    db $00, $cc
+    db $00, $cc ; Message Text13Message4C: YOU'RE STANDING / OUTSIDE THE FANCY / BRICK FACADE OF / THE LUCKY DICE / HOTEL AND CA...
     ; End script.
     db $ff
 
@@ -750,7 +750,7 @@ jr_008_4713:
     db RoomVegasCashier
     dw QuietPlaceReply
     ; Show message 0.
-    db $00, $89
+    db $00, $89 ; Message Text13Message09: THE DEALER DEALS / THE CARDS AT THE / BLACKJACK TABLE.[END]
     ; End script.
     db $ff
 
@@ -789,9 +789,9 @@ C2Loc5_19:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $86
+    db $00, $86 ; Message Text13Message06: THE BLACKJACK / DEALER SAYS,[END]
     ; Show message 0.
-    db $00, $87
+    db $00, $87 ; Message Text13Message07: "C'MON TRY YOUR / LUCK! THESE CARDS / ARE SURE HOT / TODAY!"[END]
     ; End script.
     db $ff
 
@@ -828,12 +828,12 @@ C2Loc5_1C:
     db $05
     dw BouncerDressCue
     ; Test state bit.
-    db $0e, $06
+    db $0e, C2StateCasinoFrontDoorOpen
     ; Branch if result bit 0 is set.
     db $03
     dw EvictDealerDress
     ; Set state bit.
-    db $0f, $06
+    db $0f, C2StateCasinoFrontDoorOpen
 
 ; Play the room cue and prepare the move from room 05 to 11.
 EvictDealerDress:
@@ -862,7 +862,7 @@ RudyIntro:
 
 C2Loc5_1F:
     ; Show message 0.
-    db $00, $94
+    db $00, $94 ; Message Text13Message14: RUDY GIVES YOU A / SLY GRIN, "ACE, / YOU WIN IN / WHATEVER YOU DO, / WHETHER IT'S / B...
     ; End script.
     db $ff
 
@@ -882,7 +882,7 @@ LiftInnerDoorReply:
 
 C2Sc5_1D:
     ; Show message 0.
-    db $00, $5a
+    db $00, $5a ; Message Text12Message5A: WITH DEDUCTIVE / REASONING, YOU / DEDUCE THAT THIS / MUST BE AN / ELEVATOR DOOR.[END]
     ; End script.
     db $ff
 
@@ -896,7 +896,7 @@ C2Sc5_1E:
     db $25, RoomVegasLift2
     dw EnterVegasLift2
     ; Show message 0.
-    db $00, $52
+    db $00, $52 ; Message Text12Message52: THE 2ND FLOOR / HALLWAY IS EERILY / QUIET.[END]
     ; End script.
     db $ff
 
@@ -905,7 +905,7 @@ EnterVegasLift2:
 
 C2Loc5_20:
     ; Show object.
-    db $29, $12
+    db $29, C2VisIdLiftFloor2
     ; Jump to script.
     db $07
 
@@ -919,7 +919,7 @@ C2Sc5_1F:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $55
+    db $00, $55 ; Message Text12Message55: THIS IS OBVIOUSLY / THE DOOR TO A / HOTEL ROOM.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -931,7 +931,7 @@ C2Sc5_20:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $56
+    db $00, $56 ; Message Text12Message56: A FAINT SCUFFLING / CAN BE HEARD ON / THE OTHER SIDE OF / THIS DOOR.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -965,7 +965,7 @@ VegasHall3Reply:
 
 C2Loc5_21:
     ; Show message 0.
-    db $00, $57
+    db $00, $57 ; Message Text12Message57: THE THIRD FLOOR / HALLWAY IS MUCH / THE SAME AS THE / REST.[END]
     ; End script.
     db $ff
 
@@ -974,7 +974,7 @@ EnterVegasLift3:
 
 C2Loc5_22:
     ; Show object.
-    db $29, $13
+    db $29, C2VisIdLiftFloor3
     ; Jump to script.
     db $07
 
@@ -1005,19 +1005,19 @@ ReadHamperMark:
 
 C2Loc5_23:
     ; Test object flag and branch when clear.
-    db $54, $0a
+    db $54, C2VegasHamperWritingSeen
     dw LookVegasHamper
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $5c
+    db $00, $5c ; Message Text12Message5C: IT READS, "RELIANTCLEANERS."[END]
     ; Test object flag and branch when clear.
     db $54, C2PhotoSeen
     dw ThinkHamperRun
     ; Play audio.
     db $3e, $08
     ; Show message 0.
-    db $00, $5e
+    db $00, $5e ; Message Text12Message5E: THE BEGINNINGS OF / AN IDEA FORM IN / YOUR HEAD.[END]
     ; Set object flag.
     db $09, C2HamperPlan
     ; Play room audio cue.
@@ -1030,7 +1030,7 @@ ThinkHamperRun:
 
 C2Loc5_24:
     ; Show message 0.
-    db $00, $5d
+    db $00, $5d ; Message Text12Message5D: YOU WONDER IF THEYTAKE THIS HAMPER / TO THE CLEANERS / EVERY NIGHT.[END]
     ; End script.
     db $ff
 
@@ -1039,9 +1039,9 @@ LookVegasHamper:
 
 C2Loc5_25:
     ; Show message 0.
-    db $00, $5b
+    db $00, $5b ; Message Text12Message5B: SOMETHING IS / WRITTEN ON THE / SIDE OF THIS LARGEHAMPER.[END]
     ; Set object flag.
-    db $09, $0a
+    db $09, C2VegasHamperWritingSeen
     ; End script.
     db $ff
 
@@ -1050,7 +1050,7 @@ VegasLidText:
 
 C2Loc5_26:
     ; Show message 0.
-    db $00, $e8
+    db $00, $e8 ; Message Text13Message68: IT'S THE LID TO / THE HAMPER.[END]
     ; End script.
     db $ff
 
@@ -1063,7 +1063,7 @@ C2Loc5_27:
     ; Set text name 0.
     db $30, $bb
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; Test room argument and branch on inequality.
     db $55, RoomVegasHall3
     dw EndC2Path
@@ -1071,7 +1071,7 @@ C2Loc5_27:
     db $07
     dw ReadHamperMark
 
-; Open the Vegas hamper lid using the original object swaps and flag.
+; Open the Vegas hamper lid, set object flag $1d, and exchange the visible lid objects.
 OpenVegasLid:
 
 C2Sc5_24:
@@ -1081,17 +1081,17 @@ C2Sc5_24:
     ; Set text name 0.
     db $30, $bb
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set object flag.
-    db $09, $1d
+    db $09, C2VegasHamperMarkRevealed
     ; Draw Case II panel and marks.
     db $3c
     ; Set selected state and refresh.
     db $21
     ; Hide object.
-    db $2a, $82
+    db $2a, C2VisIdVegasHamperClosed
     ; Show object.
-    db $29, $83
+    db $29, C2VisIdVegasHamperOpen
     ; End script.
     db $ff
 
@@ -1102,11 +1102,11 @@ C2Loc5_28:
     ; Set text name 0.
     db $30, $bb
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
-; Close the lid and preserve the original flag 9C clearing.
+; Close the Vegas lid and clear object flag $9c, also set by TakeC2News4.
 CloseVegasLid:
 
 C2Sc5_25:
@@ -1116,7 +1116,7 @@ C2Sc5_25:
     ; Set text name 0.
     db $30, $bb
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear object flag.
     db $0a, $9c
     ; Draw Case II panel and marks.
@@ -1124,9 +1124,9 @@ C2Sc5_25:
     ; Clear selected state and refresh.
     db $23
     ; Hide object.
-    db $2a, $83
+    db $2a, C2VisIdVegasHamperOpen
     ; Show object.
-    db $29, $82
+    db $29, C2VisIdVegasHamperClosed
     ; End script.
     db $ff
 
@@ -1137,7 +1137,7 @@ C2Loc5_A7:
     ; Set text name 0.
     db $30, $bb
     ; Show message 3.
-    db $2c, $1a
+    db $2c, $1a ; Message Text18Message1A: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1151,7 +1151,7 @@ C2Sc5_26:
     db $55, RoomVegasHamper
     dw VegasHall3Reply
     ; Show message 0.
-    db $00, $5f
+    db $00, $5f ; Message Text12Message5F: INSIDE THE HAMPER / IT STINKS LIKE / DAY-OLD SOCKS AND / SMELLY SHORTS.[END]
     ; End script.
     db $ff
 
@@ -1185,7 +1185,7 @@ C2Sc5_28:
     db $08, C2VegasHall4Seen
     dw VegasHall4Reply
     ; Show message 0.
-    db $00, $65
+    db $00, $65 ; Message Text12Message65: THE FOURTH FLOOR / OF THE HOTEL SEEMSTO CONTAIN / OFFICES.[PAGE] / SIGNS HANG ABOVE /...
     ; Run scene effect.
     db $39, $02
     ; Play audio.
@@ -1195,7 +1195,7 @@ C2Sc5_28:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $63
+    db $00, $63 ; Message Text12Message63: THE NAMES ON THE / DOORS ARE / FAMILIAR: ANTHONY / MALONE, NOTORIOUS / VEGAS MOBSTER,...
     ; Wait sixty ticks.
     db $7e
     ; Show Case II effect without saving it again.
@@ -1205,7 +1205,7 @@ C2Sc5_28:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $64
+    db $00, $64 ; Message Text12Message64: IT WAS RUMORED / THAT A DISTRICT / ATTORNEY HAD / IRREFUTABLE / EVIDENCE TO / CONVICT...
     ; Wait sixty ticks.
     db $7e
     ; Restore saved Case II effect.
@@ -1220,7 +1220,7 @@ VegasHall4Reply:
 
 C2Loc5_29:
     ; Show message 0.
-    db $00, $66
+    db $00, $66 ; Message Text12Message66: YOU'RE ON THE / FOURTH FLOOR.[END]
     ; End script.
     db $ff
 
@@ -1229,7 +1229,7 @@ EnterVegasLift4:
 
 C2Loc5_2A:
     ; Show object.
-    db $29, $14
+    db $29, C2VisIdLiftFloor4
     ; Jump to script.
     db $07
     dw VegasLiftReply
@@ -1245,7 +1245,7 @@ C2Sc5_29:
     db $55, RoomVegasHall4
     dw ClosedDoorReply
     ; Show message 0.
-    db $00, $69
+    db $00, $69 ; Message Text12Message69: THE SIGN ABOVE / THIS DOOR READS, / "DANNY VENTINI."[END]
     ; End script.
     db $ff
 
@@ -1287,7 +1287,7 @@ C2Sc5_2C:
     db $25, RoomVegasHall4
     dw VegasHall4Reply
     ; Show message 0.
-    db $00, $a7
+    db $00, $a7 ; Message Text13Message27: THIS OFFICE HAS A / QUITE A VIEW! / DESERT AS FAR AS / THE EYE CAN SEE![PAGE] / GEE, ...
     ; End script.
     db $ff
 
@@ -1306,7 +1306,7 @@ C2Sc5_2D:
 jr_008_485f:
     db HIGH(ClosedDoorReply)
     ; Show message 0.
-    db $00, $6a
+    db $00, $6a ; Message Text12Message6A: "ANTHONY MALONE" / IS PRINTED IN GOLDLETTERS ON THIS / SIGN.[END]
     ; End script.
     db $ff
 
@@ -1333,14 +1333,14 @@ C2Sc5_2F:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $c4
+    db $00, $c4 ; Message Text13Message44: JUST WHAT YOU'D / EXPECT FROM THE / BOSS' OFFICE.[PAGE] / EVERYTHING HERE ISWORTH A F...
     ; Test object flag and branch when set.
-    db $08, $00
+    db $08, C2MalonePicturesHintSeen
     dw EndC2Path
     ; Show message 1.
-    db $01, $5f
+    db $01, $5f ; Message Text14Message5F: THERE ARE TWO / PICTURES ON / THE WALL...[PAGE] / YOU WONDER WHO / THESE PEOPLE MIGHT...
     ; Set object flag.
-    db $09, $00
+    db $09, C2MalonePicturesHintSeen
     ; End script.
     db $ff
 
@@ -1357,7 +1357,7 @@ StreetWayReply:
 
 C2Sc5_31:
     ; Show message 0.
-    db $00, $d2
+    db $00, $d2 ; Message Text13Message52: THAT'S ACROSS THE / STREET.[END]
     ; End script.
     db $ff
 
@@ -1366,7 +1366,7 @@ LookDesert:
 
 C2Sc5_32:
     ; Show message 0.
-    db $00, $d0
+    db $00, $d0 ; Message Text13Message50: THE BARREN DESERT / STRETCHES AS FAR / AS YOU CAN SEE.[END]
     ; End script.
     db $ff
 
@@ -1385,7 +1385,7 @@ C2StationFront:
 
 C2Loc5_2B:
     ; Show message 0.
-    db $00, $f1
+    db $00, $f1 ; Message Text13Message71: A LARGE BUILDING / HOUSING THE TRAIN / STATION STANDS / BEFORE YOU.[END]
     ; Clear the desert exposure timer.
     db $42, C2HeatIx
     ; End script.
@@ -1406,7 +1406,7 @@ jr_008_4899:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $ed
+    db $00, $ed ; Message Text13Message6D: THE SHUTTER IS / FILTHY. BAD FOR A / CLEANER'S IMAGE, / DON'T YOU THINK?[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -1416,7 +1416,7 @@ LookLaundryChute:
 
 C2Loc5_2C:
     ; Show message 2.
-    db $02, $af
+    db $02, $af ; Message Text17Message2F: IT'S A CHUTE USED / TO DEPOSIT THE / DIRTY LAUNDRY INTOTHE ROOM FOR / CLEANING.[END]
     ; End script.
     db $ff
 
@@ -1434,9 +1434,9 @@ C2Sc5_35:
     db $54, LaundryUnlocked
     dw DoorLockedReply
     ; Hide object.
-    db $2a, $9b
+    db $2a, C2VisIdLaundryShutterClosed
     ; Show object.
-    db $29, $9c
+    db $29, C2VisIdLaundryShutterOpen
     ; Jump to script.
     db $07
     dw OpenDoorState
@@ -1446,7 +1446,7 @@ ChuteClimbReply:
 
 C2Loc5_2D:
     ; Show message 2.
-    db $02, $ca
+    db $02, $ca ; Message Text17Message4A: THE CHUTE'S TOO / SLIPPERY TO CLIMB.[END]
     ; End script.
     db $ff
 
@@ -1461,9 +1461,9 @@ C2Sc5_36:
     db $55, RoomOutskirts
     dw ChuteClimbReply
     ; Show object.
-    db $29, $9b
+    db $29, C2VisIdLaundryShutterClosed
     ; Hide object.
-    db $2a, $9c
+    db $2a, C2VisIdLaundryShutterOpen
     ; Jump to script.
     db $07
     dw CloseDoorState
@@ -1478,7 +1478,7 @@ C2Sc5_37:
     ; Move using two room arguments if the selected state permits.
     db $20, RoomOutskirts, RoomLaundry
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text17Message2E: YOU ARE IN A / DIMLY-LIT LAUNDRY / ROOM. THE SMELL OFDETERGENT / OVERWHELMS YOUR / SE...
     ; End script.
     db $ff
 
@@ -1492,14 +1492,14 @@ C2Sc5_38:
     db $25, RoomOutskirts
     dw LookCleanEntryOut
     ; Show message 1.
-    db $01, $43
+    db $01, $43 ; Message Text14Message43: LOOKS LIKE A DOOR.[END]
     ; Test object flag and branch when set.
     db $08, C2GoonsFooled
     dw EndC2Path
     ; Play audio.
     db $3e, $08
     ; Show message 2.
-    db $02, $d2
+    db $02, $d2 ; Message Text17Message52: THOSE GOONS DON'T / SEEM TOO SMART, / THERE MUST BE / SOMETHING TO DO TOMAKE THEM THI...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -1510,7 +1510,7 @@ LookCleanEntryOut:
 
 C2Loc5_2E:
     ; Show message 0.
-    db $00, $74
+    db $00, $74 ; Message Text12Message74: LOOKS LIKE THE / ENTRANCE.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -1578,7 +1578,7 @@ C2Sc5_3B:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $62
+    db $00, $62 ; Message Text12Message62: GLASS SHATTERS / EVERYWHERE.[END]
     ; Jump to script.
     db $07
     dw CleanGoonsEnd
@@ -1588,14 +1588,14 @@ UseCleanEntry:
 
 C2Sc5_3C:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomOutskirts, $48
+    db $20, RoomOutskirts, RoomCleanersHallway
     ; Test room argument and branch on equality.
-    db $25, $48
+    db $25, RoomCleanersHallway
     dw CleanHallReply
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $ea
+    db $00, $ea ; Message Text13Message6A: YOU'RE STANDING / NEAR THE OUTSKIRTSOF TOWN.[END]
     ; Test object flag and branch when set.
     db $08, C2GoonsFooled
     dw EndC2Path
@@ -1613,7 +1613,7 @@ C2Loc5_30:
     ; Wait sixty ticks.
     db $7e
     ; Show message 2.
-    db $02
+    db $02 ; Message Text17Message1F: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / ONE OF THE THUGS / GRABS HOLD OF YOURCOLLAR AND ...
 
 jr_008_492d:
     db $9f
@@ -1644,7 +1644,7 @@ CleanHallReply:
 
 C2Loc5_32:
     ; Show message 2.
-    db $02, $cd
+    db $02, $cd ; Message Text17Message4D: YOU'RE IN THE / BUILDING'S / HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -1715,7 +1715,7 @@ jr_008_4968:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $f6
+    db $00, $f6 ; Message Text13Message76: YOUR INSIDE THE / LAS VEGAS TRAIN / STATION.[END]
     ; Test object flag and branch when clear.
     db $54, C2PantsWorn
     dw CheckStnClothes
@@ -1738,7 +1738,7 @@ DressAlarmReply:
 
 C2Loc5_34:
     ; Show message 3.
-    db $2c, $2a
+    db $2c, $2a ; Message Text18Message2A: THE [OBJECT_WRAM:37C5] / APPEARS TO BE / SHOCKED BECAUSE / YOU AREN'T WEARINGANYTHING...
 
 ; Show the policeman and original arrest text, then enter the jail ending.
 PoliceArrest:
@@ -1755,7 +1755,7 @@ C2Loc5_35:
     ; Wait sixty ticks.
     db $7e
     ; Show message 0.
-    db $00, $da
+    db $00, $da ; Message Text13Message5A: A COP PATROLLING / HIS BEAT COMES / OVER TO SEE WHAT / ALL THE RUCKUS IS / ABOUT.[PAG...
     ; Wait sixty ticks.
     db $7e
     ; Jump to script in bank $07.
@@ -1791,7 +1791,7 @@ C2Sc5_41:
     db $55, RoomVegasStationLobby
     dw BusyPlaceReply
     ; Show message 0.
-    db $00, $fa
+    db $00, $fa ; Message Text13Message7A: THIS LEADS TO THE / LUGGAGE CLAIM / AREA.[END]
     ; End script.
     db $ff
 
@@ -1809,9 +1809,9 @@ C2Sc5_42:
     db $08, C2SuitcaseTaken
     dw EnterLuggageDesk
     ; Hide object.
-    db $2a, $21
+    db $2a, C2VisIdClaimSuitcaseOpen
     ; Show object.
-    db $29, $1d
+    db $29, C2VisIdClaimSuitcaseClosed
     ; Refresh room objects.
     db $2b
 
@@ -1824,7 +1824,7 @@ C2Loc5_38:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $0a
+    db $00, $0a ; Message Text12Message0A: A MAN DOZES BEHINDTHE COUNTER OF THELUGGAGE CLAIM.[END]
 
 ; Check pants before the shared luggage and lobby uniform fallback.
 ClaimDressCheck:
@@ -1864,7 +1864,7 @@ jr_008_49c3:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $f6
+    db $00, $f6 ; Message Text13Message76: YOUR INSIDE THE / LAS VEGAS TRAIN / STATION.[END]
     ; Jump to script.
     db $07
     dw ClaimDressCheck
@@ -1879,7 +1879,7 @@ C2Sc5_43:
     ; Set script value 0.
     db $49, $06
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -1908,7 +1908,7 @@ C2Loc5_3C:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $71
+    db $00, $71 ; Message Text12Message71: YOU'RE ON A / PLATFORM IN A / TRAIN STATION.[END]
     ; Clear object flag.
     db $0a, C2WomanTalked
     ; Clear object flag.
@@ -1949,7 +1949,7 @@ C2Loc5_3E:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $f6
+    db $00, $f6 ; Message Text13Message76: YOUR INSIDE THE / LAS VEGAS TRAIN / STATION.[END]
     ; Jump to script.
     db $07
     dw ClaimDressCheck
@@ -1959,21 +1959,21 @@ ClearTrainDropA:
 
 C2Loc5_3F:
     ; Clear state bit.
-    db $10, $85
+    db $10, C2StateTrain6AFareView
     ; Clear state bit.
-    db $10, $87
+    db $10, C2StateTrain7AFareView
     ; Clear state bit.
-    db $10, $89
+    db $10, C2StateTrain8AFareView
     ; Clear state bit.
-    db $10, $8b
+    db $10, C2StateTrain9AFareView
     ; Clear state bit.
-    db $10, $8d
+    db $10, C2StateTrain2AFareView
     ; Clear state bit.
-    db $10, $8f
+    db $10, C2StateTrain3AFareView
     ; Clear state bit.
-    db $10, $91
+    db $10, C2StateTrain4AFareView
     ; Clear state bit.
-    db $10, $93
+    db $10, C2StateTrain5AFareView
     ; Return to calling script.
     db $06
 
@@ -1982,23 +1982,23 @@ ClearTrainDropB:
 
 C2Loc5_40:
     ; Hide object.
-    db $2a, $a8
+    db $2a, C2VisIdTrainConductor
     ; Clear state bit.
-    db $10, $86
+    db $10, C2StateTrain6BFareView
     ; Clear state bit.
-    db $10, $88
+    db $10, C2StateTrain7BFareView
     ; Clear state bit.
-    db $10, $8a
+    db $10, C2StateTrain8BFareView
     ; Clear state bit.
-    db $10, $8c
+    db $10, C2StateTrain9BFareView
     ; Clear state bit.
-    db $10, $8e
+    db $10, C2StateTrain2BFareView
     ; Clear state bit.
-    db $10, $90
+    db $10, C2StateTrain3BFareView
     ; Clear state bit.
-    db $10, $92
+    db $10, C2StateTrain4BFareView
     ; Clear state bit.
-    db $10, $94
+    db $10, C2StateTrain5BFareView
     ; Return to calling script.
     db $06
 
@@ -2007,23 +2007,23 @@ TrainFareView:
 
 C2Loc5_41:
     ; Show object.
-    db $29, $a8
+    db $29, C2VisIdTrainConductor
     ; Hide object.
-    db $2a, $a9
+    db $2a, C2VisIdTrainChattyWoman
     ; Hide object.
-    db $2a, $aa
+    db $2a, C2VisIdTrainSeatMan
     ; Hide object.
-    db $2a, $ab
+    db $2a, C2VisIdTrainYoungWoman
     ; Hide object.
-    db $2a, $ac
+    db $2a, C2VisIdTrainShade
     ; Hide object.
-    db $2a, $ad
+    db $2a, C2VisIdTrainWindow
     ; Hide object.
-    db $2a, $ae
+    db $2a, C2VisIdTrainDestinationAndDoor
     ; Hide object.
-    db $2a, $af
+    db $2a, C2VisIdTrainPassage
     ; Hide object.
-    db $2a, $b0
+    db $2a, C2VisIdTrainSeats
     ; Return to calling script.
     db $06
 
@@ -2032,26 +2032,26 @@ TrainCarView:
 
 C2Loc5_42:
     ; Hide object.
-    db $2a, $a8
+    db $2a, C2VisIdTrainConductor
     ; Show object.
-    db $29, $a9
+    db $29, C2VisIdTrainChattyWoman
     ; Show object.
     db $29
 
 jr_008_4a3e:
-    db $aa
+    db C2VisIdTrainSeatMan
     ; Show object.
-    db $29, $ab
+    db $29, C2VisIdTrainYoungWoman
     ; Show object.
-    db $29, $ac
+    db $29, C2VisIdTrainShade
     ; Show object.
-    db $29, $ad
+    db $29, C2VisIdTrainWindow
     ; Show object.
-    db $29, $ae
+    db $29, C2VisIdTrainDestinationAndDoor
     ; Show object.
-    db $29, $af
+    db $29, C2VisIdTrainPassage
     ; Show object.
-    db $29, $b0
+    db $29, C2VisIdTrainSeats
     ; Return to calling script.
     db $06
 
@@ -2065,7 +2065,7 @@ C2Sc5_45:
     ; Set script value 0.
     db $49, $07
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2097,7 +2097,7 @@ C2Sc5_47:
     ; Set script value 0.
     db $49, $08
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2123,7 +2123,7 @@ C2Sc5_49:
     ; Set script value 0.
     db $49, $09
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2149,7 +2149,7 @@ C2Sc5_4B:
 jr_008_4a7f:
     db HIGH(DoorIsOpen)
     ; Show message 1.
-    db $01, $2c
+    db $01, $2c ; Message Text14Message2C: PASSENGERS QUICKLYSCRAMBLE IN AND / OUT.[END]
     ; End script.
     db $ff
 
@@ -2163,7 +2163,7 @@ C2Sc5_4C:
 
 jr_008_4a86:
     ; Show message 0.
-    db $00, $d3
+    db $00, $d3 ; Message Text13Message53: HMM... / IT DOESN'T OPEN.[END]
     ; End script.
     db $ff
 
@@ -2186,7 +2186,7 @@ C2Loc5_44:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $21
+    db $02, $21 ; Message Text16Message21: THE TRAIN IS / RATHER WARM AND / STUFFY.[END]
 
 ; Use the original room set to select cash checking or the train pass check.
 TrainFareDispatch:
@@ -2270,11 +2270,11 @@ C2Loc5_47:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $d1
+    db $02, $d1 ; Message Text17Message51: THE CONDUCTOR / APPROACHES AND / SAYS,[END]
     ; Select the current train fare.
     db $5e
     ; Show message 3.
-    db $2c
+    db $2c ; Message Text18Message0B: "THE DESTINATION / OF THIS TRAIN IS / [OBJECT_WRAM:37C5].[PAGE] / THAT WILL BE [NUM8_...
 
 jr_008_4acb:
     db $0b
@@ -2300,7 +2300,7 @@ C2Loc5_48:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $22
+    db $02, $22 ; Message Text16Message22: THERE ARE NO / PASSENGERS IN / THIS CAR.[END]
     ; Jump to script.
     db $07
     dw TrainFareDispatch
@@ -2310,7 +2310,7 @@ LookTrainExit:
 
 C2Sc5_4F:
     ; Show message 0.
-    db $00, $8c
+    db $00, $8c ; Message Text13Message0C: THAT'S THE / EMERGENCY EXIT.[END]
 
 jr_008_4adc:
     ; End script.
@@ -2321,7 +2321,7 @@ TryTrainExit:
 
 C2Sc5_50:
     ; Test object visibility.
-    db $28, $a7
+    db $28, C2VisIdPlatformTrainAndDoor
     ; Branch if result bit 0 is set.
     db $03
     dw TrainBlocksExit
@@ -2330,7 +2330,7 @@ C2Sc5_50:
     ; Play audio.
     db $3e, $09
     ; Show message 0.
-    db $00
+    db $00 ; Message Text13Message35: YOU STEP DOWN ONTOTHE TRACKS...[END]
 
 jr_008_4ae6:
     db $b5
@@ -2341,7 +2341,7 @@ jr_008_4ae6:
     ; No operation.
     db $41
     ; Show message 0.
-    db $00, $b7
+    db $00, $b7 ; Message Text13Message37: SUDDENLY, A TRAIN / BARRELS INTO THE / STATION AND / CRUSHES YOU UNDER / ITS WEIGHT![...
     ; Play exit effect and end this action.
     db $37
     ; Not reached from the recovered action and branch entries.
@@ -2352,7 +2352,7 @@ TrainBlocksExit:
 
 C2Loc5_49:
     ; Show message 0.
-    db $00, $bf
+    db $00, $bf ; Message Text13Message3F: THE TRAIN BLOCKS / YOUR WAY.[END]
     ; End script.
     db $ff
 
@@ -2439,7 +2439,7 @@ LookCarPassage:
 
 C2Sc5_57:
     ; Show message 2.
-    db $02, $3c
+    db $02, $3c ; Message Text16Message3C: THAT'S THE WAY TO / THE OTHER CAR.[END]
     ; End script.
     db $ff
 
@@ -2615,7 +2615,7 @@ C2Sc5_60:
     ; Set script value 0.
     db $49, $02
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2652,7 +2652,7 @@ C2Loc5_4B:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $01
+    db $01, $01 ; Message Text14Message01: CONDUCTORS' SHOUTSAND TRAIN WHISTLESFILL THE AIR.[END]
     ; End script.
     db $ff
     ; Unreferenced sequence; these interpretations follow its byte pattern.
@@ -2696,7 +2696,7 @@ C2Loc5_4E:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $01
+    db $01, $01 ; Message Text14Message01: CONDUCTORS' SHOUTSAND TRAIN WHISTLESFILL THE AIR.[END]
     ; Test object flag and branch when set.
     db $08, C2ChicagoKnown
     dw CheckChiClothes
@@ -2720,17 +2720,17 @@ HideNewsStand:
 
 C2Loc5_50:
     ; Hide object.
-    db $2a, $2e
+    db $2a, C2VisIdNewsSeller
     ; Hide object.
-    db $2a, $2f
+    db $2a, C2VisIdNewsDog
 
 jr_008_4bf8:
     ; Hide object.
-    db $2a, $2c
+    db $2a, C2VisIdNewsPaper3
     ; Hide object.
-    db $2a, $2d
+    db $2a, C2VisIdNewsPaper4
     ; Clear state bit.
-    db $10, $a0
+    db $10, C2StateNewsstandOpen
     ; Return to calling script.
     db $06
 
@@ -2744,7 +2744,7 @@ C2Sc5_62:
     ; Set script value 0.
     db $49, $03
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2803,7 +2803,7 @@ C2Sc5_64:
     ; Set script value 0.
     db $49, $04
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2864,7 +2864,7 @@ jr_008_4c4c:
 
 jr_008_4c51:
     ; Show message 3.
-    db $2c, $09
+    db $2c, $09 ; Message Text18Message09: THIS GOES OUT ONTOPLATFORM [NUM8_WRAM:87C5].[END]
     ; End script.
     db $ff
 
@@ -2970,7 +2970,7 @@ C2Loc5_58:
     db $05
     dw DoorOpening
     ; Hide object.
-    db $2a, $32
+    db $2a, C2VisIdChicagoStationBrokenDoorGlass
 
 jr_008_4c92:
     ; Return to calling script.
@@ -3008,7 +3008,7 @@ C2Sc5_6A:
     ; Clear selected state and refresh.
     db $23
     ; Show object.
-    db $29, $32
+    db $29, C2VisIdChicagoStationBrokenDoorGlass
     ; Refresh room objects.
     db $2b
     ; End script.
@@ -3022,7 +3022,7 @@ C2Loc5_A8:
     db $05
     dw DoorClosing
     ; Show object.
-    db $29, $32
+    db $29, C2VisIdChicagoStationBrokenDoorGlass
     ; Clear selected attribute bit 2.
     db $1f
     ; End script.
@@ -3054,7 +3054,7 @@ C2Sc5_6B:
     ; Set object flag.
     db $09, C2ChiGlass
     ; Show object.
-    db $29, $32
+    db $29, C2VisIdChicagoStationBrokenDoorGlass
     ; Test room argument and branch on equality.
     db $25, RoomChicagoStationLobby
     dw DoorGlassReply
@@ -3077,7 +3077,7 @@ C2Sc5_6C:
     db $08, C2ChiFrontSeen
     dw ChiFrontAgain
     ; Show message 1.
-    db $01, $34
+    db $01, $34 ; Message Text14Message34: YOU STAND OUTSIDE / OF A LARGE TRAIN / STATION. THERE IS / A CAB PARKED HERE.[END]
     ; Set object flag.
     db $09, C2ChiFrontSeen
     ; End script.
@@ -3089,7 +3089,7 @@ ChiFrontAgain:
 C2Loc5_5A:
 jr_008_4ce0:
     ; Show message 1.
-    db $01, $35
+    db $01, $35 ; Message Text14Message35: YOU ARRIVE AT / CHICAGO STATION.[END]
     ; End script.
     db $ff
 
@@ -3245,7 +3245,7 @@ C2Sc5_75:
     db $25, CabAtChicago
     dw LookCabDoor
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text14Message3A: IT'S A FAMILIAR / YELLOW CAB IDLING / IN THE STREET.[END]
     ; End script.
     db $ff
 
@@ -3254,7 +3254,7 @@ LookCabDoor:
 
 C2Sc5_76:
     ; Show message 1.
-    db $01, $43
+    db $01, $43 ; Message Text14Message43: LOOKS LIKE A DOOR.[END]
     ; End script.
     db $ff
 
@@ -3266,7 +3266,7 @@ C2Sc5_77:
     db $08, C2GabbyMet
     dw ProtectCab
     ; Show message 1.
-    db $01, $3b
+    db $01, $3b ; Message Text14Message3B: IT WOULDN'T BE THESMARTEST THING TO / UPSET GABBY! HE'D / PROBABLY MAKE YOU / WALK![END]
     ; End script.
     db $ff
 
@@ -3275,7 +3275,7 @@ ProtectCab:
 
 C2Loc5_5D:
     ; Show message 1.
-    db $01, $3c
+    db $01, $3c ; Message Text14Message3C: YOU STOP YOURSELF / FROM VANDALIZING / THE INSIDE OF YOURFRIEND'S CAB.[END]
     ; End script.
     db $ff
 
@@ -3292,7 +3292,7 @@ C2Sc5_78:
     db $08, C2GabbyMet
     dw SitInC2Cab
     ; Show message 1.
-    db $01, $3d
+    db $01, $3d ; Message Text14Message3D: YOU OPEN THE DOOR / AND STEP INTO THE / CAB.[PAGE] / WHY, IT'S NONE / OTHER THAN YOUR...
     ; Set object flag.
     db $09, C2GabbyMet
     ; End script.
@@ -3303,7 +3303,7 @@ SitInC2Cab:
 
 C2Loc5_5E:
     ; Show message 1.
-    db $01, $3e
+    db $01, $3e ; Message Text14Message3E: YOU SINK DOWN INTOTHE COMFORTABLE / BACK SEAT OF THE / CAB.[END]
     ; End script.
     db $ff
 
@@ -3313,7 +3313,7 @@ CabDoorJammed:
 C2Sc5_79:
 jr_008_4d6d:
     ; Show message 1.
-    db $01, $44
+    db $01, $44 ; Message Text14Message44: IT DOESN'T OPEN. / GABBY SAYS, "SORRYACE, THAT DOOR / HASN'T OPENED / SINCE THE GARBA...
     ; End script.
     db $ff
 
@@ -3325,7 +3325,7 @@ C2Sc5_7A:
     db $25, CabAtAdison
     dw LookCabDoor
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text14Message3A: IT'S A FAMILIAR / YELLOW CAB IDLING / IN THE STREET.[END]
     ; End script.
     db $ff
 
@@ -3342,7 +3342,7 @@ C2Sc5_7B:
     db $08, C2HomeSeen
     dw HomeFrontAgain
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text14Message51: YOU'RE IN FRONT OFA RUNDOWN, / APARTMENT / BUILDING.[PAGE] / HOME SWEET HOME![END]
     ; Set object flag.
     db $09, C2HomeSeen
     ; End script.
@@ -3353,7 +3353,7 @@ HomeFrontAgain:
 
 C2Loc5_5F:
     ; Show message 1.
-    db $01, $52
+    db $01, $52 ; Message Text14Message52: YOU'RE IN FRONT OFYOUR APARTMENT.[END]
     ; End script.
     db $ff
 
@@ -3367,7 +3367,7 @@ C2Sc5_7C:
 jr_008_4d8c:
     dw LookCabDoor
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text14Message3A: IT'S A FAMILIAR / YELLOW CAB IDLING / IN THE STREET.[END]
     ; End script.
     db $ff
 
@@ -3384,7 +3384,7 @@ C2Sc5_7D:
     db $08, C2CottageSeen
     dw CottageAgain
     ; Show message 2.
-    db $02, $2b
+    db $02, $2b ; Message Text16Message2B: YOU'RE STANDING / OUTSIDE OF A / TENEMENT. THIS / PART OF TOWN IS SOBAD THAT EVEN THE...
     ; Set object flag.
     db $09, C2CottageSeen
     ; End script.
@@ -3395,7 +3395,7 @@ CottageAgain:
 
 C2Loc5_60:
     ; Show message 2.
-    db $02, $2c
+    db $02, $2c ; Message Text16Message2C: THIS STREET RUNS / PAST SUGAR SHACK'SAPARTMENT.[END]
     ; End script.
     db $ff
 
@@ -3407,7 +3407,7 @@ C2Sc5_7E:
     db $25, CabAtPeoria
     dw LookCabDoor
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text14Message3A: IT'S A FAMILIAR / YELLOW CAB IDLING / IN THE STREET.[END]
     ; End script.
     db $ff
 
@@ -3425,7 +3425,7 @@ jr_008_4dab:
     db $08, C2PeoriaSeen
     dw PeoriaAgain
     ; Show message 1.
-    db $01, $96
+    db $01, $96 ; Message Text15Message16: WHY, IT'S YOUR / FAVORITE OLD / HAUNT, JOE'S / PLACE![END]
     ; Set object flag.
     db $09, C2PeoriaSeen
     ; End script.
@@ -3436,7 +3436,7 @@ PeoriaAgain:
 
 C2Loc5_61:
     ; Show message 1.
-    db $01, $97
+    db $01, $97 ; Message Text15Message17: THE STREET IN / FRONT OF JOE'S / PLACE IS EMPTY.[END]
     ; End script.
     db $ff
 
@@ -3448,7 +3448,7 @@ C2Sc5_80:
     db $25, CabAtMorgue
     dw LookCabDoor
     ; Show message 1.
-    db $01, $3a
+    db $01, $3a ; Message Text14Message3A: IT'S A FAMILIAR / YELLOW CAB IDLING / IN THE STREET.[END]
     ; End script.
     db $ff
 
@@ -3467,7 +3467,7 @@ MorgueFront:
 
 C2Loc5_62:
     ; Show message 2.
-    db $02, $71
+    db $02, $71 ; Message Text16Message71: YOU'RE IN FRONT OFCHICAGO'S CITY / MORGUE.[END]
     ; End script.
     db $ff
 
@@ -3545,7 +3545,7 @@ C2Loc5_63:
     ; Set state bit.
     db $0f, C2LobbyGlass
     ; Show message 0.
-    db $00, $62
+    db $00, $62 ; Message Text12Message62: GLASS SHATTERS / EVERYWHERE.[END]
     ; End script.
     db $ff
 
@@ -3562,7 +3562,7 @@ C2Sc5_86:
     db $08, C2LobbySeen
     dw HomeHallAgain
     ; Show message 1.
-    db $01, $55
+    db $01, $55 ; Message Text14Message55: A DIMLY-LIT HALL, / THE AROMA OF CHEAPCOLOGNE AND STALE / POPCORN... IT'S / GOOD TO B...
     ; Set object flag.
     db $09, C2LobbySeen
     ; End script.
@@ -3573,11 +3573,11 @@ HomeHallAgain:
 
 C2Loc5_64:
     ; Show object.
-    db $29, $3b
+    db $29, C2VisIdAdisonMailboxClosed
     ; Refresh room objects.
     db $2b
     ; Show message 1.
-    db $01, $56
+    db $01, $56 ; Message Text14Message56: YOU ADMIRE THE / RUN-DOWN CONDITIONOF THE HALLWAY / OUTSIDE YOUR / APARTMENT.[END]
     ; End script.
     db $ff
 
@@ -3591,7 +3591,7 @@ C2Loc5_65:
 
 jr_008_4e1f:
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text14Message51: YOU'RE IN FRONT OFA RUNDOWN, / APARTMENT / BUILDING.[PAGE] / HOME SWEET HOME![END]
     ; Set object flag.
     db $09, C2HomeSeen
     ; End script.
@@ -3602,7 +3602,7 @@ HomeEntryAgain:
 
 C2Loc5_66:
     ; Show message 1.
-    db $01, $52
+    db $01, $52 ; Message Text14Message52: YOU'RE IN FRONT OFYOUR APARTMENT.[END]
     ; End script.
     db $ff
 
@@ -3621,7 +3621,7 @@ jr_008_4e28:
     db $55, RoomAdisonHallway
     dw HomeDoorInside
     ; Show message 1.
-    db $01, $61
+    db $01, $61 ; Message Text14Message61: YOU VERY OWN / APARTMENT DOOR, / "1A."[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -3631,7 +3631,7 @@ HomeDoorInside:
 
 C2Loc5_67:
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text12Message2A: MIGHT BE A DOOR. / YUP, HANDLE AND / HINGES- IT'S A / DOOR ALRIGHT![END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -3663,7 +3663,7 @@ C2Loc5_68:
     ; Set text name 0.
     db $30, $d4
     ; Show message 3.
-    db $2c, $21
+    db $2c, $21 ; Message Text18Message21: YOU CAN'T DO THAT / UNLESS YOU OPEN / THE [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -3712,7 +3712,7 @@ C2Loc5_69:
     db $08, C2HomeEntered
     dw HomeRoomAgain
     ; Show message 1.
-    db $01, $cb
+    db $01, $cb ; Message Text15Message4B: THE ROOM LOOKS AS / IF A CYCLONE HIT / IT...[PAGE] / A CYCLONE NAMED / STOGIE, THAT I...
     ; Run scene effect.
     db $39, $0d
     ; Play audio.
@@ -3722,7 +3722,7 @@ C2Loc5_69:
     ; Wait sixty ticks.
     db $7e
     ; Show message 1.
-    db $01, $cc
+    db $01, $cc ; Message Text15Message4C: WELL, YOU THOUGHT / THAT THIS WOULD / BE THE BEST PLACE / TO START YOUR / SEARCH FOR ...
     ; Wait sixty ticks.
     db $7e
     ; Restore saved Case II effect.
@@ -3753,7 +3753,7 @@ HomeRoomAgain:
 
 C2Loc5_6A:
     ; Show message 1.
-    db $01, $69
+    db $01, $69 ; Message Text14Message69: YOU STAND IN A / ROOM THAT LOOKS / LIKE IT WAS TURNEDINSIDE OUT.[END]
     ; End script.
     db $ff
 
@@ -3764,7 +3764,7 @@ C2Sc5_8B:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $62
+    db $01, $62 ; Message Text14Message62: JACK BROWN LIVES / HERE. HE'S ALWAYS / TRYING TO SHOCK / YOU BY BUYING / EXPENSIVE CA...
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -3776,7 +3776,7 @@ C2Sc5_8C:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01
+    db $01 ; Message Text14Message60: DAN SMORON LIVES / IN "1C." ALL THAT / GUY EVER THINKS / ABOUT IS SPORTS, / SPORTS, S...
 
 jr_008_4e9b:
     db $60
@@ -3794,7 +3794,7 @@ C2Sc5_8D:
     db $25, RoomJoeFront
     dw PeoriaAgain
     ; Show message 2.
-    db $02, $19
+    db $02, $19 ; Message Text16Message19: YOU'RE IN FRONT / OF THE POLICE / STATION.[END]
     ; End script.
     db $ff
 
@@ -3806,7 +3806,7 @@ C2Sc5_8E:
     db $55, RoomJoeFront
     dw QuietPlaceReply
     ; Show message 1.
-    db $01, $9c
+    db $01, $9c ; Message Text15Message1C: IT'S AN ALLEYWAY / BEHIND JOE'S / PLACE.[END]
     ; End script.
     db $ff
 
@@ -3828,7 +3828,7 @@ LookManhole:
 
 C2Sc5_90:
     ; Show message 1.
-    db $01, $9a
+    db $01, $9a ; Message Text15Message1A: IT'S A MANHOLE, / SOMEDAY TO BE / DUBBED PERSONHOLE,AT LEAST IN / CALIFORNIA![END]
     ; End script.
     db $ff
 
@@ -3837,7 +3837,7 @@ OpenManholeReply:
 
 C2Sc5_91:
     ; Show message 1.
-    db $01, $a1
+    db $01, $a1 ; Message Text15Message21: REPORTS OF / CROCODILES IN THE / SEWERS PROMPTED / THE SANITATION / DEPARTMENT TO / S...
     ; End script.
     db $ff
 
@@ -3846,7 +3846,7 @@ ManholeClosed:
 
 C2Sc5_92:
     ; Show message 1.
-    db $01, $9f
+    db $01, $9f ; Message Text15Message1F: THE MANHOLE IS / CLOSED.[END]
     ; End script.
     db $ff
 
@@ -3855,7 +3855,7 @@ LookWorksBarrier:
 
 C2Sc5_93:
     ; Show message 1.
-    db $01, $9b
+    db $01, $9b ; Message Text15Message1B: YOUR WAY IS / BLOCKED BY A HUGE / CONSTRUCTION / BARRIER.[END]
     ; End script.
     db $ff
 
@@ -3864,7 +3864,7 @@ WorksBlocked:
 
 C2Sc5_94:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text15Message20: THERE'S A CHAIN- / LINK FENCE THERE / TO KEEP KIDS OUT / OF THE / CONSTRUCTION AREA.[...
     ; End script.
     db $ff
 
@@ -3883,12 +3883,12 @@ C2Loc5_6B:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $a5
+    db $01, $a5 ; Message Text15Message25: THE METAL / PLATFORMS AND / LADDERS ARE / CONNECTED IN SUCH / A WAY AS TO FORM AFIRE ...
     ; Test object flag and branch when set.
     db $08, C2JoeEscapeSeen
     dw EndC2Path
     ; Show message 1.
-    db $01, $a4
+    db $01, $a4 ; Message Text15Message24: IT MIGHT BE STURDYENOUGH TO CLIMB / ON.[END]
     ; End script.
     db $ff
 
@@ -3899,11 +3899,11 @@ C2Loc5_6C:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $a5
+    db $01, $a5 ; Message Text15Message25: THE METAL / PLATFORMS AND / LADDERS ARE / CONNECTED IN SUCH / A WAY AS TO FORM AFIRE ...
     ; Set script value 0.
     db $49, $01
     ; Show message 3.
-    db $2c, $2b
+    db $2c, $2b ; Message Text18Message2B: IT CONTINUES TO / [NUM8_WRAM:87C5] FLOOR.[END]
     ; End script.
     db $ff
 
@@ -3914,11 +3914,11 @@ C2Sc5_96:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $a5
+    db $01, $a5 ; Message Text15Message25: THE METAL / PLATFORMS AND / LADDERS ARE / CONNECTED IN SUCH / A WAY AS TO FORM AFIRE ...
     ; Set script value 0.
     db $49, $03
     ; Show message 3.
-    db $2c, $2b
+    db $2c, $2b ; Message Text18Message2B: IT CONTINUES TO / [NUM8_WRAM:87C5] FLOOR.[END]
     ; End script.
     db $ff
 
@@ -3937,7 +3937,7 @@ jr_008_4ee7:
 jr_008_4eed:
     db HIGH(JoeAlleyReply)
     ; Show message 1.
-    db $01, $a9
+    db $01, $a9 ; Message Text15Message29: YOU ARE ON A / RATHER SHAKY FIRE / ESCAPE.[END]
     ; Set object flag.
     db $09, C2JoeEscapeSeen
     ; End script.
@@ -3948,7 +3948,7 @@ JoeAlleyReply:
 
 C2Loc5_6D:
     ; Show message 1.
-    db $01, $a2
+    db $01, $a2 ; Message Text15Message22: THIS DARK ALLEY / CONNECTS TO THE / STREET.[END]
     ; End script.
     db $ff
 
@@ -3957,7 +3957,7 @@ LookJoeRearWay:
 
 C2Sc5_98:
     ; Show message 1.
-    db $01, $a6
+    db $01, $a6 ; Message Text15Message26: THE ALLEY / CONTINUES FURTHER / DOWN THAT WAY.[END]
     ; End script.
     db $ff
 
@@ -3976,7 +3976,7 @@ JoeRearAlleyReply:
 
 C2Loc5_6E:
     ; Show message 1.
-    db $01, $c8
+    db $01, $c8 ; Message Text15Message48: THE ALLEYWAY / BEHIND JOE'S PLACEIS FILTHY.[END]
     ; End script.
     db $ff
 
@@ -3985,7 +3985,7 @@ LookRearManhole:
 
 C2Sc5_9A:
     ; Show message 1.
-    db $01, $a3
+    db $01, $a3 ; Message Text15Message23: THE MANHOLE / PROBABLY LEADS TO / THE SEWER.[END]
     ; End script.
     db $ff
 
@@ -3997,7 +3997,7 @@ C2Sc5_9B:
     db $55, RoomJoeFireEscape
     dw JoeEscapeReply
     ; Show message 1.
-    db $01, $ad
+    db $01, $ad ; Message Text15Message2D: THIS OFFERS / ENTRANCE INTO THE / SECOND STORY OF  / JOE'S PLACE.[END]
     ; End script.
     db $ff
 
@@ -4006,7 +4006,7 @@ JoeEscapeReply:
 
 C2Loc5_6F:
     ; Show message 1.
-    db $01, $a5
+    db $01, $a5 ; Message Text15Message25: THE METAL / PLATFORMS AND / LADDERS ARE / CONNECTED IN SUCH / A WAY AS TO FORM AFIRE ...
     ; End script.
     db $ff
 
@@ -4018,11 +4018,11 @@ C2Sc5_9C:
     db $55, RoomJoeFireEscape
     dw LeaveJoeOfficeWin
     ; Clear state bit.
-    db $10, $75
+    db $10, C2StateJoeSafeOpen
     ; Move using two room arguments if the selected state permits.
     db $20, RoomJoeFireEscape, RoomJoeOffice
     ; Show message 1.
-    db $01, $b8
+    db $01, $b8 ; Message Text15Message38: YOU'RE IN AN / OFFICE.[PAGE] / IN FACT IT'S THE / SAME OFFICE THAT / YOU FIRST / DISC...
 
 jr_008_4f1b:
     ; End script.
@@ -4043,7 +4043,7 @@ JoeLadderBlocked:
 
 C2Sc5_9D:
     ; Show message 1.
-    db $01, $b1
+    db $01, $b1 ; Message Text15Message31: THE LADDER LOOKS / MUCH TOO RICKETY / FOR YOU TO CLIMB / ANY HIGHER.[END]
     ; End script.
     db $ff
 
@@ -4069,14 +4069,14 @@ jr_008_4f27:
 
 jr_008_4f31:
     ; Show message 1.
-    db $01, $d6
+    db $01, $d6 ; Message Text15Message56: IT'S THE BACK DOORINTO JOE'S PLACE.[PAGE] / YOUR KEEN EYE / PICKS OUT THE / CHEAPLY M...
     ; Set object flag.
     db $09, C2JoeLockHint
     ; Test object flag and branch when clear.
     db $54, C2JoeLockHint
     dw EndC2Path
     ; Show message 1.
-    db $01, $d7
+    db $01, $d7 ; Message Text15Message57: WITHOUT A KEY, YOUWONDER HOW YOU CANOPEN THIS DOOR?[END]
     ; End script.
     db $ff
 
@@ -4087,7 +4087,7 @@ C2Loc5_71:
     ; Set text name 0.
     db $30, $af
     ; Show message 3.
-    db $2c, $1b
+    db $2c, $1b ; Message Text18Message1B: THE [OBJECT_WRAM:37C5] / IS BROKEN.[END]
     ; End script.
     db $ff
 
@@ -4140,7 +4140,7 @@ C2Sc5_A1:
     db $54, C2LampFlag
     dw JoeRearDark
     ; Show message 1.
-    db $01, $e0
+    db $01, $e0 ; Message Text15Message60: THIS HALLWAY / DOESN'T SMELL VERYGOOD.[END]
     ; End script.
     db $ff
 
@@ -4159,7 +4159,7 @@ JoeRearDark:
 
 C2Loc5_73:
     ; Show message 1.
-    db $01, $de
+    db $01, $de ; Message Text15Message5E: THE NARROW / CORRIDOR IS DARK / AND GLOOMY.[END]
     ; End script.
     db $ff
 
@@ -4174,7 +4174,7 @@ C2Sc5_A2:
     db $25, RoomJoeBar
     dw ClosedDoorReply
     ; Show message 1.
-    db $01, $e6
+    db $01, $e6 ; Message Text15Message66: THE DOOR LEADS / INTO THE BAR.[END]
     ; End script.
     db $ff
 
@@ -4228,7 +4228,7 @@ C2Loc5_74:
 jr_008_4f98:
     db HIGH(JoeDarkFall)
     ; Show message 1.
-    db $01, $ec
+    db $01, $ec ; Message Text15Message6C: INSIDE JOE'S PLACEIT'S EMPTY AND IN / NEED OF A GOOD / CLEANING.[END]
     ; Set object flag.
     db $09, C2JoeBarVisited
     ; End script.
@@ -4246,7 +4246,7 @@ jr_008_4fa2:
     ; Move using two room arguments if the selected state permits.
     db $20, RoomJoeRearHallway, RoomJoeBar
     ; Show message 1.
-    db $01, $e0
+    db $01, $e0 ; Message Text15Message60: THIS HALLWAY / DOESN'T SMELL VERYGOOD.[END]
     ; End script.
     db $ff
 
@@ -4259,13 +4259,13 @@ C2Loc5_76:
     ; Play audio.
     db $3e, $09
     ; Show message 1.
-    db $01, $e9
+    db $01, $e9 ; Message Text15Message69: YOU GROPE ABOUT / BLINDLY THROUGH / THE DARKNESS.[PAGE] / YOU WERE NEVER / MUCH GOOD ...
     ; Play audio.
     db $3e, $17
     ; No operation.
     db $41
     ; Show message 3.
-    db $2c, $3b
+    db $2c, $3b ; Message Text18Message3B: WHUMP![PAGE] / YOU FALL HARD AND / HIT YOUR HEAD / AGAINST THE FLOOR.[PAGE] / THE MEA...
     ; Play exit effect and end this action.
     db $37
     ; Not reached from the recovered action and branch entries.
@@ -4276,7 +4276,7 @@ LookJoeLadies:
 
 C2Sc5_A6:
     ; Show message 1.
-    db $01, $e4
+    db $01, $e4 ; Message Text15Message64: IT'S THE DOOR / LEADING INTO THE / WOMAN'S BATHROOM.[END]
     ; End script.
     db $ff
 
@@ -4285,7 +4285,7 @@ LookJoeMens:
 
 C2Sc5_A7:
     ; Show message 1.
-    db $01, $e5
+    db $01, $e5 ; Message Text15Message65: THAT LEADS INTO / THE MEN'S ROOM.[END]
     ; End script.
     db $ff
 
@@ -4300,7 +4300,7 @@ C2Sc5_A8:
     db $55, RoomJoeBar
     dw ClosedDoorReply
     ; Show message 1.
-    db $01, $f1
+    db $01, $f1 ; Message Text15Message71: THE WORD "CELLAR" / IS CLEARLY MARKED / ON THIS DOOR.[END]
     ; End script.
     db $ff
 
@@ -4309,7 +4309,7 @@ JoeStairsAlt:
 
 C2Loc5_77:
     ; Show message 1.
-    db $01, $f9
+    db $01, $f9 ; Message Text15Message79: A FAINT BREEZE / BLOWS FROM BEHIND / IT.[END]
     ; End script.
     db $ff
 
@@ -4367,7 +4367,7 @@ JoeCellarReply:
 
 C2Loc5_78:
     ; Show message 1.
-    db $01, $f4
+    db $01, $f4 ; Message Text15Message74: THE AIR IS STALE / IN THE DIM AND / DIRTY STORAGE / CELLAR.[END]
     ; End script.
     db $ff
 
@@ -4379,7 +4379,7 @@ C2Sc5_AC:
     db $55, RoomJoeBar
     dw JoeStairsAlt
     ; Show message 1.
-    db $01, $ed
+    db $01, $ed ; Message Text15Message6D: THESE STAIRS LEAD / TO THE SECOND / FLOOR.[END]
     ; End script.
     db $ff
 
@@ -4397,7 +4397,7 @@ jr_008_4ff0:
     db $25, RoomJoeBar
     dw JoeBarArrival
     ; Show message 2.
-    db $02, $13
+    db $02, $13 ; Message Text16Message13: YOU'RE IN THE / UPSTAIRS HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -4412,7 +4412,7 @@ C2Sc5_AE:
     db $1d
     dw DoorIsOpen
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text16Message04: THAT LEADS TO THE / CELLAR.[END]
     ; End script.
     db $ff
 
@@ -4421,7 +4421,7 @@ JoeShelfWayReply:
 
 C2Loc5_79:
     ; Show message 1.
-    db $01, $fa
+    db $01, $fa ; Message Text15Message7A: A PASSAGE LEADS / OFF INTO THE / DARKNESS.[END]
     ; End script.
     db $ff
 
@@ -4443,7 +4443,7 @@ C2Loc5_7A:
     ; Set text name 0.
     db $30, $d1
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -4457,16 +4457,16 @@ C2Loc5_7B:
     ; Set object flag.
     db $09, C2ShelvesOpen
     ; Hide object.
-    db $2a, $91
+    db $2a, C2VisIdJoeBottleRack
     ; Hide object.
     db $2a
 
 jr_008_501c:
-    db $92
+    db C2VisIdJoeCleanBottle
     ; Set text name 0.
     db $30, $d1
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected state and refresh.
     db $21
     ; End script.
@@ -4493,12 +4493,12 @@ ShowJoeShelfObjs:
 
 C2Loc5_AA:
     ; Show object.
-    db $29, $91
+    db $29, C2VisIdJoeBottleRack
     ; Show object.
     db $29
 
 jr_008_5031:
-    db $92
+    db C2VisIdJoeCleanBottle
     ; End script.
     db $ff
 
@@ -4520,7 +4520,7 @@ C2Loc5_AC:
     ; Set text name 0.
     db $30, $d1
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear object flag.
     db $0a, C2ShelvesOpen
     ; Clear selected state and refresh.
@@ -4546,7 +4546,7 @@ JoeChamberReply:
 
 C2Loc5_7C:
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text16Message00: IT'S A SMALL FOUL-SMELLING CHAMBER.[END]
     ; End script.
     db $ff
 
@@ -4563,7 +4563,7 @@ C2Sc5_B2:
     db $25, RoomJoeChamber
     dw JoeChamberReply
     ; Show message 2.
-    db $02, $05
+    db $02, $05 ; Message Text16Message05: IT'S A HIDDEN / CASINO. HEY, / AREN'T THESE / THINGS ILLEGAL / OUTSIDE OF NEVADA?[END]
     ; End script.
     db $ff
 
@@ -4572,7 +4572,7 @@ JoeLiftNoPower:
 
 C2Sc5_B3:
     ; Show message 2.
-    db $02, $10
+    db $02, $10 ; Message Text16Message10: THERE APPEARS TO / BE NO POWER TO THEELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -4583,7 +4583,7 @@ C2Sc5_B4:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $17
+    db $02, $17 ; Message Text16Message17: A LARGE SIGN TELLSYOU THAT ONLY THE / PRIVILEGED MAY / ENTER HERE.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -4596,7 +4596,7 @@ C2Sc5_B5:
     db $1d
     dw DoorIsOpen
     ; Show message 2.
-    db $02, $1c
+    db $02, $1c ; Message Text16Message1C: LOOKS LIKE THE / DOOR INTO THE / STATION.[END]
     ; End script.
     db $ff
 
@@ -4621,17 +4621,17 @@ C2Sc5_B6:
     ; Play audio.
     db $3e, $13
     ; Show object.
-    db $29, $40
+    db $29, C2VisIdPoliceDoorGlass1
     ; Show object.
-    db $29, $41
+    db $29, C2VisIdPoliceDoorGlass2
     ; Refresh room objects.
     db $2b
     ; Wait while rendering objects.
     db $47, $0a
     ; Hide object.
-    db $2a, $40
+    db $2a, C2VisIdPoliceDoorGlass1
     ; Hide object.
-    db $2a, $41
+    db $2a, C2VisIdPoliceDoorGlass2
     ; Jump to script in bank $07.
     db $7d
     ; Target DrawPoliceGlass; retain the interior label.
@@ -4655,16 +4655,16 @@ C2Sc5_B7:
     ; Play audio.
     db $3e, $09
     ; Show message 2.
-    db $02, $1e
+    db $02, $1e ; Message Text16Message1E: YOU GET LITTLE / HELP FROM THE / POLICE, WHO COULD / CARE LESS ABOUT / YOUR WILD STOR...
     ; Show message 0.
-    db $00, $fd
+    db $00, $fd ; Message Text13Message7D: THEY KEEP YOU IN / JAIL, AT THE END / OF THE WEEK, / STOGIE SHOWS UP / AND POSTS BAIL...
     ; Run scene effect.
     db $39
 
 jr_008_5092:
     db FxStogie
     ; Show message 0.
-    db $00, $fe
+    db $00, $fe ; Message Text13Message7E: "I'M GONNA TAKE / YOU SOMEPLACE NICEAND QUIET, ACE," / HE SAYS WITH A / SNICKER. YOU ...
     ; Play audio.
     db $3e, $10
     ; Play exit effect and end this action.
@@ -4677,7 +4677,7 @@ PoliceNeedsOpen:
 
 C2Loc5_AD:
     ; Show message 0.
-    db $00, $d1
+    db $00, $d1 ; Message Text13Message51: OOPS... GOTTA OPENIT FIRST![END]
     ; End script.
     db $ff
 
@@ -4697,12 +4697,12 @@ C2Sc5_B8:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $30
+    db $02, $30 ; Message Text16Message30: IT'S THE FRONT / DOOR TO SUGAR / SHACK'S BASEMENT / APARTMENT.[PAGE] / IT HAS A CHEAP...
     ; Test object flag and branch when set.
     db $08, C2SugLockHint
     dw SugarLockHint
     ; Show message 2.
-    db $02, $31
+    db $02, $31 ; Message Text16Message31: ANOTHER LOCK AND / AGAIN NO KEY![END]
     ; Set object flag.
     db $09, C2SugLockHint
     ; End script.
@@ -4714,7 +4714,7 @@ SugarLockHint:
 C2Loc5_7E:
 jr_008_50b3:
     ; Show message 2.
-    db $02, $32
+    db $02, $32 ; Message Text16Message32: YOU WONDER IF / THERE IS ANY LINE / OF WORK IN THE / BREAKING AND / ENTERING / DEPART...
     ; End script.
     db $ff
 
@@ -4729,7 +4729,7 @@ C2Sc5_B9:
     db $54, C2SugLockGone
     dw DoorLockedReply
     ; Show object.
-    db $29, $46
+    db $29, C2VisIdSugarApartmentDoorOpen
     ; Test room argument and branch on equality.
     db $25
 
@@ -4762,7 +4762,7 @@ C2Sc5_BA:
     db $5b
     dw DoorIsClosed
     ; Hide object.
-    db $2a, $46
+    db $2a, C2VisIdSugarApartmentDoorOpen
     ; Test room argument and branch on equality.
     db $25, RoomSugarApartmentFront
     dw FinishSugarClose
@@ -4802,14 +4802,14 @@ EnterSugarRoom:
 
 C2Loc5_80:
     ; Clear state bit.
-    db $10, $ac
+    db $10, C2StateSugarWardrobeOpen
     ; Move using two room arguments if the selected state permits.
     db $20, RoomSugarApartmentFront, RoomSugarApartment
     ; Test object flag and branch when set.
     db $08, C2SugarSeen
     dw SugarRoomAgain
     ; Show message 2.
-    db $02, $3d
+    db $02, $3d ; Message Text16Message3D: YOU'RE STANDING INSUGAR SHACK'S / PLACE...[PAGE] / WHAT A DUMP! THIS / PLACE MAKES TH...
     ; Set object flag.
     db $09, C2SugarSeen
     ; End script.
@@ -4820,7 +4820,7 @@ SugarRoomAgain:
 
 C2Loc5_81:
     ; Show message 2.
-    db $02, $3e
+    db $02, $3e ; Message Text16Message3E: THE SMELL OF CHEAPPERFUME FILLS THE / AIR.[END]
     ; End script.
     db $ff
 
@@ -4831,7 +4831,7 @@ C2Sc5_BC:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $74
+    db $00, $74 ; Message Text12Message74: LOOKS LIKE THE / ENTRANCE.[END]
     ; Jump to script.
     db $07
     dw DoorKeyHint
@@ -4865,7 +4865,7 @@ C2Loc5_82:
     ; Set text name 0.
     db $30, $ad
     ; Show message 3.
-    db $2c, $00
+    db $2c, $00 ; Message Text18Message00: THE [OBJECT_WRAM:37C5] / BROKE.[END]
     ; End script.
     db $ff
 
@@ -4971,9 +4971,9 @@ jr_008_5157:
     db $08, C2Box2Taken
     dw ShowMorgueDesk
     ; Hide object.
-    db $2a, $4c
+    db $2a, C2VisIdMorgueBox2Open
     ; Show object.
-    db $29, $4b
+    db $29, C2VisIdMorgueBox2Closed
     ; Refresh room objects.
     db $2b
 
@@ -4984,7 +4984,7 @@ C2Loc5_85:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $75
+    db $02, $75 ; Message Text16Message75: THE MORGUE CLERK / SITS SILENTLY / BEHIND HIS DESK.[END]
     ; Test object flag and branch when clear.
     db $54, C2PantsWorn
     dw CheckMorgueDress
@@ -5013,7 +5013,7 @@ C2Loc5_B2:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $8e
+    db $02, $8e ; Message Text17Message0E: STARTLED BY YOUR / RUDENESS, THE / CLERK PRESSES / THE ALARM TO CALL / THE POLICE.[END]
     ; Jump to script.
     db $07
     ; Target PoliceArrest; retain the interior label.
@@ -5033,7 +5033,7 @@ C2Sc5_C3:
     db $25, RoomMorgueReception
     dw LookColdDoor
     ; Show message 2.
-    db $02, $a5
+    db $02, $a5 ; Message Text17Message25: IT'S THE FRONT / DESK.[END]
     ; End script.
     db $ff
 
@@ -5045,7 +5045,7 @@ C2Loc5_87:
     db $08, C2ColdRoomSeen
     dw ColdDoorKnown
     ; Show message 2.
-    db $02, $84
+    db $02, $84 ; Message Text17Message04: IT'S A HEAVY-DUTY / FREEZER DOOR.[END]
     ; End script.
     db $ff
 
@@ -5054,7 +5054,7 @@ ColdDoorKnown:
 
 C2Loc5_88:
     ; Show message 2.
-    db $02, $85
+    db $02, $85 ; Message Text17Message05: THE DOOR LEADS TO / THE BACK ROOM.[END]
 
 ; Select the door open action by room and the original reception gate state.
 OpenMorgueDoor:
@@ -5076,7 +5076,7 @@ jr_008_5191:
     ; Set text name 0.
     db $30, $bf
     ; Show message 3.
-    db $2c, $21
+    db $2c, $21 ; Message Text18Message21: YOU CAN'T DO THAT / UNLESS YOU OPEN / THE [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -5098,7 +5098,7 @@ C2Sc5_C5:
     ; Set text name 0.
     db $30, $bf
     ; Show message 3.
-    db $2c, $21
+    db $2c, $21 ; Message Text18Message21: YOU CAN'T DO THAT / UNLESS YOU OPEN / THE [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -5117,7 +5117,7 @@ C2Sc5_C6:
     ; Set text name 0.
     db $30, $bf
     ; Show message 3.
-    db $2c, $21
+    db $2c, $21 ; Message Text18Message21: YOU CAN'T DO THAT / UNLESS YOU OPEN / THE [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -5141,7 +5141,7 @@ C2Loc5_8A:
     ; Move using two room arguments if the selected state permits.
     db $20, RoomMorgueReception, RoomMorgueColdRoom
     ; Show message 2.
-    db $02, $99
+    db $02, $99 ; Message Text17Message19: NOT ONLY IS THIS / ROOM COLD, BUT IT / ALSO HAS A STRANGESMELL OF SOMETHINGROTTING! Y...
     ; Set object flag.
     db $09, C2ColdRoomSeen
     ; End script.
@@ -5152,7 +5152,7 @@ MorgueGateStop:
 
 C2Loc5_8B:
     ; Show message 2.
-    db $02, $88
+    db $02, $88 ; Message Text17Message08: "SORRY MACK, / UNAUTHORIZED / PERSONS AIN'T / ALLOWED BACK / THERE...UNLESS, OFCOURSE...
     ; End script.
     db $ff
 
@@ -5164,11 +5164,11 @@ C2Sc5_C7:
     db $25, RoomLaundry
     dw JoeEscapeReply
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text17Message53: THOSE STAIRS LEAD / DOWN TO THE / LAUNDRY ROOM.[END]
     ; End script.
     db $ff
 
-; With hands free, move between the laundry room and room $48 and show the original entry response.
+; With hands free, move between the laundry room and cleaners hallway and show the entry response.
 UseLaundryStairs:
 
 C2Sc5_C8:
@@ -5176,7 +5176,7 @@ C2Sc5_C8:
     db $54, C2HandsFree
     dw C2TiedMove
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomLaundry, $48
+    db $20, RoomLaundry, RoomCleanersHallway
     ; Test room argument and branch on inequality.
     db $55, RoomLaundry
     dw CleanHallReply
@@ -5186,7 +5186,7 @@ EnterLaundryRoom:
 
 C2Loc5_8C:
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text17Message2E: YOU ARE IN A / DIMLY-LIT LAUNDRY / ROOM. THE SMELL OFDETERGENT / OVERWHELMS YOUR / SE...
     ; End script.
     db $ff
 
@@ -5195,7 +5195,7 @@ C2TiedMove:
 
 C2Loc5_8D:
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text17Message3E: YOUR TIED HANDS / PREVENT YOU FROM / DOING THAT![END]
     ; End script.
     db $ff
 
@@ -5209,7 +5209,7 @@ C2Sc5_C9:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $bb
+    db $02, $bb ; Message Text17Message3B: IT'S THE HUGE / LAUNDRY HAMPER / YOU RODE IN ON.[END]
     ; Test object flag and branch when set.
     db $08, C2GoonsFooled
     dw EndC2Path
@@ -5222,7 +5222,7 @@ C2Sc5_C9:
     ; Play audio.
     db $3e, $08
     ; Show message 2.
-    db $02, $bc
+    db $02, $bc ; Message Text17Message3C: THOSE THUGS ARE / SURE TO COME BACK![PAGE] / BUT YOU KNOW YOU / CAN'T LEAVE, / YOU'RE...
     ; Set object flag.
     db $09, C2HamperHint
 
@@ -5231,7 +5231,7 @@ HintGoonsReturn:
 
 C2Loc5_8E:
     ; Show message 2.
-    db $02, $bd
+    db $02, $bd ; Message Text17Message3D: YOU SEARCH FOR / SOME WAY TO LOSE / THOSE GOONS![END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -5268,7 +5268,7 @@ C2Sc5_CB:
     db $54, C2HandsFree
     dw C2TiedMove
     ; Show message 2.
-    db $02, $c9
+    db $02, $c9 ; Message Text17Message49: WHEN THE THUGS / DRAGGED YOU OUT, / THEY MUST HAVE / BROKEN THE LID.[PAGE] / IT DOESN...
     ; End script.
     db $ff
 
@@ -5285,7 +5285,7 @@ C2Sc5_CC:
     db $55, RoomHamper
     dw EnterLaundryRoom
     ; Show message 2.
-    db $02
+    db $02 ; Message Text17Message27: YOU'RE INSIDE AN / INDUSTRIAL SIZE / LAUNDRY HAMPER. / PHEW! IT STINKS.[END]
 
 jr_008_5223:
     db $a7
@@ -5300,12 +5300,12 @@ C2Sc5_CD:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $48
+    db $55, RoomCleanersHallway
 
 jr_008_522a:
     dw ClosedDoorReply
     ; Show message 2.
-    db $02, $d4
+    db $02, $d4 ; Message Text17Message54: IT'S A DOOR WITH / THE WORD "OFFICE" / IN BIG, BOLD / LETTERS.[END]
     ; End script.
     db $ff
 
@@ -5317,7 +5317,7 @@ C2Sc5_CE:
     db $1d
     dw DoorIsOpen
     ; Test room argument and branch on inequality.
-    db $55, $48
+    db $55, RoomCleanersHallway
     dw OpenDoorAttr
     ; Test state bit.
     db $0e, C2CounterRaised
@@ -5332,7 +5332,7 @@ C2Loc5_90:
     ; Set text name 0.
     db $30, $d0
     ; Show message 3.
-    db $2c, $21
+    db $2c, $21 ; Message Text18Message21: YOU CAN'T DO THAT / UNLESS YOU OPEN / THE [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -5344,7 +5344,7 @@ C2Sc5_CF:
     db $5b
     dw DoorIsClosed
     ; Test room argument and branch on inequality.
-    db $55, $48
+    db $55, RoomCleanersHallway
     dw CloseDoorAttr
     ; Test state bit.
     db $0e, C2CounterRaised
@@ -5360,15 +5360,15 @@ UseCleanOffice:
 
 C2Sc5_D0:
     ; Test room argument and branch on equality.
-    db $25, $48
+    db $25, RoomCleanersHallway
     dw EnterCleanOffice
     ; Test object flag and branch when clear.
     db $54, C2VentiniKnown
     dw HintCleanPhoto
     ; Move using two room arguments if the selected state permits.
-    db $20, $48, RoomOuterOffice
+    db $20, RoomCleanersHallway, RoomOuterOffice
     ; Show message 2.
-    db $02, $cd
+    db $02, $cd ; Message Text17Message4D: YOU'RE IN THE / BUILDING'S / HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -5382,7 +5382,7 @@ C2Loc5_91:
     db $04
     dw CounterBlocks
     ; Move using two room arguments if the selected state permits.
-    db $20, $48, RoomOuterOffice
+    db $20, RoomCleanersHallway, RoomOuterOffice
 
 ; Describe the office and retain the goons and framed-picture hint checks.
 CleanOfficeReply:
@@ -5391,7 +5391,7 @@ C2Loc5_92:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $d7
+    db $02, $d7 ; Message Text17Message57: YOU'RE IN A FAIRLYLARGE OFFICE.[END]
     ; Test object flag and branch when clear.
     db $54, C2GoonsFooled
     dw CleanGoonsEnd
@@ -5401,7 +5401,7 @@ C2Loc5_92:
     ; Play audio.
     db $3e, $08
     ; Show message 1.
-    db $01, $5c
+    db $01, $5c ; Message Text14Message5C: THERE'S A FRAMED / PICTURE ON THE / DESK.[PAGE] / THE GUY WITH / SIEGEL IS IN THIS / ...
     ; Play room audio cue.
     db $5a
     ; Set object flag.
@@ -5416,7 +5416,7 @@ C2Loc5_93:
     ; Play audio.
     db $3e, $08
     ; Show message 1.
-    db $01, $5d
+    db $01, $5d ; Message Text14Message5D: YOU FEEL THE MAN / IN THE PICTURE MAYBE IMPORTANT...[PAGE] / MAYBE IF YOU COULDGET A ...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -5430,7 +5430,7 @@ C2Sc5_D1:
     db $55, RoomOuterOffice
     dw LookSecretExit
     ; Show message 2.
-    db $02, $e3
+    db $02, $e3 ; Message Text17Message63: WELL DON'T THAT / BEAT ALL![PAGE] / IT'S A SECRET / ENTRANCE.[END]
     ; End script.
     db $ff
 
@@ -5439,7 +5439,7 @@ LookSecretExit:
 
 C2Loc5_94:
     ; Show message 2.
-    db $02, $f4
+    db $02, $f4 ; Message Text17Message74: THAT LEADS TO THE / OUTER OFFICE.[END]
     ; End script.
     db $ff
 
@@ -5476,7 +5476,7 @@ C2Loc5_96:
     db $08, C2SecretSeen
     dw HintStuffyOffice
     ; Show message 2.
-    db $02, $f8
+    db $02, $f8 ; Message Text17Message78: IT'S A SECRET / OFFICE![PAGE] / YOU WONDER WHAT / TYPE OF PLANS WERELAID HERE?[END]
     ; Set object flag.
     db $09, C2SecretSeen
     ; End script.
@@ -5487,7 +5487,7 @@ HintStuffyOffice:
 
 C2Loc5_97:
     ; Show message 2.
-    db $02, $f9
+    db $02, $f9 ; Message Text17Message79: THIS SEEMS TO BE ASECRET, BUT STUFFYROOM! BOY! IT / NEEDS SOME AIR / CIRCULATION IN /...
     ; End script.
     db $ff
 
@@ -5512,9 +5512,9 @@ jr_008_52ac:
     ; Play audio.
     db $3e, $08
     ; Show message 2.
-    db $02, $fe
+    db $02, $fe ; Message Text17Message7E: YOU WONDER IF / SEEING STOGIE'S / CIGAR RING ON HIS / DESK WOULD CAUSE / VENTINI TO T...
     ; Show message 2.
-    db $02, $70
+    db $02, $70 ; Message Text16Message70: IF YOU CAN DO THATAND REVEAL / VENTINI'S SCHEME / TO MALONE AND / SOMEHOW GET OUT OFT...
     ; Set object flag.
     db $09, C2EndFlag
     ; Set object flag.
@@ -5543,7 +5543,7 @@ C2Sc5_D3:
     ; Move using two room arguments if the selected state permits.
     db $20, RoomTracksA, RoomTracksB
     ; Show message 3.
-    db $2c, $49
+    db $2c, $49 ; Message Text18Message49: A SET OF TIRE / TRACKS GOES / THROUGH THIS PART / OF THE DESERT.[END]
     ; End script.
     db $ff
 
@@ -5552,7 +5552,7 @@ UseHotelDesert:
 
 C2Sc5_D4:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomHotelFront, $7d
+    db $20, RoomHotelFront, RoomDesertBelowHotel
 
 ; Select the hotel, sand, or track description after this boundary move.
 HotelEdgeReply:
@@ -5564,7 +5564,7 @@ C2Loc5_9A:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $d0
+    db $00, $d0 ; Message Text13Message50: THE BARREN DESERT / STRETCHES AS FAR / AS YOU CAN SEE.[END]
     ; Test room argument and branch on equality.
     db $25, RoomTracksB
     dw C2TracksB
@@ -5576,7 +5576,7 @@ C2TracksB:
 
 C2Loc5_9B:
     ; Show message 3.
-    db $2c, $49
+    db $2c, $49 ; Message Text18Message49: A SET OF TIRE / TRACKS GOES / THROUGH THIS PART / OF THE DESERT.[END]
     ; End script.
     db $ff
 
@@ -5595,7 +5595,7 @@ C2HotelFront:
 
 C2Loc5_9C:
     ; Show message 0.
-    db $00, $cc
+    db $00, $cc ; Message Text13Message4C: YOU'RE STANDING / OUTSIDE THE FANCY / BRICK FACADE OF / THE LUCKY DICE / HOTEL AND CA...
     ; Clear the desert exposure timer.
     db $42, C2HeatIx
     ; End script.
@@ -5618,7 +5618,7 @@ C2Loc5_9D:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $d4
+    db $00, $d4 ; Message Text13Message54: THE BARREN / WASTELAND GOES ON / AND ON.[END]
     ; Test room argument and branch on equality.
     db $25, RoomTracksA
     dw C2TracksA
@@ -5630,7 +5630,7 @@ C2TracksA:
 
 C2Loc5_9E:
     ; Show message 3.
-    db $2c, $49
+    db $2c, $49 ; Message Text18Message49: A SET OF TIRE / TRACKS GOES / THROUGH THIS PART / OF THE DESERT.[END]
     ; End script.
     db $ff
 
@@ -5639,7 +5639,7 @@ C2Outskirts:
 
 C2Loc5_9F:
     ; Show message 0.
-    db $00, $ea
+    db $00, $ea ; Message Text13Message6A: YOU'RE STANDING / NEAR THE OUTSKIRTSOF TOWN.[END]
     ; Clear the desert exposure timer.
     db $42, C2HeatIx
     ; End script.
@@ -5650,7 +5650,7 @@ UseOutskirtsSand1:
 
 C2Sc5_D7:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomOutskirts, $76
+    db $20, RoomOutskirts, RoomDesertLeftOutskirts
     ; Jump to script.
     db $07
     dw OutskirtsEdgeReply
@@ -5660,7 +5660,7 @@ UseOutskirtsSand2:
 
 C2Sc5_D8:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomOutskirts, $7a
+    db $20, RoomOutskirts, RoomDesertBelowOutskirts
     ; Jump to script.
     db $07
 
@@ -5676,7 +5676,7 @@ UseStationSand1:
 
 C2Sc5_D9:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomStation, $77
+    db $20, RoomStation, RoomDesertRightStation
 
 ; Select the station front or sand description after this boundary move.
 StationEdgeReply:
@@ -5686,7 +5686,7 @@ C2Loc5_A0:
     db $25, RoomStation
     dw C2StationFront
     ; Show message 0.
-    db $00, $d0
+    db $00, $d0 ; Message Text13Message50: THE BARREN DESERT / STRETCHES AS FAR / AS YOU CAN SEE.[END]
 
 jr_008_5318:
     ; End script.
@@ -5697,7 +5697,7 @@ UseStationSand2:
 
 C2Sc5_DA:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomStation, $7e
+    db $20, RoomStation, RoomDesertBelowStation
     ; Jump to script.
     db $07
     ; Target StationEdgeReply; retain the interior label.
@@ -5714,7 +5714,7 @@ C2Sc5_DB:
     db $20, RoomTracksA
 
 jr_008_5321:
-    db $70
+    db RoomDesertAboveTracksA
     ; End script.
     db $ff
 
@@ -5726,7 +5726,7 @@ C2Sc5_DC:
     db $20, RoomTracksA
 
 jr_008_5325:
-    db $7b
+    db RoomDesertBelowTracksA
     ; End script.
     db $ff
 
@@ -5735,7 +5735,7 @@ UseTracksBSand1:
 
 C2Sc5_DD:
     ; Move using two room arguments if the selected state permits.
-    db $20, RoomTracksB, $71
+    db $20, RoomTracksB, RoomDesertAboveTracksB
     ; End script.
     db $ff
 
@@ -5748,7 +5748,7 @@ jr_008_532b:
     db $20, RoomTracksB
 
 jr_008_532d:
-    db $7c
+    db RoomDesertBelowTracksB
     ; End script.
     db $ff
 
@@ -5783,7 +5783,7 @@ LookSecretaryDoor:
 
 C2Sc5_E0:
     ; Show message 1.
-    db $01, $c5
+    db $01, $c5 ; Message Text15Message45: BEYOND THIS DOOR / IS A SECRETARY'S / OFFICE.[END]
     ; End script.
     db $ff
 
@@ -5799,7 +5799,7 @@ DoorNeedsOpen:
 
 C2Sc5_E2:
     ; Show message 0.
-    db $00, $d1
+    db $00, $d1 ; Message Text13Message51: OOPS... GOTTA OPENIT FIRST![END]
     ; End script.
     db $ff
 
@@ -5822,7 +5822,7 @@ C2Loc5_A2:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Return to calling script.
     db $06
 
@@ -5845,7 +5845,7 @@ C2Sc5_E3:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -5854,7 +5854,7 @@ PuzzledSceneReply:
 
 C2Sc5_E4:
     ; Show message 0.
-    db $00, $2d
+    db $00, $2d ; Message Text12Message2D: WHAT ARE YOU / DOING...?[END]
     ; End script.
     db $ff
 
@@ -5863,7 +5863,7 @@ DoorNoEffect:
 
 C2Sc5_E5:
     ; Show message 0.
-    db $00, $2c
+    db $00, $2c ; Message Text12Message2C: NOTHING HAPPENS.[END]
     ; End script.
     db $ff
 
@@ -5874,9 +5874,9 @@ C2Sc5_E6:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $d3
+    db $00, $d3 ; Message Text13Message53: HMM... / IT DOESN'T OPEN.[END]
     ; Show message 0.
-    db $00, $d6
+    db $00, $d6 ; Message Text13Message56: IT'S LOCKED.[END]
     ; End script.
     db $ff
 
@@ -5885,7 +5885,7 @@ LookEntrance:
 
 C2Sc5_E7:
     ; Show message 0.
-    db $00, $74
+    db $00, $74 ; Message Text12Message74: LOOKS LIKE THE / ENTRANCE.[END]
     ; End script.
     db $ff
 
@@ -5896,7 +5896,7 @@ C2Sc5_E8:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $1a
+    db $2c, $1a ; Message Text18Message1A: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -5919,7 +5919,7 @@ C2Loc5_B0:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Return to calling script.
     db $06
 
@@ -5941,7 +5941,7 @@ SceneDropRefusal:
 C2Sc5_E9:
 jr_008_5383:
     ; Show message 0.
-    db $00, $e5
+    db $00, $e5 ; Message Text13Message65: IF YOU DON'T HAVE / IT, YOU CAN'T / THROW IT AWAY.[END]
     ; End script.
     db $ff
 
@@ -5950,7 +5950,7 @@ SceneTakeRefusal:
 
 C2Sc5_EA:
     ; Show message 0.
-    db $00
+    db $00 ; Message Text13Message61: I CAN'T DO THAT.[END]
 
 jr_008_5387:
     db $e1
@@ -5962,6 +5962,6 @@ DoorNoAnswer:
 
 C2Sc5_EB:
     ; Show message 0.
-    db $00, $e3
+    db $00, $e3 ; Message Text13Message63: ...NO ANSWER.[END]
     ; End script.
     db $ff

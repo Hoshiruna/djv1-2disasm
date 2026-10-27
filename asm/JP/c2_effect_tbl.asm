@@ -1,11 +1,11 @@
 
 C2EffectScenes:
-    db $39 ; Effect $00.
-    db $39 ; Effect $01.
-    db $39 ; Effect $02.
-    db $39 ; Effect $03.
-    db $39 ; Effect $04.
-    db $39 ; Effect $05.
+    db C2SceneHitman ; Effect $00.
+    db C2SceneHitman ; Effect $01.
+    db C2SceneHitman ; Effect $02.
+    db C2SceneHitman ; Effect $03.
+    db C2SceneHitman ; Effect $04.
+    db C2SceneHitman ; Effect $05.
     db SceneGoons ; Effect $06.
     db SceneDog ; Effect $07.
     db ScenePoliceman ; Effect $08.
@@ -13,7 +13,7 @@ C2EffectScenes:
     db SceneAceGrave ; Effect $0a.
     db SceneConductor1 ; Effect $0b.
     db SceneConductor2 ; Effect $0c.
-    db $39 ; Effect $0d.
+    db C2SceneHitman ; Effect $0d.
     db SceneBouncer ; Effect $0e.
     db SceneMirage ; Effect $0f.
     db SceneStogie ; Effect $10.

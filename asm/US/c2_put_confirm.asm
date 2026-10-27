@@ -22,13 +22,13 @@ jr_003_513a:
     cp GrpDesk
     jr z, C2PutDeskMessage
 
-    ld a, $2c
+    ld a, $2c ; Message Text18Message2C: YOU THROW OUT THE / [OBJECT_WRAM:37C5].[END]
     jr C2PutConfirmMessage
 
 ; Select the desk-specific placement message.
 C2PutDeskMessage:
 jr_003_514b:
-    ld a, $0f
+    ld a, $0f ; Message Text18Message0F: YOU PLACE THE / [OBJECT_WRAM:37C5] IN / THE DESK DRAWER.[END]
 
 ; Show the selected confirmation and update list attributes.
 C2PutConfirmMessage:
@@ -68,7 +68,7 @@ jr_003_517b:
 C2PutRejected:
 jr_003_5181:
     ld a, $f3
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message73: YOU'D BETTER GIVE / UP.[END]
     xor a
     ret
 

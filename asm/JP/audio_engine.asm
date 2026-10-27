@@ -76,7 +76,7 @@ jr_004_4066:
     cp $1a
     jr nz, DispatchAudio
 
-; Skip a request when its retained ID already matches.
+; Compare the retained numeric ID only; equal requests also skip dispatch after a case change.
 SelectRetainedAudio:
 jr_004_4075:
     ld a, [wAudioId]

@@ -102,6 +102,7 @@ jr_001_47a4:
     db $8e, $00, $90, $c7, $92, $00, $94, $00, $96, $00, $98, $00, $9a, $00, $9c, $00
     db $9e, $00, $a0, $00, $90, $c8
 ; Per scene: BG ID, object ID. BG also loads ID+1.
+; The final $43 row duplicates UI card graphics; it has no ordinary scene-map slot.
 Case2GfxPairs:
     db $02, $81, $04, $82, $06, $82, $08, $82, $0a, $7f, $0c, $82, $0e, $7f, $10, $82
     db $12, $82, $12, $82, $16, $83, $18, $83, $1a, $7f, $1c, $83, $1e, $89, $1e, $89

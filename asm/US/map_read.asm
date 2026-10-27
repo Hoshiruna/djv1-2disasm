@@ -6,16 +6,16 @@ ReadBgMap:
 Call_000_05ce:
     ld bc, _SCRN0
     ld a, [hl+]
-    cp $20
+    cp MapFormatRleSingle
     jp z, ReadMapRle
 
     cp $21
     jr z, ReadMapRaw
 
-    cp $17
+    cp MapFormatRlePair
     jr z, ReadRlePair
 
-    cp $18
+    cp MapFormatRawPair
     jr z, ReadMapPair
 
     cp $07
@@ -30,6 +30,7 @@ jr_000_05eb:
     jr ReadMapUnknownFormat
 
 ; Copy raw tiles, restore dimensions, then copy attributes in VRAM bank 1.
+; The first pass uses the current VRAM bank; the second uses bank 1, then returns to bank 0.
 ReadMapPair:
 
 jr_000_05ed:
@@ -103,6 +104,7 @@ Call_000_0620:
     ret
 
 ; Read one marker and continue RLE run state from tiles into attributes.
+; The first pass uses the current VRAM bank; the second uses bank 1, then returns to bank 0.
 ReadRlePair:
 
 

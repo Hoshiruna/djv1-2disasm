@@ -5,16 +5,16 @@ StepC2FourRooms:
 
 Call_003_5b25:
     ld a, [wRoomId]
-    cp $0a
+    cp RoomVegasLift4
     jr z, TickGuardAttack
 
-    cp $0e
+    cp RoomVegasHall4
     jr z, TickGuardAttack
 
-    cp $0f
+    cp RoomVegasVentiniOffice
     jr z, TickGuardAttack
 
-    cp $10
+    cp RoomVegasMaloneOffice
     ret nz
 
 ; Advance the guard timer and attack only on the original fortieth step.
@@ -29,7 +29,7 @@ jr_003_5b37:
 
     call ResetObjScroll
     ld a, $6b
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message6B: しまった! / ようじんぼうに みつかった![END]
     ld a, $09
     call PlayAudio
     ld a, FxBouncer
@@ -42,12 +42,12 @@ EndGuardAttack:
 
 jr_003_5b58:
     ld a, $6c
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message6C: 「この コソドロめ! /  ここへ しのびこんで くるとは /  とんでもない やろうだ![PAGE] /  ・・・しんでもらうぜ!」[END]
     call RepeatCue10
     ld a, $3c
     call WaitTicks
     ld a, $6d
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message6D: マシンガンが ごうおんを たてながらおれの からだを ハチのすにした。[PAGE] / ・・・おかげで おれは えいえんの / ねむりに つくことになった・・・。[END]
     ld a, [wC2EventBits]
     or EvtGuard
     ld [wC2EventBits], a
@@ -74,15 +74,15 @@ Call_003_5b75:
 
     call ResetObjScroll
     call ScriptHoldText
-    ld a, $0d
+    ld a, C2StateVegasHamperOpen
     call ReadStateBit
     jr z, StartHamperRide
 
     ld a, $a8
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message28: とつぜん ふたが しまった。[END]
     ld a, $12
     call PlayAudio
-    ld a, $0d
+    ld a, C2StateVegasHamperOpen
     call ClearStateView
 
 ; Play the original transport and arrival sequence, then search the carried items.
@@ -92,18 +92,18 @@ jr_003_5ba1:
     xor a
     call PlayAudio
     ld a, $a9
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message29: おれが はいっているのに きづかず / だれかが せんたくものいれを / うごかしはじめた。[PAGE] / トラックに のせられたようだ。 / しばらく ドライブを た...
     ld a, $12
     call PlayAudio
-    ld a, $0d
+    ld a, C2StateVegasHamperOpen
     call SetStateDraw
     ld a, $aa
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message2A: ・・・うっ! / まぶしい!![PAGE] / まわりを みようとして めを / ほそめてみると ふたりの おとこが / おれを じっと みていた![END]
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     ld a, $a6
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message26: ふたりの おとこが おれの / ボディーチェックを はじめた。[END]
     ld a, C2FriskLetter
     ld [wFindListValue], a
     call FindListValue
@@ -137,7 +137,7 @@ jr_003_5beb:
 DieFriskEmpty:
 
     ld a, $ab
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message2B: そのうち おれを いかしておいても / まったく いみが ないと / おもったのだろう・・・。[PAGE] / ふたりは はなしを はじめた。[PAGE] / 「こいつが...
     call ResumeTextUI
     ld a, $05
     call WaitTicks
@@ -153,7 +153,7 @@ DieFriskPhoto:
 
 jr_003_5c14:
     ld a, $ac
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message2C: そのうち ふたりは シーゲルが / 「D・Y」という イニシャルの / おとこと あくしゅしている / しゃしんを みつけた。[PAGE] / 「おい ムース! /  こ...
     call ResumeTextUI
     ld a, $05
     call WaitTicks
@@ -169,7 +169,7 @@ FriskPackedLetter:
 
 jr_003_5c2e:
     ld a, $ad
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message2D: そのうち ふたりは ボンドウェルの / てがみを みつけた。[PAGE] / 「おい みろよ ムース! /  ボスあての てがみだぜ。」[PAGE] / 「・・・そのよう...
     call ResumeTextUI
     call FlushChangesCall
     ld a, $04
@@ -189,7 +189,7 @@ FriskLooseLetter:
 
 jr_003_5c54:
     ld a, $ad
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message2D: そのうち ふたりは ボンドウェルの / てがみを みつけた。[PAGE] / 「おい みろよ ムース! /  ボスあての てがみだぜ。」[PAGE] / 「・・・そのよう...
     call ResumeTextUI
     call DropFoundList
     ld a, $01

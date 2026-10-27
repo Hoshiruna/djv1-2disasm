@@ -4,9 +4,9 @@ LoadExtraUiGfx:
 
 
 Call_000_09f5:
-    ld a, $0a
+    ld a, UiGfxIdPublisherLogoLow
     call ReadUiGfx
-    ld a, $05
+    ld a, UiGfxIdBootTextHigh
     call ReadUiGfx
 
 Call_000_09ff:

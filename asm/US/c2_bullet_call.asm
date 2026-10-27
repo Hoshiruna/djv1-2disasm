@@ -1,5 +1,5 @@
 
-; Call the case-two bullet consumption path in bank three and restore the previous ROM bank.
+; Load one inventory round into a chamber in bank three, then restore the ROM bank.
 UseBulletCall:
 
 
@@ -11,7 +11,7 @@ UseBulletCall:
     call PopRomBank
     ret
 
-; Call the case-two bullet flag acquisition path in bank three and restore the previous ROM bank.
+; Fire one loaded chamber in bank three without changing inventory, then restore the ROM bank.
 TakeBulletCall:
 
 

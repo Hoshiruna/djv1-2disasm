@@ -90,7 +90,7 @@ jr_000_2dce:
     ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $77
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message77: たまが ない・・・。[END]
     call ClearResult
     ret
 
@@ -122,6 +122,6 @@ jr_000_2e02:
     ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $78
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message78: たま2が ない・・・。[END]
     call ClearResult
     ret

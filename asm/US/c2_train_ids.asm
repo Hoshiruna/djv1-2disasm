@@ -44,24 +44,28 @@ C2RoomNext:
     ld a, [hl]
     ret
 
-; Read the first additional state-bit ID for the current passenger room.
+
+; Read the current passenger room's boarding-door state ID through the original unchecked index.
+ReadTrainBoardingDoorState:
 TrainRoomStateA:
 C2RoomStateA:
 
 
     call TrainRoomIndex
-    ld hl, TrainRoomStatesA
+    ld hl, TrainBoardingDoorStateByRoom
     add hl, bc
     ld a, [hl]
     ret
 
-; Read the second additional state-bit ID for the current passenger room.
+
+; Read the current passenger room's destination-door state ID through the original unchecked index.
+ReadTrainDestinationDoorState:
 TrainRoomStateB:
 C2RoomStateB:
 
 
     call TrainRoomIndex
-    ld hl, TrainRoomStatesB
+    ld hl, TrainDestinationDoorStateByRoom
     add hl, bc
     ld a, [hl]
     ret

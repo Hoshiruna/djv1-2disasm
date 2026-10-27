@@ -1,16 +1,16 @@
 ; Ending scene pairs, text pointers and $5f-terminated text records.
 
 CreditScenes:
-    db $00, $28, $00
+    db $00, C1SceneCorpseOfficeWindowAndSafeClosed, $00
 jr_003_7090:
-    db $30, $01, $14
+    db C1SceneJoeStreetAllClosed, $01, C2SceneVegasPlatformNoTrain
 jr_003_7093:
-    db $01, $0d, $01, $26, $01, $37, $01, $34, $01, $03, $01, $07, $00, $41, $00, $2f
-    db $00, $0e, $00, $18, $00
+    db $01, SceneLuckyDoor, $01, C2SceneJoeCellar, $01, C2SceneOuterOffice, $01, SceneCleaners, $01, C2SceneVegasLobby, $01, C2SceneVegasElevator, $00, C1SceneLuxuryCarDashboardClosed, $00, C1SceneUpstairsHallSecretaryDoorOpen
+    db $00, C1SceneBarBothDoorsClosed, $00, C1SceneCasinoDoorOpen, $00
 jr_003_70a8:
-    db $20, $00
+    db C1SceneTopFloorRoomBothExitsClosed, $00
 jr_003_70aa:
-    db $4d, $00, $50, $00, $5a, $00, $73, $00, $8a, $01, $41
+    db C1ScenePeoriaYellowCabStop, $00, C1SceneConstructionPit, $00, C1SceneYellowCabInterior, $00, C1SceneAceOfficeDoorClosed, $00, C1SceneDeepestSewer, $01, SceneVegasNews1
 
 CreditTextPtrs:
     dw CreditText00

@@ -8,7 +8,7 @@ SECTION "ROM Bank $032", ROMX[$4000], BANK[$32]
 ; Bank-local resource pointers; Case II ID $81 selects entry $01.
 ResourcePointers_032:
 C2ObjGfxRefs:
-    dw GfxC2_G80
+    dw C2BaseObjGfx
     dw GfxC2_G81
     dw GfxC2_G82
     dw GfxC2_G83
@@ -25,6 +25,8 @@ C2ObjGfxRefs:
     dw GfxC2_G8E
     dw GfxC2_G8F
 
+; Case II base objects: 64 unsigned tiles at $8400-$87ff, loaded by LoadBaseGfx.
+C2BaseObjGfx:
 GfxC2_G80:
     db $10, $40, $17, $40, $0c, $02, $01, $5d, $1f, $b7, $a6, $46, $17, $00, $05, $32
     db $80, $17, $00, $03, $01, $11, $63, $01, $00, $40, $00, $80, $c8, $c0, $e0, $c0

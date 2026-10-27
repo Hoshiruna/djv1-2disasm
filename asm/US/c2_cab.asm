@@ -67,7 +67,7 @@ CabAlreadyHere:
 
 jr_003_4cfc:
     ld a, $46
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message46: GABBY LAUGHS AND / SAYS, "WELL TAKE ALOOK AROUND, ACE! / DAT'S WHERE WE ARENOW!"[END]
     call RestoreTextLists
     ret
 
@@ -80,12 +80,12 @@ Call_003_4d05:
     call ResetObjScroll
     call MapPulse10Call
     ld a, $48
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message48: "LEAVE IT TO ME, / ACE!" WITH THAT / GABBY DRIVES OFF.[END]
     call PlayCabRide
     ld a, $49
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message49: A PEEL OF RUBBER, / SOME WICKED TURNS / AND A SCREECH OF / THE TIRES LATER...[END]
     ld a, $4a
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message4A: GABBY STOPS THE / CAB WITH A JERK. / HE SMILES AS HE / SAYS, "HERE WE / ARE, ACE!"[END]
     call MapPulse10Call
     call RestoreTextLists
     ret

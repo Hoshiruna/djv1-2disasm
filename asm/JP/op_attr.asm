@@ -70,14 +70,14 @@ ClearAttr0:
 
 Call_000_1f6d:
     ldh a, [hItemSlot]
-    cp $00
+    cp OpSlotPrimary
     jr z, ClearAttr0Primary
 
-    ld a, [wItemType+16]
+    ld a, [wItemType+OpSlotAlternate]
     cp $03
     jr nz, ClearAttr0Primary
 
-    ld a, [wItemId+16]
+    ld a, [wItemId+OpSlotAlternate]
     cp $01
     jr z, ClearAttr0Selected
 

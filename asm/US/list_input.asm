@@ -12,21 +12,21 @@ SelectInput:
     ld a, [hl]
     ld hl, wInputKind
     ld [hl], a
-    cp $03
+    cp InputKindCount
     ret nc
 
     ld a, [wInputSel]
-    cp $16
+    cp InputSelRoomFineStart
     jr z, SelectInputDispatch
 
-    cp $15
+    cp InputSelRoomFine
     jr z, SelectInputDispatch
 
     ld [wListSel], a
-    cp $0a
+    cp InputSelAux
     jr z, SelectInputCheckAction
 
-    cp $09
+    cp InputSelSelf
     jr nc, SelectInputDispatch
 
     ld hl, wStateResult
@@ -67,19 +67,32 @@ jr_001_5bd0:
     ld a, [wInputKind]
     rst RST_00
 
+; Kinds zero, one and two select a room target, an action, or a list row.
 InputHandlers:
-    dw $174e
+    dw BuildRoomItem
     dw PickAction
     dw SelectListRow
 
 InputKinds:
-    db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01
-    db $02, $02, $02, $02, $02, $02, $02, $02, $00, $00, $01, $04, $04
+; $00-$0c: action, navigation and auxiliary selectors.
+    db InputKindAction, InputKindAction, InputKindAction, InputKindAction
+    db InputKindAction, InputKindAction, InputKindAction, InputKindAction
+    db InputKindAction, InputKindAction, InputKindAction, InputKindAction
+    db InputKindAction
+; $0d-$14: declared list-row selectors.
+    db InputKindListRow, InputKindListRow, InputKindListRow, InputKindListRow
+    db InputKindListRow, InputKindListRow, InputKindListRow, InputKindListRow
+; $15-$16: room-target selectors.
+    db InputKindRoom, InputKindRoom
+; $17-$17: command selector.
+    db InputKindAction
+; $18-$19: ignored selectors.
+    db InputKindIgnored, InputKindIgnored
 
 ; For selections below 9, save the action unless result bit 2 is set; dispatch other selections by table.
 PickAction:
     ld a, [wListSel]
-    cp $09
+    cp InputSelSelf
     jr nc, PickActionTargetDispatch
 
     ld hl, wStateResult
@@ -101,7 +114,7 @@ jr_001_5c04:
 ; Dispatch selections nine and above through the target table.
 PickActionTargetDispatch:
 jr_001_5c0b:
-    sub $09
+    sub InputSelSelf
     rst RST_00
 
 ActionTargets:
@@ -135,7 +148,7 @@ SelectAux:
 
     call SavePromptCall
     ldh a, [hItemSlot]
-    cp $10
+    cp OpSlotAlternate
     jr nz, SelectAuxReset
 
     call ClearAltSlot
@@ -152,7 +165,7 @@ SelectAux:
 ; Choose the Case II alternate-selection cancellation flag.
 SelectAuxCase2Flag:
 jr_001_5c52:
-    ld a, $8f
+    ld a, C2AltTargetCancelled
 
 ; Set the cancellation flag and restore the previous list selection.
 SelectAuxCancelAlt:
@@ -172,7 +185,7 @@ jr_001_5c5d:
     ld [wSelAction], a
     ret
 
-; If an action is selected, draw selection 9 and set the operation target to type 0, value $73/$a6.
+; If an action is selected, draw selection nine and set the case-specific type-zero self target.
 PickFixedTarget:
 
 
@@ -208,13 +221,13 @@ jr_001_5c76:
     cp $00
     jr nz, PickFixedTargetCase2
 
-    ld a, $73
+    ld a, C1TargetSelf
     jr PickFixedTargetStore
 
-; Choose fixed target $a6 for Case II.
+; Choose the Case II self target.
 PickFixedTargetCase2:
 jr_001_5ca3:
-    ld a, $a6
+    ld a, C2TargetSelf
 
 ; Write the case-specific fixed target ID into the selected operation slot.
 PickFixedTargetStore:

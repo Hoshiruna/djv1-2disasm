@@ -22,7 +22,7 @@ DropC1ItemObj:
     call SetObjVisible
     call RefreshObjs
     ld a, $58
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message58: YOU PUT IT BACK / WHERE YOU GOT IT.[END]
     call ClearResult
     ld a, [wItemId]
     cp $2c
@@ -55,6 +55,6 @@ DropC1PropObj:
     call SetObjVisible
     call RefreshObjs
     ld a, $58
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message58: YOU PUT IT BACK / WHERE YOU GOT IT.[END]
     call ClearResult
     ret

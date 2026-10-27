@@ -9,8 +9,10 @@ SpriteSet0:
     dw SpriteSet0Aux
 
 UiSpritePtrs:
-    dw UiSprite0
+    dw UiCursorSprite
 
+; Shared UI cursor: two horizontal parts using tiles $e7/$e8 and attribute $06.
+UiCursorSprite:
 UiSprite0:
     db $02, $00, $00, $e7, $06, $00, $08, $e8, $06
 

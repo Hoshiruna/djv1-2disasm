@@ -5,10 +5,10 @@ FadeBg:
 
     push hl
     push bc
-    ld a, $02
+    ld a, FadeModeBgToStaged
     jr FadeSetMode
 
-; Fill both live palette sets white, then run the original mode-0 transition.
+; Fill both live sets white, then select FadeModeAllToStaged with the original XOR.
 FadeFromWhite:
 
 Call_001_4928:
@@ -24,7 +24,7 @@ FadeToWhite:
 Call_001_4930:
     push hl
     push bc
-    ld a, $01
+    ld a, FadeModeAllToWhite
 
 ; Store the selected palette transition mode.
 FadeSetMode:
@@ -42,10 +42,10 @@ jr_001_4937:
     ret
 
 
-; Start the four-frame delay before the next fade step.
+; Wait four frames after every changing step, including the last one before equality.
 FadeWaitFourFrames:
 jr_001_493f:
-    ld c, $04
+    ld c, FadeStepDelayFrames
 
 ; Wait for the next frame of the fade delay.
 FadeWaitFrame:
@@ -96,7 +96,7 @@ LightPal:
 
 
 Call_001_4971:
-    ld d, $20
+    ld d, PaletteSetColorCount
 
 ; Lighten each component of the next live palette color.
 LightPalNextColor:
@@ -156,7 +156,7 @@ StepBgPal:
 
 
 Call_001_49bb:
-    ld b, $20
+    ld b, PaletteSetColorCount
 
 ; Move the next BG color toward its target components.
 StepBgPalNextColor:
@@ -236,7 +236,7 @@ DarkPal:
 
 
 Call_001_4a27:
-    ld b, $20
+    ld b, PaletteSetColorCount
 
 ; Apply the downward step to the next palette color.
 DarkPalNextColor:

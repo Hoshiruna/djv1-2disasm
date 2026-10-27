@@ -1,4 +1,5 @@
-; Copy the selected item type/value into the last pending record; preserve the scratch index.
+; Double the last index in A; replace only the scratch low byte and inherit its high byte.
+; Store selected type before reading selected ID; restore both scratch bytes on return.
 WriteChange:
 
 Call_000_3297:
@@ -57,7 +58,7 @@ Jump_000_32cd:
 Jump_000_32df:
     ret
 
-; Read the current pending record into the change type/value scratch bytes.
+; Zero-extend the current index and double HL before reading the type/value pair.
 ReadChange:
 
 Call_000_32e0:

@@ -5,7 +5,7 @@ LookC1Door00:
 
 C1Sc5_00:
     ; Test current room.
-    db $19, $00
+    db $19, C1RoomIdStartStall
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorViewEnd
@@ -20,7 +20,7 @@ C1Sc5_00:
     db $04
     dw C1PlainDoorView
     ; Show message 0.
-    db $00, $1e
+    db $00, $1e ; Message Text0CMessage1E: IT'S A DOOR THAT / LEADS OUT OF THE / WASHROOM AND / MOST LIKELY INTO / TROUBLE.[END]
     ; Set object flag.
     db $17, C1Washroom1IntroSeen
     ; End script.
@@ -31,7 +31,7 @@ C1PlainDoorView:
 
 C1Loc5_00:
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text10Message07: IT'S A DOOR.[END]
 
 ; End the room-specific door view.
 C1DoorViewEnd:
@@ -59,7 +59,7 @@ C1Loc5_02:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -70,7 +70,7 @@ C1Sc5_02:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -93,7 +93,7 @@ C1Sc5_03:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -102,13 +102,13 @@ C1ButlerShutsDoor:
 
 C1Loc5_03:
     ; Set first item type and ID.
-    db $5c, $05, $49
+    db $5c, $05, C1DoorIdMansionFrontDoor
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $aa
+    db $01, $aa ; Message Text0FMessage2A: SLAM![PAGE] / THE BUTLER THROWS / THE DOOR SHUT! IF / YOU HADN'T OF / JUMPED BACK, YO...
     ; End script.
     db $ff
 
@@ -185,7 +185,7 @@ C1Sc5_07:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Test object flag.
     db $16, C1ShadowShot
     ; Branch if result bit 0 is set.
@@ -194,23 +194,23 @@ C1Sc5_07:
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Set state bit.
-    db $2f, $3a
+    db $2f, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 2.
-    db $02, $25
+    db $02, $25 ; Message Text11Message25: THE YOUNG PUNK IS / POINTING HIS GUN / AT YOU![END]
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $88
+    db $01, $88 ; Message Text0FMessage08: A LETHAL SURPRISE![PAGE] / AN UNKNOWN MAN / TAKES DEADLY AIM / AND FIRES AWAY / WITH ...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
 
@@ -262,7 +262,7 @@ OpenC1OneWayDoor:
 
 C1Sc5_0A:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw OpenC1Door
@@ -272,7 +272,7 @@ C1Sc5_0A:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 0.
-    db $00, $68
+    db $00, $68 ; Message Text0CMessage68: IT WON'T OPEN.[PAGE] / YOU WONDER IF IT / CAN BE OPENED FROMTHIS SIDE.[END]
     ; End script.
     db $ff
 
@@ -290,7 +290,7 @@ C1Sc5_0B:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -301,7 +301,7 @@ C1Loc5_05:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -310,7 +310,7 @@ CloseC1OneWayDoor:
 
 C1Sc5_0C:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw CloseC1Door
@@ -326,7 +326,7 @@ C1Sc5_0C:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -335,14 +335,14 @@ MoveC1Door00:
 
 C1Sc5_0D:
     ; Test current room.
-    db $19, $00
+    db $19, C1RoomIdStartStall
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door00ToRoom01
     ; Move to the room argument if the selected state permits.
-    db $06, $00
+    db $06, C1RoomIdStartStall
     ; Show message 0.
-    db $00, $12
+    db $00, $12 ; Message Text0CMessage12: YOU'RE IN A TOILETSTALL. THE STENCH / IS MORE THAN YOU / CAN HANDLE![END]
     ; End script.
     db $ff
 
@@ -351,14 +351,14 @@ C1Door00ToRoom01:
 
 C1Loc5_06:
     ; Move to the room argument if the selected state permits.
-    db $06, $01
+    db $06, C1RoomIdStartWashroom
     ; Test object flag.
     db $16, C1Washroom1IntroSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room01Repeat
     ; Show message 0.
-    db $00, $1d
+    db $00, $1d ; Message Text0CMessage1D: YOU'RE IN A DANK, / DINGY WASHROOM.[PAGE] / FROM THE LOOK AND / SMELL OF IT, YOU / FI...
     ; Set object flag.
     db $17, C1Washroom1IntroSeen
     ; End script.
@@ -369,7 +369,7 @@ C1Room01Repeat:
 
 C1Loc5_7C:
     ; Show message 0.
-    db $00, $23
+    db $00, $23 ; Message Text0CMessage23: THIS WASHROOM / REALLY NEEDS / A GOOD CLEANING. / NO... MAKE THAT A / GOOD FUMIGATION...
     ; End script.
     db $ff
 
@@ -378,7 +378,7 @@ LookC1Door01:
 
 C1Sc5_0E:
     ; Test current room.
-    db $19, $01
+    db $19, C1RoomIdStartWashroom
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door01View
@@ -400,7 +400,7 @@ C1Loc5_07:
     db $04
     dw C1DoorToHallView
     ; Show message 0.
-    db $00, $1e
+    db $00, $1e ; Message Text0CMessage1E: IT'S A DOOR THAT / LEADS OUT OF THE / WASHROOM AND / MOST LIKELY INTO / TROUBLE.[END]
     ; End script.
     db $ff
 
@@ -409,7 +409,7 @@ C1DoorToHallView:
 
 C1Loc5_08:
     ; Show message 0.
-    db $00, $24
+    db $00, $24 ; Message Text0CMessage24: THE DOOR LEADS OUTTO A HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -418,7 +418,7 @@ C1PassageActionRefusal:
 
 C1Sc5_0F:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: WHAT DO YOU THINK / YOU ARE DOING?[END]
     ; End script.
     db $ff
 
@@ -427,7 +427,7 @@ MoveC1Door01:
 
 C1Sc5_10:
     ; Test current room.
-    db $19, $01
+    db $19, C1RoomIdStartWashroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door00ToRoom01
@@ -442,14 +442,14 @@ C1Loc5_09:
     db $05
     dw C1RoomUnfinishedReply
     ; Move to the room argument if the selected state permits.
-    db $06, $02
+    db $06, C1RoomIdWashroomHallway
     ; Test object flag.
     db $16, C1Hall02Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room02Repeat
     ; Show message 0.
-    db $00, $26
+    db $00, $26 ; Message Text0CMessage26: YOU'RE IN A DINGY / HALLWAY.[END]
     ; Set object flag.
     db $17, C1Hall02Seen
     ; End script.
@@ -460,7 +460,7 @@ C1Room02Repeat:
 
 C1Loc5_7D:
     ; Show message 0.
-    db $00, $2b
+    db $00, $2b ; Message Text0CMessage2B: THERE IS NOTHING / UNUSUAL ABOUT THISHALLWAY.[END]
     ; End script.
     db $ff
 
@@ -469,7 +469,7 @@ C1RoomUnfinishedReply:
 
 C1Loc5_0A:
     ; Show message 1.
-    db $01, $5e
+    db $01, $5e ; Message Text0EMessage5E: YOUR INSTINCTS / TELL YOU THERE IS / SOMETHING YOU'RE / MISSING IN THIS / ROOM![END]
     ; End script.
     db $ff
 
@@ -483,12 +483,12 @@ C1Sc5_11:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHallView
     ; Show message 0.
-    db $00, $28
+    db $00, $28 ; Message Text0CMessage28: IT'S A PLAIN / WOODEN DOOR.[END]
     ; End script.
     db $ff
 
@@ -497,7 +497,7 @@ MoveC1Door02:
 
 C1Sc5_12:
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHall
@@ -507,14 +507,14 @@ C1Door02ToRoom03:
 
 C1Loc5_0B:
     ; Move to the room argument if the selected state permits.
-    db $06, $03
+    db $06, C1RoomIdWomenWashroom
     ; Test object flag.
     db $16, C1Washroom3Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room03Repeat
     ; Show message 0.
-    db $00, $2c
+    db $00, $2c ; Message Text0CMessage2C: YOU'RE IN THE / WOMEN'S WASHROOM.[END]
     ; Set object flag.
     db $17, C1Washroom3Seen
     ; End script.
@@ -525,7 +525,7 @@ C1Room03Repeat:
 
 C1Loc5_7E:
     ; Show message 0.
-    db $00, $32
+    db $00, $32 ; Message Text0CMessage32: YOU'RE IN THE / LADIES ROOM. / SOMEHOW, YOU FEEL / OUT OF PLACE![END]
     ; End script.
     db $ff
 
@@ -534,7 +534,7 @@ LookC1Door03:
 
 C1Sc5_13:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03View
@@ -556,7 +556,7 @@ C1Loc5_0C:
     db $04
     dw C1DoorToBarView
     ; Show message 0.
-    db $00, $29
+    db $00, $29 ; Message Text0CMessage29: THIS DOOR HAS / SCUFFS AND / SCRATCHES ON IT.[PAGE] / IT MUST BE USED / A LOT.[END]
     ; End script.
     db $ff
 
@@ -565,7 +565,7 @@ C1DoorToBarView:
 
 C1Loc5_0D:
     ; Show message 2.
-    db $02, $b2
+    db $02, $b2 ; Message Text0DMessage32: IT'S THE DOOR / LEADING INSIDE THEBUILDING.[END]
     ; End script.
     db $ff
 
@@ -574,7 +574,7 @@ MoveC1Door03:
 
 C1Sc5_14:
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHall
@@ -584,14 +584,14 @@ C1Door03ToRoom05:
 
 C1Loc5_0E:
     ; Move to the room argument if the selected state permits.
-    db $06, $05
+    db $06, C1RoomIdBar
     ; Test object flag.
     db $16, C1BarRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room05Repeat
     ; Show message 0.
-    db $00, $3b
+    db $00, $3b ; Message Text0CMessage3B: YOU'RE IN WHAT / SEEMS TO BE A / DARK, EMPTY / RESTAURANT.[PAGE] / IT IS EITHER / CLO...
     ; Set object flag.
     db $17, C1BarRoomSeen
     ; End script.
@@ -602,7 +602,7 @@ C1Room05Repeat:
 
 C1Loc5_7F:
     ; Show message 0.
-    db $00, $42
+    db $00, $42 ; Message Text0CMessage42: THIS ROOM IS / EMPTY.[END]
     ; End script.
     db $ff
 
@@ -611,7 +611,7 @@ LookC1Door04:
 
 C1Sc5_15:
     ; Test current room.
-    db $19, $03
+    db $19, C1RoomIdWomenWashroom
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door04View
@@ -633,7 +633,7 @@ C1Loc5_0F:
     db $04
     dw C1Door04ShortView
     ; Show message 0.
-    db $00, $31
+    db $00, $31 ; Message Text0CMessage31: IT'S THE ENTRANCE / TO THE WOMEN'S / TOILET STALL.[END]
     ; End script.
     db $ff
 
@@ -642,7 +642,7 @@ C1Door04ShortView:
 
 C1Loc5_10:
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text10Message07: IT'S A DOOR.[END]
     ; End script.
     db $ff
 
@@ -651,19 +651,19 @@ MoveC1Door04:
 
 C1Sc5_16:
     ; Test current room.
-    db $19, $03
+    db $19, C1RoomIdWomenWashroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door02ToRoom03
     ; Move to the room argument if the selected state permits.
-    db $06, $04
+    db $06, C1RoomIdWomenStall
     ; Test object flag.
     db $16, C1WomenStallSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room04Repeat
     ; Show message 0.
-    db $00, $33
+    db $00, $33 ; Message Text0CMessage33: YOU'RE IN AN EMPTYSTALL.[PAGE] / YOU SEE A CRACK / IN THE TOILET AND / WATER LEAKING ...
     ; Set object flag.
     db $17, C1WomenStallSeen
     ; End script.
@@ -674,7 +674,7 @@ C1Room04Repeat:
 
 C1Loc5_80:
     ; Show message 0.
-    db $00, $39
+    db $00, $39 ; Message Text0CMessage39: IT IS VERY QUIET / IN THE WOMEN'S / TOILET STALL. YOU / HEAR NOTHING / EXCEPT THE FAI...
     ; End script.
     db $ff
 
@@ -683,7 +683,7 @@ LookC1CellarDoor:
 
 C1Sc5_17:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is set.
     db $04
     dw C1CellarDoorView
@@ -700,7 +700,7 @@ C1Loc5_11:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 0.
-    db $00, $3e
+    db $00, $3e ; Message Text0CMessage3E: THE DOOR HAS THE / WORD "CELLAR" / WRITTEN ON IT.[END]
     ; End script.
     db $ff
 
@@ -709,7 +709,7 @@ MoveC1CellarDoor:
 
 C1Sc5_18:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -731,14 +731,14 @@ C1DoorToCellar:
 
 C1Loc5_13:
     ; Move to the room argument if the selected state permits.
-    db $06, $06
+    db $06, C1RoomIdCellar
     ; Test object flag.
     db $16, C1CellarSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room06Repeat
     ; Show message 0.
-    db $00, $49
+    db $00, $49 ; Message Text0CMessage49: YOU'RE IN THE / CELLAR.[PAGE] / THE PLACE LOOKS / LIKE IT COULD USE / A GOOD SWEEPING...
     ; Set object flag.
     db $17, C1CellarSeen
     ; End script.
@@ -749,7 +749,7 @@ C1Room06Repeat:
 
 C1Loc5_81:
     ; Show message 0.
-    db $00, $52
+    db $00, $52 ; Message Text0CMessage52: IT'S A DAMP AND / DREARY CELLAR.[END]
     ; End script.
     db $ff
 
@@ -763,12 +763,12 @@ C1Sc5_19:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is set.
     db $04
     dw C1FrontDoorView
     ; Show message 2.
-    db $02, $b2
+    db $02, $b2 ; Message Text0DMessage32: IT'S THE DOOR / LEADING INSIDE THEBUILDING.[END]
     ; End script.
     db $ff
 
@@ -777,7 +777,7 @@ C1FrontDoorView:
 
 C1Loc5_14:
     ; Show message 0.
-    db $00, $3f
+    db $00, $3f ; Message Text0CMessage3F: IT'S THE FRONT / DOOR OF THE / RESTAURANT.[END]
     ; End script.
     db $ff
 
@@ -786,7 +786,7 @@ MoveC1FrontDoor:
 
 C1Sc5_1A:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -796,16 +796,16 @@ C1DoorToStreet11:
 
 C1Loc5_15:
     ; Check Case I room event for the room argument.
-    db $5e, $4a
+    db $5e, C1RoomIdMuggerJoeStreet
     ; Move to the room argument if the selected state permits.
-    db $06, $11
+    db $06, C1RoomIdJoeStreet
     ; Test object flag.
     db $16, C1JoeStreetSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Street11First
     ; Show message 2.
-    db $02, $b9
+    db $02, $b9 ; Message Text0DMessage39: YOU'RE STANDING ONTHE STREET IN / FRONT OF THE / RESTAURANT.[END]
     ; End script.
     db $ff
 
@@ -814,7 +814,7 @@ C1Street11First:
 
 C1Loc5_82:
     ; Show message 2.
-    db $02, $b1
+    db $02, $b1 ; Message Text0DMessage31: YOU'RE ON THE / STREET IN FRONT OFJOE'S PLACE.[PAGE] / A QUICK GLANCE / TELLS YOU NO ...
     ; Set object flag.
     db $17, C1JoeStreetSeen
     ; End script.
@@ -825,7 +825,7 @@ LookC1Stairs:
 
 C1Sc5_1B:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorViewEnd
@@ -835,7 +835,7 @@ C1Sc5_1B:
     db $04
     dw C1StairsShortView
     ; Show message 0.
-    db $00, $3d
+    db $00, $3d ; Message Text0CMessage3D: IT'S A RICKETY / STAIRCASE WHICH / LEADS UP TO THE / SECOND FLOOR.[END]
     ; End script.
     db $ff
 
@@ -844,7 +844,7 @@ MoveC1Stairs:
 
 C1Sc5_1C:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -854,7 +854,7 @@ C1StairsEntryCheck:
 
 C1Loc5_16:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1StairsToRoom0E
@@ -869,14 +869,14 @@ C1StairsToRoom0E:
 
 C1Loc5_17:
     ; Move to the room argument if the selected state permits.
-    db $06, $0e
+    db $06, C1RoomIdUpstairsHallway
     ; Test object flag.
     db $16, C1JoeUpHallSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room0EFirst
     ; Show message 2.
-    db $02, $aa
+    db $02, $aa ; Message Text0DMessage2A: YOU'RE IN THE / SECOND FLOOR / HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -885,7 +885,7 @@ C1Room0EFirst:
 
 C1Loc5_83:
     ; Show message 2.
-    db $02, $a3
+    db $02, $a3 ; Message Text0DMessage23: YOU'RE IN A / DINGY UPSTAIRS / HALL.[PAGE] / YOU NOTICE SOME / FADED POSTERS / OF OLD...
     ; Set object flag.
     db $17, C1JoeUpHallSeen
     ; End script.
@@ -896,11 +896,11 @@ C1StairsEffect18:
 
 C1Loc5_18:
     ; Move to the room argument if the selected state permits.
-    db $06, $0e
+    db $06, C1RoomIdUpstairsHallway
     ; Show message 2.
-    db $02, $a3
+    db $02, $a3 ; Message Text0DMessage23: YOU'RE IN A / DINGY UPSTAIRS / HALL.[PAGE] / YOU NOTICE SOME / FADED POSTERS / OF OLD...
     ; Run scene effect.
-    db $46, $18
+    db $46, C1FxIdHeadacheUpstairs
     ; End script.
     db $ff
 
@@ -914,12 +914,12 @@ C1Sc5_1D:
     db $04
     dw C1RackAlreadyOpen
     ; Test current room.
-    db $19, $06
+    db $19, C1RoomIdCellar
     ; Branch if result bit 0 is set.
     db $04
     dw C1WineRackView
     ; Show message 0.
-    db $00, $52
+    db $00, $52 ; Message Text0CMessage52: IT'S A DAMP AND / DREARY CELLAR.[END]
     ; End script.
     db $ff
 
@@ -928,7 +928,7 @@ C1WineRackView:
 
 C1Loc5_19:
     ; Show message 0.
-    db $00, $4e
+    db $00, $4e ; Message Text0CMessage4E: ROWS AND ROWS OF / DUSTY BOTTLES LINETHIS RACK.[PAGE] / ONE OF THE BOTTLESON THE RIGH...
     ; End script.
     db $ff
 
@@ -939,7 +939,7 @@ C1Loc5_1A:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -948,12 +948,12 @@ OpenC1RackPassage:
 
 C1Sc5_1E:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw OpenC1Door
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: YOU CAN'T DO THAT.[END]
     ; End script.
     db $ff
 
@@ -962,7 +962,7 @@ CloseC1RackPassage:
 
 C1Sc5_1F:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw CloseC1Door
@@ -974,7 +974,7 @@ C1Sc5_1F:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected state and refresh.
     db $37
     ; Set selected attribute bit 0.
@@ -989,7 +989,7 @@ C1Loc5_1B:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -998,7 +998,7 @@ MoveC1RackPassage:
 
 C1Sc5_20:
     ; Test current room.
-    db $19, $06
+    db $19, C1RoomIdCellar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CellarEntryFlags
@@ -1008,14 +1008,14 @@ C1RackToRoom07:
 
 C1Loc5_1C:
     ; Move to the room argument if the selected state permits.
-    db $06, $07
+    db $06, C1RoomIdRackPassage
     ; Test object flag.
     db $16, C1RackPassageSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room07First
     ; Show message 0.
-    db $00, $58
+    db $00, $58 ; Message Text0CMessage58: YOU GAG ON THE / STALE AIR. THIS / PLACE COULD USE / SOME CIRCULATION / IN HERE![END]
     ; End script.
     db $ff
 
@@ -1024,7 +1024,7 @@ C1Room07First:
 
 C1Loc5_84:
     ; Show message 0.
-    db $00, $54
+    db $00, $54 ; Message Text0CMessage54: IT'S A SMALL / CONNECTING ROOM / MADE OF STONE AND / BRICK.[END]
     ; Set object flag.
     db $17, C1RackPassageSeen
     ; End script.
@@ -1040,14 +1040,14 @@ C1Sc5_21:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw C1CasinoDoorView
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1061,7 +1061,7 @@ C1Loc5_1D:
     db $04
     dw C1CasinoDoorShortView
     ; Show message 0.
-    db $00, $56
+    db $00, $56 ; Message Text0CMessage56: IT'S A ROUND / WOODEN DOOR.[PAGE] / STRANGE DESIGN FORA DOOR![END]
     ; End script.
     db $ff
 
@@ -1070,7 +1070,7 @@ C1CasinoDoorShortView:
 
 C1Loc5_1E:
     ; Show message 0.
-    db $00, $59
+    db $00, $59 ; Message Text0CMessage59: IT'S A DOOR.[END]
     ; End script.
     db $ff
 
@@ -1079,7 +1079,7 @@ MoveC1CasinoDoor:
 
 C1Sc5_22:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1RackToRoom07
@@ -1089,14 +1089,14 @@ C1DoorToCasino:
 
 C1Loc5_1F:
     ; Move to the room argument if the selected state permits.
-    db $06, $08
+    db $06, C1RoomIdCasino
     ; Test object flag.
     db $16, C1CasinoSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CasinoFirstEntry
     ; Show message 0.
-    db $00, $65
+    db $00, $65 ; Message Text0CMessage65: THE CASINO IS / DESERTED.[END]
     ; End script.
     db $ff
 
@@ -1105,7 +1105,7 @@ C1CasinoFirstEntry:
 
 C1Loc5_85:
     ; Show message 0.
-    db $00, $5a
+    db $00, $5a ; Message Text0CMessage5A: YOU'RE IN A SMALL / ROOM SET UP AS A / CASINO.[PAGE] / THE SILENCE IN / THIS PLACE IS...
     ; Set object flag.
     db $17, C1CasinoSeen
     ; End script.
@@ -1116,12 +1116,12 @@ LookC1SewerLadder:
 
 C1Sc5_23:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LadderUpView
     ; Show message 0.
-    db $00, $55
+    db $00, $55 ; Message Text0CMessage55: YOU SEE A SHAFT / WITH A LADDER / LEADING STRAIGHT / DOWN.[PAGE] / YOU ALMOST RETCH /...
     ; End script.
     db $ff
 
@@ -1130,7 +1130,7 @@ C1LadderUpView:
 
 C1Loc5_20:
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: IT'S A LADDER / LEADING UP.[PAGE] / IT'S PRETTY RUSTY.YOU HOPE IT HOLDS / YOU WEIGHT!...
     ; End script.
     db $ff
 
@@ -1139,7 +1139,7 @@ MoveC1SewerLadder:
 
 C1Sc5_24:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1RackToRoom07
@@ -1149,7 +1149,7 @@ C1LadderToSewer:
 
 C1Loc5_21:
     ; Move to the room argument if the selected state permits.
-    db $06, $3a
+    db $06, C1RoomIdRackLadderSewer
     ; Test object flag.
     db $16, C1Sewer3ASeen
     ; Branch if result bit 0 is clear.
@@ -1161,7 +1161,7 @@ C1SewerRepeatEntry:
 
 C1Loc5_86:
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: YOU'RE INSIDE / THE SEWER.[END]
     ; End script.
     db $ff
 
@@ -1170,7 +1170,7 @@ C1SewerFirstEntry:
 
 C1Loc5_87:
     ; Show message 1.
-    db $01, $28
+    db $01, $28 ; Message Text0EMessage28: THE SEWER THAT / YOU'RE IN SMELLS / REALLY, REALLY / NASTY![END]
     ; Set object flag.
     db $17, C1Sewer3ASeen
 
@@ -1186,7 +1186,7 @@ MoveC1CasinoPassage:
 
 C1Sc5_26:
     ; Test current room.
-    db $19, $08
+    db $19, C1RoomIdCasino
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToCasino
@@ -1196,9 +1196,9 @@ C1PassageToRoom09:
 
 C1Loc5_22:
     ; Move to the room argument if the selected state permits.
-    db $06, $09
+    db $06, C1RoomIdCasinoLiftEntrance
     ; Show message 0.
-    db $00, $69
+    db $00, $69 ; Message Text0CMessage69: YOU STAND IN FRONTOF A SMALL / ELEVATOR.[END]
 
 jr_006_7586:
     ; End script.
@@ -1216,7 +1216,7 @@ C1Sc5_27:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1235,7 +1235,7 @@ C1LiftDoorWontOpen:
 
 C1Sc5_29:
     ; Show message 2.
-    db $02, $a1
+    db $02, $a1 ; Message Text0DMessage21: IT WON'T OPEN.[END]
     ; End script.
     db $ff
 
@@ -1244,7 +1244,7 @@ CloseC1LiftDoor:
 
 C1Sc5_2A:
     ; Show message 2.
-    db $02, $a2
+    db $02, $a2 ; Message Text0DMessage22: IT WON'T CLOSE.[END]
     ; End script.
     db $ff
 
@@ -1253,19 +1253,19 @@ MoveC1LiftDoor0C:
 
 C1Sc5_2B:
     ; Test current room.
-    db $19, $09
+    db $19, C1RoomIdCasinoLiftEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToRoom09
     ; Move to the room argument if the selected state permits.
-    db $06, $0a
+    db $06, C1RoomIdCasinoLift
     ; Test object flag.
     db $16, C1SmallLiftSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftRoom0AFirst
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: YOU'RE INSIDE THE / CRAMPED ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -1274,7 +1274,7 @@ C1LiftRoom0AFirst:
 
 C1Loc5_88:
     ; Show message 0.
-    db $00, $6b
+    db $00, $6b ; Message Text0CMessage6B: YOU'RE INSIDE / THE ELEVATOR.[PAGE] / WHICH FLOOR DO YOUWISH TO GO TO?[END]
     ; Set object flag.
     db $17, C1SmallLiftSeen
     ; End script.
@@ -1285,12 +1285,12 @@ MoveC1OfficePassage:
 
 C1Sc5_2C:
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1HiddenLiftToOffice
     ; Move to the room argument if the selected state permits.
-    db $06, $0c
+    db $06, C1RoomIdCorpseOffice
     ; Test object flag.
     db $16, C1OfficeDescribed
     ; Branch if result bit 0 is set.
@@ -1302,7 +1302,7 @@ C1Sc5_2C:
     db $04
     dw C1OfficeRepeatEntry
     ; Show message 2.
-    db $02, $81
+    db $02, $81 ; Message Text0DMessage01: YOU'RE IN AN / OFFICE, THE STALE / AIR FILLED WITH / THE STENCH OF / DEATH.[PAGE] / L...
     ; Set object flag.
     db $17, C1OfficeDescribed
     ; End script.
@@ -1313,7 +1313,7 @@ C1OfficeRepeatEntry:
 
 C1Loc5_89:
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: THERE'S A DEAD / BODY LYING JUST / INSIDE THE OFFICE.[END]
     ; End script.
     db $ff
 
@@ -1322,7 +1322,7 @@ C1HiddenLiftToOffice:
 
 C1Loc5_23:
     ; Move to the room argument if the selected state permits.
-    db $06, $0c
+    db $06, C1RoomIdCorpseOffice
     ; Test object flag.
     db $16, C1HiddenLiftSeen
     ; Branch if result bit 0 is set.
@@ -1336,9 +1336,9 @@ C1Loc5_23:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $81
+    db $02, $81 ; Message Text0DMessage01: YOU'RE IN AN / OFFICE, THE STALE / AIR FILLED WITH / THE STENCH OF / DEATH.[PAGE] / L...
     ; Show message 1.
-    db $01, $02
+    db $01, $02 ; Message Text0EMessage02: AS YOU ENTER THE / ROOM, THE WALL / SLIDES SHUT BEHINDYOU.[PAGE] / OBVIOUSLY THIS / E...
     ; Set object flag.
     db $17, C1HiddenLiftSeen
     ; End script.
@@ -1351,9 +1351,9 @@ C1Loc5_8A:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: THERE'S A DEAD / BODY LYING JUST / INSIDE THE OFFICE.[END]
     ; Show message 2.
-    db $02, $a9
+    db $02, $a9 ; Message Text0DMessage29: THE WALL SLIDES / BACK INTO PLACE, / SILENTLY HIDING / THE ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -1364,9 +1364,9 @@ C1Loc5_8B:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: THERE'S A DEAD / BODY LYING JUST / INSIDE THE OFFICE.[END]
     ; Show message 1.
-    db $01, $02
+    db $01, $02 ; Message Text0EMessage02: AS YOU ENTER THE / ROOM, THE WALL / SLIDES SHUT BEHINDYOU.[PAGE] / OBVIOUSLY THIS / E...
     ; Set object flag.
     db $17, C1HiddenLiftSeen
     ; End script.
@@ -1377,7 +1377,7 @@ MoveC1LiftDoor0F:
 
 C1Sc5_2D:
     ; Test current room.
-    db $19, $40
+    db $19, C1RoomIdTopFloorLift
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToLiftRoom40
@@ -1387,14 +1387,14 @@ C1LiftDoorToRoom0B:
 
 C1Loc5_24:
     ; Move to the room argument if the selected state permits.
-    db $06, $0b
+    db $06, C1RoomIdTopFloorRoom
     ; Test object flag.
     db $16, C1Room0BSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room0BFirst
     ; Show message 0.
-    db $00, $7c
+    db $00, $7c ; Message Text0CMessage7C: YOU'RE INSIDE / A SMALL, / CLAUSTROPHOBIC / ROOM.[END]
     ; End script.
     db $ff
 
@@ -1403,7 +1403,7 @@ C1Room0BFirst:
 
 C1Loc5_8C:
     ; Show message 0.
-    db $00, $72
+    db $00, $72 ; Message Text0CMessage72: WHAT KIND OF ROOM / IS THIS?[PAGE] / YOU WONDER WHAT / WENT ON HERE?[END]
     ; Set object flag.
     db $17, C1Room0BSeen
     ; End script.
@@ -1414,14 +1414,14 @@ C1DoorToLiftRoom40:
 
 C1Loc5_25:
     ; Move to the room argument if the selected state permits.
-    db $06, $40
+    db $06, C1RoomIdTopFloorLift
     ; Test object flag.
     db $16, C1SmallLiftSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftRoom0AFirst
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: YOU'RE INSIDE THE / CRAMPED ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -1435,16 +1435,16 @@ C1Sc5_2E:
     db $04
     dw C1WindowAlreadyOpen
     ; Test current room.
-    db $19, $0b
+    db $19, C1RoomIdTopFloorRoom
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeWindowView
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $ac
+    db $02, $ac ; Message Text0DMessage2C: IT'S A WINDOW / LEADING INTO / THE BUILDING.[END]
     ; Show message 2.
-    db $02, $4e
+    db $02, $4e ; Message Text11Message4E: THROUGH THE GRIMY / WINDOW YOU CAN / BARELY MAKE OUT / A ROOM BEYOND.[END]
     ; End script.
     db $ff
 
@@ -1453,7 +1453,7 @@ C1FireEscapeWindowView:
 
 C1Loc5_26:
     ; Show message 2.
-    db $02, $87
+    db $02, $87 ; Message Text0DMessage07: THROUGH THE WINDOWYOU NOTICE EASY / ACCESS TO THE FIREESCAPE.[END]
     ; End script.
     db $ff
 
@@ -1471,7 +1471,7 @@ C1Sc5_2F:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -1482,7 +1482,7 @@ C1Loc5_27:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -1500,7 +1500,7 @@ C1Sc5_30:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -1511,7 +1511,7 @@ C1Loc5_28:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1520,7 +1520,7 @@ MoveC1Window10:
 
 C1Sc5_31:
     ; Test current room.
-    db $19, $0b
+    db $19, C1RoomIdTopFloorRoom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftDoorToRoom0B
@@ -1530,9 +1530,9 @@ C1WindowToFireEscape0F:
 
 C1Loc5_29:
     ; Move to the room argument if the selected state permits.
-    db $06, $0f
+    db $06, C1RoomIdFireEscape3
     ; Show message 2.
-    db $02, $ab
+    db $02, $ab ; Message Text0DMessage2B: YOU'RE STANDING / ON THE THIRD FLOORFIRE ESCAPE.[PAGE] / A BOUT OF PANIC / HITS YOU A...
 
 ; End the fire-escape view; the preceding window traversal also falls through here.
 C1FireEscapeEmptyView:
@@ -1546,14 +1546,14 @@ MoveC1FireEscape11:
 
 C1Sc5_33:
     ; Test current room.
-    db $19, $0f
+    db $19, C1RoomIdFireEscape3
     ; Branch if result bit 0 is clear.
     db $05
     dw C1WindowToFireEscape0F
     ; Move to the room argument if the selected state permits.
-    db $06, $10
+    db $06, C1RoomIdFireEscape2
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text0DMessage2E: YOU'RE ON A FIRE / ESCAPE.[PAGE] / THE THEORY IS THATIF THERE'S A FIRE,YOU USE ONE OF...
     ; End script.
     db $ff
 
@@ -1567,12 +1567,12 @@ C1Sc5_34:
     db $04
     dw C1WindowAlreadyOpen
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeWindowView
     ; Show message 2.
-    db $02, $b0
+    db $02, $b0 ; Message Text0DMessage30: IT'S A WINDOW.[END]
     ; End script.
     db $ff
 
@@ -1581,14 +1581,14 @@ MoveC1Window12:
 
 C1Sc5_35:
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw MoveC1OfficePassage
     ; Move to the room argument if the selected state permits.
-    db $06, $10
+    db $06, C1RoomIdFireEscape2
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text0DMessage2E: YOU'RE ON A FIRE / ESCAPE.[PAGE] / THE THEORY IS THATIF THERE'S A FIRE,YOU USE ONE OF...
 
 ; End the fire-escape movement or unavailable view.
 C1FireEscapeMoveEnd:
@@ -1602,12 +1602,12 @@ LookC1FireEscape13:
 
 C1Sc5_36:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1FireEscapeMoveEnd
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text0DMessage53: THE FIRE ESCAPE ISTOO HIGH FOR YOU / TO REACH FROM / THE STREET.[END]
     ; End script.
     db $ff
 
@@ -1616,12 +1616,12 @@ MoveC1FireEscape13:
 
 C1Sc5_37:
     ; Test current room.
-    db $19, $10
+    db $19, C1RoomIdFireEscape2
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeToAlley
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text0DMessage53: THE FIRE ESCAPE ISTOO HIGH FOR YOU / TO REACH FROM / THE STREET.[END]
     ; End script.
     db $ff
 
@@ -1630,11 +1630,11 @@ C1FireEscapeToAlley:
 
 C1Loc5_2B:
     ; Check Case I room event for the room argument.
-    db $5e, $1e
+    db $5e, C1RoomIdAlleyMuggerEncounter
     ; Move to the room argument if the selected state permits.
-    db $06, $16
+    db $06, C1RoomIdJoeAlley
     ; Show message 2.
-    db $02, $d1
+    db $02, $d1 ; Message Text0DMessage51: YOU'RE IN A DARK / ALLEY.[END]
     ; End script.
     db $ff
 
@@ -1658,7 +1658,7 @@ C1DoorLockedReply:
 
 C1Loc5_2C:
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text0CMessage43: THE DOOR WON'T / OPEN.[PAGE] / IT MUST BE / LOCKED.[END]
     ; End script.
     db $ff
 
@@ -1667,7 +1667,7 @@ MoveC1Door14:
 
 C1Sc5_39:
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw MoveC1OfficePassage
@@ -1677,14 +1677,14 @@ C1DoorToSecretary:
 
 C1Loc5_2D:
     ; Move to the room argument if the selected state permits.
-    db $06, $0d
+    db $06, C1RoomIdSecretaryOffice
     ; Test object flag.
     db $16, C1SecretaryRoomSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SecretaryFirstEntry
     ; Show message 2.
-    db $02, $a0
+    db $02, $a0 ; Message Text0DMessage20: YOU'RE IN THE / CRAMPED QUARTERS / OF A SECRETARY'S / OFFICE.[END]
     ; End script.
     db $ff
 
@@ -1693,7 +1693,7 @@ C1SecretaryFirstEntry:
 
 C1Loc5_8D:
     ; Show message 2.
-    db $02, $97
+    db $02, $97 ; Message Text0DMessage17: YOU'RE IN THE / SECRETARY'S / OFFICE.[PAGE] / THE ODOR OF CHEAP / PERFUME LINGERS INT...
     ; Set object flag.
     db $17, C1SecretaryRoomSeen
     ; End script.
@@ -1704,7 +1704,7 @@ LookC1Door15:
 
 C1Sc5_3A:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorViewEnd
@@ -1717,7 +1717,7 @@ MoveC1Door15:
 
 C1Sc5_3B:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToSecretary
@@ -1730,7 +1730,7 @@ MoveC1AlleyPassage16:
 
 C1Sc5_3C:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1743,7 +1743,7 @@ MoveC1NewsstandPassage:
 
 C1Sc5_3D:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1753,16 +1753,16 @@ C1PassageToNewsstand:
 
 C1Loc5_2E:
     ; Check Case I room event for the room argument.
-    db $5e, $4b
+    db $5e, C1RoomIdMuggerNewsstand
     ; Move to the room argument if the selected state permits.
-    db $06, $12
+    db $06, C1RoomIdNewsstandStreet
     ; Test object flag.
     db $16, C1NewsstandSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1NewsstandFirstEntry
     ; Show message 2.
-    db $02, $c2
+    db $02, $c2 ; Message Text0DMessage42: YOU'RE ON THE / STREET IN FRONT OFTHE NEWSSTAND.[END]
     ; End script.
     db $ff
 
@@ -1771,7 +1771,7 @@ C1NewsstandFirstEntry:
 
 C1Loc5_8E:
     ; Show message 2.
-    db $02, $bd
+    db $02, $bd ; Message Text0DMessage3D: YOU'RE IN FRONT OFA NEWSSTAND.[PAGE] / YOU FEEL THAT THISMIGHT NOT BE / THE BEST TIME...
     ; Set object flag.
     db $17, C1NewsstandSeen
 
@@ -1787,12 +1787,12 @@ LookC1AlleyPassage16:
 
 C1Sc5_3F:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DarkAlleyView
     ; Show message 2.
-    db $02, $d4
+    db $02, $d4 ; Message Text0DMessage54: YOU'RE AT THE END / OF THE ALLEY.[END]
     ; End script.
     db $ff
 
@@ -1801,7 +1801,7 @@ C1DarkAlleyView:
 
 C1Loc5_2F:
     ; Show message 2.
-    db $02, $d1
+    db $02, $d1 ; Message Text0DMessage51: YOU'RE IN A DARK / ALLEY.[END]
     ; End script.
     db $ff
 
@@ -1815,12 +1815,12 @@ C1Sc5_40:
     db $04
     dw C1ManholeAlreadyOpen
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is set.
     db $04
     dw C1StreetManholeView
     ; Show message 1.
-    db $01, $32
+    db $01, $32 ; Message Text0EMessage32: IT'S A MANHOLE / COVER.[PAGE] / YOU'VE OFTEN / WONDERED WHY / THEY'RE ROUND / INSTEAD...
     ; End script.
     db $ff
 
@@ -1829,7 +1829,7 @@ C1StreetManholeView:
 
 C1Loc5_30:
     ; Show message 2.
-    db $02, $bc
+    db $02, $bc ; Message Text0DMessage3C: THE MANHOLE COVER / SITS IN THE MIDDLEOF THE STREET.[END]
     ; End script.
     db $ff
 
@@ -1847,7 +1847,7 @@ C1Sc5_41:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -1858,7 +1858,7 @@ C1Loc5_31:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -1876,7 +1876,7 @@ C1Sc5_42:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; End script.
     db $ff
 
@@ -1887,7 +1887,7 @@ C1Loc5_32:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1896,7 +1896,7 @@ MoveC1Manhole18:
 
 C1Sc5_43:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1906,7 +1906,7 @@ C1ManholeToRoom1D:
 
 C1Loc5_33:
     ; Move to the room argument if the selected state permits.
-    db $06, $1d
+    db $06, C1RoomIdJoeStreetUpperSewer
 
 ; Choose sewer-entry text using flag $40 and set it on the first description.
 C1ManholeSewerText:
@@ -1918,7 +1918,7 @@ C1Loc5_8F:
     db $04
     dw C1SewerRepeatEntry
     ; Show message 1.
-    db $01, $31
+    db $01, $31 ; Message Text0EMessage31: YOU'RE IN A COLD / AND CLAMMY SEWER.[END]
     ; Set object flag.
     db $17, C1ManholeSewerSeen
 
@@ -1934,7 +1934,7 @@ MoveC1PolicePassage:
 
 C1Sc5_45:
     ; Test current room.
-    db $19, $17
+    db $19, C1RoomIdPoliceFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToPolice
@@ -1947,11 +1947,11 @@ C1PassageToPolice:
 
 C1Loc5_34:
     ; Check Case I room event for the room argument.
-    db $5e, $20
+    db $5e, C1RoomIdArmedWomanEncounter
     ; Move to the room argument if the selected state permits.
-    db $06, $17
+    db $06, C1RoomIdPoliceFront
     ; Show message 2.
-    db $02, $d6
+    db $02, $d6 ; Message Text0DMessage56: YOU'RE STANDING INFRONT OF THE / POLICE STATION.[END]
 
 ; End the empty passage view or the police-station exterior description.
 C1PoliceEntryEnd:
@@ -1965,19 +1965,19 @@ MoveC1CarRearPassage:
 
 C1Sc5_47:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
     ; Move to the room argument if the selected state permits.
-    db $06, $22
+    db $06, C1RoomIdCarRear
     ; Test object flag.
     db $16, C1CarRearSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarRearFirstEntry
     ; Show message 2.
-    db $02, $f6
+    db $02, $f6 ; Message Text0DMessage76: YOU'RE AT THE BACKOF THE CAR.[END]
     ; End script.
     db $ff
 
@@ -1986,7 +1986,7 @@ C1CarRearFirstEntry:
 
 C1Loc5_90:
     ; Show message 2.
-    db $02, $f1
+    db $02, $f1 ; Message Text0DMessage71: YOU'RE STANDING / AT THE REAR OF THECAR, IN FRONT OF / ITS TRUNK.[END]
     ; Set object flag.
     db $17, C1CarRearSeen
     ; End script.
@@ -1997,7 +1997,7 @@ LookC1CarDoor1B:
 
 C1Sc5_48:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarDoorViewEnd
@@ -2007,7 +2007,7 @@ C1Sc5_48:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $b5
+    db $02, $b5 ; Message Text0DMessage35: IT'S THE FRONT / DOOR TO THE / CAR.[END]
 
 ; End the car-door view.
 C1CarDoorViewEnd:
@@ -2021,19 +2021,19 @@ MoveC1CarDoor1B:
 
 C1Sc5_49:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
     ; Move to the room argument if the selected state permits.
-    db $06, $23
+    db $06, C1RoomIdLuxuryCar
     ; Test object flag.
     db $16, C1CarInteriorSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarInteriorFirstEntry
     ; Show message 2.
-    db $02, $82
+    db $02, $82 ; Message Text0DMessage02: YOU'RE INSIDE / A EUROPEAN LUXURY / CAR.[END]
     ; End script.
     db $ff
 
@@ -2042,7 +2042,7 @@ C1CarInteriorFirstEntry:
 
 C1Loc5_91:
     ; Show message 1.
-    db $01, $00
+    db $01, $00 ; Message Text0EMessage00: YOU SEE NOTHING / UNUSUAL ABOUT THE / PLUSH INTERIOR OF / THE FOREIGN CAR.[END]
     ; Set object flag.
     db $17, C1CarInteriorSeen
 
@@ -2058,7 +2058,7 @@ MoveC1GunShopStreet:
 
 C1Sc5_4B:
     ; Test current room.
-    db $19, $12
+    db $19, C1RoomIdNewsstandStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToNewsstand
@@ -2073,23 +2073,23 @@ C1Loc5_36:
     db $04
     dw C1GunShopStreetEntry
     ; Check Case I room event for the room argument.
-    db $5e, $4c
+    db $5e, C1RoomIdMuggerGunShopStreet
     ; Check Case I room event for the room argument.
-    db $5e, $1f
+    db $5e, C1RoomIdBumEncounter
 
 ; Check exit $13, clear flag $a8, and retain the following result-based text branch.
 C1GunShopStreetEntry:
 
 C1Loc5_37:
     ; Move to the room argument if the selected state permits.
-    db $06, $13
+    db $06, C1RoomIdGunShopStreet
     ; Clear object flag.
     db $18, C1BumEventActive
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetLong
     ; Show message 2.
-    db $02, $cf
+    db $02, $cf ; Message Text0DMessage4F: YOU'RE ON THE / STREET IN FRONT OFTHE GUN SHOP.[END]
     ; End script.
     db $ff
 
@@ -2098,7 +2098,7 @@ C1GunShopStreetLong:
 
 C1Loc5_92:
     ; Show message 2.
-    db $02, $cb
+    db $02, $cb ; Message Text0DMessage4B: YOU'RE STANDING ONTHE STREET IN / FRONT OF PETE'S / ALL NITE GUN / PALACE.[END]
     ; Set object flag.
     db $17, $43
 
@@ -2114,7 +2114,7 @@ MoveC1PeoriaPassage1D:
 
 C1Sc5_4D:
     ; Test current room.
-    db $19, $13
+    db $19, C1RoomIdGunShopStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetEvents
@@ -2124,9 +2124,9 @@ C1PassageToPeoria14:
 
 C1Loc5_38:
     ; Check Case I room event for the room argument.
-    db $5e, $4d
+    db $5e, C1RoomIdMuggerPeoria
     ; Move to the room argument if the selected state permits.
-    db $06, $14
+    db $06, C1RoomIdPeoriaBlueCabStop
     ; Test object flag.
     db $16, C1PeoriaStopKnown
     ; Branch if result bit 0 is clear.
@@ -2138,7 +2138,7 @@ C1PeoriaPlainView:
 
 C1Loc5_93:
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: YOU STAND AMONGST / THE RAMSHACKLE / BUILDINGS ON  / PEORIA ST.[END]
     ; End script.
     db $ff
 
@@ -2149,7 +2149,7 @@ C1Loc5_94:
     ; Set text name 0.
     db $1e, $b1
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text11Message0B: THIS IS PEORIA ST.A [OBJECT_WRAM:37C5] / IS WAITING.[END]
     ; Add quick-list value.
     db $42, $a3
     ; Set object flag.
@@ -2164,7 +2164,7 @@ LookC1GunShopDoor:
 
 C1Sc5_4E:
     ; Test current room.
-    db $19, $25
+    db $19, C1RoomIdGunShop
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorViewEnd
@@ -2174,7 +2174,7 @@ C1Sc5_4E:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $cd
+    db $02, $cd ; Message Text0DMessage4D: IT'S THE ENTRANCE / TO THE STORE.[END]
     ; End script.
     db $ff
 
@@ -2183,19 +2183,19 @@ MoveC1GunShopDoor:
 
 C1Sc5_4F:
     ; Test current room.
-    db $19, $13
+    db $19, C1RoomIdGunShopStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetEvents
     ; Move to the room argument if the selected state permits.
-    db $06, $25
+    db $06, C1RoomIdGunShop
     ; Test object flag.
     db $16, C1GunShopSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopFirstEntry
     ; Show message 2.
-    db $02, $26
+    db $02, $26 ; Message Text11Message26: YOU'RE INSIDE THE / GUN SHOP.[END]
     ; End script.
     db $ff
 
@@ -2204,7 +2204,7 @@ C1GunShopFirstEntry:
 
 C1Loc5_95:
     ; Show message 1.
-    db $01, $10
+    db $01, $10 ; Message Text0EMessage10: YOU'RE INSIDE / PETE'S ALL NITE / GUN PALACE.[PAGE] / THE GUY BEHIND THECOUNTER ASKS,...
     ; Set object flag.
     db $17, C1GunShopSeen
 
@@ -2220,7 +2220,7 @@ MoveC1PeoriaPassage1F:
 
 C1Sc5_51:
     ; Test current room.
-    db $19, $14
+    db $19, C1RoomIdPeoriaBlueCabStop
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToPeoria14
@@ -2230,7 +2230,7 @@ C1PassageToPeoria15:
 
 C1Loc5_39:
     ; Move to the room argument if the selected state permits.
-    db $06, $15
+    db $06, C1RoomIdPeoriaYellowCabStop
     ; Test object flag.
     db $16, $46
     ; Branch if result bit 0 is clear.
@@ -2239,7 +2239,7 @@ C1Loc5_39:
     ; Set text name 0.
     db $1e, $b2
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text11Message0B: THIS IS PEORIA ST.A [OBJECT_WRAM:37C5] / IS WAITING.[END]
     ; End script.
     db $ff
 
@@ -2253,7 +2253,7 @@ C1Sc5_52:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $d8
+    db $02, $d8 ; Message Text0DMessage58: THE POLICE / STATION'S / FRONT DOOR IS / CLOSED.[END]
 
 ; End the empty pit view or the police-door description.
 C1PoliceDoorViewEnd:
@@ -2286,7 +2286,7 @@ C1Sc5_54:
     db $05
     dw C1PoliceGunEvidenceEnd
     ; Test item flag.
-    db $52, $24
+    db $52, C1ItemMemo
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PoliceCheckItems
@@ -2296,7 +2296,7 @@ C1Sc5_54:
     db $05
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $1e
+    db $52, C1ItemLetter1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PoliceCheckClueFlags
@@ -2316,12 +2316,12 @@ C1Sc5_54:
     db $05
     dw C1PoliceMissingCluesEnd
     ; Finish Case I scene effect.
-    db $5a, $17
+    db $5a, C1FxIdCaseSolved
     ; End script.
     db $ff
     ; Unreferenced from indexed roots in the explicit script graph.
     ; Show message 2.
-    db $02, $63
+    db $02, $63 ; Message Text11Message63: IT CAN'T BE / MOVED IF IT'S / NOT OPENED![END]
     ; End script.
     db $ff
 
@@ -2358,22 +2358,22 @@ C1Loc5_97:
     db $04
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $1e
+    db $52, C1ItemLetter1
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $12
+    db $52, C1ItemMap
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
     ; Test item flag.
-    db $52, $1b
+    db $52, C1ItemFile5
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
     ; Test item flag.
-    db $52, $0e
+    db $52, C1ItemNote1
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
@@ -2383,17 +2383,17 @@ C1PoliceTooLittleProof:
 
 C1Loc5_98:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: YOU STEP INTO THE / POLICE STATION.[PAGE] / THE COPS QUICKLY / SURROUND YOU WITH / TH...
     ; Show message 0.
-    db $00, $5c
+    db $00, $5c ; Message Text0CMessage5C: BUT THERE IS TOO / LITTLE EVIDENCE / THAT STERNWOOD ANDVICKERS WERE / INVOLVED...[END]
     ; Show message 1.
-    db $01, $fd
+    db $01, $fd ; Message Text10Message3D: IF STERNWOOD AND / VICKERS DIDN'T / KILL SIEGEL AND / KIDNAP MRS. / STERNWOOD, THEN /...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2404,11 +2404,11 @@ C1PoliceGunEvidenceEnd:
 
 C1Loc5_3A:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 1.
-    db $01, $fa
+    db $01, $fa ; Message Text10Message3A: CLICK! CUFFED BY / THE COPS.[PAGE] / YOUR STORY / INTERESTS THEM SO / THEY INVESTIGAT...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2419,17 +2419,17 @@ C1PoliceLifeSentence:
 
 C1Loc5_99:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: YOU STEP INTO THE / POLICE STATION.[PAGE] / THE COPS QUICKLY / SURROUND YOU WITH / TH...
     ; Show message 0.
-    db $00, $5c
+    db $00, $5c ; Message Text0CMessage5C: BUT THERE IS TOO / LITTLE EVIDENCE / THAT STERNWOOD ANDVICKERS WERE / INVOLVED...[END]
     ; Show message 0.
-    db $00, $5b
+    db $00, $5b ; Message Text0CMessage5B: THE COPS FIND / SOME INCRIMINATINGEVIDENCE AND / THEY SUSPECT / YOU COMMITTED JOEYSIE...
     ; Show message 1.
-    db $01, $fe
+    db $01, $fe ; Message Text10Message3E: YOU'RE GIVEN THREECONSECUTIVE LIFE / SENTENCES TO BEGINIMMEDIATELY![PAGE] / YOUR NOTO...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2440,17 +2440,17 @@ C1PoliceMissingCluesEnd:
 
 C1Loc5_9A:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: YOU STEP INTO THE / POLICE STATION.[PAGE] / THE COPS QUICKLY / SURROUND YOU WITH / TH...
     ; Show message 0.
-    db $00, $3a
+    db $00, $3a ; Message Text0CMessage3A: YOUR STORY AND / THE THREE PIECES / OF EVIDENCE MADE / STERNWOOD AND / VICKERS LOOK /...
     ; Show message 0.
-    db $00, $5b
+    db $00, $5b ; Message Text0CMessage5B: THE COPS FIND / SOME INCRIMINATINGEVIDENCE AND / THEY SUSPECT / YOU COMMITTED JOEYSIE...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2461,11 +2461,11 @@ C1PoliceAmnesiaEnd:
 
 C1Loc5_3B:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
 
 Jump_006_785b:
     ; Show message 1.
-    db $01, $fb
+    db $01, $fb ; Message Text10Message3B: CLICK! THE COPS / SNAP THE CUFFS ON / YOU![PAGE] / YOU ARE / QUESTIONED OVER / AND OV...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2476,13 +2476,13 @@ MoveC1ConstructionPit:
 
 C1Sc5_55:
     ; Move to the room argument if the selected state permits.
-    db $06, $18
+    db $06, C1RoomIdConstructionPit
     ; Show message 2.
-    db $02, $da
+    db $02, $da ; Message Text0DMessage5A: WHOOPS! YOU DON'T / WATCH THAT FIRST / STEP AND PLUNGE / DOWN HEAD OVER / HEELS INTO ...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2498,12 +2498,12 @@ C1Sc5_56:
     db $04
     dw C1ManholeAlreadyOpen
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is set.
     db $04
     dw C1StreetManholeView
     ; Show message 1.
-    db $01, $32
+    db $01, $32 ; Message Text0EMessage32: IT'S A MANHOLE / COVER.[PAGE] / YOU'VE OFTEN / WONDERED WHY / THEY'RE ROUND / INSTEAD...
     ; End script.
     db $ff
 
@@ -2512,7 +2512,7 @@ MoveC1Manhole22:
 
 C1Sc5_57:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1FireEscapeToAlley
@@ -2522,7 +2522,7 @@ C1ManholeToRoom3D:
 
 C1Loc5_3C:
     ; Move to the room argument if the selected state permits.
-    db $06, $3d
+    db $06, C1RoomIdJoeAlleyUpperSewer
     ; Jump to script.
     db $1c
     dw C1ManholeSewerText
@@ -2532,7 +2532,7 @@ LookC1BlueCab26:
 
 C1Sc5_58:
     ; Test current room.
-    db $19, $26
+    db $19, C1RoomIdBlueCabPeoria
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2546,7 +2546,7 @@ C1Loc5_3D:
     ; Set text name 0.
     db $1e, $b1
     ; Show message 2.
-    db $02, $0c
+    db $02, $0c ; Message Text11Message0C: THE DRIVER IS IN / THE [OBJECT_WRAM:37C5].[PAGE] / HE IS WAITING / FOR PASSENGERS.[END]
     ; End script.
     db $ff
 
@@ -2555,18 +2555,18 @@ MoveC1BlueCab26:
 
 C1Sc5_59:
     ; Test current room.
-    db $19, $26
+    db $19, C1RoomIdBlueCabPeoria
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit26
     ; Clear state bit.
-    db $30, $0d
+    db $30, C1StateYellowCabView
     ; Move to the room argument if the selected state permits.
-    db $06, $26
+    db $06, C1RoomIdBlueCabPeoria
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: YOU HUNKER DOWN / IN THE BACK OF THECAB.[PAGE] / YOU LOOK OVER THE / DRIVER, HE SEEMS...
     ; Test object flag.
     db $16, C1BlueCabDebt
     ; Branch if result bit 0 is set.
@@ -2583,7 +2583,7 @@ C1BlueCabLoanReminder:
 C1Loc5_9B:
 jr_006_789e:
     ; Show message 2.
-    db $02, $6e
+    db $02, $6e ; Message Text11Message6E: THE CABBY MUTTERS / WITH A HINT OF / ANGER, "HEY, PAL![PAGE] / YA GONNA PAY ME / BACK...
     ; End script.
     db $ff
 
@@ -2611,7 +2611,7 @@ jr_006_78ad:
 
 jr_006_78b0:
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text11Message5D: WITH AN ANGRY / FROWN THE DRIVER / SAYS, "HEY PAL! YASTILL OWE ME![PAGE] / AND YA BET...
     ; Set object flag.
     db $17
 
@@ -2630,16 +2630,16 @@ C1Loc5_3F:
     db $05
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $6c
+    db $02, $6c ; Message Text11Message6C: THE CABBIE SAYS, / "DOWN ON YER LUCK,PAL?[PAGE] / OKAY, WELL YOU CANPAY ME NEXT TIME....
 
 ; Check exit $14, show Peoria Street, and clear the shared cab fare flags.
 C1BlueCabToPeoria14:
 
 C1Loc5_40:
     ; Move to the room argument if the selected state permits.
-    db $06, $14
+    db $06, C1RoomIdPeoriaBlueCabStop
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: YOU STAND AMONGST / THE RAMSHACKLE / BUILDINGS ON  / PEORIA ST.[END]
     ; Jump to script.
     db $1c
     dw C1CabClearFareFlags
@@ -2649,7 +2649,7 @@ LookC1BlueCab42:
 
 C1Sc5_5A:
     ; Test current room.
-    db $19, $42
+    db $19, C1RoomIdBlueCabStanford
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2661,14 +2661,14 @@ MoveC1BlueCab42:
 
 C1Sc5_5B:
     ; Test current room.
-    db $19, $42
+    db $19, C1RoomIdBlueCabStanford
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit42
     ; Move to the room argument if the selected state permits.
-    db $06, $42
+    db $06, C1RoomIdBlueCabStanford
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: YOU HUNKER DOWN / IN THE BACK OF THECAB.[PAGE] / YOU LOOK OVER THE / DRIVER, HE SEEMS...
     ; End script.
     db $ff
 
@@ -2677,14 +2677,14 @@ C1CabToStanfordStreet:
 
 C1Loc5_41:
     ; Move to the room argument if the selected state permits.
-    db $06, $19
+    db $06, C1RoomIdStanfordFront
     ; Test object flag.
     db $16, C1StanfordStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1StanfordStreetRepeat
     ; Show message 1.
-    db $01, $47
+    db $01, $47 ; Message Text0EMessage47: YOU'RE OUTSIDE / THE STANFORD ARMS,AN APARTMENT / BUILDING IN / A VERY UPSCALE / PART...
     ; Set object flag.
     db $17, C1StanfordStreetSeen
     ; End script.
@@ -2695,7 +2695,7 @@ C1StanfordStreetRepeat:
 
 C1Loc5_9C:
     ; Show message 1.
-    db $01, $49
+    db $01, $49 ; Message Text0EMessage49: THE APARTMENT / BUILDING RISES / HIGH ABOVE YOU.[END]
     ; End script.
     db $ff
 
@@ -2725,7 +2725,7 @@ jr_006_78ec:
 jr_006_78ef:
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text11Message5D: WITH AN ANGRY / FROWN THE DRIVER / SAYS, "HEY PAL! YASTILL OWE ME![PAGE] / AND YA BET...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -2736,7 +2736,7 @@ LookC1BlueCab44:
 
 C1Sc5_5C:
     ; Test current room.
-    db $19, $44
+    db $19, C1RoomIdBlueCabBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2748,14 +2748,14 @@ MoveC1BlueCab44:
 
 C1Sc5_5D:
     ; Test current room.
-    db $19, $44
+    db $19, C1RoomIdBlueCabBungalow
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit44
     ; Move to the room argument if the selected state permits.
-    db $06, $44
+    db $06, C1RoomIdBlueCabBungalow
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: YOU HUNKER DOWN / IN THE BACK OF THECAB.[PAGE] / YOU LOOK OVER THE / DRIVER, HE SEEMS...
     ; End script.
     db $ff
 
@@ -2764,14 +2764,14 @@ C1CabToBungalowStreet:
 
 C1Loc5_43:
     ; Move to the room argument if the selected state permits.
-    db $06, $1a
+    db $06, C1RoomIdBungalowFront
     ; Test object flag.
     db $16, C1BungalowStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowStreetRepeat
     ; Show message 1.
-    db $01, $5f
+    db $01, $5f ; Message Text0EMessage5F: IT'S A RUN-DOWN / BUNGALOW IN THE / SEEDIER SECTION OFTOWN.[PAGE] / THE PAINT IS / CH...
     ; Set object flag.
     db $17, C1BungalowStreetSeen
     ; End script.
@@ -2782,7 +2782,7 @@ C1BungalowStreetRepeat:
 
 C1Loc5_9D:
     ; Show message 1.
-    db $01, $66
+    db $01, $66 ; Message Text0EMessage66: YOU STAND IN FRONTOF A RAMSHACKLE / BUNGALOW.[PAGE] / THERE'S A PARKED / CAB IDLING B...
     ; End script.
     db $ff
 
@@ -2806,7 +2806,7 @@ C1Loc5_44:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02
+    db $02 ; Message Text11Message5D: WITH AN ANGRY / FROWN THE DRIVER / SAYS, "HEY PAL! YASTILL OWE ME![PAGE] / AND YA BET...
 
 jr_006_7925:
     db $5d
@@ -2838,7 +2838,7 @@ LookC1BlueCab46:
 
 C1Sc5_5E:
     ; Test current room.
-    db $19, $46
+    db $19, C1RoomIdBlueCabOfficeBuilding
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2850,14 +2850,14 @@ MoveC1BlueCab46:
 
 C1Sc5_5F:
     ; Test current room.
-    db $19, $46
+    db $19, C1RoomIdBlueCabOfficeBuilding
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit46
     ; Move to the room argument if the selected state permits.
-    db $06, $46
+    db $06, C1RoomIdBlueCabOfficeBuilding
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: YOU HUNKER DOWN / IN THE BACK OF THECAB.[PAGE] / YOU LOOK OVER THE / DRIVER, HE SEEMS...
     ; End script.
     db $ff
 
@@ -2866,14 +2866,14 @@ C1CabToStreet1B:
 
 C1Loc5_46:
     ; Move to the room argument if the selected state permits.
-    db $06, $1b
+    db $06, C1RoomIdOfficeBuildingFront
     ; Test object flag.
     db $16, $4a
     ; Branch if result bit 0 is set.
     db $04
     dw C1CabStreet1BFlag4A
     ; Show message 1.
-    db $01, $75
+    db $01, $75 ; Message Text0EMessage75: YOU'RE ON A QUIET / STREET.[PAGE] / YOU ARE AMAZED AT / HOW QUIET IT IS![END]
     ; End script.
     db $ff
 
@@ -2882,7 +2882,7 @@ C1CabStreet1BFlag4A:
 
 C1Loc5_9E:
     ; Show message 1.
-    db $01, $73
+    db $01, $73 ; Message Text0EMessage73: YOU'RE IN FRONT OFA DIRTY OFFICE / BUILDING.[END]
     ; Set object flag.
     db $17, $4a
     ; End script.
@@ -2908,7 +2908,7 @@ C1Loc5_47:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text11Message5D: WITH AN ANGRY / FROWN THE DRIVER / SAYS, "HEY PAL! YASTILL OWE ME![PAGE] / AND YA BET...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -2936,7 +2936,7 @@ C1Sc5_60:
     db $19
 
 jr_006_796f:
-    db $48
+    db C1RoomIdBlueCabEstate
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1BlueCabExteriorView; retain the interior label.
@@ -2955,14 +2955,14 @@ C1Sc5_61:
     db $19
 
 jr_006_7975:
-    db $48
+    db C1RoomIdBlueCabEstate
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit48
     ; Move to the room argument if the selected state permits.
-    db $06, $48
+    db $06, C1RoomIdBlueCabEstate
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: YOU HUNKER DOWN / IN THE BACK OF THECAB.[PAGE] / YOU LOOK OVER THE / DRIVER, HE SEEMS...
     ; End script.
     db $ff
 
@@ -2971,14 +2971,14 @@ C1CabToEstateStreet:
 
 C1Loc5_49:
     ; Move to the room argument if the selected state permits.
-    db $06, $1c
+    db $06, C1RoomIdEstateFront
     ; Test object flag.
     db $16, C1EstateStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1EstateStreetRepeat
     ; Show message 1.
-    db $01, $9a
+    db $01, $9a ; Message Text0FMessage1A: YOU STAND ON THE / SPRAWLING GROUNDS / OF A LARGE ESTATE.[PAGE] / THE RESEMBLANCE TOT...
     ; Set object flag.
     db $17, C1EstateStreetSeen
     ; End script.
@@ -2989,7 +2989,7 @@ C1EstateStreetRepeat:
 
 C1Loc5_9F:
     ; Show message 1.
-    db $01, $9f
+    db $01, $9f ; Message Text0FMessage1F: YOU CAN'T SEE / ANYONE AROUND.[END]
     ; End script.
     db $ff
 
@@ -3015,7 +3015,7 @@ C1Loc5_4A:
 jr_006_799a:
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02
+    db $02 ; Message Text11Message5D: WITH AN ANGRY / FROWN THE DRIVER / SAYS, "HEY PAL! YASTILL OWE ME![PAGE] / AND YA BET...
 
 jr_006_799d:
     db $5d
@@ -3045,7 +3045,7 @@ LookC1YellowCab27:
 
 C1Sc5_62:
     ; Test current room.
-    db $19, $27
+    db $19, C1RoomIdYellowCabPeoria
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3059,7 +3059,7 @@ C1Loc5_4C:
     ; Set text name 0.
     db $1e, $b2
     ; Show message 2.
-    db $02, $0c
+    db $02, $0c ; Message Text11Message0C: THE DRIVER IS IN / THE [OBJECT_WRAM:37C5].[PAGE] / HE IS WAITING / FOR PASSENGERS.[END]
     ; End script.
     db $ff
 
@@ -3068,18 +3068,18 @@ MoveC1YellowCab27:
 
 C1Sc5_63:
     ; Test current room.
-    db $19, $27
+    db $19, C1RoomIdYellowCabPeoria
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit27
     ; Set state bit.
-    db $2f, $0d
+    db $2f, C1StateYellowCabView
     ; Move to the room argument if the selected state permits.
-    db $06, $27
+    db $06, C1RoomIdYellowCabPeoria
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: YOU'RE IN A BEAT / UP YELLOW CAB.[PAGE] / THE CABBY LOOKS / LIKE A PLEASANT / ENOUGH ...
     ; Test object flag.
     db $16, C1YellowCabDebt
     ; Branch if result bit 0 is set.
@@ -3095,7 +3095,7 @@ C1YellowCabLoanReminder:
 
 C1Loc5_A0:
     ; Show message 2.
-    db $02, $6f
+    db $02, $6f ; Message Text11Message6F: "HEY, MACK!" THE / CABBY ANGRILY / SAYS,[PAGE] / "I'M FRESH OUT OF / CHARITY, NOW PAY...
     ; End script.
     db $ff
 
@@ -3119,7 +3119,7 @@ C1Loc5_4D:
     db $04
     dw C1YellowCabDeferFare
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text11Message5E: "HEY BUB, YA / HAVEN'T PAID ME / YET!" YELLS THE / CABBY.[PAGE] / "YA BETTER PAY ME /...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3135,16 +3135,16 @@ C1Loc5_4E:
     db $05
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $6d
+    db $02, $6d ; Message Text11Message6D: THE CABBY SAYS / WITH A HINT OF / COMPASSION, "WELL / WE'VE ALL GOT / TROUBLES NOW DO...
 
 ; Check exit $15 and show Peoria Street before clearing the cab fare flags.
 C1YellowCabToPeoria15:
 
 C1Loc5_4F:
     ; Move to the room argument if the selected state permits.
-    db $06, $15
+    db $06, C1RoomIdPeoriaYellowCabStop
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: YOU STAND AMONGST / THE RAMSHACKLE / BUILDINGS ON  / PEORIA ST.[END]
 
 ; Clear flags $82, $83, and $84 after the Peoria exit.
 C1CabClearFareFlags:
@@ -3164,7 +3164,7 @@ LookC1YellowCab43:
 
 C1Sc5_64:
     ; Test current room.
-    db $19, $43
+    db $19, C1RoomIdYellowCabStanford
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3176,14 +3176,14 @@ MoveC1YellowCab43:
 
 C1Sc5_65:
     ; Test current room.
-    db $19, $43
+    db $19, C1RoomIdYellowCabStanford
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit43
     ; Move to the room argument if the selected state permits.
-    db $06, $43
+    db $06, C1RoomIdYellowCabStanford
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: YOU'RE IN A BEAT / UP YELLOW CAB.[PAGE] / THE CABBY LOOKS / LIKE A PLEASANT / ENOUGH ...
     ; End script.
     db $ff
 
@@ -3207,7 +3207,7 @@ C1Loc5_50:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text11Message5E: "HEY BUB, YA / HAVEN'T PAID ME / YET!" YELLS THE / CABBY.[PAGE] / "YA BETTER PAY ME /...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3232,9 +3232,9 @@ C1CabFareArrestEnd:
 
 C1Loc5_52:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 1.
-    db $01, $b2
+    db $01, $b2 ; Message Text0FMessage32: WHAT STARTED OUT / AS A BAD DAY JUST / GOT WORSE![PAGE] / THE DISGRUNTLED / CABBY CAL...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3245,7 +3245,7 @@ LookC1YellowCab45:
 
 C1Sc5_66:
     ; Test current room.
-    db $19, $45
+    db $19, C1RoomIdYellowCabBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3257,14 +3257,14 @@ MoveC1YellowCab45:
 
 C1Sc5_67:
     ; Test current room.
-    db $19, $45
+    db $19, C1RoomIdYellowCabBungalow
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit45
     ; Move to the room argument if the selected state permits.
-    db $06, $45
+    db $06, C1RoomIdYellowCabBungalow
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: YOU'RE IN A BEAT / UP YELLOW CAB.[PAGE] / THE CABBY LOOKS / LIKE A PLEASANT / ENOUGH ...
     ; End script.
     db $ff
 
@@ -3288,7 +3288,7 @@ C1Loc5_53:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text11Message5E: "HEY BUB, YA / HAVEN'T PAID ME / YET!" YELLS THE / CABBY.[PAGE] / "YA BETTER PAY ME /...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3299,7 +3299,7 @@ LookC1YellowCab47:
 
 C1Sc5_68:
     ; Test current room.
-    db $19, $47
+    db $19, C1RoomIdYellowCabOfficeBuilding
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3311,14 +3311,14 @@ MoveC1YellowCab47:
 
 C1Sc5_69:
     ; Test current room.
-    db $19, $47
+    db $19, C1RoomIdYellowCabOfficeBuilding
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit47
     ; Move to the room argument if the selected state permits.
-    db $06, $47
+    db $06, C1RoomIdYellowCabOfficeBuilding
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: YOU'RE IN A BEAT / UP YELLOW CAB.[PAGE] / THE CABBY LOOKS / LIKE A PLEASANT / ENOUGH ...
     ; End script.
     db $ff
 
@@ -3342,7 +3342,7 @@ C1Loc5_54:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text11Message5E: "HEY BUB, YA / HAVEN'T PAID ME / YET!" YELLS THE / CABBY.[PAGE] / "YA BETTER PAY ME /...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3353,7 +3353,7 @@ LookC1YellowCab49:
 
 C1Sc5_6A:
     ; Test current room.
-    db $19, $49
+    db $19, C1RoomIdYellowCabEstate
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3365,14 +3365,14 @@ MoveC1YellowCab49:
 
 C1Sc5_6B:
     ; Test current room.
-    db $19, $49
+    db $19, C1RoomIdYellowCabEstate
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit49
     ; Move to the room argument if the selected state permits.
-    db $06, $49
+    db $06, C1RoomIdYellowCabEstate
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: YOU'RE IN A BEAT / UP YELLOW CAB.[PAGE] / THE CABBY LOOKS / LIKE A PLEASANT / ENOUGH ...
     ; End script.
     db $ff
 
@@ -3396,7 +3396,7 @@ C1Loc5_55:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text11Message5E: "HEY BUB, YA / HAVEN'T PAID ME / YET!" YELLS THE / CABBY.[PAGE] / "YA BETTER PAY ME /...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3407,7 +3407,7 @@ LookC1StanfordDoor:
 
 C1Sc5_6C:
     ; Test current room.
-    db $19, $19
+    db $19, C1RoomIdStanfordFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1StanfordDoorViewEnd
@@ -3419,7 +3419,7 @@ C1Sc5_6C:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
 
 ; End the Stanford Arms door view.
 C1StanfordDoorViewEnd:
@@ -3433,7 +3433,7 @@ MoveC1StanfordDoor:
 
 C1Sc5_6D:
     ; Test current room.
-    db $19, $19
+    db $19, C1RoomIdStanfordFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToStanfordStreet
@@ -3443,14 +3443,14 @@ C1DoorToLobby28:
 
 C1Loc5_57:
     ; Move to the room argument if the selected state permits.
-    db $06, $28
+    db $06, C1RoomIdStanfordLobby
     ; Test object flag.
     db $16, C1Lobby28Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Lobby28Repeat
     ; Show message 1.
-    db $01, $4a
+    db $01, $4a ; Message Text0EMessage4A: THE DECORATIVE / TOUCHES IN THE / LOBBY ARE A BIT / TOO OPULENT FOR / YOU.[PAGE] / "I...
     ; Set object flag.
     db $17, C1Lobby28Seen
     ; End script.
@@ -3461,7 +3461,7 @@ C1Lobby28Repeat:
 
 C1Loc5_A2:
     ; Show message 1.
-    db $01, $4d
+    db $01, $4d ; Message Text0EMessage4D: THE ELEVATOR IS / AT THE LOBBY.[END]
     ; End script.
     db $ff
 
@@ -3475,12 +3475,12 @@ C1Sc5_6E:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $28
+    db $19, C1RoomIdStanfordLobby
     ; Branch if result bit 0 is set.
     db $04
     dw C1PrivateLiftOuterView
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text0EMessage51: THERE DOESN'T SEEMTO BE MUCH TO DO / INSIDE THIS / ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -3489,7 +3489,7 @@ C1PrivateLiftOuterView:
 
 C1Loc5_58:
     ; Show message 1.
-    db $01, $4b
+    db $01, $4b ; Message Text0EMessage4B: IT APPEARS TO / BE A PRIVATE / ELEVATOR FOR / RESIDENTS ONLY.[END]
     ; End script.
     db $ff
 
@@ -3498,14 +3498,14 @@ MoveC1PrivateLift2F:
 
 C1Sc5_6F:
     ; Test current room.
-    db $19, $28
+    db $19, C1RoomIdStanfordLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToLobby28
     ; Move to the room argument if the selected state permits.
-    db $06, $29
+    db $06, C1RoomIdStanfordLobbyLift
     ; Show message 0.
-    db $00
+    db $00 ; Message Text0CMessage6F: YOU'RE INSIDE THE / CRAMPED ELEVATOR.[END]
 
 jr_006_7aca:
     db $6f
@@ -3522,12 +3522,12 @@ C1Sc5_70:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $2a
+    db $19, C1RoomIdStanfordPenthouse
     ; Branch if result bit 0 is set.
     db $04
     dw C1PrivateLiftOuterView
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text0EMessage51: THERE DOESN'T SEEMTO BE MUCH TO DO / INSIDE THIS / ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -3536,14 +3536,14 @@ MoveC1PrivateLift30:
 
 C1Sc5_71:
     ; Test current room.
-    db $19, $2a
+    db $19, C1RoomIdStanfordPenthouse
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftToPenthouse
     ; Move to the room argument if the selected state permits.
-    db $06, $41
+    db $06, C1RoomIdStanfordPenthouseLift
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: YOU'RE INSIDE THE / CRAMPED ELEVATOR.[END]
     ; End script.
     db $ff
 
@@ -3552,14 +3552,14 @@ C1LiftToPenthouse:
 
 C1Loc5_59:
     ; Move to the room argument if the selected state permits.
-    db $06, $2a
+    db $06, C1RoomIdStanfordPenthouse
     ; Test object flag.
     db $16, C1PenthouseSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1PenthouseRepeat
     ; Show message 1.
-    db $01, $53
+    db $01, $53 ; Message Text0EMessage53: YOU'RE IN A VERY / ORNATELY DECORATEDPENTHOUSE.[PAGE] / THE COUCH ALONE / PROBABLY CO...
     ; Set object flag.
     db $17, C1PenthouseSeen
     ; End script.
@@ -3570,7 +3570,7 @@ C1PenthouseRepeat:
 
 C1Loc5_A3:
     ; Show message 2.
-    db $02, $27
+    db $02, $27 ; Message Text11Message27: YOU'RE INSIDE / THE APARTMENT.[END]
     ; End script.
     db $ff
 
@@ -3579,7 +3579,7 @@ LookC1BungalowDoor:
 
 C1Sc5_72:
     ; Test current room.
-    db $19, $2b
+    db $19, C1RoomIdBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BungalowDoorView
@@ -3606,7 +3606,7 @@ C1Loc5_5A:
     db $04
     dw C1BungalowDoorDetail
     ; Show message 1.
-    db $01, $61
+    db $01, $61 ; Message Text0EMessage61: THE DOOR IS / LOCKED.[END]
     ; Set object flag.
     db $17, C1BungalowLockHintSeen
     ; End script.
@@ -3619,9 +3619,9 @@ C1Loc5_5B:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $61
+    db $01, $61 ; Message Text0EMessage61: THE DOOR IS / LOCKED.[END]
     ; Show message 1.
-    db $01, $62
+    db $01, $62 ; Message Text0EMessage62: YOU HAVEN'T COME / THIS FAR TO LET A / LOCKED DOOR STOP / YOU![END]
     ; End script.
     db $ff
 
@@ -3630,19 +3630,19 @@ MoveC1BungalowDoor:
 
 C1Sc5_73:
     ; Test current room.
-    db $19, $1a
+    db $19, C1RoomIdBungalowFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToBungalowStreet
     ; Move to the room argument if the selected state permits.
-    db $06, $2b
+    db $06, C1RoomIdBungalow
     ; Test object flag.
     db $16, C1BungalowRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowRoomRepeat
     ; Show message 1.
-    db $01, $67
+    db $01, $67 ; Message Text0EMessage67: THE SMELL INSIDE / THE BUNGALOW IS / CLOYING.[PAGE] / YOU THINK YOU'VE / SMELLED THIS...
     ; Set object flag.
     db $17, C1BungalowRoomSeen
     ; End script.
@@ -3653,7 +3653,7 @@ C1BungalowRoomRepeat:
 
 C1Loc5_A4:
     ; Show message 1.
-    db $01, $6f
+    db $01, $6f ; Message Text0EMessage6F: YOU'RE INSIDE / A SMALL BUNGALOW.[END]
 
 ; End the bungalow-entry description or an unavailable door view.
 C1BungalowEntryEnd:
@@ -3667,7 +3667,7 @@ LookC1OfficeDoor32:
 
 C1Sc5_74:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowEntryEnd
@@ -3677,7 +3677,7 @@ C1Sc5_74:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text10Message07: IT'S A DOOR.[END]
     ; End script.
     db $ff
 
@@ -3686,7 +3686,7 @@ MoveC1OfficeDoor32:
 
 C1Sc5_75:
     ; Test current room.
-    db $19, $1b
+    db $19, C1RoomIdOfficeBuildingFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToStreet1B
@@ -3696,9 +3696,9 @@ C1OfficeDoorToRoom2C:
 
 C1Loc5_5D:
     ; Move to the room argument if the selected state permits.
-    db $06, $2c
+    db $06, C1RoomIdOfficeBuildingLobby
     ; Show message 1.
-    db $01, $76
+    db $01, $76 ; Message Text0EMessage76: YOU'RE IN THE / LOBBY OF THE / OFFICE BUILDING.[PAGE] / THERE IS A HALLWAYIN FRONT AN...
 
 ; End the office-building entry or unavailable stair view.
 C1OfficeDoorEntryEnd:
@@ -3719,7 +3719,7 @@ LookC1OfficeStairs:
 
 C1Sc5_77:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorEntryEnd
@@ -3729,7 +3729,7 @@ C1StairsShortView:
 
 C1Loc5_5F:
     ; Show message 0.
-    db $00, $48
+    db $00, $48 ; Message Text0CMessage48: THIS STAIRWAY / LEADS TO THE / SECOND FLOOR.[END]
     ; End script.
     db $ff
 
@@ -3738,7 +3738,7 @@ MoveC1OfficeStairs:
 
 C1Sc5_78:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorToRoom2C
@@ -3760,7 +3760,7 @@ C1StairsToAceOffice:
 
 C1Loc5_61:
     ; Move to the room argument if the selected state permits.
-    db $06, $2f
+    db $06, C1RoomIdAceOfficeEntrance
     ; Test object flag.
     db $16, C1AceOfficeFrontSeen
     ; Branch if result bit 0 is set.
@@ -3776,13 +3776,13 @@ C1Loc5_61:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $86
+    db $01, $86 ; Message Text0FMessage06: YOU'RE STANDING / IN FRONT OF / A GRIMY OFFICE.[PAGE] / THE WORDS ON THE / DOOR READ,...
     ; Show message 1.
-    db $01, $ac
+    db $01, $ac ; Message Text0FMessage2C: YOU SEE SOMEONE'S / SHADOW MOVING / BEYOND THE GLASS.[END]
     ; Resume text.
     db $45
     ; Run scene effect.
-    db $46, $19
+    db $46, C1FxIdHeadacheOffice
     ; Set object flag.
     db $17, C1AceOfficeFrontSeen
     ; End script.
@@ -3795,11 +3795,11 @@ C1Loc5_A5:
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $86
+    db $01, $86 ; Message Text0FMessage06: YOU'RE STANDING / IN FRONT OF / A GRIMY OFFICE.[PAGE] / THE WORDS ON THE / DOOR READ,...
     ; Show message 2.
-    db $02, $28
+    db $02, $28 ; Message Text11Message28: COULD THIS / POSSIBLY BE YOUR / OFFICE?[END]
     ; Show message 1.
-    db $01, $ac
+    db $01, $ac ; Message Text0FMessage2C: YOU SEE SOMEONE'S / SHADOW MOVING / BEYOND THE GLASS.[END]
 
 jr_006_7b72:
     ; Set object flag.
@@ -3817,9 +3817,9 @@ C1Loc5_A6:
     db $04
     dw C1AceOfficeRepeatWell
     ; Show message 1.
-    db $01, $82
+    db $01, $82 ; Message Text0FMessage02: YOU'RE IN FRONT OFA PRIVATE EYE'S / OFFICE.[END]
     ; Run scene effect.
-    db $46, $19
+    db $46, C1FxIdHeadacheOffice
     ; End script.
     db $ff
 
@@ -3828,7 +3828,7 @@ C1AceOfficeRepeatWell:
 
 C1Loc5_A7:
     ; Show message 1.
-    db $01, $82
+    db $01, $82 ; Message Text0FMessage02: YOU'RE IN FRONT OFA PRIVATE EYE'S / OFFICE.[END]
     ; End script.
     db $ff
 
@@ -3837,7 +3837,7 @@ LookC1DoctorDoor:
 
 C1Sc5_79:
     ; Test current room.
-    db $19, $2d
+    db $19, C1RoomIdDoctorEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoctorDoorViewEnd
@@ -3852,7 +3852,7 @@ C1Sc5_79:
     db $04
     dw C1DoctorEntranceView
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text0CMessage43: THE DOOR WON'T / OPEN.[PAGE] / IT MUST BE / LOCKED.[END]
 
 ; End the doctor's door view.
 C1DoctorDoorViewEnd:
@@ -3866,7 +3866,7 @@ C1DoctorEntranceView:
 
 C1Loc5_63:
     ; Show message 1.
-    db $01, $78
+    db $01, $78 ; Message Text0EMessage78: YOU'RE STANDING BYTHE ENTRANCE TO ANOFFICE.[END]
     ; End script.
     db $ff
 
@@ -3875,19 +3875,19 @@ MoveC1DoctorDoor:
 
 C1Sc5_7A:
     ; Test current room.
-    db $19, $2d
+    db $19, C1RoomIdDoctorEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToDoctorLanding
     ; Move to the room argument if the selected state permits.
-    db $06, $2e
+    db $06, C1RoomIdDoctorOffice
     ; Test object flag.
     db $16, C1DoctorRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoctorRoomRepeat
     ; Show message 1.
-    db $01, $7a
+    db $01, $7a ; Message Text0EMessage7A: IT'S THE STERILE / FURNISHINGS OF A / DOCTOR'S OFFICE.[PAGE] / YOU GLANCE AROUND / TH...
     ; Set object flag.
     db $17, C1DoctorRoomSeen
     ; End script.
@@ -3898,9 +3898,9 @@ C1DoorToDoctorLanding:
 
 C1Loc5_64:
     ; Move to the room argument if the selected state permits.
-    db $06, $2d
+    db $06, C1RoomIdDoctorEntrance
     ; Show message 1.
-    db $01, $78
+    db $01, $78 ; Message Text0EMessage78: YOU'RE STANDING BYTHE ENTRANCE TO ANOFFICE.[END]
     ; End script.
     db $ff
 
@@ -3909,7 +3909,7 @@ C1DoctorRoomRepeat:
 
 C1Loc5_A8:
     ; Show message 1.
-    db $01, $84
+    db $01, $84 ; Message Text0FMessage04: IT'S PRETTY QUIET / IN THE ROOM.[END]
     ; End script.
     db $ff
 
@@ -3918,12 +3918,12 @@ LookC1OfficeHall37:
 
 C1Sc5_7B:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeHallViewEnd
     ; Show message 1.
-    db $01, $77
+    db $01, $77 ; Message Text0EMessage77: THE LONG HALLWAY / RUNS THE LENGTH OFTHE BUILDING.[END]
 
 ; End the office hallway view.
 C1OfficeHallViewEnd:
@@ -3937,7 +3937,7 @@ MoveC1OfficeHall37:
 
 C1Sc5_7C:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorToRoom2C
@@ -3960,7 +3960,7 @@ C1Sc5_7D:
     db $04
     dw C1ShadowDoorAfterShot
     ; Show message 1.
-    db $01, $89
+    db $01, $89 ; Message Text0FMessage09: THROUGH THE WINDOWYOU CAN SEE / THE FAINT SHADOW / OF SOMEONE MOVING / ABOUT INSIDE.[...
     ; End script.
     db $ff
 
@@ -3974,7 +3974,7 @@ C1Loc5_66:
     db $04
     dw C1DoorAlreadyClosed
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text0FMessage0A: THE BULLET HOLE / AND THE LACK OF / MOVEMENT TELLS / YOU THE THREAT / IS GONE.[END]
     ; End script.
     db $ff
 
@@ -3983,7 +3983,7 @@ MoveC1ShadowDoor:
 
 C1Sc5_7E:
     ; Test current room.
-    db $19, $2f
+    db $19, C1RoomIdAceOfficeEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1AceOfficeEntryFlags
@@ -3995,23 +3995,23 @@ C1Sc5_7E:
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Set state bit.
-    db $2f, $3a
+    db $2f, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 2.
-    db $02, $25
+    db $02, $25 ; Message Text11Message25: THE YOUNG PUNK IS / POINTING HIS GUN / AT YOU![END]
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $88
+    db $01, $88 ; Message Text0FMessage08: A LETHAL SURPRISE![PAGE] / AN UNKNOWN MAN / TAKES DEADLY AIM / AND FIRES AWAY / WITH ...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -4022,9 +4022,9 @@ C1ShadowOfficeEntry:
 
 C1Loc5_67:
     ; Clear state bit.
-    db $30, $3a
+    db $30, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Test object flag.
     db $16, C1MemoryRecovered
     ; Branch if result bit 0 is clear.
@@ -4036,7 +4036,7 @@ C1Loc5_67:
     db $04
     dw C1ShadowOfficeRepeat
     ; Show message 1.
-    db $01, $8b
+    db $01, $8b ; Message Text0FMessage0B: YOU KICK THE GUY / ON THE FLOOR TO / MAKE SURE HE STAYSDEAD! YOU REALLY / HATED TO DO...
     ; Set object flag.
     db $17, C1AceOfficeRoomSeen
     ; End script.
@@ -4047,7 +4047,7 @@ C1ShadowOfficeRepeat:
 
 C1Loc5_A9:
     ; Show message 1.
-    db $01, $92
+    db $01, $92 ; Message Text0FMessage12: YOU'RE IN A DIMLY / LIT OFFICE. THE / BARREN FURNISHINGSSAYS A LOT ABOUT / ITS OWNER....
     ; End script.
     db $ff
 
@@ -4058,13 +4058,13 @@ C1Loc5_AA:
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $85
+    db $01, $85 ; Message Text0FMessage05: YOU REEL FROM A / MOMENTARY BOUT / OF DIZZINESS![PAGE] / PAIN EXPLODES / BEHIND YOUR ...
     ; Show message 2.
-    db $02, $5a
+    db $02, $5a ; Message Text11Message5A: SUDDENLY, THE / WORLD BEGINS / SPINNING... YOU'REPASSING OUT...[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $5b
+    db $02, $5b ; Message Text11Message5B: IT APPEARS YOUR / TIME IS UP AND / YOUR LUCK HAS RUN / OUT, ACE![PAGE] / THE THROBBIN...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -4075,12 +4075,12 @@ LookC1EstatePassage39:
 
 C1Sc5_7F:
     ; Test current room.
-    db $19, $1c
+    db $19, C1RoomIdEstateFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstatePassageViewEnd
     ; Show message 1.
-    db $01, $9e
+    db $01, $9e ; Message Text0FMessage1E: WHOEVER OWNS THIS / PLACE MUST REALLY / HAVE THE BUCKS![END]
 
 ; End the estate-approach view.
 C1EstatePassageViewEnd:
@@ -4094,7 +4094,7 @@ MoveC1EstatePassage39:
 
 C1Sc5_80:
     ; Test current room.
-    db $19, $1c
+    db $19, C1RoomIdEstateFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToEstateStreet
@@ -4104,9 +4104,9 @@ C1Sc5_80:
     db $04
     dw C1EstateToVestibule
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: YOU'RE AT THE / FRONT DOOR OF / THE MANSION.[PAGE] / THE DOOR HAS / A HUGE KNOCKER / ...
     ; End script.
     db $ff
 
@@ -4115,9 +4115,9 @@ C1EstateToVestibule:
 
 C1Loc5_69:
     ; Move to the room argument if the selected state permits.
-    db $06, $32
+    db $06, C1RoomIdMansionVestibule
     ; Show message 1.
-    db $01, $a9
+    db $01, $a9 ; Message Text0FMessage29: YOU'RE IN THE / MANSION VESTIBULE.THIS ROOM IS / BIGGER THAN A CITYBLOCK![END]
     ; End script.
     db $ff
 
@@ -4133,7 +4133,7 @@ LookC1KitchenDoor:
 
 C1Sc5_82:
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is set.
     db $04
     dw LookC1LiftDoor
@@ -4150,14 +4150,14 @@ C1Sc5_83:
     db $05
     dw C1ButlerShutsDoor
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToRoom32
     ; Move to the room argument if the selected state permits.
-    db $06, $34
+    db $06, C1RoomIdMansionKitchen
     ; Show message 1.
-    db $01, $ae
+    db $01, $ae ; Message Text0FMessage2E: YOU'RE IN / THE KITCHEN.[PAGE] / THE PLACE IS SO / CLEAN IT SPARKLES.[END]
     ; End script.
     db $ff
 
@@ -4166,9 +4166,9 @@ C1EstateToRoom32:
 
 C1Loc5_6A:
     ; Move to the room argument if the selected state permits.
-    db $06, $32
+    db $06, C1RoomIdMansionVestibule
     ; Show message 1.
-    db $01, $a9
+    db $01, $a9 ; Message Text0FMessage29: YOU'RE IN THE / MANSION VESTIBULE.THIS ROOM IS / BIGGER THAN A CITYBLOCK![END]
     ; End script.
     db $ff
 
@@ -4177,7 +4177,7 @@ LookC1EstateStairs:
 
 C1Sc5_84:
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is set.
     db $04
     dw C1StairsShortView
@@ -4194,7 +4194,7 @@ C1Sc5_85:
     db $05
     dw C1ButlerShutsDoor
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToRoom32
@@ -4204,9 +4204,9 @@ C1EstateToUpstairsHall:
 
 C1Loc5_6B:
     ; Move to the room argument if the selected state permits.
-    db $06, $35
+    db $06, C1RoomIdMansionUpstairsHallway
     ; Show message 1.
-    db $01, $ba
+    db $01, $ba ; Message Text0FMessage3A: YOU'RE IN THE / UPSTAIRS HALLWAY.[END]
     ; End script.
     db $ff
 
@@ -4215,7 +4215,7 @@ MoveC1MasterBedroom:
 
 C1Sc5_86:
     ; Test current room.
-    db $19, $35
+    db $19, C1RoomIdMansionUpstairsHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToUpstairsHall
@@ -4225,14 +4225,14 @@ C1EstateToMasterBedroom:
 
 C1Loc5_6C:
     ; Move to the room argument if the selected state permits.
-    db $06, $36
+    db $06, C1RoomIdMansionMasterBedroom
     ; Test object flag.
     db $16, C1MasterBedroomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1MasterBedroomRepeat
     ; Show message 1.
-    db $01, $bc
+    db $01, $bc ; Message Text0FMessage3C: YOU'RE IN THE / MASTER BEDROOM.[PAGE] / THERE IS A MAN / ASLEEP IN THE BED.[END]
     ; Set object flag.
     db $17, C1MasterBedroomSeen
     ; End script.
@@ -4243,7 +4243,7 @@ C1MasterBedroomRepeat:
 
 C1Loc5_AB:
     ; Show message 1.
-    db $01, $c9
+    db $01, $c9 ; Message Text10Message09: IT'S A BEDROOM.[END]
     ; End script.
     db $ff
 
@@ -4252,7 +4252,7 @@ MoveC1GuestBedroom:
 
 C1Sc5_87:
     ; Test current room.
-    db $19, $35
+    db $19, C1RoomIdMansionUpstairsHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToUpstairsHall
@@ -4262,14 +4262,14 @@ C1EstateToGuestBedroom:
 
 C1Loc5_6D:
     ; Move to the room argument if the selected state permits.
-    db $06, $37
+    db $06, C1RoomIdMansionGuestBedroom
     ; Test object flag.
     db $16, C1GuestBedroomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1GuestBedroomRepeat
     ; Show message 1.
-    db $01, $cb
+    db $01, $cb ; Message Text10Message0B: YOU'RE IN A SMALL / BEDROOM.[PAGE] / THE SMELL OF CHEAPPERFUME FILLS THE / AIR. YOU K...
     ; Set object flag.
     db $17, C1GuestBedroomSeen
     ; End script.
@@ -4280,7 +4280,7 @@ C1GuestBedroomRepeat:
 
 C1Loc5_AC:
     ; Show message 1.
-    db $01, $d7
+    db $01, $d7 ; Message Text10Message17: THIS SMALLER / BEDROOM MUST BE / THE GUESTROOM.[END]
     ; End script.
     db $ff
 
@@ -4289,7 +4289,7 @@ MoveC1BedroomLink:
 
 C1Sc5_88:
     ; Test current room.
-    db $19, $36
+    db $19, C1RoomIdMansionMasterBedroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToMasterBedroom
@@ -4302,12 +4302,12 @@ LookC1SewerLadder41:
 
 C1Sc5_89:
     ; Test current room.
-    db $19, $1d
+    db $19, C1RoomIdJoeStreetUpperSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerLadder41Down
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: IT'S A LADDER / LEADING UP.[PAGE] / IT'S PRETTY RUSTY.YOU HOPE IT HOLDS / YOU WEIGHT!...
     ; End script.
     db $ff
 
@@ -4316,7 +4316,7 @@ C1SewerLadder41Down:
 
 C1Loc5_6E:
     ; Show message 1.
-    db $01, $29
+    db $01, $29 ; Message Text0EMessage29: IT'S A LADDER / GOING DOWN.[END]
     ; End script.
     db $ff
 
@@ -4325,7 +4325,7 @@ MoveC1SewerLadder41:
 
 C1Sc5_8A:
     ; Test current room.
-    db $19, $1d
+    db $19, C1RoomIdJoeStreetUpperSewer
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ManholeToRoom1D
@@ -4335,14 +4335,14 @@ C1SewerToRoom3B:
 
 C1Loc5_6F:
     ; Move to the room argument if the selected state permits.
-    db $06, $3b
+    db $06, C1RoomIdJoeStreetLowerSewer
     ; Test object flag.
     db $16, C1Sewer3BSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $20
+    db $01, $20 ; Message Text0EMessage20: YOU'RE IN THE / SEWER.[PAGE] / SO MUCH FOR YOUR / NEW PAIR OF SHOES.[END]
     ; Set object flag.
     db $17, C1Sewer3BSeen
     ; End script.
@@ -4353,7 +4353,7 @@ C1SewerRoomRepeat:
 
 C1Loc5_AD:
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: YOU'RE INSIDE / THE SEWER.[END]
     ; End script.
     db $ff
 
@@ -4362,12 +4362,12 @@ LookC1SewerLadder42:
 
 C1Sc5_8B:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerLadder42Down
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: IT'S A LADDER / LEADING UP.[PAGE] / IT'S PRETTY RUSTY.YOU HOPE IT HOLDS / YOU WEIGHT!...
     ; End script.
     db $ff
 
@@ -4376,7 +4376,7 @@ C1SewerLadder42Down:
 
 C1Loc5_70:
     ; Show message 1.
-    db $01, $29
+    db $01, $29 ; Message Text0EMessage29: IT'S A LADDER / GOING DOWN.[END]
     ; End script.
     db $ff
 
@@ -4385,7 +4385,7 @@ MoveC1SewerLadder42:
 
 C1Sc5_8C:
     ; Test current room.
-    db $19, $3d
+    db $19, C1RoomIdJoeAlleyUpperSewer
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ManholeToRoom3D
@@ -4395,14 +4395,14 @@ C1SewerToRoom39:
 
 C1Loc5_71:
     ; Move to the room argument if the selected state permits.
-    db $06, $39
+    db $06, C1RoomIdSewerJunction
     ; Test object flag.
     db $16, C1Sewer39Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $25
+    db $01, $25 ; Message Text0EMessage25: YOU'RE INSIDE / THE SEWER.[PAGE] / YOU'D BETTER BE / CAREFUL WHERE YOU / STEP.[END]
     ; Set object flag.
     db $17, C1Sewer39Seen
     ; End script.
@@ -4413,12 +4413,12 @@ LookC1SewerTunnel43:
 
 C1Sc5_8D:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel43View
     ; Show message 1.
-    db $01, $22
+    db $01, $22 ; Message Text0EMessage22: IT'S A TUNNEL / LEADING FURTHER / DOWN THE SEWER.[END]
     ; End script.
     db $ff
 
@@ -4427,7 +4427,7 @@ C1SewerTunnel43View:
 
 C1Loc5_72:
     ; Show message 1.
-    db $01, $27
+    db $01, $27 ; Message Text0EMessage27: THE TUNNEL IS SO / DARK THAT YOU / CAN'T SEE YOUR / HAND IN FRONT OF / YOUR FACE![END]
     ; End script.
     db $ff
 
@@ -4436,7 +4436,7 @@ MoveC1SewerTunnel43:
 
 C1Sc5_8E:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
@@ -4449,12 +4449,12 @@ LookC1SewerTunnel44:
 
 C1Sc5_8F:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel44View
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: YOU'RE IN / A PITCH-BLACK / TUNNEL.[END]
     ; End script.
     db $ff
 
@@ -4463,7 +4463,7 @@ C1SewerTunnel44View:
 
 C1Loc5_73:
     ; Show message 1.
-    db $01, $27
+    db $01, $27 ; Message Text0EMessage27: THE TUNNEL IS SO / DARK THAT YOU / CAN'T SEE YOUR / HAND IN FRONT OF / YOUR FACE![END]
     ; End script.
     db $ff
 
@@ -4472,7 +4472,7 @@ MoveC1SewerTunnel44:
 
 C1Sc5_90:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
@@ -4485,12 +4485,12 @@ LookC1SewerTunnel45:
 
 C1Sc5_91:
     ; Test current room.
-    db $19, $3a
+    db $19, C1RoomIdRackLadderSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel45View
     ; Show message 1.
-    db $01, $23
+    db $01, $23 ; Message Text0EMessage23: THE FLOWING SEWAGESMELLS TERRIBLE.[END]
     ; End script.
     db $ff
 
@@ -4499,7 +4499,7 @@ C1SewerTunnel45View:
 
 C1Loc5_74:
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: YOU'RE IN / A PITCH-BLACK / TUNNEL.[END]
     ; End script.
     db $ff
 
@@ -4508,23 +4508,23 @@ MoveC1SewerTunnel45:
 
 C1Sc5_92:
     ; Test current room.
-    db $19, $38
+    db $19, C1RoomIdLiftSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1LadderToSewer
     ; Check Case I room event for the room argument.
-    db $5e, $24
+    db $5e, C1RoomIdAlligatorEncounter
 
 jr_006_7d02:
     ; Move to the room argument if the selected state permits.
-    db $06, $38
+    db $06, C1RoomIdLiftSewer
     ; Test object flag.
     db $16, C1Sewer38Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $20
+    db $01, $20 ; Message Text0EMessage20: YOU'RE IN THE / SEWER.[PAGE] / SO MUCH FOR YOUR / NEW PAIR OF SHOES.[END]
     ; Set object flag.
     db $17, C1Sewer38Seen
     ; End script.
@@ -4535,7 +4535,7 @@ LookC1SewerTunnel46:
 
 C1Sc5_93:
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: YOU'RE IN / A PITCH-BLACK / TUNNEL.[END]
     ; End script.
     db $ff
 
@@ -4544,19 +4544,19 @@ MoveC1SewerTunnel46:
 
 C1Sc5_94:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
     ; Move to the room argument if the selected state permits.
-    db $06, $3c
+    db $06, C1RoomIdDeepestSewer
     ; Test object flag.
     db $16, C1Sewer3CSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $2b
+    db $01, $2b ; Message Text0EMessage2B: YOU'RE IN THE / DEEPEST PART / OF THE SEWER.[END]
     ; Set object flag.
     db $17, C1Sewer3CSeen
     ; End script.
@@ -4567,7 +4567,7 @@ LookC1TrunkDoor:
 
 C1Sc5_95:
     ; Show message 2.
-    db $02, $f2
+    db $02, $f2 ; Message Text0DMessage72: IT'S A TRUNK LIKE / ANY OTHER TRUNK.[END]
     ; End script.
     db $ff
 
@@ -4598,7 +4598,7 @@ C1Loc5_75:
     db $04
     dw C1TrunkOpenReply
     ; Show message 0.
-    db $00, $47
+    db $00, $47 ; Message Text0CMessage47: YOU TRY TO OPEN / THE TRUNK BUT / IT'S LOCKED.[END]
     ; End script.
     db $ff
 
@@ -4609,7 +4609,7 @@ C1Loc5_76:
     ; Set text name 0.
     db $1e, $7c
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -4622,7 +4622,7 @@ C1Loc5_77:
     ; Set text name 0.
     db $1e, $7c
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set object flag.
     db $17, C1TrunkOpenedOnce
     ; End script.
@@ -4640,7 +4640,7 @@ LookC1MansionFrontDoor:
 
 C1Sc5_98:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: YOU'RE AT THE / FRONT DOOR OF / THE MANSION.[PAGE] / THE DOOR HAS / A HUGE KNOCKER / ...
     ; End script.
     db $ff
 
@@ -4649,7 +4649,7 @@ OpenC1MansionFrontDoor:
 
 C1Sc5_99:
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1MansionKnockHint
@@ -4664,9 +4664,9 @@ C1MansionButlerDoorReply:
 
 C1Loc5_78:
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $aa
+    db $01, $aa ; Message Text0FMessage2A: SLAM![PAGE] / THE BUTLER THROWS / THE DOOR SHUT! IF / YOU HADN'T OF / JUMPED BACK, YO...
     ; End script.
     db $ff
 
@@ -4675,7 +4675,7 @@ C1MansionKnockHint:
 
 C1Loc5_79:
     ; Show message 1.
-    db $01, $a1
+    db $01, $a1 ; Message Text0FMessage21: THE DOOR REFUSES / TO BUDGE.[PAGE] / MIGHT BE BETTER TOTRY COMMON SENSE / AND TRY KNO...
     ; End script.
     db $ff
 
@@ -4684,7 +4684,7 @@ CloseC1MansionFrontDoor:
 
 C1Sc5_9A:
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorAlreadyClosed
@@ -4709,19 +4709,19 @@ C1Sc5_9B:
     db $04
     dw C1MansionDoorToEstate
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1MansionFrontDoorView
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
 
 ; Show the front-door description after the approach.
 C1MansionFrontDoorView:
 
 C1Loc5_7A:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: YOU'RE AT THE / FRONT DOOR OF / THE MANSION.[PAGE] / THE DOOR HAS / A HUGE KNOCKER / ...
     ; End script.
     db $ff
 
@@ -4730,9 +4730,9 @@ C1MansionDoorToEstate:
 
 C1Loc5_7B:
     ; Move to the room argument if the selected state permits.
-    db $06, $1c
+    db $06, C1RoomIdEstateFront
     ; Show message 1.
-    db $01, $9f
+    db $01, $9f ; Message Text0FMessage1F: YOU CAN'T SEE / ANYONE AROUND.[END]
     ; End script.
     db $ff
 

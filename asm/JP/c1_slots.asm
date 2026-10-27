@@ -29,7 +29,7 @@ Call_002_6183:
     call WaitTicks
     call AddCoinFind
     ld a, $18
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message18: ・・・カチャ カチャ カチャ・・・ / チーン!!![PAGE] / やったぜ!!! / ジャックポットだ! / おおあたりだ!!![PAGE] / ぜんぶで [NUM8...
     ret
 
 
@@ -39,7 +39,7 @@ jr_002_61c8:
     ld a, $16
     call PlayAudio
     ld a, $75
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message74: ちっ だめか! / どうも ついてないようだ。[END]
     ret
 
 ; At zero coins choose matching reels; at $46 coins or above choose nonmatching reels; between them use the original low-three-bit random branch.

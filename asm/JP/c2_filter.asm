@@ -141,13 +141,13 @@ PickC2RoomItem:
 
 
     ld a, [wRoomId]
-    cp $1b
+    cp TrainRoomBase
     jr c, C2StoreDefaultRoomItem
 
-    cp $2b
+    cp RoomTrain5B + 1
     jr nc, C2StoreDefaultRoomItem
 
-    sub $1b
+    sub TrainRoomBase
     ld l, a
     ld h, $00
     ld bc, C2RoomItems
@@ -182,4 +182,4 @@ jr_003_6223:
 
 ; Item IDs for rooms $1b..$2a.
 C2RoomItems:
-    db $2d, $22, $2e, $25, $2f, $28, $30, $2b, $31, $3b, $32, $3e, $33, $41, $34, $44
+    db C2TargetTrainCarAPassageBase, C2TargetTrainCarBDoorBase, C2TargetTrain7CarAPassage, C2TargetTrain7CarBDoor, C2TargetTrain8CarAPassage, C2TargetTrain8CarBDoor, C2TargetTrain9CarAPassage, C2TargetTrain9CarBDoor, C2TargetTrain2CarAPassage, C2TargetTrain2CarBDoor, C2TargetTrain3CarAPassage, C2TargetTrain3CarBDoor, C2TargetTrain4CarAPassage, C2TargetTrain4CarBDoor, C2TargetTrain5CarAPassage, C2TargetTrain5CarBDoor

@@ -51,7 +51,7 @@ Jump_003_60d4:
     ld h, a
     add hl, bc
     ld a, [hl]
-    cp $ff
+    cp C2RoomRecordEnd
     ret z
 
     ld a, [wRoomDataPtr]
@@ -90,7 +90,7 @@ Jump_003_60d4:
     and $01
     ret nz
 
-; Read the object ID at the current room-state base plus one; store it with type five in the selected slot and initialize its action.
+; Read the current room record second byte; store it as a type-five target and initialize its action.
 C2StoreTarget:
 
 jr_003_6129:

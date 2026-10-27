@@ -21,11 +21,11 @@ C1ListTexts:
 C2ListTexts:
     dw C2Lbl00
     dw C2Lbl01
-    dw C2Lbl02
-    dw C2Lbl03
-    dw C2Lbl04
-    dw C2Lbl05
-    dw C2Lbl06
+    dw C2ListCashLabel
+    dw C2ListQuartersLabel
+    dw C2ListBulletsLabel
+    dw C2ListCellsLabel
+    dw C2ListChipsLabel
     dw C2Lbl07
     dw C2Lbl08
     dw C2Lbl09

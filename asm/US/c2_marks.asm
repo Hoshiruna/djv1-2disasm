@@ -24,7 +24,7 @@ jr_003_4547:
     pop af
     ret
 
-; Read current four-byte room records; skip $55 records and queue eligible marks until $ff.
+; Read four-byte room records; skip markless cells and queue eligible marks until $ff.
 DoC2Marks:
 
 
@@ -39,10 +39,10 @@ jr_003_4554:
     ld a, [wRoomDataPtr+1]
     ld h, a
     ld a, [hl+]
-    cp $ff
+    cp C2RoomRecordEnd
     ret z
 
-    cp $55
+    cp C2RoomCellNoMark
     jr z, C2MarksAdvanceRecord
 
     call HideC2Mark
@@ -156,25 +156,25 @@ jr_003_45f6:
     jr C2MarkFindCondition
 
 C2MarkTests:
-    db $0d, $1d
-    db $21, $1e
-    db $22, $1e
-    db $24, $1f
-    db $25, $1f
-    db $27, $20
-    db $28, $20
-    db $2a, $21
-    db $2b, $21
-    db $3a, $22
-    db $3b, $22
-    db $3d, $23
-    db $3e, $23
-    db $40, $24
-    db $41, $24
-    db $43, $25
-    db $44, $25
-    db $61, $9d
-    db $6d, $9e
+    db C2TargetVegasHamperLid, C2VegasHamperMarkRevealed
+    db C2StateTrain6BoardingDoorOpen, C2Train6AccessEnabled
+    db C2StateTrain6DestinationDoorOpen, C2Train6AccessEnabled
+    db C2StateTrain7BoardingDoorOpen, C2Train7AccessEnabled
+    db C2StateTrain7DestinationDoorOpen, C2Train7AccessEnabled
+    db C2StateTrain8BoardingDoorOpen, C2Train8AccessEnabled
+    db C2StateTrain8DestinationDoorOpen, C2Train8AccessEnabled
+    db C2StateTrain9BoardingDoorOpen, C2Train9AccessEnabled
+    db C2StateTrain9DestinationDoorOpen, C2Train9AccessEnabled
+    db C2StateTrain2BoardingDoorOpen, C2Train2AccessEnabled
+    db C2StateTrain2DestinationDoorOpen, C2Train2AccessEnabled
+    db C2StateTrain3BoardingDoorOpen, C2Train3AccessEnabled
+    db C2StateTrain3DestinationDoorOpen, C2Train3AccessEnabled
+    db C2StateTrain4BoardingDoorOpen, C2Train4AccessEnabled
+    db C2StateTrain4DestinationDoorOpen, C2Train4AccessEnabled
+    db C2StateTrain5BoardingDoorOpen, C2Train5AccessEnabled
+    db C2StateTrain5DestinationDoorOpen, C2Train5AccessEnabled
+    db C2StateJoeShelvesOpen, C2ShelvesOpen
+    db C2StateOuterOfficeSecretDoorOpen, C2Bullseye
 
 ; Return BC=$98cf plus row*32 and column decoded from A; preserve HL.
 C2MarkPos:

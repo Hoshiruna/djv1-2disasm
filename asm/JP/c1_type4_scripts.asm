@@ -7,7 +7,7 @@ C1Sc4_00:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 0.
-    db $00, $01
+    db $00, $01 ; Message Text0CMessage01: ライトブラウンの トレンチコートだ。なかなか しゅみがいい。[END]
     ; Test object flag.
     db $16, C1CoatPocketOpenedOnce
     ; Branch if result bit 0 is clear.
@@ -23,7 +23,7 @@ C1CoatPocketHint:
 
 C1Loc4_00:
     ; Show message 0.
-    db $00, $02
+    db $00, $02 ; Message Text0CMessage02: ・・・ん? / ポケットに なにか はいっているぞ。ちょっと あけて みようか・・・。[END]
     ; End script.
     db $ff
 
@@ -39,7 +39,7 @@ C1Sc4_01:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set object flag.
@@ -58,7 +58,7 @@ C1Loc4_01:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -74,7 +74,7 @@ C1Sc4_02:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -89,7 +89,7 @@ C1Loc4_02:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -105,7 +105,7 @@ C1Sc4_03:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -122,7 +122,7 @@ C1Loc4_03:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -138,7 +138,7 @@ C1Sc4_04:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -153,7 +153,7 @@ C1Loc4_04:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -169,7 +169,7 @@ C1Sc4_05:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -184,7 +184,7 @@ C1Loc4_05:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -200,7 +200,7 @@ C1Sc4_06:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -215,7 +215,7 @@ C1Loc4_06:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -231,7 +231,7 @@ C1Sc4_07:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -246,7 +246,7 @@ C1Loc4_07:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -262,7 +262,7 @@ C1Sc4_08:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -279,7 +279,7 @@ C1Loc4_08:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -300,7 +300,7 @@ C1Sc4_09:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -315,7 +315,7 @@ C1Loc4_09:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -324,7 +324,7 @@ C1DiaryBookmarkOpen:
 
 C1Loc4_0A:
     ; Show message 1.
-    db $01, $72
+    db $01, $72 ; Message Text0EMessage72: おれは しおりが はさんである / ぺージを ひらいた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -344,7 +344,7 @@ C1Sc4_0A:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -361,7 +361,7 @@ C1Loc4_0B:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -377,7 +377,7 @@ C1Sc4_0B:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -392,7 +392,7 @@ C1Loc4_0C:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -408,7 +408,7 @@ C1Sc4_0C:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -423,7 +423,7 @@ C1Loc4_0D:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -439,7 +439,7 @@ C1Sc4_0D:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -454,7 +454,7 @@ C1Loc4_0E:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -470,7 +470,7 @@ C1Sc4_0E:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -485,7 +485,7 @@ C1Loc4_0F:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -501,7 +501,7 @@ C1Sc4_0F:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -516,7 +516,7 @@ C1Loc4_10:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -532,7 +532,7 @@ C1Sc4_10:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -547,7 +547,7 @@ C1Loc4_11:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -563,7 +563,7 @@ C1Sc4_11:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -578,7 +578,7 @@ C1Loc4_12:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -594,7 +594,7 @@ C1Sc4_12:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -611,7 +611,7 @@ C1Loc4_13:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -627,7 +627,7 @@ C1Sc4_13:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -642,7 +642,7 @@ C1Loc4_14:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -658,7 +658,7 @@ C1Sc4_14:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -673,7 +673,7 @@ C1Loc4_15:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -689,7 +689,7 @@ C1Sc4_15:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -704,7 +704,7 @@ C1Loc4_16:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -720,7 +720,7 @@ C1Sc4_16:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -735,7 +735,7 @@ C1Loc4_17:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -751,7 +751,7 @@ C1Sc4_17:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -766,7 +766,7 @@ C1Loc4_18:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -782,7 +782,7 @@ C1Sc4_18:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -797,7 +797,7 @@ C1Loc4_19:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -813,7 +813,7 @@ C1Sc4_19:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -828,7 +828,7 @@ C1Loc4_1A:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -844,7 +844,7 @@ C1Sc4_1A:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -859,7 +859,7 @@ C1Loc4_1B:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -875,7 +875,7 @@ C1Sc4_1B:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -890,7 +890,7 @@ C1Loc4_1C:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -906,7 +906,7 @@ C1Sc4_1C:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -921,7 +921,7 @@ C1Loc4_1D:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -937,7 +937,7 @@ C1Sc4_1D:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -952,7 +952,7 @@ C1Loc4_1E:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -968,7 +968,7 @@ C1Sc4_1E:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -983,7 +983,7 @@ C1Loc4_1F:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -999,7 +999,7 @@ C1Sc4_1F:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1014,7 +1014,7 @@ C1Loc4_20:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1030,7 +1030,7 @@ C1Sc4_20:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1045,7 +1045,7 @@ C1Loc4_21:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1061,7 +1061,7 @@ C1Sc4_21:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1076,7 +1076,7 @@ C1Loc4_22:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1092,7 +1092,7 @@ C1Sc4_22:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1107,7 +1107,7 @@ C1Loc4_23:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1123,7 +1123,7 @@ C1Sc4_23:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1138,7 +1138,7 @@ C1Loc4_24:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1154,7 +1154,7 @@ C1Sc4_24:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1169,7 +1169,7 @@ C1Loc4_25:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1192,7 +1192,7 @@ C1Sc4_25:
     ; Set text name 0.
     db $1e, $40
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1208,7 +1208,7 @@ C1Sc4_25:
     db $04
     dw C1CoatTakeResume
     ; Show message 0.
-    db $00, $17
+    db $00, $17 ; Message Text0CMessage17: ピストルだ! / こいつは すごい![PAGE] / だが なぜ こんなところに・・・?[END]
     ; Set object flag.
     db $17, C1CoatTakeCommentSeen
 
@@ -1238,7 +1238,7 @@ C1Sc4_26:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1257,12 +1257,12 @@ C1Loc4_32:
     db $05
     dw C1ContainerPlaceEnd
     ; Test item flag.
-    db $52, $00
+    db $52, C1ItemCoins
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $01
+    db $52, C1ItemLighter
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -1277,17 +1277,17 @@ C1WalletPlaceChecks:
 
 C1Loc4_9A:
     ; Test item flag.
-    db $52, $05
+    db $52, C1ItemKey1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $06
+    db $52, C1ItemAccessCard
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $07
+    db $52, C1ItemTwentyDollarBill
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -1306,7 +1306,7 @@ C1ContainerPlaceNeedsTaken:
 
 C1Loc4_26:
     ; Show message 2.
-    db $02, $56
+    db $02, $56 ; Message Text10Message56: とっていない ものを すてることは / できない![END]
     ; End script.
     db $ff
 
@@ -1315,7 +1315,7 @@ C1ContainerPlaceNoHere:
 
 C1Loc4_33:
     ; Show message 2.
-    db $02, $57
+    db $02, $57 ; Message Text10Message57: どうやら ここには すてられない / ようだ。[END]
     ; End script.
     db $ff
 
@@ -1324,7 +1324,7 @@ C1ContainerPlaceCaution:
 
 C1Loc4_9C:
     ; Show message 2.
-    db $02, $7d
+    db $02, $7d ; Message Text10Message7D: まてよ・・・? / これを やると あとで / こまるのでは ないだろうか・・・。[END]
     ; End script.
     db $ff
 
@@ -1340,7 +1340,7 @@ jr_006_68f8:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1367,7 +1367,7 @@ C1ContainerActionNoHere:
 
 C1Sc4_28:
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text10Message37: なにを しているんだ おれは?![END]
     ; End script.
     db $ff
 
@@ -1376,7 +1376,7 @@ C1ContainerTakeRefuse:
 
 C1Loc4_27:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: ははっ・・・。 / バカなことを してしまった。[END]
     ; End script.
     db $ff
 
@@ -1385,7 +1385,7 @@ LookC1Wallet:
 
 C1Sc4_29:
     ; Show message 0.
-    db $00, $0d
+    db $00, $0d ; Message Text0CMessage0D: かわせいの いきな さいふだ。 / かなり こうかな ものらしい。[END]
     ; End script.
     db $ff
 
@@ -1406,7 +1406,7 @@ C1Sc4_2A:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1431,7 +1431,7 @@ C1Sc4_2B:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1457,7 +1457,7 @@ jr_006_6930:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1482,7 +1482,7 @@ C1Sc4_2D:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1507,7 +1507,7 @@ C1Sc4_2E:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1532,7 +1532,7 @@ C1Sc4_2F:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1557,7 +1557,7 @@ C1Sc4_30:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1582,7 +1582,7 @@ C1Sc4_31:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1607,7 +1607,7 @@ C1Sc4_32:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1632,7 +1632,7 @@ C1Sc4_33:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1657,7 +1657,7 @@ C1Sc4_34:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1682,7 +1682,7 @@ C1Sc4_35:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1707,7 +1707,7 @@ C1Sc4_36:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1732,7 +1732,7 @@ C1Sc4_37:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1757,7 +1757,7 @@ C1Sc4_38:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1782,7 +1782,7 @@ C1Sc4_39:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1805,12 +1805,12 @@ C1Sc4_3A:
     db $04
     dw C1Gun3PaidPickup
     ; Test item flag.
-    db $52, $07
+    db $52, C1ItemTwentyDollarBill
     ; Branch if result bit 0 is set.
     db $04
     dw C1BuyGun3Bill07
     ; Test item flag.
-    db $52, $54
+    db $52, C1ItemTwentyDollarBillAlt
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Gun3PriceReply
@@ -1824,7 +1824,7 @@ C1Sc4_3A:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1832,13 +1832,13 @@ C1Sc4_3A:
     ; Set text name 0.
     db $1e, $c1
     ; Show message 2.
-    db $02, $1a
+    db $02, $1a ; Message Text10Message1A: ありがとう ございます。 / [OBJECT_WRAM:37C5] いただきます。[END]
     ; Set item state.
-    db $53, $54
+    db $53, C1ItemTwentyDollarBillAlt
     ; Drop list value.
-    db $55, $54
+    db $55, C1ItemTwentyDollarBillAlt
     ; Set first item type and ID.
-    db $5c, $03, $54
+    db $5c, $03, C1ItemTwentyDollarBillAlt
     ; Clear attribute bit 0.
     db $09
     ; Set object flag.
@@ -1860,21 +1860,21 @@ C1Loc4_35:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set text name 0.
     db $1e, $c1
     ; Show message 2.
-    db $02, $1a
+    db $02, $1a ; Message Text10Message1A: ありがとう ございます。 / [OBJECT_WRAM:37C5] いただきます。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
     db $1d
     ; Set item state.
-    db $53, $07
+    db $53, C1ItemTwentyDollarBill
     ; Drop list value.
-    db $55, $07
+    db $55, C1ItemTwentyDollarBill
     ; Set first item type and ID.
-    db $5c, $03, $07
+    db $5c, $03, C1ItemTwentyDollarBill
     ; Clear attribute bit 0.
     db $09
     ; Set object flag.
@@ -1887,7 +1887,7 @@ C1Gun3PriceReply:
 
 C1Loc4_36:
     ; Show message 1.
-    db $01, $1b
+    db $01, $1b ; Message Text0EMessage1B: すると みせのおとこが / やさしいこえで いった。[PAGE] / 「20ドルですよ。」[END]
     ; End script.
     db $ff
 
@@ -1898,7 +1898,7 @@ C1Loc4_28:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text10Message04: [OBJECT_WRAM:37C5]を とった。[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1911,7 +1911,7 @@ LookC1Gun1:
 
 C1Sc4_3B:
     ; Show message 0.
-    db $00, $08
+    db $00, $08 ; Message Text0CMessage08: 38こうけい スぺシャルだ。[END]
     ; End script.
     db $ff
 
@@ -1925,7 +1925,7 @@ C1Sc4_3C:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1981,7 +1981,7 @@ jr_006_6a7a:
     db $05
     dw C1Gun1TargetPrompt
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: あいたままでは つかえない。[END]
     ; End script.
     db $ff
 
@@ -1990,7 +1990,7 @@ C1Gun1TargetPrompt:
 
 C1Loc4_29:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: なにに つかおうか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1999,79 +1999,79 @@ MatchC1Gun1:
 
 C1Loc4_38:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun1Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun1Mirror2
 
 jr_006_6a91:
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun1StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun1GunShopWin
-    db $00, $34
+    db $00, C1TargetArmedWoman
     dw C1Gun1Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun1Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun1Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun1NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun1Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun1Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun1Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun1Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun1RoundMirror
-    db $00, $5f
+    db $00, C1TargetMansionButler
     dw C1Gun1Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun1Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun1WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun1Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun1Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
 
 jr_006_6ad3:
     dw C1Gun1Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun1NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun1Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun1NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun1NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun1NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun1Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun1NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun1Shadow
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun1Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun1Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun1Self
     db $fe, $fe
     dw C1ContainerActionNoHere
@@ -2081,7 +2081,7 @@ C1Gun1Self:
 
 C1Loc4_39:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text0FMessage68: ・・・・・・。[PAGE] / これから さきのことを かんがえるとおれの みらいは まっくらやみの / ような きがする・・・。[PAGE] / ・・・つかれた。 / ...
     ; Decrement gun 1 ammunition.
     db $4f
     ; Branch if result bit 0 is clear.
@@ -2093,11 +2093,11 @@ C1SelfShotEnd:
 
 C1Loc4_3A:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2108,7 +2108,7 @@ C1Gun2Self:
 
 C1Loc4_3B:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text0FMessage68: ・・・・・・。[PAGE] / これから さきのことを かんがえるとおれの みらいは まっくらやみの / ような きがする・・・。[PAGE] / ・・・つかれた。 / ...
     ; Decrement gun 2 ammunition.
     db $59
     ; Branch if result bit 0 is clear.
@@ -2123,7 +2123,7 @@ C1Gun3Self:
 
 C1Loc4_3C:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text0FMessage68: ・・・・・・。[PAGE] / これから さきのことを かんがえるとおれの みらいは まっくらやみの / ような きがする・・・。[PAGE] / ・・・つかれた。 / ...
     ; Decrement gun 3 ammunition.
     db $51
     ; Branch if result bit 0 is clear.
@@ -2153,13 +2153,13 @@ C1ShootMirror1:
 
 C1Loc4_3E:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1Mirror1Broken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: ものすごい おとと ともに カガミがくだけちった。[END]
     ; End script.
     db $ff
 
@@ -2168,7 +2168,7 @@ C1GunEmpty:
 
 C1Loc4_3F:
     ; Show message 1.
-    db $01, $64
+    db $01, $64 ; Message Text0EMessage64: カチッ![PAGE] / ・・・たまが なくなったようだ。[END]
     ; End script.
     db $ff
 
@@ -2177,7 +2177,7 @@ C1GunSaveTarget:
 
 C1Loc4_40:
     ; Show message 2.
-    db $02, $7d
+    db $02, $7d ; Message Text10Message7D: まてよ・・・? / これを やると あとで / こまるのでは ないだろうか・・・。[END]
     ; End script.
     db $ff
 
@@ -2196,13 +2196,13 @@ C1StreetShotArrest:
 
 C1Loc4_42:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text0FMessage5B: おれは はっぽうした。[PAGE] / ちかくを とおりかかったひとが / じゅうせいを ききつけ けいさつに / つうほうした![PAGE] / おれは たいほされてし...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2285,13 +2285,13 @@ C1ShootMirror2:
 
 C1Loc4_48:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1Mirror2Broken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: ものすごい おとと ともに カガミがくだけちった。[END]
     ; End script.
     db $ff
 
@@ -2336,13 +2336,13 @@ C1ShootRoundMirror:
 
 C1Loc4_4C:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1RoundMirrorBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: ものすごい おとと ともに カガミがくだけちった。[END]
     ; End script.
     db $ff
 
@@ -2387,13 +2387,13 @@ C1ShootWallMirror:
 
 C1Loc4_50:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1WallMirrorBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: ものすごい おとと ともに カガミがくだけちった。[END]
     ; End script.
     db $ff
 
@@ -2438,13 +2438,13 @@ C1ShootStreetWin:
 
 C1Loc4_54:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1StreetWinBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $46
+    db $00, $46 ; Message Text0CMessage46: ものすごい おとがして / マドが われた。[END]
     ; End script.
     db $ff
 
@@ -2489,13 +2489,13 @@ C1ShootGunShopWin:
 
 C1Loc4_58:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1GunShopWinBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $46
+    db $00, $46 ; Message Text0CMessage46: ものすごい おとがして / マドが われた。[END]
     ; End script.
     db $ff
 
@@ -2540,13 +2540,13 @@ C1ShootLadyEnd:
 
 C1Loc4_5C:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 2.
-    db $02, $ef
+    db $02, $ef ; Message Text0DMessage6F: ピストルで おんなを うった。[PAGE] / じゅうせいを ききつけて けいさつがやってきた。[END]
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text10Message7F: さつじんを おかしてしまった / あなたは きびしい とりしらべを / うけた・・・。[PAGE] / ・・・そして さいばんに かけられ / しけいの はんけつを うけ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2593,17 +2593,17 @@ C1ShootBumEnd:
 
 C1Loc4_60:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 2.
-    db $02, $e4
+    db $02, $e4 ; Message Text0DMessage64: ・・・はずれた。 / よっぱらいは フラフラしていて / ねらいが さだまらない。[PAGE] / じゅうせいを ききつけて けいさつがやってきた。[END]
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text10Message7E: さつじんみすいの ようぎで / たいほされた あなたは けいさつで / とりしらべを うけ さいばんに / かけられた・・・。[END]
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2650,13 +2650,13 @@ C1ShootClerkEnd:
 
 C1Loc4_64:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $1a
+    db $01, $1a ; Message Text0EMessage1A: みせのおとこに むかって ピストルをかまえた。[PAGE] / ・・・・・・! / なんと おれより さきに むこうが / ピストルを うった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2703,17 +2703,17 @@ C1ShootCabbyEnd:
 
 C1Loc4_68:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $41
+    db $01, $41 ; Message Text0EMessage41: おれは うんてんしゅに ねらいをつけピストルを うった。[PAGE] / しかし うんてんせきとの さかいの / ぼうだんガラスに はばまれた。[PAGE] / じゅうせ...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text10Message7E: さつじんみすいの ようぎで / たいほされた あなたは けいさつで / とりしらべを うけ さいばんに / かけられた・・・。[END]
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2760,17 +2760,17 @@ C1ShootButlerEnd:
 
 C1Loc4_6C:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $ab
+    db $01, $ab ; Message Text0FMessage2B: しつじを ピストルで うった。[PAGE] / ところが うんわるく ちょうど / せんたくものを とりにきた / クリーニングやが いちぶしじゅうを / みていたのだ。...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text10Message7E: さつじんみすいの ようぎで / たいほされた あなたは けいさつで / とりしらべを うけ さいばんに / かけられた・・・。[END]
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2817,13 +2817,13 @@ C1ShootSleepersEnd:
 
 C1Loc4_70:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text0FMessage5B: おれは はっぽうした。[PAGE] / ちかくを とおりかかったひとが / じゅうせいを ききつけ けいさつに / つうほうした![PAGE] / おれは たいほされてし...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text10Message7F: さつじんを おかしてしまった / あなたは きびしい とりしらべを / うけた・・・。[PAGE] / ・・・そして さいばんに かけられ / しけいの はんけつを うけ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2870,25 +2870,25 @@ C1ShootAlligator:
 
 C1Loc4_74:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Set state and refresh.
-    db $33, $4d
+    db $33, C1StateAlligatorShotView
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 1.
-    db $01, $36
+    db $01, $36 ; Message Text0EMessage36: ワニを しとめたぞ。[PAGE] / ・・・どうやら いのちは / たすかったようだ・・・。[PAGE] / うんよく ピストルの おとには / だれも きづいていないよ...
     ; Wait sixty ticks.
     db $68
     ; Set first item type and ID.
-    db $5c, $05, $45
+    db $5c, $05, C1DoorIdLiftToRackSewer
     ; Move to the room argument if the selected state permits.
-    db $06, $38
+    db $06, C1RoomIdLiftSewer
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: げすいどうの なかだ。[END]
     ; Clear state bit.
-    db $30, $4d
+    db $30, C1StateAlligatorShotView
     ; End script.
     db $ff
 
@@ -2940,9 +2940,9 @@ C1Loc4_78:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: おれは ピストルを とりだした。[PAGE] / ねらいを さだめて トリガーを / ひいた・・・。[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Clear object flag.
     db $18, $0a
     ; Set object flag.
@@ -2950,7 +2950,7 @@ C1Loc4_78:
     ; Refresh room objects.
     db $27
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text0FMessage0A: ひとの けはいは なくなった。 / だが ゆだんは きんもつだ。[END]
     ; End script.
     db $ff
 
@@ -2997,9 +2997,9 @@ C1GunNoChangeReply:
 
 C1Loc4_7C:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Show message 1.
-    db $01, $f8
+    db $01, $f8 ; Message Text0FMessage78: はっぽうしたが おおきな へんかは / みられない。 / たまの ムダづかいだったか・・・。[END]
     ; End script.
     db $ff
 
@@ -3051,9 +3051,9 @@ C1Loc4_80:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: おれは ピストルを とりだした。[PAGE] / ねらいを さだめて トリガーを / ひいた・・・。[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1CabinetUnlocked
     ; Swap operation slots.
@@ -3067,7 +3067,7 @@ C1Loc4_80:
     ; Set text name 0.
     db $1e, $d6
     ; Show message 2.
-    db $02, $11
+    db $02, $11 ; Message Text10Message11: カギが こわれて [OBJECT_WRAM:37C5]が / あいた。[END]
     ; End script.
     db $ff
 
@@ -3119,17 +3119,17 @@ C1Loc4_84:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: おれは ピストルを とりだした。[PAGE] / ねらいを さだめて トリガーを / ひいた・・・。[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set state and refresh.
-    db $33, $31
+    db $33, C1StateBungalowDoorOpen
     ; Set object flag.
     db $17, C1BungalowUnlocked
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $11
+    db $02, $11 ; Message Text10Message11: カギが こわれて [OBJECT_WRAM:37C5]が / あいた。[END]
     ; End script.
     db $ff
 
@@ -3200,9 +3200,9 @@ C1Door49ShotReply:
 
 C1Loc4_8A:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Show message 1.
-    db $01, $a2
+    db $01, $a2 ; Message Text0FMessage22: おれは トリガーを ひいた。 / ドアが あつくて こうかが ない。[END]
     ; End script.
     db $ff
 
@@ -3237,7 +3237,7 @@ C1GunNeedsTaken:
 
 C1Loc4_2A:
     ; Show message 2.
-    db $02, $52
+    db $02, $52 ; Message Text10Message52: てに とっていない ものは / つかえない。[END]
     ; End script.
     db $ff
 
@@ -3253,9 +3253,9 @@ C1Sc4_3E:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $8b
+    db $02, $8b ; Message Text0DMessage0B: マニラホルダーだ。[END]
     ; Show message 2.
-    db $02, $92
+    db $02, $92 ; Message Text0DMessage12: なかに かみが はさんである。[END]
     ; End script.
     db $ff
 
@@ -3264,7 +3264,7 @@ C1FolderShortView:
 
 C1Loc4_2B:
     ; Show message 2.
-    db $02, $8b
+    db $02, $8b ; Message Text0DMessage0B: マニラホルダーだ。[END]
     ; End script.
     db $ff
 
@@ -3278,7 +3278,7 @@ C1Sc4_3F:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3297,7 +3297,7 @@ C1Loc4_8D:
     db $05
     dw C1ContainerPlaceEnd
     ; Test item flag.
-    db $52, $0e
+    db $52, C1ItemNote1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -3311,7 +3311,7 @@ LookC1Box:
 
 C1Sc4_40:
     ; Show message 2.
-    db $02, $8c
+    db $02, $8c ; Message Text0DMessage0C: こものいれの はこだ。[END]
     ; End script.
     db $ff
 
@@ -3325,7 +3325,7 @@ C1Sc4_41:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3358,7 +3358,7 @@ LookC1Envelope1:
 
 C1Sc4_42:
     ; Show message 2.
-    db $02, $9d
+    db $02, $9d ; Message Text0DMessage1D: なにも かかれていない ただの / ふうとうだ。[END]
     ; End script.
     db $ff
 
@@ -3372,7 +3372,7 @@ C1Sc4_43:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3405,7 +3405,7 @@ LookC1Handbag:
 
 C1Sc4_44:
     ; Show message 2.
-    db $02, $ea
+    db $02, $ea ; Message Text0DMessage6A: くろい セカンドバッグだ。 / いったい なにが はいっているんだ?[END]
     ; End script.
     db $ff
 
@@ -3419,7 +3419,7 @@ C1Sc4_45:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3452,7 +3452,7 @@ LookC1Gun2:
 
 C1Sc4_46:
     ; Show message 2.
-    db $02, $eb
+    db $02, $eb ; Message Text0DMessage6B: サタデーナイト スぺシャルだ。[PAGE] / すこし こがたの ピストルで / じょせいでも あつかいやすい。[END]
     ; End script.
     db $ff
 
@@ -3475,7 +3475,7 @@ C1Sc4_47:
 jr_006_6e0c:
     db HIGH(C1Gun2TargetPrompt)
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: あいたままでは つかえない。[END]
     ; End script.
     db $ff
 
@@ -3484,7 +3484,7 @@ C1Gun2TargetPrompt:
 
 C1Loc4_2C:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: なにに つかおうか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3493,78 +3493,78 @@ MatchC1Gun2:
 
 C1Loc4_91:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun2Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun2Mirror2
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun2StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun2GunShopWin
     db $00
 
 jr_006_6e25:
-    db $34
+    db C1TargetArmedWoman
     dw C1Gun2Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun2Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun2Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun2NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun2Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun2Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun2Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun2Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun2RoundMirror
-    db $00, $5f
+    db $00, C1TargetMansionButler
     dw C1Gun2Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun2Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun2WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun2Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun2Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
     dw C1Gun2Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun2NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun2Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun2NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun2NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun2NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun2Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun2NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun2ShadowDoor
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun2Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun2Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun2Self
     db $fe, $fe
     dw C1ContainerActionNoHere
@@ -3574,13 +3574,13 @@ C1GunmanShootsFirst:
 
 C1Loc4_92:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $ee
+    db $01, $ee ; Message Text0FMessage6E: おれは トリガーを ひこうとした。[PAGE] / しかし おとこのほうが いっしゅん / はやく トリガーを ひいた![PAGE] / おれは ぎゃくに うたれてしまっ...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3591,13 +3591,13 @@ C1ShootMuggerEnd:
 
 C1Loc4_93:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $ea
+    db $01, $ea ; Message Text0FMessage6A: ピストルで おとこを うった。 / ・・・・・・![PAGE] / じゅうせいを ききつけて けいさつがやってきた。[PAGE] / おれは せいとうぼうえいを / うっ...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text10Message7F: さつじんを おかしてしまった / あなたは きびしい とりしらべを / うけた・・・。[PAGE] / ・・・そして さいばんに かけられ / しけいの はんけつを うけ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3620,9 +3620,9 @@ C1Sc4_48:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $6e
+    db $01, $6e ; Message Text0EMessage6E: にっきちょうだ。 / 「マーサ」と たっぴつで なまえが / かかれている。[END]
     ; Show message 1.
-    db $01, $1f
+    db $01, $1f ; Message Text0EMessage1F: ・・・しおりが はさんであるようだ。[END]
     ; End script.
     db $ff
 
@@ -3631,7 +3631,7 @@ C1DiaryOpenView:
 
 C1Loc4_2D:
     ; Show message 1.
-    db $01, $71
+    db $01, $71 ; Message Text0EMessage71: 「12がつ 5にち /  また シーゲルから さそわれた。 /  かれとは とっくに /  わかれたのに・・・。[PAGE] /  あんな しっとぶかい おとこと /  ...
     ; End script.
     db $ff
 
@@ -3640,7 +3640,7 @@ C1DiaryShortView:
 
 C1Loc4_2E:
     ; Show message 1.
-    db $01, $6e
+    db $01, $6e ; Message Text0EMessage6E: にっきちょうだ。 / 「マーサ」と たっぴつで なまえが / かかれている。[END]
     ; End script.
     db $ff
 
@@ -3654,7 +3654,7 @@ C1Sc4_49:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3680,7 +3680,7 @@ LookC1AmmoCase:
 
 C1Sc4_4A:
     ; Show message 1.
-    db $01, $ff
+    db $01, $ff ; Message Text0FMessage7F: これは だんがんケースだ。 / かやくの においが・・・。[END]
     ; End script.
     db $ff
 
@@ -3694,7 +3694,7 @@ C1Sc4_4B:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3729,7 +3729,7 @@ LookC1Envelope2:
 
 C1Sc4_4C:
     ; Show message 1.
-    db $01, $9c
+    db $01, $9c ; Message Text0FMessage1C: きってが はっていない ふうとうだ。「スタンウッドへ」 とだけ / かいてある。[END]
     ; End script.
     db $ff
 
@@ -3743,7 +3743,7 @@ C1Sc4_4D:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3778,7 +3778,7 @@ LookC1Bowl1:
 
 C1Sc4_4E:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: ちいさな つぼだ。[END]
     ; End script.
     db $ff
 
@@ -3792,7 +3792,7 @@ C1Sc4_4F:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3820,7 +3820,7 @@ LookC1Bowl2:
 
 C1Sc4_50:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: ちいさな つぼだ。[END]
     ; End script.
     db $ff
 
@@ -3830,7 +3830,7 @@ LookC1Envelope3:
 C1Sc4_51:
 Call_006_6f27:
     ; Show message 2.
-    db $02, $9d
+    db $02, $9d ; Message Text0DMessage1D: なにも かかれていない ただの / ふうとうだ。[END]
     ; End script.
     db $ff
 
@@ -3844,7 +3844,7 @@ C1Sc4_52:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text10Message54: どこに すてようか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3879,7 +3879,7 @@ LookC1CandyBox:
 
 C1Sc4_53:
     ; Show message 1.
-    db $01, $c3
+    db $01, $c3 ; Message Text0FMessage43: チョコレートを いれる はこだろう。あまい かおりがする。[END]
     ; End script.
     db $ff
 
@@ -3888,7 +3888,7 @@ LookC1Case:
 
 C1Sc4_54:
     ; Show message 1.
-    db $01, $bf
+    db $01, $bf ; Message Text0FMessage3F: くろい しょるいかばんだ。[END]
     ; End script.
     db $ff
 
@@ -3897,7 +3897,7 @@ LookC1Bowl3:
 
 C1Sc4_55:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: ちいさな つぼだ。[END]
     ; End script.
     db $ff
 
@@ -3906,7 +3906,7 @@ LookC1Gun3:
 
 C1Sc4_56:
     ; Show message 1.
-    db $01, $12
+    db $01, $12 ; Message Text0EMessage12: トゥナイト スぺシャルだ。 / ドイツせいの ピストルらしい。[END]
     ; End script.
     db $ff
 
@@ -3926,7 +3926,7 @@ jr_006_6f4c:
     db $05
     dw C1Gun3TargetPrompt
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: あいたままでは つかえない。[END]
     ; End script.
     db $ff
 
@@ -3935,7 +3935,7 @@ C1Gun3TargetPrompt:
 
 C1Loc4_2F:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: なにに つかおうか?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3944,77 +3944,77 @@ MatchC1Gun3:
 
 C1Loc4_99:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun3Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun3Mirror2
 
 jr_006_6f63:
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun3StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun3GunShopWin
-    db $00, $34
+    db $00, C1TargetArmedWoman
     dw C1Gun3Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun3Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun3Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun3NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun3Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun3Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun3Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun3Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun3RoundMirror
-    db $00, $5f
+    db $00, C1TargetMansionButler
     dw C1Gun3Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun3Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun3WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun3Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun3Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
     dw C1Gun3Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun3NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun3Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun3NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun3NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun3NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun3Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun3NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun3ShadowDoor
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun3Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun3Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun3Self
     db $fe, $fe
     dw C1ContainerActionNoHere

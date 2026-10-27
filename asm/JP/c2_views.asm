@@ -210,188 +210,188 @@ jr_003_4454:
     dw C2View06
 
 C2View00:
-    db $00, $00
+    db C2SceneVegasBath, C2SceneVegasBath
 
 C2View01:
-    db $01, $01
+    db C2SceneVegasBedroom, C2SceneVegasBedroom
 
 C2View02:
-    db $02, $02, $02, $02
+    db C2SceneVegasCasinoHall, C2SceneVegasCasinoHall, C2SceneVegasCasinoHall, C2SceneVegasCasinoHall
 
 C2View03:
-    db $03
+    db C2SceneVegasLobby
 jr_003_4460:
-    db $03
+    db C2SceneVegasLobby
 
 C2View04:
-    db $04
+    db C2SceneVegasCashier
 
 C2View05:
-    db $05, $05
+    db C2SceneVegasBlackjack, C2SceneVegasBlackjack
 
 C2View07:
-    db $07, $07
+    db C2SceneVegasElevator, C2SceneVegasElevator
 
 C2View0B:
 jr_003_4466:
-    db $08
+    db C2SceneVegasSecondFloorHall
 
 C2View0C:
-    db $09, $09
+    db C2SceneVegasThirdFloorHall, C2SceneVegasThirdFloorHall
 
 C2View0D:
-    db $33, $33
+    db C2SceneLaundryHamper, C2SceneLaundryHamper
 
 C2View0E:
-    db $0a
+    db C2SceneVegasFourthFloorHall
 jr_003_446c:
-    db $0a, $0a, $0a
+    db C2SceneVegasFourthFloorHall, C2SceneVegasFourthFloorHall, C2SceneVegasFourthFloorHall
 
 C2View0F:
-    db $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 jr_003_4472:
-    db $0b, $0b, $0b, $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 jr_003_4478:
-    db $0b, $0b, $0b, $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 jr_003_447e:
-    db $0b, $0b, $0b, $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 jr_003_4484:
-    db $0b, $0b, $0b, $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 jr_003_448a:
-    db $0b, $0b, $0b, $0b, $0b
+    db C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice, C2SceneVentiniOffice
 
 C2View10:
-    db $0c
+    db C2SceneMaloneOffice
 jr_003_4490:
-    db $0c, $0c, $0c, $0c, $0c, $0c
+    db C2SceneMaloneOffice, C2SceneMaloneOffice, C2SceneMaloneOffice, C2SceneMaloneOffice, C2SceneMaloneOffice, C2SceneMaloneOffice
 jr_003_4496:
-    db $0c
+    db C2SceneMaloneOffice
 
 C2View11:
-    db $0d, $0d, $0d, $0d
+    db SceneLuckyDoor, SceneLuckyDoor, SceneLuckyDoor, SceneLuckyDoor
 
 C2View13:
-    db $34
+    db SceneCleaners
 jr_003_449c:
-    db $34, $34, $34, $34, $34, $34, $34, $34, $34, $34, $34, $34, $34, $34, $34
+    db SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners, SceneCleaners
 
 C2View14:
-    db $11, $11, $11, $11
+    db C2SceneVegasStationFront, C2SceneVegasStationFront, C2SceneVegasStationFront, C2SceneVegasStationFront
 
 C2View15:
-    db $12
+    db C2SceneVegasWaitingHall
 
 C2View16:
-    db $13
+    db C2SceneVegasLuggageClaim
 
 C2View17:
-    db $14, $14, $15, $15
+    db C2SceneVegasPlatformNoTrain, C2SceneVegasPlatformNoTrain, C2SceneVegasPlatformTrain, C2SceneVegasPlatformTrain
 
 C2View1C:
-    db $18, $18, $19, $19
+    db C2SceneTrainPassengerCarB, C2SceneTrainPassengerCarB, SceneConductor2, SceneConductor2
 
 C2View1B:
-    db $16, $17
+    db C2SceneTrainPassengerCarA, SceneConductor1
 
 C2View2B:
-    db $1c, $1c
+    db C2SceneChicagoWaitingHall, C2SceneChicagoWaitingHall
 
 C2View2C:
-    db $1a, $1a, $1b, $1b
+    db C2SceneChicagoPlatformNoTrain, C2SceneChicagoPlatformNoTrain, C2SceneChicagoPlatformTrain, C2SceneChicagoPlatformTrain
 
 C2View30:
-    db $1d, $1d, $1d, $1d, $1d, $1d, $1d, $1d
+    db C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront, C2SceneChicagoStationFront
 
 C2View31:
-    db $1e, $1e
+    db C2SceneCabInterior, C2SceneCabInterior
 
 C2View32:
-    db $1f, $1f, $1f, $1f
+    db C2SceneAdisonApartmentFront, C2SceneAdisonApartmentFront, C2SceneAdisonApartmentFront, C2SceneAdisonApartmentFront
 
 C2View33:
 jr_003_44cf:
-    db $20, $20
+    db C2SceneAdisonHallway, C2SceneAdisonHallway
 
 C2View34:
-    db $21, $21, $21, $21, $21, $21, $21, $21
+    db C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment, C2SceneAdisonApartment
 
 C2View35:
-    db $22, $22, $22, $22
+    db C2SceneJoeFront, C2SceneJoeFront, C2SceneJoeFront, C2SceneJoeFront
 
 C2View36:
-    db $23
+    db C2SceneJoeAlley
 
 C2View37:
-    db $29
+    db C2SceneJoeFireEscape
 
 C2View38:
-    db $2a, $2a
+    db C2SceneJoeOffice, C2SceneJoeOffice
 
 C2View39:
-    db $2c, $2c
+    db C2SceneJoeRearAlley, C2SceneJoeRearAlley
 
 C2View3A:
-    db $24, $24
+    db C2SceneJoeRearHallway, C2SceneJoeRearHallway
 
 C2View3B:
-    db $25, $25, $25, $25, $25, $25, $25, $25
+    db C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar, C2SceneJoeBar
 
 C2View3C:
-    db $26, $26
+    db C2SceneJoeCellar, C2SceneJoeCellar
 
 C2View3D:
-    db $27, $27
+    db C2SceneJoeChamber, C2SceneJoeChamber
 jr_003_44f1:
-    db $27, $27
+    db C2SceneJoeChamber, C2SceneJoeChamber
 
 C2View3E:
-    db $28, $28
+    db C2SceneJoeCasino, C2SceneJoeCasino
 
 C2View3F:
-    db $2b
+    db C2SceneJoeUpstairsHallway
 
 C2View40:
-    db $2d, $2d
+    db C2ScenePoliceStationFront, C2ScenePoliceStationFront
 
 C2View41:
-    db $2e
+    db C2SceneSugarApartmentFront
 
 C2View42:
-    db $2f, $2f, $2f, $2f
+    db C2SceneSugarApartment, C2SceneSugarApartment, C2SceneSugarApartment, C2SceneSugarApartment
 
 C2View43:
-    db $30, $30, $30, $30
+    db C2SceneMorgueFront, C2SceneMorgueFront, C2SceneMorgueFront, C2SceneMorgueFront
 
 C2View44:
-    db $31, $31, $31, $31
+    db C2SceneMorgueReception, C2SceneMorgueReception, C2SceneMorgueReception, C2SceneMorgueReception
 
 C2View45:
-    db $32, $32, $32, $32
+    db C2SceneMorgueColdRoom, C2SceneMorgueColdRoom, C2SceneMorgueColdRoom, C2SceneMorgueColdRoom
 
 C2View47:
-    db $35, $35
+    db C2SceneLaundry, C2SceneLaundry
 
 C2View48:
-    db $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36
-    db $36, $36
+    db C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway
+    db C2SceneCleanersHallway, C2SceneCleanersHallway
 jr_003_451d:
-    db $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36, $36
-    db $36, $36
+    db C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway, C2SceneCleanersHallway
+    db C2SceneCleanersHallway, C2SceneCleanersHallway
 
 C2View49:
 jr_003_452f:
-    db $37, $37
+    db C2SceneOuterOffice, C2SceneOuterOffice
 jr_003_4531:
-    db $37, $37, $37, $37, $37, $37
+    db C2SceneOuterOffice, C2SceneOuterOffice, C2SceneOuterOffice, C2SceneOuterOffice, C2SceneOuterOffice, C2SceneOuterOffice
 
 C2View4A:
-    db $38
+    db C2SceneSecretOffice
 
 C2View06:
-    db $0e
+    db C2SceneDesertPalms
 
 C2View63:
-    db $0f
+    db C2SceneDesertShrubs
 
 C2View65:
-    db $10
+    db C2SceneDesertTree

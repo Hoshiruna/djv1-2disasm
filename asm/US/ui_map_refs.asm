@@ -1,13 +1,13 @@
 ; Original zero-based UI resource index.
 UiMapRefs:
-    dw UiMap0
-    dw UiMap1
-    dw UiMap2
-    dw UiMap3
-    dw UiMap4
-    dw UiMap5
-    dw UiMap6
+    dw UiMapCopyrightNotice
+    dw UiMapTitle
+    dw UiMapSaveSelection
+    dw UiMapGameHud
+    dw UiMapDeveloperLogo
+    dw UiMapBlackjackTable
+    dw UiMapBlankTextPanel
     ; Pointer to UiMap7; split bytes retain the interior label.
-    db LOW(UiMap7)
+    db LOW(UiMapPublisherLogo)
 Call_009_400f:
-    db HIGH(UiMap7)
+    db HIGH(UiMapPublisherLogo)

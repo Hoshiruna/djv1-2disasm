@@ -22,35 +22,37 @@ jr_002_74c3:
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
-    bit 0, a
+    bit PADB_A, a
     jp nz, RunSaveSlotMenu
 
-    bit 3, a
+    bit PADB_START, a
     jp nz, RunSaveSlotMenu
 
-    bit 2, a
+    bit PADB_SELECT, a
     jp nz, CycleSaveSlot
 
-    bit 7, a
+    bit PADB_DOWN, a
     jp nz, NextSaveSlot
 
-    bit 6, a
+    bit PADB_UP, a
     jr nz, PrevSaveSlot
 
     ld a, [wSaveCodeStage]
     rst RST_00
 
 SaveCodeCalls:
-    dw SaveCode0
-    dw SaveCode1
-    dw SaveCode2
-    dw SaveCode3
+    dw SaveAudioCodeBRight
+    dw SaveAudioCodeBLeft
+    dw SaveAudioCodeBDown
+    dw SaveAudioCodeBUp
 
 ; Advance the hidden sequence when held buttons include mask $12.
+; First held-code stage: B+Right, with no reject mask.
+SaveAudioCodeBRight:
 SaveCode0:
     ld a, [wJoyHeld]
-    and $12
-    cp $12
+    and SaveAudioCodeBRightMask
+    cp SaveAudioCodeBRightMask
     jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
@@ -59,15 +61,17 @@ SaveCode0:
     jr ReadSaveSelect
 
 ; Reject held mask $cd and advance on mask $22.
+; Held-code stage: B+Left after its original reject-mask check.
+SaveAudioCodeBLeft:
 SaveCode1:
 
     ld a, [wJoyHeld]
-    and $cd
+    and SaveAudioCodeRejectBeforeLeft
     jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
-    and $22
-    cp $22
+    and SaveAudioCodeBLeftMask
+    cp SaveAudioCodeBLeftMask
     jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
@@ -76,15 +80,17 @@ SaveCode1:
     jr ReadSaveSelect
 
 ; Reject held mask $5d and advance on mask $82.
+; Held-code stage: B+Down after its original reject-mask check.
+SaveAudioCodeBDown:
 SaveCode2:
 
     ld a, [wJoyHeld]
-    and $5d
+    and SaveAudioCodeRejectBeforeDown
     jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
-    and $82
-    cp $82
+    and SaveAudioCodeBDownMask
+    cp SaveAudioCodeBDownMask
     jr nz, ReadSaveSelect
 
     ld a, [wSaveCodeStage]
@@ -93,15 +99,17 @@ SaveCode2:
     jr ReadSaveSelect
 
 ; Reject held mask $3d and enter the audio test on mask $42.
+; Held-code stage: B+Up after its original reject-mask check.
+SaveAudioCodeBUp:
 SaveCode3:
 
     ld a, [wJoyHeld]
-    and $3d
+    and SaveAudioCodeRejectBeforeUp
     jr nz, ResetSaveCode
 
     ld a, [wJoyHeld]
-    and $42
-    cp $42
+    and SaveAudioCodeBUpMask
+    cp SaveAudioCodeBUpMask
     jp z, AudioTestCall
 
     jp ReadSaveSelect
@@ -183,16 +191,16 @@ jr_002_75a0:
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
-    bit 0, a
+    bit PADB_A, a
     jr nz, DispatchSaveOp
 
-    bit 1, a
+    bit PADB_B, a
     jp nz, CancelSaveMenu
 
-    bit 7, a
+    bit PADB_DOWN, a
     jr nz, SaveOpMoveDown
 
-    bit 6, a
+    bit PADB_UP, a
     jr z, SaveOpInputLoop
 
     ld a, $19
@@ -251,10 +259,10 @@ jr_002_75f3:
     call QueueTileRect
     xor a
     ld [wCaseId], a
-    ld hl, SaveSlotRect11
+    ld hl, SaveCaseBookOneChoiceRect
     ld bc, $99a6
     call QueueTileRect
-    ld hl, SaveSlotRect12
+    ld hl, SaveCaseBookTwoChoiceRect
     ld bc, $99e6
     call QueueTileRect
     call SubmitMapQueue
@@ -268,16 +276,16 @@ jr_002_7624:
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
-    bit 0, a
+    bit PADB_A, a
     jr nz, StartNewCase
 
-    bit 1, a
+    bit PADB_B, a
     jr nz, CancelNewCase
 
-    bit 7, a
+    bit PADB_DOWN, a
     jr nz, NewCaseMoveDown
 
-    bit 6, a
+    bit PADB_UP, a
     jr z, NewCaseInputLoop
 
     ld a, $19
@@ -330,7 +338,7 @@ StartSavedGame:
     ld a, $19
     call PlayAudio
     call LoadGame
-    ld a, $ff
+    ld a, CaseStartLoadedMarker
 
 ; Store the new/load start marker from A and fade out.
 SetSaveStart:
@@ -387,13 +395,13 @@ Call_002_76ad:
     ld h, b
     ld bc, $9965
     call QueueTileRect
-    ld hl, SaveUiPtrs0
+    ld hl, SaveContinuePointers
     call PickSaveSpec
     call QueueTileSpec
-    ld hl, SaveUiPtrs1
+    ld hl, SaveExitPointers
     call PickSaveSpec
     call QueueTileSpec
-    ld hl, SaveUiPtrs2
+    ld hl, SaveNewGamePointers
     call PickSaveSpec
     call QueueTileSpec
     jp SubmitMapQueue
@@ -408,7 +416,7 @@ Call_002_76df:
     ld [wSaveAnswer], a
     ld hl, SavePromptFill
     call QueueFillSpec
-    ld hl, SaveUiPtrs3
+    ld hl, SaveEraseAnswerPointers
     call PickSaveSpec
     call QueueTileSpec
     call SubmitMapQueue
@@ -432,7 +440,7 @@ Call_002_76fb:
     add c
     ld c, a
     ld b, $00
-    ld hl, SaveAnswerPos
+    ld hl, SaveAnswerCursorPositions
     add hl, bc
     ld a, [hl+]
     ldh [hSpriteX], a
@@ -440,6 +448,8 @@ Call_002_76fb:
     ldh [hSpriteY], a
     jp DrawSaveCursor
 
+; X/Y pairs indexed by menu row times four plus answer times two.
+SaveAnswerCursorPositions:
 SaveAnswerPos:
     db $34, $68, $34, $70, $20, $60, $20, $70, $34, $80, $34, $88
 
@@ -458,16 +468,16 @@ jr_002_7728:
     call SubmitOam
     call PollJoy
     ld a, [wJoyPress]
-    bit 0, a
+    bit PADB_A, a
     jr nz, SaveAnswerConfirm
 
-    bit 1, a
+    bit PADB_B, a
     jr nz, SaveAnswerCancel
 
-    bit 7, a
+    bit PADB_DOWN, a
     jr nz, SaveAnswerMoveDown
 
-    bit 6, a
+    bit PADB_UP, a
     jr z, SaveAnswerInputLoop
 
     ld a, $19
@@ -518,7 +528,7 @@ Call_002_776c:
     call RequestTimer
     call DisableLcd
     call LoadSaveGfx
-    ld a, $02
+    ld a, UiMapIdSaveSelection
     call ReadUiMap
     call StopTimer
     call RestoreLcd
@@ -565,7 +575,7 @@ DrawSaveSlotNum:
 Call_002_77ba:
     call PickSaveDest
     push bc
-    ld hl, SaveNumDests
+    ld hl, SaveSlotNumberDestinations
     call ReadSaveDest
     pop hl
     jp QueueTileRect
@@ -580,11 +590,11 @@ Call_002_77c8:
     ld [wSaveBits], a
     jr c, DrawOccupiedSaveSlot
 
-    ld hl, SaveNumDests
+    ld hl, SaveSlotNumberDestinations
     call ReadSaveDest
-    ld hl, SaveTextOffsets
+    ld hl, SaveEmptyStatusOffsets
     call ShiftSaveDest
-    ld hl, SaveEmptyPtrs
+    ld hl, SaveEmptyStatusPointers
     call PickSaveSpec
     jp QueueTileRect
 
@@ -592,7 +602,7 @@ Call_002_77c8:
 ; Choose the saved case label for an occupied slot.
 DrawOccupiedSaveSlot:
 jr_002_77e7:
-    ld hl, SaveCaseDests
+    ld hl, SaveSlotCaseDestinations
     call ReadSaveDest
     ld a, e
     srl a
@@ -606,26 +616,28 @@ jr_002_77e7:
     cp $00
     jr nz, DrawNonzeroCaseSaveSlot
 
-    ld hl, SaveSlotRect9
+    ld hl, SaveCaseBookOneStatusRect
     jp QueueTileRect
 
 
 ; Queue the label selected for a nonzero saved case byte.
 DrawNonzeroCaseSaveSlot:
 jr_002_7804:
-    ld hl, SaveSlotRect10
+    ld hl, SaveCaseBookTwoStatusRect
     jp QueueTileRect
 
 ; --- save_dest.asm ---
 
+; Five retained byte offsets; the three declared empty-label tables use 6,36,6.
+SaveEmptyStatusOffsets:
 SaveTextOffsets:
     db $06, $24, $06, $25, $24
 
-; Select the regional destination table, then read the destination word at DE.
+; Read the language-selected slot-number rectangle pointer at word index DE into BC.
 PickSaveDest:
 
 Call_002_780f:
-    ld hl, SaveNumPtrs
+    ld hl, SaveSlotNumberPointers
     call PickSaveSpec
 
 ; Read the destination word at HL plus DE into BC.
@@ -676,7 +688,7 @@ Call_002_7830:
     ld a, [wSaveMenuRow]
     ld c, a
     ld b, $00
-    ld hl, SaveMenuYs
+    ld hl, SaveMenuCursorYTable
     add hl, bc
     ld a, [hl]
     ldh [hSpriteY], a
@@ -693,7 +705,7 @@ Call_002_7845:
     ldh a, [hSaveSlot]
     ld c, a
     ld b, $00
-    ld hl, SaveSlotYs
+    ld hl, SaveSlotCursorYTable
     add hl, bc
     ld a, [hl]
     ldh [hSpriteY], a

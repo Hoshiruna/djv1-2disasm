@@ -2,21 +2,21 @@
 RefreshC1:
 
     ld a, [wSceneId]
-    cp $8e
+    cp C1SceneAlligatorShotView
     jr z, C1RefreshShowEffect
 
-    cp $13
+    cp C1SceneCellarRackPassageOpen
     jr nz, C1RefreshReload
 
     ld a, [wItemId]
     cp $06
     jr nz, C1RefreshReload
 
-; Use scene effect six to redraw the special scene before applying presence changes.
+; Use diagonal stripes to redraw the special scene before applying presence changes.
 C1RefreshShowEffect:
 
 jr_002_69a3:
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     call ShowScene
     jr C1RefreshApplyPresence
@@ -33,28 +33,28 @@ C1RefreshApplyPresence:
 jr_002_69b0:
     call SubmitMapQueue
     ld a, [wSceneId]
-    cp $00
+    cp C1SceneStartStallDoorClosed
     jr nz, C1RefreshScene01
 
-    ld a, $41
+    ld a, C1ObjectCoat
     call SetObjPresent
     call RefreshObjs
-    ld a, $42
+    ld a, C1ObjectGun1
     call SetObjPresent
     call RefreshObjs
     jr C1RefreshDone
 
-; In scene $01, clear presence for objects $41 and $42.
+; In scene $01, clear presence for the coat and gun one.
 C1RefreshScene01:
 
 jr_002_69cc:
-    cp $01
+    cp C1SceneStartStallDoorOpen
     jr nz, C1RefreshScene12
 
-    ld a, $41
+    ld a, C1ObjectCoat
     call ClearObjPresent
     call RefreshObjs
-    ld a, $42
+    ld a, C1ObjectGun1
     call ClearObjPresent
     call RefreshObjs
     jr C1RefreshDone
@@ -63,7 +63,7 @@ jr_002_69cc:
 C1RefreshScene12:
 
 jr_002_69e2:
-    cp $12
+    cp C1SceneCellarRackPassageClosed
     jr nz, C1RefreshScene13
 
     ld bc, $98cf
@@ -77,7 +77,7 @@ jr_002_69e2:
 C1RefreshScene13:
 
 jr_002_69f7:
-    cp $13
+    cp C1SceneCellarRackPassageOpen
     jr nz, C1RefreshScene43
 
     ld bc, $98cf
@@ -87,50 +87,50 @@ jr_002_69f7:
     call RefreshObjs
     jr C1RefreshDone
 
-; In scene $43, clear presence for object $1f.
+; In scene $43, clear gag presence.
 C1RefreshScene43:
 
 jr_002_6a0c:
-    cp $43
+    cp C1SceneCarTrunkClosed
     jr nz, C1RefreshScene44
 
-    ld a, $1f
+    ld a, C1ObjectGag
     call ClearObjPresent
     call RefreshObjs
     jr C1RefreshDone
 
-; In scene $44, restore presence for object $1f.
+; In scene $44, restore gag presence.
 C1RefreshScene44:
 
 jr_002_6a1a:
-    cp $44
+    cp C1SceneCarTrunkOpen
     jr nz, C1RefreshScene73
 
-    ld a, $1f
+    ld a, C1ObjectGag
     call SetObjPresent
     call RefreshObjs
     jr C1RefreshDone
 
-; In scene $73, restore presence for object $16.
+; In scene $73, restore door-shadow presence.
 C1RefreshScene73:
 
 jr_002_6a28:
-    cp $73
+    cp C1SceneAceOfficeDoorClosed
     jr nz, C1RefreshScene74
 
-    ld a, $16
+    ld a, C1ObjectAceOfficeDoorShadow
     call SetObjPresent
     call RefreshObjs
     jr C1RefreshDone
 
-; In scene $74, clear presence for object $16.
+; In scene $74, clear door-shadow presence.
 C1RefreshScene74:
 
 jr_002_6a36:
-    cp $74
+    cp C1SceneAceOfficeDoorOpen
     jr nz, C1RefreshDone
 
-    ld a, $16
+    ld a, C1ObjectAceOfficeDoorShadow
     call ClearObjPresent
     call RefreshObjs
     jr C1RefreshDone

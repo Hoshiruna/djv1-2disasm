@@ -37,7 +37,7 @@ jr_001_4232:
     ld a, [wRoomDataPtr+1]
     ld h, a
     ld a, [hl+]
-    cp $ff
+    cp C1RoomRecordEnd
     ret z
 
     bit 7, a
@@ -132,7 +132,7 @@ C1MarkCheckSpecialId:
 
 jr_001_42b4:
     ld a, e
-    call HideC1MarkBB
+    call CheckC1CabColorHidden
     ret
 
 ; Advance the HRAM test-row offset by two and try the next mark ID.
@@ -146,55 +146,58 @@ jr_001_42b9:
     ldh [hChangePos], a
     jr C1MarkTestLoop
 
+; Two-byte rows; the current lookup reads only each row's first byte.
 C1MarkTests:
-    db $08, $6f
-    db $0d, $bb
-    db $24, $ff
-    db $29, $ff
-    db $25, $ff
-    db $2a, $ff
-    db $26, $ff
-    db $2b, $ff
-    db $27, $ff
-    db $2c, $ff
+    db C1StateRackPassageOpen, $6f
+    db C1StateYellowCabView, $bb
+    db C1DoorIdBlueCabStanford, $ff
+    db C1DoorIdYellowCabStanford, $ff
+    db C1DoorIdBlueCabBungalow, $ff
+    db C1DoorIdYellowCabBungalow, $ff
+    db C1DoorIdBlueCabOfficeBuilding, $ff
+    db C1DoorIdYellowCabOfficeBuilding, $ff
+    db C1DoorIdBlueCabEstate, $ff
+    db C1DoorIdYellowCabEstate, $ff
 
-; Use object flag $bb for IDs $24..$27/$29..$2c; clear result for other IDs.
+; Check hidden status for non-Peoria cab entries; clear it for other IDs.
+CheckC1CabEntryHidden:
 HideC1MarkId:
 
 Call_001_42d5:
-    cp $24
-    jr z, HideC1MarkBB
+    cp C1DoorIdBlueCabStanford
+    jr z, CheckC1CabColorHidden
 
-    cp $25
-    jr z, HideC1MarkBB
+    cp C1DoorIdBlueCabBungalow
+    jr z, CheckC1CabColorHidden
 
-    cp $26
-    jr z, HideC1MarkBB
+    cp C1DoorIdBlueCabOfficeBuilding
+    jr z, CheckC1CabColorHidden
 
-    cp $27
-    jr z, HideC1MarkBB
+    cp C1DoorIdBlueCabEstate
+    jr z, CheckC1CabColorHidden
 
-    cp $29
-    jr z, HideC1MarkBB
+    cp C1DoorIdYellowCabStanford
+    jr z, CheckC1CabColorHidden
 
-    cp $2a
-    jr z, HideC1MarkBB
+    cp C1DoorIdYellowCabBungalow
+    jr z, CheckC1CabColorHidden
 
-    cp $2b
-    jr z, HideC1MarkBB
+    cp C1DoorIdYellowCabOfficeBuilding
+    jr z, CheckC1CabColorHidden
 
-    cp $2c
+    cp C1DoorIdYellowCabEstate
     jr nz, C1MarkNotHidden
 
-; Use input bit 3 to choose whether object flag $bb hides the mark.
+; Hide the entry when its cab color differs from C1CabIsYellow.
+CheckC1CabColorHidden:
 HideC1MarkBB:
 
 Call_001_42f5:
 jr_001_42f5:
     and $08
-    jr nz, C1MarkInvertBB
+    jr nz, CheckC1YellowCabHidden
 
-    ld a, $bb
+    ld a, C1CabIsYellow
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
@@ -203,12 +206,13 @@ jr_001_42f5:
     call SetResult
     ret
 
-; With input bit 3 set, hide the mark when object flag $bb is clear.
+; A yellow cab entry is hidden when C1CabIsYellow is clear.
+CheckC1YellowCabHidden:
 C1MarkInvertBB:
 
 
 jr_001_4309:
-    ld a, $bb
+    ld a, C1CabIsYellow
     call ReadObjFlag
     ld a, [wStateResult]
     and $01

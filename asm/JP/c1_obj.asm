@@ -21,11 +21,11 @@ jr_002_6c0a:
 
     ret
 
-; Rule 0: select object $04 in room $06, otherwise check the scene replacement.
+; Rule 0: select the open spigot object in the cellar, otherwise check the scene replacement.
 C1ObjSwap:
 
     ld a, [wRoomId]
-    cp $06
+    cp C1RoomIdCellar
     jr nz, C1ObjSwapSceneCheck
 
     ld a, C1SpigotOpen
@@ -34,7 +34,7 @@ C1ObjSwap:
     and $01
     jr z, C1ObjSpigotReturn
 
-    ld a, $04
+    ld a, C1ObjectCellarSpigotOpen
     ld [wDrawObj], a
 
 ; Return after the room-six spigot object selection.
@@ -56,17 +56,17 @@ jr_002_6c27:
 C1Rule2:
     ret
 
-; Replace object $16 with $0a in scene $73 when its third-bitmap flag is clear.
+; Replace the scene-$73 door-shadow object while the shadow-shot flag is clear.
 SwapSceneObj:
 
 Call_002_6c33:
     call ClearResult
     ld a, [wDrawObj]
-    cp $16
+    cp C1ObjectAceOfficeDoorShadow
     ret nz
 
     ld a, [wSceneId]
-    cp $73
+    cp C1SceneAceOfficeDoorClosed
     ret nz
 
     ld a, C1ShadowShot
@@ -75,7 +75,7 @@ Call_002_6c33:
     and $01
     jr nz, C1SwapSceneObjDone
 
-    ld a, $0a
+    ld a, C1ObjectAceOfficeUnshotShadow
     ld [wDrawObj], a
 
 ; Clear the result after the scene-$73 object replacement check.
@@ -87,15 +87,15 @@ jr_002_6c53:
 C1Rule1:
     ret
 
-; Rule 3: skip object $1f unless the current scene is $44.
+; Rule 3: skip the gag object unless the current scene is $44.
 C1ObjOnly:
 
     ld a, [wDrawObj]
-    cp $1f
+    cp C1ObjectGag
     ret nz
 
     ld a, [wSceneId]
-    cp $44
+    cp C1SceneCarTrunkOpen
     ret z
 
     jr C1ObjSkipRoom

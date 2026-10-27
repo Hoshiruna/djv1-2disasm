@@ -97,7 +97,7 @@ jr_000_2c7e:
     ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $77
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message77: THERE ARE NO / BULLETS.[END]
     call ClearResult
     ret
 
@@ -129,6 +129,6 @@ jr_000_2cb2:
     ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $78
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message78: THERE ARE NO / BULLETS.[END]
     call ClearResult
     ret

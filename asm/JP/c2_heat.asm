@@ -44,7 +44,7 @@ WarnDesertSun:
 
 jr_003_5e66:
     ld a, $d8
-    jp ShowMsg0
+    jp ShowMsg0 ; Message Text13Message58: たいようが ジリジリと ようしゃなくてりつける・・・。[PAGE] / ひかげを さがしたが みつからない。・・・あせが たきのように / ながれおちる・・・。[END]
 
 ; Warn about the lack of shade and water.
 WarnDesertDry:
@@ -52,7 +52,7 @@ WarnDesertDry:
 
 jr_003_5e6b:
     ld a, $d9
-    jp ShowMsg0
+    jp ShowMsg0 ; Message Text13Message59: ひよけも ない・・・。 / みずも ない・・・。[PAGE] / きもちばかりが あせって からだは / つかれるばかりだ・・・。[PAGE] / ・・・くるしい・・・。...
 
 ; Show the lemonade-stand mirage, restore the scene effect, and resume the room cue.
 ShowMirage:
@@ -63,7 +63,7 @@ jr_003_5e70:
     xor a
     call PlayAudio
     ld a, $db
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5B: ・・・もう たいりょくも / げんかいだ・・・。[PAGE] / ハゲタカの エサになるのも じかんのもんだいのようだ・・・。[END]
     ld a, FxMirage
     call BeginC2Fx
     call LoadC2Pal
@@ -72,15 +72,15 @@ jr_003_5e70:
     call WaitTicks
     call ScriptHoldText
     ld a, $dc
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5C: なんて おれは うんが いいんだ! / すぐ そこに ばいてんが![PAGE] / フラフラと すいよせられるように / あるきながら おれは つぶやいた。[PAGE] ...
     ld a, $dd
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5D: ああ・・・っ! / そんな・・・。[END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     call RestoreC2Effect
     ld a, $de
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5E: ばいてんは おれの よくぼうがみせたまぼろしだったようだ・・・。[PAGE] / あんな まぼろしを みるとは・・・。しが ちかづいているのか?[END]
     jp RoomCueCall
 
 ; Show collapse in the sand, mark the saved heat event, and run the exit effect.
@@ -91,7 +91,7 @@ jr_003_5eac:
     ld a, $09
     call PlayAudio
     ld a, $df
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5F: ああ・・・! / もう いっぽも うごけない・・・。[PAGE] / こうしているあいだも おれの / たいないの すいぶんは どんどん / じょうはつしている・・・。[...
     ld a, [wC2EventBits]
     or EvtHeat
     ld [wC2EventBits], a

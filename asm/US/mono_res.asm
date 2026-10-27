@@ -4,7 +4,7 @@ MonoMapRef:
     dw MonoMap
 
 MonoMap:
-    db $20, $14, $12, $7d, $7d, $00, $3f, $64, $69, $6a, $6b, $6c, $6d, $6e, $6f, $70
+    db MapFormatRleSingle, $14, $12, $7d, $7d, $00, $3f, $64, $69, $6a, $6b, $6c, $6d, $6e, $6f, $70
     db $71, $72, $66, $7d, $00, $04
 jr_009_7aa7:
     db $7d, $68
@@ -28,7 +28,7 @@ MonoGfxRef:
     dw MonoGfx
 
 MonoGfx:
-    db $1d, $00, $80, $3d
+    db GfxFormatLzSigned + $10, $00, $80, $3d
 jr_009_7b38:
     db $00, $00, $0f, $00, $ff, $ff, $04, $16, $06, $02, $01, $f7, $e0, $e0, $08, $26
     db $02, $0b, $0b, $0e, $0c, $fa, $02, $03, $02, $36, $00, $00, $00, $e2, $c2, $32

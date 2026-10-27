@@ -14,9 +14,9 @@ SECTION "ROM Bank $025", ROMX[$4000], BANK[$25]
     dw MapC1_S56 ; $06
     dw MapC1_S57 ; $07
     dw MapC1_S58 ; $08
-    dw MapC1_S59 ; $09
+    dw MapC1_BlueCabDriverTurned ; $09
     dw MapC1_S5A ; $0a
-    dw MapC1_S5B ; $0b
+    dw MapC1_YellowCabDriverTurned ; $0b
     dw MapC1_S5C ; $0c
     dw MapC1_S5D ; $0d
     dw MapC1_S5E ; $0e
@@ -198,6 +198,8 @@ jr_025_4d25:
 AttrC1_S58:
     INCBIN "../../res/scene/case1/58-cab-interior/s58-bg.attrmap", $0, $c4
 
+; Source-rendered cab driver turned toward Ace; retain the original scene-index label.
+MapC1_BlueCabDriverTurned:
 MapC1_S59:
     INCBIN "../../res/scene/case1/59-cab-interior/s59-bg.tilemap", $0, $4f
 jr_025_4e67:
@@ -209,6 +211,8 @@ jr_025_4e9d:
 jr_025_4ead:
     INCBIN "../../res/scene/case1/59-cab-interior/s59-bg.tilemap", $95, $2f
 
+; Source-rendered cab driver turned toward Ace; retain the original scene-index label.
+AttrC1_BlueCabDriverTurned:
 AttrC1_S59:
     INCBIN "../../res/scene/case1/59-cab-interior/s59-bg.attrmap", $0, $c4
 
@@ -224,6 +228,8 @@ jr_025_5035:
 AttrC1_S5A:
     INCBIN "../../res/scene/case1/5a-cab-interior/s5a-bg.attrmap", $0, $c4
 
+; Source-rendered cab driver turned toward Ace; retain the original scene-index label.
+MapC1_YellowCabDriverTurned:
 MapC1_S5B:
     INCBIN "../../res/scene/case1/5b-cab-interior/s5b-bg.tilemap", $0, $61
 jr_025_5189:
@@ -233,6 +239,8 @@ jr_025_51ad:
 jr_025_51bd:
     INCBIN "../../res/scene/case1/5b-cab-interior/s5b-bg.tilemap", $95, $2f
 
+; Source-rendered cab driver turned toward Ace; retain the original scene-index label.
+AttrC1_YellowCabDriverTurned:
 AttrC1_S5B:
     INCBIN "../../res/scene/case1/5b-cab-interior/s5b-bg.attrmap", $0, $c4
 

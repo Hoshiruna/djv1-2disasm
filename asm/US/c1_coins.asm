@@ -50,7 +50,7 @@ UseListCount:
 C1UseCoinEmpty:
 jr_000_28f3:
     ld a, $72
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message72: THERE ARE NO MORE / COINS.[END]
     ret
 
 ; Read a cost, subtract it when available, and retain the room-specific success and insufficient-count flags.
@@ -70,7 +70,7 @@ Jump_000_2902:
 
     ld [wC1Coins], a
     ld a, [wRoomId]
-    cp $27
+    cp C1RoomIdYellowCabPeoria
     jr z, C1SpendCheckYellowDebt
 
     ld a, C1BlueCabDebt
@@ -115,10 +115,10 @@ jr_000_292e:
 C1SpendCoinsInsufficient:
 jr_000_2942:
     ld a, [wRoomId]
-    cp $26
+    cp C1RoomIdBlueCabPeoria
     jr z, C1SpendBlueDebt
 
-    cp $27
+    cp C1RoomIdYellowCabPeoria
 
 Jump_000_294b:
     jr z, C1SpendYellowDebt

@@ -9,12 +9,12 @@ jr_001_61ab:
     call DrawRoomObjs
     call SubmitOam
 
-; For selections below $15, use their scroll target; other selections use zero.
+; Use table scroll targets below InputSelRoomFine; room selectors use zero.
 ScrollCursor:
 
 Call_001_61ba:
     ld a, [wInputSel]
-    cp $15
+    cp InputSelRoomFine
     jr c, ScrollSelection
 
     xor a

@@ -85,7 +85,7 @@ jr_000_28ad:
 ; Check the Case II bypass flag and attribute-zero requirement.
 C2AltTargetCheck:
 jr_000_28b7:
-    ld a, $88
+    ld a, C2AltTargetBypass
     call ReadObjFlag
     jr nz, C2AltTargetBegin
 
@@ -95,8 +95,8 @@ jr_000_28b7:
     jr nz, C2AltTargetBegin
 
     ld a, [wSelAction]
-    cp $02
-    jr z, C2AltTargetAction2Reject
+    cp SelActionUse
+    jr z, C2AltTargetUseReject
 
     ld a, $e5
     call ShowMsg0
@@ -104,7 +104,8 @@ jr_000_28b7:
     jp EndBankAction
 
 
-; Show the action-two rejection and end the banked action.
+; Show the use-action rejection and end the banked action.
+C2AltTargetUseReject:
 C2AltTargetAction2Reject:
 jr_000_28d8:
     ld a, $9e
@@ -116,17 +117,18 @@ jr_000_28d8:
 ; Clear the Case II bypass flag and choose the selection prompt.
 C2AltTargetBegin:
 jr_000_28e1:
-    ld a, $88
+    ld a, C2AltTargetBypass
     call ClearObjFlag
     ld a, [wSelAction]
-    cp $02
-    jr z, C2AltTargetAction2Prompt
+    cp SelActionUse
+    jr z, C2AltTargetUsePrompt
 
     ld a, $a7
     call ShowMsg1
     jr C2AltTargetInputLoop
 
-; Show the alternate-target prompt for action two.
+; Show the alternate-target prompt for use.
+C2AltTargetUsePrompt:
 C2AltTargetAction2Prompt:
 jr_000_28f4:
     ld a, $15
@@ -149,7 +151,7 @@ Call_000_28ff:
     pop af
     call HandleAltInput
     call PopRomBank
-    ld a, $8f
+    ld a, C2AltTargetCancelled
     call ReadObjFlag
     jr nz, C2AltTargetCancelExit
 
@@ -167,7 +169,7 @@ Jump_000_2922:
 ; Clear the Case II cancellation flag and restore the banked caller exit.
 C2AltTargetCancelExit:
 jr_000_2926:
-    ld a, $8f
+    ld a, C2AltTargetCancelled
     call ClearObjFlag
     pop bc
     call PopRomBank

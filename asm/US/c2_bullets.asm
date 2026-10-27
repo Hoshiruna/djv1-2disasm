@@ -1,5 +1,5 @@
 
-; With a nonzero inventory count, clear the first loaded-bullet flag and consume one bullet.
+; Load one inventory round into the first empty chamber: clear its flag and decrement the inventory count.
 ; Refresh the selected list mode and retain both failure messages.
 UseC2Bullet:
 
@@ -9,17 +9,17 @@ UseC2Bullet:
     jr nz, C2BulletUseReady
 
     ld a, $2d
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message2D: WHAT ARE YOU / DOING...?[END]
     call ClearResult
     ret
 
 
-; Start scanning loaded bullet flags when inventory count is nonzero.
+; With inventory available, scan for a set chamber flag (empty chamber).
 C2BulletUseReady:
 jr_003_4f44:
     ld hl, C2BulletIds
 
-; Scan the six bullet flags for the first loaded slot.
+; Scan the six chamber flags for the first set bit, then clear it to load that chamber.
 C2BulletFindLoaded:
 jr_003_4f47:
     ld a, [hl+]
@@ -33,7 +33,7 @@ jr_003_4f47:
     ld a, [hl]
     call ClearItemFlag
     ld a, $8e
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message0E: YOU LOAD THE GUN.[END]
     call SetResult
     ld a, [wC2Bullets]
     dec a
@@ -50,22 +50,22 @@ jr_003_4f47:
     ret
 
 
-; Report that no loaded bullet flag is set.
+; All six chamber flags are clear: the gun is already fully loaded.
 C2BulletNoLoaded:
 jr_003_4f77:
     ld a, $8f
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message0F: THERE ARE ONLY 6 / CHAMBERS IN A .38![END]
     call ClearResult
     ret
 
-; Mark the first unloaded bullet slot and play cue $10; the inventory count is unchanged.
-; If all six slots are loaded, show message $90 and clear the result.
+; Fire the first loaded chamber: set its clear flag and play cue $10; inventory count is unchanged.
+; If all six chamber flags are set (empty), show message $90 and clear the result.
 TakeC2Bullet:
 
 
     ld hl, C2BulletIds
 
-; Scan the six bullet flags for the first empty slot.
+; Scan for the first clear chamber flag (loaded round).
 C2BulletFindEmpty:
 jr_003_4f83:
     ld a, [hl+]
@@ -84,14 +84,14 @@ jr_003_4f83:
     ret
 
 
-; Report that all six bullet flags are already set.
+; All six chamber flags are set: no loaded rounds remain.
 C2BulletAllLoaded:
 jr_003_4f9b:
     ld a, $90
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message10: YOU TAKE AIM, PULL / THE TRIGGER...[PAGE] / AND... CLICK?![PAGE] / HMM, NO BULLETS![END]
     call ClearResult
     ret
 
-; Six BULLET item IDs; $ff ends the table.
+; Six item-bitmap chamber flag IDs; set means empty, clear means loaded; $ff ends the scan.
 C2BulletIds:
     db $55, $56, $57, $58, $59, $5a, $ff

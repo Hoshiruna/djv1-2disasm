@@ -52,7 +52,7 @@ jr_005_59db:
     ld bc, wListType
     add hl, bc
     ld [hl], a
-    cp $03
+    cp ListDecodedRawItemType
     jr z, ListDecodeReturn
 
     ld bc, wListValue
@@ -62,7 +62,7 @@ jr_005_59db:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $1f
+    and ListPackedValueMask
     ld b, a
     ldh a, [hItemSlot]
     ld l, a
@@ -79,11 +79,14 @@ jr_005_5a08:
     ret
 
 C1ListTypes:
-    db $03, $03, $03, $04, $01, $02
+    db ListDecodedRawItemType, ListDecodedRawItemType, ListDecodedRawItemType, $04
+    db $01, $02
 C2ListTypes:
-    db $03, $03, $03, $03, $04, $01, $02, $06
+    db ListDecodedRawItemType, ListDecodedRawItemType, ListDecodedRawItemType, ListDecodedRawItemType
+    db $04, $01, $02, $06
 
-; Resolve change type/value to a terminated list and filter it into the scratch buffer.
+; Resolve the pointer before clearing scratch; offsets 4/5 also hold change type/value.
+; A kind with bit 7 set returns before the clear.
 ReadChangeList:
     ld a, [wChangeType]
     ld l, a
@@ -92,15 +95,15 @@ ReadChangeList:
     cp $00
     jr nz, ReadChangeCase2Kinds
 
-    ld bc, C1ListKinds
-    ld de, C1ChangeRefs
+    ld bc, C1ChangeKindByType
+    ld de, C1ChangeListsByKind
     jr ReadChangeResolve
 
 ; Use the Case II list-kind and change-reference tables.
 ReadChangeCase2Kinds:
 jr_005_5a2c:
-    ld bc, C2ListKinds
-    ld de, C2ChangeRefs
+    ld bc, C2ChangeKindByType
+    ld de, C2ChangeListsByKind
 
 ; Resolve a change record to its terminated item list.
 ReadChangeResolve:
@@ -135,7 +138,7 @@ jr_005_5a32:
     ld [wListScratch+5], a
     ld bc, wListScratch
 
-; Filter each item byte into the six-byte scratch list.
+; Write one byte per source entry until $ff; this loop has no six-byte bound.
 ReadChangeFilterLoop:
 jr_005_5a64:
     ld a, [hl+]
@@ -151,18 +154,25 @@ jr_005_5a64:
     inc bc
     jr ReadChangeFilterLoop
 
+; Case I change type to list-kind index; bit 7 returns before scratch clear.
+C1ChangeKindByType:
 C1ListKinds:
-    db $ff, $00, $ff, $ff, $01, $ff
+    db ChangeListKindUnavailable, ChangeListKindProp1, ChangeListKindUnavailable
+    db ChangeListKindUnavailable, ChangeListKindProp4, ChangeListKindUnavailable
+; Case II change type to list-kind index; kind two bypasses item filtering.
+C2ChangeKindByType:
 C2ListKinds:
-    db $ff, $00, $02, $ff, $01, $ff
+    db ChangeListKindUnavailable, ChangeListKindProp1, ChangeListKindGroup
+    db ChangeListKindUnavailable, ChangeListKindProp4, ChangeListKindUnavailable
 
-; Return the raw item byte, or $ff when its state excludes it; list kind $02 bypasses filtering.
+; Kind 2 returns raw bytes. Other kinds keep a byte only when both predicates clear.
+; A holds their combined test; wStateResult retains the second reader result.
 FilterListItem:
 
     ld [wListRaw], a
 
     ld a, [wListKind]
-    cp $02
+    cp ChangeListKindGroup
     jr z, FilterListKeepRaw
 
     ld a, [wListRaw]

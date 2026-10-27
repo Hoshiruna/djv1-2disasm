@@ -119,8 +119,8 @@ jr_003_6deb:
 
 FlatDesertRooms:
 C2Anim6CRooms:
-    db $7c, $6d, $81, $8d, $ff
+    db RoomDesertBelowTracksB, $6d, $81, $8d, $ff
 
 SlopeDesertRooms:
 C2Anim6BRooms:
-    db $84, $71, $93, $9f, $ff
+    db $84, RoomDesertAboveTracksB, $93, $9f, $ff

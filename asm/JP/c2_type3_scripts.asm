@@ -5,7 +5,7 @@ LookC2Money:
 
 C2Sc3_00:
     ; Show message 1.
-    db $01, $65
+    db $01, $65 ; Message Text14Message65: くにじゅう どこででも つかえる / おかねだ。[END]
     ; End script.
     db $ff
 
@@ -14,7 +14,7 @@ LookC2Bullet:
 
 C2Sc3_01:
     ; Show message 1.
-    db $01, $7f
+    db $01, $7f ; Message Text14Message7F: この たまは 38スぺシャルに / いれられるのを まっている。[END]
     ; End script.
     db $ff
 
@@ -23,7 +23,7 @@ LookC2Cell:
 
 C2Sc3_02:
     ; Show message 1.
-    db $01, $78
+    db $01, $78 ; Message Text14Message78: たんいちの でんちだ。[END]
     ; End script.
     db $ff
 
@@ -32,7 +32,7 @@ LookC2Chip:
 
 C2Sc3_03:
     ; Show message 0.
-    db $00, $f5
+    db $00, $f5 ; Message Text13Message75: チップは 1まい 5ドルだ。[END]
     ; End script.
     db $ff
 
@@ -41,7 +41,7 @@ LookC2Towel:
 
 C2Sc3_04:
     ; Show message 0.
-    db $00, $18
+    db $00, $18 ; Message Text12Message18: 「ラッキーダイスホテル & カジノ」と ししゅうが してある タオルだ。[END]
     ; End script.
     db $ff
 
@@ -50,7 +50,7 @@ UseLift4Button:
 
 C2Sc3_05:
     ; Test object visibility.
-    db $28, $0f
+    db $28, C2VisIdLiftButton4Installed
     ; Branch if result bit 0 is set.
     db $03
     dw PressLift4
@@ -67,78 +67,78 @@ MatchC2Item:
 
 C2Loc3_00:
     ; Match alternate item against type, ID and script target rows.
-    db $32, $00, $05
+    db $32, $00, C2TargetBathSink
     dw MatchTowelWater
-    db $00, $18
+    db $00, C2TargetHotelBlackjackTable
     dw MatchChipTable
-    db $00, $1a
+    db $00, C2TargetHotelDealerTag
 
 jr_007_598d:
     dw UseItemDealer
-    db $00, $1b
+    db $00, C2TargetHotelDealer
     dw UseItemDealer
-    db $00, $1f
+    db $00, C2TargetLiftPanel
     dw MatchLiftButton
-    db $00, $43
+    db $00, C2TargetTrainConductor
     dw MatchFareItems
     db $00
 
 jr_007_599c:
-    db $44
+    db C2TargetTrainChattyWoman
     dw MatchTrainSharp
-    db $00, $45
+    db $00, C2TargetTrainSeatMan
     dw UseItemConductor
-    db $00, $46
+    db $00, C2TargetTrainYoungWoman
     dw MatchTrainSharp
-    db $00, $50
+    db $00, C2TargetChicagoNewsDog
     dw UseItemC2Dog
-    db $00, $70
+    db $00, C2TargetJoeBoardedWindow
     dw MatchKnifeBoards
-    db $00, $7a
+    db $00, C2TargetSugarHobo
     dw UseItemHobo
-    db $00, $83
+    db $00, C2TargetMorgueClerk
     dw MatchClerkItem
-    db $00, $93
+    db $00, C2TargetCleanersDartboard
     dw MatchDartBoard
-    db $01, $0c
+    db $01, C2ContainerSecretOfficeDesk
     dw MatchDeskRing
-    db $01, $03
+    db $01, C2ContainerJoeDiarySlot
     dw MatchSlotCoin
-    db $01, $04
+    db $01, C2ContainerJoeEmptySlot
     dw MatchSlotCoin
-    db $02, $00
+    db $02, C2GroupLaundryWasher
     dw MatchItemWasher
-    db $03, $4b
+    db $03, C2DeskMat
     dw TryRingOnMat
-    db $04, $09
+    db $04, C2ItemGun
 
 jr_007_59d1:
     dw MatchGunBullet
-    db $04, $0a
+    db $04, C2ItemFlashlight
     dw MatchLampCell
-    db $04, $11
+    db $04, C2ItemVacuumBag
     dw MatchBagKnife
-    db $05, $47
+    db $05, C2TargetJammedCabDoor
     dw MatchKnifeCab
-    db $05, $5b
+    db $05, C2TargetJoeRearDoor
     dw KnifeJoeLock
-    db $05, $66
+    db $05, C2TargetSugarApartmentDoor
     dw KnifeSugarLock
-    db $00, $a6
+    db $00, C2TargetSelf
     dw MatchSelfItem
-    db $00, $16
+    db $00, C2TargetHotelCashCounter
     dw UseItemCashier
-    db $00, $17
+    db $00, C2TargetHotelCashier
     dw UseItemCashier
-    db $00, $37
+    db $00, C2TargetVegasSeller
     dw UseItemSeller
-    db $00, $3c
+    db $00, C2TargetVegasClaimAttendant
     dw UseItemAttendant
-    db $00, $4f
+    db $00, C2TargetChicagoNewsSeller
     dw UseItemNewsMan
-    db $00, $55
+    db $00, C2TargetCabDriver
     dw UseItemCabDriver
-    db $02, $03
+    db $02, C2GroupMaloneDesk
     dw MatchDeskStore
     db $fe, $fe
     dw MatchPencilUse
@@ -148,14 +148,14 @@ MatchTowelWater:
 
 C2Loc3_01:
     ; Test packed item argument and branch on inequality.
-    db $56, $05
+    db $56, C2ItemTowel
     ; Target NoC2ItemEffect; retain the interior label.
     db LOW(NoC2ItemEffect)
 
 jr_007_5a0e:
     db HIGH(NoC2ItemEffect)
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text12Message22: タオルを ひたした。[END]
     ; End script.
     db $ff
 
@@ -210,13 +210,13 @@ C2Loc3_04:
     db $08, C2RudyKnows
     dw RudyClipAgain
     ; Show message 0.
-    db $00, $8d
+    db $00, $8d ; Message Text13Message0D: ルーディーは しんぶんの きりぬきをチラッとみた。[PAGE] / そして おれに ウィンクをすると / ニマッと わらった。[END]
     ; Run map pulse animation.
     db $75
     ; Set state bit.
-    db $0f, $73
+    db $0f, C2StateRudyRecognizesAce
     ; Show message 0.
-    db $00, $8e
+    db $00, $8e ; Message Text13Message0E: おれが だれなのか わかったようだ。ルーディーは こえを ひそめて / いった。[PAGE] / 「ひさしぶりだな・・・エース。 /  あいかわらず くろうしている / ...
     ; Set object flag.
     db $09, C2RudyKnows
     ; End script.
@@ -227,7 +227,7 @@ RudyClipAgain:
 
 C2Loc3_05:
     ; Show message 0.
-    db $00, $8f
+    db $00, $8f ; Message Text13Message0F: 「あのころは よかったな・・・。」[PAGE] / ルーディーは とおくを みながら / しみじみと いった。[END]
     ; End script.
     db $ff
 
@@ -241,7 +241,7 @@ C2Loc3_06:
     ; Set text name 0.
     db $30, $bd
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -252,7 +252,7 @@ C2Loc3_07:
     ; Set text name 0.
     db $30, $be
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -310,7 +310,7 @@ C2Loc3_0C:
     db $03
     dw EvictDealerAttack
     ; Set state bit.
-    db $0f, $06
+    db $0f, C2StateCasinoFrontDoorOpen
 
 ; Prepare the move from room 05 to 11 and enter the guard response.
 EvictDealerAttack:
@@ -343,10 +343,10 @@ C2Loc3_0F:
     db $46, $0c
     dw ShowClerkID
     ; Test packed item argument and branch on equality.
-    db $46, $51
+    db $46, C2MorgueTag1
     dw GiveClerkTag1
     ; Test packed item argument and branch on equality.
-    db $46, $52
+    db $46, C2MorgueTag2
     dw GiveClerkTag2
     ; Test packed item argument and branch on equality.
     db $46, C2Bottle
@@ -381,7 +381,7 @@ C2Loc3_10:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $90
+    db $02, $90 ; Message Text17Message10: じむいんは めんきょしょうを みて / おれの しょくぎょうを たずねた。[PAGE] / おれが なんのために きたのか / わからないらしい。[END]
     ; Set object flag.
     db $09, C2ClerkSawID
 
@@ -390,7 +390,7 @@ ClerkNeedsUni:
 
 C2Loc3_11:
     ; Show message 2.
-    db $02, $91
+    db $02, $91 ; Message Text17Message11: 「しりつたんていね・・・。 /  ざんねんだが ここには じむいんか けいかんしか はいれないんだ。」[END]
     ; End script.
     db $ff
 
@@ -399,7 +399,7 @@ ClerkNoBody:
 
 C2Loc3_12:
     ; Show message 2.
-    db $02, $92
+    db $02, $92 ; Message Text17Message12: じむいんは めんきょしょうを / もどしながら いった。[PAGE] / 「そんな なまえの いたいは /  ないよ。」[END]
     ; End script.
     db $ff
 
@@ -413,9 +413,9 @@ C2Loc3_13:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text17Message13: じむいんは めんどうくさそうに / いった。[END]
     ; Show message 2.
-    db $02, $94
+    db $02, $94 ; Message Text17Message14: 「ピエールさんの もちものは /  ありませんよ!」[END]
     ; Set object flag.
     db $09, C2Tag1Given
     ; Jump to script.
@@ -432,14 +432,14 @@ C2Loc3_14:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $98
+    db $02, $98 ; Message Text17Message18: じむいんは ぶきみに わらいながら / いった。[PAGE] / 「くわしくは しらないのですが /  ボンドウェルさんの いたいは /  シカゴがわの かわぞこで / ...
     ; Call script.
     db $05
     dw ConsumeSlot0Item
     ; Show message 1.
-    db $01, $37
+    db $01, $37 ; Message Text14Message37: そういうと じむいんは ブツブツと / めんどうくさそうに はこを だした。[PAGE] / 「これが ボンドウェルさんの /  もちものですよ。」[END]
     ; Show object.
-    db $29, $4b
+    db $29, C2VisIdMorgueBox2Closed
     ; Refresh room objects.
     db $2b
     ; Set object flag.
@@ -454,7 +454,7 @@ C2Loc3_15:
     ; Play audio.
     db $3e, $09
     ; Show message 1.
-    db $01, $54
+    db $01, $54 ; Message Text14Message54: 「どうして けいかんでない おまえが これを もっているんだ・・・?」[PAGE] / じむいんは ひじょうべルを おして / けいさつを よんだ・・・。[END]
     ; Jump to script.
     db $07
     dw C2JailEnding
@@ -466,7 +466,7 @@ C2Loc3_16:
     ; Set text name 0.
     db $30, $b4
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -497,7 +497,7 @@ WorkerAlarmEnd:
 
 C2Loc3_19:
     ; Show message 2.
-    db $02, $8e
+    db $02, $8e ; Message Text17Message0E: ぶさほうな こういに おどろいて / じむいんは ひじょうべルを おして / けいかんを よんだ。[END]
     ; Run scene effect.
     db $39, FxPoliceman
     ; Play audio.
@@ -507,7 +507,7 @@ C2Loc3_19:
     ; Wait sixty ticks.
     db $7e
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text15Message0A: すぐに けいかんが やってきた。 / はやく にげなければ・・・![END]
     ; Wait sixty ticks.
     db $7e
     ; Run scene effect.
@@ -517,7 +517,7 @@ C2Loc3_19:
     ; Wait sixty ticks.
     db $7e
     ; Show message 1.
-    db $01, $81
+    db $01, $81 ; Message Text15Message01: とっさに にげだしたが すぐに / つかまってしまった・・・。[PAGE] / わるふざけして どくしょの じゃまをするべきでは なかったな。[END]
     ; Wait sixty ticks.
     db $7e
     ; Play exit effect and end this action.
@@ -577,7 +577,7 @@ C2Loc3_1E:
     ; Refresh room objects.
     db $2b
     ; Show message 1.
-    db $01, $22
+    db $01, $22 ; Message Text14Message22: つくえの うえに シガーリングを / おいた。[PAGE] / ・・・フッ フッ フッ。 / べンティーニの あわてる ようすが / めに みえるようだ。[PAGE] /...
     ; Set object flag.
     db $09, C2RingFlag
     ; Set object flag.
@@ -611,7 +611,7 @@ C2Loc3_20:
     db $46, $42
     dw FitLiftButton
     ; Test packed item argument and branch on equality.
-    db $46, $17
+    db $46, C2ItemLiftButton
     dw FitLiftButton
     ; Jump to script.
     db $07
@@ -622,21 +622,21 @@ FitLiftButton:
 
 C2Loc3_21:
     ; Clear state bit.
-    db $10, $14
+    db $10, C2StateLaundryChuteDoorOpen
     ; Clear object flag.
     db $0a, LaundryUnlocked
     ; Clear state bit.
-    db $10, $15
+    db $10, C2StateCleanersEntranceOpen
     ; Set object flag.
     db $09, C2CleanLock
     ; Show object.
-    db $29, $0f
+    db $29, C2VisIdLiftButton4Installed
     ; Refresh room objects.
     db $2b
     ; Show message 0.
-    db $00, $a6
+    db $00, $a6 ; Message Text13Message26: ・・・カチャ![PAGE] / マグネットボタンは 3かいの / ボタンの うえに おさまった。[END]
     ; Show object.
-    db $29, $20
+    db $29, C2VisIdLiftButton4Pressed
     ; Refresh room objects.
     db $2b
     ; Select operation slot 0.
@@ -646,7 +646,7 @@ C2Loc3_21:
     ; Drop selected list item.
     db $33
     ; Test packed item argument and branch on equality.
-    db $46, $17
+    db $46, C2ItemLiftButton
     dw FinishLiftButton
     ; Set selected attribute bit 1.
     db $1b
@@ -663,7 +663,7 @@ TravelLift4:
 
 C2Loc3_E5:
     ; Show object.
-    db $29, $20
+    db $29, C2VisIdLiftButton4Pressed
     ; Refresh room objects.
     db $2b
     ; Test room argument and branch on equality.
@@ -676,7 +676,7 @@ C2Loc3_E5:
     db $25, RoomVegasLift4
     dw CheckLift4Here
     ; Test state bit.
-    db $0e, $04
+    db $0e, C2StateLift1DoorOpen
     ; Branch if result bit 0 is clear.
     db $04
     dw RideLift4From1
@@ -684,7 +684,7 @@ C2Loc3_E5:
     db $05
     dw LiftClosingReply
     ; Clear state and refresh.
-    db $24, $04
+    db $24, C2StateLift1DoorOpen
 
 ; Start the fourth-floor ride and swap floor objects 11 and 12.
 RideLift4From1:
@@ -694,9 +694,9 @@ C2Loc3_23:
     db $05
     dw StartLift4Ride
     ; Hide object.
-    db $2a, $11
+    db $2a, C2VisIdLiftFloor1
     ; Show object.
-    db $29, $12
+    db $29, C2VisIdLiftFloor2
     ; Refresh room objects.
     db $2b
     ; Wait while rendering objects.
@@ -710,12 +710,12 @@ Lift4PassFloor2:
 
 C2Loc3_24:
     ; Hide object.
-    db $2a, $12
+    db $2a, C2VisIdLiftFloor2
     ; Show object.
     db $29
 
 jr_007_5b76:
-    db $13
+    db C2VisIdLiftFloor3
     ; Refresh room objects.
     db $2b
     ; Wait while rendering objects.
@@ -726,9 +726,9 @@ Lift4Arrive:
 
 C2Loc3_25:
     ; Hide object.
-    db $2a, $13
+    db $2a, C2VisIdLiftFloor3
     ; Show object.
-    db $29, $14
+    db $29, C2VisIdLiftFloor4
 
 jr_007_5b7e:
     ; Refresh room objects.
@@ -738,15 +738,15 @@ jr_007_5b7e:
     ; Set script value 0.
     db $49, $04
     ; Show message 3.
-    db $2c, $20
+    db $2c, $20 ; Message Text18Message20: [NUM8_WRAM:87C5]かいに ついた。[END]
     ; Hide object.
-    db $2a, $20
+    db $2a, C2VisIdLiftButton4Pressed
     ; Refresh room objects.
     db $2b
     ; Clear the room-state closure timer.
     db $42, C2DoorIx
     ; Set state and refresh without cue.
-    db $22, $0e
+    db $22, C2StateLift4DoorOpen
     ; End script.
     db $ff
 
@@ -755,7 +755,7 @@ CheckLift4From2:
 
 C2Loc3_26:
     ; Test state bit.
-    db $0e, $09
+    db $0e, C2StateLift2DoorOpen
     ; Branch if result bit 0 is clear.
     db $04
     dw RideLift4From2
@@ -763,7 +763,7 @@ C2Loc3_26:
     db $05
     dw LiftClosingReply
     ; Clear state and refresh.
-    db $24, $09
+    db $24, C2StateLift2DoorOpen
 
 ; Start the ride from floor two and continue through the original floor displays.
 RideLift4From2:
@@ -781,7 +781,7 @@ CheckLift4From3:
 
 C2Loc3_28:
     ; Test state bit.
-    db $0e, $0c
+    db $0e, C2StateLift3DoorOpen
     ; Branch if result bit 0 is clear.
     db $04
     dw RideLift4From3
@@ -789,7 +789,7 @@ C2Loc3_28:
     db $05
     dw LiftClosingReply
     ; Clear state and refresh.
-    db $24, $0c
+    db $24, C2StateLift3DoorOpen
 
 ; Start the ride from floor three and continue to the fourth-floor arrival.
 RideLift4From3:
@@ -807,13 +807,13 @@ CheckLift4Here:
 
 C2Loc3_2A:
     ; Show object.
-    db $29, $20
+    db $29, C2VisIdLiftButton4Pressed
     ; Refresh room objects.
     db $2b
 
 jr_007_5bb0:
     ; Test state bit.
-    db $0e, $0e
+    db $0e, C2StateLift4DoorOpen
     ; Branch if result bit 0 is clear.
     db $04
 
@@ -823,22 +823,22 @@ jr_007_5bb3:
     db $05
     dw LiftClosingReply
     ; Clear state and refresh.
-    db $24, $0e
+    db $24, C2StateLift4DoorOpen
 
 ; Hide the travel object, reopen the fourth-floor state, and show the same-floor reply.
 Lift4AlreadyHere:
 
 C2Loc3_2B:
     ; Hide object.
-    db $2a, $20
+    db $2a, C2VisIdLiftButton4Pressed
     ; Refresh room objects.
     db $2b
     ; Clear the room-state closure timer.
     db $42, C2DoorIx
     ; Set state and refresh without cue.
-    db $22, $0e
+    db $22, C2StateLift4DoorOpen
     ; Show message 1.
-    db $01, $29
+    db $01, $29 ; Message Text14Message29: しかし すぐに あいた。[PAGE] / ・・・いま いる かいを / えらんでしまったようだ。[END]
     ; End script.
     db $ff
 
@@ -849,7 +849,7 @@ C2Loc3_2C:
     ; Set text name 0.
     db $30, $b0
     ; Show message 3.
-    db $2c, $23
+    db $2c, $23 ; Message Text18Message23: [OBJECT_WRAM:37C5]が しまった。[END]
     ; Return to calling script.
     db $06
 
@@ -858,7 +858,7 @@ StartLift4Ride:
 
 C2Loc3_2D:
     ; Show message 0.
-    db $00, $a5
+    db $00, $a5 ; Message Text13Message25: エレべータは うごきはじめた。[END]
 
 jr_007_5bcb:
     ; Set current room.
@@ -871,7 +871,7 @@ MatchSelfItem:
 
 C2Loc3_2E:
     ; Test packed item argument and branch on equality.
-    db $46, $05
+    db $46, C2ItemTowel
     dw WipeTowelReply
     ; Test packed item argument and branch on equality.
     db $46, $2e
@@ -886,10 +886,10 @@ jr_007_5bdb:
     db C2Peel
     dw RefuseC2Peel
     ; Test packed item argument and branch on equality.
-    db $46, $33
+    db $46, C2ItemSugarTissue
     dw EatC2Tissue
     ; Test packed item argument and branch on equality.
-    db $46, $35
+    db $46, C2ItemSugarPerfume
     dw DrinkPerfume
     ; Test packed item argument and branch on equality.
     db $46, $37
@@ -926,7 +926,7 @@ WipeTowelReply:
 
 C2Loc3_2F:
     ; Show message 0.
-    db $00, $23
+    db $00, $23 ; Message Text12Message23: タオルで ひたいの あせを / ぬぐった。[END]
     ; End script.
     db $ff
 
@@ -938,7 +938,7 @@ C2Loc3_30:
     db $08, C2TissueUsed
     dw EatUsedTissue
     ; Show message 2.
-    db $02, $61
+    db $02, $61 ; Message Text16Message61: うーん・・・。 / こうきゅうせんいは べジタリアンが / たべるものだ![END]
     ; Call script.
     db $05
     dw ConsumeSlot0Item
@@ -950,7 +950,7 @@ EatUsedTissue:
 
 C2Loc3_31:
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text16Message62: う うまいぞ! / しおあじが きいている・・・。[END]
     ; Call script.
     db $05
     dw ConsumeSlot0Item
@@ -962,7 +962,7 @@ DrinkPerfume:
 
 C2Loc3_32:
     ; Show message 2.
-    db $02, $65
+    db $02, $65 ; Message Text16Message65: ゴックン! / こうすいって おいしくないな。[END]
     ; End script.
     db $ff
 
@@ -980,7 +980,7 @@ C2Loc3_33:
     db $08, C2Uniform
     dw NeedUniformOff
     ; Show message 2.
-    db $02, $6a
+    db $02, $6a ; Message Text16Message6A: ちいさすぎて おれには きれない。[END]
     ; End script.
     db $ff
 
@@ -1001,7 +1001,7 @@ C2Loc3_34:
     db $08, C2Uniform
     dw RemoveC2Uniform
     ; Show message 2.
-    db $02, $6c
+    db $02, $6c ; Message Text16Message6C: けいかんの せいふくの サイズは / おれに ぴったりだ。[END]
     ; Set object flag.
     db $09, C2Uniform
     ; End script.
@@ -1014,7 +1014,7 @@ C2Loc3_35:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $12
+    db $2c, $12 ; Message Text18Message12: [OBJECT_WRAM:37C5]を ぬいだ。[END]
     ; Clear object flag.
     db $0a, C2Uniform
     ; Jump to script.
@@ -1030,7 +1030,7 @@ C2Loc3_36:
     ; Set text name 1.
     db $31, $71
     ; Show message 3.
-    db $2c, $11
+    db $2c, $11 ; Message Text18Message11: [OBJECT_WRAM:37C5]を みにつけるために / [OBJECT_WRAM:38C5]を ぬぐ / ひつようがある。[END]
     ; End script.
     db $ff
 
@@ -1043,7 +1043,7 @@ C2Loc3_37:
     ; Set text name 1.
     db $31, $70
     ; Show message 3.
-    db $2c, $11
+    db $2c, $11 ; Message Text18Message11: [OBJECT_WRAM:37C5]を みにつけるために / [OBJECT_WRAM:38C5]を ぬぐ / ひつようがある。[END]
     ; End script.
     db $ff
 
@@ -1056,7 +1056,7 @@ C2Loc3_38:
     ; Set text name 1.
     db $31, $78
     ; Show message 3.
-    db $2c, $11
+    db $2c, $11 ; Message Text18Message11: [OBJECT_WRAM:37C5]を みにつけるために / [OBJECT_WRAM:38C5]を ぬぐ / ひつようがある。[END]
     ; End script.
     db $ff
 
@@ -1069,7 +1069,7 @@ C2Loc3_39:
     ; Set text name 1.
     db $31, $3a
     ; Show message 3.
-    db $2c, $11
+    db $2c, $11 ; Message Text18Message11: [OBJECT_WRAM:37C5]を みにつけるために / [OBJECT_WRAM:38C5]を ぬぐ / ひつようがある。[END]
     ; End script.
     db $ff
 
@@ -1078,7 +1078,7 @@ EatOldFood:
 
 C2Loc3_3A:
     ; Show message 0.
-    db $00, $be
+    db $00, $be ; Message Text13Message3E: うぐえーっ! / すえた においとともに すっぱい / えきが くちのなかに とびだした![END]
 
 ; Call the shared first-slot consumption script and end the action.
 ConsumeC2Food:
@@ -1112,7 +1112,7 @@ EatC2Duck:
 
 C2Loc3_3D:
     ; Show message 1.
-    db $01, $d9
+    db $01, $d9 ; Message Text15Message59: ・・・・・・うーん![PAGE] / くろまめソースが きいている! / おふくろの あじに にているな。[END]
     ; Jump to script.
     db $07
     dw ConsumeC2Food
@@ -1125,7 +1125,7 @@ C2Loc3_3E:
     db $08, C2BananaPeeled
     dw EatPeeledBanana
     ; Show message 2.
-    db $02, $1b
+    db $02, $1b ; Message Text16Message1B: かわを むいたほうが いいよね。[END]
     ; End script.
     db $ff
 
@@ -1134,7 +1134,7 @@ EatPeeledBanana:
 
 C2Loc3_3F:
     ; Show message 2.
-    db $02, $1d
+    db $02, $1d ; Message Text16Message1D: バナナを たべた・・・。[PAGE] / ・・・しまった! / おれは バナナを たべると おなかをこわす たいしつ だったんだ![END]
     ; Set object flag.
     db $09, C2BananaEaten
     ; Jump to script.
@@ -1146,7 +1146,7 @@ RefuseC2Peel:
 
 C2Loc3_40:
     ; Show message 2.
-    db $02, $20
+    db $02, $20 ; Message Text16Message20: バナナの かわを たべるなんて・・・いまどき サルでも たべないよ。[END]
     ; End script.
     db $ff
 
@@ -1155,7 +1155,7 @@ PokeDartSelf:
 
 C2Loc3_41:
     ; Show message 2.
-    db $02, $ec
+    db $02, $ec ; Message Text17Message6C: どうして ハチドリで じぶんを / つつかなければならないんだ?[END]
     ; End script.
     db $ff
 
@@ -1166,7 +1166,7 @@ C2Sc3_07:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $bd
+    db $00, $bd ; Message Text13Message3D: ぺーパーウエイトを ふたつに / わけた。[PAGE] / ・・・おや? / この ハチドリ なにかに / にているぞ・・・。[END]
     ; Test item flag.
     db $11, C2Paperweight
     ; Branch if result bit 0 is clear.
@@ -1175,7 +1175,7 @@ C2Sc3_07:
     ; Set text name 0.
     db $30, C2DartBase
     ; Show message 3.
-    db $2c, $2d
+    db $2c, $2d ; Message Text18Message2D: [OBJECT_WRAM:37C5]は やくに / たちそうもないので すてた。[END]
     ; Clear item flag.
     db $13, C2Paperweight
     ; Set item state.
@@ -1208,9 +1208,9 @@ C2Loc3_43:
     ; Play audio.
     db $3e, $09
     ; Show message 3.
-    db $2c, $14
+    db $2c, $14 ; Message Text18Message14: [OBJECT_WRAM:37C5]で てくびを / きった。[END]
     ; Show message 0.
-    db $00, $26
+    db $00, $26 ; Message Text12Message26: しんぞうが みゃくうつたびに / きずぐちから いろあざやかな / けつえきが とびだす・・・。[PAGE] / ああ・・・。 / きが・・・とおく・な・・る・・・。[P...
     ; Play exit effect and end this action.
     db $37
     ; Not reached from the recovered action and branch entries.
@@ -1264,7 +1264,7 @@ C2Loc3_47:
     db $54, C2Uniform
     dw PutItemWasher
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text17Message47: ぬがなければ いれられない。[END]
     ; End script.
     db $ff
 
@@ -1286,7 +1286,7 @@ C2Loc3_49:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $e6
+    db $02, $e6 ; Message Text17Message66: ねらいを さだめて ハチドリを / なげた。[END]
     ; Play audio.
     db $3e, $00
     ; Call script.
@@ -1295,37 +1295,37 @@ C2Loc3_49:
     ; Play audio.
     db $3e, $17
     ; Show object.
-    db $29, $52
+    db $29, C2VisIdOuterOfficeDartBeforeShift
     ; Refresh room objects.
     db $2b
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text14Message39: やったぜ! / みごと めいちゅう![END]
     ; Play audio.
     db $3e, $12
     ; Show message 2.
-    db $02, $e7
+    db $02, $e7 ; Message Text17Message67: ・・・ん・・・? / やったー![END]
     ; Set object flag.
     db $09, C2Bullseye
     ; Draw Case II panel and marks.
     db $3c
     ; Set state and refresh without cue.
-    db $22, $6d
+    db $22, C2StateOuterOfficeSecretDoorOpen
     ; Hide object.
-    db $2a, $52
+    db $2a, C2VisIdOuterOfficeDartBeforeShift
     ; Show object.
-    db $29, $5b
+    db $29, C2VisIdOuterOfficeDartAfterShift
     ; Refresh room objects.
     db $2b
     ; Show message 2.
-    db $02, $e8
+    db $02, $e8 ; Message Text17Message68: ハチドリが まとを いると / ギーッという おとと ともに かべがスライドして ひみつの いりぐちが / あらわれた![END]
     ; Set object flag.
     db $09, C2DartUsed
     ; Hide object.
-    db $2a, $a4
+    db $2a, C2VisIdCleanersDartboardBeforeShift
     ; Show object.
-    db $29, $a5
+    db $29, C2VisIdCleanersDartboardAfterShift
     ; Show object.
-    db $29, $a6
+    db $29, C2VisIdOuterOfficeSecretDoor
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -1350,7 +1350,7 @@ C2Loc3_4B:
     db $54, C2KnifeOpen
     dw NeedKnifeOpen
     ; Show message 1.
-    db $01, $b7
+    db $01, $b7 ; Message Text15Message37: てこのげんりを りようして いたを / とりはずそうとした。[PAGE] / すこし ゆるんだが / この ちいさな ナイフでは しょせんむりらしい・・・。[END]
     ; End script.
     db $ff
 
@@ -1373,7 +1373,7 @@ C2Loc3_4D:
     db $08, C2GabbyMet
     dw ProtectCabItem
     ; Show message 1.
-    db $01, $3b
+    db $01, $3b ; Message Text14Message3B: いや まてよ! / うんてんしゅを おこらせたら / タクシーに のれなくなる・・・。[END]
     ; End script.
     db $ff
 
@@ -1382,7 +1382,7 @@ ProtectCabItem:
 
 C2Loc3_4E:
     ; Show message 1.
-    db $01, $3c
+    db $01, $3c ; Message Text14Message3C: いや そんなことはできない。 / ゆうじんの くるまだ![END]
     ; End script.
     db $ff
 
@@ -1404,7 +1404,7 @@ C2Loc3_50:
     ; Use one Case II bullet.
     db $52
     ; Set object flag.
-    db $09, $4b
+    db $09, C2GunLoadAttempted
     ; End script.
     db $ff
 
@@ -1431,7 +1431,7 @@ jr_007_5d32:
     db $08, C2VacBagTorn
     dw BagAlreadyTorn
     ; Show message 2.
-    db $02, $68
+    db $02, $68 ; Message Text16Message68: ナイフで ふくろを つきさした。[END]
     ; Keep selected change.
     db $27
     ; Set object flag.
@@ -1444,7 +1444,7 @@ BagAlreadyTorn:
 
 C2Loc3_53:
     ; Show message 2.
-    db $02, $69
+    db $02, $69 ; Message Text16Message69: ふくろが びりびりに なった。 / もとどおりには ならないだろうな。[END]
     ; End script.
     db $ff
 
@@ -1473,7 +1473,7 @@ C2Loc3_55:
     db $08, C2LampWeak
     dw ReplaceLampCell
     ; Show message 1.
-    db $01, $4c
+    db $01, $4c ; Message Text14Message4C: まだ でんちを こうかんしなくても / いいようだ。[END]
     ; End script.
     db $ff
 
@@ -1482,7 +1482,7 @@ NeedLampHeld:
 
 C2Loc3_56:
     ; Show message 3.
-    db $2c, $47
+    db $2c, $47 ; Message Text18Message47: でんとうを とらなければ できない。[END]
     ; End script.
     db $ff
 
@@ -1496,7 +1496,7 @@ C2Loc3_57:
     db $04
     dw NoLampCells
     ; Show message 1.
-    db $01, $83
+    db $01, $83 ; Message Text15Message03: かいちゅうでんとうの でんちを / いれかえた。[END]
     ; Clear the flashlight timer.
     db $42, C2LampIx
     ; Test object flag and branch when clear.
@@ -1527,7 +1527,7 @@ NoLampCells:
 
 C2Loc3_EB:
     ; Show message 1.
-    db $01, $67
+    db $01, $67 ; Message Text14Message67: でんちを もっていないようだ。[END]
     ; End script.
     db $ff
 
@@ -1552,7 +1552,7 @@ C2Loc3_59:
     db $04
     dw NoC2ItemEffect
     ; Show message 2.
-    db $02, $12
+    db $02, $12 ; Message Text16Message12: コインを いれようとした。 / ・・・ん・・・?[PAGE] / コインを いれるところに / なまりが つめられているではないか!ちえっ![END]
     ; End script.
     db $ff
 
@@ -1572,13 +1572,13 @@ C2Loc3_5A:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $da
+    db $01, $da ; Message Text15Message5A: ナイフで ドアの カギを / こわそうとした。[PAGE] / ・・・カチャ カチャ カチャ。[END]
     ; Play audio.
     db $3e, $15
     ; Set selected state and refresh.
     db $21
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text15Message5B: よおおおしっ!! / カギを こわせたぞ![PAGE] / ナイフで こんなことが できるなんてちょっとしたものだな。[END]
     ; Set object flag.
     db $09, C2JoeLockGone
     ; End script.
@@ -1589,7 +1589,7 @@ NeedKnifeOpen:
 
 C2Loc3_5B:
     ; Show message 1.
-    db $01, $8d
+    db $01, $8d ; Message Text15Message0D: はを しまったままでは やくに / たたない。[END]
     ; End script.
     db $ff
 
@@ -1609,9 +1609,9 @@ C2Loc3_5C:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $da
+    db $01, $da ; Message Text15Message5A: ナイフで ドアの カギを / こわそうとした。[PAGE] / ・・・カチャ カチャ カチャ。[END]
     ; Show object.
-    db $29, $46
+    db $29, C2VisIdSugarApartmentDoorOpen
     ; Refresh room objects.
     db $2b
 
@@ -1619,11 +1619,11 @@ jr_007_5dac:
     ; Play audio.
     db $3e, $15
     ; Set state and refresh without cue.
-    db $22, $66
+    db $22, C2StateSugarDoorUnlocked
     ; Set selected attribute bit 2.
     db $1e
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text15Message5B: よおおおしっ!! / カギを こわせたぞ![PAGE] / ナイフで こんなことが できるなんてちょっとしたものだな。[END]
     ; Set object flag.
     db $09, C2SugLockGone
     ; End script.
@@ -1664,7 +1664,7 @@ C2Loc3_5E:
     ; Set text name 0.
     db $30, $d9
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -1680,9 +1680,9 @@ C2Loc3_5F:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $6e
+    db $02, $6e ; Message Text16Message6E: しゃしょうは かねを うけとって / いった。[END]
     ; Show message 2.
-    db $02, $6f
+    db $02, $6f ; Message Text16Message6F: 「ありがとうございます。」[END]
     ; Resume text.
     db $2f
     ; Clear the train-room fare view and refresh.
@@ -1711,9 +1711,9 @@ jr_007_5de8:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $77
+    db $02, $77 ; Message Text16Message77: しゃしょうは イライラして いった。[END]
     ; Show message 2.
-    db $02, $72
+    db $02, $72 ; Message Text16Message72: 「おきゃくさん・・・。 /  おかねが たりませんよ・・・。」[END]
     ; End script.
     db $ff
 
@@ -1744,7 +1744,7 @@ C2Loc3_62:
     ; Set text name 0.
     db $30, $b6
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -1765,7 +1765,7 @@ C2Loc3_63:
     db $46, C2Bottle
     dw BottleConductor
     ; Show message 0.
-    db $00, $07
+    db $00, $07 ; Message Text12Message07: おとこは くびを よこにふって / いった。[PAGE] / 「ありがとう・・・。 /  でも ほどこしを うけるほど /  こまっていないよ!」[END]
     ; End script.
     db $ff
 
@@ -1806,7 +1806,7 @@ C2Loc3_67:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $0c
+    db $2c, $0c ; Message Text18Message0C: おれが きりかかろうとすると / しゃしょうが ものすごいちからで / おれの てから [OBJECT_WRAM:37C5]を / とりあげた![PAGE] / そして ...
     ; Jump to script.
     db $07
     dw EjectTrainFight
@@ -1818,7 +1818,7 @@ C2Loc3_68:
     ; Set text name 0.
     db $30, $b5
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -1868,7 +1868,7 @@ C2Loc3_6A:
     db $05
     dw ConsumeSlot0Item
     ; Show message 2.
-    db $02, $39
+    db $02, $39 ; Message Text16Message39: ふろうしゃは ガツガツと たべた。 / よほど おなかが すいていたので / あろう。[END]
     ; End script.
     db $ff
 
@@ -1895,7 +1895,7 @@ C2Loc3_6C:
     ; Wait sixty ticks.
     db $7e
     ; Show message 3.
-    db $2c, $0e
+    db $2c, $0e ; Message Text18Message0E: おれは [OBJECT_WRAM:37C5]を / ころしてしまった・・・。[PAGE] / ひとを ころすなんて まともな / にんげんが やることではない。[PAGE...
     ; Wait sixty ticks.
     db $7e
 
@@ -1910,7 +1910,7 @@ C2Loc3_6D:
     ; Wait sixty ticks.
     db $7e
     ; Show message 2.
-    db $02, $9a
+    db $02, $9a ; Message Text17Message1A: さつじんの つみで おれを / まっていたのは でんきイスだった。[PAGE] / でんきイスに しばりつけられて / おれは ばくぜんと かんがえていた。[PAGE] ...
     ; Wait sixty ticks.
     db $7e
     ; Play exit effect and end this action.
@@ -1936,7 +1936,7 @@ C2Loc3_6F:
     ; Set text name 0.
     db $30, $b3
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -1951,7 +1951,7 @@ jr_007_5e87:
     db $04
     dw NoC2ItemEffect
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text16Message37: ふろうしゃは かねを うけとると / うれしそうに つぶやいた。[PAGE] / 「これで あつくて あまーい /  コーヒーに ありつけるぞ![PAGE] /  だんな...
     ; End script.
     db $ff
 
@@ -1965,7 +1965,7 @@ C2Loc3_71:
     db $04
     dw NoC2ItemEffect
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text16Message37: ふろうしゃは かねを うけとると / うれしそうに つぶやいた。[PAGE] / 「これで あつくて あまーい /  コーヒーに ありつけるぞ![PAGE] /  だんな...
     ; Decrement Case II quarters.
     db $5d
     ; End script.
@@ -2012,7 +2012,7 @@ C2Loc3_73:
 jr_007_5eb7:
     db HIGH(ConsumeSlot0Item)
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text14Message21: えさを もらっていないのか / いぬは ガツガツと たべた。[PAGE] / ・・・おーっと! / もうすこしで おれの ゆびまで / たべられるところだった。[END]
     ; End script.
     db $ff
 
@@ -2032,7 +2032,7 @@ DogDodgesItem:
 
 C2Loc3_75:
     ; Show message 1.
-    db $01, $27
+    db $01, $27 ; Message Text14Message27: このいぬは よく くんれんされているようだ。[PAGE] / おれの こうげきを すんなりと / かわすとは![END]
     ; End script.
     db $ff
 
@@ -2054,7 +2054,7 @@ C2Loc3_77:
     ; Set text name 0.
     db $30, $b9
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -2086,7 +2086,7 @@ C2Loc3_78:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $05
+    db $2c, $05 ; Message Text18Message05: おんなは いっしゅん おどろいたが / さしだした [OBJECT_WRAM:37C5]をみて / ニコリと わらった。[PAGE] / 「すばらしい プレゼントを / ...
     ; End script.
     db $ff
 
@@ -2125,7 +2125,7 @@ C2Loc3_7B:
     db $03
     dw EvictCashierHit
     ; Set state bit.
-    db $0f, $06
+    db $0f, C2StateCasinoFrontDoorOpen
 
 ; Prepare the move from room 04 to 11 and enter the casino ejection reply.
 EvictCashierHit:
@@ -2143,7 +2143,7 @@ CasinoAttackCue:
 
 C2Loc3_7D:
     ; Show message 3.
-    db $2c, $1d
+    db $2c, $1d ; Message Text18Message1D: スカッ![PAGE] / おれの ては [OBJECT_WRAM:37C5]に / とどかなかった。[PAGE] / だが [OBJECT_WRAM:37C5]を / お...
     ; Run scene effect.
     db $39, FxBouncer
     ; Play audio.
@@ -2153,11 +2153,11 @@ C2Loc3_7D:
     ; Wait sixty ticks.
     db $7e
     ; Show message 3.
-    db $2c, $1e
+    db $2c, $1e ; Message Text18Message1E: [OBJECT_WRAM:37C5]は おおごえで / ようじんぼうを よんだ![END]
     ; Wait sixty ticks.
     db $7e
     ; Test state bit.
-    db $0e, $06
+    db $0e, C2StateCasinoFrontDoorOpen
     ; Return to calling script.
     db $06
 
@@ -2177,7 +2177,7 @@ C2Loc3_7F:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $06
+    db $2c, $06 ; Message Text18Message06: おんなは あいそわらいをして / [OBJECT_WRAM:37C5]を つきかえした。[PAGE] / 「これは チップに /  かえられませんよ。」[END]
     ; End script.
     db $ff
 
@@ -2225,7 +2225,7 @@ ItemNoUseReply:
 
 C2Loc3_E6:
     ; Show message 0.
-    db $00, $07
+    db $00, $07 ; Message Text12Message07: おとこは くびを よこにふって / いった。[PAGE] / 「ありがとう・・・。 /  でも ほどこしを うけるほど /  こまっていないよ!」[END]
     ; End script.
     db $ff
 
@@ -2289,7 +2289,7 @@ C2Loc3_86:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $04
+    db $2c, $04 ; Message Text18Message04: おれは [OBJECT_WRAM:37C5]で / つみもないひとを ころしてしまった![END]
     ; Wait sixty ticks.
     db $7e
     ; Jump to script.
@@ -2316,7 +2316,7 @@ C2Loc3_87:
     db $46, C2Dart
     dw DartMan
     ; Show message 2.
-    db $02, $e5
+    db $02, $e5 ; Message Text17Message65: おとこは ねむっているので / はんのうがない。[END]
     ; End script.
     db $ff
 
@@ -2325,9 +2325,9 @@ ShowClaimTicket:
 
 C2Loc3_88:
     ; Show message 2.
-    db $02, $ff
+    db $02, $ff ; Message Text17Message7F: あずかりしょうを さしだすと / おとこは はんしゃてきに めをさましカウンターから おおきな / スーツケースを だした。[PAGE] / そして ふたたび ねむってし...
     ; Show object.
-    db $29, $1d
+    db $29, C2VisIdClaimSuitcaseClosed
     ; Refresh room objects.
     db $2b
     ; Set object flag.
@@ -2359,7 +2359,7 @@ C2Loc3_89:
     db $46, $01
     dw PayNewsQuarter
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text14Message26: 「ありがとうございます。 /  でも おかねを いただかないと /  しんぶんは おわたしできません。」[END]
     ; End script.
     db $ff
 
@@ -2370,7 +2370,7 @@ C2Loc3_8A:
     ; Set text name 0.
     db $30, $b8
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -2396,7 +2396,7 @@ C2Loc3_8C:
     db $07
     dw DogDefendsNews
 
-; Spend one dollar for a newspaper when stock remains and no payment is pending.
+; With stock and no pending payment, spend one dollar before accepting payment; no change is returned.
 PayNewsDollar:
 
 C2Loc3_8D:
@@ -2422,7 +2422,7 @@ NewsSoldOut:
 
 C2Loc3_8E:
     ; Show message 1.
-    db $01, $25
+    db $01, $25 ; Message Text14Message25: 「ありがとうございます。 /  しかし しんぶんは すべて /  うれてしまいました。[PAGE] /  またの おこしを こころより /  おまちしています。」[END]
     ; End script.
     db $ff
 
@@ -2431,11 +2431,11 @@ NewsAlreadyPaid:
 
 C2Loc3_8F:
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text14Message24: ろうじんは わらって いった。[PAGE] / 「おきゃくさん さきほど おかねは /  いただきましたが まだ しんぶんを とっていませんね。 /  はやく とってくだ...
     ; End script.
     db $ff
 
-; Spend one quarter for a newspaper when stock remains and no payment is pending.
+; With stock and no pending payment, check quarters, accept payment, then deduct one quarter.
 PayNewsQuarter:
 
 C2Loc3_90:
@@ -2463,7 +2463,7 @@ C2MoneyShort:
 
 C2Loc3_E7:
     ; Show message 2.
-    db $02, $72
+    db $02, $72 ; Message Text16Message72: 「おきゃくさん・・・。 /  おかねが たりませんよ・・・。」[END]
     ; End script.
     db $ff
 
@@ -2472,7 +2472,7 @@ AcceptNewsPay:
 
 C2Loc3_E8:
     ; Show message 1.
-    db $01, $23
+    db $01, $23 ; Message Text14Message23: ろうじんは いった。[PAGE] / 「ありがとうございます。 /  どうぞ しんぶんを とって /  ください。」[END]
     ; Set object flag.
     db $09, C2NewsPaid
     ; Return to calling script.
@@ -2503,7 +2503,7 @@ DriverGiftReply:
 
 C2Loc3_E9:
     ; Show message 1.
-    db $01, $50
+    db $01, $50 ; Message Text14Message50: うんてんしゅは よろこんでくれた。 / だが うけとらずに こういった。[PAGE] / 「ありがとう。 /  でも いまのところ まにあって /  いるんだ。」[END]
     ; End script.
     db $ff
 
@@ -2535,7 +2535,7 @@ C2Loc3_94:
     ; Set text name 0.
     db $30, $da
     ; Show message 3.
-    db $2c, $17
+    db $2c, $17 ; Message Text18Message17: [OBJECT_WRAM:37C5]に なげるなんて / あまりにも むいみな ことだ。[END]
     ; End script.
     db $ff
 
@@ -2554,7 +2554,7 @@ C2Loc3_96:
     ; Copy first-slot name to text name 0.
     db $45
     ; Show message 3.
-    db $2c, $24
+    db $2c, $24 ; Message Text18Message24: うんてんしゅ めがけて / [OBJECT_WRAM:37C5]を つきだした。[PAGE] / だが ぼうだんガラスに はばまれた。それに もうすこしで [OBJECT...
     ; End script.
     db $ff
 
@@ -2566,7 +2566,7 @@ C2Loc3_97:
     db $56, $31
     dw TiedItemFallback
     ; Show message 1.
-    db $01, $c6
+    db $01, $c6 ; Message Text15Message46: しんが おれているので かけない。[END]
     ; End script.
     db $ff
 
@@ -2581,7 +2581,7 @@ C2Loc3_98:
     db $08, C2HandsFree
     dw NoC2ItemEffect
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text17Message3E: そんなことは できない。 / ロープで しばられている。[END]
     ; End script.
     db $ff
 
@@ -2594,7 +2594,7 @@ Case2BathroomTowelTake:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $00
+    db $2a, C2VisIdBathTowel
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -2604,7 +2604,7 @@ LookC2Key1:
 
 C2Sc3_09:
     ; Show message 0.
-    db $00, $19
+    db $00, $19 ; Message Text12Message19: おれの アパートの カギだ。[END]
     ; End script.
     db $ff
 
@@ -2620,59 +2620,59 @@ MatchC2Key:
 
 C2Loc3_99:
     ; Match alternate item against type, ID and script target rows.
-    db $32, $00, $5a
+    db $32, $00, C2TargetAdisonScratchedMailbox
     dw C2KeyNoFit
-    db $00, $5b
+    db $00, C2TargetAdisonDentedMailbox
     dw C2KeyNoFit
-    db $05, $01
+    db $05, C2TargetVegasBedroomDoor
     dw C2KeyNoFit
-    db $05, $03
+    db $05, C2TargetHotelQuietGuestDoor
     dw C2KeyNoFit
-    db $05, $0a
+    db $05, C2TargetHotelGuestDoor2
     dw C2KeyNoFit
-    db $05, $0b
+    db $05, C2TargetHotelGuestDoor3
     dw C2KeyNoFit
-    db $05, $14
+    db $05, C2TargetLaundryChuteDoor
     dw KeyLaundryDoor
-    db $05, $15
+    db $05, C2TargetCleanersEntrance
     dw C2KeyNoFit
-    db $05, $4d
+    db $05, C2TargetAdisonApartmentDoor
     dw KeyHomeDoor
-    db $05, $4e
+    db $05, C2TargetAdisonNeighborDoor1
     dw C2KeyNoFit
-    db $05, $4f
+    db $05, C2TargetAdisonNeighborDoor2
     dw C2KeyNoFit
-    db $05, $53
+    db $05, C2TargetJoeBarFrontDoor
     dw C2KeyNoFit
 
 Jump_007_6066:
-    db $05, $5b
+    db $05, C2TargetJoeRearDoor
     dw C2KeyNoFit
-    db $05, $64
+    db $05, C2TargetJoeUpstairsRestrictedDoor
     dw C2KeyNoFit
-    db $05, $66
+    db $05, C2TargetSugarApartmentDoor
     dw C2KeyNoFit
-    db $05, $67
+    db $05, C2TargetSugarFrontLockedDoor
     dw C2KeyNoFit
-    db $05, $74
+    db $05, C2TargetSecretaryDoor
     dw C2KeyNoFit
-    db $01, $02
+    db $01, C2ContainerAdisonMailbox
     dw KeyC2Mailbox
-    db $01, $03
+    db $01, C2ContainerJoeDiarySlot
     dw KeyDiarySlot
-    db $01, $04
+    db $01, C2ContainerJoeEmptySlot
     dw KeyEmptySlot
-    db $00, $17
+    db $00, C2TargetHotelCashier
     dw UseItemCashier
-    db $00, $37
+    db $00, C2TargetVegasSeller
     dw UseItemSeller
-    db $00, $3c
+    db $00, C2TargetVegasClaimAttendant
     dw UseItemAttendant
-    db $00, $4f
+    db $00, C2TargetChicagoNewsSeller
     dw UseItemNewsMan
-    db $00, $55
+    db $00, C2TargetCabDriver
     dw UseItemCabDriver
-    db $02, $03
+    db $02, C2GroupMaloneDesk
     dw MatchDeskStore
     db $fe, $fe
     dw TiedItemFallback
@@ -2682,7 +2682,7 @@ C2KeyNoFit:
 
 C2Loc3_9A:
     ; Show message 0.
-    db $00, $60
+    db $00, $60 ; Message Text12Message60: どうも カギが ちがうようだ。[END]
     ; End script.
     db $ff
 
@@ -2710,7 +2710,7 @@ ChuteTooSlippy:
 
 C2Loc3_9C:
     ; Show message 2.
-    db $02, $ca
+    db $02, $ca ; Message Text17Message4A: シュートは すべるので のぼれない。[END]
     ; End script.
     db $ff
 
@@ -2775,7 +2775,7 @@ C2Loc3_A0:
     db $05
     dw C2UnlockReply
     ; Hide object.
-    db $2a, $3b
+    db $2a, C2VisIdAdisonMailboxClosed
     ; Refresh room objects.
     db $2b
     ; Keep selected change.
@@ -2807,7 +2807,7 @@ C2Loc3_A2:
     db $08, DiaryUnlocked
     dw LockDiarySlot
     ; Set object flag.
-    db $09, $64
+    db $09, C2DiarySlotUnlockedOnce
     ; Set object flag.
     db $09, DiaryUnlocked
 
@@ -2869,7 +2869,7 @@ LookBoxingClip:
 
 C2Sc3_0B:
     ; Show message 0.
-    db $00, $1a
+    db $00, $1a ; Message Text12Message1A: いろあせた しんぶんの きりぬきだ。[PAGE] / おれが ボクサーだったころの / きじだ。[PAGE] / おれと スパーリングパートナーの / ルーディー・カワル...
     ; End script.
     db $ff
 
@@ -2878,7 +2878,7 @@ ReadC2License1:
 
 C2Sc3_0C:
     ; Show message 0.
-    db $00, $1c
+    db $00, $1c ; Message Text12Message1C: おれの うんてんめんきょしょうだ。[PAGE] / 「エース・ハーディング /  シカゴ イリノイしゅう /  ウエストアディソンどおり /  2034」[END]
     ; Test object flag and branch when set.
     db $08, C2AdisonKnown
     dw EndC2Item
@@ -2894,7 +2894,7 @@ LookEmptyPack:
 
 C2Sc3_0D:
     ; Show message 0.
-    db $00, $1d
+    db $00, $1d ; Message Text12Message1D: カラになった ラッキーストライクの / はこだ。[END]
     ; End script.
     db $ff
 
@@ -2905,7 +2905,7 @@ C2Sc3_0E:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $3e
+    db $00, $3e ; Message Text12Message3E: かみせいの シガーリングだ。[PAGE] / ・・・そういえば ストージーが / すっていた はまきに / まいてあったな・・・。[PAGE] / とすれば これは スト...
     ; Test object flag and branch when clear.
     db $54, C2LootSeen
     dw EndC2Item
@@ -2918,9 +2918,9 @@ C2Sc3_0E:
     ; Play audio.
     db $3e, $08
     ; Show message 0.
-    db $00, $d5
+    db $00, $d5 ; Message Text13Message55: ・・・そうだ!![PAGE] / この シガーリングを ひみつの / オフィスの つくえの うえに / おいておけば・・・。[PAGE] / べンティーニは じぶんの け...
     ; Show message 2.
-    db $02, $70
+    db $02, $70 ; Message Text16Message70: それから マロンに べンティーニの / あくじを ばらせば ふたりは / あらそうに ちがいない![PAGE] / そのすきに このまちから / にげてしまおう![PAG...
     ; Set object flag.
     db $09, C2EndFlag
     ; Set object flag.
@@ -2949,7 +2949,7 @@ C2Sc3_0F:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $06
+    db $2a, C2VisIdBedroomCigarRing
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -2959,7 +2959,7 @@ LookC2Pillow:
 
 C2Sc3_10:
     ; Show message 0.
-    db $00, $3f
+    db $00, $3f ; Message Text12Message3F: かたくて へんな においのする / マクラだ。[PAGE] / これを つかうと へんな ゆめを / みそうだなあ・・・。[END]
     ; End script.
     db $ff
 
@@ -2974,7 +2974,7 @@ C2Sc3_11:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $09
+    db $2a, C2VisIdBedroomPillow
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -2984,7 +2984,7 @@ ReadPayNote:
 
 C2Sc3_12:
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text12Message43: しわくちゃの かみきれだ。 / きたない もじで なにか / かいてある。[PAGE] / 「あの うるさい けんさつかんを /  ころせ![PAGE] /  ぜったいに...
     ; End script.
     db $ff
 
@@ -2996,7 +2996,7 @@ C2Sc3_13:
     db $08, C2TimetableOpen
     dw ReadC2Fares
     ; Show message 0.
-    db $00, $41
+    db $00, $41 ; Message Text12Message41: おりたたみしきの じこくひょうだ。 / したのほうに シカゴえきの / じゅうしょが かいてある。[END]
 
 ; Add the Chicago cab destination once.
 AddChicagoStop:
@@ -3017,7 +3017,7 @@ ReadC2Fares:
 
 C2Loc3_A8:
     ; Show message 0.
-    db $00, $42
+    db $00, $42 ; Message Text12Message42: りょうきんひょうが かいてある。[PAGE] / 「ラスべガスからニューヨーク          ・・・$35[PAGE] /  ラスべガスからセントルイス       ...
     ; End script.
     db $ff
 
@@ -3048,7 +3048,7 @@ C2Sc3_15:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $08
+    db $2a, C2VisIdBedroomTimetable
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3071,7 +3071,7 @@ LookC2Plant1:
 
 C2Sc3_17:
     ; Show message 0.
-    db $00, $4e
+    db $00, $4e ; Message Text12Message4E: はっぱを たくさん しげらせた / はちうえだ。[END]
     ; End script.
     db $ff
 
@@ -3086,7 +3086,7 @@ C2Sc3_18:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $0a
+    db $2a, C2VisIdVegasHallPlant
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3097,7 +3097,7 @@ LookC2Pot:
 C2Sc3_19:
 jr_007_61b0:
     ; Show message 0.
-    db $00, $79
+    db $00, $79 ; Message Text12Message79: おおきな しんちゅうの つぼだ。[END]
     ; End script.
     db $ff
     ; Unreferenced extra $ff after the preceding end opcode.
@@ -3114,7 +3114,7 @@ C2Sc3_1A:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $0c
+    db $2a, C2VisIdVegasLobbyPot
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3124,7 +3124,7 @@ LookC2Ashtray:
 
 C2Sc3_1B:
     ; Show message 0.
-    db $00, $72
+    db $00, $72 ; Message Text12Message72: 「ラッキーダイスホテル & カジノ」と かいてある ガラスの / はいざらだ。[END]
     ; End script.
     db $ff
 
@@ -3139,7 +3139,7 @@ C2Sc3_1C:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $0b
+    db $2a, C2VisIdVegasLobbyAshtray
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3149,7 +3149,7 @@ LookC2Plant2:
 
 C2Sc3_1D:
     ; Show message 0.
-    db $00, $54
+    db $00, $54 ; Message Text12Message54: ちいさな はなをつけた はちうえだ。[END]
     ; End script.
     db $ff
 
@@ -3164,7 +3164,7 @@ C2Sc3_1E:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $15
+    db $2a, C2VisIdVegasHall2Plant
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3174,7 +3174,7 @@ LookC2Plant3:
 
 C2Sc3_1F:
     ; Show message 0.
-    db $00, $59
+    db $00, $59 ; Message Text12Message59: ちいさな はちうえだ。 / はなが さいている。[END]
     ; End script.
     db $ff
 
@@ -3189,7 +3189,7 @@ C2Sc3_20:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $16
+    db $2a, C2VisIdVegasHall3Plant
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3199,7 +3199,7 @@ LookLiftButton:
 
 C2Sc3_21:
     ; Show message 0.
-    db $00, $a3
+    db $00, $a3 ; Message Text13Message23: はっはああん・・・。[PAGE] / この ボタンは かんけいしゃいがいが4かいへ いけないように / つくられたんだな・・・。[END]
     ; End script.
     db $ff
 
@@ -3216,7 +3216,7 @@ C2Sc3_22:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $0f
+    db $2a, C2VisIdLiftButton4Installed
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3226,7 +3226,7 @@ PressLift4:
 
 C2Sc3_23:
     ; Test object visibility.
-    db $28, $0f
+    db $28, C2VisIdLiftButton4Installed
     ; Branch if result bit 0 is clear.
     db $04
     dw RejectC2Item
@@ -3235,7 +3235,7 @@ C2Sc3_23:
     ; Set script value 0.
     db $49, $04
     ; Show message 3.
-    db $2c, $1f
+    db $2c, $1f ; Message Text18Message1F: [NUM8_WRAM:87C5]かいの ボタンを おした。[END]
     ; Jump to script.
     db $07
     dw TravelLift4
@@ -3247,7 +3247,7 @@ C2Sc3_24:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $2f
+    db $00, $2f ; Message Text12Message2F: シーゲルが やせた おとこと / あくしゅを している しゃしんだ。[PAGE] / うしろの たてものには / 「リライアント・クリーニングてん」 / という かんばん...
 
 jr_007_620a:
     ; Set object flag.
@@ -3261,7 +3261,7 @@ jr_007_620a:
     ; Play audio.
     db $3e, $08
     ; Show message 0.
-    db $00, $31
+    db $00, $31 ; Message Text12Message31: この おとこの ことを しらべれば / かねの ありかが わかるかも / しれない・・・。[PAGE] / なんとかして クリーニングてんに / しのびこめないだろうか・...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3289,7 +3289,7 @@ C2Sc3_26:
     ; Play audio.
     db $3e, $08
     ; Show message 0.
-    db $00, $40
+    db $00, $40 ; Message Text12Message40: アンソニー・マロンに あてた / てがみだ。[PAGE] / 「ボス。 /  なんだか おかしいのです。[PAGE] /  おれは べンティーニあにきの /  めいれいで...
     ; Set object flag.
     db $09, C2BondSeen
     ; Set object flag.
@@ -3301,7 +3301,7 @@ C2Sc3_26:
     db $08, C2McMSeen
     dw BondLetterTail
     ; Show message 1.
-    db $01, $63
+    db $01, $63 ; Message Text14Message63: あの べンティーニが マロンから / どくりつ・・・だって? / ・・・まさか。[PAGE] / おれが さがしている かねも / べンティーニが すでに つかって / ...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3312,7 +3312,7 @@ BondLetterTail:
 
 C2Loc3_A9:
     ; Show message 1.
-    db $01, $68
+    db $01, $68 ; Message Text14Message68: ボンドウェルが ぬすみだした / ちょうぼを しらべれば なにか / わかるかも しれない・・・。[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3326,7 +3326,7 @@ C2Sc3_27:
     db $08, C2PamphletOpen
     dw ReadTrainGuide
     ; Show message 0.
-    db $00, $3c
+    db $00, $3c ; Message Text12Message3C: パシフィックてつどうの / パンフレットだ。[PAGE] / シカゴえきの じゅうしょが / かいてある。[END]
     ; Jump to script.
     db $07
     dw AddChicagoStop
@@ -3336,7 +3336,7 @@ ReadTrainGuide:
 
 C2Loc3_AA:
     ; Show message 0.
-    db $00, $3d
+    db $00, $3d ; Message Text12Message3D: 「あたらしい あんないばんの /  みかたについて ごしょうかい /  いたします。[PAGE] /  みとうちゃくーーー /   まもなく れっしゃが ホームに /  ...
     ; End script.
     db $ff
 
@@ -3366,7 +3366,7 @@ jr_007_6253:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Return to calling script.
     db $06
 
@@ -3381,7 +3381,7 @@ C2Sc3_29:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $1c
+    db $2a, C2VisIdRailwayPamphlet
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3415,7 +3415,7 @@ News3Article:
 
 C2Loc3_AC:
     ; Show message 1.
-    db $01, $0a
+    db $01, $0a ; Message Text14Message0A: しんぶんには シーゲルの / なかまだった マフィアが / ころされたと かいてある。[PAGE] / したいが あんちされている / こうきょうの したいおきばの / ...
     ; Test object flag and branch when set.
     db $08, C2MorgueKnown
     dw EndC2Item
@@ -3455,7 +3455,7 @@ FinishNews3Take:
 
 C2Loc3_AD:
     ; Hide object.
-    db $2a, $2c
+    db $2a, C2VisIdNewsPaper3
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3468,7 +3468,7 @@ C2Loc3_AE:
     db $08, C2NewsPaid
     dw NewsTakeFirst
     ; Show message 1.
-    db $01, $18
+    db $01, $18 ; Message Text14Message18: おれが しんぶんを とろうとすると / ろうじんは いった。[PAGE] / 「いちぶ 25セントです。 /  さきに おかねを はらって /  くださいよ!」[END]
     ; End script.
     db $ff
 
@@ -3477,7 +3477,7 @@ NewsTakeFirst:
 
 C2Loc3_AF:
     ; Show message 1.
-    db $01, $df
+    db $01, $df ; Message Text15Message5F: おれが しんぶんを よもうとすると / ろうじんは いった。[PAGE] / 「ちゃんと てに とってから /  よんでください。」[END]
     ; End script.
     db $ff
 
@@ -3507,7 +3507,7 @@ News4Article:
 
 C2Loc3_B1:
     ; Show message 1.
-    db $01, $0b
+    db $01, $0b ; Message Text14Message0B: しんぶんには しんだ / マフィアについて・・・[PAGE] / 2しゅうかんまえに ころされた / ジョー・シーゲルの なかまかも / しれないと かいてある。[PAG...
     ; Test object flag and branch when set.
     db $08, C2MorgueKnown
     dw EndC2Item
@@ -3518,7 +3518,7 @@ C2Loc3_B1:
     ; End script.
     db $ff
 
-; Take newspaper 4 after payment and preserve its additional original flag.
+; Take newspaper four after payment and set object flag $9c; CloseVegasLid clears it.
 TakeC2News4:
 
 C2Sc3_2E:
@@ -3549,7 +3549,7 @@ FinishNews4Take:
 
 C2Loc3_B2:
     ; Hide object.
-    db $2a, $2d
+    db $2a, C2VisIdNewsPaper4
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3569,7 +3569,7 @@ ReadVinnyLetter:
 
 C2Sc3_2F:
     ; Show message 1.
-    db $01, $5e
+    db $01, $5e ; Message Text14Message5E: じょうほうていきょうしゃである / ビニー・タルッソからの てがみだ。[PAGE] / 「エース・・・。[PAGE] /  ノルディックくつこうじょうは /  とおりの ...
     ; End script.
     db $ff
 
@@ -3581,7 +3581,7 @@ C2Sc3_30:
     db $08, C2BottleBroken
     dw LookBrokenBottle
     ; Show message 1.
-    db $01, $76
+    db $01, $76 ; Message Text14Message76: サイダーが はいっていた ビンだ。 / いってきも のこっていない・・・。[END]
     ; End script.
     db $ff
 
@@ -3592,7 +3592,7 @@ C2Loc3_B4:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $01
+    db $2c, $01 ; Message Text18Message01: [OBJECT_WRAM:37C5]は われている。[END]
     ; End script.
     db $ff
 
@@ -3612,7 +3612,7 @@ C2Sc3_31:
     db $08, C2BottleBroken
     dw TakeBrokenBottle
     ; Hide object.
-    db $2a, $36
+    db $2a, C2VisIdAdisonBottleIntact
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3622,7 +3622,7 @@ TakeBrokenBottle:
 
 C2Loc3_B5:
     ; Hide object.
-    db $2a, $37
+    db $2a, C2VisIdAdisonBottleBroken
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3632,7 +3632,7 @@ ItemNoAnswer:
 
 C2Sc3_32:
     ; Show message 0.
-    db $00, $e3
+    db $00, $e3 ; Message Text13Message63: ・・・へんじがない。[END]
     ; End script.
     db $ff
 
@@ -3649,9 +3649,9 @@ C2Sc3_33:
     db $08, C2BottleTaken
     dw MarkBottleBroken
     ; Hide object.
-    db $2a, $36
+    db $2a, C2VisIdAdisonBottleIntact
     ; Show object.
-    db $29, $37
+    db $29, C2VisIdAdisonBottleBroken
     ; Refresh room objects.
     db $2b
 
@@ -3662,7 +3662,7 @@ C2Loc3_B6:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $00
+    db $2c, $00 ; Message Text18Message00: [OBJECT_WRAM:37C5]が われた。[END]
     ; Set object flag.
     db $09, C2BottleBroken
     ; End script.
@@ -3675,7 +3675,7 @@ C2Loc3_B7:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $1b
+    db $2c, $1b ; Message Text18Message1B: [OBJECT_WRAM:37C5]は こわれている。[END]
     ; End script.
     db $ff
 
@@ -3684,7 +3684,7 @@ LookCrackedLamp:
 
 C2Sc3_34:
     ; Show message 1.
-    db $01, $77
+    db $01, $77 ; Message Text14Message77: でんきスタンドが われている。[PAGE] / ・・・ストージーめ! / こわしたな!![END]
     ; End script.
     db $ff
 
@@ -3699,7 +3699,7 @@ C2Sc3_35:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $38
+    db $2a, C2VisIdAdisonCrackedLamp
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3712,7 +3712,7 @@ C2Sc3_36:
     db $54, C2KnifeOpen
     dw KnifeFoldedText
     ; Show message 1.
-    db $01
+    db $01 ; Message Text14Message7C: ちいさな やいばだな・・・。 / だが もっていれば なにかの やくにたつかもしれない。[END]
 
 jr_007_632f:
     db $7c
@@ -3724,7 +3724,7 @@ KnifeFoldedText:
 
 C2Loc3_B8:
     ; Show message 1.
-    db $01, $7b
+    db $01, $7b ; Message Text14Message7B: おりたたみしきの ナイフだ。[END]
     ; End script.
     db $ff
 
@@ -3736,7 +3736,7 @@ C2Sc3_37:
     db $08, C2KnifeOpen
     dw RejectC2Item
     ; Show message 2.
-    db $02, $8a
+    db $02, $8a ; Message Text17Message0A: ナイフの はを だした。[END]
     ; Set object flag.
     db $09, C2KnifeOpen
     ; End script.
@@ -3750,7 +3750,7 @@ C2Sc3_38:
     db $54, C2KnifeOpen
     dw RejectC2Item
     ; Show message 1.
-    db $01, $14
+    db $01, $14 ; Message Text14Message14: ナイフの はを おさめた。[END]
     ; Clear object flag.
     db $0a, C2KnifeOpen
     ; End script.
@@ -3761,7 +3761,7 @@ LookC2Key2:
 
 C2Sc3_39:
     ; Show message 1.
-    db $01, $7e
+    db $01, $7e ; Message Text14Message7E: おれの メールボックスを あける / ための カギだ。[END]
     ; End script.
     db $ff
 
@@ -3770,7 +3770,7 @@ LookC2Ammo:
 
 C2Sc3_3A:
     ; Show message 1.
-    db $01, $7f
+    db $01, $7f ; Message Text14Message7F: この たまは 38スぺシャルに / いれられるのを まっている。[END]
     ; End script.
     db $ff
 
@@ -3779,7 +3779,7 @@ LookJuiceCan:
 
 C2Sc3_3B:
     ; Show message 1.
-    db $01, $d0
+    db $01, $d0 ; Message Text15Message50: ぺしゃんこに なった ジュースの / カンだ。[END]
     ; End script.
     db $ff
 
@@ -3794,7 +3794,7 @@ C2Sc3_3C:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $3f
+    db $2a, C2VisIdJoeJuiceCan
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -3804,7 +3804,7 @@ LookC2Key3:
 
 C2Sc3_3D:
     ; Show message 1.
-    db $01, $d2
+    db $01, $d2 ; Message Text15Message52: みたことのある マークが / ついている。[PAGE] / そうだ! / これは メルセデス・べンツの / カギだ。[END]
     ; End script.
     db $ff
 
@@ -3813,7 +3813,7 @@ LookC2Duck:
 
 C2Sc3_3E:
     ; Show message 1.
-    db $01, $d4
+    db $01, $d4 ; Message Text15Message54: くろまめソースの かかった / ぺキンダックの たべのこしだ。 / はなを つく においがする・・・。[END]
     ; End script.
     db $ff
 
@@ -3827,12 +3827,12 @@ C2Sc3_3F:
     db $08, C2DiaryOpen
     dw ReadSiegelDiary
     ; Show message 2.
-    db $02, $0e
+    db $02, $0e ; Message Text16Message0E: シーゲルの にっきだ。[END]
     ; Test object flag and branch when set.
     db $08, C2DiarySeen
     dw EndC2Item
     ; Show message 1.
-    db $01, $4f
+    db $01, $4f ; Message Text14Message4F: なにが かいてあるのだろう・・・。[END]
     ; End script.
     db $ff
 
@@ -3841,7 +3841,7 @@ ReadSiegelDiary:
 
 C2Loc3_B9:
     ; Show message 2.
-    db $02, $0f
+    db $02, $0f ; Message Text16Message0F: にっきには しはらいリストが / かかれている。 / リストを しらべてみた・・・[PAGE] / 「3/24 1ばん $118000 /  4/15 0ばん  $240...
     ; Test object flag and branch when clear.
     db $54, C2BookMatch
     dw DiaryNoBookMatch
@@ -3855,13 +3855,13 @@ C2Loc3_B9:
     ; Set text name 1.
     db $31, $6b
     ; Show message 3.
-    db $2c, $30
+    db $2c, $30 ; Message Text18Message30: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / みくらべると・・・[END]
     ; Set text name 0.
     db $30, $6c
     ; Set text name 1.
     db $31, $6d
     ; Show message 3.
-    db $2c, $31
+    db $2c, $31 ; Message Text18Message31: こ[OBJECT_WRAM:37C5]には 0ばんが / [OBJECT_WRAM:38C5]な・・・。[END]
     ; Test object flag and branch when clear.
     db $54, C2BondSeen
     dw HintMissingPay
@@ -3873,7 +3873,7 @@ HintFalseLedger:
 
 C2Loc3_BA:
     ; Show message 3.
-    db $2c, $34
+    db $2c, $34 ; Message Text18Message34: ははあん・・・。[PAGE] / [OBJECT_WRAM:37C5]の きろくちょうは / マロンを ごまかすために シーゲルがつくった にせものだな![PAGE] /...
 
 ; With McMurphy's note read, describe police bribes and reveal the fixed courier-zero sum once.
 ShowC2Bribes:
@@ -3883,18 +3883,18 @@ C2Loc3_BB:
     db $54, C2McMSeen
     dw EndC2ItemCue
     ; Show message 0.
-    db $00, $98
+    db $00, $98 ; Message Text13Message18: ということは・・・ / 0ばんは けいさつに わたした / めこぼしりょうなんだな・・・。[END]
     ; Test object flag and branch when set.
     db $08, C2SumShown
     dw EndC2ItemCue
     ; Set object flag.
     db $09, C2SumShown
     ; Show message 2.
-    db $02, $26
+    db $02, $26 ; Message Text16Message26: ・・・あれ? / 0ばんを ごうけいすると・・・。[PAGE] / ・・・あっ!!! / 112000ドルに なるじゃないか![END]
     ; Set object flag.
     db $09, C2BribeKnown
     ; Set object flag.
-    db $09, $03
+    db $09, C2BribeTotalsShown
     ; Test object flag and branch when set.
     db $08, C2RingPlan
     dw EndC2ItemCue
@@ -3902,7 +3902,7 @@ C2Loc3_BB:
     db $08, C2LootPlan
     dw EndC2ItemCue
     ; Show message 1.
-    db $01, $64
+    db $01, $64 ; Message Text14Message64: ・・・ということは・・・。 / 112000ドルは さがしても ムダということに なる・・・。[PAGE] / いったい これから どうしたら / いいのだろう・・・。 ...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3916,7 +3916,7 @@ C2Loc3_BC:
     db $08, C2LedgerSeen
     dw CompareDiaryLedger
     ; Show message 0.
-    db $00
+    db $00 ; Message Text13Message3C: リストは つづいているが ばんごうのいみが わからないので これいじょうしらべても いみがなさそうだ。[END]
 
 jr_007_63b1:
     db $bc
@@ -3934,7 +3934,7 @@ C2Loc3_BD:
     ; Set text name 1.
     db $31, $6b
     ; Show message 3.
-    db $2c, $2e
+    db $2c, $2e ; Message Text18Message2E: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / ないようが すこし ちがっている。[END]
     ; Set text name 0.
     db $30, $6c
     ; Set text name 1.
@@ -3945,11 +3945,11 @@ HintAbsentPay:
 
 C2Loc3_BE:
     ; Show message 3.
-    db $2c, $2f
+    db $2c, $2f ; Message Text18Message2F: こ[OBJECT_WRAM:37C5]には 0ばんの / しはらいが かかれて[OBJECT_WRAM:38C5]。[END]
     ; Show message 2.
-    db $02, $eb
+    db $02, $eb ; Message Text17Message6B: 0ばんの しはらいには なにか / とくべつな いみが あるのだろうか?[END]
     ; Show message 1.
-    db $01, $79
+    db $01, $79 ; Message Text14Message79: シーゲルと どういうかんけいが / あるのだろうか?[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3964,14 +3964,14 @@ C2Loc3_BF:
     ; Set text name 1.
     db $31, $6b
     ; Show message 3.
-    db $2c, $32
+    db $2c, $32 ; Message Text18Message32: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / ないようは おなじだ。[END]
 
 ; Show that the ledger contains the same information as Siegel's diary.
 HintSameEntries:
 
 C2Loc3_C0:
     ; Show message 2.
-    db $02, $f1
+    db $02, $f1 ; Message Text17Message71: べンティーニは シーゲルの しごとをすべて はあくしていたようだ。[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -3982,7 +3982,7 @@ HintMissingPay:
 
 C2Loc3_C1:
     ; Show message 0.
-    db $00, $bb
+    db $00, $bb ; Message Text13Message3B: どうして 0ばんが あるものと / ないものが あるのだろうか・・・?[PAGE] / いったい 0ばんは なにを / いみするのだろうか?[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -4029,7 +4029,7 @@ ReadSugarCard:
 
 C2Sc3_42:
     ; Show message 2.
-    db $02, $0d
+    db $02, $0d ; Message Text16Message0D: シュガーの めいしだ。[PAGE] / 「シュガー・ショック /  イリノイしゅう シカゴ /  グループがい /  サウスコテージ 4117」[PAGE] / 「ジョー...
     ; Test object flag and branch when set.
     db $08, C2CottageKnown
     dw EndC2Item
@@ -4047,7 +4047,7 @@ LookPencil:
 
 C2Sc3_43:
     ; Show message 1.
-    db $01, $c2
+    db $01, $c2 ; Message Text15Message42: ただの えんぴつだ。[END]
     ; End script.
     db $ff
 
@@ -4056,7 +4056,7 @@ LookC2Key4:
 
 C2Sc3_44:
     ; Show message 1.
-    db $01, $c3
+    db $01, $c3 ; Message Text15Message43: へんな かたちの カギだ。[END]
     ; End script.
     db $ff
 
@@ -4068,7 +4068,7 @@ C2Sc3_45:
     db $08, C2TissueUsed
     dw LookUsedTissue
     ; Show message 2.
-    db $02, $46
+    db $02, $46 ; Message Text16Message46: ティッシュだ。 / はなを かんだのだろう。[END]
     ; End script.
     db $ff
 
@@ -4077,7 +4077,7 @@ LookUsedTissue:
 
 C2Loc3_C2:
     ; Show message 2.
-    db $02, $47
+    db $02, $47 ; Message Text16Message47: つかいふるしの ティッシュだ。[END]
     ; End script.
     db $ff
 
@@ -4092,7 +4092,7 @@ C2Sc3_46:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $4a
+    db $2a, C2VisIdSugarTissue
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4102,7 +4102,7 @@ LookPillow:
 
 C2Sc3_47:
     ; Show message 2.
-    db $02, $48
+    db $02, $48 ; Message Text16Message48: この マクラが しゃべれば いろいろおもしろい はなしが / きけただろうに![END]
     ; End script.
     db $ff
 
@@ -4117,7 +4117,7 @@ C2Sc3_48:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $48
+    db $2a, C2VisIdSugarPillow
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4127,7 +4127,7 @@ LookPerfume:
 
 C2Sc3_49:
     ; Show message 2.
-    db $02, $49
+    db $02, $49 ; Message Text16Message49: シュガーの おきにいりの こうすい / 「ピアのゆうぐれ」だ。[END]
     ; End script.
     db $ff
 
@@ -4142,7 +4142,7 @@ C2Sc3_4A:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $49
+    db $2a, C2VisIdSugarPerfume
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4152,7 +4152,7 @@ ReadSugarNews:
 
 C2Sc3_4B:
     ; Show message 2.
-    db $02, $4a
+    db $02, $4a ; Message Text16Message4A: しんぶんは ひろげられたままだ。 / しぼうきじが のっている。[PAGE] / ・・・あっ! / シュガーが きりとったところがある!なにを きりとったのだろう?[END]
 
 jr_007_6431:
     ; End script.
@@ -4169,7 +4169,7 @@ C2Sc3_4C:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $47
+    db $2a, C2VisIdSugarNewspaper
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4179,7 +4179,7 @@ LookC2Dress:
 
 C2Sc3_4D:
     ; Show message 2.
-    db $02, $4b
+    db $02, $4b ; Message Text16Message4B: スリットが はいっていて セクシーなドレスだ。[END]
     ; End script.
     db $ff
 
@@ -4188,7 +4188,7 @@ LookSugarClothes:
 
 C2Sc3_4E:
     ; Show message 2.
-    db $02, $4c
+    db $02, $4c ; Message Text16Message4C: よごれた ふくだ。 / せんたくされるのを まっている。[END]
     ; End script.
     db $ff
 
@@ -4201,7 +4201,7 @@ C2Sc3_4F:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $4e
+    db $02, $4e ; Message Text16Message4E: けいかんの マクマーフィーからの / てがみだ。[PAGE] / 「しぬまえに こくはくしよう。 /  このてがみが みつかれば わたしは すぐに ころされてしまうだろう...
     ; Set object flag.
     db $09, C2McMSeen
     ; Test object flag and branch when set.
@@ -4211,7 +4211,7 @@ C2Sc3_4F:
     db $08, C2BondSeen
     dw HintFindLedger
     ; Show message 1.
-    db $01, $7d
+    db $01, $7d ; Message Text14Message7D: シーゲルは ゆすりの ほかに / こんな ことも していたのか・・・。[PAGE] / これも マロンの めいれい / なのだろうか・・・?[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -4222,7 +4222,7 @@ HintFindLedger:
 
 C2Loc3_C3:
     ; Show message 1.
-    db $01, $8c
+    db $01, $8c ; Message Text15Message0C: この てがみにある かねの うごきをきろくした ちょうぼが どこかに / あるはずだが・・・。[PAGE] / それを しらべてみれば もしかして / 112000ドルの...
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -4233,7 +4233,7 @@ LookMcMUniform:
 
 C2Sc3_50:
     ; Show message 2.
-    db $02, $4f
+    db $02, $4f ; Message Text16Message4F: けいかんの せいふくだ。 / シュガーには けいかんの こいびともいるのか?[PAGE] / よからぬことを たくらんでいなければよいが・・・。[PAGE] / よくみる...
     ; End script.
     db $ff
 
@@ -4245,7 +4245,7 @@ C2Sc3_51:
     db $08, C2DepositsOpen
     dw ReadDeposits
     ; Show message 2.
-    db $02, $54
+    db $02, $54 ; Message Text16Message54: でんぴょうらしい。 / わゴムで かたく たばねてある。[END]
     ; End script.
     db $ff
 
@@ -4256,7 +4256,7 @@ C2Loc3_C4:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text16Message55: ぎんこうよきんの でんぴょうが / 4まい とじられている。[PAGE] / ひづけと きんがくは つぎのように / なっている。[PAGE] / 「4/15   $12...
     ; Test object flag and branch when set.
     db $08, C2BribeKnown
     dw DepositBribeText
@@ -4264,7 +4264,7 @@ C2Loc3_C4:
     db $54, C2DiarySeen
     dw EndC2Item
     ; Show message 2.
-    db $02, $56
+    db $02, $56 ; Message Text16Message56: ・・・ん? / どこかで みたような?[END]
     ; End script.
     db $ff
 
@@ -4273,7 +4273,7 @@ DepositBribeText:
 
 C2Loc3_C5:
     ; Show message 0.
-    db $00, $b1
+    db $00, $b1 ; Message Text13Message31: ひにちが 0ばんと おなじ・・・。[PAGE] / ということは ここに かいてある / きんがくは マクマーフィーが / シーゲルから もらった / ほうしゅうなのだろ...
     ; End script.
     db $ff
 
@@ -4311,7 +4311,7 @@ LookC2Key5:
 
 C2Sc3_54:
     ; Show message 2.
-    db $02, $7c
+    db $02, $7c ; Message Text16Message7C: ボンドウェルの いえの / カギだろうか・・・? / それとも ちがうのだろうか・・・?[END]
     ; End script.
     db $ff
 
@@ -4320,7 +4320,7 @@ LookBondLicense:
 
 C2Sc3_55:
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text16Message7F: トーマス・ボンドウェルの / うんてんめんきょしょうだ。[END]
     ; End script.
     db $ff
 
@@ -4329,7 +4329,7 @@ LookClaimTicket:
 
 C2Sc3_56:
     ; Show message 2.
-    db $02, $80
+    db $02, $80 ; Message Text17Message00: ラスべガスえきの / てにもつあずかりしょうだ。 / 「526」と かいてある。[END]
     ; End script.
     db $ff
 
@@ -4338,7 +4338,7 @@ LookSoap:
 
 C2Sc3_57:
     ; Show message 2.
-    db $02, $b9
+    db $02, $b9 ; Message Text17Message39: せんたくを するための せんざいだ。とくべつな せんざいなのだろうか?[END]
     ; End script.
     db $ff
 
@@ -4347,7 +4347,7 @@ LookC2Key6:
 
 C2Sc3_58:
     ; Show message 2.
-    db $02, $de
+    db $02, $de ; Message Text17Message5E: しるしのない カギだ。 / どこの カギだろう?[END]
     ; End script.
     db $ff
 
@@ -4356,7 +4356,7 @@ LookMagnet:
 
 C2Sc3_59:
     ; Show message 2.
-    db $02, $df
+    db $02, $df ; Message Text17Message5F: グレーの まるい じしゃくだ。 / ちょうど ビンのふた ていどの / おおきさだな。[PAGE] / なにかの ボタンのようだが・・・? / ・・・どこかで おなじボタ...
     ; End script.
     db $ff
 
@@ -4383,14 +4383,14 @@ C2Sc3_5B:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $e0
+    db $02, $e0 ; Message Text17Message60: あくめいだかい アンソニー・マロンのしゃしんだ。[PAGE] / マロンは シーゲルと いっしょに / うつっていた あの おとこと / あくしゅしている![PAGE] ...
     ; Test object flag and branch when set.
     db $08, C2VentiniKnown
     dw EndC2Item
     ; Play audio.
     db $3e, $08
     ; Show message 1.
-    db $01, $75
+    db $01, $75 ; Message Text14Message75: なるほど・・・。[PAGE] / この おとこが マロンの / かたうでと いわれている / ダニー・べンティーニらしい・・・。[PAGE] / マロンが いかに かれを...
     ; Set object flag.
     db $09, C2VentiniKnown
     ; Play room audio cue.
@@ -4409,7 +4409,7 @@ C2Sc3_5C:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $51
+    db $2a, C2VisIdOuterOfficePhoto
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4424,12 +4424,12 @@ C2Sc3_5D:
     db $08, C2LedgerOpen
     dw ReadC2Ledger
     ; Show message 0.
-    db $00, $b9
+    db $00, $b9 ; Message Text13Message39: おおきな かわせいの / きろくちょうだ。[END]
     ; Test object flag and branch when set.
     db $08, C2LedgerSeen
     dw EndC2Item
     ; Show message 1.
-    db $01, $4f
+    db $01, $4f ; Message Text14Message4F: なにが かいてあるのだろう・・・。[END]
     ; End script.
     db $ff
 
@@ -4440,7 +4440,7 @@ C2Loc3_C6:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $ba
+    db $00, $ba ; Message Text13Message3A: べンティーニが かねの つかいみちをマロンに ほうこくする ための / ものらしい・・・。[PAGE] / 「ばしょ シカゴ /  せきにんしゃ ジョー・シーゲル[PAG...
     ; Test object flag and branch when clear.
     db $54, C2DiarySeen
     dw EndC2Item
@@ -4454,13 +4454,13 @@ C2Loc3_C6:
     ; Set text name 1.
     db $31, $6b
     ; Show message 3.
-    db $2c, $30
+    db $2c, $30 ; Message Text18Message30: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / みくらべると・・・[END]
     ; Set text name 0.
     db $30, $6b
     ; Set text name 1.
     db $31, $6e
     ; Show message 3.
-    db $2c, $31
+    db $2c, $31 ; Message Text18Message31: こ[OBJECT_WRAM:37C5]には 0ばんが / [OBJECT_WRAM:38C5]な・・・。[END]
     ; Test object flag and branch when clear.
     db $54, C2BondSeen
     dw HintMissingPay
@@ -4479,7 +4479,7 @@ C2Loc3_C7:
     ; Set text name 1.
     db $31, $6c
     ; Show message 3.
-    db $2c, $2e
+    db $2c, $2e ; Message Text18Message2E: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / ないようが すこし ちがっている。[END]
     ; Set text name 0.
     db $30, $6b
     ; Set text name 1.
@@ -4526,7 +4526,7 @@ LookC2HatRack:
 
 C2Sc3_60:
     ; Show message 0.
-    db $00, $af
+    db $00, $af ; Message Text13Message2F: しんちゅうの ぼうしかけだ。[END]
     ; End script.
     db $ff
 
@@ -4556,7 +4556,7 @@ LookPaperweight:
 
 C2Sc3_62:
     ; Show message 0.
-    db $00, $b0
+    db $00, $b0 ; Message Text13Message30: だいの うえに とりが のっている / ぺーパーウエイトだ。[PAGE] / ながくて するどい くちばしだ。 / この とりは ハチドリを / かたどっているのだろう。...
     ; Set object flag.
     db $09, C2WeightSeen
     ; End script.
@@ -4573,7 +4573,7 @@ C2Sc3_63:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $1a
+    db $2a, C2VisIdVentiniPaperweight
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4585,12 +4585,12 @@ C2Sc3_64:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $b2
+    db $00, $b2 ; Message Text13Message32: くちばしが ハリのように するどく / とがった ハチドリの つくりものだ。[END]
     ; Test object flag and branch when set.
     db $08, C2DartUsed
     dw EndC2Item
     ; Show message 0.
-    db $00, $b3
+    db $00, $b3 ; Message Text13Message33: あれ・・・? / この ほそくて するどい くちばし。ハネのついた ほそい からだ。[PAGE] / やっぱり なにかに にているような / きが するんだが・・・。[END]
     ; End script.
     db $ff
 
@@ -4610,7 +4610,7 @@ jr_007_6546:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $18
+    db $2a, C2VisIdVentiniDart
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4620,7 +4620,7 @@ DartUnavailable:
 
 C2Loc3_C8:
     ; Show message 0.
-    db $00, $e1
+    db $00, $e1 ; Message Text13Message61: ・・・とれない。[END]
     ; End script.
     db $ff
 
@@ -4629,7 +4629,7 @@ LookDartBase:
 
 C2Sc3_66:
     ; Show message 0.
-    db $00
+    db $00 ; Message Text13Message34: ぺーパーウエイトの だいだ。[END]
 
 jr_007_6555:
     db $b4
@@ -4649,7 +4649,7 @@ C2Sc3_67:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $19
+    db $2a, C2VisIdVentiniDartBase
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4659,7 +4659,7 @@ LookC2Opener:
 
 C2Sc3_68:
     ; Show message 0.
-    db $00, $b6
+    db $00, $b6 ; Message Text13Message36: イギリスせいの ぎんの / ぺーパーナイフだ。[END]
     ; End script.
     db $ff
 
@@ -4668,7 +4668,7 @@ LookOldSandwich:
 
 C2Sc3_69:
     ; Show message 0.
-    db $00
+    db $00 ; Message Text13Message38: うっ! / なんだ この サンドウイッチは![PAGE] / くさって すえた においが するぞ![END]
 
 Jump_007_6566:
     db $b8
@@ -4680,7 +4680,7 @@ LookDeskMat:
 
 C2Sc3_6A:
     ; Show message 2.
-    db $02, $fb
+    db $02, $fb ; Message Text17Message7B: あたらしい デスクマットだ。[END]
     ; End script.
     db $ff
 
@@ -4691,7 +4691,7 @@ C2Sc3_6B:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $3a
+    db $2c, $3a ; Message Text18Message3A: [OBJECT_WRAM:37C5]は あかない。[END]
     ; End script.
     db $ff
 
@@ -4708,7 +4708,7 @@ C2Sc3_6C:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $53
+    db $2a, C2VisIdSecretOfficeDeskMat
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4718,7 +4718,7 @@ LookFramedPhoto:
 
 C2Sc3_6D:
     ; Show message 0.
-    db $00, $2f
+    db $00, $2f ; Message Text12Message2F: シーゲルが やせた おとこと / あくしゅを している しゃしんだ。[PAGE] / うしろの たてものには / 「リライアント・クリーニングてん」 / という かんばん...
     ; End script.
     db $ff
 
@@ -4727,7 +4727,7 @@ ReadCompanyList:
 
 C2Sc3_6E:
     ; Show message 2.
-    db $02, $f5
+    db $02, $f5 ; Message Text17Message75: かみきれに かいてある もじが / なんとか よめる。[PAGE] / シカゴを きばんにしている / かいしゃの リストの ようだ。[PAGE] / かいしゃめいの と...
     ; End script.
     db $ff
 
@@ -4739,7 +4739,7 @@ C2Sc3_6F:
     db $08, C2BananaPeeled
     dw LookPeeledBanana
     ; Show message 2.
-    db $02, $f6
+    db $02, $f6 ; Message Text17Message76: うれすぎの バナナだ。[END]
     ; End script.
     db $ff
 
@@ -4748,7 +4748,7 @@ LookPeeledBanana:
 
 C2Loc3_C9:
     ; Show message 2.
-    db $02, $f7
+    db $02, $f7 ; Message Text17Message77: バナナが フニャフニャに / なっている。[END]
     ; End script.
     db $ff
 
@@ -4762,14 +4762,14 @@ C2Sc3_70:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $ed
+    db $02, $ed ; Message Text17Message6D: バナナの かわを むいた。[END]
     ; Test attribute bit 0 and branch when clear.
     db $6e
     dw ShowC2Peel
     ; Set text name 0.
     db $30, C2Peel
     ; Show message 3.
-    db $2c, $2d
+    db $2c, $2d ; Message Text18Message2D: [OBJECT_WRAM:37C5]は やくに / たちそうもないので すてた。[END]
     ; Set object flag.
     db $09, C2BananaPeeled
     ; End script.
@@ -4813,12 +4813,12 @@ C2Sc3_72:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $ef
+    db $02, $ef ; Message Text17Message6F: くろくて おおきな / とりひききろくちょうだ。[END]
     ; Test object flag and branch when set.
     db $08, C2BlackSeen
     dw EndC2ItemCue
     ; Show message 1.
-    db $01, $4f
+    db $01, $4f ; Message Text14Message4F: なにが かいてあるのだろう・・・。[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -4840,7 +4840,7 @@ C2Loc3_CB:
     ; Set text name 1.
     db $31, $6c
     ; Show message 3.
-    db $2c, $32
+    db $2c, $32 ; Message Text18Message32: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / ないようは おなじだ。[END]
     ; Play audio.
     db $3e, $08
     ; Test object flag and branch when clear.
@@ -4851,20 +4851,20 @@ C2Loc3_CB:
     ; Set text name 1.
     db $31, $6b
     ; Show message 3.
-    db $2c, $30
+    db $2c, $30 ; Message Text18Message30: [OBJECT_WRAM:37C5][OBJECT_WRAM:38C5]と / みくらべると・・・[END]
     ; Set text name 0.
     db $30, $6b
     ; Set text name 1.
     db $31, $6d
     ; Show message 3.
-    db $2c, $31
+    db $2c, $31 ; Message Text18Message31: こ[OBJECT_WRAM:37C5]には 0ばんが / [OBJECT_WRAM:38C5]な・・・。[END]
     ; Test object flag and branch when clear.
     db $54, C2BondSeen
     dw HintMissingPay
     ; Set text name 0.
     db $30, $69
     ; Show message 3.
-    db $2c, $34
+    db $2c, $34 ; Message Text18Message34: ははあん・・・。[PAGE] / [OBJECT_WRAM:37C5]の きろくちょうは / マロンを ごまかすために シーゲルがつくった にせものだな![PAGE] /...
     ; Jump to script.
     db $07
     dw ShowC2Bribes
@@ -4874,7 +4874,7 @@ HintUnreadDiary:
 
 C2Loc3_CC:
     ; Show message 2.
-    db $02, $f3
+    db $02, $f3 ; Message Text17Message73: しはらいきろくが かかれている。[PAGE] / でも・・・おおくの しはらいが / かかれていて よくわからない![PAGE] / なにか めやすになるものが あれば ...
     ; End script.
     db $ff
 
@@ -4918,7 +4918,7 @@ LookTag1:
 
 C2Sc3_75:
     ; Show message 2.
-    db $02, $a3
+    db $02, $a3 ; Message Text17Message23: あしふだには 「ピエール・マローカ」と かいてある。[END]
     ; End script.
     db $ff
 
@@ -4935,7 +4935,7 @@ jr_007_6605:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $4d
+    db $2a, C2VisIdMorgueTag1
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4945,7 +4945,7 @@ LookTag2:
 
 C2Sc3_77:
     ; Show message 2.
-    db $02, $a4
+    db $02, $a4 ; Message Text17Message24: 「トーマス・ボンドウェル」と / あしふだに かいてある。[END]
     ; End script.
     db $ff
 
@@ -4960,7 +4960,7 @@ C2Sc3_78:
     db $05
     dw ShowC2Take
     ; Hide object.
-    db $2a, $4e
+    db $2a, C2VisIdMorgueTag2
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -4970,7 +4970,7 @@ LookC2Peel:
 
 C2Sc3_79:
     ; Show message 2.
-    db $02, $ee
+    db $02, $ee ; Message Text17Message6E: ゆかに バナナのかわを おいておけばころぶ ひとが いるかな・・・。[END]
     ; End script.
     db $ff
 
@@ -5003,7 +5003,7 @@ C2Sc3_7B:
     db $2a
 
 jr_007_662e:
-    db $65
+    db C2VisIdAdisonCigarRing
     ; Jump to script.
     db $07
     dw AddC2ItemEnd
@@ -5013,7 +5013,7 @@ LookC2AmmoAlt:
 
 C2Sc3_7C:
     ; Show message 0.
-    db $00, $c0
+    db $00, $c0 ; Message Text13Message40: 38スぺシャルの たまだ。[END]
     ; End script.
     db $ff
 
@@ -5022,7 +5022,7 @@ AmmoNotNeeded:
 
 C2Sc3_7D:
     ; Show message 1.
-    db $01, $47
+    db $01, $47 ; Message Text14Message47: ほかに つかいみちが ないので / とるひつようは ないようだ。[END]
     ; End script.
     db $ff
 
@@ -5040,17 +5040,17 @@ C2Loc3_CD:
     ; Match alternate item against type, ID and script target rows.
     db $32, $03, C2DeskMat
     dw TryRingOnMat
-    db $01, $0c
+    db $01, C2ContainerSecretOfficeDesk
     dw MatchDeskRing
-    db $02, $00
+    db $02, C2GroupLaundryWasher
     dw PutItemWasher
-    db $02, $01
+    db $02, C2GroupSecretOfficeBin
     dw PutItemTrash1
-    db $02, $02
+    db $02, C2GroupJoeFoodTrash
     dw PutItemTrash2
-    db $02, $03
+    db $02, C2GroupMaloneDesk
     dw MatchDeskStore
-    db $00, $a7
+    db $00, C2TargetNoHit
     dw PutItemDirect
     db $fe, $fe
     dw NoC2ItemEffect
@@ -5067,15 +5067,15 @@ MatchItemPlace:
 
 C2Loc3_CE:
     ; Match alternate item against type, ID and script target rows.
-    db $32, $02, $00
+    db $32, $02, C2GroupLaundryWasher
     dw PutItemWasher
-    db $02, $01
+    db $02, C2GroupSecretOfficeBin
     dw PutItemTrash1
-    db $02, $02
+    db $02, C2GroupJoeFoodTrash
     dw PutItemTrash2
-    db $02, $03
+    db $02, C2GroupMaloneDesk
     dw MatchDeskStore
-    db $00, $a7
+    db $00, C2TargetNoHit
     dw PutItemDirect
     db $fe, $fe
     dw NoC2ItemEffect
@@ -5124,7 +5124,7 @@ C2Loc3_D2:
     db $46, $3a
     dw StoreUniformCheck
     ; Test packed item argument and branch on equality.
-    db $46, $17
+    db $46, C2ItemLiftButton
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
     db $46, $00
@@ -5166,7 +5166,7 @@ DeskItemRefusal:
 
 C2Loc3_D4:
     ; Show message 1.
-    db $01, $f3
+    db $01, $f3 ; Message Text15Message73: ・・・やめたほうが よさそうだ。[END]
     ; End script.
     db $ff
 
@@ -5178,7 +5178,7 @@ C2Loc3_D5:
     db $54, C2TrenchWorn
     dw PutItemDesk
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text17Message47: ぬがなければ いれられない。[END]
     ; End script.
     db $ff
 
@@ -5194,7 +5194,7 @@ C2Loc3_D6:
 jr_007_66bd:
     db HIGH(PutItemDesk)
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text17Message47: ぬがなければ いれられない。[END]
     ; End script.
     db $ff
 
@@ -5206,7 +5206,7 @@ C2Loc3_D7:
     db $54, C2CoatWorn
     dw PutItemDesk
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text17Message47: ぬがなければ いれられない。[END]
     ; End script.
     db $ff
 
@@ -5218,7 +5218,7 @@ C2Loc3_D8:
     db $54, C2Uniform
     dw PutItemDesk
     ; Show message 2.
-    db $02, $c7
+    db $02, $c7 ; Message Text17Message47: ぬがなければ いれられない。[END]
     ; End script.
     db $ff
 
@@ -5264,7 +5264,7 @@ C2Loc3_DC:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $1c
+    db $2c, $1c ; Message Text18Message1C: [OBJECT_WRAM:37C5]を てにいれた。[END]
     ; Return to calling script.
     db $06
 
@@ -5282,7 +5282,7 @@ RejectC2Item:
 
 C2Sc3_81:
     ; Show message 0.
-    db $00, $2d
+    db $00, $2d ; Message Text12Message2D: おれ・・・。 / なにを しているのだろう・・・。[END]
     ; End script.
     db $ff
 
@@ -5291,14 +5291,14 @@ NoC2ItemEffect:
 
 C2Sc3_82:
     ; Show message 0.
-    db $00, $2c
+    db $00, $2c ; Message Text12Message2C: なにも おこらない。[END]
     ; End script.
     db $ff
     ; Unreferenced sequence; these interpretations follow its byte pattern.
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: [OBJECT_WRAM:37C5]を あけた。[END]
     ; End script.
     db $ff
 
@@ -5309,7 +5309,7 @@ C2Loc3_DE:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -5320,7 +5320,7 @@ C2Loc3_DF:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 
@@ -5331,7 +5331,7 @@ C2Loc3_E0:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $1a
+    db $2c, $1a ; Message Text18Message1A: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -5346,7 +5346,7 @@ C2Loc3_E1:
     ; Set text name 0.
     db $30, $af
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set selected state and refresh.
     db $21
     ; End script.
@@ -5363,7 +5363,7 @@ C2Loc3_E2:
     ; Set text name 0.
     db $30, $af
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Return to calling script.
     db $06
 
@@ -5378,7 +5378,7 @@ C2Loc3_E3:
     ; Set text name 0.
     db $30, $af
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 

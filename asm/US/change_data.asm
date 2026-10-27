@@ -1,12 +1,16 @@
 ; Change type/value selects a group and a terminated list.
 ; CASE2 group 2 points to the original writable lists in WRAM.
 
+; Case I list-kind index to value-indexed pointer table.
+C1ChangeListsByKind:
 C1ChangeRefs:
-    db LOW(C1Changes0)
+    db LOW(C1Prop1ChangeLists)
 jr_005_5853:
-    db HIGH(C1Changes0)
-    dw C1Changes1
+    db HIGH(C1Prop1ChangeLists)
+    dw C1Prop4ChangeLists
 
+; Case I property-four value to terminated item-list pointer.
+C1Prop4ChangeLists:
 C1Changes1:
     dw C1Ch1_00
     dw C1Ch1_01
@@ -83,6 +87,8 @@ C1Ch1_10:
 C1Ch1_11:
     db $2d, $ff
 
+; Case I property-one value to terminated item-list pointer.
+C1Prop1ChangeLists:
 C1Changes0:
     dw C1Ch0_00
     dw C1Ch0_01
@@ -137,11 +143,15 @@ C1Ch0_0B:
 C1Ch0_0C:
     db $ff
 
+; Case II list-kind index to value-indexed pointer table.
+C2ChangeListsByKind:
 C2ChangeRefs:
-    dw C2Changes0
-    dw C2Changes1
-    dw C2Changes2
+    dw C2Prop1ChangeLists
+    dw C2Prop4ChangeLists
+    dw C2GroupContentChangeLists
 
+; Four Case II pointers to writable group contents after their headers.
+C2GroupContentChangeLists:
 C2Changes2:
 jr_005_58ec:
     dw wGroupData+1
@@ -149,6 +159,8 @@ jr_005_58ec:
     dw wGroupData+17
     dw wGroupData+25
 
+; Case II property-one value to terminated item-list pointer.
+C2Prop1ChangeLists:
 C2Changes0:
     dw C2Ch0_00
     db LOW(C2Ch0_01)
@@ -199,6 +211,8 @@ C2Ch0_0B:
 C2Ch0_0C:
     db $4c, $4d, $4e, $50, $4f, $53, $ff
 
+; Case II property-four value to terminated item-list pointer.
+C2Prop4ChangeLists:
 C2Changes1:
     dw C2Ch1_00
     dw C2Ch1_01

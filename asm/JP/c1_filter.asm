@@ -54,40 +54,40 @@ CheckC1RoomItem:
 
 
     ld a, [wRoomItem]
-    cp $6b
+    cp C1TargetAceOfficeDoorShadow
     jr nz, C1FilterButlerItem
 
     ld a, [wSceneId]
-    cp $73
+    cp C1SceneAceOfficeDoorClosed
     jr z, C1FilterButlerItem
 
     jp SkipRoomItem
 
-; Keep room item $5f only in scene $7a, otherwise continue to the next exception.
+; Keep the butler target only in scene $7a, otherwise continue to the next exception.
 C1FilterButlerItem:
 
 
 jr_001_6cdb:
     ld a, [wRoomItem]
-    cp $5f
+    cp C1TargetMansionButler
     jr nz, C1FilterRackItem
 
     ld a, [wSceneId]
-    cp $7a
+    cp C1SceneMansionButlerKitchenClosed
     jr z, C1StoreRoomItem
 
     jp SkipRoomItem
 
-; Skip room item $13 when state bit $08 is set.
+; Skip the rack bottle target when its passage state is set.
 C1FilterRackItem:
 
 
 jr_001_6cec:
     ld a, [wRoomItem]
-    cp $13
+    cp C1TargetRackBottle
     jr nz, C1StoreRoomItem
 
-    ld a, $08
+    ld a, C1StateRackPassageOpen
     call ReadStateBit
     ld a, [wStateResult]
     and $01
@@ -191,18 +191,18 @@ CheckC1ObjItem:
 
 
     ld a, [wRoomItem]
-    cp $00
+    cp C1PortableCoat
     jr z, C1ObjItemScene00
 
-    cp $02
+    cp C1PortableGun1
     jr nz, C1ObjItemPropertyCheck
 
-; Keep object-backed items $00 and $02 only in scene $00.
+; Keep the coat and gun one only in scene $00.
 C1ObjItemScene00:
 
 jr_001_6d7b:
     ld a, [wSceneId]
-    cp $00
+    cp C1SceneStartStallDoorClosed
     jr z, C1ObjItemPropertyCheck
 
     jp SkipRoomItem
@@ -245,43 +245,44 @@ jr_001_6d9c:
     ld a, d
     ret
 
-; Apply the mark check and allow item $47 only in scene $43.
+; Apply the mark check and allow the car trunk only in scene $43.
 CheckC1MarkItem:
 
 
     ld a, [wRoomItem]
-    cp $47
+    cp C1DoorIdCarTrunk
     jr z, C1TrunkMarkSceneCheck
 
-    cp $24
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdBlueCabStanford
+    jr z, C1FilterCabEntry
 
-    cp $25
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdBlueCabBungalow
+    jr z, C1FilterCabEntry
 
-    cp $26
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdBlueCabOfficeBuilding
+    jr z, C1FilterCabEntry
 
-    cp $27
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdBlueCabEstate
+    jr z, C1FilterCabEntry
 
-    cp $29
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdYellowCabStanford
+    jr z, C1FilterCabEntry
 
-    cp $2a
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdYellowCabBungalow
+    jr z, C1FilterCabEntry
 
-    cp $2b
-    jr z, C1FilterSpecialMark
+    cp C1DoorIdYellowCabOfficeBuilding
+    jr z, C1FilterCabEntry
 
-    cp $2c
+    cp C1DoorIdYellowCabEstate
     jr nz, C1StoreMarkItem
 
-; Use the flag-$bb mark rule to keep or skip the selected special passage ID.
+; Apply cab-color visibility before keeping the selected cab-entry item.
+C1FilterCabEntry:
 C1FilterSpecialMark:
 
 jr_001_6dd5:
-    call HideC1MarkBB
+    call CheckC1CabColorHidden
     ld a, [wStateResult]
     and $01
     jr z, C1StoreMarkItem
@@ -305,13 +306,13 @@ jr_001_6de2:
     ld [hl], a
     ret
 
-; Keep passage item $47 only in scene $43.
+; Keep the car trunk target only in scene $43.
 C1TrunkMarkSceneCheck:
 
 
 jr_001_6df3:
     ld a, [wSceneId]
-    cp $43
+    cp C1SceneCarTrunkClosed
     jr z, C1StoreMarkItem
 
     jp SkipRoomItem

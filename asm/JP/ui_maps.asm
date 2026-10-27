@@ -1,8 +1,10 @@
 ; Bank-nine UI maps: $17 header followed by tile/attribute RLE.
 
 ; 20x18 cells, 172 stored bytes.
+; Copyright BG map reached by the boot sequence's zero-index fallthrough.
+UiMapCopyrightNotice:
 UiMap0:
-    db $17, $14, $12, $01, $01, $fe, $15, $60, $61, $62, $63, $64, $65, $66, $67, $68
+    db MapFormatRlePair, $14, $12, $01, $01, $fe, $15, $60, $61, $62, $63, $64, $65, $66, $67, $68
     db $69, $6a, $6b, $6c, $6d, $6e, $01, $fe, $18, $6f, $70, $71, $72, $73, $74, $75
     db $76, $77, $78, $79, $7a, $7b, $7c, $7d, $7e, $01, $fe, $17, $7f, $80, $81, $82
     db $83, $84, $85, $86, $87, $88, $89, $8a, $8b, $8c, $8d, $8e, $8f, $01, $fe, $16
@@ -15,6 +17,8 @@ UiMap0:
     db $c8, $c9, $ca, $cb, $cc, $cd, $01, $00, $ff, $01, $00, $67
 
 ; 20x18 cells, 465 stored bytes.
+; Title BG map selected after the title graphics load.
+UiMapTitle:
 UiMap1:
 MapTitle:
     INCBIN "../../res/ui/title/title.bin", $0, $4b
@@ -32,8 +36,10 @@ jr_009_41ca:
     INCBIN "../../res/ui/title/title.bin", $f3, $de
 
 ; 20x18 cells, 374 stored bytes.
+; Save-selection background; native code adds the slots and cursor.
+UiMapSaveSelection:
 UiMap2:
-    db $17, $14, $12, $3b, $00, $01, $02, $03, $04, $8f, $8f, $8b, $8c, $8d, $8e, $8f
+    db MapFormatRlePair, $14, $12, $3b, $00, $01, $02, $03, $04, $8f, $8f, $8b, $8c, $8d, $8e, $8f
     db $8f, $47, $48, $49, $3b, $8f, $03, $10, $11, $12, $13, $14, $3b, $8f, $05, $46
     db $56, $57, $58, $59, $7a, $7b, $ad, $8f, $20, $21, $22, $23, $24, $2a, $3b, $8f
     db $02, $52, $62, $63, $66, $67, $68, $69, $4c, $4d, $4e, $8f, $05, $06, $07, $08
@@ -68,6 +74,8 @@ Jump_009_43c1:
     db $42, $03, $02, $62, $02, $42, $62, $00, $02, $02, $3b, $07, $9f
 
 ; 20x32 cells, 233 stored bytes.
+; Shared gameplay HUD map with 20 columns and 32 stored rows.
+UiMapGameHud:
 UiMap3:
 Resource_JP_009_441e:
     INCBIN "../../res/ui/hud/JP/hud.bin", $0, $4
@@ -79,8 +87,10 @@ Call_009_44c4:
     INCBIN "../../res/ui/hud/JP/hud.bin", $a6, $43
 
 ; 20x18 cells, 222 stored bytes.
+; Developer-logo BG map with regional content differences.
+UiMapDeveloperLogo:
 UiMap4:
-    db $17, $14, $12, $3f, $3f, $fe, $66, $19, $05, $04, $03, $02, $01, $00, $00, $01
+    db MapFormatRlePair, $14, $12, $3f, $3f, $fe, $66, $19, $05, $04, $03, $02, $01, $00, $00, $01
     db $02, $03, $04, $05, $3f, $fe, $05, $09, $1b, $1c, $06, $fe, $fe, $1d, $1e, $fe
     db $1f, $fe, $fe, $06, $07, $08, $09, $3e, $fe, $fe, $0b, $0a, $20, $21, $22, $23
     db $24, $25, $26, $27, $28, $29, $2a, $2b, $2c, $2d, $0a, $0b, $fe, $fe, $0c, $fe
@@ -105,13 +115,17 @@ jr_009_45cd:
     db $00, $0b, $3f, $20, $03, $3f, $00, $83
 
 ; 20x18 cells, 30 stored bytes.
+; Bare blackjack table map selected through UI map index five.
+UiMapBlackjackTable:
 UiMap5:
 jr_009_45e5:
-    db $17, $14, $12, $00, $00, $7f, $07, $e9, $9a, $f8, $7f, $ef, $92, $9d, $93, $00
+    db MapFormatRlePair, $14, $12, $00, $00, $7f, $07, $e9, $9a, $f8, $7f, $ef, $92, $9d, $93, $00
     db $7f, $cb, $00, $77, $13, $00, $7f, $77, $00, $06, $db, $00, $07, $8b
 
 ; 20x18 cells, 16 stored bytes.
+; Blank 20x18 text panel, filled with tile $7f and attribute seven.
+UiMapBlankTextPanel:
 UiMap6:
-    db $17, $14, $12, $00, $00, $7f, $ff, $00, $7f, $67, $00, $07, $ff
+    db MapFormatRlePair, $14, $12, $00, $00, $7f, $ff, $00, $7f, $67, $00, $07, $ff
 Call_009_4610:
     db $00, $07, $67

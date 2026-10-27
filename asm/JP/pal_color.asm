@@ -15,7 +15,7 @@ Call_001_4ac3:
 LightColor:
 
 Call_001_4ac9:
-    ld c, $1f
+    ld c, Rgb555ComponentMax
 
 ; Increase a color component toward its target by up to four.
 StepColorIncrease:
@@ -68,15 +68,15 @@ UnpackColor:
 
 Call_001_4ae5:
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wPalR], a
     call ColorShr5
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wPalG], a
     call ColorShr5
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wPalB], a
     ret
 
@@ -104,15 +104,15 @@ UnpackGoal:
 
 Call_001_4b15:
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wGoalR], a
     call ColorShr5
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wGoalG], a
     call ColorShr5
     ld a, c
-    and $1f
+    and Rgb555ComponentMax
     ld [wGoalB], a
     ret
 

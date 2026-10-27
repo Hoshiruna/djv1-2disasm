@@ -10,7 +10,7 @@ C1Sc1_00:
     db $04
     dw C1SiegelNamed
     ; Show message 1.
-    db $01, $0c
+    db $01, $0c ; Message Text0EMessage0C: YOU NOTICE THE / SLUMPED OVER MAN / APPEARS TO HAVE / BREATHED HIS LAST / BREATH.[PAG...
     ; End script.
     db $ff
 
@@ -19,7 +19,7 @@ C1SiegelNamed:
 
 C1Loc1_00:
     ; Show message 2.
-    db $02, $96
+    db $02, $96 ; Message Text0DMessage16: IT'S THE BODY / OF JOEY SIEGEL.[PAGE] / YOUR STOMACH DOES / A LURCH AS YOU / NOTICE T...
     ; End script.
     db $ff
 
@@ -37,7 +37,7 @@ jr_006_4a98:
     ; Set text name 0.
     db $1e, $c4
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -52,7 +52,7 @@ C1Loc1_05:
     ; Set text name 0.
     db $1e, $c4
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -68,7 +68,7 @@ C1Sc1_02:
     ; Set text name 0.
     db $1e, $d1
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -83,7 +83,7 @@ C1Loc1_06:
     ; Set text name 0.
     db $1e, $d1
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -97,7 +97,7 @@ C1Sc1_03:
     db $04
     dw C1WallSafeOpen
     ; Show message 2.
-    db $02, $8e
+    db $02, $8e ; Message Text0DMessage0E: YOU FIDDLE WITH / THE DIAL, / LISTENING HARD FORTHE TELLTALE / SOUNDS OF TUMBLERSCLIC...
     ; End script.
     db $ff
 
@@ -110,7 +110,7 @@ C1Loc1_07:
 
 jr_006_4ac0:
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -126,7 +126,7 @@ C1Sc1_04:
     ; Set text name 0.
     db $1e, $d3
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -143,7 +143,7 @@ C1Loc1_08:
 
 jr_006_4ad0:
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -159,9 +159,9 @@ C1Sc1_05:
     ; Set text name 0.
     db $1e, $d4
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set state and refresh.
-    db $33, $48
+    db $33, C1StateLuxuryCarDashboardOpen
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -176,7 +176,7 @@ C1Loc1_09:
     ; Set text name 0.
     db $1e, $d4
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -192,7 +192,7 @@ C1Sc1_06:
     ; Set text name 0.
     db $1e, $d5
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -207,7 +207,7 @@ C1Loc1_0A:
     ; Set text name 0.
     db $1e, $d5
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -223,7 +223,7 @@ C1Sc1_07:
     ; Set text name 0.
     db $1e, $d7
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -238,7 +238,7 @@ C1Loc1_0B:
     ; Set text name 0.
     db $1e, $d7
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -252,7 +252,7 @@ C1Sc1_08:
     db $04
     dw C1CabOpenCheck
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text0CMessage43: THE DOOR WON'T / OPEN.[PAGE] / IT MUST BE / LOCKED.[END]
     ; End script.
     db $ff
 
@@ -288,7 +288,7 @@ C1Loc1_0C:
     ; Set text name 0.
     db $1e, $d8
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -305,7 +305,7 @@ C1Loc1_0D:
     ; Set text name 0.
     db $1e, $d8
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -321,7 +321,7 @@ C1Sc1_0A:
     ; Set text name 0.
     db $1e, $d9
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -336,7 +336,7 @@ C1Loc1_0E:
     ; Set text name 0.
     db $1e, $d9
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -352,7 +352,7 @@ C1Sc1_0B:
     ; Set text name 0.
     db $1e, $da
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -367,7 +367,7 @@ C1Loc1_0F:
     ; Set text name 0.
     db $1e, $da
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -383,7 +383,7 @@ C1Sc1_0C:
     ; Set text name 0.
     db $1e, $db
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
@@ -398,7 +398,7 @@ C1Loc1_10:
     ; Set text name 0.
     db $1e, $db
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -416,18 +416,18 @@ C1Sc1_0D:
     ; Set text name 0.
     db $1e, $c5
     ; Show message 2.
-    db $02
+    db $02 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
 
 Call_006_4b60:
     db $00
     ; Set state and refresh.
-    db $33, $4b
+    db $33, C1StateWomenStallLidOpen
     ; Set selected attribute bit 2.
     db $0e
     ; Keep selected change.
     db $26
     ; Show message 0.
-    db $00, $37
+    db $00, $37 ; Message Text0CMessage37:  YOU ARE RELIEVED / THAT YOU FIND / NOTHING FLOATING / INSIDE.[END]
     ; End script.
     db $ff
 
@@ -438,7 +438,7 @@ C1Loc1_11:
     ; Set text name 0.
     db $1e, $c5
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -454,7 +454,7 @@ C1Sc1_0E:
     ; Set text name 0.
     db $1e, $c4
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -469,7 +469,7 @@ C1Loc1_12:
     ; Set text name 0.
     db $1e, $c4
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -485,7 +485,7 @@ C1Sc1_0F:
     ; Set text name 0.
     db $1e, $d1
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -500,7 +500,7 @@ C1Loc1_13:
     ; Set text name 0.
     db $1e, $d1
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -516,9 +516,9 @@ C1Sc1_10:
     ; Set text name 0.
     db $1e, $d2
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear state and refresh.
-    db $34, $4a
+    db $34, C1StateCorpseOfficeWallSafeOpen
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -533,7 +533,7 @@ C1Loc1_14:
     ; Set text name 0.
     db $1e, $d2
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -549,7 +549,7 @@ C1Sc1_11:
     ; Set text name 0.
     db $1e, $d3
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -564,7 +564,7 @@ C1Loc1_15:
     ; Set text name 0.
     db $1e, $d3
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -580,9 +580,9 @@ C1Sc1_12:
     ; Set text name 0.
     db $1e, $d4
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear state and refresh.
-    db $34, $48
+    db $34, C1StateLuxuryCarDashboardOpen
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -597,7 +597,7 @@ C1Loc1_16:
     ; Set text name 0.
     db $1e, $d4
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -613,7 +613,7 @@ C1Sc1_13:
     ; Set text name 0.
     db $1e, $d5
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -628,7 +628,7 @@ C1Loc1_17:
     ; Set text name 0.
     db $1e, $d5
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -644,7 +644,7 @@ C1Sc1_14:
     ; Set text name 0.
     db $1e, $d6
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -661,7 +661,7 @@ C1Loc1_18:
     ; Set text name 0.
     db $1e, $d6
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -677,7 +677,7 @@ C1Sc1_15:
     ; Set text name 0.
     db $1e, $d7
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -692,7 +692,7 @@ C1Loc1_19:
     ; Set text name 0.
     db $1e, $d7
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -708,7 +708,7 @@ C1Sc1_16:
     ; Set text name 0.
     db $1e, $d9
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -723,7 +723,7 @@ C1Loc1_1A:
     ; Set text name 0.
     db $1e, $d9
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -739,7 +739,7 @@ C1Sc1_17:
     ; Set text name 0.
     db $1e, $da
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -754,7 +754,7 @@ C1Loc1_1B:
     ; Set text name 0.
     db $1e, $da
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -770,7 +770,7 @@ C1Sc1_18:
     ; Set text name 0.
     db $1e, $db
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
@@ -785,7 +785,7 @@ C1Loc1_1C:
     ; Set text name 0.
     db $1e, $db
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -803,15 +803,15 @@ C1Sc1_19:
     ; Set text name 0.
     db $1e, $c5
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear state and refresh.
-    db $34, $4b
+    db $34, C1StateWomenStallLidOpen
     ; Clear selected attribute bit 2.
     db $0f
     ; Remove selected change.
     db $47
     ; Show message 0.
-    db $00, $38
+    db $00, $38 ; Message Text0CMessage38: THE VAGUE / RECOLLECTION OF / YOUR MOTHER / TELLING YOU TO PUTTHE SEAT DOWN / COMES T...
     ; End script.
     db $ff
 
@@ -822,7 +822,7 @@ C1Loc1_1D:
     ; Set text name 0.
     db $1e, $c5
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -831,7 +831,7 @@ C1ContainerPuzzled:
 
 C1Sc1_1A:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: WHAT DO YOU THINK / YOU ARE DOING?[END]
     ; End script.
     db $ff
 
@@ -845,7 +845,7 @@ C1Sc1_1B:
     db $04
     dw LookC1Desk2
     ; Show message 2.
-    db $02, $84
+    db $02, $84 ; Message Text0DMessage04: A POOL OF BLOOD / LIES DRYING ON THEDESK TOP.[PAGE] / THE DRAWER ON THE / OTHER SIDE ...
     ; End script.
     db $ff
 
@@ -854,7 +854,7 @@ C1ContainerRefuse:
 
 C1Sc1_1C:
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: YOU CAN'T DO THAT.[END]
     ; End script.
     db $ff
 
@@ -868,7 +868,7 @@ C1Sc1_1D:
     db $04
     dw C1WallSafeView2
     ; Show message 2.
-    db $02, $85
+    db $02, $85 ; Message Text0DMessage05: IT'S A WALL SAFE. / TOO BAD YOU NEVER / SHOWED MUCH / APTITUDE FOR SAFE / ROBBING.[END]
     ; End script.
     db $ff
 
@@ -877,7 +877,7 @@ C1WallSafeView2:
 
 C1Loc1_02:
     ; Show message 2.
-    db $02, $94
+    db $02, $94 ; Message Text0DMessage14: IT'S A RATHER NEW / WALL SAFE.[END]
     ; End script.
     db $ff
 
@@ -886,7 +886,7 @@ LookC1Desk2:
 
 C1Sc1_1E:
     ; Show message 2.
-    db $02, $99
+    db $02, $99 ; Message Text0DMessage19: IT'S AN EVERYDAY, / RUN-OF-THE-MILL / DESK.[PAGE] / THE DRAWER APPEARSTO HAVE BEEN / ...
     ; End script.
     db $ff
 
@@ -900,7 +900,7 @@ C1Sc1_1F:
     db $04
     dw C1DashOpen
     ; Show message 1.
-    db $01, $06
+    db $01, $06 ; Message Text0EMessage06: YOU WONDER WHY / IT'S CALLED A / GLOVE COMPARTMENT / WHEN THERE USUALLYAREN'T ANY GLO...
     ; End script.
     db $ff
 
@@ -909,7 +909,7 @@ LookC1Desk3:
 
 C1Sc1_20:
     ; Show message 1.
-    db $01, $68
+    db $01, $68 ; Message Text0EMessage68: IT'S A SCUFFED / NIGHTSTAND / WITH A DRAWER / IN IT.[END]
     ; End script.
     db $ff
 
@@ -923,7 +923,7 @@ C1Sc1_21:
     db $04
     dw C1LockedCabView2
     ; Show message 1.
-    db $01, $7c
+    db $01, $7c ; Message Text0EMessage7C: A COMBINATION LOCKKEEPS THIS FILE / CABINET LOCKED.[PAGE] / PERHAPS TO KEEP / OUT WOU...
     ; End script.
     db $ff
 
@@ -932,7 +932,7 @@ C1LockedCabView2:
 
 C1Loc1_03:
     ; Show message 2.
-    db $02, $3b
+    db $02, $3b ; Message Text11Message3B: IT'S A BIG BLACK / CABINET.[END]
     ; End script.
     db $ff
 
@@ -941,7 +941,7 @@ C1ContainerNoHere:
 
 C1Sc1_22:
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text11Message37: YOU CAN'T DO THAT / HERE.[END]
     ; End script.
     db $ff
 
@@ -950,7 +950,7 @@ LookC1Desk4:
 
 C1Sc1_23:
     ; Show message 1.
-    db $01, $8d
+    db $01, $8d ; Message Text0FMessage0D: A TYPICAL DESK: / FOUR LEGS AND A / DRAWER.[END]
     ; End script.
     db $ff
 
@@ -964,7 +964,7 @@ C1Sc1_24:
     db $04
     dw C1CabinetView2
     ; Show message 1.
-    db $01, $8f
+    db $01, $8f ; Message Text0FMessage0F: THE FILE CABINET / LOOKS OLD AND / WORN. A MAN'S / FILES SAYS A LOT / ABOUT HIMSELF![...
     ; End script.
     db $ff
 
@@ -973,7 +973,7 @@ C1CabinetView2:
 
 C1Loc1_04:
     ; Show message 2.
-    db $02, $3b
+    db $02, $3b ; Message Text11Message3B: IT'S A BIG BLACK / CABINET.[END]
     ; End script.
     db $ff
 
@@ -982,7 +982,7 @@ LookC1Mailbox:
 
 C1Sc1_25:
     ; Show message 1.
-    db $01, $9b
+    db $01, $9b ; Message Text0FMessage1B: IT'S A MAIL BOX. / THE NUMBER 626 IS / NEATLY PAINTED ON / IT. [END]
     ; End script.
     db $ff
 
@@ -991,7 +991,7 @@ LookC1Tables:
 
 C1Sc1_26:
     ; Show message 1.
-    db $01, $c0
+    db $01, $c0 ; Message Text10Message00: IT'S A NIGHTSTAND / WITH DRAWERS.[END]
     ; End script.
     db $ff
 
@@ -1000,6 +1000,6 @@ LookC1Lid:
 
 C1Sc1_27:
     ; Show message 0.
-    db $00, $36
+    db $00, $36 ; Message Text0CMessage36: THE PORCELAIN OF / THE TOILET SEEMS / TO HAVE BEEN / RECENTLY CRACKED.[PAGE] / WATER ...
     ; End script.
     db $ff

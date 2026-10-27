@@ -8,7 +8,7 @@ Call_000_339c:
     ld [wCursorX], a
     ld a, $9c
     ld [wCursorY], a
-    ld a, $0c
+    ld a, InputSelPrevPage
     ld [wInputSel], a
     push af
     ld a, $01

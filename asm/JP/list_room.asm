@@ -23,7 +23,7 @@ jr_000_2acb:
     ld [wCursorX], a
     ld a, $b4
     ld [wCursorY], a
-    ld a, $0d
+    ld a, InputSelListFirst
     ld [wInputSel], a
     push af
     ld a, $01
@@ -52,7 +52,7 @@ jr_000_2afe:
 ; Resolve the selected list byte and choose the case-specific room mapper.
 ListRoomResolveRow:
 jr_000_2b05:
-    sub $0d
+    sub InputSelListFirst
     ld c, a
     ld b, $00
     ld hl, wListBase
@@ -84,7 +84,8 @@ Call_000_2b2a:
 
     inc c
 
-; Read the destination pair and adjust it using the current room parity.
+; Other non-ff list values select slot four, the estate destination.
+; Read the blue-cab base; odd current rooms select its yellow partner.
 C1ListRoomLookup:
 jr_000_2b30:
     ld hl, C1RoomPick
@@ -104,9 +105,9 @@ jr_000_2b3d:
     ret
 
 C1RoomPick:
-    db $26, $42
+    db C1RoomIdBlueCabPeoria, C1RoomIdBlueCabStanford
 Jump_000_2b44:
-    db $44, $46, $48
+    db C1RoomIdBlueCabBungalow, C1RoomIdBlueCabOfficeBuilding, C1RoomIdBlueCabEstate
 
 ; Call the Case II cab-stop selector in bank three.
 C2ListRoomDispatch:

@@ -18,11 +18,11 @@ jr_003_4d98:
     ld [wChipLimit], a
     call ScriptHoldText
     ld a, $85
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message05: おんなは いった。[END]
     xor a
     ld [wChipCount], a
     ld a, $35
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message35: 「チップは 1まい 5ドルです。 /  なんまいの チップに /  こうかんしますか?」 /           [NUM8_WRAM:C3C5] まい[WAIT_END]
     call ChooseChipCount
     ld a, [wStateResult]
     and $01
@@ -42,7 +42,7 @@ jr_003_4dba:
     jr z, ChipBuyInsufficientCash
 
     ld a, $37
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message37: 「ごうけい [NUM8_WRAM:A7C8]ドルに /  なります。 /  ありがとうございました。」[END]
     call ResumeTextUI
     ld a, [wChipCount]
     ld hl, wChips
@@ -63,7 +63,7 @@ jr_003_4dba:
 ChipBuyInsufficientCash:
 jr_003_4de9:
     ld a, $99
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message19: 「おかねが たりませんよ。」[END]
     call ResumeTextUI
     ret
 
@@ -169,7 +169,7 @@ jr_003_4e63:
     ld a, [wChipCount]
     ld [wChipLimit], a
     ld a, $36
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message36: 「チップは 1まい 5ドルです。 /  なんまいを おかねに /  こうかんしますか?」 /           [NUM8_WRAM:C3C5] まい[WAIT_END]
     call ChooseChipCount
     ld a, [wStateResult]
     and $01
@@ -177,7 +177,7 @@ jr_003_4e63:
 
     call CalcChipCost
     ld a, $37
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message37: 「ごうけい [NUM8_WRAM:A7C8]ドルに /  なります。 /  ありがとうございました。」[END]
     ld a, [wChips]
     ld hl, wChipCount
     sub [hl]

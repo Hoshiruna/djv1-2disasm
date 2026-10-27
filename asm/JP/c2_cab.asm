@@ -67,7 +67,7 @@ CabAlreadyHere:
 
 jr_003_4cfc:
     ld a, $46
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message46: うんてんしゅは しばらく あっけに / とられていたが わらって いった。[PAGE] / 「エース どうかしてるぜ。 /  そとを みてみろよ。 /  ここが そのばし...
     call RestoreTextLists
     ret
 
@@ -80,12 +80,12 @@ Call_003_4d05:
     call ResetObjScroll
     call MapPulse10Call
     ld a, $48
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message48: いきさきを きくと うんてんしゅは / げんきよく いった。[PAGE] / 「しょうちしたぜ!」[PAGE] / タクシーは はしりだした・・・。[END]
     call PlayCabRide
     ld a, $49
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message49: キキーッ!![END]
     ld a, $4a
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message4A: うんてんしゅは タクシーを とめて / いった。[PAGE] / 「エース ついたぜ!」[END]
     call MapPulse10Call
     call RestoreTextLists
     ret

@@ -43,7 +43,7 @@ jr_002_66a1:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $e0
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage60: とつぜん めのまえに おとこが / あらわれた![PAGE] / ・・・おそろしく つよそうだ。[PAGE] / おとこは ふといこえで おれに / いった。[PAGE]...
     call SetResult
     ret
 
@@ -79,7 +79,7 @@ jr_002_66d8:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $e5
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage65: ・・・・・・! / どこからともなく おんなが / あらわれて いった。[PAGE] / 「ながかったわ・・・。 /  いま けいむしょから /  でてきたところなの。[...
     call SetResult
     ret
 
@@ -118,7 +118,7 @@ jr_002_66fe:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $33
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0EMessage33: ギャー!!!!! / ワッ ワッ ワニだ!![PAGE] / げすいどうの なかに とつぜん / おおきな ワニが・・・!![END]
     call SetResult
     ret
 
@@ -149,7 +149,7 @@ jr_002_6732:
     jr nz, C1BumRepeatEventReply
 
     ld a, $db
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage5B: ・・・・・・! / いきなり よっぱらいが とおりを / さえぎった。[PAGE] / かおを ちかづけてきて なにか / ブツブツと いっている。[PAGE] / 「5...
     call SetResult
     ret
 
@@ -158,7 +158,7 @@ jr_002_6732:
 C1BumRepeatEventReply:
 jr_002_6752:
     ld a, $de
-    call ShowMsg2
+    call ShowMsg2 ; Message Text0DMessage5E: よっぱらいが とおりを / さえぎっている。[END]
     call SetResult
     ret
 
@@ -207,7 +207,7 @@ jr_002_6788:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $eb
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage6B: なんてこった! / めのまえの おとこが いきなり / おれに ピストルを つきつけてきた![PAGE] / 「かねを だせ! /  ださないと どうなるか /  わかっ...
     call SetResult
     ret
 
@@ -269,7 +269,7 @@ jr_002_67d4:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f1
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage71: また でた! / さっきの おとこだ![PAGE] / おれに なぐられたところを / アザにしている。[PAGE] / 「にどと おなじては くわないぜ。 /  さっさ...
     call SetResult
     ret
 
@@ -325,7 +325,7 @@ jr_002_6813:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f4
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage74: ゲッ! / また でた! / さっきの おとこだ。[PAGE] / こんどは りょうめに アザ・・・。 / たぬきのような かおで おれに / いった。[PAGE] / ...
     call SetResult
     ret
 
@@ -387,6 +387,6 @@ jr_002_6869:
     ld a, [wArg3]
     call DrawRoomAt
     ld a, $f6
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage76: さっきの おとこだ。 / あいかわらず おれに ピストルを / つきつけてくる。[PAGE] / りょうめの アザに くわえ はなぢのおまけつきだ。[PAGE] / 「と...
     call SetResult
     ret

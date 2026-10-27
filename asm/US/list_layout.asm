@@ -31,14 +31,14 @@ ListBarFill:
 ; Select page command $0b in B and enter the shared temporary-selection path.
 GoNextList:
 
-    ld b, $0b
+    ld b, InputSelNextPage
     jr TempListPage
 
 ; Select page command $0c in B and enter the shared temporary-selection path.
 GoPrevList:
 
 Jump_001_4bbc:
-    ld b, $0c
+    ld b, InputSelPrevPage
 
 ; Apply page selection B, then restore the incoming selection A.
 TempListPage:
@@ -106,10 +106,10 @@ StepListPage:
 
 Call_001_4c06:
     ld a, [wListSel]
-    cp $0b
+    cp InputSelNextPage
     jr z, StepListNext
 
-    cp $0c
+    cp InputSelPrevPage
     jr z, StepListPrevious
 
     ret
@@ -429,7 +429,7 @@ jr_001_4d9d:
     ld bc, wWorkList
     ld e, $00
 
-; Copy the seven group bytes into work-list storage.
+; Copy seven bytes; Case II includes group byte 7, which StoreWorkGroup leaves untouched.
 ListDrawGroupCopyLoop:
 jr_001_4da2:
     ld a, [hl+]
@@ -438,7 +438,7 @@ jr_001_4da2:
     ld a, e
     inc a
     ld e, a
-    cp $07
+    cp ListGroupCopyBytes
     jr c, ListDrawGroupCopyLoop
 
 ; Begin drawing list rows outside mode zero.
@@ -460,7 +460,7 @@ jr_001_4db0:
     ld a, [wListRow]
     inc a
     ld [wListRow], a
-    cp $07
+    cp UsListPageRows
     jr c, ListDrawChangedRowLoop
 
 ; Return when the changed list ends or reaches its regional row limit.
@@ -495,7 +495,7 @@ jr_001_4dd0:
     jr z, ListDrawBaseNameReady
 
     ld a, [wListName]
-    sub $20
+    sub C2ListBaseNameOffset
     ld [wListName], a
 
 ; Draw the selected base-list name after regional adjustment.
@@ -508,7 +508,7 @@ jr_001_4df4:
     ld [wListRow], a
     ld a, d
     ld a, [wListRow]
-    cp $07
+    cp UsListPageRows
     jr c, ListDrawBaseLoop
 
 ; Mode 0 falls through here when all 7 rows are occupied.
@@ -523,7 +523,7 @@ Call_001_4e07:
     ld a, [wListRow]
     ld l, a
     ld h, $00
-    ld bc, ListRowY
+    ld bc, UsListRowYCoordinates
     add hl, bc
     ld a, [hl+]
     ld [wTextY], a
@@ -540,14 +540,14 @@ Call_001_4e07:
     ld a, d
     ld d, a
     ldh a, [hChangePos]
-    cp $05
+    cp C2ListNumericNameCount
     ld a, d
     jr nc, ListRowShowMarkedText
 
     ldh a, [hChangePos]
     ld l, a
     ld h, $00
-    ld bc, C2ListMarks
+    ld bc, C2ListRowMarkIds
     add hl, bc
     ld a, [hl]
     jr ListRowShowMarkedText
@@ -659,6 +659,8 @@ jr_001_4ead:
     ldh [hChangePos], a
     ret
 
+; US list-row Y bytes; the reader sets X to one.
+UsListRowYCoordinates:
 ListRowY:
     db $15
     db $16
@@ -668,12 +670,14 @@ ListRowY:
     db $1a
     db $1b
 
+; Case II name IDs zero through four select label marks two through six.
+C2ListRowMarkIds:
 C2ListMarks:
-    db $02
-    db $03
-    db $04
-    db $05
-    db $06
+    db C2ListMarkCash
+    db C2ListMarkQuarters
+    db C2ListMarkBullets
+    db C2ListMarkCells
+    db C2ListMarkChips
 
 ; --- list_head.asm ---
 

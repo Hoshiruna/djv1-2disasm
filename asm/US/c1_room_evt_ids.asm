@@ -1,3 +1,3 @@
 
 C1RoomEvtIds:
-    db $1e, $20, $24, $1f, $4a, $4d, $4b, $4c, $ff
+    db C1RoomIdAlleyMuggerEncounter, C1RoomIdArmedWomanEncounter, C1RoomIdAlligatorEncounter, C1RoomIdBumEncounter, C1RoomIdMuggerJoeStreet, C1RoomIdMuggerPeoria, C1RoomIdMuggerNewsstand, C1RoomIdMuggerGunShopStreet, $ff

@@ -5,7 +5,7 @@ LookC1Door00:
 
 C1Sc5_00:
     ; Test current room.
-    db $19, $00
+    db $19, C1RoomIdStartStall
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorViewEnd
@@ -20,7 +20,7 @@ C1Sc5_00:
     db $04
     dw C1PlainDoorView
     ; Show message 0.
-    db $00, $1e
+    db $00, $1e ; Message Text0CMessage1E: ドアだ。[PAGE] / イヤな よかんがする。 / そとにでると なにか トラブルに / まきこまれそうだ。[END]
     ; Set object flag.
     db $17, C1Washroom1IntroSeen
     ; End script.
@@ -31,7 +31,7 @@ C1PlainDoorView:
 
 C1Loc5_00:
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text0FMessage47: ドアだ。[END]
 
 ; End the room-specific door view.
 C1DoorViewEnd:
@@ -59,7 +59,7 @@ C1Loc5_02:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; End script.
     db $ff
 
@@ -70,7 +70,7 @@ C1Sc5_02:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -93,7 +93,7 @@ C1Sc5_03:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; End script.
     db $ff
 
@@ -102,13 +102,13 @@ C1ButlerShutsDoor:
 
 C1Loc5_03:
     ; Set first item type and ID.
-    db $5c, $05, $49
+    db $5c, $05, C1DoorIdMansionFrontDoor
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $aa
+    db $01, $aa ; Message Text0FMessage2A: バタン!!![PAGE] / おれの たいどが きに / いらなかったのか しつじは ドアを / しめてしまった。[END]
     ; End script.
     db $ff
 
@@ -185,7 +185,7 @@ C1Sc5_07:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Test object flag.
     db $16, C1ShadowShot
     ; Branch if result bit 0 is set.
@@ -194,23 +194,23 @@ C1Sc5_07:
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Set state bit.
-    db $2f, $3a
+    db $2f, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 2.
-    db $02, $25
+    db $02, $25 ; Message Text10Message25: おとこだ! / じゅうこうを おれに むけている![END]
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $88
+    db $01, $88 ; Message Text0FMessage08: やつは ピストルを もってたのか! / すっかり ゆだんしていた おれは / やられてしまった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
 
@@ -262,7 +262,7 @@ OpenC1OneWayDoor:
 
 C1Sc5_0A:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw OpenC1Door
@@ -272,7 +272,7 @@ C1Sc5_0A:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 0.
-    db $00, $68
+    db $00, $68 ; Message Text0CMessage68: ・・・あかない。 / こちらからは あかないようだ。[END]
     ; End script.
     db $ff
 
@@ -290,7 +290,7 @@ C1Sc5_0B:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 
@@ -301,7 +301,7 @@ C1Loc5_05:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -310,7 +310,7 @@ CloseC1OneWayDoor:
 
 C1Sc5_0C:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw CloseC1Door
@@ -326,7 +326,7 @@ C1Sc5_0C:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 
@@ -335,14 +335,14 @@ MoveC1Door00:
 
 C1Sc5_0D:
     ; Test current room.
-    db $19, $00
+    db $19, C1RoomIdStartStall
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door00ToRoom01
     ; Move to the room argument if the selected state permits.
-    db $06, $00
+    db $06, C1RoomIdStartStall
     ; Show message 0.
-    db $00, $12
+    db $00, $12 ; Message Text0CMessage12: トイレの なかだ。[END]
     ; End script.
     db $ff
 
@@ -351,14 +351,14 @@ C1Door00ToRoom01:
 
 C1Loc5_06:
     ; Move to the room argument if the selected state permits.
-    db $06, $01
+    db $06, C1RoomIdStartWashroom
     ; Test object flag.
     db $16, C1Washroom1IntroSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room01Repeat
     ; Show message 0.
-    db $00, $1d
+    db $00, $1d ; Message Text0CMessage1D: せんめんじょの なかだ。 / ・・・よごれている。[PAGE] / きっと なんにちも / そうじをしていないのだろう。[END]
     ; Set object flag.
     db $17, C1Washroom1IntroSeen
     ; End script.
@@ -369,7 +369,7 @@ C1Room01Repeat:
 
 C1Loc5_7C:
     ; Show message 0.
-    db $00, $23
+    db $00, $23 ; Message Text0CMessage23: うすよごれた せんめんじょの / なかだ。[END]
     ; End script.
     db $ff
 
@@ -378,7 +378,7 @@ LookC1Door01:
 
 C1Sc5_0E:
     ; Test current room.
-    db $19, $01
+    db $19, C1RoomIdStartWashroom
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door01View
@@ -400,7 +400,7 @@ C1Loc5_07:
     db $04
     dw C1DoorToHallView
     ; Show message 0.
-    db $00, $1e
+    db $00, $1e ; Message Text0CMessage1E: ドアだ。[PAGE] / イヤな よかんがする。 / そとにでると なにか トラブルに / まきこまれそうだ。[END]
     ; End script.
     db $ff
 
@@ -409,7 +409,7 @@ C1DoorToHallView:
 
 C1Loc5_08:
     ; Show message 0.
-    db $00, $24
+    db $00, $24 ; Message Text0CMessage24: ろうかに つうじる ドアだ。[END]
     ; End script.
     db $ff
 
@@ -418,7 +418,7 @@ C1PassageActionRefusal:
 
 C1Sc5_0F:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: ははっ・・・。 / バカなことを してしまった。[END]
     ; End script.
     db $ff
 
@@ -427,7 +427,7 @@ MoveC1Door01:
 
 C1Sc5_10:
     ; Test current room.
-    db $19, $01
+    db $19, C1RoomIdStartWashroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door00ToRoom01
@@ -442,14 +442,14 @@ C1Loc5_09:
     db $05
     dw C1RoomUnfinishedReply
     ; Move to the room argument if the selected state permits.
-    db $06, $02
+    db $06, C1RoomIdWashroomHallway
     ; Test object flag.
     db $16, C1Hall02Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room02Repeat
     ; Show message 0.
-    db $00, $26
+    db $00, $26 ; Message Text0CMessage26: ろうかに でた。 / くらくて ジメジメしている。[END]
     ; Set object flag.
     db $17, C1Hall02Seen
     ; End script.
@@ -460,7 +460,7 @@ C1Room02Repeat:
 
 C1Loc5_7D:
     ; Show message 0.
-    db $00, $2b
+    db $00, $2b ; Message Text0CMessage2B: ろうかだ。 / くうきが シメっている。[END]
     ; End script.
     db $ff
 
@@ -469,7 +469,7 @@ C1RoomUnfinishedReply:
 
 C1Loc5_0A:
     ; Show message 1.
-    db $01, $5e
+    db $01, $5e ; Message Text0EMessage5E: ・・・・・・なんだ? / このへやで やりのこしたことが / あるような きがする・・・。[END]
     ; End script.
     db $ff
 
@@ -483,12 +483,12 @@ C1Sc5_11:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHallView
     ; Show message 0.
-    db $00, $28
+    db $00, $28 ; Message Text0CMessage28: ドアだ。 / 「じょせいよう」と かいてある。[END]
     ; End script.
     db $ff
 
@@ -497,7 +497,7 @@ MoveC1Door02:
 
 C1Sc5_12:
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHall
@@ -507,14 +507,14 @@ C1Door02ToRoom03:
 
 C1Loc5_0B:
     ; Move to the room argument if the selected state permits.
-    db $06, $03
+    db $06, C1RoomIdWomenWashroom
     ; Test object flag.
     db $16, C1Washroom3Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room03Repeat
     ; Show message 0.
-    db $00, $2c
+    db $00, $2c ; Message Text0CMessage2C: じょせいようの せんめんじょだ。 / おせじにも きれいとは いえない。[END]
     ; Set object flag.
     db $17, C1Washroom3Seen
     ; End script.
@@ -525,7 +525,7 @@ C1Room03Repeat:
 
 C1Loc5_7E:
     ; Show message 0.
-    db $00, $32
+    db $00, $32 ; Message Text0CMessage32: じょせいようの せんめんじょだ。[END]
     ; End script.
     db $ff
 
@@ -534,7 +534,7 @@ LookC1Door03:
 
 C1Sc5_13:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03View
@@ -556,7 +556,7 @@ C1Loc5_0C:
     db $04
     dw C1DoorToBarView
     ; Show message 0.
-    db $00, $29
+    db $00, $29 ; Message Text0CMessage29: ちゃいろい ドアだ。 / どこへ つづくのだろう・・・[END]
     ; End script.
     db $ff
 
@@ -565,7 +565,7 @@ C1DoorToBarView:
 
 C1Loc5_0D:
     ; Show message 2.
-    db $02, $b2
+    db $02, $b2 ; Message Text0DMessage32: バーに つうじる ドアだ。[END]
     ; End script.
     db $ff
 
@@ -574,7 +574,7 @@ MoveC1Door03:
 
 C1Sc5_14:
     ; Test current room.
-    db $19, $02
+    db $19, C1RoomIdWashroomHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToHall
@@ -584,14 +584,14 @@ C1Door03ToRoom05:
 
 C1Loc5_0E:
     ; Move to the room argument if the selected state permits.
-    db $06, $05
+    db $06, C1RoomIdBar
     ; Test object flag.
     db $16, C1BarRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room05Repeat
     ; Show message 0.
-    db $00, $3b
+    db $00, $3b ; Message Text0CMessage3B: くらい だれもいない バーのなかだ。よるも かなり ふけているらしい。[END]
     ; Set object flag.
     db $17, C1BarRoomSeen
     ; End script.
@@ -602,7 +602,7 @@ C1Room05Repeat:
 
 C1Loc5_7F:
     ; Show message 0.
-    db $00, $42
+    db $00, $42 ; Message Text0CMessage42: だれもいない バーのなかだ。[END]
     ; End script.
     db $ff
 
@@ -611,7 +611,7 @@ LookC1Door04:
 
 C1Sc5_15:
     ; Test current room.
-    db $19, $03
+    db $19, C1RoomIdWomenWashroom
     ; Branch if result bit 0 is set.
     db $04
     dw C1Door04View
@@ -633,7 +633,7 @@ C1Loc5_0F:
     db $04
     dw C1Door04ShortView
     ; Show message 0.
-    db $00, $31
+    db $00, $31 ; Message Text0CMessage31: じょせいようトイレへの いりぐちだ。だれか いるのだろうか・・・。[END]
     ; End script.
     db $ff
 
@@ -642,7 +642,7 @@ C1Door04ShortView:
 
 C1Loc5_10:
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text0FMessage47: ドアだ。[END]
     ; End script.
     db $ff
 
@@ -651,19 +651,19 @@ MoveC1Door04:
 
 C1Sc5_16:
     ; Test current room.
-    db $19, $03
+    db $19, C1RoomIdWomenWashroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door02ToRoom03
     ; Move to the room argument if the selected state permits.
-    db $06, $04
+    db $06, C1RoomIdWomenStall
     ; Test object flag.
     db $16, C1WomenStallSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room04Repeat
     ; Show message 0.
-    db $00, $33
+    db $00, $33 ; Message Text0CMessage33: じょせいようの トイレだ。 / ざんねんだが だれもいない。[END]
     ; Set object flag.
     db $17, C1WomenStallSeen
     ; End script.
@@ -674,7 +674,7 @@ C1Room04Repeat:
 
 C1Loc5_80:
     ; Show message 0.
-    db $00, $39
+    db $00, $39 ; Message Text0CMessage39: じょせいようの トイレだ。 / とても しずかだ。[END]
     ; End script.
     db $ff
 
@@ -683,7 +683,7 @@ LookC1CellarDoor:
 
 C1Sc5_17:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is set.
     db $04
     dw C1CellarDoorView
@@ -700,7 +700,7 @@ C1Loc5_11:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 0.
-    db $00, $3e
+    db $00, $3e ; Message Text0CMessage3E: かいだんの したに ドアが・・・? / 「ワインセラー」と かいてある。[END]
     ; End script.
     db $ff
 
@@ -709,7 +709,7 @@ MoveC1CellarDoor:
 
 C1Sc5_18:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -731,14 +731,14 @@ C1DoorToCellar:
 
 C1Loc5_13:
     ; Move to the room argument if the selected state permits.
-    db $06, $06
+    db $06, C1RoomIdCellar
     ; Test object flag.
     db $16, C1CellarSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Room06Repeat
     ; Show message 0.
-    db $00, $49
+    db $00, $49 ; Message Text0CMessage49: うすぎたない ワインセラーだ。 / くうきが にごっている。[END]
     ; Set object flag.
     db $17, C1CellarSeen
     ; End script.
@@ -749,7 +749,7 @@ C1Room06Repeat:
 
 C1Loc5_81:
     ; Show message 0.
-    db $00, $52
+    db $00, $52 ; Message Text0CMessage52: うすぎたない ワインセラーだ。[END]
     ; End script.
     db $ff
 
@@ -763,12 +763,12 @@ C1Sc5_19:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is set.
     db $04
     dw C1FrontDoorView
     ; Show message 2.
-    db $02, $b2
+    db $02, $b2 ; Message Text0DMessage32: バーに つうじる ドアだ。[END]
     ; End script.
     db $ff
 
@@ -777,7 +777,7 @@ C1FrontDoorView:
 
 C1Loc5_14:
     ; Show message 0.
-    db $00, $3f
+    db $00, $3f ; Message Text0CMessage3F: とおりに でる フロントドアだ。[END]
     ; End script.
     db $ff
 
@@ -786,7 +786,7 @@ MoveC1FrontDoor:
 
 C1Sc5_1A:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -796,16 +796,16 @@ C1DoorToStreet11:
 
 C1Loc5_15:
     ; Check Case I room event for the room argument.
-    db $5e, $4a
+    db $5e, C1RoomIdMuggerJoeStreet
     ; Move to the room argument if the selected state permits.
-    db $06, $11
+    db $06, C1RoomIdJoeStreet
     ; Test object flag.
     db $16, C1JoeStreetSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Street11First
     ; Show message 2.
-    db $02, $b9
+    db $02, $b9 ; Message Text0DMessage39: バーの まえの とおりだ。[END]
     ; End script.
     db $ff
 
@@ -814,7 +814,7 @@ C1Street11First:
 
 C1Loc5_82:
     ; Show message 2.
-    db $02, $b1
+    db $02, $b1 ; Message Text0DMessage31: バーの まえの とおりだ。 / だれも いない。[END]
     ; Set object flag.
     db $17, C1JoeStreetSeen
     ; End script.
@@ -825,7 +825,7 @@ LookC1Stairs:
 
 C1Sc5_1B:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorViewEnd
@@ -835,7 +835,7 @@ C1Sc5_1B:
     db $04
     dw C1StairsShortView
     ; Show message 0.
-    db $00, $3d
+    db $00, $3d ; Message Text0CMessage3D: 2かいへ つうじる かいだんらしい。[PAGE] / のぼってみたいが いまの おれの / すいじゃくした からだでは / むりかもしれない・・・。[END]
     ; End script.
     db $ff
 
@@ -844,7 +844,7 @@ MoveC1Stairs:
 
 C1Sc5_1C:
     ; Test current room.
-    db $19, $05
+    db $19, C1RoomIdBar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Door03ToRoom05
@@ -854,7 +854,7 @@ C1StairsEntryCheck:
 
 C1Loc5_16:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1StairsToRoom0E
@@ -869,14 +869,14 @@ C1StairsToRoom0E:
 
 C1Loc5_17:
     ; Move to the room argument if the selected state permits.
-    db $06, $0e
+    db $06, C1RoomIdUpstairsHallway
     ; Test object flag.
     db $16, C1JoeUpHallSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room0EFirst
     ; Show message 2.
-    db $02, $aa
+    db $02, $aa ; Message Text0DMessage2A: 2かいの ろうかだ。[END]
     ; End script.
     db $ff
 
@@ -885,7 +885,7 @@ C1Room0EFirst:
 
 C1Loc5_83:
     ; Show message 2.
-    db $02, $a3
+    db $02, $a3 ; Message Text0DMessage23: 2かいの ろうかだ。 / かべに ポスターが はってある。[END]
     ; Set object flag.
     db $17, C1JoeUpHallSeen
     ; End script.
@@ -896,11 +896,11 @@ C1StairsEffect18:
 
 C1Loc5_18:
     ; Move to the room argument if the selected state permits.
-    db $06, $0e
+    db $06, C1RoomIdUpstairsHallway
     ; Show message 2.
-    db $02, $a3
+    db $02, $a3 ; Message Text0DMessage23: 2かいの ろうかだ。 / かべに ポスターが はってある。[END]
     ; Run scene effect.
-    db $46, $18
+    db $46, C1FxIdHeadacheUpstairs
     ; End script.
     db $ff
 
@@ -914,12 +914,12 @@ C1Sc5_1D:
     db $04
     dw C1RackAlreadyOpen
     ; Test current room.
-    db $19, $06
+    db $19, C1RoomIdCellar
     ; Branch if result bit 0 is set.
     db $04
     dw C1WineRackView
     ; Show message 0.
-    db $00, $52
+    db $00, $52 ; Message Text0CMessage52: うすぎたない ワインセラーだ。[END]
     ; End script.
     db $ff
 
@@ -928,7 +928,7 @@ C1WineRackView:
 
 C1Loc5_19:
     ; Show message 0.
-    db $00, $4e
+    db $00, $4e ; Message Text0CMessage4E: ワインの たなか・・・。 / ほこりを かぶった ワインで / いっぱいだ。[PAGE] / ・・・おや? / みぎの まんなかあたりに / みょうに あたらしいビンが・...
     ; End script.
     db $ff
 
@@ -939,7 +939,7 @@ C1Loc5_1A:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -948,12 +948,12 @@ OpenC1RackPassage:
 
 C1Sc5_1E:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw OpenC1Door
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: ・・・・・・むりか。[END]
     ; End script.
     db $ff
 
@@ -962,7 +962,7 @@ CloseC1RackPassage:
 
 C1Sc5_1F:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw CloseC1Door
@@ -974,7 +974,7 @@ C1Sc5_1F:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; Clear selected state and refresh.
     db $37
     ; Set selected attribute bit 0.
@@ -989,7 +989,7 @@ C1Loc5_1B:
     ; Set text name 0.
     db $1e, $67
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -998,7 +998,7 @@ MoveC1RackPassage:
 
 C1Sc5_20:
     ; Test current room.
-    db $19, $06
+    db $19, C1RoomIdCellar
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CellarEntryFlags
@@ -1008,14 +1008,14 @@ C1RackToRoom07:
 
 C1Loc5_1C:
     ; Move to the room argument if the selected state permits.
-    db $06, $07
+    db $06, C1RoomIdRackPassage
     ; Test object flag.
     db $16, C1RackPassageSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room07First
     ; Show message 0.
-    db $00, $58
+    db $00, $58 ; Message Text0CMessage58: うすぐらい ひみつの つうろだ。[END]
     ; End script.
     db $ff
 
@@ -1024,7 +1024,7 @@ C1Room07First:
 
 C1Loc5_84:
     ; Show message 0.
-    db $00, $54
+    db $00, $54 ; Message Text0CMessage54: ひみつの つうろのようだ。 / なんのために こんなところを?[END]
     ; Set object flag.
     db $17, C1RackPassageSeen
     ; End script.
@@ -1040,14 +1040,14 @@ C1Sc5_21:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is set.
     db $04
     dw C1CasinoDoorView
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1061,7 +1061,7 @@ C1Loc5_1D:
     db $04
     dw C1CasinoDoorShortView
     ; Show message 0.
-    db $00, $56
+    db $00, $56 ; Message Text0CMessage56: まるい もくせいの ドアだ。 / このドアの むこうには いったい / なにが あるというのか?[END]
     ; End script.
     db $ff
 
@@ -1070,7 +1070,7 @@ C1CasinoDoorShortView:
 
 C1Loc5_1E:
     ; Show message 0.
-    db $00, $59
+    db $00, $59 ; Message Text0CMessage59: カジノに つうじる ドアだ。[END]
     ; End script.
     db $ff
 
@@ -1079,7 +1079,7 @@ MoveC1CasinoDoor:
 
 C1Sc5_22:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1RackToRoom07
@@ -1089,14 +1089,14 @@ C1DoorToCasino:
 
 C1Loc5_1F:
     ; Move to the room argument if the selected state permits.
-    db $06, $08
+    db $06, C1RoomIdCasino
     ; Test object flag.
     db $16, C1CasinoSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CasinoFirstEntry
     ; Show message 0.
-    db $00, $65
+    db $00, $65 ; Message Text0CMessage65: だれもいない カジノの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1105,7 +1105,7 @@ C1CasinoFirstEntry:
 
 C1Loc5_85:
     ; Show message 0.
-    db $00, $5a
+    db $00, $5a ; Message Text0CMessage5A: カジノのようだ。 / なかは ひっそりと / しずまりかえっている。[END]
     ; Set object flag.
     db $17, C1CasinoSeen
     ; End script.
@@ -1116,12 +1116,12 @@ LookC1SewerLadder:
 
 C1Sc5_23:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LadderUpView
     ; Show message 0.
-    db $00, $55
+    db $00, $55 ; Message Text0CMessage55: したへ つうじる たてあなだ。 / はしごが ついている。[PAGE] / げすい どくとくの はなをつくようなにおいが のぼってくる。[END]
     ; End script.
     db $ff
 
@@ -1130,7 +1130,7 @@ C1LadderUpView:
 
 C1Loc5_20:
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: うえに つうじる はしごだ。 / かなり さびついている。[END]
     ; End script.
     db $ff
 
@@ -1139,7 +1139,7 @@ MoveC1SewerLadder:
 
 C1Sc5_24:
     ; Test current room.
-    db $19, $07
+    db $19, C1RoomIdRackPassage
     ; Branch if result bit 0 is clear.
     db $05
     dw C1RackToRoom07
@@ -1149,7 +1149,7 @@ C1LadderToSewer:
 
 C1Loc5_21:
     ; Move to the room argument if the selected state permits.
-    db $06, $3a
+    db $06, C1RoomIdRackLadderSewer
     ; Test object flag.
     db $16, C1Sewer3ASeen
     ; Branch if result bit 0 is clear.
@@ -1161,7 +1161,7 @@ C1SewerRepeatEntry:
 
 C1Loc5_86:
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: げすいどうの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1170,7 +1170,7 @@ C1SewerFirstEntry:
 
 C1Loc5_87:
     ; Show message 1.
-    db $01, $28
+    db $01, $28 ; Message Text0EMessage28: げすいどうの なかだ。 / からだじゅうが へんな においに / そまって しまいそうだ・・・。[END]
     ; Set object flag.
     db $17, C1Sewer3ASeen
 
@@ -1186,7 +1186,7 @@ MoveC1CasinoPassage:
 
 C1Sc5_26:
     ; Test current room.
-    db $19, $08
+    db $19, C1RoomIdCasino
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToCasino
@@ -1196,9 +1196,9 @@ C1PassageToRoom09:
 
 C1Loc5_22:
     ; Move to the room argument if the selected state permits.
-    db $06, $09
+    db $06, C1RoomIdCasinoLiftEntrance
     ; Show message 0.
-    db $00, $69
+    db $00, $69 ; Message Text0CMessage69: エレべータの まえだ。[END]
     ; End script.
     db $ff
 
@@ -1214,7 +1214,7 @@ C1Sc5_27:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1233,7 +1233,7 @@ C1LiftDoorWontOpen:
 
 C1Sc5_29:
     ; Show message 2.
-    db $02, $a1
+    db $02, $a1 ; Message Text0DMessage21: あかないようだ。[END]
     ; End script.
     db $ff
 
@@ -1242,7 +1242,7 @@ CloseC1LiftDoor:
 
 C1Sc5_2A:
     ; Show message 2.
-    db $02, $a2
+    db $02, $a2 ; Message Text0DMessage22: しまらないようだ。[END]
     ; End script.
     db $ff
 
@@ -1251,19 +1251,19 @@ MoveC1LiftDoor0C:
 
 C1Sc5_2B:
     ; Test current room.
-    db $19, $09
+    db $19, C1RoomIdCasinoLiftEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToRoom09
     ; Move to the room argument if the selected state permits.
-    db $06, $0a
+    db $06, C1RoomIdCasinoLift
     ; Test object flag.
     db $16, C1SmallLiftSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftRoom0AFirst
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: エレべータの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1272,7 +1272,7 @@ C1LiftRoom0AFirst:
 
 C1Loc5_88:
     ; Show message 0.
-    db $00, $6b
+    db $00, $6b ; Message Text0CMessage6A: エレべータの なかだ。 / さて どこに いこうか・・・?[END]
     ; Set object flag.
     db $17, C1SmallLiftSeen
     ; End script.
@@ -1283,12 +1283,12 @@ MoveC1OfficePassage:
 
 C1Sc5_2C:
     ; Test current room.
-    db $19, $3f
+    db $19, C1RoomIdHiddenOfficeLift
     ; Branch if result bit 0 is set.
     db $04
     dw C1HiddenLiftToOffice
     ; Move to the room argument if the selected state permits.
-    db $06, $0c
+    db $06, C1RoomIdCorpseOffice
     ; Test object flag.
     db $16, C1OfficeDescribed
     ; Branch if result bit 0 is set.
@@ -1300,7 +1300,7 @@ C1Sc5_2C:
     db $04
     dw C1OfficeRepeatEntry
     ; Show message 2.
-    db $02, $81
+    db $02, $81 ; Message Text0DMessage01: あっ!!! / ちまみれの おとこが つくえに / うつぶせに・・・?[PAGE] / うごかない・・・しっ しんでいる![PAGE] / ・・・おや? / なにかの お...
     ; Set object flag.
     db $17, C1OfficeDescribed
     ; End script.
@@ -1311,7 +1311,7 @@ C1OfficeRepeatEntry:
 
 C1Loc5_89:
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: したいのある オフィスの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1320,7 +1320,7 @@ C1HiddenLiftToOffice:
 
 C1Loc5_23:
     ; Move to the room argument if the selected state permits.
-    db $06, $0c
+    db $06, C1RoomIdCorpseOffice
     ; Test object flag.
     db $16, C1HiddenLiftSeen
     ; Branch if result bit 0 is set.
@@ -1334,9 +1334,9 @@ C1Loc5_23:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $81
+    db $02, $81 ; Message Text0DMessage01: あっ!!! / ちまみれの おとこが つくえに / うつぶせに・・・?[PAGE] / うごかない・・・しっ しんでいる![PAGE] / ・・・おや? / なにかの お...
     ; Show message 1.
-    db $01, $02
+    db $01, $02 ; Message Text0EMessage02: そのとき とつぜん ゴーッという / おとがした。[PAGE] / ふりむくと いま のってきた / エレべータが きえている! / なにが おこったんだ?[PAGE] ...
     ; Set object flag.
     db $17, C1HiddenLiftSeen
     ; End script.
@@ -1349,9 +1349,9 @@ C1Loc5_8A:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: したいのある オフィスの なかだ。[END]
     ; Show message 2.
-    db $02, $a9
+    db $02, $a9 ; Message Text0DMessage29: ゴーッと いう おとと ともに / かべが スライドして エレべータを / かくしてしまった。[END]
     ; End script.
     db $ff
 
@@ -1362,9 +1362,9 @@ C1Loc5_8B:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $93
+    db $02, $93 ; Message Text0DMessage13: したいのある オフィスの なかだ。[END]
     ; Show message 1.
-    db $01, $02
+    db $01, $02 ; Message Text0EMessage02: そのとき とつぜん ゴーッという / おとがした。[PAGE] / ふりむくと いま のってきた / エレべータが きえている! / なにが おこったんだ?[PAGE] ...
     ; Set object flag.
     db $17, C1HiddenLiftSeen
     ; End script.
@@ -1375,7 +1375,7 @@ MoveC1LiftDoor0F:
 
 C1Sc5_2D:
     ; Test current room.
-    db $19, $40
+    db $19, C1RoomIdTopFloorLift
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToLiftRoom40
@@ -1385,14 +1385,14 @@ C1LiftDoorToRoom0B:
 
 C1Loc5_24:
     ; Move to the room argument if the selected state permits.
-    db $06, $0b
+    db $06, C1RoomIdTopFloorRoom
     ; Test object flag.
     db $16, C1Room0BSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Room0BFirst
     ; Show message 0.
-    db $00, $7c
+    db $00, $7c ; Message Text0CMessage7C: ぶきみな へやの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1401,7 +1401,7 @@ C1Room0BFirst:
 
 C1Loc5_8C:
     ; Show message 0.
-    db $00, $72
+    db $00, $72 ; Message Text0CMessage72: なんだ!? / このへやは・・・?[PAGE] / ぶきみな くうきが ただよっている。いったい なにをする へやなのか?[END]
     ; Set object flag.
     db $17, C1Room0BSeen
     ; End script.
@@ -1412,14 +1412,14 @@ C1DoorToLiftRoom40:
 
 C1Loc5_25:
     ; Move to the room argument if the selected state permits.
-    db $06, $40
+    db $06, C1RoomIdTopFloorLift
     ; Test object flag.
     db $16, C1SmallLiftSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftRoom0AFirst
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: エレべータの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1433,16 +1433,16 @@ C1Sc5_2E:
     db $04
     dw C1WindowAlreadyOpen
     ; Test current room.
-    db $19, $0b
+    db $19, C1RoomIdTopFloorRoom
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeWindowView
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $ac
+    db $02, $ac ; Message Text0DMessage2C: へやに つうじる マドだ。[END]
     ; Show message 2.
-    db $02, $4e
+    db $02, $4e ; Message Text10Message4E: ・・・イスのようなものが みえる。[END]
     ; End script.
     db $ff
 
@@ -1451,7 +1451,7 @@ C1FireEscapeWindowView:
 
 C1Loc5_26:
     ; Show message 2.
-    db $02, $87
+    db $02, $87 ; Message Text0DMessage07: ひじょうかいだんに つうじる / マドだ。[END]
     ; End script.
     db $ff
 
@@ -1469,7 +1469,7 @@ C1Sc5_2F:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; End script.
     db $ff
 
@@ -1480,7 +1480,7 @@ C1Loc5_27:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -1498,7 +1498,7 @@ C1Sc5_30:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 
@@ -1509,7 +1509,7 @@ C1Loc5_28:
     ; Set text name 0.
     db $1e, $66
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1518,7 +1518,7 @@ MoveC1Window10:
 
 C1Sc5_31:
     ; Test current room.
-    db $19, $0b
+    db $19, C1RoomIdTopFloorRoom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftDoorToRoom0B
@@ -1528,9 +1528,9 @@ C1WindowToFireEscape0F:
 
 C1Loc5_29:
     ; Move to the room argument if the selected state permits.
-    db $06, $0f
+    db $06, C1RoomIdFireEscape3
     ; Show message 2.
-    db $02, $ab
+    db $02, $ab ; Message Text0DMessage2B: 3かいの ひじょうかいだんの / うえだ。[END]
 
 ; End the fire-escape view; the preceding window traversal also falls through here.
 C1FireEscapeEmptyView:
@@ -1544,14 +1544,14 @@ MoveC1FireEscape11:
 
 C1Sc5_33:
     ; Test current room.
-    db $19, $0f
+    db $19, C1RoomIdFireEscape3
     ; Branch if result bit 0 is clear.
     db $05
     dw C1WindowToFireEscape0F
     ; Move to the room argument if the selected state permits.
-    db $06, $10
+    db $06, C1RoomIdFireEscape2
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text0DMessage2E: 2かいの ひじょうかいだんの / うえだ。[END]
     ; End script.
     db $ff
 
@@ -1565,12 +1565,12 @@ C1Sc5_34:
     db $04
     dw C1WindowAlreadyOpen
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeWindowView
     ; Show message 2.
-    db $02, $b0
+    db $02, $b0 ; Message Text0DMessage30: へやに つうじる マドだ。 / へやの なかは よくみえない。[END]
     ; End script.
     db $ff
 
@@ -1579,14 +1579,14 @@ MoveC1Window12:
 
 C1Sc5_35:
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw MoveC1OfficePassage
     ; Move to the room argument if the selected state permits.
-    db $06, $10
+    db $06, C1RoomIdFireEscape2
     ; Show message 2.
-    db $02, $ae
+    db $02, $ae ; Message Text0DMessage2E: 2かいの ひじょうかいだんの / うえだ。[END]
 
 ; End the fire-escape movement or unavailable view.
 C1FireEscapeMoveEnd:
@@ -1600,12 +1600,12 @@ LookC1FireEscape13:
 
 C1Sc5_36:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1FireEscapeMoveEnd
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text0DMessage53: ひじょうかいだんだ。 / たかすぎて あがるのは むりだ。[END]
     ; End script.
     db $ff
 
@@ -1614,12 +1614,12 @@ MoveC1FireEscape13:
 
 C1Sc5_37:
     ; Test current room.
-    db $19, $10
+    db $19, C1RoomIdFireEscape2
     ; Branch if result bit 0 is set.
     db $04
     dw C1FireEscapeToAlley
     ; Show message 2.
-    db $02, $d3
+    db $02, $d3 ; Message Text0DMessage53: ひじょうかいだんだ。 / たかすぎて あがるのは むりだ。[END]
     ; End script.
     db $ff
 
@@ -1628,11 +1628,11 @@ C1FireEscapeToAlley:
 
 C1Loc5_2B:
     ; Check Case I room event for the room argument.
-    db $5e, $1e
+    db $5e, C1RoomIdAlleyMuggerEncounter
     ; Move to the room argument if the selected state permits.
-    db $06, $16
+    db $06, C1RoomIdJoeAlley
     ; Show message 2.
-    db $02, $d1
+    db $02, $d1 ; Message Text0DMessage51: よこちょうの うすぐらい ろじだ。[END]
     ; End script.
     db $ff
 
@@ -1656,7 +1656,7 @@ C1DoorLockedReply:
 
 C1Loc5_2C:
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text0CMessage43: おしても ひいても びくともしない。カギが かかっているらしい。[END]
     ; End script.
     db $ff
 
@@ -1665,7 +1665,7 @@ MoveC1Door14:
 
 C1Sc5_39:
     ; Test current room.
-    db $19, $0c
+    db $19, C1RoomIdCorpseOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw MoveC1OfficePassage
@@ -1675,14 +1675,14 @@ C1DoorToSecretary:
 
 C1Loc5_2D:
     ; Move to the room argument if the selected state permits.
-    db $06, $0d
+    db $06, C1RoomIdSecretaryOffice
     ; Test object flag.
     db $16, C1SecretaryRoomSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SecretaryFirstEntry
     ; Show message 2.
-    db $02, $a0
+    db $02, $a0 ; Message Text0DMessage20: ひしょの オフィスの なかだ。[END]
     ; End script.
     db $ff
 
@@ -1691,7 +1691,7 @@ C1SecretaryFirstEntry:
 
 C1Loc5_8D:
     ; Show message 2.
-    db $02, $97
+    db $02, $97 ; Message Text0DMessage17: うけつけか ひしょの へやらしい。 / やすものの こうすいの においが / ただよっている。[END]
     ; Set object flag.
     db $17, C1SecretaryRoomSeen
     ; End script.
@@ -1702,7 +1702,7 @@ LookC1Door15:
 
 C1Sc5_3A:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorViewEnd
@@ -1715,7 +1715,7 @@ MoveC1Door15:
 
 C1Sc5_3B:
     ; Test current room.
-    db $19, $0d
+    db $19, C1RoomIdSecretaryOffice
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToSecretary
@@ -1728,7 +1728,7 @@ MoveC1AlleyPassage16:
 
 C1Sc5_3C:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1741,7 +1741,7 @@ MoveC1NewsstandPassage:
 
 C1Sc5_3D:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1751,16 +1751,16 @@ C1PassageToNewsstand:
 
 C1Loc5_2E:
     ; Check Case I room event for the room argument.
-    db $5e, $4b
+    db $5e, C1RoomIdMuggerNewsstand
     ; Move to the room argument if the selected state permits.
-    db $06, $12
+    db $06, C1RoomIdNewsstandStreet
     ; Test object flag.
     db $16, C1NewsstandSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1NewsstandFirstEntry
     ; Show message 2.
-    db $02, $c2
+    db $02, $c2 ; Message Text0DMessage42: しんぶんうりばの まえの とおりだ。[END]
     ; End script.
     db $ff
 
@@ -1769,7 +1769,7 @@ C1NewsstandFirstEntry:
 
 C1Loc5_8E:
     ; Show message 2.
-    db $02, $bd
+    db $02, $bd ; Message Text0DMessage3D: しんぶんうりばの まえの とおりだ。[PAGE] / よが ふけているにも かかわらず / しょうばいを している おとこが / いる。[PAGE] / てがかりに なる...
     ; Set object flag.
     db $17, C1NewsstandSeen
 
@@ -1785,12 +1785,12 @@ LookC1AlleyPassage16:
 
 C1Sc5_3F:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DarkAlleyView
     ; Show message 2.
-    db $02, $d4
+    db $02, $d4 ; Message Text0DMessage54: ろじの つきあたりだ。 / とおりに つづいている。[END]
     ; End script.
     db $ff
 
@@ -1799,7 +1799,7 @@ C1DarkAlleyView:
 
 C1Loc5_2F:
     ; Show message 2.
-    db $02, $d1
+    db $02, $d1 ; Message Text0DMessage51: よこちょうの うすぐらい ろじだ。[END]
     ; End script.
     db $ff
 
@@ -1813,12 +1813,12 @@ C1Sc5_40:
     db $04
     dw C1ManholeAlreadyOpen
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is set.
     db $04
     dw C1StreetManholeView
     ; Show message 1.
-    db $01, $32
+    db $01, $32 ; Message Text0EMessage32: マンホールの ふただ。 / このうえは とおりだろうか・・・。[END]
     ; End script.
     db $ff
 
@@ -1827,7 +1827,7 @@ C1StreetManholeView:
 
 C1Loc5_30:
     ; Show message 2.
-    db $02, $bc
+    db $02, $bc ; Message Text0DMessage3C: マンホールだ。 / したは げすいどうか・・・。[END]
     ; End script.
     db $ff
 
@@ -1845,7 +1845,7 @@ C1Sc5_41:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; End script.
     db $ff
 
@@ -1856,7 +1856,7 @@ C1Loc5_31:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -1874,7 +1874,7 @@ C1Sc5_42:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ; End script.
     db $ff
 
@@ -1885,7 +1885,7 @@ C1Loc5_32:
     ; Set text name 0.
     db $1e, $ba
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     ; End script.
     db $ff
 
@@ -1894,7 +1894,7 @@ MoveC1Manhole18:
 
 C1Sc5_43:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
@@ -1904,7 +1904,7 @@ C1ManholeToRoom1D:
 
 C1Loc5_33:
     ; Move to the room argument if the selected state permits.
-    db $06, $1d
+    db $06, C1RoomIdJoeStreetUpperSewer
 
 ; Choose sewer-entry text using flag $40 and set it on the first description.
 C1ManholeSewerText:
@@ -1916,7 +1916,7 @@ C1Loc5_8F:
     db $04
     dw C1SewerRepeatEntry
     ; Show message 1.
-    db $01, $31
+    db $01, $31 ; Message Text0EMessage31: げすいどうの なかだ。 / じめじめしている。[END]
     ; Set object flag.
     db $17, C1ManholeSewerSeen
 
@@ -1932,7 +1932,7 @@ MoveC1PolicePassage:
 
 C1Sc5_45:
     ; Test current room.
-    db $19, $17
+    db $19, C1RoomIdPoliceFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToPolice
@@ -1945,11 +1945,11 @@ C1PassageToPolice:
 
 C1Loc5_34:
     ; Check Case I room event for the room argument.
-    db $5e, $20
+    db $5e, C1RoomIdArmedWomanEncounter
     ; Move to the room argument if the selected state permits.
-    db $06, $17
+    db $06, C1RoomIdPoliceFront
     ; Show message 2.
-    db $02, $d6
+    db $02, $d6 ; Message Text0DMessage56: けいさつの まえの とおりだ。[END]
 
 ; End the empty passage view or the police-station exterior description.
 C1PoliceEntryEnd:
@@ -1963,19 +1963,19 @@ MoveC1CarRearPassage:
 
 C1Sc5_47:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
     ; Move to the room argument if the selected state permits.
-    db $06, $22
+    db $06, C1RoomIdCarRear
     ; Test object flag.
     db $16, C1CarRearSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarRearFirstEntry
     ; Show message 2.
-    db $02, $f6
+    db $02, $f6 ; Message Text0DMessage76: べンツの トランクの まえだ。[END]
     ; End script.
     db $ff
 
@@ -1984,7 +1984,7 @@ C1CarRearFirstEntry:
 
 C1Loc5_90:
     ; Show message 2.
-    db $02, $f1
+    db $02, $f1 ; Message Text0DMessage71: べンツの うしろに まわった。 / トランクの まえだ。[END]
     ; Set object flag.
     db $17, C1CarRearSeen
     ; End script.
@@ -1995,7 +1995,7 @@ LookC1CarDoor1B:
 
 C1Sc5_48:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarDoorViewEnd
@@ -2005,7 +2005,7 @@ C1Sc5_48:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $b5
+    db $02, $b5 ; Message Text0DMessage35: べンツの ドアだ。[END]
 
 ; End the car-door view.
 C1CarDoorViewEnd:
@@ -2019,19 +2019,19 @@ MoveC1CarDoor1B:
 
 C1Sc5_49:
     ; Test current room.
-    db $19, $11
+    db $19, C1RoomIdJoeStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToStreet11
     ; Move to the room argument if the selected state permits.
-    db $06, $23
+    db $06, C1RoomIdLuxuryCar
     ; Test object flag.
     db $16, C1CarInteriorSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CarInteriorFirstEntry
     ; Show message 2.
-    db $02, $82
+    db $02, $82 ; Message Text0DMessage02: べンツの なかだ。[END]
     ; End script.
     db $ff
 
@@ -2040,7 +2040,7 @@ C1CarInteriorFirstEntry:
 
 C1Loc5_91:
     ; Show message 1.
-    db $01, $00
+    db $01, $00 ; Message Text0EMessage00: べンツの なかだ。 / これといって かわったことは / ないようだ。[END]
     ; Set object flag.
     db $17, C1CarInteriorSeen
 
@@ -2056,7 +2056,7 @@ MoveC1GunShopStreet:
 
 C1Sc5_4B:
     ; Test current room.
-    db $19, $12
+    db $19, C1RoomIdNewsstandStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToNewsstand
@@ -2071,23 +2071,23 @@ C1Loc5_36:
     db $04
     dw C1GunShopStreetEntry
     ; Check Case I room event for the room argument.
-    db $5e, $4c
+    db $5e, C1RoomIdMuggerGunShopStreet
     ; Check Case I room event for the room argument.
-    db $5e, $1f
+    db $5e, C1RoomIdBumEncounter
 
 ; Check exit $13, clear flag $a8, and retain the following result-based text branch.
 C1GunShopStreetEntry:
 
 C1Loc5_37:
     ; Move to the room argument if the selected state permits.
-    db $06, $13
+    db $06, C1RoomIdGunShopStreet
     ; Clear object flag.
     db $18, C1BumEventActive
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetLong
     ; Show message 2.
-    db $02, $cf
+    db $02, $cf ; Message Text0DMessage4F: ガンショップの まえの とおりだ。[END]
     ; End script.
     db $ff
 
@@ -2096,7 +2096,7 @@ C1GunShopStreetLong:
 
 C1Loc5_92:
     ; Show message 2.
-    db $02, $cb
+    db $02, $cb ; Message Text0DMessage4B: ガンショップの まえの とおりだ。 / おおきな かんばんが でている。[END]
     ; Set object flag.
     db $17, $43
 
@@ -2112,7 +2112,7 @@ MoveC1PeoriaPassage1D:
 
 C1Sc5_4D:
     ; Test current room.
-    db $19, $13
+    db $19, C1RoomIdGunShopStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetEvents
@@ -2122,9 +2122,9 @@ C1PassageToPeoria14:
 
 C1Loc5_38:
     ; Check Case I room event for the room argument.
-    db $5e, $4d
+    db $5e, C1RoomIdMuggerPeoria
     ; Move to the room argument if the selected state permits.
-    db $06, $14
+    db $06, C1RoomIdPeoriaBlueCabStop
     ; Test object flag.
     db $16, C1PeoriaStopKnown
     ; Branch if result bit 0 is clear.
@@ -2136,7 +2136,7 @@ C1PeoriaPlainView:
 
 C1Loc5_93:
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: ぺオリアどおりだ。[END]
     ; End script.
     db $ff
 
@@ -2147,7 +2147,7 @@ C1Loc5_94:
     ; Set text name 0.
     db $1e, $b1
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text10Message0B: ぺオリアどおりだ。 / [OBJECT_WRAM:37C5]が とまっている。[END]
     ; Add quick-list value.
     db $42, $a3
     ; Set object flag.
@@ -2163,7 +2163,7 @@ LookC1GunShopDoor:
 C1Sc5_4E:
 jr_006_77a4:
     ; Test current room.
-    db $19, $25
+    db $19, C1RoomIdGunShop
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorViewEnd
@@ -2173,7 +2173,7 @@ jr_006_77a4:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $cd
+    db $02, $cd ; Message Text0DMessage4D: ガンショップの いりぐちの ドアだ。とじている。[END]
     ; End script.
     db $ff
 
@@ -2182,19 +2182,19 @@ MoveC1GunShopDoor:
 
 C1Sc5_4F:
     ; Test current room.
-    db $19, $13
+    db $19, C1RoomIdGunShopStreet
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopStreetEvents
     ; Move to the room argument if the selected state permits.
-    db $06, $25
+    db $06, C1RoomIdGunShop
     ; Test object flag.
     db $16, C1GunShopSeen
     ; Branch if result bit 0 is clear.
     db $05
     dw C1GunShopFirstEntry
     ; Show message 2.
-    db $02, $26
+    db $02, $26 ; Message Text10Message26: ガンショップの なかだ。[END]
     ; End script.
     db $ff
 
@@ -2203,7 +2203,7 @@ C1GunShopFirstEntry:
 
 C1Loc5_95:
     ; Show message 1.
-    db $01, $10
+    db $01, $10 ; Message Text0EMessage10: ガンショップの なかだ。 / カウンターに ふとった やさしそうなおとこが たっている。[END]
     ; Set object flag.
     db $17, C1GunShopSeen
 
@@ -2219,7 +2219,7 @@ MoveC1PeoriaPassage1F:
 
 C1Sc5_51:
     ; Test current room.
-    db $19, $14
+    db $19, C1RoomIdPeoriaBlueCabStop
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PassageToPeoria14
@@ -2229,7 +2229,7 @@ C1PassageToPeoria15:
 
 C1Loc5_39:
     ; Move to the room argument if the selected state permits.
-    db $06, $15
+    db $06, C1RoomIdPeoriaYellowCabStop
     ; Test object flag.
     db $16, $46
     ; Branch if result bit 0 is clear.
@@ -2238,7 +2238,7 @@ C1Loc5_39:
     ; Set text name 0.
     db $1e, $b2
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text10Message0B: ぺオリアどおりだ。 / [OBJECT_WRAM:37C5]が とまっている。[END]
     ; End script.
     db $ff
 
@@ -2252,7 +2252,7 @@ C1Sc5_52:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 2.
-    db $02, $d8
+    db $02, $d8 ; Message Text0DMessage58: けいさつしょの ドアだ。 / しまっている。[END]
 
 ; End the empty pit view or the police-door description.
 C1PoliceDoorViewEnd:
@@ -2285,7 +2285,7 @@ C1Sc5_54:
     db $05
     dw C1PoliceGunEvidenceEnd
     ; Test item flag.
-    db $52, $24
+    db $52, C1ItemMemo
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PoliceCheckItems
@@ -2295,7 +2295,7 @@ C1Sc5_54:
     db $05
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $1e
+    db $52, C1ItemLetter1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1PoliceCheckClueFlags
@@ -2315,12 +2315,12 @@ C1Sc5_54:
     db $05
     dw C1PoliceMissingCluesEnd
     ; Finish Case I scene effect.
-    db $5a, $17
+    db $5a, C1FxIdCaseSolved
     ; End script.
     db $ff
     ; Unreferenced from indexed roots in the explicit script graph.
     ; Show message 2.
-    db $02, $63
+    db $02, $63 ; Message Text10Message63: あけなければ いどうできない![END]
     ; End script.
     db $ff
 
@@ -2357,22 +2357,22 @@ C1Loc5_97:
     db $04
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $1e
+    db $52, C1ItemLetter1
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceCheckClueFlags
     ; Test item flag.
-    db $52, $12
+    db $52, C1ItemMap
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
     ; Test item flag.
-    db $52, $1b
+    db $52, C1ItemFile5
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
     ; Test item flag.
-    db $52, $0e
+    db $52, C1ItemNote1
     ; Branch if result bit 0 is set.
     db $04
     dw C1PoliceLifeSentence
@@ -2382,17 +2382,17 @@ C1PoliceTooLittleProof:
 
 C1Loc5_98:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: あなたは けいさつしょに いる。[PAGE] / けいさつは よろこんで あなたを / むかえた。[PAGE] / かれらは あなたの はなしに / たいへん きょうみを...
     ; Show message 0.
-    db $00, $5c
+    db $00, $5c ; Message Text0CMessage5C: しかし スタンウッドと ビッカースにようぎを なげかけるには あまりにもしょうこが ふそくしていた。[END]
     ; Show message 1.
-    db $01, $fd
+    db $01, $fd ; Message Text0FMessage7D: シーゲルの さつじんと ふじんの / ゆうかいを ふたりが やったのでは / ないとすれば ぎわくが あなたに / かかるのは とうぜんのことだった。[PAGE] / さ...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2403,11 +2403,11 @@ C1PoliceGunEvidenceEnd:
 
 C1Loc5_3A:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 1.
-    db $01, $fa
+    db $01, $fa ; Message Text0FMessage7A: ガチャッ・・・! / あなたは たいほされてしまった。[PAGE] / けいさつは あなたの はなしに / きょうみをもち それを もとに / ゆうかいと さつじんについ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2418,17 +2418,17 @@ C1PoliceLifeSentence:
 
 C1Loc5_99:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: あなたは けいさつしょに いる。[PAGE] / けいさつは よろこんで あなたを / むかえた。[PAGE] / かれらは あなたの はなしに / たいへん きょうみを...
     ; Show message 0.
-    db $00, $5c
+    db $00, $5c ; Message Text0CMessage5C: しかし スタンウッドと ビッカースにようぎを なげかけるには あまりにもしょうこが ふそくしていた。[END]
     ; Show message 0.
-    db $00, $5b
+    db $00, $5b ; Message Text0CMessage5B: それどころか あなたにも おおきな / ようぎが かかった。[PAGE] / シーゲルの さつがいや ふじんの / ゆうかいを じっさいに おこなったとうたがわれるに じ...
     ; Show message 1.
-    db $01, $fe
+    db $01, $fe ; Message Text0FMessage7E: はんけつは 「むきちょうえき」[PAGE] / いっしょう はいいろの かべを / みつめながら くらさなければ / ならなくなった・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2439,17 +2439,17 @@ C1PoliceMissingCluesEnd:
 
 C1Loc5_9A:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $03
     ; Show message 0.
-    db $00, $2a
+    db $00, $2a ; Message Text0CMessage2A: あなたは けいさつしょに いる。[PAGE] / けいさつは よろこんで あなたを / むかえた。[PAGE] / かれらは あなたの はなしに / たいへん きょうみを...
     ; Show message 0.
-    db $00, $3a
+    db $00, $3a ; Message Text0CMessage3A: あなたの はなしと 3つの / しょうこひんは スタンウッドと / ビッカースに おおきな ようぎの / かげを なげかけた。[PAGE] / しかし それは ぜったいの...
     ; Show message 0.
-    db $00, $5b
+    db $00, $5b ; Message Text0CMessage5B: それどころか あなたにも おおきな / ようぎが かかった。[PAGE] / シーゲルの さつがいや ふじんの / ゆうかいを じっさいに おこなったとうたがわれるに じ...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text0FMessage7C: そのけっか あなたは ちょうえき / 10ねんの はんけつを うけた。[PAGE] / ・・・あなたには てつごうしが / まっている・・・。[END]
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2460,9 +2460,9 @@ C1PoliceAmnesiaEnd:
 
 C1Loc5_3B:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 1.
-    db $01, $fb
+    db $01, $fb ; Message Text0FMessage7B: ガチャッ・・・! / あなたは たいほされてしまった。[PAGE] / けいかんから たくさんの しつもんをされた。[PAGE] / しかし きおくのない おとこに / ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2473,13 +2473,13 @@ MoveC1ConstructionPit:
 
 C1Sc5_55:
     ; Move to the room argument if the selected state permits.
-    db $06, $18
+    db $06, C1RoomIdConstructionPit
     ; Show message 2.
-    db $02, $da
+    db $02, $da ; Message Text0DMessage5A: うわーっ![PAGE] / いきなり こうじちゅうの あなに / おちてしまった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2495,12 +2495,12 @@ C1Sc5_56:
     db $04
     dw C1ManholeAlreadyOpen
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is set.
     db $04
     dw C1StreetManholeView
     ; Show message 1.
-    db $01, $32
+    db $01, $32 ; Message Text0EMessage32: マンホールの ふただ。 / このうえは とおりだろうか・・・。[END]
     ; End script.
     db $ff
 
@@ -2509,7 +2509,7 @@ MoveC1Manhole22:
 
 C1Sc5_57:
     ; Test current room.
-    db $19, $16
+    db $19, C1RoomIdJoeAlley
     ; Branch if result bit 0 is clear.
     db $05
     dw C1FireEscapeToAlley
@@ -2519,7 +2519,7 @@ C1ManholeToRoom3D:
 
 C1Loc5_3C:
     ; Move to the room argument if the selected state permits.
-    db $06, $3d
+    db $06, C1RoomIdJoeAlleyUpperSewer
     ; Jump to script.
     db $1c
     dw C1ManholeSewerText
@@ -2529,7 +2529,7 @@ LookC1BlueCab26:
 
 C1Sc5_58:
     ; Test current room.
-    db $19, $26
+    db $19, C1RoomIdBlueCabPeoria
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2543,7 +2543,7 @@ C1Loc5_3D:
     ; Set text name 0.
     db $1e, $b1
     ; Show message 2.
-    db $02, $0c
+    db $02, $0c ; Message Text10Message0C: [OBJECT_WRAM:37C5]だ。 / うんてんしゅが のっている。 / きゃくを まっているようだ。[END]
     ; End script.
     db $ff
 
@@ -2552,18 +2552,18 @@ MoveC1BlueCab26:
 
 C1Sc5_59:
     ; Test current room.
-    db $19, $26
+    db $19, C1RoomIdBlueCabPeoria
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit26
     ; Clear state bit.
-    db $30, $0d
+    db $30, C1StateYellowCabView
     ; Move to the room argument if the selected state permits.
-    db $06, $26
+    db $06, C1RoomIdBlueCabPeoria
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: ブルータクシーの なかに はいった。うんてんしゅは イライラしている / ようだ。[END]
     ; Test object flag.
     db $16, C1BlueCabDebt
     ; Branch if result bit 0 is set.
@@ -2580,7 +2580,7 @@ C1BlueCabLoanReminder:
 C1Loc5_9B:
 jr_006_78b3:
     ; Show message 2.
-    db $02, $6e
+    db $02, $6e ; Message Text10Message6E: くちもとを ヒクヒクさせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  このまえ かした かねを けえして くれねえと こまるぜ!」[END]
     ; End script.
     db $ff
 
@@ -2606,7 +2606,7 @@ jr_006_78c2:
     db $04
     dw C1BlueCabDeferFare
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text10Message5D: うんてんしゅは こわいかおをして / いった。[PAGE] / 「おきゃくさん!!! /  まだ かねを もらっちゃあ /  いやせんぜ![PAGE] /  このままじゃ...
     ; Set object flag.
     db $17
 
@@ -2625,16 +2625,16 @@ C1Loc5_3F:
     db $05
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $6c
+    db $02, $6c ; Message Text10Message6C: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  かねを もってねえんですかい?[PAGE] /  ・・・しようがねえな! ...
 
 ; Check exit $14, show Peoria Street, and clear the shared cab fare flags.
 C1BlueCabToPeoria14:
 
 C1Loc5_40:
     ; Move to the room argument if the selected state permits.
-    db $06, $14
+    db $06, C1RoomIdPeoriaBlueCabStop
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: ぺオリアどおりだ。[END]
     ; Jump to script.
     db $1c
     dw C1CabClearFareFlags
@@ -2644,7 +2644,7 @@ LookC1BlueCab42:
 
 C1Sc5_5A:
     ; Test current room.
-    db $19, $42
+    db $19, C1RoomIdBlueCabStanford
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2656,14 +2656,14 @@ MoveC1BlueCab42:
 
 C1Sc5_5B:
     ; Test current room.
-    db $19, $42
+    db $19, C1RoomIdBlueCabStanford
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit42
     ; Move to the room argument if the selected state permits.
-    db $06, $42
+    db $06, C1RoomIdBlueCabStanford
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: ブルータクシーの なかに はいった。うんてんしゅは イライラしている / ようだ。[END]
     ; End script.
     db $ff
 
@@ -2672,14 +2672,14 @@ C1CabToStanfordStreet:
 
 C1Loc5_41:
     ; Move to the room argument if the selected state permits.
-    db $06, $19
+    db $06, C1RoomIdStanfordFront
     ; Test object flag.
     db $16, C1StanfordStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1StanfordStreetRepeat
     ; Show message 1.
-    db $01, $47
+    db $01, $47 ; Message Text0EMessage47: マンションの まえだ。 / かなり こうきゅうそうだ。[PAGE] / こんなところに すむのは いったい / どんなヤツなんだろう・・・。[END]
     ; Set object flag.
     db $17, C1StanfordStreetSeen
     ; End script.
@@ -2690,7 +2690,7 @@ C1StanfordStreetRepeat:
 
 C1Loc5_9C:
     ; Show message 1.
-    db $01, $49
+    db $01, $49 ; Message Text0EMessage49: マンションの まえの とおりだ。 / ひとどおりは あまり おおくない。[END]
     ; End script.
     db $ff
 
@@ -2720,7 +2720,7 @@ jr_006_7901:
 jr_006_7904:
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text10Message5D: うんてんしゅは こわいかおをして / いった。[PAGE] / 「おきゃくさん!!! /  まだ かねを もらっちゃあ /  いやせんぜ![PAGE] /  このままじゃ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -2731,7 +2731,7 @@ LookC1BlueCab44:
 
 C1Sc5_5C:
     ; Test current room.
-    db $19, $44
+    db $19, C1RoomIdBlueCabBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2743,14 +2743,14 @@ MoveC1BlueCab44:
 
 C1Sc5_5D:
     ; Test current room.
-    db $19, $44
+    db $19, C1RoomIdBlueCabBungalow
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit44
     ; Move to the room argument if the selected state permits.
-    db $06, $44
+    db $06, C1RoomIdBlueCabBungalow
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: ブルータクシーの なかに はいった。うんてんしゅは イライラしている / ようだ。[END]
     ; End script.
     db $ff
 
@@ -2759,14 +2759,14 @@ C1CabToBungalowStreet:
 
 C1Loc5_43:
     ; Move to the room argument if the selected state permits.
-    db $06, $1a
+    db $06, C1RoomIdBungalowFront
     ; Test object flag.
     db $16, C1BungalowStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowStreetRepeat
     ; Show message 1.
-    db $01, $5f
+    db $01, $5f ; Message Text0EMessage5F: バンガローだ。 / にわが あれほうだい あれている。 / ひとは すんでいないのだろうか?[END]
     ; Set object flag.
     db $17, C1BungalowStreetSeen
     ; End script.
@@ -2777,7 +2777,7 @@ C1BungalowStreetRepeat:
 
 C1Loc5_9D:
     ; Show message 1.
-    db $01, $66
+    db $01, $66 ; Message Text0EMessage66: たてものの まえの とおりだ。 / タクシーが とまっている。[END]
     ; End script.
     db $ff
 
@@ -2801,7 +2801,7 @@ C1Loc5_44:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02
+    db $02 ; Message Text10Message5D: うんてんしゅは こわいかおをして / いった。[PAGE] / 「おきゃくさん!!! /  まだ かねを もらっちゃあ /  いやせんぜ![PAGE] /  このままじゃ...
 
 jr_006_793a:
     db $5d
@@ -2833,7 +2833,7 @@ LookC1BlueCab46:
 
 C1Sc5_5E:
     ; Test current room.
-    db $19, $46
+    db $19, C1RoomIdBlueCabOfficeBuilding
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BlueCabExteriorView
@@ -2845,14 +2845,14 @@ MoveC1BlueCab46:
 
 C1Sc5_5F:
     ; Test current room.
-    db $19, $46
+    db $19, C1RoomIdBlueCabOfficeBuilding
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit46
     ; Move to the room argument if the selected state permits.
-    db $06, $46
+    db $06, C1RoomIdBlueCabOfficeBuilding
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: ブルータクシーの なかに はいった。うんてんしゅは イライラしている / ようだ。[END]
     ; End script.
     db $ff
 
@@ -2861,14 +2861,14 @@ C1CabToStreet1B:
 
 C1Loc5_46:
     ; Move to the room argument if the selected state permits.
-    db $06, $1b
+    db $06, C1RoomIdOfficeBuildingFront
     ; Test object flag.
     db $16, $4a
     ; Branch if result bit 0 is set.
     db $04
     dw C1CabStreet1BFlag4A
     ; Show message 1.
-    db $01, $75
+    db $01, $75 ; Message Text0EMessage75: とおりだ。 / あたりは とても しずかだ。[END]
     ; End script.
     db $ff
 
@@ -2877,7 +2877,7 @@ C1CabStreet1BFlag4A:
 
 C1Loc5_9E:
     ; Show message 1.
-    db $01, $73
+    db $01, $73 ; Message Text0EMessage73: ずいぶんと きたない オフィスビルのまえだ。[END]
     ; Set object flag.
     db $17, $4a
     ; End script.
@@ -2903,7 +2903,7 @@ C1Loc5_47:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5d
+    db $02, $5d ; Message Text10Message5D: うんてんしゅは こわいかおをして / いった。[PAGE] / 「おきゃくさん!!! /  まだ かねを もらっちゃあ /  いやせんぜ![PAGE] /  このままじゃ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -2931,7 +2931,7 @@ C1Sc5_60:
     db $19
 
 jr_006_7984:
-    db $48
+    db C1RoomIdBlueCabEstate
     ; Branch if result bit 0 is clear.
     db $05
     ; Target C1BlueCabExteriorView; retain the interior label.
@@ -2950,14 +2950,14 @@ C1Sc5_61:
     db $19
 
 jr_006_798a:
-    db $48
+    db C1RoomIdBlueCabEstate
     ; Branch if result bit 0 is set.
     db $04
     dw C1BlueCabExit48
     ; Move to the room argument if the selected state permits.
-    db $06, $48
+    db $06, C1RoomIdBlueCabEstate
     ; Show message 1.
-    db $01, $39
+    db $01, $39 ; Message Text0EMessage39: ブルータクシーの なかに はいった。うんてんしゅは イライラしている / ようだ。[END]
     ; End script.
     db $ff
 
@@ -2966,14 +2966,14 @@ C1CabToEstateStreet:
 
 C1Loc5_49:
     ; Move to the room argument if the selected state permits.
-    db $06, $1c
+    db $06, C1RoomIdEstateFront
     ; Test object flag.
     db $16, C1EstateStreetSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1EstateStreetRepeat
     ; Show message 1.
-    db $01, $9a
+    db $01, $9a ; Message Text0FMessage1A: おおきな べっそうのまえ。 / 「かぜとともに さりぬ」の なかの / ワンシーンの ようだ。[END]
     ; Set object flag.
     db $17, C1EstateStreetSeen
     ; End script.
@@ -2984,7 +2984,7 @@ C1EstateStreetRepeat:
 
 C1Loc5_9F:
     ; Show message 1.
-    db $01, $9f
+    db $01, $9f ; Message Text0FMessage1F: べっそうの しゅうへんに ひとかげはみられない。[END]
     ; End script.
     db $ff
 
@@ -3010,7 +3010,7 @@ C1Loc5_4A:
 jr_006_79af:
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02
+    db $02 ; Message Text10Message5D: うんてんしゅは こわいかおをして / いった。[PAGE] / 「おきゃくさん!!! /  まだ かねを もらっちゃあ /  いやせんぜ![PAGE] /  このままじゃ...
 
 jr_006_79b2:
     db $5d
@@ -3040,7 +3040,7 @@ LookC1YellowCab27:
 
 C1Sc5_62:
     ; Test current room.
-    db $19, $27
+    db $19, C1RoomIdYellowCabPeoria
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3054,7 +3054,7 @@ C1Loc5_4C:
     ; Set text name 0.
     db $1e, $b2
     ; Show message 2.
-    db $02, $0c
+    db $02, $0c ; Message Text10Message0C: [OBJECT_WRAM:37C5]だ。 / うんてんしゅが のっている。 / きゃくを まっているようだ。[END]
     ; End script.
     db $ff
 
@@ -3063,18 +3063,18 @@ MoveC1YellowCab27:
 
 C1Sc5_63:
     ; Test current room.
-    db $19, $27
+    db $19, C1RoomIdYellowCabPeoria
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit27
     ; Set state bit.
-    db $2f, $0d
+    db $2f, C1StateYellowCabView
     ; Move to the room argument if the selected state permits.
-    db $06, $27
+    db $06, C1RoomIdYellowCabPeoria
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: イエロータクシーに はいった。 / うんてんしゅは ひとがよさそうだ。[END]
     ; Test object flag.
     db $16, C1YellowCabDebt
     ; Branch if result bit 0 is set.
@@ -3090,7 +3090,7 @@ C1YellowCabLoanReminder:
 
 C1Loc5_A0:
     ; Show message 2.
-    db $02, $6f
+    db $02, $6f ; Message Text10Message6F: うんてんしゅは ニコニコして / いった。[PAGE] / 「このまえの おかねを かえして /  くださいね。」[END]
     ; End script.
     db $ff
 
@@ -3114,7 +3114,7 @@ C1Loc5_4D:
     db $04
     dw C1YellowCabDeferFare
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text10Message5E: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  まだ おかねを いただいて /  いませんよ![PAGE] /  のりにげ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3130,16 +3130,16 @@ C1Loc5_4E:
     db $05
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $6d
+    db $02, $6d ; Message Text10Message6D: うんてんしゅは やさしいこえで / いった。[PAGE] / 「こまったときは おたがいさま! /  おかねは こんど きたときで /  よろしいですよ。」[END]
 
 ; Check exit $15 and show Peoria Street before clearing the cab fare flags.
 C1YellowCabToPeoria15:
 
 C1Loc5_4F:
     ; Move to the room argument if the selected state permits.
-    db $06, $15
+    db $06, C1RoomIdPeoriaYellowCabStop
     ; Show message 2.
-    db $02, $d0
+    db $02, $d0 ; Message Text0DMessage50: ぺオリアどおりだ。[END]
 
 ; Clear flags $82, $83, and $84 after the Peoria exit.
 C1CabClearFareFlags:
@@ -3159,7 +3159,7 @@ LookC1YellowCab43:
 
 C1Sc5_64:
     ; Test current room.
-    db $19, $43
+    db $19, C1RoomIdYellowCabStanford
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3171,14 +3171,14 @@ MoveC1YellowCab43:
 
 C1Sc5_65:
     ; Test current room.
-    db $19, $43
+    db $19, C1RoomIdYellowCabStanford
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit43
     ; Move to the room argument if the selected state permits.
-    db $06, $43
+    db $06, C1RoomIdYellowCabStanford
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: イエロータクシーに はいった。 / うんてんしゅは ひとがよさそうだ。[END]
     ; End script.
     db $ff
 
@@ -3202,7 +3202,7 @@ C1Loc5_50:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text10Message5E: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  まだ おかねを いただいて /  いませんよ![PAGE] /  のりにげ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3227,9 +3227,9 @@ C1CabFareArrestEnd:
 
 C1Loc5_52:
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 1.
-    db $01, $b2
+    db $01, $b2 ; Message Text0FMessage32: あなたは トイレで めざめてから / ようやく ここまで たどりついた。[PAGE] / しかし あなたは うんてんしゅの / ちゅうこくを ききいれず のりにげをしてし...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3240,7 +3240,7 @@ LookC1YellowCab45:
 
 C1Sc5_66:
     ; Test current room.
-    db $19, $45
+    db $19, C1RoomIdYellowCabBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3252,14 +3252,14 @@ MoveC1YellowCab45:
 
 C1Sc5_67:
     ; Test current room.
-    db $19, $45
+    db $19, C1RoomIdYellowCabBungalow
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit45
     ; Move to the room argument if the selected state permits.
-    db $06, $45
+    db $06, C1RoomIdYellowCabBungalow
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: イエロータクシーに はいった。 / うんてんしゅは ひとがよさそうだ。[END]
     ; End script.
     db $ff
 
@@ -3283,7 +3283,7 @@ C1Loc5_53:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text10Message5E: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  まだ おかねを いただいて /  いませんよ![PAGE] /  のりにげ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3294,7 +3294,7 @@ LookC1YellowCab47:
 
 C1Sc5_68:
     ; Test current room.
-    db $19, $47
+    db $19, C1RoomIdYellowCabOfficeBuilding
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3306,14 +3306,14 @@ MoveC1YellowCab47:
 
 C1Sc5_69:
     ; Test current room.
-    db $19, $47
+    db $19, C1RoomIdYellowCabOfficeBuilding
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit47
     ; Move to the room argument if the selected state permits.
-    db $06, $47
+    db $06, C1RoomIdYellowCabOfficeBuilding
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: イエロータクシーに はいった。 / うんてんしゅは ひとがよさそうだ。[END]
     ; End script.
     db $ff
 
@@ -3337,7 +3337,7 @@ C1Loc5_54:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text10Message5E: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  まだ おかねを いただいて /  いませんよ![PAGE] /  のりにげ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3348,7 +3348,7 @@ LookC1YellowCab49:
 
 C1Sc5_6A:
     ; Test current room.
-    db $19, $49
+    db $19, C1RoomIdYellowCabEstate
     ; Branch if result bit 0 is clear.
     db $05
     dw C1YellowCabExteriorView
@@ -3360,14 +3360,14 @@ MoveC1YellowCab49:
 
 C1Sc5_6B:
     ; Test current room.
-    db $19, $49
+    db $19, C1RoomIdYellowCabEstate
     ; Branch if result bit 0 is set.
     db $04
     dw C1YellowCabExit49
     ; Move to the room argument if the selected state permits.
-    db $06, $49
+    db $06, C1RoomIdYellowCabEstate
     ; Show message 1.
-    db $01, $42
+    db $01, $42 ; Message Text0EMessage42: イエロータクシーに はいった。 / うんてんしゅは ひとがよさそうだ。[END]
     ; End script.
     db $ff
 
@@ -3391,7 +3391,7 @@ C1Loc5_55:
     db $04
     dw C1CabFareArrestEnd
     ; Show message 2.
-    db $02, $5e
+    db $02, $5e ; Message Text10Message5E: かおを ひきつらせながら / うんてんしゅは いった。[PAGE] / 「おきゃくさん! /  まだ おかねを いただいて /  いませんよ![PAGE] /  のりにげ...
     ; Set object flag.
     db $17, C1CabFareWarned
     ; End script.
@@ -3402,7 +3402,7 @@ LookC1StanfordDoor:
 
 C1Sc5_6C:
     ; Test current room.
-    db $19, $19
+    db $19, C1RoomIdStanfordFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1StanfordDoorViewEnd
@@ -3414,7 +3414,7 @@ C1Sc5_6C:
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
 
 ; End the Stanford Arms door view.
 C1StanfordDoorViewEnd:
@@ -3428,7 +3428,7 @@ MoveC1StanfordDoor:
 
 C1Sc5_6D:
     ; Test current room.
-    db $19, $19
+    db $19, C1RoomIdStanfordFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToStanfordStreet
@@ -3438,14 +3438,14 @@ C1DoorToLobby28:
 
 C1Loc5_57:
     ; Move to the room argument if the selected state permits.
-    db $06, $28
+    db $06, C1RoomIdStanfordLobby
     ; Test object flag.
     db $16, C1Lobby28Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1Lobby28Repeat
     ; Show message 1.
-    db $01, $4a
+    db $01, $4a ; Message Text0EMessage4A: マンションの まえに おとらず / ロビーも りっぱだ。[PAGE] / しろい えんちゅうが ごうかさを / いっそう ひきたてている。[END]
     ; Set object flag.
     db $17, C1Lobby28Seen
     ; End script.
@@ -3456,7 +3456,7 @@ C1Lobby28Repeat:
 
 C1Loc5_A2:
     ; Show message 1.
-    db $01, $4d
+    db $01, $4d ; Message Text0EMessage4D: ロビーだ。 / しょうめんに エレべータが みえる。[END]
     ; End script.
     db $ff
 
@@ -3470,12 +3470,12 @@ C1Sc5_6E:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $28
+    db $19, C1RoomIdStanfordLobby
     ; Branch if result bit 0 is set.
     db $04
     dw C1PrivateLiftOuterView
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text0EMessage51: エレべータの なかだ。[PAGE] / なにを ぐずぐず しているんだ! / することは きまっているじゃないか![END]
 
 jr_006_7ad3:
     ; End script.
@@ -3486,7 +3486,7 @@ C1PrivateLiftOuterView:
 
 C1Loc5_58:
     ; Show message 1.
-    db $01, $4b
+    db $01, $4b ; Message Text0EMessage4B: エレべータだ。 / しかし ふつうのものとは そうさの / しかたが ちがうようだ。[END]
     ; End script.
     db $ff
 
@@ -3495,14 +3495,14 @@ MoveC1PrivateLift2F:
 
 C1Sc5_6F:
     ; Test current room.
-    db $19, $28
+    db $19, C1RoomIdStanfordLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToLobby28
     ; Move to the room argument if the selected state permits.
-    db $06, $29
+    db $06, C1RoomIdStanfordLobbyLift
     ; Show message 0.
-    db $00
+    db $00 ; Message Text0CMessage6F: エレべータの なかだ。[END]
 
 jr_006_7adf:
     db $6f
@@ -3519,12 +3519,12 @@ C1Sc5_70:
     db $04
     dw C1DoorAlreadyOpen
     ; Test current room.
-    db $19, $2a
+    db $19, C1RoomIdStanfordPenthouse
     ; Branch if result bit 0 is set.
     db $04
     dw C1PrivateLiftOuterView
     ; Show message 1.
-    db $01, $51
+    db $01, $51 ; Message Text0EMessage51: エレべータの なかだ。[PAGE] / なにを ぐずぐず しているんだ! / することは きまっているじゃないか![END]
     ; End script.
     db $ff
 
@@ -3533,14 +3533,14 @@ MoveC1PrivateLift30:
 
 C1Sc5_71:
     ; Test current room.
-    db $19, $2a
+    db $19, C1RoomIdStanfordPenthouse
     ; Branch if result bit 0 is clear.
     db $05
     dw C1LiftToPenthouse
     ; Move to the room argument if the selected state permits.
-    db $06, $41
+    db $06, C1RoomIdStanfordPenthouseLift
     ; Show message 0.
-    db $00, $6f
+    db $00, $6f ; Message Text0CMessage6F: エレべータの なかだ。[END]
     ; End script.
     db $ff
 
@@ -3549,14 +3549,14 @@ C1LiftToPenthouse:
 
 C1Loc5_59:
     ; Move to the room argument if the selected state permits.
-    db $06, $2a
+    db $06, C1RoomIdStanfordPenthouse
     ; Test object flag.
     db $16, C1PenthouseSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1PenthouseRepeat
     ; Show message 1.
-    db $01, $53
+    db $01, $53 ; Message Text0EMessage53: しゃれたへやだ。 / もちぬしは かなりの ひとだろう。 / ・・・かぐの しゅみもいい。[END]
     ; Set object flag.
     db $17, C1PenthouseSeen
     ; End script.
@@ -3567,7 +3567,7 @@ C1PenthouseRepeat:
 
 C1Loc5_A3:
     ; Show message 2.
-    db $02, $27
+    db $02, $27 ; Message Text10Message27: マンションの へやの なかだ。[END]
     ; End script.
     db $ff
 
@@ -3576,7 +3576,7 @@ LookC1BungalowDoor:
 
 C1Sc5_72:
     ; Test current room.
-    db $19, $2b
+    db $19, C1RoomIdBungalow
     ; Branch if result bit 0 is clear.
     db $05
     dw C1BungalowDoorView
@@ -3603,7 +3603,7 @@ C1Loc5_5A:
     db $04
     dw C1BungalowDoorDetail
     ; Show message 1.
-    db $01, $61
+    db $01, $61 ; Message Text0EMessage61: ドアだ。[PAGE] / どうも カギが かかっているらしい。[PAGE] / ここの カギらしいものは / もっていないが・・・。[END]
     ; Set object flag.
     db $17, C1BungalowLockHintSeen
     ; End script.
@@ -3616,9 +3616,9 @@ C1Loc5_5B:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $61
+    db $01, $61 ; Message Text0EMessage61: ドアだ。[PAGE] / どうも カギが かかっているらしい。[PAGE] / ここの カギらしいものは / もっていないが・・・。[END]
     ; Show message 1.
-    db $01, $62
+    db $01, $62 ; Message Text0EMessage62: ふふふん! / こうなったら ちからずくで / あけるしかないな![PAGE] / カギを こわすのなら やはり・・・。[END]
     ; End script.
     db $ff
 
@@ -3627,19 +3627,19 @@ MoveC1BungalowDoor:
 
 C1Sc5_73:
     ; Test current room.
-    db $19, $1a
+    db $19, C1RoomIdBungalowFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToBungalowStreet
     ; Move to the room argument if the selected state permits.
-    db $06, $2b
+    db $06, C1RoomIdBungalow
     ; Test object flag.
     db $16, C1BungalowRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowRoomRepeat
     ; Show message 1.
-    db $01, $67
+    db $01, $67 ; Message Text0EMessage67: たてものの なかに はいった。 / やすっぽい こうすいの においが / はなをつく・・・。[END]
     ; Set object flag.
     db $17, C1BungalowRoomSeen
     ; End script.
@@ -3650,7 +3650,7 @@ C1BungalowRoomRepeat:
 
 C1Loc5_A4:
     ; Show message 1.
-    db $01, $6f
+    db $01, $6f ; Message Text0EMessage6F: ひらやの たてものの なかだ。[END]
 
 ; End the bungalow-entry description or an unavailable door view.
 C1BungalowEntryEnd:
@@ -3664,7 +3664,7 @@ LookC1OfficeDoor32:
 
 C1Sc5_74:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is set.
     db $04
     dw C1BungalowEntryEnd
@@ -3674,7 +3674,7 @@ C1Sc5_74:
     db $04
     dw C1DoorAlreadyOpen
     ; Show message 1.
-    db $01, $c7
+    db $01, $c7 ; Message Text0FMessage47: ドアだ。[END]
     ; End script.
     db $ff
 
@@ -3683,7 +3683,7 @@ MoveC1OfficeDoor32:
 
 C1Sc5_75:
     ; Test current room.
-    db $19, $1b
+    db $19, C1RoomIdOfficeBuildingFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToStreet1B
@@ -3693,9 +3693,9 @@ C1OfficeDoorToRoom2C:
 
 C1Loc5_5D:
     ; Move to the room argument if the selected state permits.
-    db $06, $2c
+    db $06, C1RoomIdOfficeBuildingLobby
     ; Show message 1.
-    db $01, $76
+    db $01, $76 ; Message Text0EMessage76: ロビーだ。 / みぎがわには ろうか ひだりがわにはかいだんが みえる。[END]
 
 ; End the office-building entry or unavailable stair view.
 C1OfficeDoorEntryEnd:
@@ -3716,7 +3716,7 @@ LookC1OfficeStairs:
 
 C1Sc5_77:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorEntryEnd
@@ -3726,7 +3726,7 @@ C1StairsShortView:
 
 C1Loc5_5F:
     ; Show message 0.
-    db $00, $48
+    db $00, $48 ; Message Text0CMessage48: 2かいへ つうじる かいだんだ。[END]
     ; End script.
     db $ff
 
@@ -3735,7 +3735,7 @@ MoveC1OfficeStairs:
 
 C1Sc5_78:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorToRoom2C
@@ -3757,7 +3757,7 @@ C1StairsToAceOffice:
 
 C1Loc5_61:
     ; Move to the room argument if the selected state permits.
-    db $06, $2f
+    db $06, C1RoomIdAceOfficeEntrance
     ; Test object flag.
     db $16, C1AceOfficeFrontSeen
     ; Branch if result bit 0 is set.
@@ -3773,13 +3773,13 @@ C1Loc5_61:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $86
+    db $01, $86 ; Message Text0FMessage06: ここは しりつたんていの オフィスのようだ。[PAGE] / ガラスに 「エース・ハーディング」とかいてある。[END]
     ; Show message 1.
-    db $01, $ac
+    db $01, $ac ; Message Text0FMessage2C: はっ! / ガラスに ひとかげが・・・?[END]
     ; Resume text.
     db $45
     ; Run scene effect.
-    db $46, $19
+    db $46, C1FxIdHeadacheOffice
     ; Set object flag.
     db $17, C1AceOfficeFrontSeen
     ; End script.
@@ -3792,11 +3792,11 @@ C1Loc5_A5:
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $86
+    db $01, $86 ; Message Text0FMessage06: ここは しりつたんていの オフィスのようだ。[PAGE] / ガラスに 「エース・ハーディング」とかいてある。[END]
     ; Show message 2.
-    db $02, $28
+    db $02, $28 ; Message Text10Message28: ・・・と いうことは・・・? / ここは おれの オフィスなのか![END]
     ; Show message 1.
-    db $01, $ac
+    db $01, $ac ; Message Text0FMessage2C: はっ! / ガラスに ひとかげが・・・?[END]
 
 jr_006_7b87:
     ; Set object flag.
@@ -3814,9 +3814,9 @@ C1Loc5_A6:
     db $04
     dw C1AceOfficeRepeatWell
     ; Show message 1.
-    db $01, $82
+    db $01, $82 ; Message Text0FMessage02: たんていじむしょの まえだ。[END]
     ; Run scene effect.
-    db $46, $19
+    db $46, C1FxIdHeadacheOffice
     ; End script.
     db $ff
 
@@ -3825,7 +3825,7 @@ C1AceOfficeRepeatWell:
 
 C1Loc5_A7:
     ; Show message 1.
-    db $01, $82
+    db $01, $82 ; Message Text0FMessage02: たんていじむしょの まえだ。[END]
     ; End script.
     db $ff
 
@@ -3834,7 +3834,7 @@ LookC1DoctorDoor:
 
 C1Sc5_79:
     ; Test current room.
-    db $19, $2d
+    db $19, C1RoomIdDoctorEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoctorDoorViewEnd
@@ -3849,7 +3849,7 @@ C1Sc5_79:
     db $04
     dw C1DoctorEntranceView
     ; Show message 0.
-    db $00, $43
+    db $00, $43 ; Message Text0CMessage43: おしても ひいても びくともしない。カギが かかっているらしい。[END]
 
 ; End the doctor's door view.
 C1DoctorDoorViewEnd:
@@ -3863,7 +3863,7 @@ C1DoctorEntranceView:
 
 C1Loc5_63:
     ; Show message 1.
-    db $01, $78
+    db $01, $78 ; Message Text0EMessage78: オフィスの まえの ようだ。 / 「ドクター ブロディ」と かんばんがかかっている。[END]
     ; End script.
     db $ff
 
@@ -3872,19 +3872,19 @@ MoveC1DoctorDoor:
 
 C1Sc5_7A:
     ; Test current room.
-    db $19, $2d
+    db $19, C1RoomIdDoctorEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1DoorToDoctorLanding
     ; Move to the room argument if the selected state permits.
-    db $06, $2e
+    db $06, C1RoomIdDoctorOffice
     ; Test object flag.
     db $16, C1DoctorRoomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoctorRoomRepeat
     ; Show message 1.
-    db $01, $7a
+    db $01, $7a ; Message Text0EMessage7A: いしゃの オフィスらしく / クスリビンが いっぱいならんでいる。[PAGE] / みまわしたところ だれも / いないようだ。[END]
     ; Set object flag.
     db $17, C1DoctorRoomSeen
     ; End script.
@@ -3895,9 +3895,9 @@ C1DoorToDoctorLanding:
 
 C1Loc5_64:
     ; Move to the room argument if the selected state permits.
-    db $06, $2d
+    db $06, C1RoomIdDoctorEntrance
     ; Show message 1.
-    db $01, $78
+    db $01, $78 ; Message Text0EMessage78: オフィスの まえの ようだ。 / 「ドクター ブロディ」と かんばんがかかっている。[END]
     ; End script.
     db $ff
 
@@ -3906,7 +3906,7 @@ C1DoctorRoomRepeat:
 
 C1Loc5_A8:
     ; Show message 1.
-    db $01, $84
+    db $01, $84 ; Message Text0FMessage04: へやの なかは いたって しずかだ。[END]
     ; End script.
     db $ff
 
@@ -3915,12 +3915,12 @@ LookC1OfficeHall37:
 
 C1Sc5_7B:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeHallViewEnd
     ; Show message 1.
-    db $01, $77
+    db $01, $77 ; Message Text0EMessage77: ろうかだ。 / かなり うすぐらい。[END]
 
 ; End the office hallway view.
 C1OfficeHallViewEnd:
@@ -3934,7 +3934,7 @@ MoveC1OfficeHall37:
 
 C1Sc5_7C:
     ; Test current room.
-    db $19, $2c
+    db $19, C1RoomIdOfficeBuildingLobby
     ; Branch if result bit 0 is clear.
     db $05
     dw C1OfficeDoorToRoom2C
@@ -3957,7 +3957,7 @@ C1Sc5_7D:
     db $04
     dw C1ShadowDoorAfterShot
     ; Show message 1.
-    db $01, $89
+    db $01, $89 ; Message Text0FMessage09: ドアだ。 / あいかわらず ひとかげが ある。[END]
     ; End script.
     db $ff
 
@@ -3971,7 +3971,7 @@ C1Loc5_66:
     db $04
     dw C1DoorAlreadyClosed
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text0FMessage0A: ひとの けはいは なくなった。 / だが ゆだんは きんもつだ。[END]
     ; End script.
     db $ff
 
@@ -3980,7 +3980,7 @@ MoveC1ShadowDoor:
 
 C1Sc5_7E:
     ; Test current room.
-    db $19, $2f
+    db $19, C1RoomIdAceOfficeEntrance
     ; Branch if result bit 0 is clear.
     db $05
     dw C1AceOfficeEntryFlags
@@ -3992,23 +3992,23 @@ C1Sc5_7E:
     ; Set object flag.
     db $17, C1SkipNextSnapshot
     ; Set state bit.
-    db $2f, $3a
+    db $2f, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 2.
-    db $02, $25
+    db $02, $25 ; Message Text10Message25: おとこだ! / じゅうこうを おれに むけている![END]
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $88
+    db $01, $88 ; Message Text0FMessage08: やつは ピストルを もってたのか! / すっかり ゆだんしていた おれは / やられてしまった。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -4019,9 +4019,9 @@ C1ShadowOfficeEntry:
 
 C1Loc5_67:
     ; Clear state bit.
-    db $30, $3a
+    db $30, C1StateAceOfficeGunmanVisible
     ; Move to the room argument if the selected state permits.
-    db $06, $30
+    db $06, C1RoomIdAceOffice
     ; Test object flag.
     db $16, C1MemoryRecovered
     ; Branch if result bit 0 is clear.
@@ -4033,7 +4033,7 @@ C1Loc5_67:
     db $04
     dw C1ShadowOfficeRepeat
     ; Show message 1.
-    db $01, $8b
+    db $01, $8b ; Message Text0FMessage0B: やつの したいが ころがっている。 / ほかに ひとは いないようだ。[END]
     ; Set object flag.
     db $17, C1AceOfficeRoomSeen
     ; End script.
@@ -4044,7 +4044,7 @@ C1ShadowOfficeRepeat:
 
 C1Loc5_A9:
     ; Show message 1.
-    db $01, $92
+    db $01, $92 ; Message Text0FMessage12: オフィスだ。 / かなり ふるいへやのようで かべが / われている。[END]
     ; End script.
     db $ff
 
@@ -4055,13 +4055,13 @@ C1Loc5_AA:
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $85
+    db $01, $85 ; Message Text0FMessage05: ああっ・・・。 / めまいが する。 / あたまが われそうに いたい![END]
     ; Show message 2.
-    db $02, $5a
+    db $02, $5a ; Message Text10Message5A: いっ・・・いしきが・・・。 / うす・れ・・て・・・い・・・・く・・・・・・・・・・・。[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $5b
+    db $02, $5b ; Message Text10Message5B: あなたは トイレで めざめてから / ようやく ここまで たどりついた。[PAGE] / だが どうやら あなたの うんも / ここまでだったようだ・・・。[PAGE] ...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -4072,12 +4072,12 @@ LookC1EstatePassage39:
 
 C1Sc5_7F:
     ; Test current room.
-    db $19, $1c
+    db $19, C1RoomIdEstateFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstatePassageViewEnd
     ; Show message 1.
-    db $01, $9e
+    db $01, $9e ; Message Text0FMessage1E: とても りっぱな べっそうだ。[END]
 
 ; End the estate-approach view.
 C1EstatePassageViewEnd:
@@ -4091,7 +4091,7 @@ MoveC1EstatePassage39:
 
 C1Sc5_80:
     ; Test current room.
-    db $19, $1c
+    db $19, C1RoomIdEstateFront
     ; Branch if result bit 0 is clear.
     db $05
     dw C1CabToEstateStreet
@@ -4101,9 +4101,9 @@ C1Sc5_80:
     db $04
     dw C1EstateToVestibule
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: べっそうの げんかんだ。 / ドアには おおきくて りっぱな / ノッカーが ついている。[END]
     ; End script.
     db $ff
 
@@ -4112,9 +4112,9 @@ C1EstateToVestibule:
 
 C1Loc5_69:
     ; Move to the room argument if the selected state permits.
-    db $06, $32
+    db $06, C1RoomIdMansionVestibule
     ; Show message 1.
-    db $01, $a9
+    db $01, $a9 ; Message Text0FMessage29: げんかんだ。 / とても ひろい。[END]
     ; End script.
     db $ff
 
@@ -4130,7 +4130,7 @@ LookC1KitchenDoor:
 
 C1Sc5_82:
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is set.
     db $04
     dw LookC1LiftDoor
@@ -4147,14 +4147,14 @@ C1Sc5_83:
     db $05
     dw C1ButlerShutsDoor
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToRoom32
     ; Move to the room argument if the selected state permits.
-    db $06, $34
+    db $06, C1RoomIdMansionKitchen
     ; Show message 1.
-    db $01, $ae
+    db $01, $ae ; Message Text0FMessage2E: キッチンだ。 / きちんと せいとんされている。[PAGE] / あの しつじが つかっているの / だろうか・・・?[END]
     ; End script.
     db $ff
 
@@ -4163,9 +4163,9 @@ C1EstateToRoom32:
 
 C1Loc5_6A:
     ; Move to the room argument if the selected state permits.
-    db $06, $32
+    db $06, C1RoomIdMansionVestibule
     ; Show message 1.
-    db $01, $a9
+    db $01, $a9 ; Message Text0FMessage29: げんかんだ。 / とても ひろい。[END]
     ; End script.
     db $ff
 
@@ -4174,7 +4174,7 @@ LookC1EstateStairs:
 
 C1Sc5_84:
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is set.
     db $04
     dw C1StairsShortView
@@ -4191,7 +4191,7 @@ C1Sc5_85:
     db $05
     dw C1ButlerShutsDoor
     ; Test current room.
-    db $19, $32
+    db $19, C1RoomIdMansionVestibule
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToRoom32
@@ -4201,9 +4201,9 @@ C1EstateToUpstairsHall:
 
 C1Loc5_6B:
     ; Move to the room argument if the selected state permits.
-    db $06, $35
+    db $06, C1RoomIdMansionUpstairsHallway
     ; Show message 1.
-    db $01, $ba
+    db $01, $ba ; Message Text0FMessage3A: ろうかだ。 / ドアが 2つみえる。[END]
     ; End script.
     db $ff
 
@@ -4212,7 +4212,7 @@ MoveC1MasterBedroom:
 
 C1Sc5_86:
     ; Test current room.
-    db $19, $35
+    db $19, C1RoomIdMansionUpstairsHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToUpstairsHall
@@ -4222,14 +4222,14 @@ C1EstateToMasterBedroom:
 
 C1Loc5_6C:
     ; Move to the room argument if the selected state permits.
-    db $06, $36
+    db $06, C1RoomIdMansionMasterBedroom
     ; Test object flag.
     db $16, C1MasterBedroomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1MasterBedroomRepeat
     ; Show message 1.
-    db $01, $bc
+    db $01, $bc ; Message Text0FMessage3C: ここは べッドルームのようだ。 / はっ・・・! / おとこが ねている。[END]
     ; Set object flag.
     db $17, C1MasterBedroomSeen
     ; End script.
@@ -4240,7 +4240,7 @@ C1MasterBedroomRepeat:
 
 C1Loc5_AB:
     ; Show message 1.
-    db $01, $c9
+    db $01, $c9 ; Message Text0FMessage49: シンプルな つくりの / べッドルームだ。[END]
     ; End script.
     db $ff
 
@@ -4249,7 +4249,7 @@ MoveC1GuestBedroom:
 
 C1Sc5_87:
     ; Test current room.
-    db $19, $35
+    db $19, C1RoomIdMansionUpstairsHallway
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToUpstairsHall
@@ -4259,14 +4259,14 @@ C1EstateToGuestBedroom:
 
 C1Loc5_6D:
     ; Move to the room argument if the selected state permits.
-    db $06, $37
+    db $06, C1RoomIdMansionGuestBedroom
     ; Test object flag.
     db $16, C1GuestBedroomSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1GuestBedroomRepeat
     ; Show message 1.
-    db $01, $cb
+    db $01, $cb ; Message Text0FMessage4B: ウップ! / やすっぽい こうすいの かおりが / つよく ただよっている。[PAGE] / ここは しんしつのようだ。[PAGE] / かぐや ちょうどひんの ごうかさ...
     ; Set object flag.
     db $17, C1GuestBedroomSeen
     ; End script.
@@ -4277,7 +4277,7 @@ C1GuestBedroomRepeat:
 
 C1Loc5_AC:
     ; Show message 1.
-    db $01, $d7
+    db $01, $d7 ; Message Text0FMessage57: ゲストルームだ。 / こうかそうな かぐるいが / おいてある。[END]
     ; End script.
     db $ff
 
@@ -4286,7 +4286,7 @@ MoveC1BedroomLink:
 
 C1Sc5_88:
     ; Test current room.
-    db $19, $36
+    db $19, C1RoomIdMansionMasterBedroom
     ; Branch if result bit 0 is clear.
     db $05
     dw C1EstateToMasterBedroom
@@ -4299,12 +4299,12 @@ LookC1SewerLadder41:
 
 C1Sc5_89:
     ; Test current room.
-    db $19, $1d
+    db $19, C1RoomIdJoeStreetUpperSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerLadder41Down
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: うえに つうじる はしごだ。 / かなり さびついている。[END]
     ; End script.
     db $ff
 
@@ -4313,7 +4313,7 @@ C1SewerLadder41Down:
 
 C1Loc5_6E:
     ; Show message 1.
-    db $01, $29
+    db $01, $29 ; Message Text0EMessage29: したへ おりる はしごだ。 / この したは・・・![END]
     ; End script.
     db $ff
 
@@ -4322,7 +4322,7 @@ MoveC1SewerLadder41:
 
 C1Sc5_8A:
     ; Test current room.
-    db $19, $1d
+    db $19, C1RoomIdJoeStreetUpperSewer
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ManholeToRoom1D
@@ -4332,14 +4332,14 @@ C1SewerToRoom3B:
 
 C1Loc5_6F:
     ; Move to the room argument if the selected state permits.
-    db $06, $3b
+    db $06, C1RoomIdJoeStreetLowerSewer
     ; Test object flag.
     db $16, C1Sewer3BSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $20
+    db $01, $20 ; Message Text0EMessage20: げすいどうだ。 / へんな においが たちこめてくる。 / きぶんが ますます わるくなった。[END]
     ; Set object flag.
     db $17, C1Sewer3BSeen
     ; End script.
@@ -4350,7 +4350,7 @@ C1SewerRoomRepeat:
 
 C1Loc5_AD:
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: げすいどうの なかだ。[END]
     ; End script.
     db $ff
 
@@ -4359,12 +4359,12 @@ LookC1SewerLadder42:
 
 C1Sc5_8B:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerLadder42Down
     ; Show message 1.
-    db $01, $21
+    db $01, $21 ; Message Text0EMessage21: うえに つうじる はしごだ。 / かなり さびついている。[END]
     ; End script.
     db $ff
 
@@ -4373,7 +4373,7 @@ C1SewerLadder42Down:
 
 C1Loc5_70:
     ; Show message 1.
-    db $01, $29
+    db $01, $29 ; Message Text0EMessage29: したへ おりる はしごだ。 / この したは・・・![END]
     ; End script.
     db $ff
 
@@ -4382,7 +4382,7 @@ MoveC1SewerLadder42:
 
 C1Sc5_8C:
     ; Test current room.
-    db $19, $3d
+    db $19, C1RoomIdJoeAlleyUpperSewer
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ManholeToRoom3D
@@ -4392,14 +4392,14 @@ C1SewerToRoom39:
 
 C1Loc5_71:
     ; Move to the room argument if the selected state permits.
-    db $06, $39
+    db $06, C1RoomIdSewerJunction
     ; Test object flag.
     db $16, C1Sewer39Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $25
+    db $01, $25 ; Message Text0EMessage25: げすいどうの なかだ。 / あしの ふみばに ちゅういを / はらわなければ・・・。[END]
     ; Set object flag.
     db $17, C1Sewer39Seen
     ; End script.
@@ -4410,12 +4410,12 @@ LookC1SewerTunnel43:
 
 C1Sc5_8D:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel43View
     ; Show message 1.
-    db $01, $22
+    db $01, $22 ; Message Text0EMessage22: げすいの ながれぐちだ。 / ひとが じゅうぶん とおれそうだ。[END]
     ; End script.
     db $ff
 
@@ -4424,7 +4424,7 @@ C1SewerTunnel43View:
 
 C1Loc5_72:
     ; Show message 1.
-    db $01, $27
+    db $01, $27 ; Message Text0EMessage27: よこあなだ。 / くらくて さきは みえない。[END]
     ; End script.
     db $ff
 
@@ -4433,7 +4433,7 @@ MoveC1SewerTunnel43:
 
 C1Sc5_8E:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
@@ -4446,12 +4446,12 @@ LookC1SewerTunnel44:
 
 C1Sc5_8F:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel44View
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: まっくらな よこあなだ。[END]
     ; End script.
     db $ff
 
@@ -4460,7 +4460,7 @@ C1SewerTunnel44View:
 
 C1Loc5_73:
     ; Show message 1.
-    db $01, $27
+    db $01, $27 ; Message Text0EMessage27: よこあなだ。 / くらくて さきは みえない。[END]
     ; End script.
     db $ff
 
@@ -4469,7 +4469,7 @@ MoveC1SewerTunnel44:
 
 C1Sc5_90:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
@@ -4482,12 +4482,12 @@ LookC1SewerTunnel45:
 
 C1Sc5_91:
     ; Test current room.
-    db $19, $3a
+    db $19, C1RoomIdRackLadderSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerTunnel45View
     ; Show message 1.
-    db $01, $23
+    db $01, $23 ; Message Text0EMessage23: げすいが ながれでている。 / とにかく ものすごい においだ。[END]
     ; End script.
     db $ff
 
@@ -4496,7 +4496,7 @@ C1SewerTunnel45View:
 
 C1Loc5_74:
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: まっくらな よこあなだ。[END]
     ; End script.
     db $ff
 
@@ -4505,23 +4505,23 @@ MoveC1SewerTunnel45:
 
 C1Sc5_92:
     ; Test current room.
-    db $19, $38
+    db $19, C1RoomIdLiftSewer
     ; Branch if result bit 0 is set.
     db $04
     dw C1LadderToSewer
     ; Check Case I room event for the room argument.
-    db $5e, $24
+    db $5e, C1RoomIdAlligatorEncounter
 
 jr_006_7d17:
     ; Move to the room argument if the selected state permits.
-    db $06, $38
+    db $06, C1RoomIdLiftSewer
     ; Test object flag.
     db $16, C1Sewer38Seen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $20
+    db $01, $20 ; Message Text0EMessage20: げすいどうだ。 / へんな においが たちこめてくる。 / きぶんが ますます わるくなった。[END]
     ; Set object flag.
     db $17, C1Sewer38Seen
     ; End script.
@@ -4532,7 +4532,7 @@ LookC1SewerTunnel46:
 
 C1Sc5_93:
     ; Show message 1.
-    db $01, $26
+    db $01, $26 ; Message Text0EMessage26: まっくらな よこあなだ。[END]
     ; End script.
     db $ff
 
@@ -4541,19 +4541,19 @@ MoveC1SewerTunnel46:
 
 C1Sc5_94:
     ; Test current room.
-    db $19, $39
+    db $19, C1RoomIdSewerJunction
     ; Branch if result bit 0 is clear.
     db $05
     dw C1SewerToRoom39
     ; Move to the room argument if the selected state permits.
-    db $06, $3c
+    db $06, C1RoomIdDeepestSewer
     ; Test object flag.
     db $16, C1Sewer3CSeen
     ; Branch if result bit 0 is set.
     db $04
     dw C1SewerRoomRepeat
     ; Show message 1.
-    db $01, $2b
+    db $01, $2b ; Message Text0EMessage2B: げすいどうの もっとも したがわに / でたようだ。 / げすいが どんどん ながれている。[END]
     ; Set object flag.
     db $17, C1Sewer3CSeen
     ; End script.
@@ -4564,7 +4564,7 @@ LookC1TrunkDoor:
 
 C1Sc5_95:
     ; Show message 2.
-    db $02, $f2
+    db $02, $f2 ; Message Text0DMessage72: まるい トランクだ。 / ものが たくさん はいりそうだ。[END]
     ; End script.
     db $ff
 
@@ -4595,7 +4595,7 @@ C1Loc5_75:
     db $04
     dw C1TrunkOpenReply
     ; Show message 0.
-    db $00, $47
+    db $00, $47 ; Message Text0CMessage47: あけようとしたが カギが / かかっている・・・。[END]
     ; End script.
     db $ff
 
@@ -4606,7 +4606,7 @@ C1Loc5_76:
     ; Set text name 0.
     db $1e, $7c
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     ; End script.
     db $ff
 
@@ -4619,7 +4619,7 @@ C1Loc5_77:
     ; Set text name 0.
     db $1e, $7c
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ; Set object flag.
     db $17, C1TrunkOpenedOnce
     ; End script.
@@ -4637,7 +4637,7 @@ LookC1MansionFrontDoor:
 
 C1Sc5_98:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: べっそうの げんかんだ。 / ドアには おおきくて りっぱな / ノッカーが ついている。[END]
     ; End script.
     db $ff
 
@@ -4646,7 +4646,7 @@ OpenC1MansionFrontDoor:
 
 C1Sc5_99:
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1MansionKnockHint
@@ -4661,9 +4661,9 @@ C1MansionButlerDoorReply:
 
 C1Loc5_78:
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
     ; Show message 1.
-    db $01, $aa
+    db $01, $aa ; Message Text0FMessage2A: バタン!!![PAGE] / おれの たいどが きに / いらなかったのか しつじは ドアを / しめてしまった。[END]
     ; End script.
     db $ff
 
@@ -4672,7 +4672,7 @@ C1MansionKnockHint:
 
 C1Loc5_79:
     ; Show message 1.
-    db $01, $a1
+    db $01, $a1 ; Message Text0FMessage21: あかない。 / ここは やはり しんしになった / きもちで・・・。[END]
     ; End script.
     db $ff
 
@@ -4681,7 +4681,7 @@ CloseC1MansionFrontDoor:
 
 C1Sc5_9A:
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1DoorAlreadyClosed
@@ -4706,19 +4706,19 @@ C1Sc5_9B:
     db $04
     dw C1MansionDoorToEstate
     ; Test current room.
-    db $19, $31
+    db $19, C1RoomIdMansionFrontDoor
     ; Branch if result bit 0 is set.
     db $04
     dw C1MansionFrontDoorView
     ; Move to the room argument if the selected state permits.
-    db $06, $31
+    db $06, C1RoomIdMansionFrontDoor
 
 ; Show the front-door description after the approach.
 C1MansionFrontDoorView:
 
 C1Loc5_7A:
     ; Show message 1.
-    db $01, $a0
+    db $01, $a0 ; Message Text0FMessage20: べっそうの げんかんだ。 / ドアには おおきくて りっぱな / ノッカーが ついている。[END]
     ; End script.
     db $ff
 
@@ -4727,9 +4727,9 @@ C1MansionDoorToEstate:
 
 C1Loc5_7B:
     ; Move to the room argument if the selected state permits.
-    db $06, $1c
+    db $06, C1RoomIdEstateFront
     ; Show message 1.
-    db $01, $9f
+    db $01, $9f ; Message Text0FMessage1F: べっそうの しゅうへんに ひとかげはみられない。[END]
     ; End script.
     db $ff
 

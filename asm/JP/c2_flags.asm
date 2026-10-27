@@ -20,12 +20,23 @@ jr_003_412d:
 
 ; Case II initial state-bit IDs, terminated by $ff.
 C2StartBits:
-    db $05, $07, $11, $12, $13, $16, $17, $18, $1a, $1b, $1c, $1d, $1e, $1f, $20, $2d
-    db $2e, $2f, $30, $31, $32, $33, $34, $35, $36, $37, $38, $46, $48, $49, $4a, $4b
-    db $50, $51, $55
+    db C2StateVegasCashierPassageOpen, C2StateVegasBlackjackPassageOpen, C2StateHotelDesertRouteOpen, C2StateHotelTracksRouteOpen
+    db C2StateHotelStationRouteOpen, C2StateOutskirtsTracksRouteOpen, C2StateOutskirtsLeftDesertRouteOpen, C2StateOutskirtsBelowDesertRouteOpen
+    db C2StateStationRightDesertRouteOpen, C2StateStationBelowDesertRouteOpen, C2StateVegasLuggagePassageOpen, C2StateVegasPlatform6PassageOpen
+    db C2StateVegasPlatform7PassageOpen, C2StateVegasPlatform8PassageOpen, C2StateVegasPlatform9PassageOpen, C2StateTrain6InternalPassageOpen
+    db C2StateTrain7InternalPassageOpen, C2StateTrain8InternalPassageOpen, C2StateTrain9InternalPassageOpen, C2StateTrain2InternalPassageOpen
+    db C2StateTrain3InternalPassageOpen, C2StateTrain4InternalPassageOpen, C2StateTrain5InternalPassageOpen, C2StateChicagoPlatform2PassageOpen
+    db C2StateChicagoPlatform3PassageOpen, C2StateChicagoPlatform4PassageOpen, C2StateChicagoPlatform5PassageOpen, C2StateChicagoCabPassageOpen
+    db C2StateAdisonCabPassageOpen, C2StateCottageCabPassageOpen, C2StateJoeFrontCabPassageOpen, C2StateMorgueCabPassageOpen
+    db C2StateJoePoliceRouteOpen, C2StateJoeAlleyPassageOpen, C2StateJoeFireEscapePassageOpen
 jr_003_415b:
-    db $56, $60, $6a, $6b, $6e, $6f, $70, $71, $72, $78, $79, $7a, $7b, $54, $59, $23
-    db $26, $29, $2c, $3c, $3f, $42, $45, $77, $ff
+    db C2StateJoeRearAlleyRouteOpen, C2StateJoeBarStairsOpen, C2StateLaundryStairsOpen, C2StateLaundryHamperPassageOpen
+    db C2StateTracksLinkOpen, C2StateTracksAAboveDesertRouteOpen, C2StateTracksABelowDesertRouteOpen, C2StateTracksBAboveDesertRouteOpen
+    db C2StateTracksBBelowDesertRouteOpen, GridRight, GridLeft, GridDown
+    db GridUp, C2StateJoeWorksRoute, C2StateJoeUpperLadderRoute, C2StateVegasPlatform6EmergencyExitOpen
+    db C2StateVegasPlatform7EmergencyExitOpen, C2StateVegasPlatform8EmergencyExitOpen, C2StateVegasPlatform9EmergencyExitOpen, C2StateChicagoPlatform2EmergencyExitOpen
+    db C2StateChicagoPlatform3EmergencyExitOpen, C2StateChicagoPlatform4EmergencyExitOpen, C2StateChicagoPlatform5EmergencyExitOpen, C2StateBedroomCurtainClosed
+    db $ff
 
 ; Set initial object visibility and restore the caller scratch bytes at hItemSlot/hItemSlot+1.
 InitC2Visible:
@@ -74,10 +85,80 @@ jr_003_418c:
 
 
 Case2InitialObjectFlags:
-    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $0, $4
+    db C2VisIdBathTowel, C2VisIdBathTrench, C2VisIdBathPants
+    db C2VisIdBedroomTimetable
 jr_003_419a:
-    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $4, $39
+    db C2VisIdBedroomPillow
+    db C2VisIdVegasHallPlant, C2VisIdVegasLobbyAshtray, C2VisIdVegasLobbyPot
+    db C2VisIdVegasHall2Plant
+    db C2VisIdVegasHall3Plant
+    db C2VisIdVegasHall4Glass
+    db C2VisIdVentiniPaperweight
+    db C2VisIdVegasStationSeller
+    db C2VisIdRailwayPamphlet
+    db C2VisIdVegasPlatform6CeilingSign
+    db C2VisIdVegasPlatform7CeilingSign
+    db C2VisIdVegasPlatform8CeilingSign
+    db C2VisIdVegasPlatform9CeilingSign
+    db C2VisIdChicagoPlatform2CeilingSign
+    db C2VisIdChicagoPlatform3CeilingSign
+    db C2VisIdChicagoPlatform4CeilingSign
+    db C2VisIdChicagoPlatform5CeilingSign
+    db C2VisIdNewsPaper3, C2VisIdNewsPaper4, C2VisIdNewsSeller, C2VisIdNewsDog
+    db C2VisIdChicagoStationArch1
+    db C2VisIdAdisonSpareCoat
+    db C2VisIdAdisonFlashlight
+    db C2VisIdAdisonDrawer
+    db C2VisIdAdisonBottleIntact
+    db C2VisIdAdisonCrackedLamp
+    db C2VisIdAdisonDentedMailbox
+    db C2VisIdAdisonScratchedMailbox
+    db C2VisIdAdisonMailboxClosed
+    db C2VisIdJoeBoardedWindow
+    db C2VisIdJoeMoldyBox
+    db C2VisIdJoeJuiceCan
+    db C2VisIdSugarHobo
+    db C2VisIdSugarNewspaper
+    db C2VisIdSugarPillow
+    db C2VisIdSugarPerfume
+    db C2VisIdSugarTissue
+    db C2VisIdJoeFoodTrash
+    db C2VisIdLaundrySoapBox
+    db C2VisIdOuterOfficePhoto
+    db C2VisIdSecretOfficeDeskMat
+    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $2f, $6
+    db C2VisIdDesertCactusThorns1
+    db C2VisIdDesertCactusThorns2
+    db C2VisIdDesertThornLayoutRock1
+    db C2VisIdDesertThornLayoutRock2
+    db C2VisIdDesertCactus1
+    db C2VisIdDesertCactus2
+    db C2VisIdDesertGrassLayoutRock1
+    db C2VisIdDesertGrassLayoutRock2
 jr_003_41d3:
-    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $3d, $12
+    db C2VisIdDesertAnimalRemains
+    db C2VisIdAdisonCigarRing
+    db C2VisIdVegasBlackjackDealer
+    db C2VisIdBedroomCurtainOpen
+    db C2VisIdVegasHamperClosed
+    db C2VisIdVentiniThinBlindsOpen
+    db C2VisIdVentiniWhiteBlindsOpen
+    db C2VisIdMaloneVegasWindow
+    db C2VisIdBedroomWindowIntact
+    db C2VisIdVentiniCityWindow
+    db C2VisIdVentiniVegasWindow
+    db C2VisIdAdisonCurtainsOpen
+    db C2VisIdAdisonApartmentDoor
+    db C2VisIdJoeOfficeBoardGap
+    db C2VisIdJoeOfficeWindowPassage
+    db C2VisIdJoeBottleRack, C2VisIdJoeCleanBottle
+    db C2VisIdMorgueGateClosed
 jr_003_41e5:
-    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $4f, $9
+    db C2VisIdMorgueDrawer1Closed
+    db C2VisIdMorgueDrawer2Closed
+    db C2VisIdLaundryShutterClosed
+    db C2VisIdBindingRope, C2VisIdTiedHands
+    db C2VisIdCleanersCounterLowered
+    db C2VisIdCleanersOfficeDrapeClosed
+    db C2VisIdCleanersDartboardBeforeShift
+    INCBIN "../../res/scene/case2/common/initial-visibility.bin", $57, $1

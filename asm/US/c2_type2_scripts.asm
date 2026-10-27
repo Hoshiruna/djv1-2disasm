@@ -5,7 +5,7 @@ LookC2Washer:
 
 C2Sc2_00:
     ; Show message 2.
-    db $02, $b8
+    db $02, $b8 ; Message Text17Message38: IT'S AN / INDUSTRIAL-SIZED / WASHER.[END]
     ; End script.
     db $ff
 
@@ -14,7 +14,7 @@ LookWickerBin:
 
 C2Sc2_01:
     ; Show message 2.
-    db $02, $fc
+    db $02, $fc ; Message Text17Message7C: IT'S A WELL-WOVEN / STRAW WASTEBASKET.WHAT DO YOU WANT, / WICKER?[END]
     ; End script.
     db $ff
 
@@ -23,7 +23,7 @@ LookFoodTrash:
 
 C2Sc2_02:
     ; Show message 1.
-    db $01, $c9
+    db $01, $c9 ; Message Text15Message49: THIS GARBAGE / STINKS OF ROTTEN / FOOD AND DISCARDEDDREAMS... WHOA, / WERE DID THAT /...
     ; End script.
     db $ff
 
@@ -34,12 +34,12 @@ C2Sc2_03:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $c9
+    db $00, $c9 ; Message Text13Message49: IT'S AN EXPENSIVE / DESK MADE OF / CHERRY WOOD.[END]
     ; Test object flag and branch when set.
     db $08, C2RingPlan
     dw HintMaloneProof
     ; Show message 0.
-    db $00, $ca
+    db $00, $ca ; Message Text13Message4A: MALONE MUST KEEP / HIS IMPORTANT / DOCUMENTS HERE.[END]
     ; End script.
     db $ff
 
@@ -50,7 +50,7 @@ C2Loc2_00:
     ; Play audio.
     db $3e, $08
     ; Show message 0.
-    db $00, $cb
+    db $00, $cb ; Message Text13Message4B: THIS MIGHT BE THE / PLACE TO LEAVE / CONCRETE PROOF OF / WHAT VENTINI IS UPTO.[END]
     ; Play room audio cue.
     db $5a
     ; End script.
@@ -64,7 +64,7 @@ C2Sc2_04:
     db $08, C2HandsFree
     dw OpenC2Group
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text17Message3E: YOUR TIED HANDS / PREVENT YOU FROM / DOING THAT![END]
     ; End script.
     db $ff
 
@@ -78,7 +78,7 @@ C2Sc2_05:
     db $1d
     dw GroupIsOpen
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $27
     ; End script.
@@ -89,7 +89,7 @@ GroupIsOpen:
 
 C2Loc2_01:
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -101,7 +101,7 @@ C2Sc2_06:
     db $08, C2HandsFree
     dw RejectC2Group
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text17Message3E: YOUR TIED HANDS / PREVENT YOU FROM / DOING THAT![END]
     ; End script.
     db $ff
 
@@ -110,7 +110,7 @@ RejectC2Group:
 
 C2Sc2_07:
     ; Show message 0.
-    db $00, $2d
+    db $00, $2d ; Message Text12Message2D: WHAT ARE YOU / DOING...?[END]
     ; End script.
     db $ff
 
@@ -122,7 +122,7 @@ C2Sc2_08:
     db $08, C2HandsFree
     dw CloseC2Group
     ; Show message 2.
-    db $02, $be
+    db $02, $be ; Message Text17Message3E: YOUR TIED HANDS / PREVENT YOU FROM / DOING THAT![END]
     ; End script.
     db $ff
 
@@ -136,7 +136,7 @@ C2Sc2_09:
     db $1d
     dw CloseGroupNow
     ; Show message 3.
-    db $2c, $1a
+    db $2c, $1a ; Message Text18Message1A: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -145,7 +145,7 @@ CloseGroupNow:
 
 C2Loc2_02:
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $1f
     ; Remove selected change.

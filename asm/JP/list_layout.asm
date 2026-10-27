@@ -35,14 +35,14 @@ ListBarFill:
 GoNextList:
 
 Jump_001_4c36:
-    ld b, $0b
+    ld b, InputSelNextPage
     jr TempListPage
 
 ; Select page command $0c in B and enter the shared temporary-selection path.
 GoPrevList:
 
 Jump_001_4c3a:
-    ld b, $0c
+    ld b, InputSelPrevPage
 
 ; Apply page selection B, then restore the incoming selection A.
 TempListPage:
@@ -110,10 +110,10 @@ StepListPage:
 
 Call_001_4c84:
     ld a, [wListSel]
-    cp $0b
+    cp InputSelNextPage
     jr z, StepListNext
 
-    cp $0c
+    cp InputSelPrevPage
     jr z, StepListPrevious
 
     ret
@@ -433,7 +433,8 @@ jr_001_4e1b:
     ld bc, wWorkList+1
     ld e, $00
 
-; Copy the seven group bytes into work-list storage.
+; Copy seven bytes; Case II includes group byte 7, which StoreWorkGroup leaves untouched.
+; JP work row 7 remains unchanged. The changed-row loop may read it.
 ListDrawGroupCopyLoop:
 jr_001_4e20:
     ld a, [hl+]
@@ -442,7 +443,7 @@ jr_001_4e20:
     ld a, e
     inc a
     ld e, a
-    cp $07
+    cp ListGroupCopyBytes
     jr c, ListDrawGroupCopyLoop
 
 ; Begin drawing list rows outside mode zero.
@@ -464,7 +465,7 @@ jr_001_4e2e:
     ld a, [wListRow]
     inc a
     ld [wListRow], a
-    cp $08
+    cp JpListPageRows
     jr c, ListDrawChangedRowLoop
 
 ; Return when the changed list ends or reaches its regional row limit.
@@ -499,7 +500,7 @@ jr_001_4e4e:
     jr z, ListDrawBaseNameReady
 
     ld a, [wListName]
-    sub $20
+    sub C2ListBaseNameOffset
     ld [wListName], a
 
 ; Draw the selected base-list name after regional adjustment.
@@ -512,7 +513,7 @@ jr_001_4e72:
     ld [wListRow], a
     ld a, d
     ld a, [wListRow]
-    cp $08
+    cp JpListPageRows
     jr c, ListDrawBaseLoop
 
 ; Mode 0 falls through here when all 8 rows are occupied.
@@ -526,7 +527,7 @@ Call_001_4e85:
     ld l, a
     ld h, $00
     add hl, hl
-    ld bc, ListRowPos
+    ld bc, JpListRowYXCoordinates
     add hl, bc
     ld a, [hl+]
     ld [wTextY], a
@@ -545,14 +546,14 @@ Call_001_4e85:
     ld a, d
     ld d, a
     ldh a, [hChangePos]
-    cp $05
+    cp C2ListNumericNameCount
     ld a, d
     jr nc, ListRowShowMarkedText
 
     ldh a, [hChangePos]
     ld l, a
     ld h, $00
-    ld bc, C2ListMarks
+    ld bc, C2ListRowMarkIds
     add hl, bc
     ld a, [hl]
     jr ListRowShowMarkedText
@@ -664,6 +665,8 @@ jr_001_4f2b:
     ldh [hChangePos], a
     ret
 
+; JP list-row Y/X pairs; Y is the normal glyph's lower row.
+JpListRowYXCoordinates:
 ListRowPos:
     db $16
     db $01
@@ -683,12 +686,14 @@ jr_001_4f3d:
     db $1c
     db $0b
 
+; Case II name IDs zero through four select label marks two through six.
+C2ListRowMarkIds:
 C2ListMarks:
-    db $02
-    db $03
-    db $04
-    db $05
-    db $06
+    db C2ListMarkCash
+    db C2ListMarkQuarters
+    db C2ListMarkBullets
+    db C2ListMarkCells
+    db C2ListMarkChips
 
 ; --- list_head.asm ---
 

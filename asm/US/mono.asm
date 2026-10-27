@@ -15,9 +15,9 @@ Jump_000_3713:
     ld h, [hl]
     ld l, a
     call ReadBgMap
-    ld a, $e4
+    ld a, MonoFallbackBgPalette
     ldh [rBGP], a
-    ld a, $c1
+    ld a, MonoFallbackLcdControl
     ldh [rLCDC], a
 
 ; Remain on the monochrome screen.

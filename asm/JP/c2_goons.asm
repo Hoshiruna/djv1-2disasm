@@ -16,7 +16,7 @@ Call_003_5d07:
     cp RoomLaundry
     jr z, TickC2Goons
 
-    cp $48
+    cp RoomCleanersHallway
     ret nz
 
 ; Advance the goons timer and choose capture or escape once it reaches nine.
@@ -39,24 +39,24 @@ DieC2Bound:
     call ResetObjScroll
     call PlayCue16Twice
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: あっ! / あしおとが きこえる! / やつらが もどってきたんだ![END]
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $c2
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message42: 「あにきは おまえのことなんか /  しらないって いってるぜ。」[PAGE] / そして ピストルを とりだしてから / おれに いった。 / 「なにか いいのこしたい...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: おれが ゆいごんを のこすまえに / やつらは おれの しんぞうを / ぶちぬいた。[END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     ld a, FxVegasNews2
     call SwitchC2Fx
     ld a, $c4
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message44: ロープが きれたらなあ。[END]
     call MarkGoonsEvent
     jp PlayExitEffect
 
@@ -76,29 +76,29 @@ DieC2Flee:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: あっ! / あしおとが きこえる! / やつらが もどってきたんだ![END]
     ld a, $c5
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message45: おれが ウロウロしているところを / やつらに みつかってしまった。[END]
     call ResumeTextUI
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $cb
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4B: 「にげようとしていたのか? /  まあ みつけてしまえば そんなこと かんけいないがね。[END]
     ld a, $cc
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4C:  あにきは どうして あの てがみを おまえが もっていたのか /  わからないし おまえのことなど /  きいたこともないと いっていた。[PAGE] /  おまえを ...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: おれが ゆいごんを のこすまえに / やつらは おれの しんぞうを / ぶちぬいた。[END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     ld a, FxVegasNews2
     call SwitchC2Fx
     ld a, $b0
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message30: ウロウロするまえに なにか / するんだったな。[END]
     call ResumeTextUI
     call MarkGoonsEvent
     jp PlayExitEffect
@@ -119,24 +119,24 @@ DieC2Search:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: あっ! / あしおとが きこえる! / やつらが もどってきたんだ![END]
     ld a, $b6
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message36: 「おい スパイク。 /  やつが いなくなっているぜ!」[END]
     ld a, $b7
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message37: 「でも そとに にげたようすは /  ないな・・・。[PAGE] /  どこか そのへんに かくれて /  いるんじゃないか?」[END]
     call ResumeTextUI
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $f2
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message72: とつぜん せんたくものいれから / そとに ほうりだされた。[PAGE] / 「ここに いたのか モグラやろう![END]
     ld a, $cc
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4C:  あにきは どうして あの てがみを おまえが もっていたのか /  わからないし おまえのことなど /  きいたこともないと いっていた。[PAGE] /  おまえを ...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: おれが ゆいごんを のこすまえに / やつらは おれの しんぞうを / ぶちぬいた。[END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
@@ -151,13 +151,13 @@ jr_003_5e0c:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: あっ! / あしおとが きこえる! / やつらが もどってきたんだ![END]
     ld a, $09
     call PlayAudio
     ld a, $b6
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message36: 「おい スパイク。 /  やつが いなくなっているぜ!」[END]
     ld a, $a1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message21: 「ドアが あいている ということは /  やつは にげたんだ![PAGE] /  ・・・あにきの きげんが /  わるくなるかな?[PAGE] /  とにかく あにきに ...
     call ResumeTextUI
     ld a, C2GoonsFooled
     call SetObjFlag

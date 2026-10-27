@@ -53,13 +53,13 @@ Jump_001_55db:
     ld h, a
     add hl, bc
     ld a, [hl]
-    cp $ff
+    cp C1RoomRecordEnd
     ret z
 
     inc hl
     ld a, [hl]
     and $7f
-    call HideC1MarkId
+    call CheckC1CabEntryHidden
     ld a, [wStateResult]
     and $01
     jr nz, C1NextTarget

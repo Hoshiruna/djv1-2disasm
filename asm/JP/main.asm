@@ -1,5 +1,5 @@
 
-; Run the original startup helpers, set scene effect 6, then select the current case flow.
+; Run the original startup helpers, set the diagonal-stripe effect, then select the current case flow.
 MainGame:
 
 
@@ -27,6 +27,7 @@ Jump_000_0862:
     pop af
     call ShowTitle
     call PopRomBank
+    ; Reset the text/UI table index before initializing text references and choosing a save.
     xor a
     ld [wTextSet], a
     push af
@@ -43,7 +44,7 @@ Jump_000_0862:
 Call_000_08ad:
     call RunSaveSelect
     call PopRomBank
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     ld a, [wCaseId]
     cp $01
@@ -54,7 +55,7 @@ StartC1Game:
 
     call SaveState
 
-; Run Case I setup, clear object flag $bf, then enter the input loop.
+; Run Case I setup, clear the automatic-action latch, then enter the input loop.
 ResumeC1Game:
     push af
     ld a, $01
@@ -62,7 +63,7 @@ ResumeC1Game:
     pop af
     call InitC1View
     call PopRomBank
-    ld a, $bf
+    ld a, AutoActionResetPending
     call ClearObjFlag
 
 ; Poll cursor and input until the Case I exit marker or result bit 6 requests a transition.
@@ -108,7 +109,7 @@ Jump_000_0904:
     ld a, [wStateResult]
     and $bf
     ld [wStateResult], a
-    ld a, $ff
+    ld a, CaseStartLoadedMarker
     ld [wCaseResume], a
     ld a, [wInputMode]
     rst RST_00
@@ -139,7 +140,7 @@ Jump_000_0931:
     call InitTextRefs
     call PopRomBank
     ld a, [wCaseResume]
-    cp $ff
+    cp CaseStartLoadedMarker
     jr z, ResumeC2Game
 
     ld hl, wObjPresent
@@ -154,7 +155,7 @@ Jump_000_0931:
     call InitC2Data
     call PopRomBank
 
-; Run the Case II bank entry, clear object flag $bf, then enter the input loop.
+; Run Case II setup, clear the automatic-action latch, then enter the input loop.
 ResumeC2Game:
 
 jr_000_0965:
@@ -166,7 +167,7 @@ Call_000_0966:
     pop af
     call InitC2View
     call PopRomBank
-    ld a, $bf
+    ld a, AutoActionResetPending
     call ClearObjFlag
 
 ; Poll cursor and input until result bit 6 requests the original menu/restart path.
@@ -205,7 +206,7 @@ Jump_000_09a2:
     ld a, [wStateResult]
     and $bf
     ld [wStateResult], a
-    ld a, $ff
+    ld a, CaseStartLoadedMarker
     ld [wCaseResume], a
     ld a, [wInputMode]
     rst RST_00

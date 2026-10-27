@@ -18,11 +18,11 @@ jr_003_4d98:
     ld [wChipLimit], a
     call ScriptHoldText
     ld a, $85
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message05: THE WOMAN MUMBLES / SOMETHING.[END]
     xor a
     ld [wChipCount], a
     ld a, $35
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message35: "A CHIP IS $5. / HOW MANY CHIPS / WOULD YOU LIKE, / SIR?" /    CHIPS:[NUM8_WRAM:C3C5]...
     call ChooseChipCount
     ld a, [wStateResult]
     and $01
@@ -42,7 +42,7 @@ jr_003_4dba:
     jr z, ChipBuyInsufficientCash
 
     ld a, $37
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message37: "THAT WILL BE A / TOTAL OF [NUM8_WRAM:A7C8] / DOLLARS.[PAGE] / THANK YOU VERY / MUCH ...
     call ResumeTextUI
     ld a, [wChipCount]
     ld hl, wChips
@@ -63,7 +63,7 @@ jr_003_4dba:
 ChipBuyInsufficientCash:
 jr_003_4de9:
     ld a, $99
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message19: "THAT'S NOT / ENOUGH, PAL."[END]
     call ResumeTextUI
     ret
 
@@ -169,7 +169,7 @@ jr_003_4e63:
     ld a, [wChipCount]
     ld [wChipLimit], a
     ld a, $36
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message36: "HOW MANY DO YOU / WANT TO CASH IN, / SIR?" /  /    CHIPS:[NUM8_WRAM:C3C5] /  / USE L...
     call ChooseChipCount
     ld a, [wStateResult]
     and $01
@@ -177,7 +177,7 @@ jr_003_4e63:
 
     call CalcChipCost
     ld a, $37
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message37: "THAT WILL BE A / TOTAL OF [NUM8_WRAM:A7C8] / DOLLARS.[PAGE] / THANK YOU VERY / MUCH ...
     ld a, [wChips]
     ld hl, wChipCount
     sub [hl]

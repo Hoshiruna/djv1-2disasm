@@ -4,10 +4,10 @@ AudioTest:
     call RequestTimer
     call DisableLcd
     call LoadAuxGfx
-    ld a, $06
+    ld a, UiMapIdBlankTextPanel
     call ReadUiMap
-    ld a, $02
-    call StageUiObj
+    ld a, UiPalIdCommonObjects
+    call StageUiObjPal
     call StopTimer
     call RestoreLcd
     call BlankOam
@@ -25,10 +25,10 @@ jr_002_6409:
 ; Subtract ten until the displayed digit is below ten.
 AudioTestDivideByTen:
 jr_002_640f:
-    cp $0a
+    cp AudioTestDecimalBase
     jr c, AudioTestQueueDigits
 
-    sub $0a
+    sub AudioTestDecimalBase
     inc c
     jr AudioTestDivideByTen
 
@@ -38,7 +38,7 @@ jr_002_6418:
     ld [wTestDigit], a
     ld a, c
     ld [wTestTens], a
-    ld hl, TestMapAddrs
+    ld hl, AudioTestMapDestinations
     ld c, [hl]
     inc hl
     ld b, [hl]
@@ -46,13 +46,13 @@ jr_002_6418:
     ld l, a
     ld h, $00
     add hl, hl
-    ld de, TestDigitPtrs
+    ld de, AudioTestDigitPointers
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     call QueueMapRect
-    ld hl, TestMapAddrs+2
+    ld hl, AudioTestMapDestinations+2
     ld c, [hl]
     inc hl
     ld b, [hl]
@@ -60,22 +60,22 @@ jr_002_6418:
     ld l, a
     ld h, $00
     add hl, hl
-    ld de, TestDigitPtrs
+    ld de, AudioTestDigitPointers
     add hl, de
     ld a, [hl+]
     ld h, [hl]
     ld l, a
     call QueueMapRect
     call SubmitMapQueue
-    ld a, $10
+    ld a, AudioTestDelayTicks
     call WaitTicks
 
-; Poll for direction, play, or stop input.
+; Poll new presses in priority order Up, Down, A, B; clamped directions consume that poll.
 AudioTestPollInput:
 jr_002_6455:
     call PollJoy
     ld a, [wJoyPress]
-    bit 6, a
+    bit PADB_UP, a
     jr z, AudioTestMoveDown
 
     ld a, [wTestIndex]
@@ -89,11 +89,11 @@ jr_002_6455:
 ; Increase the test index unless it is already at the last entry.
 AudioTestMoveDown:
 jr_002_646c:
-    bit 7, a
+    bit PADB_DOWN, a
     jr z, AudioTestCheckPlay
 
     ld a, [wTestIndex]
-    cp $11
+    cp AudioTestLastIndex
     jr z, AudioTestPollInput
 
     inc a
@@ -103,14 +103,14 @@ jr_002_646c:
 ; Check the play button and read the selected audio pair.
 AudioTestCheckPlay:
 jr_002_647d:
-    bit 0, a
+    bit PADB_A, a
     jr z, AudioTestCheckStop
 
     ld a, [wTestIndex]
     ld l, a
     ld h, $00
     add hl, hl
-    ld de, TestAudioPairs
+    ld de, AudioTestCuePairs
     add hl, de
     ld a, [hl+]
     ld [wCaseId], a
@@ -120,14 +120,14 @@ jr_002_647d:
 AudioTestPlayRequest:
 jr_002_6491:
     call PlayAudio
-    ld a, $10
+    ld a, AudioTestDelayTicks
     call WaitTicks
     jr AudioTestPollInput
 
-; Check the stop button and send request zero when pressed.
+; B sends request zero with the retained case ID and leaves the selection unchanged.
 AudioTestCheckStop:
 jr_002_649b:
-    bit 1, a
+    bit PADB_B, a
     jr z, AudioTestPollInput
 
     xor a

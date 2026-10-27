@@ -8,7 +8,7 @@ Call_003_59cf:
     ld hl, C2FxSkipRooms
     ld a, [wRoomId]
     ld e, a
-    cp $42
+    cp RoomSugarApartment
     ret nc
 
 ; Scan rooms excluded from the Stogie visit and uniform check.
@@ -22,10 +22,10 @@ jr_003_59d9:
     jr nz, C2WatchScanRoom
 
     ld a, [wSceneId]
-    cp $17
+    cp SceneConductor1
     ret z
 
-    cp $19
+    cp SceneConductor2
     ret z
 
     call StepC2Debt
@@ -77,7 +77,7 @@ C2Fx10Msg0C:
 
 Call_003_5a25:
     ld a, $0c
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message0C: とつぜん だれかが おれの なを / よんだ・・・。[PAGE] / ・・・いやな よかんが する・・・。[PAGE] / ふりむくと ストージー・マーチンが / たって...
     ld a, FxStogie
     call BeginC2Fx
     ld a, $09
@@ -93,7 +93,7 @@ C2TimedMsg0D:
     ld a, $78
     call WaitTicks
     ld a, $0d
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message0D: 「まだ こんなところを /  ウロウロしているのか?[PAGE] /  はやく しないと きげんに /  まにあわないぜ!」[END]
     jr EndC2DebtVisit
 
 ; Run the second Stogie warning: the boss expects the money.
@@ -104,7 +104,7 @@ C2TimedMsg0E:
     ld a, $78
     call WaitTicks
     ld a, $0e
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message0E: 「かねは みつかったのか? /  ボスは 1ぷんたりとも まっては くれないぜ!」[END]
     jr EndC2DebtVisit
 
 ; Run the third Stogie warning: roughly half the time has passed.
@@ -115,7 +115,7 @@ C2TimedMsg0F:
     ld a, $78
     call WaitTicks
     ld a, $0f
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message0F: 「のこされた じかんは あと /  はんぶんだ。 /  いそいだほうが いいぜ!」[END]
     jr EndC2DebtVisit
 
 ; Run the fourth Stogie warning: the boss will not forgive the theft.
@@ -126,7 +126,7 @@ C2TimedMsg10:
     ld a, $78
     call WaitTicks
     ld a, $10
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message10: 「ボスは おまえの かえりを /  くびを ながくして まっている。[PAGE] /  ボスの きたいを うらぎるなよ!」[END]
     jr EndC2DebtVisit
 
 ; Run the fifth Stogie warning: the next visit will be the last.
@@ -137,7 +137,7 @@ C2TimedMsg11:
     ld a, $78
     call WaitTicks
     ld a, $11
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message11: 「これが さいごの けいこくだ![PAGE] /  こんど あうとき おまえが /  やくそくを はたしていなかったら /  いのちはないと おもえ!」[END]
 
 ; Show Stogie leaving, resume text, wait sixty ticks, and restore the room effect and audio.
 EndC2DebtVisit:
@@ -145,7 +145,7 @@ FinishC2RoomFx:
 
 jr_003_5a7e:
     ld a, $12
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message12: そういうと ストージーは たからかにわらいながら さっていった・・・。[END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
@@ -162,11 +162,11 @@ C2TimedMsg13:
     ld a, $78
     call WaitTicks
     ld a, $13
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message13: 「じかんだ・・・。 /  112000ドルを もらおうか![PAGE] /  なにっ・・・!! /  みつけられなかっただと・・・![PAGE] /  しかたがない・・・...
     ld a, $10
     call PlayAudio
     ld a, $d7
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message57: ・・・さすが マフィアの / ころしやだ![PAGE] / ストージーは いっぱつで おれを / しとめた![END]
     call ResumeTextUI
     ld a, [wC2EventBits]
     or EvtDebt

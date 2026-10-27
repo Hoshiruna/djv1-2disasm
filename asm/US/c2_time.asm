@@ -8,10 +8,10 @@ Call_003_623f:
     inc a
     ld [wC2Time], a
     ld a, [wRoomId]
-    cp $15
+    cp RoomVegasStationLobby
     ret c
 
-    cp $30
+    cp RoomChicagoStationFront
     ret nc
 
     call BuildTrains

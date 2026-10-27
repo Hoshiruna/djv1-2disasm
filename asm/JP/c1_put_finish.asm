@@ -45,6 +45,6 @@ jr_002_6b46:
     ld a, [wSelName]
     ld [wTextName0], a
     ld a, $05
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message05: [OBJECT_WRAM:37C5]を すてた。[END]
     call ClearResult
     ret

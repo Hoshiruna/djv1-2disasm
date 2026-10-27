@@ -594,7 +594,7 @@ Call_000_12ff:
     ld a, [wTextTmp+1]
     ld [wTextValue+1], a
     inc de
-    ld a, $04
+    ld a, TextNum16ProcessedPlaces
     cp e
     jr nz, TextNum16NextPlace
 
@@ -606,7 +606,7 @@ Call_000_12ff:
 
 ; Decimal places 10000, 1000, 100, 10, 1.
 TextDecPlaces:
-    dw $2710, $03e8, $0064, $000a, $0001
+    dw 10000, 1000, 100, 10, 1
 
 ; Read an address from the text stream, advance two bytes, and load its sixteen-bit value.
 ReadTextValue16:
@@ -630,7 +630,7 @@ ReadTextValue16:
     ld [wTextValue+1], a
     ld hl, wTextNum10000
     xor a
-    ld c, $05
+    ld c, TextNumDigitBufferBytes
 
 ; Clear the next of five digit bytes before converting an indirect sixteen-bit value.
 TextNum16ClearNextDigit:
@@ -696,7 +696,7 @@ jr_000_1378:
 EmitTextDigit:
 
 Call_000_137b:
-    or $80
+    or JpTextDigitGlyphBits
     ld [wTextChar], a
     ld a, $ff
     ld [wTextNumShown], a
@@ -710,10 +710,10 @@ SplitTextNumber:
 Call_000_1389:
     ld a, [wTextValue]
     ld e, a
-    ld b, $64
+    ld b, 100
     call DivTextDigit
     ld [wTextNum100], a
-    ld b, $0a
+    ld b, 10
     call DivTextDigit
     ld [wTextNum10], a
     ld a, e
@@ -775,7 +775,7 @@ Jump_000_13c0:
     ld a, [bc]
     ld [wTextValue], a
     ld hl, wTextNum10000
-    ld d, $05
+    ld d, TextNumDigitBufferBytes
     xor a
 
 ; Clear the next of five digit bytes before converting an indirect eight-bit value.
@@ -804,9 +804,9 @@ Call_000_13da:
     call PopRomBank
     call DrawRoomObjs
     call SubmitOam
-    ld a, $12
+    ld a, TextBufferRowTiles
     ld [wTextWidth], a
-    ld a, $08
+    ld a, TextWindowDefaultTileRows
     ld [wTextHeight], a
 
 Jump_000_13fc:
@@ -830,17 +830,17 @@ DrawTextGlyph:
 
 
 Call_000_1414:
-    ld a, $7f
+    ld a, JpBlankGlyphTile
     ld [wTextTile], a
     ld a, [wTextChar]
     ld [wTextAux], a
-    cp $7f
+    cp JpBlankGlyphTile
     jr z, JpGlyphBlankLower
 
     bit 7, a
     jr nz, JpGlyphSelectMode
 
-    cp $10
+    cp JpDirectGlyphLimit
     jr c, JpGlyphSelectMode
 
     swap a
@@ -849,13 +849,13 @@ Call_000_1414:
 
 JpGlyphParts:
     dw JpGlyphPlain
-    dw JpGlyphTop90
+    dw JpGlyphDakuten
     dw JpGlyphPlain
-    dw JpGlyphTop90
-    dw JpGlyphTop90
-    dw JpGlyphTopA0
-    dw JpGlyphTop90
-    dw JpGlyphTopA0
+    dw JpGlyphDakuten
+    dw JpGlyphDakuten
+    dw JpGlyphHandakuten
+    dw JpGlyphDakuten
+    dw JpGlyphHandakuten
 
 ; Return directly from the glyph dispatcher without queueing tiles or advancing text.
 JpGlyphPlain:
@@ -865,43 +865,49 @@ JpGlyphPlain:
 ; Keep the lower tile blank for code $7f before selecting the drawing mode.
 JpGlyphBlankLower:
 jr_000_1441:
-    ld a, $7f
+    ld a, JpBlankGlyphTile
     ld [wTextAux], a
     jr JpGlyphSelectMode
 
 ; Add $80 to the lower tile and select upper tile $90.
+; Prepare the dakuten upper tile and its shifted lower glyph.
+JpGlyphDakuten:
 JpGlyphTop90:
 
     ld a, [wTextAux]
-    add $80
+    add JpDakutenLowerOffset
     ld [wTextAux], a
-    ld a, $90
+    ld a, JpDakutenGlyphTile
     jr JpGlyphStoreUpper
 
 ; Add $70 to the lower tile and select upper tile $a0.
+; Prepare the handakuten upper tile and its shifted lower glyph.
+JpGlyphHandakuten:
 JpGlyphTopA0:
 
     ld a, [wTextAux]
-    add $70
+    add JpHandakutenLowerOffset
     ld [wTextAux], a
-    ld a, $a0
+    ld a, JpHandakutenGlyphTile
 
 ; Store the selected upper glyph tile before choosing window or sprite output.
 JpGlyphStoreUpper:
 jr_000_145e:
     ld [wTextTile], a
 
-; Choose window or sprite output for the prepared upper and lower tiles.
+; Select direct-coordinate or buffered-origin output with text mode bit 1.
 JpGlyphSelectMode:
 jr_000_1461:
     ld a, [wTextMode]
-    and $02
-    jr nz, JpGlyphDrawSprite
+    and TextModeDirectCoordinatesFlag
+    jr nz, QueueJpMapGlyph
 
-    jp DrawWindowGlyph
+    jp DrawBufferedJpGlyph
 
 
-; Queue a one-by-two glyph rectangle with its upper tile at text Y minus one.
+; Queue an upper/lower tile-map pair at (wTextX,wTextY-1), then advance wTextX.
+; Queue the prepared 1x2 JP glyph at direct text-map coordinates.
+QueueJpMapGlyph:
 JpGlyphDrawSprite:
 jr_000_146b:
     ld a, [wTextX]
@@ -919,12 +925,14 @@ jr_000_146b:
     ld a, [wTextX]
     inc a
     ld [wTextX], a
-    and $e0
+    and TextMapColumnHighBits
     ret z
 
     jp TextNewline
 
-; Draw the glyph in the text window, retain its buffer entry, and advance the column.
+; Queue both glyph tiles at buffer-origin coordinates, store the upper tile, and advance the column.
+; Queue the JP glyph using buffer-origin coordinates and retain its upper tile.
+DrawBufferedJpGlyph:
 DrawWindowGlyph:
 
 
@@ -1005,7 +1013,7 @@ Jump_000_1504:
     dec a
     jr nz, WindowGlyphDelayFrame
 
-; Store the glyph in the text buffer and advance the column.
+; Store only the upper tile at row-offset+column, then advance the text column.
 WindowGlyphStoreBuffer:
 jr_000_1515:
     ld a, [wTextRow]
@@ -1048,15 +1056,15 @@ jr_000_1548:
 
 ; --- text_line.asm ---
 
-; Advance the text row or sprite Y, preserving the regional row-height calculation.
+; Advance a buffered text row or direct map Y using the regional height comparison.
 TextNewline:
 
 
 Call_000_154e:
 Jump_000_154e:
     ld a, [wTextMode]
-    and $02
-    jr nz, TextSpriteLine
+    and TextModeDirectCoordinatesFlag
+    jr nz, TextMapNewline
 
     ld a, [wTextRow]
     inc a
@@ -1079,7 +1087,9 @@ jr_000_156e:
     ld [wTextCol], a
     ret
 
-; Restore the text start column and advance Y, wrapping at $20.
+; Restore start X, increment byte Y, and clear Y only when the result equals $20.
+; Restore direct map X and advance Y through the original equality-based wrap.
+TextMapNewline:
 TextSpriteLine:
 
 
@@ -1091,7 +1101,7 @@ jr_000_1573:
     inc a
     ld [wTextY], a
     ld a, [wTextY]
-    cp $20
+    cp TextMapRowWrapValue
     ret nz
 
     xor a
@@ -1111,8 +1121,8 @@ ScrollTextRow:
 
 Call_000_158e:
     ld hl, wTextBuf
-    ld bc, wTextBuf+18
-    ld d, $7e
+    ld bc, wTextBuf+TextBufferRowTiles
+    ld d, TextScrollCopyBytes
 
 ; Copy the next tile from the following row.
 TextScrollCopyNextTile:
@@ -1123,8 +1133,8 @@ jr_000_1596:
     dec d
     jr nz, TextScrollCopyNextTile
 
-    ld d, $12
-    ld a, $7f
+    ld d, TextBufferRowTiles
+    ld a, TextBufferBlankTile
 
 ; Fill the final text-buffer row with blank tiles.
 TextScrollBlankLastRow:
@@ -1146,7 +1156,7 @@ TextMapAddr:
 Call_000_15ab:
     push hl
     ld a, [wTextMode]
-    bit 0, a
+    bit TextModeWindowMapBit, a
     jr nz, TextMapUseWindow
 
     ld bc, _SCRN0
@@ -1186,7 +1196,7 @@ ClearTextBuffer:
 
 Call_000_15d2:
     ld a, [wTextMode]
-    and $02
+    and TextModeDirectCoordinatesFlag
     ret nz
 
     ld a, [wTextPageReady]
@@ -1204,8 +1214,8 @@ jr_000_15e7:
     ld [wTextCol], a
     ld [wTextRow], a
     ld hl, wTextBuf
-    ld bc, $0120
-    ld d, $7f
+    ld bc, JpTextBufferClearBytes
+    ld d, TextBufferBlankTile
 
 ; Fill the next buffer tile with the blank glyph.
 TextBufferBlankNextTile:

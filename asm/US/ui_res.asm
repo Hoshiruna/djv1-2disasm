@@ -1,12 +1,13 @@
 
-; Stage the matching map palette, then read the indexed bank-9 background map.
+; Stage 64 map-palette bytes in bank $0a, restore the caller bank, then read bank 9.
+; Both map/palette offsets use eight-bit A*2; neither path checks the index bound.
 ReadUiMap:
 
 
 Call_000_19e9:
     push af
-    call StageMapPal
-    ld a, $09
+    call StageUiMapPal
+    ld a, UiResourceRomBank
     call PushRomBank
     ld hl, UiMapRefs
     pop af
@@ -44,7 +45,8 @@ ObjPalBanks:
 ObjPalTables:
     dw C1ObjPalRefs, C2ObjPalRefs
 
-; Read the indexed bank-9 graphics resource; preserve BC/DE and restore the ROM bank.
+; Read the bank-9 graphics pointer using sixteen-bit A*2, with no index bound check.
+; Preserve BC/DE and restore the caller ROM bank after decoding.
 ReadUiGfx:
 
 Call_000_1a17:
@@ -54,7 +56,7 @@ Call_000_1a17:
 Jump_000_1a19:
     push af
     ld bc, UiGfxRefs
-    ld a, $09
+    ld a, UiResourceRomBank
     call PushRomBank
     pop af
     ld l, a

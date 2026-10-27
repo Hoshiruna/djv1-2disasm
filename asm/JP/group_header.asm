@@ -1,5 +1,6 @@
 
-; Select the eight-byte group header, OR zero, and write it back without changing its byte value.
+; Multiply the full index by eight in HL, unlike the wrapped content-list offset.
+; OR zero and write back the unchanged group header.
 TouchGroup:
 
 
@@ -33,6 +34,6 @@ Call_000_3807:
     ld bc, wGroupData
     add hl, bc
     ld a, [hl]
-    and $11
+    and GroupHeaderRetainedBits
     ld [hl], a
     ret

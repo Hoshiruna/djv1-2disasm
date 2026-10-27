@@ -1,11 +1,11 @@
 
-; Initialize an unset selected action only for list slot zero, preserving the original flag change.
+; Initialize an unset action in slot zero and mark it for clearing after action completion.
 InitSelAction:
 
 
     ld d, a
     ldh a, [hItemSlot]
-    cp $00
+    cp OpSlotPrimary
     ld a, d
     ret nz
 
@@ -13,7 +13,7 @@ InitSelAction:
     cp $ff
     ret nz
 
-    ld a, $bf
+    ld a, AutoActionResetPending
     call SetObjFlag
     ld a, [wItemType]
 
@@ -21,22 +21,24 @@ jr_002_747e:
     rst RST_00
 
 SelActionCalls:
-    dw ClearSelAction
-    dw ClearSelAction
-    dw ClearSelAction
-    dw ClearSelAction
-    dw ClearSelAction
-    dw PickBitAction
+    dw SelectLookAction
+    dw SelectLookAction
+    dw SelectLookAction
+    dw SelectLookAction
+    dw SelectLookAction
+    dw PickOpenOrMoveAction
 
-; Select action zero for item types $00..$04.
+; Select look for item types $00..$04.
+SelectLookAction:
 ClearSelAction:
 
 jr_002_748b:
-    ld a, $00
+    ld a, SelActionLook
     ld [wSelAction], a
     ret
 
-; Select action $01 or $08 from the item state bit, retaining the Case I ID exception.
+; Select open or move from the item state bit, retaining the Case I ID exception.
+PickOpenOrMoveAction:
 PickBitAction:
 
 
@@ -45,11 +47,11 @@ PickBitAction:
     jr nz, DefaultActionReadState
 
     ld a, [wItemId]
-    cp $23
+    cp C1DoorIdBlueCabPeoria
     jr c, DefaultActionReadState
 
-    cp $2c
-    jr c, DefaultActionEight
+    cp C1DoorIdYellowCabEstate
+    jr c, SelectMoveAction
 
 ; Use the selected room-state bit outside the Case I forced-action range.
 DefaultActionReadState:
@@ -58,16 +60,17 @@ jr_002_74a3:
     call ReadStateBit
     ld a, [wStateResult]
     and $01
-    jr nz, DefaultActionEight
+    jr nz, SelectMoveAction
 
-    ld a, $01
+    ld a, SelActionOpen
     ld [wSelAction], a
     ret
 
 
-; Select action eight when the state bit or Case I ID exception requires it.
+; Select move when the state bit or Case I ID exception requires it.
+SelectMoveAction:
 DefaultActionEight:
 jr_002_74b6:
-    ld a, $08
+    ld a, SelActionMove
     ld [wSelAction], a
     ret

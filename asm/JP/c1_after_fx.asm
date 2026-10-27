@@ -64,17 +64,17 @@ ShowC1AfterFx:
     call FadeToWhite
     ret
 
-; Disable the LCD through the timer controls, load UI map and object six, restore the LCD, and blank OAM.
+; Load the blank text map and closing OBJ palette with the LCD paused, then restore it and blank OAM.
 LoadC1FxUi:
 
 
 Call_001_6e94:
     call RequestTimer
     call DisableLcd
-    ld a, $06
+    ld a, UiMapIdBlankTextPanel
     call ReadUiMap
-    ld a, $06
-    call StageUiObj
+    ld a, UiPalIdCase1ClosingObjects
+    call StageUiObjPal
     call StopTimer
     call RestoreLcd
     call BlankOam

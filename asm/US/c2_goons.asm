@@ -16,7 +16,7 @@ Call_003_5d07:
     cp RoomLaundry
     jr z, TickC2Goons
 
-    cp $48
+    cp RoomCleanersHallway
     ret nz
 
 ; Advance the goons timer and choose capture or escape once it reaches nine.
@@ -39,24 +39,24 @@ DieC2Bound:
     call ResetObjScroll
     call PlayCue16Twice
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / THE TWO GOONS ARE / COMING BACK.[END]
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $c2
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message42: ONE OF THE GOONS / GRABS YOU AND / SAYS, "DA BOSS / SAYS HE DON'T KNOWYA!"[PAGE] / "Y...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: BEFORE YOU CAN / UTTER THOSE LAST / WORDS, THE GOONS / FILL YOU FULL OF / LEAD![END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     ld a, FxVegasNews2
     call SwitchC2Fx
     ld a, $c4
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message44: IT'S AT TIMES LIKETHESE THAT YOU / WISH YOU WERE A / MAGICIAN![END]
     call MarkGoonsEvent
     jp PlayExitEffect
 
@@ -76,29 +76,29 @@ DieC2Flee:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / THE TWO GOONS ARE / COMING BACK.[END]
     ld a, $c5
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message45: THE GOONS FIND YOUWANDERING / AIMLESSLY![END]
     call ResumeTextUI
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $cb
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4B: ONE OF THE GOONS / SMACKS YOU HARD ASHE SAYS, "ARE YA / TRYING TO ESCAPE?[PAGE] / I G...
     ld a, $cc
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4C: "DA BOSS DON'T / KNOW YA AND HE / DON'T LIKE IT THATYA GOT DAT LETTER / TO MALONE, EI...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: BEFORE YOU CAN / UTTER THOSE LAST / WORDS, THE GOONS / FILL YOU FULL OF / LEAD![END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     ld a, FxVegasNews2
     call SwitchC2Fx
     ld a, $b0
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message30: YOU SHOULD'VE MADESURE YOU LOST / THOSE GOONS BEFOREYOU BEGAN ROAMING / AROUND.[END]
     call ResumeTextUI
     call MarkGoonsEvent
     jp PlayExitEffect
@@ -119,24 +119,24 @@ DieC2Search:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / THE TWO GOONS ARE / COMING BACK.[END]
     ld a, $b6
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message36: YOU HEAR A VOICE / SAY, "HEY SPIKE, / HE'S GONE!"[END]
     ld a, $b7
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message37: A GRUFF VOICE / REPLIES, "THERE'S / NO SIGN DAT HE / LEFT, SO HE MUST / BE HIDIN' HER...
     call ResumeTextUI
     call BeginGoonsFx
     ld a, $78
     call WaitTicks
     call ScriptHoldText
     ld a, $f2
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message72: SUDDENLY YOU ARE / PULLED ROUGHLY OUTOF THE HAMPER.[PAGE] / "AH, THERE YA / ARE!"[END]
     ld a, $cc
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message4C: "DA BOSS DON'T / KNOW YA AND HE / DON'T LIKE IT THATYA GOT DAT LETTER / TO MALONE, EI...
     ld a, $10
     call PlayAudio
     ld a, $c3
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message43: BEFORE YOU CAN / UTTER THOSE LAST / WORDS, THE GOONS / FILL YOU FULL OF / LEAD![END]
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
@@ -151,13 +151,13 @@ jr_003_5e0c:
     call PlayCue16Twice
     call ScriptHoldText
     ld a, $c1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message41: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / THE TWO GOONS ARE / COMING BACK.[END]
     ld a, $09
     call PlayAudio
     ld a, $b6
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message36: YOU HEAR A VOICE / SAY, "HEY SPIKE, / HE'S GONE!"[END]
     ld a, $a1
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message21: YOU HEAR A WORRIEDVOICE SAY, "UH-OH / MOOSE! HE AIN'T / HERE!"[PAGE] / A SECOND VOICE...
     call ResumeTextUI
     ld a, C2GoonsFooled
     call SetObjFlag

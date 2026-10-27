@@ -51,7 +51,7 @@ MoveListCursor:
 Call_001_5d6a:
     call ClearListCursor
     ld d, a
-    ld a, $00
+    ld a, CursorMapOnOffset
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a
@@ -76,7 +76,7 @@ Call_001_5d87:
     pop af
     push hl
     ld d, a
-    ld a, $02
+    ld a, CursorMapOffOffset
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a

@@ -68,22 +68,23 @@ Jump_000_1f07:
     ld h, a
     add hl, bc
     ld a, [hl]
-    cp $23
-    jr nz, RoomMoveCheckItem28
+    cp C1DoorIdBlueCabPeoria
+    jr nz, RoomMoveCheckYellowCabEntry
 
-    ld a, $bb
+    ld a, C1CabIsYellow
 
 Jump_000_1f12:
     call ClearObjFlag
     jr RoomMoveCheckCabFare
 
-; Check whether item 28 should set object flag BB.
+; Check the Peoria yellow-cab item before selecting the cab color.
+RoomMoveCheckYellowCabEntry:
 RoomMoveCheckItem28:
 jr_000_1f17:
-    cp $28
+    cp C1DoorIdYellowCabPeoria
     jr nz, RoomMoveCheckCabFare
 
-    ld a, $bb
+    ld a, C1CabIsYellow
 
 Call_000_1f1d:
     call SetObjFlag
@@ -99,10 +100,10 @@ jr_000_1f20:
     jr z, RoomMoveClearCabFare
 
     ld a, [wRoomId]
-    cp $26
+    cp C1RoomIdBlueCabPeoria
     jr z, RoomMoveSetBlueCabDebt
 
-    cp $27
+    cp C1RoomIdYellowCabPeoria
     jr z, RoomMoveSetYellowCabDebt
 
     jr RoomMoveClearCabFare

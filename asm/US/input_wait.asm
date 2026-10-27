@@ -1,5 +1,5 @@
 
-; Reset the input mode, copy cursor coordinates to the candidate position, then wait for cursor input.
+; Set InputModeCursor with xor a, copy candidate coordinates, then wait for cursor input.
 PollCursor:
     xor a
     ld [wInputMode], a
@@ -32,10 +32,10 @@ WaitCursor:
 
 Call_001_5f15:
     ld a, [wInputSel]
-    cp $17
+    cp InputSelRoomGrid
     jr z, WaitCursorSetDirectionalDelay
 
-    cp $15
+    cp InputSelRoomFine
     jr nc, WaitCursorPollButtons
 
     ld a, [wJoyHeld]
@@ -90,10 +90,10 @@ jr_001_5f42:
 
     jr WaitCursorPollButtons
 
-; Set selection 16 and center the candidate position.
+; Start presets the fine room selector and candidate X/Y to $38.
 WaitCursorSetSpecialSelection:
 jr_001_5f6c:
-    ld a, $16
+    ld a, InputSelRoomFineStart
     ld [wInputSel], a
     ld a, $38
     ld [wInputX], a
@@ -104,21 +104,21 @@ jr_001_5f6c:
     ret
 
 
-; Play the select sound and return input mode one.
+; Play the select sound and return InputModeConfirm.
 WaitCursorPressA:
 jr_001_5f7b:
     ld a, $19
     call PlayAudio
     ld a, $05
     call WaitTicks
-    ld a, $01
+    ld a, InputModeConfirm
     ld [wInputMode], a
     ret
 
 
-; Return input mode two.
+; Return InputModeCancel.
 WaitCursorPressB:
 jr_001_5f8b:
-    ld a, $02
+    ld a, InputModeCancel
     ld [wInputMode], a
     ret

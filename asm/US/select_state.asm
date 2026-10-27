@@ -12,16 +12,16 @@ Call_001_5b04:
     rst RST_00
 
 InputModes:
-    dw InputMode0Return
-    dw SelectInput
-    dw CancelSelect
+    dw InputMode0Return ; InputModeCursor
+    dw SelectInput ; InputModeConfirm
+    dw CancelSelect ; InputModeCancel
     dw InputMode3Return
     dw InputMode4Return
 
 ; Cancel the alternate slot when its offset is $10; otherwise reset selection and clear the previous cursor.
 CancelSelect:
     ldh a, [hItemSlot]
-    cp $10
+    cp OpSlotAlternate
     jr nz, CancelSelectPrimary
 
     ld a, [wSelRow]
@@ -41,7 +41,7 @@ CancelSelect:
 ; Choose the Case II cancellation flag for the alternate slot.
 CancelSelectCase2Flag:
 jr_001_5b43:
-    ld a, $8f
+    ld a, C2AltTargetCancelled
 
 ; Set the selected cancellation flag and restore the previous list selection.
 CancelSelectRestoreList:
@@ -77,7 +77,7 @@ Call_001_5b60:
     ld [wOpClass], a
     ld [wActionCode], a
     ld hl, wItemType
-    ld d, $10
+    ld d, OpSlotSize
 
 ; Fill the sixteen-byte primary operation slot with $ff.
 ClearSelectSlotLoop:
@@ -95,7 +95,7 @@ ClearAltSlot:
 Call_001_5b72:
     ld hl, wAltSlot
     ld a, $ff
-    ld d, $10
+    ld d, OpSlotSize
 
 ; Fill the sixteen-byte alternate operation slot with $ff.
 ClearAltSlotLoop:

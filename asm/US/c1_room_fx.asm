@@ -20,7 +20,7 @@ jr_001_6500:
     ld a, [wRoomDataPtr+1]
     ld h, a
     ld a, [hl+]
-    cp $ff
+    cp C1RoomRecordEnd
     ret z
 
     ld a, [hl+]

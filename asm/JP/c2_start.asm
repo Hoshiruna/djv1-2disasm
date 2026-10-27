@@ -15,7 +15,7 @@ InitC2View:
     call FadeOut
     call RequestTimer
     call DisableLcd
-    ld a, $03
+    ld a, UiMapIdGameHud
     call ReadUiMap
     call LoadBaseGfx
     call StopTimer
@@ -40,11 +40,11 @@ InitC2View:
     ld [hl+], a
     ld [hl], a
     ld a, [wCaseResume]
-    cp $00
+    cp CaseStartNewMarker
     jr nz, C2ViewFinishInit
 
     xor a
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message00: ふと めがさめた・・・。[PAGE] / うっ! / あたまの うしろが ズキズキする![PAGE] / おれは おそるおそる じぶんの / なまえを おもいだしてみた・...
     ld a, $0d
     ld [wFxId], a
     call SaveC2Effect
@@ -53,7 +53,7 @@ InitC2View:
     ld a, $78
     call WaitTicks
     ld a, $01
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message01: おれは シカゴの アパートに いた / はずなのに・・・。[PAGE] / ・・・そうか! / おもいだしたぞ!![PAGE] / そこで おそわれて ラスべガスの / ...
     ld a, $3c
     call WaitTicks
     xor a
@@ -62,18 +62,18 @@ InitC2View:
     ld a, $78
     call WaitTicks
     ld a, $02
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message02: 「きみの したしい ゆうじんであった ジョー・シーゲルは わたしの /  ぶかで シカゴを まかせていた。[PAGE] /  だが きみも しってのとおり /  やつは ...
     ld a, $3c
     call WaitTicks
     call RestoreC2Effect
     call RoomCueCall
     ld a, $03
-    call ShowMsg0
+    call ShowMsg0 ; Message Text12Message03: ああ・・・そうか。 / おれは にげようとして あたまを / なぐられたんだったな・・・。[PAGE] / ・・・どうやら おれは またしても / たいへんなことに まき...
 
 ; Finish view setup after either the opening sequence or a resumed view.
 C2ViewFinishInit:
 jr_003_40a8:
-    ld a, $fe
+    ld a, CaseViewReadyMarker
     ld [wCaseResume], a
     xor a
     ld [wInputSel], a

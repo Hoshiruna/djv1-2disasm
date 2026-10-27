@@ -1,8 +1,10 @@
 ; Bank-nine UI graphics: original LZ streams.
 
 ; 128 tiles, 1505 stored bytes.
+; Save-selection tiles $00-$7f.
+UiGfxSaveScreenLow:
 UiGfx0:
-    db $1d, $00, $80, $ff, $00, $00, $03, $00, $1e, $01, $0b, $07, $ff, $37, $0f, $2f
+    db GfxFormatLzSigned + $10, $00, $80, $ff, $00, $00, $03, $00, $1e, $01, $0b, $07, $ff, $37, $0f, $2f
     db $1f, $7f, $1f, $5f, $3f, $ff, $ff, $00, $99, $7e, $ff, $ff, $f9, $ff, $df, $fc
     db $ff, $f8, $ff, $ff, $17, $00, $80, $00, $ff, $80, $00, $78, $80, $d0, $e0, $6c
     db $f0, $ff, $74, $f8, $fe, $f8, $2a, $fc, $0a, $f5, $db, $05, $fa, $30, $01, $02
@@ -130,8 +132,10 @@ jr_009_4bff:
     db $99, $d6, $72, $c2, $7b, $c6, $7d, $f9, $73
 
 ; 128 tiles, 1255 stored bytes.
+; Save-selection tiles $80-$ff.
+UiGfxSaveScreenHigh:
 UiGfx1:
-    db $1d, $80, $80, $45, $00, $00, $02, $19, $06, $00, $02, $03, $00, $03, $99, $16
+    db GfxFormatLzSigned + $10, $80, $80, $45, $00, $00, $02, $19, $06, $00, $02, $03, $00, $03, $99, $16
     db $00, $60, $12, $03, $08, $05, $08, $05, $18, $05, $18, $05, $18, $18, $00
 jr_009_4c27:
     db $03, $cc, $04, $09, $20, $09, $15, $15, $00, $01, $60, $07, $54, $54, $e0, $00
@@ -276,6 +280,8 @@ jr_009_50d2:
     db $10, $0d, $00, $8f, $16, $7c, $28, $e8, $71, $5d, $33, $f2, $7a
 
 ; 128 tiles, 1501 stored bytes.
+; Title tiles $00-$7f.
+UiGfxTitleLow:
 UiGfx2:
 GfxTitleLow:
     INCBIN "../../res/ui/title/title_tiles.bin", $0, $48
@@ -331,6 +337,8 @@ jr_009_56ac:
     INCBIN "../../res/ui/title/title_tiles.bin", $5bd, $20
 
 ; 128 tiles, 1273 stored bytes.
+; Title tiles $80-$ff.
+UiGfxTitleHigh:
 UiGfx3:
 GfxTitleHigh:
     INCBIN "../../res/ui/title/title_tiles_extra.bin", $0, $21
@@ -432,8 +440,10 @@ jr_009_5bab:
     INCBIN "../../res/ui/title/title_tiles_extra.bin", $4df, $1a
 
 ; 128 tiles, 1349 stored bytes.
+; KEMCO-logo tiles $00-$7f.
+UiGfxDeveloperLogoLow:
 UiGfx4:
-    db $1d, $00, $80, $1b
+    db GfxFormatLzSigned + $10, $00, $80, $1b
 jr_009_5bc9:
     db $ff, $00, $00, $01, $00, $ff, $07, $00, $01, $02, $00, $03, $f7
 jr_009_5bd6:
@@ -576,8 +586,10 @@ Jump_009_6100:
     db $52, $ac, $53, $dd, $22, $de, $07, $21, $ff, $00
 
 ; 128 tiles, 1253 stored bytes.
+; Tiles $80-$ff shared by the developer and US publisher boot pages.
+UiGfxBootTextHigh:
 UiGfx5:
-    db $1d, $80, $80, $ff, $ff, $00, $ff, $00, $34, $cb, $d3, $2c, $ff, $17, $e8, $f7
+    db GfxFormatLzSigned + $10, $80, $80, $ff, $ff, $00, $ff, $00, $34, $cb, $d3, $2c, $ff, $17, $e8, $f7
     db $08, $17, $e8, $ff, $00, $ff, $f7, $08, $f7, $08, $c1, $3e, $77, $88, $f6, $16
     db $01, $79, $86, $00, $01, $ff, $00, $75, $8a, $ff, $74, $8b, $75, $8a, $65, $9a
     db $95, $6a, $fe, $1e, $03, $31, $ce, $ee, $11, $e0, $1f, $ef, $f7, $10, $f0, $0f
@@ -692,8 +704,10 @@ jr_009_65bb:
     db $ae, $7c, $ef, $7d
 
 ; 128 tiles, 1051 stored bytes.
+; Low card tiles loaded by blackjack through UI graphics index six.
+UiGfxBlackjackCardsLow:
 UiGfx6:
-    db $1d, $00, $80, $ff, $00, $ff, $00, $80, $7f, $00, $7f, $28, $ff, $7f, $1b, $7f
+    db GfxFormatLzSigned + $10, $00, $80, $ff, $00, $ff, $00, $80, $7f, $00, $7f, $28, $ff, $7f, $1b, $7f
     db $3c, $7f, $0f, $7f, $14, $e8, $00, $00, $00, $00, $14, $00, $ef, $14, $00, $39
     db $ff, $c6, $fe, $00, $00, $03, $fc, $01, $fc, $29, $fc, $b1, $ff, $fc, $79, $fc
     db $e1, $fc, $51, $7f, $14, $eb, $7f, $13, $30, $00
@@ -804,8 +818,10 @@ jr_009_69ab:
     db $47, $60, $0a, $53, $b0, $50, $09, $0d, $b4, $5f, $9a, $02, $70, $fa, $71
 
 ; 99 tiles, 709 stored bytes.
+; High card tiles loaded by blackjack through UI graphics index seven.
+UiGfxBlackjackCardsHigh:
 UiGfx7:
-    db $1d, $80, $63, $7d, $ff, $00, $03, $38, $ff, $10, $ff, $00, $0a, $01, $fb, $fc
+    db GfxFormatLzSigned + $10, $80, $63, $7d, $ff, $00, $03, $38, $ff, $10, $ff, $00, $0a, $01, $fb, $fc
     db $fd, $10, $02, $7d, $fc, $3d, $fc, $1d, $74, $1a, $01, $0b, $00, $00, $00, $00
     db $d7, $ff, $83, $28, $00
 jr_009_6a2f:
@@ -870,8 +886,10 @@ jr_009_6cae:
     db $6f
 
 ; 128 tiles, 1307 stored bytes.
+; Auxiliary display tiles $00-$7f loaded before the audio test or credits.
+UiGfxAuxLow:
 UiGfx8:
-    db $1d, $00, $80, $ff, $00, $81, $00
+    db GfxFormatLzSigned + $10, $00, $80, $ff, $00, $81, $00
 jr_009_6cd6:
     db $42, $00, $24, $00, $18, $fa, $06, $00, $24, $02, $00, $81, $e7, $e7, $db, $db
     db $ff, $d7, $d7, $ed, $ed, $d4, $d4, $bb, $bb, $7f, $b9, $b9, $c6, $c6, $80, $80
@@ -1001,8 +1019,10 @@ jr_009_719f:
     db $e4, $71, $f7, $f7, $cf, $01, $cf, $82, $7b, $b0, $71
 
 ; 128 tiles, 888 stored bytes.
+; Auxiliary display tiles $80-$ff loaded before the audio test or credits.
+UiGfxAuxHigh:
 UiGfx9:
-    db $1d, $80, $80, $f7, $c3, $c3, $bd, $02, $06, $c3, $c3, $ff, $ff, $df, $f7, $f7
+    db GfxFormatLzSigned + $10, $80, $80, $f7, $c3, $c3, $bd, $02, $06, $c3, $c3, $ff, $ff, $df, $f7, $f7
     db $e7, $e7, $f7, $14, $04, $e3, $e3, $fb, $ff, $ff, $00, $03, $f3, $f3, $cf, $cf
     db $bf, $f7, $bf, $81, $81, $1e, $03, $fd, $fd, $e3, $e3, $fb, $fd, $fd, $0a, $03
     db $f3, $f3

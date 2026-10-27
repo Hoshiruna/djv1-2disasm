@@ -7,7 +7,7 @@ Call_001_4a6f:
     push de
     push hl
     ld hl, wBgPal
-    ld d, $40
+    ld d, PalettePairColorCount
 
 ; Compare the next live palette color with RGB555 white.
 PalsAreWhiteNextColor:
@@ -40,7 +40,7 @@ Call_001_4a86:
     push hl
     ld hl, wBgPal
     ld bc, wBgPalNext
-    ld d, $40
+    ld d, PaletteSetByteCount
     jr ComparePalsNextByte
 
 ; Compare all 128 live BG/object palette bytes with their staged bytes.
@@ -52,7 +52,7 @@ Call_001_4a93:
     push hl
     ld hl, wBgPal
     ld bc, wBgPalNext
-    ld d, $80
+    ld d, PalettePairByteCount
 
 ; Compare the next live and staged palette bytes.
 ComparePalsNextByte:
@@ -84,8 +84,8 @@ Call_001_4aac:
     push hl
     push bc
     ld hl, wBgPal
-    ld d, $40
-    ld bc, $7fff
+    ld d, PalettePairColorCount
+    ld bc, Rgb555White
     xor a
 
 ; Store white into the next live palette color.

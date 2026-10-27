@@ -7,7 +7,7 @@ C1Sc4_00:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 0.
-    db $00, $01
+    db $00, $01 ; Message Text0CMessage01: IT'S A LIGHT BROWNTRENCH COAT THAT / MATCHES YOUR / TROUSERS.[END]
     ; Test object flag.
     db $16, C1CoatPocketOpenedOnce
     ; Branch if result bit 0 is clear.
@@ -23,7 +23,7 @@ C1CoatPocketHint:
 
 C1Loc4_00:
     ; Show message 0.
-    db $00, $02
+    db $00, $02 ; Message Text0CMessage02: YOU FEEL SOMETHINGIN THE POCKET OF / THE COAT.[END]
     ; End script.
     db $ff
 
@@ -39,7 +39,7 @@ C1Sc4_01:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set object flag.
@@ -58,7 +58,7 @@ C1Loc4_01:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -74,7 +74,7 @@ C1Sc4_02:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -89,7 +89,7 @@ C1Loc4_02:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -105,7 +105,7 @@ C1Sc4_03:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -122,7 +122,7 @@ C1Loc4_03:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -138,7 +138,7 @@ C1Sc4_04:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -153,7 +153,7 @@ C1Loc4_04:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -169,7 +169,7 @@ C1Sc4_05:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -184,7 +184,7 @@ C1Loc4_05:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -200,7 +200,7 @@ C1Sc4_06:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -216,7 +216,7 @@ jr_006_6694:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -232,7 +232,7 @@ C1Sc4_07:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -247,7 +247,7 @@ C1Loc4_07:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -263,7 +263,7 @@ C1Sc4_08:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -280,7 +280,7 @@ C1Loc4_08:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -301,7 +301,7 @@ C1Sc4_09:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -316,7 +316,7 @@ C1Loc4_09:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -325,7 +325,7 @@ C1DiaryBookmarkOpen:
 
 C1Loc4_0A:
     ; Show message 1.
-    db $01, $72
+    db $01, $72 ; Message Text0EMessage72: YOU OPEN THE / DIARY TO THE / BOOKMARKED PAGE.[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -345,7 +345,7 @@ C1Sc4_0A:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -362,7 +362,7 @@ C1Loc4_0B:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -378,7 +378,7 @@ C1Sc4_0B:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -393,7 +393,7 @@ C1Loc4_0C:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -409,7 +409,7 @@ C1Sc4_0C:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -424,7 +424,7 @@ C1Loc4_0D:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -440,7 +440,7 @@ C1Sc4_0D:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -455,7 +455,7 @@ C1Loc4_0E:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -471,7 +471,7 @@ C1Sc4_0E:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -486,7 +486,7 @@ C1Loc4_0F:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -502,7 +502,7 @@ C1Sc4_0F:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -517,7 +517,7 @@ C1Loc4_10:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -533,7 +533,7 @@ C1Sc4_10:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -548,7 +548,7 @@ C1Loc4_11:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -564,7 +564,7 @@ C1Sc4_11:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Keep selected change.
@@ -579,7 +579,7 @@ C1Loc4_12:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -595,7 +595,7 @@ C1Sc4_12:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 2.
     db $11
     ; Set text name 1.
@@ -612,7 +612,7 @@ C1Loc4_13:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -628,7 +628,7 @@ C1Sc4_13:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -643,7 +643,7 @@ C1Loc4_14:
     ; Set text name 0.
     db $1e, $c3
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -659,7 +659,7 @@ C1Sc4_14:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -674,7 +674,7 @@ C1Loc4_15:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -690,7 +690,7 @@ C1Sc4_15:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -705,7 +705,7 @@ C1Loc4_16:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -721,7 +721,7 @@ C1Sc4_16:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -736,7 +736,7 @@ C1Loc4_17:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -752,7 +752,7 @@ C1Sc4_17:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -767,7 +767,7 @@ C1Loc4_18:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -783,7 +783,7 @@ C1Sc4_18:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -798,7 +798,7 @@ C1Loc4_19:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -814,7 +814,7 @@ C1Sc4_19:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -829,7 +829,7 @@ C1Loc4_1A:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -845,7 +845,7 @@ C1Sc4_1A:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -860,7 +860,7 @@ C1Loc4_1B:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -876,7 +876,7 @@ C1Sc4_1B:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -891,7 +891,7 @@ C1Loc4_1C:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -907,7 +907,7 @@ C1Sc4_1C:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -922,7 +922,7 @@ C1Loc4_1D:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -938,7 +938,7 @@ C1Sc4_1D:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -953,7 +953,7 @@ C1Loc4_1E:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -969,7 +969,7 @@ C1Sc4_1E:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -984,7 +984,7 @@ C1Loc4_1F:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1000,7 +1000,7 @@ C1Sc4_1F:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1015,7 +1015,7 @@ C1Loc4_20:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1031,7 +1031,7 @@ C1Sc4_20:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1046,7 +1046,7 @@ C1Loc4_21:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1062,7 +1062,7 @@ C1Sc4_21:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1077,7 +1077,7 @@ C1Loc4_22:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1093,7 +1093,7 @@ C1Sc4_22:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1108,7 +1108,7 @@ C1Loc4_23:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1124,7 +1124,7 @@ C1Sc4_23:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1139,7 +1139,7 @@ C1Loc4_24:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1155,7 +1155,7 @@ C1Sc4_24:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $12
     ; Remove selected change.
@@ -1170,7 +1170,7 @@ C1Loc4_25:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -1193,7 +1193,7 @@ C1Sc4_25:
     ; Set text name 0.
     db $1e, $40
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1209,7 +1209,7 @@ C1Sc4_25:
     db $04
     dw C1CoatTakeResume
     ; Show message 0.
-    db $00, $17
+    db $00, $17 ; Message Text0CMessage17: THERE'S NOTHING / MORE HANDY THAN / A .38 AT YOUR / SIDE![END]
     ; Set object flag.
     db $17, C1CoatTakeCommentSeen
 
@@ -1239,7 +1239,7 @@ C1Sc4_26:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1258,12 +1258,12 @@ C1Loc4_32:
     db $05
     dw C1ContainerPlaceEnd
     ; Test item flag.
-    db $52, $00
+    db $52, C1ItemCoins
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $01
+    db $52, C1ItemLighter
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -1278,17 +1278,17 @@ C1WalletPlaceChecks:
 
 C1Loc4_9A:
     ; Test item flag.
-    db $52, $05
+    db $52, C1ItemKey1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $06
+    db $52, C1ItemAccessCard
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
     ; Test item flag.
-    db $52, $07
+    db $52, C1ItemTwentyDollarBill
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -1307,7 +1307,7 @@ C1ContainerPlaceNeedsTaken:
 
 C1Loc4_26:
     ; Show message 2.
-    db $02, $56
+    db $02, $56 ; Message Text11Message56: YOU CAN'T LEAVE / WHAT YOU DIDN'T / TAKE![END]
     ; End script.
     db $ff
 
@@ -1316,7 +1316,7 @@ C1ContainerPlaceNoHere:
 
 C1Loc4_33:
     ; Show message 2.
-    db $02, $57
+    db $02, $57 ; Message Text11Message57: MAYBE YOU CAN'T / LEAVE IT HERE.[END]
     ; End script.
     db $ff
 
@@ -1325,7 +1325,7 @@ C1ContainerPlaceCaution:
 
 C1Loc4_9C:
     ; Show message 2.
-    db $02, $7d
+    db $02, $7d ; Message Text11Message7D: HOLD ON![PAGE] / IF YOU DO THAT, / IT MAY CAUSE YOU / TROUBLE LATER.[END]
     ; End script.
     db $ff
 
@@ -1341,7 +1341,7 @@ jr_006_68e3:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1368,7 +1368,7 @@ C1ContainerActionNoHere:
 
 C1Sc4_28:
     ; Show message 2.
-    db $02, $37
+    db $02, $37 ; Message Text11Message37: YOU CAN'T DO THAT / HERE.[END]
     ; End script.
     db $ff
 
@@ -1377,7 +1377,7 @@ C1ContainerTakeRefuse:
 
 C1Loc4_27:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: WHAT DO YOU THINK / YOU ARE DOING?[END]
     ; End script.
     db $ff
 
@@ -1386,7 +1386,7 @@ LookC1Wallet:
 
 C1Sc4_29:
     ; Show message 0.
-    db $00, $0d
+    db $00, $0d ; Message Text0CMessage0D: IT'S A VERY WORN / LEATHER WALLET.[PAGE] / YOU'D HATE TO BE / THE COW THAT IT / CAME ...
     ; End script.
     db $ff
 
@@ -1407,7 +1407,7 @@ C1Sc4_2A:
     ; Set text name 0.
     db $1e, $42
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1432,7 +1432,7 @@ C1Sc4_2B:
     ; Set text name 0.
     db $1e, $41
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1458,7 +1458,7 @@ jr_006_691b:
     ; Set text name 0.
     db $1e, $43
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1483,7 +1483,7 @@ C1Sc4_2D:
     ; Set text name 0.
     db $1e, $44
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1508,7 +1508,7 @@ C1Sc4_2E:
     ; Set text name 0.
     db $1e, $45
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1533,7 +1533,7 @@ C1Sc4_2F:
     ; Set text name 0.
     db $1e, $46
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1558,7 +1558,7 @@ C1Sc4_30:
     ; Set text name 0.
     db $1e, $47
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1583,7 +1583,7 @@ C1Sc4_31:
     ; Set text name 0.
     db $1e, $48
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1608,7 +1608,7 @@ C1Sc4_32:
     ; Set text name 0.
     db $1e, $49
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1633,7 +1633,7 @@ C1Sc4_33:
     ; Set text name 0.
     db $1e, $4a
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1658,7 +1658,7 @@ C1Sc4_34:
     ; Set text name 0.
     db $1e, $4b
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1683,7 +1683,7 @@ C1Sc4_35:
     ; Set text name 0.
     db $1e, $4c
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1708,7 +1708,7 @@ C1Sc4_36:
     ; Set text name 0.
     db $1e, $4d
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1733,7 +1733,7 @@ C1Sc4_37:
     ; Set text name 0.
     db $1e, $4e
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1758,7 +1758,7 @@ C1Sc4_38:
     ; Set text name 0.
     db $1e, $4f
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1783,7 +1783,7 @@ C1Sc4_39:
     ; Set text name 0.
     db $1e, $50
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1806,12 +1806,12 @@ C1Sc4_3A:
     db $04
     dw C1Gun3PaidPickup
     ; Test item flag.
-    db $52, $07
+    db $52, C1ItemTwentyDollarBill
     ; Branch if result bit 0 is set.
     db $04
     dw C1BuyGun3Bill07
     ; Test item flag.
-    db $52, $54
+    db $52, C1ItemTwentyDollarBillAlt
     ; Branch if result bit 0 is clear.
     db $05
     dw C1Gun3PriceReply
@@ -1825,7 +1825,7 @@ C1Sc4_3A:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1833,13 +1833,13 @@ C1Sc4_3A:
     ; Set text name 0.
     db $1e, $c1
     ; Show message 2.
-    db $02, $1a
+    db $02, $1a ; Message Text11Message1A: "THANKS FOR /  THE [OBJECT_WRAM:37C5]."[END]
     ; Set item state.
-    db $53, $54
+    db $53, C1ItemTwentyDollarBillAlt
     ; Drop list value.
-    db $55, $54
+    db $55, C1ItemTwentyDollarBillAlt
     ; Set first item type and ID.
-    db $5c, $03, $54
+    db $5c, $03, C1ItemTwentyDollarBillAlt
     ; Clear attribute bit 0.
     db $09
     ; Set object flag.
@@ -1861,21 +1861,21 @@ C1Loc4_35:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set text name 0.
     db $1e, $c1
     ; Show message 2.
-    db $02, $1a
+    db $02, $1a ; Message Text11Message1A: "THANKS FOR /  THE [OBJECT_WRAM:37C5]."[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
     db $1d
     ; Set item state.
-    db $53, $07
+    db $53, C1ItemTwentyDollarBill
     ; Drop list value.
-    db $55, $07
+    db $55, C1ItemTwentyDollarBill
     ; Set first item type and ID.
-    db $5c, $03, $07
+    db $5c, $03, C1ItemTwentyDollarBill
     ; Clear attribute bit 0.
     db $09
     ; Set object flag.
@@ -1888,7 +1888,7 @@ C1Gun3PriceReply:
 
 C1Loc4_36:
     ; Show message 1.
-    db $01, $1b
+    db $01, $1b ; Message Text0EMessage1B: THE CLERK SAYS IN / A GRUFF VOICE, / "IT'LL COST YA / TWENTY BUCKS, / PAL!"[END]
     ; End script.
     db $ff
 
@@ -1899,7 +1899,7 @@ C1Loc4_28:
     ; Set text name 0.
     db $1e, $51
     ; Show message 2.
-    db $02, $04
+    db $02, $04 ; Message Text11Message04: YOU TAKE THE  / [OBJECT_WRAM:37C5].[END]
     ; Set selected attribute bit 0.
     db $0b
     ; Append selected item to list.
@@ -1912,7 +1912,7 @@ LookC1Gun1:
 
 C1Sc4_3B:
     ; Show message 0.
-    db $00, $08
+    db $00, $08 ; Message Text0CMessage08: THERE'S NOTHING / PARTICULARLY / SPECIAL ABOUT THIS.38 SPECIAL.[END]
     ; End script.
     db $ff
 
@@ -1926,7 +1926,7 @@ C1Sc4_3C:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1981,7 +1981,7 @@ C1Sc4_3D:
     db $05
     dw C1Gun1TargetPrompt
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: YOU CAN'T USE IT / WHEN IT'S OPEN.[END]
     ; End script.
     db $ff
 
@@ -1990,7 +1990,7 @@ C1Gun1TargetPrompt:
 
 C1Loc4_29:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: WHAT WOULD YOU / LIKE TO USE THIS / ON?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -1999,80 +1999,80 @@ MatchC1Gun1:
 
 C1Loc4_38:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun1Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun1Mirror2
 
 jr_006_6a7c:
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun1StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun1GunShopWin
-    db $00, $34
+    db $00, C1TargetArmedWoman
     dw C1Gun1Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun1Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun1Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun1NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun1Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun1Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun1Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun1Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun1RoundMirror
     db $00
 
 jr_006_6aa9:
-    db $5f
+    db C1TargetMansionButler
     dw C1Gun1Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun1Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun1WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun1Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun1Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
     dw C1Gun1Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun1NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun1Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun1NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun1NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun1NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun1Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun1NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun1Shadow
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun1Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun1Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun1Self
     db $fe, $fe
     dw C1ContainerActionNoHere
@@ -2082,7 +2082,7 @@ C1Gun1Self:
 
 C1Loc4_39:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text10Message28: ...GOOD JOB.[PAGE] / WHAT A GREAT WAY / TO GO OUT WITH / A BANG![PAGE] / AND TO THINK...
     ; Decrement gun 1 ammunition.
     db $4f
     ; Branch if result bit 0 is clear.
@@ -2094,11 +2094,11 @@ C1SelfShotEnd:
 
 C1Loc4_3A:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2109,7 +2109,7 @@ C1Gun2Self:
 
 C1Loc4_3B:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text10Message28: ...GOOD JOB.[PAGE] / WHAT A GREAT WAY / TO GO OUT WITH / A BANG![PAGE] / AND TO THINK...
     ; Decrement gun 2 ammunition.
     db $59
     ; Branch if result bit 0 is clear.
@@ -2124,7 +2124,7 @@ C1Gun3Self:
 
 C1Loc4_3C:
     ; Show message 1.
-    db $01, $e8
+    db $01, $e8 ; Message Text10Message28: ...GOOD JOB.[PAGE] / WHAT A GREAT WAY / TO GO OUT WITH / A BANG![PAGE] / AND TO THINK...
     ; Decrement gun 3 ammunition.
     db $51
     ; Branch if result bit 0 is clear.
@@ -2154,13 +2154,13 @@ C1ShootMirror1:
 
 C1Loc4_3E:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1Mirror1Broken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: YOU JUST BLEW AWAYTHE MIRROR. IT / SHATTERS SENDING / SMALL SHARDS EVERYWHICH WAY![END]
     ; End script.
     db $ff
 
@@ -2169,7 +2169,7 @@ C1GunEmpty:
 
 C1Loc4_3F:
     ; Show message 1.
-    db $01, $64
+    db $01, $64 ; Message Text0EMessage64: CLICK![PAGE] / YOU PULL THE / TRIGGER.[PAGE] / IT SEEMS THAT THE / GUN IS EMPTY.[END]
     ; End script.
     db $ff
 
@@ -2178,7 +2178,7 @@ C1GunSaveTarget:
 
 C1Loc4_40:
     ; Show message 2.
-    db $02, $7d
+    db $02, $7d ; Message Text11Message7D: HOLD ON![PAGE] / IF YOU DO THAT, / IT MAY CAUSE YOU / TROUBLE LATER.[END]
     ; End script.
     db $ff
 
@@ -2197,13 +2197,13 @@ C1StreetShotArrest:
 
 C1Loc4_42:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text10Message1B: YOU PULL THE / TRIGGER AND SHOOT / YOUR GUN.[PAGE] / A PASSERBY RUNS / FOR COVER AND ...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2286,13 +2286,13 @@ C1ShootMirror2:
 
 C1Loc4_48:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1Mirror2Broken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: YOU JUST BLEW AWAYTHE MIRROR. IT / SHATTERS SENDING / SMALL SHARDS EVERYWHICH WAY![END]
     ; End script.
     db $ff
 
@@ -2337,13 +2337,13 @@ C1ShootRoundMirror:
 
 C1Loc4_4C:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1RoundMirrorBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: YOU JUST BLEW AWAYTHE MIRROR. IT / SHATTERS SENDING / SMALL SHARDS EVERYWHICH WAY![END]
 
 jr_006_6b94:
     ; End script.
@@ -2390,13 +2390,13 @@ C1ShootWallMirror:
 
 C1Loc4_50:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1WallMirrorBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $22
+    db $00, $22 ; Message Text0CMessage22: YOU JUST BLEW AWAYTHE MIRROR. IT / SHATTERS SENDING / SMALL SHARDS EVERYWHICH WAY![END]
     ; End script.
     db $ff
 
@@ -2441,13 +2441,13 @@ C1ShootStreetWin:
 
 C1Loc4_54:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1StreetWinBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00
+    db $00 ; Message Text0CMessage46: WITH A BANG AND A / CRASH, YOU BLOW / AWAY THE WINDOW.[END]
 
 jr_006_6bc7:
     db $46
@@ -2499,13 +2499,13 @@ C1ShootGunShopWin:
 
 C1Loc4_58:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1GunShopWinBroken
     ; Refresh room objects.
     db $27
     ; Show message 0.
-    db $00, $46
+    db $00, $46 ; Message Text0CMessage46: WITH A BANG AND A / CRASH, YOU BLOW / AWAY THE WINDOW.[END]
     ; End script.
     db $ff
 
@@ -2550,13 +2550,13 @@ C1ShootLadyEnd:
 
 C1Loc4_5C:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 2.
-    db $02, $ef
+    db $02, $ef ; Message Text0DMessage6F: GOING AGAINST / COMMON SENSE, YOU / DECIDE TO SHOOT / HER.[PAGE] / A PASSING COP / HE...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text11Message7F: IT DOESN'T TAKE / TOO LONG FOR A / JURY OF YOUR PEERSTO CONVICT YOU OF / FIRST DEGREE...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2603,17 +2603,17 @@ C1ShootBumEnd:
 
 C1Loc4_60:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 2.
-    db $02, $e4
+    db $02, $e4 ; Message Text0DMessage64: YOU TAKE A SHOT ATTHE BUM AND HEAR / A WOMAN BEGIN TO / SCREAM.[PAGE] / IMMEDIATELY T...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text11Message7E: YOU'RE ON TRIAL / FOR ATTEMPTED / MURDER.[PAGE] / THE PROSECUTION / HAS A SOLID CASE ...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2660,13 +2660,13 @@ C1ShootClerkEnd:
 
 C1Loc4_64:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $1a
+    db $01, $1a ; Message Text0EMessage1A: KA-BOOM![PAGE] / THE CLERK REACTS / FASTER THAN YOU / THOUGHT POSSIBLE / FOR ONE SO B...
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2713,17 +2713,17 @@ C1ShootCabbyEnd:
 
 C1Loc4_68:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $41
+    db $01, $41 ; Message Text0EMessage41: YOU'VE MANAGED / TO SHOOT THE / BULLETPROOF SCREENBETWEEN YOU AND / THE CABBY.[PAGE] ...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text11Message7E: YOU'RE ON TRIAL / FOR ATTEMPTED / MURDER.[PAGE] / THE PROSECUTION / HAS A SOLID CASE ...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2770,17 +2770,17 @@ C1ShootButlerEnd:
 
 C1Loc4_6C:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Hold text; consume the Case I extra argument.
     db $3f, $02
     ; Show message 1.
-    db $01, $ab
+    db $01, $ab ; Message Text0FMessage2B: YOU TAKE DEADLY / AIM AND SHOT THE / SNOOTY BUTLER! THESOUND BRINGS A / BUNCH OF STAR...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7e
+    db $02, $7e ; Message Text11Message7E: YOU'RE ON TRIAL / FOR ATTEMPTED / MURDER.[PAGE] / THE PROSECUTION / HAS A SOLID CASE ...
     ; Show message 1.
-    db $01, $fc
+    db $01, $fc ; Message Text10Message3C: THE SENTENCE / PASSED DOWN WAS / TEN YEARS IN / MAXIMUM SECURITY![PAGE] / YOUR CELL A...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2827,13 +2827,13 @@ C1ShootSleepersEnd:
 
 C1Loc4_70:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $db
+    db $01, $db ; Message Text10Message1B: YOU PULL THE / TRIGGER AND SHOOT / YOUR GUN.[PAGE] / A PASSERBY RUNS / FOR COVER AND ...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text11Message7F: IT DOESN'T TAKE / TOO LONG FOR A / JURY OF YOUR PEERSTO CONVICT YOU OF / FIRST DEGREE...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -2880,25 +2880,25 @@ C1ShootAlligator:
 
 C1Loc4_74:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Set state and refresh.
-    db $33, $4d
+    db $33, C1StateAlligatorShotView
     ; Wait sixty ticks.
     db $68
     ; Wait sixty ticks.
     db $68
     ; Show message 1.
-    db $01, $36
+    db $01, $36 ; Message Text0EMessage36: AS YOU TRY TO STOPTHE RINGING IN / YOUR EARS, YOU ARETHANKFUL OF TWO / THINGS.[PAGE] ...
     ; Wait sixty ticks.
     db $68
     ; Set first item type and ID.
-    db $5c, $05, $45
+    db $5c, $05, C1DoorIdLiftToRackSewer
     ; Move to the room argument if the selected state permits.
-    db $06, $38
+    db $06, C1RoomIdLiftSewer
     ; Show message 1.
-    db $01, $24
+    db $01, $24 ; Message Text0EMessage24: YOU'RE INSIDE / THE SEWER.[END]
     ; Clear state bit.
-    db $30, $4d
+    db $30, C1StateAlligatorShotView
     ; End script.
     db $ff
 
@@ -2950,9 +2950,9 @@ C1Loc4_78:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: YOU PULL OUT THE / GUN, TAKE QUICK / AIM AND PULL THE / TRIGGER.[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Clear object flag.
     db $18, $0a
     ; Set object flag.
@@ -2960,7 +2960,7 @@ C1Loc4_78:
     ; Refresh room objects.
     db $27
     ; Show message 1.
-    db $01, $8a
+    db $01, $8a ; Message Text0FMessage0A: THE BULLET HOLE / AND THE LACK OF / MOVEMENT TELLS / YOU THE THREAT / IS GONE.[END]
     ; End script.
     db $ff
 
@@ -3007,9 +3007,9 @@ C1GunNoChangeReply:
 
 C1Loc4_7C:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Show message 1.
-    db $01, $f8
+    db $01, $f8 ; Message Text10Message38: YOU WONDER WHY YOUBOTHERED WASTING / THE BULLETS?[END]
     ; End script.
     db $ff
 
@@ -3061,9 +3061,9 @@ C1Loc4_80:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: YOU PULL OUT THE / GUN, TAKE QUICK / AIM AND PULL THE / TRIGGER.[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set object flag.
     db $17, C1CabinetUnlocked
     ; Swap operation slots.
@@ -3077,7 +3077,7 @@ C1Loc4_80:
     ; Set text name 0.
     db $1e, $d6
     ; Show message 2.
-    db $02, $11
+    db $02, $11 ; Message Text11Message11: THE LOCK IS BLOWN / AWAY, SO THE / [OBJECT_WRAM:37C5] IS / NOW OPEN.[END]
     ; End script.
     db $ff
 
@@ -3129,17 +3129,17 @@ C1Loc4_84:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $87
+    db $01, $87 ; Message Text0FMessage07: YOU PULL OUT THE / GUN, TAKE QUICK / AIM AND PULL THE / TRIGGER.[END]
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Set state and refresh.
-    db $33, $31
+    db $33, C1StateBungalowDoorOpen
     ; Set object flag.
     db $17, C1BungalowUnlocked
     ; Set text name 0.
     db $1e, $b0
     ; Show message 2.
-    db $02, $11
+    db $02, $11 ; Message Text11Message11: THE LOCK IS BLOWN / AWAY, SO THE / [OBJECT_WRAM:37C5] IS / NOW OPEN.[END]
     ; End script.
     db $ff
 
@@ -3210,9 +3210,9 @@ C1Door49ShotReply:
 
 C1Loc4_8A:
     ; Run scene effect.
-    db $46, $07
+    db $46, C1FxIdGunshot
     ; Show message 1.
-    db $01, $a2
+    db $01, $a2 ; Message Text0FMessage22: IN YOUR / EXCITEMENT, YOUR / AIM IS WAY OFF![PAGE] / IT SEEMS THAT YOU / HAVE MISSED ...
     ; End script.
     db $ff
 
@@ -3247,7 +3247,7 @@ C1GunNeedsTaken:
 
 C1Loc4_2A:
     ; Show message 2.
-    db $02, $52
+    db $02, $52 ; Message Text11Message52: YOU CAN'T USE WHATYOU HAVEN'T TAKEN.[END]
     ; End script.
     db $ff
 
@@ -3263,9 +3263,9 @@ C1Sc4_3E:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 2.
-    db $02, $8b
+    db $02, $8b ; Message Text0DMessage0B: THE FADED YELLOW / OF THE MANILA / FOLDER CATCHES / YOUR EYE.[END]
     ; Show message 2.
-    db $02, $92
+    db $02, $92 ; Message Text0DMessage12: TYPICALLY, YOU'D / FIND FILES INSIDE.[END]
     ; End script.
     db $ff
 
@@ -3274,7 +3274,7 @@ C1FolderShortView:
 
 C1Loc4_2B:
     ; Show message 2.
-    db $02, $8b
+    db $02, $8b ; Message Text0DMessage0B: THE FADED YELLOW / OF THE MANILA / FOLDER CATCHES / YOUR EYE.[END]
     ; End script.
     db $ff
 
@@ -3288,7 +3288,7 @@ C1Sc4_3F:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3307,7 +3307,7 @@ C1Loc4_8D:
     db $05
     dw C1ContainerPlaceEnd
     ; Test item flag.
-    db $52, $0e
+    db $52, C1ItemNote1
     ; Branch if result bit 0 is clear.
     db $05
     dw C1ContainerPlaceCaution
@@ -3321,7 +3321,7 @@ LookC1Box:
 
 C1Sc4_40:
     ; Show message 2.
-    db $02, $8c
+    db $02, $8c ; Message Text0DMessage0C: IT'S A SMALL BOX.[END]
     ; End script.
     db $ff
 
@@ -3335,7 +3335,7 @@ C1Sc4_41:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3368,7 +3368,7 @@ LookC1Envelope1:
 
 C1Sc4_42:
     ; Show message 2.
-    db $02, $9d
+    db $02, $9d ; Message Text0DMessage1D: IT LOOKS LIKE / A LEGAL-SIZE / ENVELOPE.[END]
     ; End script.
     db $ff
 
@@ -3382,7 +3382,7 @@ C1Sc4_43:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3415,7 +3415,7 @@ LookC1Handbag:
 
 C1Sc4_44:
     ; Show message 2.
-    db $02, $ea
+    db $02, $ea ; Message Text0DMessage6A: IT'S A BLACK / HANDBAG. IT LOOKS / BIG ENOUGH TO / CHOKE A MULE![END]
     ; End script.
     db $ff
 
@@ -3429,7 +3429,7 @@ C1Sc4_45:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3462,7 +3462,7 @@ LookC1Gun2:
 
 C1Sc4_46:
     ; Show message 2.
-    db $02, $eb
+    db $02, $eb ; Message Text0DMessage6B: THIS GUN IS ONE OFTHOSE "SATURDAY / NIGHT SPECIALS."[PAGE] / IT'S EASY TO COME / BY O...
     ; End script.
     db $ff
 
@@ -3485,7 +3485,7 @@ C1Sc4_47:
 jr_006_6df7:
     db HIGH(C1Gun2TargetPrompt)
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: YOU CAN'T USE IT / WHEN IT'S OPEN.[END]
     ; End script.
     db $ff
 
@@ -3494,7 +3494,7 @@ C1Gun2TargetPrompt:
 
 C1Loc4_2C:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: WHAT WOULD YOU / LIKE TO USE THIS / ON?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3503,78 +3503,78 @@ MatchC1Gun2:
 
 C1Loc4_91:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun2Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun2Mirror2
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun2StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun2GunShopWin
     db $00
 
 jr_006_6e10:
-    db $34
+    db C1TargetArmedWoman
     dw C1Gun2Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun2Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun2Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun2NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun2Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun2Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun2Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun2Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun2RoundMirror
-    db $00, $5f
+    db $00, C1TargetMansionButler
     dw C1Gun2Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun2Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun2WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun2Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun2Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
     dw C1Gun2Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun2NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun2Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun2NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun2NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun2NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun2Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun2NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun2ShadowDoor
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun2Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun2Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun2Self
     db $fe, $fe
     dw C1ContainerActionNoHere
@@ -3584,13 +3584,13 @@ C1GunmanShootsFirst:
 
 C1Loc4_92:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $ee
+    db $01, $ee ; Message Text10Message2E: YOU WERE A BIT / SLOW ON THE / TRIGGER.[PAGE] / HE SHOT YOU FIRST.[END]
     ; Finish Case I scene effect.
-    db $5a, $15
+    db $5a, C1FxIdDefeat
     ; Show message 2.
-    db $02, $62
+    db $02, $62 ; Message Text11Message62: TOO BAD ACE! FROM / THE BEGINNING THE / ODDS WERE STACKED / AGAINST YOU![PAGE] / IT S...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3601,13 +3601,13 @@ C1ShootMuggerEnd:
 
 C1Loc4_93:
     ; Finish Case I scene effect.
-    db $5a, $07
+    db $5a, C1FxIdGunshot
     ; Show message 1.
-    db $01, $ea
+    db $01, $ea ; Message Text10Message2A: YOU SHOOT THE / MUGGER ONLY TO / HAVE THE COPS SHOWUP MOMENTS LATER.[PAGE] / BOY, WHE...
     ; Finish Case I scene effect.
-    db $5a, $14
+    db $5a, C1FxIdArrest
     ; Show message 2.
-    db $02, $7f
+    db $02, $7f ; Message Text11Message7F: IT DOESN'T TAKE / TOO LONG FOR A / JURY OF YOUR PEERSTO CONVICT YOU OF / FIRST DEGREE...
     ; Set exit flag and end this action.
     db $48
     ; Not reached from the recovered action and branch entries.
@@ -3630,9 +3630,9 @@ C1Sc4_48:
     ; Hold text; consume the Case I extra argument.
     db $3f, $01
     ; Show message 1.
-    db $01, $6e
+    db $01, $6e ; Message Text0EMessage6E: IT'S A DIARY WITH / THE NAME "MARTHA" / ON IT.[END]
     ; Show message 1.
-    db $01, $1f
+    db $01, $1f ; Message Text0EMessage1F: THERE IS A / BOOKMARK BETWEEN / THE PAGES.[END]
     ; End script.
     db $ff
 
@@ -3641,7 +3641,7 @@ C1DiaryOpenView:
 
 C1Loc4_2D:
     ; Show message 1.
-    db $01, $71
+    db $01, $71 ; Message Text0EMessage71: YOU BEGIN READING,"DEC. 5TH: SIEGEL / DROPPED BY- / PROBABLY TO / APOLOGIZE AGAIN.[PA...
     ; End script.
     db $ff
 
@@ -3650,7 +3650,7 @@ C1DiaryShortView:
 
 C1Loc4_2E:
     ; Show message 1.
-    db $01, $6e
+    db $01, $6e ; Message Text0EMessage6E: IT'S A DIARY WITH / THE NAME "MARTHA" / ON IT.[END]
     ; End script.
     db $ff
 
@@ -3664,7 +3664,7 @@ C1Sc4_49:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
 
 jr_006_6ebf:
     ; Choose alternate target; selected input runs the following script.
@@ -3692,7 +3692,7 @@ LookC1AmmoCase:
 
 C1Sc4_4A:
     ; Show message 1.
-    db $01, $ff
+    db $01, $ff ; Message Text10Message3F: IT'S A BOX OF / AMMO.[END]
     ; End script.
     db $ff
 
@@ -3706,7 +3706,7 @@ C1Sc4_4B:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3739,7 +3739,7 @@ LookC1Envelope2:
 
 C1Sc4_4C:
     ; Show message 1.
-    db $01, $9c
+    db $01, $9c ; Message Text0FMessage1C: THE NAME "MR. / STERNWOOD" IS / PASTED ON THE / ENVELOPE USING / LETTERS CUT OUT / FR...
     ; End script.
     db $ff
 
@@ -3753,7 +3753,7 @@ C1Sc4_4D:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3788,7 +3788,7 @@ LookC1Bowl1:
 
 C1Sc4_4E:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: IT'S A SMALL JAR.[END]
     ; End script.
     db $ff
 
@@ -3802,7 +3802,7 @@ C1Sc4_4F:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3830,7 +3830,7 @@ LookC1Bowl2:
 
 C1Sc4_50:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: IT'S A SMALL JAR.[END]
     ; End script.
     db $ff
 
@@ -3839,7 +3839,7 @@ LookC1Envelope3:
 
 C1Sc4_51:
     ; Show message 2.
-    db $02, $9d
+    db $02, $9d ; Message Text0DMessage1D: IT LOOKS LIKE / A LEGAL-SIZE / ENVELOPE.[END]
     ; End script.
     db $ff
 
@@ -3853,7 +3853,7 @@ C1Sc4_52:
     db $05
     dw C1ContainerPlaceNeedsTaken
     ; Show message 2.
-    db $02, $55
+    db $02, $55 ; Message Text11Message55: YOU WONDER WHERE / YOU SHOULD LEAVE / THIS?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3888,7 +3888,7 @@ LookC1CandyBox:
 
 C1Sc4_53:
     ; Show message 1.
-    db $01, $c3
+    db $01, $c3 ; Message Text10Message03: IT'S A BOX OF / CHOCOLATES.[END]
     ; End script.
     db $ff
 
@@ -3897,7 +3897,7 @@ LookC1Case:
 
 C1Sc4_54:
     ; Show message 1.
-    db $01, $bf
+    db $01, $bf ; Message Text0FMessage3F: IT'S A BLACK / BRIEFCASE, THE / KIND PREFERRED BY / KIDNAPPERS / EVERYWHERE![END]
     ; End script.
     db $ff
 
@@ -3906,7 +3906,7 @@ LookC1Bowl3:
 
 C1Sc4_55:
     ; Show message 1.
-    db $01, $af
+    db $01, $af ; Message Text0FMessage2F: IT'S A SMALL JAR.[END]
     ; End script.
     db $ff
 
@@ -3915,7 +3915,7 @@ LookC1Gun3:
 
 C1Sc4_56:
     ; Show message 1.
-    db $01, $12
+    db $01, $12 ; Message Text0EMessage12: IT'S A STANDARD / MILITARY-ISSUE / GERMAN LUGER.[END]
     ; End script.
     db $ff
 
@@ -3935,7 +3935,7 @@ jr_006_6f37:
     db $05
     dw C1Gun3TargetPrompt
     ; Show message 1.
-    db $01, $60
+    db $01, $60 ; Message Text0EMessage60: YOU CAN'T USE IT / WHEN IT'S OPEN.[END]
     ; End script.
     db $ff
 
@@ -3944,7 +3944,7 @@ C1Gun3TargetPrompt:
 
 C1Loc4_2F:
     ; Show message 1.
-    db $01, $b9
+    db $01, $b9 ; Message Text0FMessage39: WHAT WOULD YOU / LIKE TO USE THIS / ON?[END]
     ; Choose alternate target; selected input runs the following script.
     db $28
 
@@ -3953,77 +3953,77 @@ MatchC1Gun3:
 
 C1Loc4_99:
     ; Match alternate item against type, ID and script target rows.
-    db $29, $00, $03
+    db $29, $00, C1TargetStartWashroomMirror
     dw C1Gun3Mirror1
-    db $00, $07
+    db $00, C1TargetWomenWashroomMirror
     dw C1Gun3Mirror2
 
 jr_006_6f4e:
-    db $00, $0d
+    db $00, C1TargetBarStreetWindow
     dw C1Gun3StreetWin
-    db $00, $2c
+    db $00, C1TargetGunShopWindow
     dw C1Gun3GunShopWin
-    db $00, $34
+    db $00, C1TargetArmedWoman
     dw C1Gun3Lady
-    db $00, $35
+    db $00, C1TargetFallenWoman
     dw C1Gun3Lady
-    db $00, $36
+    db $00, C1TargetBum
     dw C1Gun3Bum
-    db $00, $3d
+    db $00, C1TargetAceOfficeWallMarks
     dw C1Gun3NoChange
-    db $00, $3f
+    db $00, C1TargetMrsSternwood
     dw C1Gun3Lady
-    db $00, $40
+    db $00, C1TargetGunShopClerk
     dw C1Gun3Clerk
-    db $00, $42
+    db $00, C1TargetBlueCabDriver
     dw C1Gun3Cabby
-    db $00, $46
+    db $00, C1TargetYellowCabDriver
     dw C1Gun3Cabby
-    db $00, $54
+    db $00, C1TargetPenthouseRoundMirror
     dw C1Gun3RoundMirror
-    db $00, $5f
+    db $00, C1TargetMansionButler
     dw C1Gun3Butler
-    db $00, $64
+    db $00, C1TargetMrSternwood
     dw C1Gun3Sleepers
-    db $00, $65
+    db $00, C1TargetGuestBedroomMirror
     dw C1Gun3WallMirror
-    db $00, $68
+    db $00, C1TargetSleepingWoman
     dw C1Gun3Sleepers
-    db $00, $6a
+    db $00, C1TargetAlligator
     dw C1Gun3Alligator
-    db $00, $6b
+    db $00, C1TargetAceOfficeDoorShadow
     dw C1Gun3Shadow
-    db $01, $02
+    db $01, C1ContainerCorpseOfficeWallSafe
     dw C1Gun3NoChange
-    db $01, $06
+    db $01, C1ContainerDoctorLockedCabinet
     dw C1Gun3Cabinet
-    db $05, $06
+    db $05, C1DoorIdJoeFrontDoor
     dw C1Gun3NoChange
-    db $05, $14
+    db $05, C1DoorIdCorpseOffice
     dw C1Gun3NoChange
-    db $05, $1b
+    db $05, C1DoorIdLuxuryCar
     dw C1Gun3NoChange
-    db $05, $31
+    db $05, C1DoorIdBungalow
     dw C1Gun3Door31
-    db $05, $36
+    db $05, C1DoorIdDoctorOffice
     dw C1Gun3NoChange
-    db $05, $38
+    db $05, C1DoorIdAceOffice
     dw C1Gun3ShadowDoor
-    db $05, $49
+    db $05, C1DoorIdMansionFrontDoor
     dw C1Gun3Door49
-    db $00, $2e
+    db $00, C1TargetShootingMuggerVariant1
     dw C1GunmanShootsFirst
-    db $00, $75
+    db $00, C1TargetShootingMuggerVariant2
     dw C1GunmanShootsFirst
-    db $00, $76
+    db $00, C1TargetShootingMuggerVariant3
     dw C1GunmanShootsFirst
-    db $00, $77
+    db $00, C1TargetShootingMuggerVariant4
     dw C1GunmanShootsFirst
-    db $00, $2f
+    db $00, C1TargetRobbingMugger
     dw C1ShootMuggerEnd
-    db $05, $47
+    db $05, C1DoorIdCarTrunk
     dw C1Gun3Street
-    db $00, $73
+    db $00, C1TargetSelf
     dw C1Gun3Self
     db $fe, $fe
     dw C1ContainerActionNoHere

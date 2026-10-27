@@ -5,9 +5,9 @@ C2ScriptTypes:
     dw C2Type1Refs ; type 1
     db $07
     ; C2Type2Refs: split pointer retains the original interior label.
-    db $23 ; type 2
+    db LOW(C2Type2Refs) ; type 2
 Call_000_3b03:
-    db $55
+    db HIGH(C2Type2Refs)
     db $07
     dw C2Type3Refs ; type 3
     db $07

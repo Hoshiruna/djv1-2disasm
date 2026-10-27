@@ -1,5 +1,5 @@
 
-; For Case I type $01 values $06/$08, clear object $18/$19 presence.
+; Clear the selected Case I cabinet object presence.
 ClearC1Pair:
     ld a, [wCaseId]
     cp $00
@@ -22,20 +22,20 @@ ClearC1Pair:
     ld h, a
     add hl, bc
     ld a, [hl]
-    cp $06
+    cp C1ContainerDoctorLockedCabinet
     jr nz, C1ClearPairSecond
 
-    ld a, $18
+    ld a, C1ObjectDoctorCabinet
     call ClearObjPresent
     jr C1ClearPairReturn
 
-; Check type-one value eight before clearing object $19 presence.
+; Check the Ace cabinet before clearing its object presence.
 C1ClearPairSecond:
 jr_002_6532:
-    cp $08
+    cp C1ContainerAceOfficeCabinet
     jr nz, C1ClearPairReturn
 
-    ld a, $19
+    ld a, C1ObjectAceCabinet
     call ClearObjPresent
 
 ; Return after the Case I paired-object clearing checks.
@@ -43,7 +43,7 @@ C1ClearPairReturn:
 jr_002_653b:
     ret
 
-; For Case I type $01 values $06/$08, set object $18/$19 presence.
+; Set the selected Case I cabinet object presence.
 KeepC1Pair:
 
     ld a, [wCaseId]
@@ -67,20 +67,20 @@ KeepC1Pair:
     ld h, a
     add hl, bc
     ld a, [hl]
-    cp $06
+    cp C1ContainerDoctorLockedCabinet
     jr nz, C1KeepPairSecond
 
-    ld a, $18
+    ld a, C1ObjectDoctorCabinet
     call SetObjPresent
     jr C1KeepPairReturn
 
-; Check type-one value eight before setting object $19 presence.
+; Check the Ace cabinet before setting its object presence.
 C1KeepPairSecond:
 jr_002_6567:
-    cp $08
+    cp C1ContainerAceOfficeCabinet
     jr nz, C1KeepPairReturn
 
-    ld a, $19
+    ld a, C1ObjectAceCabinet
     call SetObjPresent
 
 ; Return after the Case I paired-object presence checks.

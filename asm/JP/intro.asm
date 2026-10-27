@@ -5,9 +5,10 @@ ShowBoot:
 
     call DisableLcd
     call LoadBootGfx
-    ld a, $04
+    ld a, UiMapIdDeveloperLogo
     call DrawBoot
     call DisableLcd
+; Fall through to DrawBoot with the copyright map at index zero.
     xor a
 
 ; Load map A and object palette 2, fade in, wait $78 ticks, then fade out.
@@ -15,8 +16,8 @@ DrawBoot:
 
 Call_001_41c0:
     call ReadUiMap
-    ld a, $02
-    call StageUiObj
+    ld a, UiPalIdCommonObjects
+    call StageUiObjPal
     call RestoreLcd
     call BlankOam
     call FadeFromWhite
@@ -32,10 +33,10 @@ ShowTitle:
     call LoadTextSet
     call DisableLcd
     call LoadTitleGfx
-    ld a, $01
+    ld a, UiMapIdTitle
     call ReadUiMap
-    ld a, $02
-    call StageUiObj
+    ld a, UiPalIdCommonObjects
+    call StageUiObjPal
     call RestoreLcd
     call BlankOam
     call FadeFromWhite

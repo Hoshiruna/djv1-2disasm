@@ -15,8 +15,8 @@ SECTION "ROM Bank $031", ROMX[$4000], BANK[$31]
     dw GfxC2_G77Empty ; $07
     dw GfxC2_G78 ; $08
     dw GfxC2_G79 ; $09
-    dw GfxC2_G7A ; $0a
-    dw GfxC2_G7B ; $0b
+    dw GfxC2_BlackjackCardsLow ; $0a
+    dw GfxC2_BlackjackCardsHigh ; $0b
     dw GfxC2_G7CEmpty ; $0c
     dw GfxC2_G7DEmpty ; $0d
     dw GfxC2_G7EEmpty ; $0e
@@ -342,6 +342,8 @@ jr_031_5c6f:
 jr_031_5c7f:
     INCBIN "../../res/scene/case2/common/US/g79.bin", $1b7, $5
 
+; Low card tiles; byte-identical to the separate UI card stream.
+GfxC2_BlackjackCardsLow:
 GfxC2_G7A:
     INCBIN "../../res/scene/case2/common/US/g7a.bin", $0, $3a
 jr_031_5cbe:
@@ -399,6 +401,8 @@ jr_031_6027:
 jr_031_6040:
     INCBIN "../../res/scene/case2/common/US/g7a.bin", $3bc, $5f
 
+; High card tiles; byte-identical to the separate UI card stream.
+GfxC2_BlackjackCardsHigh:
 GfxC2_G7B:
     INCBIN "../../res/scene/case2/common/US/g7b.bin", $0, $25
 jr_031_60c4:

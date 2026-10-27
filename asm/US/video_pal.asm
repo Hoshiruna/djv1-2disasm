@@ -1,5 +1,5 @@
 
-; Write active object and BG palette sets to CGB palette registers.
+; Upload 64 live OBJ bytes, then 64 live BG bytes; staged buffers are not read.
 UploadPals:
 Call_001_4172:
     call UploadObjPal
@@ -10,7 +10,7 @@ Call_001_4172:
 UploadBgPal:
 Call_001_4179:
     ld hl, wBgPal
-    ld d, $40
+    ld d, PaletteSetByteCount
     ld a, $80
     ldh [rBCPS], a
     ld c, $69
@@ -20,7 +20,7 @@ Call_001_4179:
 UploadObjPal:
 Call_001_4186:
     ld hl, wObjPal
-    ld d, $40
+    ld d, PaletteSetByteCount
     ld a, $80
     ldh [rOCPS], a
     ld c, $6b

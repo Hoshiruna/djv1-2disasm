@@ -29,7 +29,7 @@ Call_002_6183:
     call WaitTicks
     call AddCoinFind
     ld a, $18
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message18: YOUR LUCK HAS / CERTAINLY CHANGED!YOU'VE HIT THE / JACKPOT![PAGE] / YOU GOT / [NUM8_W...
     ret
 
 
@@ -39,7 +39,7 @@ jr_002_61c8:
     ld a, $16
     call PlayAudio
     ld a, $75
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message75: UNFORTUNATELY, YOUCOME UP A LOSER.[END]
     ret
 
 ; At zero coins choose matching reels; at $46 coins or above choose nonmatching reels; between them use the original low-three-bit random branch.

@@ -1,13 +1,13 @@
 
-; Load UI graphics zero and one in sequence.
+; Load the save-screen low and high tile blocks.
 LoadSaveGfx:
 
 
 Call_000_09ea:
-    ld a, $00
+    ld a, UiGfxIdSaveScreenLow
 
 Call_000_09ec:
     call ReadUiGfx
-    ld a, $01
+    ld a, UiGfxIdSaveScreenHigh
     call ReadUiGfx
     ret

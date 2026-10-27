@@ -1,5 +1,6 @@
 
-; For a type-two pending record, store the working-list bytes in its group record using the regional source base.
+; Locate the pending record using a 16-bit doubled index; accept only type two.
+; The group offset below wraps to eight bits after three shifts.
 StoreWorkGroup:
 
 
@@ -37,13 +38,13 @@ jr_000_2393:
     inc bc
     inc e
     ld a, e
-    cp $07
+    cp C1GroupStoreBytes
     jr c, StoreWorkGroupCase1Next
 
     ret
 
 
-; Skip the Case II group header before copying six content bytes.
+; Skip the Case II header and store bytes 1-6; byte 7 remains untouched.
 StoreWorkGroupCase2:
 jr_000_239d:
     ld bc, wGroupData+1
@@ -59,7 +60,7 @@ jr_000_23a6:
     inc bc
     inc e
     ld a, e
-    cp $06
+    cp C2GroupStoreBytes
     jr c, StoreWorkGroupCase2Next
 
     ret

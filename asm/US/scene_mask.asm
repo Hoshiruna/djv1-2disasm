@@ -48,13 +48,16 @@ jr_001_4fc7:
 ; Seven effect tables; each step has fourteen little-endian row masks.
 ; The renderer uses only bits 0-13. Repeated cells and unused high bits are original data.
 SceneMaskRefs:
-    dw SceneMask0
-    dw SceneMask1
+    dw SceneMaskRightChevron
+    dw SceneMaskLeftChevron
     dw SceneMask2
-    dw SceneMask3
-    dw SceneMask4
+    dw SceneMaskDownChevron
+    dw SceneMaskUpChevron
     dw SceneMask5
-    dw SceneMask6
+    dw SceneMaskDiagonalStripes
+; Effect 1: 7 steps, 0 repeated cell selections, 0 row masks with unused high bits.
+; Scene-draw mask: left chevrons.
+SceneMaskLeftChevron:
 SceneMask1:
     dw $2040
     dw $1020
@@ -170,6 +173,9 @@ jr_001_5090:
     dw $1020
     dw $2040
     dw $0081
+; Effect 0: 7 steps, 0 repeated cell selections, 0 row masks with unused high bits.
+; Scene-draw mask: right chevrons.
+SceneMaskRightChevron:
 SceneMask0:
     dw $0081
     dw $0102
@@ -285,6 +291,7 @@ jr_001_514a:
     dw $0102
     dw $0081
     dw $2040
+; Effect 2: 7 steps, 3 repeated cell selections, 17 row masks with unused high bits.
 SceneMask2:
     dw $0080
     db LOW($0080)
@@ -392,6 +399,9 @@ jr_001_51e7:
     dw $0000
     dw $0000
     dw $0000
+; Effect 3: 7 steps, 0 repeated cell selections, 0 row masks with unused high bits.
+; Scene-draw mask: down chevrons.
+SceneMaskDownChevron:
 SceneMask3:
     dw $2001
     dw $1002
@@ -517,6 +527,9 @@ jr_001_52dc:
 jr_001_52ea:
     db HIGH($00c0)
     dw $2001
+; Effect 4: 7 steps, 0 repeated cell selections, 0 row masks with unused high bits.
+; Scene-draw mask: up chevrons.
+SceneMaskUpChevron:
 SceneMask4:
     dw $00c0
     dw $0120
@@ -640,6 +653,7 @@ jr_001_53aa:
     dw $0408
     dw $0804
     dw $1002
+; Effect 5: 7 steps, 8 repeated cell selections, 0 row masks with unused high bits.
 SceneMask5:
     dw $00c0
     dw $0000
@@ -761,6 +775,9 @@ jr_001_546c:
     dw $0804
     dw $1002
     dw $2001
+; Effect 6: 6 steps, 0 repeated cell selections, 0 row masks with unused high bits.
+; Scene-draw mask: diagonal stripes.
+SceneMaskDiagonalStripes:
 SceneMask6:
     dw $0104
     dw $2082

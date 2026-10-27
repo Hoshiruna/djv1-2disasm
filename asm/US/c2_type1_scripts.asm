@@ -5,7 +5,7 @@ LookC2Dresser:
 
 C2Sc1_00:
     ; Show message 0.
-    db $00, $39
+    db $00, $39 ; Message Text12Message39: IT'S A BEAT UP / DRESSER.[END]
     ; End script.
     db $ff
 
@@ -14,7 +14,7 @@ RejectC2Container:
 
 C2Sc1_01:
     ; Show message 0.
-    db $00, $2c
+    db $00, $2c ; Message Text12Message2C: NOTHING HAPPENS.[END]
     ; End script.
     db $ff
 
@@ -23,7 +23,7 @@ LookNightstand1:
 
 C2Sc1_02:
     ; Show message 0.
-    db $00, $3a
+    db $00, $3a ; Message Text12Message3A: TWO INCHES OF / DUST COAT THIS / NIGHTSTAND.[END]
     ; End script.
     db $ff
 
@@ -37,9 +37,9 @@ C2Sc1_03:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $57
+    db $01, $57 ; Message Text14Message57: THIS BATTERED / MAILBOX HAS YOUR / NAME ON IT. KIND / OF SEEMS LIKE A / METAPHOR ABOU...
     ; Show message 2.
-    db $02, $08
+    db $02, $08 ; Message Text16Message08: YOUR DETECTIVE / SKILLS TELL YOU / THAT A KEY WOULD / PROBABLY OPEN THISUP![END]
     ; End script.
     db $ff
 
@@ -48,7 +48,7 @@ MailUnlockedText:
 
 C2Loc1_00:
     ; Show message 1.
-    db $01, $59
+    db $01, $59 ; Message Text14Message59: IT'S A DENTED / MAILBOX.[END]
     ; End script.
     db $ff
 
@@ -65,9 +65,9 @@ C2Sc1_04:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Hide object.
-    db $2a, $3b
+    db $2a, C2VisIdAdisonMailboxClosed
     ; Refresh room objects.
     db $2b
     ; Keep selected change.
@@ -85,9 +85,9 @@ C2Sc1_05:
     db $5b
     dw ContainerIsClosed
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Show object.
-    db $29, $3b
+    db $29, C2VisIdAdisonMailboxClosed
     ; Refresh room objects.
     db $2b
     ; Clear selected attribute bit 2.
@@ -102,7 +102,7 @@ LookDiarySlot:
 
 C2Sc1_06:
     ; Test object flag and branch when set.
-    db $08, $64
+    db $08, C2DiarySlotUnlockedOnce
     dw SlotDiaryReply
     ; Test object flag and branch when set.
     db $08, DiarySlotSeen
@@ -110,9 +110,9 @@ C2Sc1_06:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $07
+    db $02, $07 ; Message Text16Message07: WELL, WELL- A SLOTMACHINE. DO YOU / FEEL LUCKY?[END]
     ; Show message 2.
-    db $02, $08
+    db $02, $08 ; Message Text16Message08: YOUR DETECTIVE / SKILLS TELL YOU / THAT A KEY WOULD / PROBABLY OPEN THISUP![END]
     ; Set object flag.
     db $09, DiarySlotSeen
     ; End script.
@@ -123,7 +123,7 @@ SlotDiaryReply:
 
 C2Loc1_01:
     ; Show message 2.
-    db $02, $0a
+    db $02, $0a ; Message Text16Message0A: A DIARY IS HIDDEN / IN THIS MACHINE.[END]
     ; End script.
     db $ff
 
@@ -132,7 +132,7 @@ SlotKeyHint:
 
 C2Loc1_02:
     ; Show message 2.
-    db $02, $09
+    db $02, $09 ; Message Text16Message09: THAT WOULD / PROBABLY BE THE / EASIEST WAY TO / OPEN IT UP![END]
     ; End script.
     db $ff
 
@@ -163,9 +163,9 @@ C2Sc1_08:
     ; Hold text.
     db $2e
     ; Show message 2.
-    db $02, $0b
+    db $02, $0b ; Message Text16Message0B: IT DOESN'T APPEAR / THAT THIS SLOT / MACHINE HAS BEEN / USED IN QUITE A / WHILE.[END]
     ; Show message 2.
-    db $02, $08
+    db $02, $08 ; Message Text16Message08: YOUR DETECTIVE / SKILLS TELL YOU / THAT A KEY WOULD / PROBABLY OPEN THISUP![END]
     ; Set object flag.
     db $09, EmptySlotSeen
     ; End script.
@@ -176,7 +176,7 @@ SlotEmptyReply:
 
 C2Loc1_03:
     ; Show message 2.
-    db $02, $0c
+    db $02, $0c ; Message Text16Message0C: THIS IS AN EMPTY / SLOT MACHINE.[END]
     ; End script.
     db $ff
 
@@ -209,7 +209,7 @@ jr_007_5430:
     ; Wait sixty ticks.
     db $7e
     ; Show message 1.
-    db $01, $bd
+    db $01, $bd ; Message Text15Message3D: ON THE DESKTOP IS / A POOL OF DRIED / BLOOD.[PAGE] / YOU REMEMBER / FINDING JOEY / SI...
     ; Wait sixty ticks.
     db $7e
     ; Restore saved Case II effect.
@@ -224,12 +224,12 @@ C2Sc1_0B:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $be
+    db $01, $be ; Message Text15Message3E: IT'S A STAINLESS- / STEEL SAFE MOUNTEDON THE WALL.[END]
     ; Test object flag and branch when set.
     db $08, C2SafeSeen
     dw EndC2Container
     ; Show message 1.
-    db $01, $bf
+    db $01, $bf ; Message Text15Message3F: JOEY KEPT HIS / IMPORTANT THINGS / HERE...[PAGE] / AND THAT INCLUDED / A LARGE AMOUNT...
     ; Set object flag.
     db $09, C2SafeSeen
     ; End script.
@@ -246,9 +246,9 @@ jr_007_5443:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Set state and refresh without cue.
-    db $22, $75
+    db $22, C2StateJoeSafeOpen
     ; Keep selected change.
     db $27
     ; End script.
@@ -264,9 +264,9 @@ C2Sc1_0D:
     db $5b
     dw ContainerIsClosed
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear state and refresh.
-    db $24, $75
+    db $24, C2StateJoeSafeOpen
     ; Clear selected attribute bit 2.
     db $1f
     ; Remove selected change.
@@ -281,12 +281,12 @@ C2Sc1_0E:
     ; Hold text.
     db $2e
     ; Show message 1.
-    db $01, $c1
+    db $01, $c1 ; Message Text15Message41: IT'S AN OLD / FASHIONED / TELEPHONE.[END]
     ; Test object flag and branch when set.
     db $08, C2PhoneOpened
     dw EndC2Container
     ; Show message 1.
-    db $01, $c0
+    db $01, $c0 ; Message Text15Message40: NOW THAT'S / STRANGE, YOU NEVERNOTICED THE SMALL / KNOB ON IT BEFORE![END]
     ; End script.
     db $ff
 
@@ -312,7 +312,7 @@ LookNightstand2:
 
 C2Sc1_10:
     ; Show message 2.
-    db $02, $42
+    db $02, $42 ; Message Text16Message42: THE THICK DUST ON / THIS NIGHT TABLE / MAKES YOUR NOSE / ITCH.[END]
     ; End script.
     db $ff
 
@@ -321,12 +321,12 @@ LookC2Wardrobe:
 
 C2Sc1_11:
     ; Test state bit.
-    db $0e, $a7
+    db $0e, C2StateSugarWardrobeMirrorBroken
     ; Branch if result bit 0 is set.
     db $03
     dw WardrobeMirrorText
     ; Show message 2.
-    db $02, $43
+    db $02, $43 ; Message Text16Message43: IT'S A LARGE / CLOTHES WARDROBE.[PAGE] / A GLANCE IN THE / MIRROR, TELLS YOU / THAT Y...
     ; End script.
     db $ff
 
@@ -335,7 +335,7 @@ WardrobeMirrorText:
 
 C2Loc1_04:
     ; Show message 2.
-    db $02, $44
+    db $02, $44 ; Message Text16Message44: THE JAGGED ANGLES / OF THE BUSTED / MIRROR FASCINATES / YOU.[END]
     ; End script.
     db $ff
 
@@ -349,11 +349,11 @@ C2Sc1_12:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
 
 jr_007_547e:
     ; Set state and refresh without cue.
-    db $22, $ac
+    db $22, C2StateSugarWardrobeOpen
     ; Keep selected change.
     db $27
     ; End script.
@@ -364,7 +364,7 @@ WardrobeDropReply:
 
 C2Sc1_13:
     ; Show message 0.
-    db $00, $e5
+    db $00, $e5 ; Message Text13Message65: IF YOU DON'T HAVE / IT, YOU CAN'T / THROW IT AWAY.[END]
     ; End script.
     db $ff
 
@@ -373,7 +373,7 @@ WardrobeCantDo:
 
 C2Sc1_14:
     ; Show message 0.
-    db $00, $e1
+    db $00, $e1 ; Message Text13Message61: I CAN'T DO THAT.[END]
     ; End script.
     db $ff
 
@@ -387,9 +387,9 @@ C2Sc1_15:
     db $5b
     dw ContainerIsClosed
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear state and refresh.
-    db $24, $ac
+    db $24, C2StateSugarWardrobeOpen
     ; Remove selected change.
     db $38
     ; Clear selected attribute bit 2.
@@ -404,16 +404,16 @@ C2Sc1_16:
     ; Set text name 0.
     db $30, $ae
     ; Test state bit.
-    db $0e, $a7
+    db $0e, C2StateSugarWardrobeMirrorBroken
     ; Branch if result bit 0 is set.
     db $03
     dw WardMirrorBroken
     ; Play audio.
     db $3e, $13
     ; Set state and refresh without cue.
-    db $22, $a7
+    db $22, C2StateSugarWardrobeMirrorBroken
     ; Show message 3.
-    db $2c, $00
+    db $2c, $00 ; Message Text18Message00: THE [OBJECT_WRAM:37C5] / BROKE.[END]
     ; End script.
     db $ff
 
@@ -422,7 +422,7 @@ WardMirrorBroken:
 
 C2Loc1_05:
     ; Show message 3.
-    db $2c, $01
+    db $2c, $01 ; Message Text18Message01: THE [OBJECT_WRAM:37C5] / IS BROKEN.[END]
     ; End script.
     db $ff
 
@@ -431,7 +431,7 @@ WardrobeNoAnswer:
 
 C2Sc1_17:
     ; Show message 0.
-    db $00, $e3
+    db $00, $e3 ; Message Text13Message63: ...NO ANSWER.[END]
     ; End script.
     db $ff
 
@@ -440,7 +440,7 @@ WardrobeQuestion:
 
 C2Sc1_18:
     ; Show message 0.
-    db $00, $2d
+    db $00, $2d ; Message Text12Message2D: WHAT ARE YOU / DOING...?[END]
     ; End script.
     db $ff
 
@@ -449,7 +449,7 @@ LookMahogDesk:
 
 C2Sc1_19:
     ; Show message 2.
-    db $02, $dd
+    db $02, $dd ; Message Text17Message5D: IT'S A MAHOGANY / DESK WITH A / GLOSSY, SHELLACKEDFINISH.[END]
     ; End script.
     db $ff
 
@@ -458,7 +458,7 @@ LookSolidDesk:
 
 C2Sc1_1A:
     ; Show message 0.
-    db $00, $ad
+    db $00, $ad ; Message Text13Message2D: IT'S AN SOLID WOODDESK.[END]
     ; End script.
     db $ff
 
@@ -483,9 +483,9 @@ jr_007_54b1:
     ; Play audio.
     db $3e, $08
     ; Show message 2.
-    db $02, $fe
+    db $02, $fe ; Message Text17Message7E: YOU WONDER IF / SEEING STOGIE'S / CIGAR RING ON HIS / DESK WOULD CAUSE / VENTINI TO T...
     ; Show message 2.
-    db $02, $70
+    db $02, $70 ; Message Text16Message70: IF YOU CAN DO THATAND REVEAL / VENTINI'S SCHEME / TO MALONE AND / SOMEHOW GET OUT OFT...
     ; Set object flag.
     db $09, C2RingPlan
     ; Set object flag.
@@ -504,7 +504,7 @@ SecretDeskReply:
 
 C2Loc1_06:
     ; Show message 2.
-    db $02, $fd
+    db $02, $fd ; Message Text17Message7D: IT'S A SMALL / OFFICE DESK, MADE / OF BLONDE OAK.[END]
     ; End script.
     db $ff
 
@@ -520,7 +520,7 @@ C2Sc1_1C:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $27
     ; Test object flag and branch when set.
@@ -537,7 +537,7 @@ C2Sc1_1C:
     ; Play audio.
     db $3e, $08
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text16Message01: YOU DISCOVER THE / STUFF THAT WAS / TAKEN FROM YOU.[PAGE] / YOU CAREFULLY / CONSIDER ...
     ; Set object flag.
     db $09, C2EndFlag
     ; Set object flag.
@@ -557,7 +557,7 @@ C2Loc1_07:
     db $08, C2LootSeen
     dw EndC2Container
     ; Show message 2.
-    db $02, $18
+    db $02, $18 ; Message Text16Message18: HERE'S THE STUFF / THEY TOOK OFF OF / YOU![PAGE] / YOU THINK YOU KNOWWHY THIS WAS SO ...
     ; Set object flag.
     db $09, C2LootSeen
     ; End script.
@@ -599,7 +599,7 @@ C2Loc1_09:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $02
+    db $2c, $02 ; Message Text18Message02: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $27
     ; End script.
@@ -612,7 +612,7 @@ C2Loc1_0A:
     ; Copy selected-slot name to text name 0.
     db $48
     ; Show message 3.
-    db $2c, $19
+    db $2c, $19 ; Message Text18Message19: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -631,7 +631,7 @@ CloseContainerNow:
 
 C2Loc1_0C:
     ; Show message 3.
-    db $2c, $03
+    db $2c, $03 ; Message Text18Message03: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear selected attribute bit 2.
     db $1f
     ; Remove selected change.
@@ -646,9 +646,9 @@ C2Loc1_0B:
     ; Hold text.
     db $2e
     ; Show message 0.
-    db $00, $d3
+    db $00, $d3 ; Message Text13Message53: HMM... / IT DOESN'T OPEN.[END]
     ; Show message 0.
-    db $00, $d6
+    db $00, $d6 ; Message Text13Message56: IT'S LOCKED.[END]
     ; End script.
     db $ff
 
@@ -657,6 +657,6 @@ ContainerIsClosed:
 
 C2Loc1_0D:
     ; Show message 3.
-    db $2c, $1a
+    db $2c, $1a ; Message Text18Message1A: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff

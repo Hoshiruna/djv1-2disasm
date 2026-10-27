@@ -1,9 +1,9 @@
 ; 138 indexed Case II map patches: $2f, width, height, then tile/attribute rows.
 C2PatchRefs:
-    dw C2Patch00
-    dw C2Patch01
-    dw C2Patch02
-    dw C2Patch03
+    dw Case2BathroomDoorClosed
+    dw Case2BathroomDoorOpen
+    dw C2PatchBedroomCurtainOpen
+    dw C2PatchBedroomCurtainClosed
     dw C2Patch04
     dw C2Patch05
     dw C2Patch06
@@ -12,8 +12,8 @@ C2PatchRefs:
     dw C2Patch09
     dw C2Patch0A
     dw C2Patch0B
-    dw C2Patch0C
-    dw C2Patch0D
+    dw C2PatchLiftDoorClosed
+    dw C2PatchLiftDoorOpen
     dw C2Patch0E
     dw C2Patch0F
     dw C2Patch10
@@ -88,10 +88,10 @@ C2PatchRefs:
     dw C2Patch55
     dw C2Patch56
     dw C2Patch57
-    dw C2Patch58
-    dw C2Patch59
-    dw C2Patch5A
-    dw C2Patch5B
+    dw C2PatchSugarWardrobeClosedIntact
+    dw C2PatchSugarWardrobeOpenIntact
+    dw C2PatchSugarWardrobeClosedBroken
+    dw C2PatchSugarWardrobeOpenBroken
     dw C2Patch5C
     dw C2Patch5D
     dw C2Patch5E
@@ -117,8 +117,8 @@ C2PatchRefs:
 jr_029_40e1:
     db HIGH(C2Patch70)
     dw C2Patch71
-    dw C2Patch72
-    dw C2Patch73
+    dw C2PatchLaundryBound
+    dw C2PatchLaundryUntied
     dw C2Patch74
     dw C2Patch75
     dw C2Patch76
@@ -190,11 +190,15 @@ jr_029_415c:
     INCBIN "../../res/scene/case2/00-lucky-bath/s00-door-open.attrmap", $1c, $4
 
 ; 1x8 cells.
+; Bedroom curtain map patch while C2StateBedroomCurtainClosed is clear.
+C2PatchBedroomCurtainOpen:
 C2Patch02:
     db $2f, $01, $08, $6c, $0d, $6d, $0d, $6d, $0d, $6e, $0d, $6d, $0d, $6d, $0d, $6f
     db $0d, $70, $0a
 
 ; 1x8 cells.
+; Bedroom curtain map patch while C2StateBedroomCurtainClosed is set.
+C2PatchBedroomCurtainClosed:
 C2Patch03:
     db $2f, $01, $08, $71, $08, $71, $08, $71, $08, $71, $08, $71, $08, $71, $08, $71
     db $08, $72, $08
@@ -242,6 +246,8 @@ C2Patch0B:
     db $2f, $02, $02, $47, $48, $08, $08, $49, $4a, $08, $08
 
 ; 4x13 cells.
+; Shared lift-door map patch while the floor door-open state is clear.
+C2PatchLiftDoorClosed:
 C2Patch0C:
     db $2f, $04, $0d, $19, $1a, $88, $89, $0c, $09, $09, $09, $84, $85, $86, $87, $09
     db $09, $09, $09, $4c, $4d, $4e, $4f, $09, $09, $09, $09, $5c, $5d, $5e, $5f, $09
@@ -252,6 +258,8 @@ C2Patch0C:
     db $09, $09, $09, $80, $81, $82, $83, $09, $09, $09, $09
 
 ; 4x13 cells.
+; Shared lift-door map patch while the floor door-open state is set.
+C2PatchLiftDoorOpen:
 C2Patch0D:
     db $2f, $04, $0d, $19, $1a, $8a, $8b, $0c, $09, $09, $0e, $8c, $8d, $8e, $8f, $09
     db $0e, $0e, $0e, $90, $a7, $a7, $a7, $09, $0e, $0e, $0e, $91, $a7, $a7, $a7, $09
@@ -772,24 +780,32 @@ C2Patch57:
     db $ff, $0b, $0b, $0b, $0b, $0b, $00
 
 ; 3x7 cells.
+; Sugar wardrobe patch: closed, mirror intact.
+C2PatchSugarWardrobeClosedIntact:
 C2Patch58:
     db $2f, $03, $07, $84, $85, $86, $0e, $0e, $0e, $87, $88, $89, $0a, $0a, $0e, $8a
     db $8b, $89, $0a, $0b, $0e, $8c, $8d, $89, $0a, $0b, $0e, $8e, $8f, $90, $0a, $0b
     db $0e, $91, $92, $93, $0a, $0a, $0e, $94, $95, $96, $0e, $0e, $0e
 
 ; 3x7 cells.
+; Sugar wardrobe patch: open, mirror intact.
+C2PatchSugarWardrobeOpenIntact:
 C2Patch59:
     db $2f, $03, $07, $97, $98, $99, $0e, $0e, $0e, $9a, $ff, $9b, $0a, $00, $0e, $9a
     db $ff, $9b, $0a, $00, $0e, $9a, $ff, $9b, $0a, $00, $0e, $9a, $ff, $9c, $0a, $00
     db $0e, $9d, $9e, $9f, $0e, $0e, $0e, $94, $95, $a0, $0e, $0e, $0e
 
 ; 3x7 cells.
+; Sugar wardrobe patch: closed, mirror broken.
+C2PatchSugarWardrobeClosedBroken:
 C2Patch5A:
     db $2f, $03, $07, $84, $85, $86, $0e, $0e, $0e, $a1, $a2, $89, $0a, $0a, $0e, $a3
     db $a4, $89, $0a, $0b, $0e, $a5, $a6, $89, $0a, $0b, $0e, $a7, $a8, $90, $0a, $0b
     db $0e, $a9, $aa, $93, $0a, $0a, $0e, $94, $95, $a0, $0e, $0e, $0e
 
 ; 3x7 cells.
+; Sugar wardrobe patch: open, mirror broken.
+C2PatchSugarWardrobeOpenBroken:
 C2Patch5B:
     db $2f, $03, $07, $97, $98, $99, $0e, $0e, $0e, $9a, $ff, $9b, $0a, $00, $0e, $9a
     db $ff, $9b, $0a, $00, $0e, $9a, $ff, $9b, $0a, $00, $0e, $9a, $ff, $9c, $0a, $00
@@ -951,6 +967,8 @@ jr_029_572b:
     db $61, $0c, $0c
 
 ; 5x6 cells.
+; Laundry map patch while C2StateLaundryUntied is clear.
+C2PatchLaundryBound:
 C2Patch72:
     db $2f, $05, $06, $7e, $7f, $80, $81, $82, $0b, $0b, $0b, $0b, $0b, $83, $84, $85
     db $86, $87, $0b, $0a, $0a, $0a, $0b, $88, $89, $8a, $8b, $8c, $0b, $0e, $0e, $0e
@@ -958,6 +976,8 @@ C2Patch72:
     db $0a, $0a, $0a, $0a, $0a, $97, $98, $99, $9a, $9b, $0a, $0a, $0a, $0a, $0a
 
 ; 5x6 cells.
+; Laundry map patch while C2StateLaundryUntied is set.
+C2PatchLaundryUntied:
 C2Patch73:
     db $2f, $05, $06, $69, $6a, $6a, $6a, $69, $09, $09, $09, $09, $29, $6b, $6c, $6c
     db $6c, $6b, $0c, $09, $09, $09, $2c, $6d, $6e, $6e, $6e, $6d, $0c, $09, $09, $09

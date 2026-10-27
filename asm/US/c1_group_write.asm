@@ -5,7 +5,7 @@ WriteC1Group:
 
 Jump_000_2881:
     ld d, a
-    ld a, $00
+    ld a, OpSlotPrimary
     ldh [hItemSlot], a
     ld a, $00
     ldh [hItemSlot+1], a

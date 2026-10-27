@@ -1,23 +1,23 @@
 
 ; Regional text byte streams, including their original control bytes and terminators.
 C1Lbl00:
-    db $12, $b6, $c8, $ff
+    db $12, LOW(wListName), HIGH(wListName), $ff
 C1Lbl01:
-    db $12, $b6, $c8, $7f, $04, $3a, $c5, $ef, $92, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wC1Coins), HIGH(wC1Coins), $ef, $92, $7f, $ff
 C1Lbl02:
-    db $12, $b6, $c8, $7f, $04, $5f, $c5, $ef, $92, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wC1CoinQty), HIGH(wC1CoinQty), $ef, $92, $7f, $ff
 C1Lbl03:
-    db $12, $b6, $c8, $7f, $04, $63, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wBullet1Count), HIGH(wBullet1Count), $ba, $7f, $ff
 C1Lbl04:
-    db $12, $b6, $c8, $7f, $04, $5c, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wGun1Ammo), HIGH(wGun1Ammo), $ba, $7f, $ff
 C1Lbl05:
-    db $12, $b6, $c8, $7f, $04, $64, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wBullet2Count), HIGH(wBullet2Count), $ba, $7f, $ff
 C1Lbl08:
-    db $12, $b6, $c8, $7f, $04, $5d, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wGun2Ammo), HIGH(wGun2Ammo), $ba, $7f, $ff
 C1Lbl09:
-    db $12, $b6, $c8, $7f, $04, $60, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wC1AmmoQty), HIGH(wC1AmmoQty), $ba, $7f, $ff
 C1Lbl0a:
-    db $12, $b6, $c8, $7f, $04, $5e, $c5, $ba, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $7f, $04, LOW(wGun3Ammo), HIGH(wGun3Ammo), $ba, $7f, $ff
 C1Lbl06:
     db $14, $bc, $b6, $3a, $a5, $a5, $a5, $1a, $1e, $fd, $7f, $82, $1c, $a1, $0d, $0d
     db $9e, $92, $1c, $8c, $98, $16, $7f, $91, $e0, $f8, $b0, $0d, $9c, $ea, $92, $9c
@@ -44,29 +44,39 @@ C1Lbl0d:
 C1Lbl0e:
 C1Lbl0f:
 C2Lbl00:
-    db $12, $b6, $c8, $ff
+    db $12, LOW(wListName), HIGH(wListName), $ff
 C2Lbl01:
-    db $12, $b6, $c8, $ff
+    db $12, LOW(wListName), HIGH(wListName), $ff
+; Case II list label for cash, using the sixteen-bit number control.
+C2ListCashLabel:
 C2Lbl02:
-    db $05, $8a, $c5, $12, $b6, $c8, $ff
+    db $05, LOW(wC2Cash), HIGH(wC2Cash), $12, LOW(wListName), HIGH(wListName), $ff
+; Case II list label for quarters, using its byte count.
+C2ListQuartersLabel:
 C2Lbl03:
-    db $12, $b6, $c8, $04, $3a, $c5, $ef, $92, $ff
+    db $12, LOW(wListName), HIGH(wListName), $04, LOW(wC2Quarters), HIGH(wC2Quarters), $ef, $92, $ff
+; Case II list label for bullets, using its byte count.
+C2ListBulletsLabel:
 C2Lbl04:
-    db $12, $b6, $c8, $04, $90, $c5, $ba, $ff
+    db $12, LOW(wListName), HIGH(wListName), $04, LOW(wC2Bullets), HIGH(wC2Bullets), $ba, $ff
+; Case II list label for batteries, using its byte count.
+C2ListCellsLabel:
 C2Lbl05:
-    db $12, $b6, $c8, $04, $8d, $c5, $ba, $ff
+    db $12, LOW(wListName), HIGH(wListName), $04, LOW(wC2Cells), HIGH(wC2Cells), $ba, $ff
+; Case II list label for chips, using its byte count.
+C2ListChipsLabel:
 C2Lbl06:
-    db $12, $b6, $c8, $04, $8c, $c5, $ef, $92, $7f, $ff
+    db $12, LOW(wListName), HIGH(wListName), $04, LOW(wChips), HIGH(wChips), $ef, $92, $7f, $ff
 C2Lbl07:
     db $15, $06, $01, $07, $02, $00, $ea, $06, $06, $00, $eb, $06, $0e, $00, $ec, $14
     db $ff
 C2Lbl08:
-    db $15, $06, $02, $12, $5e, $c8, $06, $01, $04, $5d, $c8, $06, $0b, $12, $5f, $c8
+    db $15, $06, $02, $12, LOW(wTrainCity), HIGH(wTrainCity), $06, $01, $04, LOW(wTrainNo), HIGH(wTrainNo), $06, $0b, $12, LOW(wTrainState), HIGH(wTrainState)
     db $14, $ff
 C2Lbl09:
-    db $04, $75, $c8, $7f, $ff
+    db $04, LOW(wBJTotal), HIGH(wBJTotal), $7f, $ff
 C2Lbl0a:
-    db $15, $06, $0b, $07, $08, $04, $c3, $c5, $7f, $ef, $92, $7f, $14, $ff
+    db $15, $06, $0b, $07, $08, $04, LOW(wChipCount), HIGH(wChipCount), $7f, $ef, $92, $7f, $14, $ff
 C2Lbl0b:
 C2Lbl0c:
     db $92, $98, $f7, $7f, $96, $99, $ef, $9d, $96, $8b, $ff
@@ -111,7 +121,7 @@ C2Lbl1d:
 C2Lbl1e:
     db $e9, $9a, $f8, $ef, $92, $9d, $93, $ff
 C2Lbl1f:
-    db $04, $8c, $c5, $ef, $92, $7f, $ff
+    db $04, LOW(wChips), HIGH(wChips), $ef, $92, $7f, $ff
 C2Lbl20:
     db $ff
 C2Lbl21:

@@ -27,7 +27,7 @@ jr_000_313d:
     ld [hl+], a
     inc d
     ld a, d
-    cp $07
+    cp UsWorkListClearBytes
     jr c, ClearWorkListNextByte
 
     ret

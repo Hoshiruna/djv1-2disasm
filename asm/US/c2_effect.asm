@@ -21,7 +21,7 @@ Jump_003_527b:
     push af
     ld a, $ff
     ld [wRoomCueHold], a
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     ld a, [wFxId]
     ld l, a
@@ -79,7 +79,7 @@ Call_003_52ce:
     call PickC2Scene
     ld a, [wFxScene]
     ld [wSceneId], a
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     call ShowScene
     call RefreshObjs

@@ -59,7 +59,7 @@ Jump_000_0363:
     jr z, QueueMapFillDone
 
     ldh a, [hMapQueueLen]
-    cp $80
+    cp MapQueueSubmitThreshold
     jr c, QueueMapFillNextRow
 
     call SubmitMapQueue
@@ -69,7 +69,7 @@ Jump_000_0363:
 QueueMapFillDone:
 jr_000_0375:
     ldh a, [hMapQueueLen]
-    cp $80
+    cp MapQueueSubmitThreshold
     call nc, SubmitMapQueue
     pop de
     pop af
@@ -94,7 +94,7 @@ Jump_000_0383:
     ldh a, [hMapWidth]
     ld [de], a
     inc de
-    add $03
+    add MapQueueEntryHeaderBytes
     add b
     ldh [hMapQueueLen], a
     ld a, [wFillTile]
@@ -131,11 +131,11 @@ Call_000_03a8:
     inc de
     ldh a, [hMapWidth]
     ld b, a
-    or $40
+    or MapQueueAttrFlag
     ld [de], a
     inc de
     ldh a, [hMapQueueLen]
-    add $03
+    add MapQueueEntryHeaderBytes
     add b
     ldh [hMapQueueLen], a
     ld a, [wFillAttr]

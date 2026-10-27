@@ -116,7 +116,7 @@ jr_003_5080:
 AppendChangeAdvance:
 jr_003_5087:
     inc e
-    ld a, $06
+    ld a, WorkListInputBytes
     cp e
     jr nz, AppendChangeCopyNext
 

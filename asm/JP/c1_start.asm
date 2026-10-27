@@ -15,7 +15,7 @@ InitC1View:
     call FadeToWhite
     call RequestTimer
     call DisableLcd
-    ld a, $03
+    ld a, UiMapIdGameHud
     call ReadUiMap
     call LoadBaseGfx
     call StopTimer
@@ -25,11 +25,11 @@ InitC1View:
     call DrawListUI
     call InitC1Bits
     ld a, [wCaseResume]
-    cp $00
+    cp CaseStartNewMarker
     jr nz, C1ResumeViewLoad
 
     call BlankOam
-    ld a, $8f
+    ld a, C1SceneHitman
     ld [wSceneId], a
     jr C1InitViewDraw
 
@@ -68,17 +68,17 @@ jr_001_6bc2:
     call WaitTicks
     xor a
     ld [wSceneId], a
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     call ShowScene
     ld a, C1OpeningShown
     call SetObjFlag
-    ld a, $fe
+    ld a, CaseViewReadyMarker
     ld [wCaseResume], a
     call BuildObjList
     call SaveState
     xor a
-    call ShowMsg0
+    call ShowMsg0 ; Message Text0CMessage00: ふと めが さめた。 / ここは・・・・・・?[PAGE] / ・・・どうも トイレの なからしい。どうして こんなところに / いるのだろう?[PAGE] / かんがえ...
     ret
 
 ; Initialize Case I room, object, selection, and original case-specific state fields.
@@ -103,7 +103,7 @@ Call_001_6c0e:
     ld [wBullet1Count], a
     ld [wBullet2Count], a
     ld a, $07
-    ld [$c55f], a
+    ld [wC1CoinQty], a
     ld a, $06
     ld [wC1AmmoQty], a
     ld a, $02

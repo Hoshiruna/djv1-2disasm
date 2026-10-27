@@ -13,7 +13,7 @@ SelectListRow:
 
     ld hl, wListSel
     ld a, [hl]
-    sub $0d
+    sub InputSelListFirst
     ld [wListRow], a
     call LoadListRow
     ld a, [wStateResult]

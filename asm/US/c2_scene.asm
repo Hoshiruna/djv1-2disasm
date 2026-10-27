@@ -4,23 +4,23 @@ Call_003_41ee:
 PickC2Scene:
     call BuildC2Scene
     ld a, [wCaseResume]
-    cp $ff
+    cp CaseStartLoadedMarker
     jr nz, C2SceneSelectVariant
 
     ld a, [wSceneId]
-    cp $17
+    cp SceneConductor1
     jr z, C2SceneCheckTrainPass
 
-    cp $19
+    cp SceneConductor2
     jr nz, C2SceneSelectVariant
 
-; Check train clearance for the retained special scene.
+; Retain on ReadTrainPass Z, including its unmatched-room return; then show the conductor.
 C2SceneCheckTrainPass:
 jr_003_4203:
     call ReadTrainPass
     jr nz, C2SceneSelectVariant
 
-    ld a, $a8
+    ld a, C2VisIdTrainConductor
     call SetObjVisible
     jr C2SceneReturn
 
@@ -59,7 +59,7 @@ BuildC2Scene:
 Call_003_4236:
     call ReadC2Room
     ld b, $09
-    ld a, $fe
+    ld a, C2PatchListEnd
     ld hl, wPatchList
 
 ; Fill the next patch-list slot with the terminator.
@@ -83,7 +83,7 @@ jr_003_424b:
     ld a, [wRoomDataPtr+1]
     ld h, a
     ld a, [hl]
-    cp $ff
+    cp C2RoomRecordEnd
     ret z
 
     call GroupC2Patch
@@ -96,7 +96,7 @@ jr_003_424b:
     inc hl
     ld a, [hl]
     ld [wPatchId], a
-    cp $fe
+    cp C2PatchListEnd
     ret z
 
     ld a, [wRoomDataPtr]
@@ -177,11 +177,11 @@ jr_003_42cc:
     inc hl
     inc hl
     ld a, [hl-]
-    cp $ff
+    cp C2RoomRecordEnd
     jr z, C2SceneFinishGroup
 
     ld a, [hl+]
-    cp $fe
+    cp C2PatchListEnd
     jr z, C2SceneFinishGroup
 
     ld [wPatchBase], a

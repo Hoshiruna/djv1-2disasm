@@ -13,9 +13,9 @@ ShowMono:
 
 Call_009_400f:
     call ReadBgMap
-    ld a, $e4
+    ld a, MonoFallbackBgPalette
     ldh [rBGP], a
-    ld a, $c1
+    ld a, MonoFallbackLcdControl
     ldh [rLCDC], a
 
 ; Remain on the monochrome screen.

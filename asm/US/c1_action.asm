@@ -18,6 +18,7 @@ PickC1Action:
     ld [wActionCode], a
     ret
 
+; Ordinary columns 0-8: look, open, use, put, take, close, hit, talk, move.
 C1ActionRows:
     dw C1Act00
     dw C1Act01

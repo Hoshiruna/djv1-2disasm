@@ -44,7 +44,7 @@ WarnDesertSun:
 
 jr_003_5e66:
     ld a, $d8
-    jp ShowMsg0
+    jp ShowMsg0 ; Message Text13Message58: THE SUN BEATS DOWNMERCILESSLY ON / YOU.[END]
 
 ; Warn about the lack of shade and water.
 WarnDesertDry:
@@ -52,7 +52,7 @@ WarnDesertDry:
 
 jr_003_5e6b:
     ld a, $d9
-    jp ShowMsg0
+    jp ShowMsg0 ; Message Text13Message59: NO SHADE, NO / WATER...[PAGE] / YOU SWEAT / PROFUSELY, HOPING / FOR AN END TO THISDES...
 
 ; Show the lemonade-stand mirage, restore the scene effect, and resume the room cue.
 ShowMirage:
@@ -63,7 +63,7 @@ jr_003_5e70:
     xor a
     call PlayAudio
     ld a, $db
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5B: "WATER," YOU / CROAK.[PAGE] / IT'S ONLY A MATTEROF TIME BEFORE YOUBECOME BUZZARD / BA...
     ld a, FxMirage
     call BeginC2Fx
     call LoadC2Pal
@@ -72,13 +72,13 @@ jr_003_5e70:
     call WaitTicks
     call ScriptHoldText
     ld a, $dc
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5C: COULD IT BE? WHY / YES, IT IS! / ...A LEMONADE / STAND![PAGE] / YOU STAGGER OVER / TO...
     call ResumeTextUI
     ld a, $3c
     call WaitTicks
     call RestoreC2Effect
     ld a, $de
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5E: JUST A MIRAGE! / YOU SHOULD HAVE / KNOWN![PAGE] / YOU MUST BE NEAR / THE END OF YOUR ...
     jp RoomCueCall
 
 ; Show collapse in the sand, mark the saved heat event, and run the exit effect.
@@ -89,7 +89,7 @@ jr_003_5ea7:
     ld a, $09
     call PlayAudio
     ld a, $df
-    call ShowMsg0
+    call ShowMsg0 ; Message Text13Message5F: YOU FALL FACE DOWNIN THE SAND. YOU / CAN'T MANAGE / ANOTHER STEP...[PAGE] / YOU LIE F...
     ld a, [wC2EventBits]
     or EvtHeat
     ld [wC2EventBits], a

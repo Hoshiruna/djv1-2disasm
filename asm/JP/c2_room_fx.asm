@@ -19,7 +19,7 @@ jr_003_4c7b:
     ld a, [wRoomDataPtr+1]
     ld h, a
     ld a, [hl+]
-    cp $ff
+    cp C2RoomRecordEnd
     jr z, DefaultC2RoomFx
 
     ld a, [hl+]
@@ -43,7 +43,7 @@ DefaultC2RoomFx:
 
 
 jr_003_4c98:
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     ret
 

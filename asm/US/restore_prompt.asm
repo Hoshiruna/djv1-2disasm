@@ -7,7 +7,7 @@ RunRestorePrompt:
     call HideTextWindow
     call LoadSaveUi
     call ClearSavePanel
-    ld hl, SaveUiPtrs6
+    ld hl, SaveContinueEndPointers
     call PickSaveSpec
     call QueueTileSpec
     call SubmitMapQueue

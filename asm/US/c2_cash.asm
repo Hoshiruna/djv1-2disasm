@@ -1,5 +1,5 @@
 
-; Subtract wArg0 from Case II cash when sufficient; set the result on success and clear it on borrow.
+; Subtract the byte in wArg0 from 16-bit Case II cash; commit only without borrow.
 SpendC2Cash:
 SpendC2Word:
 
@@ -29,7 +29,7 @@ jr_003_4fee:
     call ClearResult
     ret
 
-; Set the result when Case II cash is at least wTrainFare; otherwise clear it without changing cash.
+; Compare 16-bit Case II cash with the byte in wTrainFare and set result bit 0 on sufficient cash.
 TestC2Cash:
 TestC2Word:
 

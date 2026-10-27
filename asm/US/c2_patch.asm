@@ -5,13 +5,13 @@ ApplyC2Patches:
     ret z
 
     ld a, [wSceneId]
-    cp $14
+    cp C2SceneVegasPlatformNoTrain
     ret z
 
-    cp $1a
+    cp C2SceneChicagoPlatformNoTrain
     ret z
 
-    cp $19
+    cp SceneConductor2
     ret z
 
     ld a, [wRoomCueHold]
@@ -26,10 +26,10 @@ jr_029_66a6:
     xor a
     ld [wPatchBits], a
     ld a, [de]
-    cp $fe
+    cp C2PatchListEnd
     ret z
 
-    cp $f0
+    cp C2PatchSkipBase
     jr c, C2PatchApplyId
 
     inc de

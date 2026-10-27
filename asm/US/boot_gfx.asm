@@ -1,22 +1,22 @@
 
-; Load UI graphics two and three for the title screen.
+; Load the title low and high tile blocks.
 LoadTitleGfx:
 
 
 Call_000_09d4:
-    ld a, $02
+    ld a, UiGfxIdTitleLow
     call ReadUiGfx
-    ld a, $03
+    ld a, UiGfxIdTitleHigh
     call ReadUiGfx
     ret
 
-; Load UI graphics four and five for the boot-screen display.
+; Load the developer-logo low tiles and shared boot text high tiles.
 LoadBootGfx:
 
 
 Call_000_09df:
-    ld a, $04
+    ld a, UiGfxIdDeveloperLogoLow
     call ReadUiGfx
-    ld a, $05
+    ld a, UiGfxIdBootTextHigh
     call ReadUiGfx
     ret

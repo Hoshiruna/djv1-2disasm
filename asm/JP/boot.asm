@@ -22,7 +22,7 @@ Jump_000_0160:
     call ZeroBytes
     ld a, d
     ldh [hBootByte], a
-    cp $11
+    cp BootColorStartupByte
     jp nz, MonoFallback
 
 Call_000_0174:
@@ -44,6 +44,6 @@ MonoFallback:
 
 
 Jump_000_0183:
-    ld a, $09
+    ld a, MonoFallbackRomBank
     call PushRomBank
     jp ShowMono

@@ -45,7 +45,7 @@ EncodeListReadPrefix:
 jr_001_63c9:
     add hl, bc
     ld a, [hl]
-    cp $ff
+    cp ListUnencodablePrefix
     jr z, EncodeListReturn
 
     add a
@@ -72,7 +72,9 @@ jr_001_63e6:
     ret
 
 C1PackTypes:
-    db $ff, $04, $05, $00, $03, $ff
+    db ListUnencodablePrefix, $04, $05, $00
+    db $03, ListUnencodablePrefix
 
 C2PackTypes:
-    db $ff, $05, $06, $00, $04, $ff, $07
+    db ListUnencodablePrefix, $05, $06, $00
+    db $04, ListUnencodablePrefix, $07

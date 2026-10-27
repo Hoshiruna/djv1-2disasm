@@ -5,7 +5,7 @@ LookC1Trash1:
 
 C1Sc2_00:
     ; Show message 0.
-    db $00, $74
+    db $00, $74 ; Message Text0CMessage74: IT'S AN OLD / WASTEBASKET.[END]
     ; End script.
     db $ff
 
@@ -23,7 +23,7 @@ C1Sc2_01:
     ; Set text name 0.
     db $1e, $e0
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $26
     ; Clear object flag.
@@ -47,7 +47,7 @@ C1TrashMedicineHint:
 
 C1Loc2_03:
     ; Show message 0.
-    db $00, $7a
+    db $00, $7a ; Message Text0CMessage7A: IT'S AN UNUSED / MEDICINE CAPSULE.[PAGE] / YOU'VE SEEN / DOCTORS PLACE / MEDICINE IN ...
     ; End script.
     db $ff
 
@@ -58,7 +58,7 @@ C1Loc2_00:
     ; Set text name 0.
     db $1e, $e0
     ; Show message 2.
-    db $02, $01
+    db $02, $01 ; Message Text11Message01: THE [OBJECT_WRAM:37C5] / IS OPEN.[END]
     ; End script.
     db $ff
 
@@ -74,7 +74,7 @@ C1Sc2_02:
     ; Set text name 0.
     db $1e, $e0
     ; Show message 2.
-    db $02
+    db $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
 
 jr_006_4ce0:
     db $02
@@ -96,7 +96,7 @@ C1Loc2_01:
     ; Set text name 0.
     db $1e, $e0
     ; Show message 2.
-    db $02, $03
+    db $02, $03 ; Message Text11Message03: THE [OBJECT_WRAM:37C5] / IS CLOSED.[END]
     ; End script.
     db $ff
 
@@ -105,7 +105,7 @@ C1TrashPuzzled:
 
 C1Sc2_03:
     ; Show message 0.
-    db $00, $13
+    db $00, $13 ; Message Text0CMessage13: WHAT DO YOU THINK / YOU ARE DOING?[END]
     ; End script.
     db $ff
 
@@ -115,7 +115,7 @@ LookC1Trash2:
 C1Sc2_04:
 jr_006_4cf0:
     ; Show message 0.
-    db $00, $2e
+    db $00, $2e ; Message Text0CMessage2E: IT'S A LARGE METALWASTEBASKET.[END]
     ; End script.
     db $ff
 
@@ -131,7 +131,7 @@ C1Sc2_05:
     ; Set text name 0.
     db $1e, $e1
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $26
     ; Clear object flag.
@@ -156,7 +156,7 @@ jr_006_4d03:
     ; Set text name 0.
     db $1e, $e1
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear object flag.
     db $18, C1Trash2Open
     ; Set object flag.
@@ -173,7 +173,7 @@ C1TrashRefuse:
 
 C1Sc2_07:
     ; Show message 0.
-    db $00, $14
+    db $00, $14 ; Message Text0CMessage14: YOU CAN'T DO THAT.[END]
     ; End script.
     db $ff
 
@@ -189,7 +189,7 @@ C1Sc2_08:
     ; Set text name 0.
     db $1e, $e2
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $26
     ; Clear object flag.
@@ -213,7 +213,7 @@ C1Sc2_09:
     ; Set text name 0.
     db $1e, $e2
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
 
 jr_006_4d2f:
     ; Clear object flag.
@@ -232,7 +232,7 @@ LookC1Trash34:
 
 C1Sc2_0A:
     ; Show message 2.
-    db $02, $ce
+    db $02, $ce ; Message Text0DMessage4E: IT LOOKS LIKE / A TRASH CAN.[END]
     ; End script.
     db $ff
 
@@ -248,7 +248,7 @@ C1Sc2_0B:
     ; Set text name 0.
     db $1e, $e3
     ; Show message 2.
-    db $02, $00
+    db $02, $00 ; Message Text11Message00: YOU OPEN THE / [OBJECT_WRAM:37C5].[END]
     ; Keep selected change.
     db $26
     ; Set object flag.
@@ -270,7 +270,7 @@ C1Sc2_0C:
     ; Set text name 0.
     db $1e, $e3
     ; Show message 2.
-    db $02, $02
+    db $02, $02 ; Message Text11Message02: YOU CLOSE THE / [OBJECT_WRAM:37C5].[END]
     ; Clear object flag.
     db $18, C1Trash4Open
     ; Refresh room objects.
@@ -292,7 +292,7 @@ C1Sc2_0D:
     db $05
     dw C1SewerDropFx
     ; Show message 1.
-    db $01, $2c
+    db $01, $2c ; Message Text0EMessage2C: THE SEWAGE LOOKS / REALLY DEEP RIGHT / HERE.[PAGE] / YOU TRY TO BE / CAREFUL, BECAUSE...
     ; End script.
     db $ff
 
@@ -301,8 +301,8 @@ C1SewerDropFx:
 
 C1Loc2_02:
     ; Show message 1.
-    db $01, $2c
+    db $01, $2c ; Message Text0EMessage2C: THE SEWAGE LOOKS / REALLY DEEP RIGHT / HERE.[PAGE] / YOU TRY TO BE / CAREFUL, BECAUSE...
     ; Run scene effect.
-    db $46, $1a
+    db $46, C1FxIdRubberDuckMemory
     ; End script.
     db $ff

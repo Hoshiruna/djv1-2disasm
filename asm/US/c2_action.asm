@@ -20,6 +20,7 @@ PickC2Action:
     ld [wActionCode], a
     ret
 
+; Ordinary columns 0-8: look, open, use, put, take, close, hit, talk, move.
 C2ActionRows:
     dw C2Act00
     dw C2Act01

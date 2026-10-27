@@ -73,7 +73,7 @@ TryDesertCash:
     add $0a
     ld [wC2Cash], a
     ld a, $3f
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message3F: かぜに まっている 10ドルさつを / みつけた。[PAGE] / 10ドルを てにいれた。[END]
     xor a
     ld [wFindListValue], a
     call FindListValue
@@ -97,9 +97,9 @@ C2GridSteps:
 DesertRooms:
 C2GridRooms:
     db $66, $67, $68, $69, $6a, $6b, $6c, $6d
-    db $6e, $6f, $70, $71, $72, $73, $74, $75
-    db $76, RoomOutskirts, RoomTracksA, RoomTracksB, RoomHotelFront, RoomStation, $77, $78
-    db $79, $7a, $7b, $7c, $7d, $7e, $7f, $80
+    db $6e, $6f, RoomDesertAboveTracksA, RoomDesertAboveTracksB, $72, $73, $74, $75
+    db RoomDesertLeftOutskirts, RoomOutskirts, RoomTracksA, RoomTracksB, RoomHotelFront, RoomStation, RoomDesertRightStation, $78
+    db $79, RoomDesertBelowOutskirts, RoomDesertBelowTracksA, RoomDesertBelowTracksB, RoomDesertBelowHotel, RoomDesertBelowStation, $7f, $80
     db $81, $82, $83, $84, $85, $86, $87, $88
     db $89, $8a, $8b, $8c, $8d, $8e, $8f, $90
     db $91, $92, $93, $94, $95, $96, $97, $98

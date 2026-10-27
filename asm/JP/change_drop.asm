@@ -79,7 +79,8 @@ jr_000_25e8:
     ldh a, [hChangePos]
     ld [wDropPos], a
 
-; Shift later pending type and value bytes over the removed pair.
+; Selected-slot path shifts through the sixth pair, then clears the fifth pair.
+; Its bounds differ from the shared ShiftChanges path below.
 RemoveChangeShiftLoop:
 jr_000_25ed:
     ld bc, wPendingOps+2
@@ -161,7 +162,7 @@ Call_000_264b:
     jr z, ResetChangeSel
 
     ld a, [wInputKind]
-    cp $02
+    cp InputKindListRow
     jr z, TrimChangeSel
 
     ld a, [wPendingCur]
@@ -287,7 +288,8 @@ jr_000_26ec:
     inc hl
     jr DropArgChangeScan
 
-; HL = matching value byte; shift to low byte $32, then clear two bytes at HL-4.
+; HL = matching value byte; copy first, then stop when source L equals $32.
+; Matches 0-2 clear pair 2; match 3 copies 128 pairs into the following state area.
 ShiftChanges:
 
 jr_000_26f0:
@@ -297,7 +299,7 @@ jr_000_26f0:
     inc hl
     inc hl
 
-; Shift subsequent pending pairs until the original end offset.
+; Copy one pair before testing the low-byte endpoint; retain the page-crossing behavior.
 ShiftChangesLoop:
 jr_000_26f5:
     ld a, [hl+]
@@ -364,7 +366,7 @@ jr_000_2730:
     inc hl
     jr DropItemChangeScan
 
-; Copy six scratch bytes to the working list without filtering or clearing its seventh slot.
+; Copy six scratch bytes verbatim, preserving $ff gaps and the regional work-list tail.
 CopyChangeList:
 
 Call_000_2734:

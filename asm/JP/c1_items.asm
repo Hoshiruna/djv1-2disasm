@@ -1,4 +1,4 @@
-; Restore presence for object IDs $00/$01/$02/$09/$14/$15 before setting their flags.
+; Restore presence for the six broken-fixture IDs before setting their object flags.
 KeepC1Obj:
 
     ld a, [wArg0]
@@ -74,7 +74,7 @@ RestoreC1Objs:
     ld c, $00
     ld hl, ItemObjIds1
 
-; Clear six item flags and restore objects $26 through $2b.
+; Clear six item flags and restore the BULLET1 stock objects.
 C1RestoreAmmo1ObjLoop:
 jr_002_6124:
     ld a, [hl+]
@@ -82,7 +82,7 @@ jr_002_6124:
     call ClearItemFlag
     pop bc
     ld a, c
-    add $26
+    add C1ObjectGunShopBullet1Slot1
     push bc
     push af
     call SetObjPresent
@@ -104,7 +104,7 @@ jr_002_613d:
     ld c, $00
     ld hl, ItemObjIds
 
-; Clear six item flags and restore objects $20 through $25.
+; Clear six item flags and restore the BULLET2 stock objects.
 C1RestoreAmmo2ObjLoop:
 jr_002_6149:
     ld a, [hl+]
@@ -112,7 +112,7 @@ jr_002_6149:
     call ClearItemFlag
     pop bc
     ld a, c
-    add $20
+    add C1ObjectGunShopBullet2Slot1
     push bc
     push af
     call SetObjPresent
@@ -129,7 +129,7 @@ C1RestoreObjectsDone:
 jr_002_6162:
     ret
 
-; Map the current item ID through ItemObjIds; return object ID $20 + index.
+; Map the current ammunition item ID to its stock object by table index.
 MapItemObj:
 
     ld a, [wItemId]
@@ -150,10 +150,10 @@ jr_002_616c:
 C1MapItemObjFound:
 jr_002_6173:
     ld a, c
-    add $20
+    add C1ObjectGunShopBullet2Slot1
     ret
 
 ItemObjIds:
-    db $4a, $4f, $50, $51, $52, $53
+    db C1ItemGunShopBullet2Slot1, C1ItemGunShopBullet2Slot2, C1ItemGunShopBullet2Slot3, C1ItemGunShopBullet2Slot4, C1ItemGunShopBullet2Slot5, C1ItemGunShopBullet2Slot6
 ItemObjIds1:
-    db $3d, $3e, $3f, $40, $41, $42
+    db C1ItemGunShopBullet1Slot1, C1ItemGunShopBullet1Slot2, C1ItemGunShopBullet1Slot3, C1ItemGunShopBullet1Slot4, C1ItemGunShopBullet1Slot5, C1ItemGunShopBullet1Slot6

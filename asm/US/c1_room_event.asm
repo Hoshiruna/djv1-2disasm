@@ -10,7 +10,7 @@ TryC1RoomEvent:
     jr nz, C1RoomEventStateReady
 
     ld a, $63
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message63: IT CAN'T BE / MOVED IF IT'S / NOT OPENED![END]
     pop bc
     jp EndNestedAction
 
@@ -56,7 +56,7 @@ jr_002_6650:
 ; Set scene effect six and dispatch the matching room-event entry.
 C1RoomEventDispatch:
 jr_002_665a:
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     ld a, c
     rst RST_00

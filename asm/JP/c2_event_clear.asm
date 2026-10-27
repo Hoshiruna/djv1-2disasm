@@ -69,7 +69,7 @@ Call_002_78d0:
     ld [wC2EventBits], a
     ret
 
-; Clear event bit seven and object flags $4e/$a8, then set room $3a.
+; Clear event bit seven and object flags $4e/$a8, then select Joe's rear hallway.
 ; This special event path does not zero the flashlight-age counter.
 ClearC2Event7:
 
@@ -80,6 +80,6 @@ jr_002_78dc:
     call ClearObjFlag
     ld a, C2LampWeak
     call ClearObjFlag
-    ld a, $3a
+    ld a, RoomJoeRearHallway
     ld [wRoomId], a
     ret

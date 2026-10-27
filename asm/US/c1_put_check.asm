@@ -19,7 +19,7 @@ CheckC1Put:
 C1PutCountEmpty:
 jr_002_6a5a:
     ld a, $29
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message29: YOU CAN'T GET RID / OF WHAT YOU DIDN'TTAKE![END]
     ld a, C1AltTargetBypass
     call ClearObjFlag
     jr C1PutEndNested
@@ -52,7 +52,7 @@ jr_002_6a7e:
     ld a, C1AltTargetBypass
     call ClearObjFlag
     ld a, $7d
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message7D: HOLD ON![PAGE] / IF YOU DO THAT, / IT MAY CAUSE YOU / TROUBLE LATER.[END]
     jr C1PutEndNested
 
 ; Save selection scratch values around the put dispatcher.
@@ -109,7 +109,7 @@ C1PutCalls:
 RejectC1Put:
 
     ld a, $13
-    call ShowMsg0
+    call ShowMsg0 ; Message Text0CMessage13: WHAT DO YOU THINK / YOU ARE DOING?[END]
     ret
 
 ; Accept alternate ID four immediately; otherwise scan seven group bytes for $ff using the original scratch high byte and jump to WriteC1Group when found.
@@ -158,7 +158,7 @@ jr_002_6ae5:
     jr c, C1PutGroupSlotLoop
 
     ld a, $76
-    call ShowMsg2
+    call ShowMsg2 ; Message Text11Message76: THE WASTEBASKET / IS FULL.[PAGE] / IT WON'T HOLD / ANYMORE.[END]
     ld a, [wStateResult]
     or $10
     ld [wStateResult], a

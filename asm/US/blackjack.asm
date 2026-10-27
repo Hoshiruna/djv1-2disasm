@@ -22,7 +22,7 @@ RunBlackjack:
     ret nz
 
     ld a, $4e
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message4A: RUDY GLANCES / NERVOUSLY AROUND / AND SAYS, "I CAN'TKEEP THIS UP ACE, / THE BOSS IS /...
     ret
 
 ; --- bj_map.asm ---
@@ -35,7 +35,7 @@ Call_029_6971:
     call RequestTimer
     call DisableLcd
     call LoadCardGfx
-    ld a, $05
+    ld a, UiMapIdBlackjackTable
     call ReadUiMap
     call StopTimer
     call RestoreLcd
@@ -90,18 +90,19 @@ jr_029_69a6:
     call ShowBJPause
     jr BJRoundResetDeck
 
-; Prepare and play the next blackjack hand.
+; Clear hands and run four draw-before-store deals; reveal player slot 7 before betting.
+; Reveal slots 1/6 after betting; dealer slot 0 stays displayed as a back.
 BJRoundPlayHand:
 jr_029_69c4:
     call ShowBJChips
     call ClearBJHands
     call DealBJFirst4
-    ld a, $07
+    ld a, BJPlayerSecondSlot
     call ShowBJHandCard
     call ChooseBJBet
-    ld a, $01
+    ld a, BJDealerSecondSlot
     call ShowBJHandCard
-    ld a, $06
+    ld a, BJPlayerFirstSlot
     call ShowBJHandCard
     call ShowBJPause
     call PlayBJPlayer
@@ -170,7 +171,7 @@ Call_029_6a34:
 
 ; --- bj_first.asm ---
 
-; Prepare and deal hand slots zero, one, six, and seven in order, waiting thirty-two ticks after each.
+; Draw each old slot value, then store a new card, in slot order 0,1,6,7; wait $20 ticks each.
 DealBJFirst4:
 
 
@@ -182,7 +183,7 @@ Call_029_6a4e:
     ldh [hBJLoop+1], a
     ld a, d
 
-; Deal the current opening-hand slot and advance the slot index.
+; Display the current slot before selecting and storing its newly dealt card.
 BJDealFirstSlot:
 jr_029_6a58:
     ld bc, BJFirstSlots
@@ -213,7 +214,7 @@ jr_029_6a58:
     ret
 
 BJFirstSlots:
-    db $07, $06, $01, $00
+    db BJPlayerSecondSlot, BJPlayerFirstSlot, BJDealerSecondSlot, BJDealerFirstSlot
 
 ; --- bj_sum.asm ---
 
@@ -327,7 +328,7 @@ jr_029_6b02:
 
 ; --- bj_bet.asm ---
 
-; Adjust the previous bet between one, ten, and the available chips; confirm and deduct it from the saved balance.
+; Save the chip balance, use wChips for a bet from one to min(ten, available chips), then deduct the confirmed bet.
 ChooseBJBet:
 
 
@@ -412,7 +413,7 @@ jr_029_6b6c:
 
 ; --- bj_dealer.asm ---
 
-; Reveal and score the dealer hand, draw according to the original score/mode conditions, then compare the two hands.
+; A player $ff wins before dealer reveal; otherwise resolve bust, reveal the dealer, draw, and compare encoded scores.
 PlayBJDealer:
 
 
@@ -445,7 +446,7 @@ jr_029_6b99:
     jp PayBJResult
 
 
-; Reveal the dealer card and score the hand.
+; Reveal dealer slot 0, then score its stored hand.
 BJDealerReveal:
 jr_029_6b9e:
     xor a
@@ -528,7 +529,7 @@ jr_029_6bf2:
     ld a, [wBJNextD]
     inc a
     ld [wBJNextD], a
-    cp $06
+    cp BJPlayerFirstSlot
     jr nz, BJDealerTurnLoop
 
 ; Compare final dealer and player totals.
@@ -672,7 +673,7 @@ jr_029_6cbc:
     ld a, [wBJNextP]
     inc a
     ld [wBJNextP], a
-    cp $0c
+    cp BJHandSlotCount
     jr nz, BJPlayerChooseAction
 
 ; Return after a special total or the sixth card.
@@ -780,7 +781,7 @@ jr_029_6d52:
     cp $00
     jr z, DealBJRandom
 
-    cp $35
+    cp BJPlayableCardLimit
     jr nc, DealBJRandom
 
     ld [wBJDraw], a
@@ -827,6 +828,7 @@ Jump_029_6d6f:
     jr DealBJRandom
 
 ; Mark the unused card, store it in the current hand slot, and decrement the deck count.
+; The tail updates the remaining-card count without redrawing the stored hand card.
 BJStoreUnusedCard:
 jr_029_6da9:
     ldh a, [hBJByte]
@@ -886,7 +888,7 @@ jr_029_6df5:
     cp $0c
     jr nc, BJNear21RandomFallback
 
-; Search for an unused card matching the target rank.
+; Search the rank and reject only a set sign bit; candidate zero also reaches StoreBJCard.
 BJTargetPickRank:
 jr_029_6e00:
     call PickBJRank
@@ -927,7 +929,7 @@ Call_029_6e1d:
     ld [wBJTarget], a
     jr BJTargetPickRank
 
-; Target player total minus dealer total minus one.
+; Use player minus dealer minus one; only zero/sign are rejected, so targets above eleven can reach the rank search.
 BJBelowUseScoreGap:
 jr_029_6e39:
     ld a, [wBJPlayer]
@@ -1125,12 +1127,13 @@ jr_029_6f37:
 
 BJHalfMasks:
     db $f0, $0f
+; Index five keeps base $12: probes cards 21..24 but returns IDs 19..22; StoreBJCard rechecks the returned ID.
 BJRankBases:
     db $00, $04, $08, $0c, $10, $12, $18, $1c, $20
 
 ; --- bj_bias.asm ---
 
-; Select dealing mode from the cash high byte, chip count, and object flag $0e; preserve the original exit marker.
+; Select dealing mode from cash >= $1000, chips >= 200, and Rudy recognition; only the high recognized path latches exit.
 SetBJBias:
 
     ld a, [wC2Cash+1]
@@ -1141,10 +1144,10 @@ SetBJBias:
     cp $c8
     jr c, BJBiasLowFunds
 
-; Check object flag 0E after high cash or chip threshold.
+; Use mode one above either funds threshold; recognized Rudy also sets the session exit marker.
 BJBiasHighFunds:
 jr_029_6f54:
-    ld a, $0e
+    ld a, C2RudyKnows
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
@@ -1159,10 +1162,10 @@ jr_029_6f65:
     ld a, $01
     jr BJBiasStoreMode
 
-; Check object flag 0E below both resource thresholds.
+; Below both thresholds, use mode two for recognized Rudy and mode zero otherwise; keep any exit marker.
 BJBiasLowFunds:
 jr_029_6f69:
-    ld a, $0e
+    ld a, C2RudyKnows
     call ReadObjFlag
     ld a, [wStateResult]
     and $01
@@ -1186,7 +1189,7 @@ Call_029_6f7b:
     xor a
     ld [wBJDealer], a
     ld [wBJPlayer], a
-    ld c, $0b
+    ld c, BJLastHandSlot
     ld hl, wBJCards
 
 ; Clear each of the twelve hand-card slots.
@@ -1197,9 +1200,9 @@ jr_029_6f87:
     bit 7, c
     jr z, BJClearHandSlots
 
-    ld a, $02
+    ld a, BJDealerFirstExtraSlot
     ld [wBJNextD], a
-    ld a, $08
+    ld a, BJPlayerFirstExtraSlot
     ld [wBJNextP], a
     ret
 
@@ -1370,7 +1373,7 @@ BJSplitDigitsDone:
 jr_029_7069:
     ret
 
-; Add the pending chips one at a time with redraw and cue $23; stop when the byte reaches $ff.
+; Add payout chips one at a time; reaching $ff exits before decrementing the pending payout byte.
 PayBJChips:
 
 
@@ -1518,27 +1521,57 @@ Call_029_7109:
 ; --- bj_ui_tbl.asm ---
 
 BJCardDests:
-    dw $9841
-    dw $9844
-    dw $9847
-    dw $984a
-    dw $984d
-    dw $9850
-    dw $98e1
-    dw $98e4
-    dw $98e7
-    dw $98ea
-    dw $98ed
-    dw $98f0
+    dw $9841 ; dealer slot 0
+    dw $9844 ; dealer slot 1
+    dw $9847 ; dealer slot 2
+    dw $984a ; dealer slot 3
+    dw $984d ; dealer slot 4
+    dw $9850 ; dealer slot 5
+    dw $98e1 ; player slot 6
+    dw $98e4 ; player slot 7
+    dw $98e7 ; player slot 8
+    dw $98ea ; player slot 9
+    dw $98ed ; player slot 10
+    dw $98f0 ; player slot 11
 
 BJTextCoords:
-    db $00, $0d, $00, $10, $00, $0e, $00, $0e, $00, $0d, $00, $0d, $00, $0d, $00, $0d
-    db $00, $0d, $00, $0d, $00, $0f, $00, $0f, $00, $0f, $00, $0d, $00, $0f, $00, $0d
-    db $00, $01, $00, $06, $08, $00, $01, $01, $01, $01, $0c, $0c
+    db $00, $0d ; text $00: bet prompt
+    db $00, $10 ; text $01: bet confirmation
+    db $00, $0e ; text $02: player action prompt
+    db $00, $0e ; text $03: replay prompt
+    db $00, $0d ; text $04: leave table
+    db $00, $0d ; text $05
+    db $00, $0d ; text $06: dealer blackjack
+    db $00, $0d ; text $07: player blackjack
+    db $00, $0d ; text $08: dealer bust
+    db $00, $0d ; text $09: player bust
+    db $00, $0f ; text $0a: tie
+    db $00, $0f ; text $0b: loss
+    db $00, $0f ; text $0c: win
+    db $00, $0d ; text $0d: reshuffle
+    db $00, $0f ; text $0e
+    db $00, $0d ; text $0f: no chips
+    db $00, $01 ; text $10: LoadBJTable first text
+    db $00, $06 ; text $11: LoadBJTable second text
+    db $08, $00 ; text $12
+    db $01, $01 ; text $13
+    db $01, $01 ; text $14
+    db $0c, $0c ; text $15
 
 BJCardFaces:
-    db $00, $0b, $1b, $2b, $3b, $02, $12, $22, $32, $03, $13, $23, $33, $04, $14, $24
-    db $34, $05, $15, $25, $35, $06, $16, $26, $36, $07, $17, $27, $37, $08, $18, $28
-    db $38, $09, $19, $29, $39, $0a, $1a, $2a, $3a, $0a, $1a
+    db $00 ; ID 0: empty slot
+    db $0b, $1b, $2b, $3b ; IDs 1..4: 11 points before ace adjustment
+    db $02, $12, $22, $32 ; IDs 5..8: 2 points
+    db $03, $13, $23, $33 ; IDs 9..12: 3 points
+    db $04, $14, $24, $34 ; IDs 13..16: 4 points
+    db $05, $15, $25, $35 ; IDs 17..20: 5 points
+    db $06, $16, $26, $36 ; IDs 21..24: 6 points
+    db $07, $17, $27, $37 ; IDs 25..28: 7 points
+    db $08, $18, $28, $38 ; IDs 29..32: 8 points
+    db $09, $19, $29, $39 ; IDs 33..36: 9 points
+    db $0a, $1a, $2a, $3a ; IDs 37..40: 10 points
+    db $0a, $1a ; IDs 41..42: 10 points
 jr_029_719c:
-    db $2a, $3a, $0a, $1a, $2a, $3a, $0a, $1a, $2a, $3a
+    db $2a, $3a ; IDs 43..44: 10 points
+    db $0a, $1a, $2a, $3a ; IDs 45..48: 10 points
+    db $0a, $1a, $2a, $3a ; IDs 49..52: 10 points

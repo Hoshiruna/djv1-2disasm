@@ -26,31 +26,31 @@ CursorPos:
     db $8c, $44
 
 CursorLinks:
-    db $02, $03, $0c, $16
-    db $05, $04, $0c, $16
-    db $04, $00, $0c, $16
-    db $00, $06, $0b, $08
-    db $01, $02, $0c, $16
-    db $07, $01, $0c, $16
-    db $03, $07, $0b, $08
-    db $06, $05, $0b, $08
-    db $ff, $15, $03, $17
-    db $0a, $15, $17, $ff
-    db $ff, $09, $17, $ff
-    db $18, $0c, $0d, $07
-    db $0b, $19, $0d, $00
-    db $18, $19, $0e, $0c
-    db $18, $19
+    db $02, $03, InputSelPrevPage, InputSelRoomFineStart
+    db $05, $04, InputSelPrevPage, InputSelRoomFineStart
+    db $04, $00, InputSelPrevPage, InputSelRoomFineStart
+    db $00, $06, InputSelNextPage, $08
+    db $01, $02, InputSelPrevPage, InputSelRoomFineStart
+    db $07, $01, InputSelPrevPage, InputSelRoomFineStart
+    db $03, $07, InputSelNextPage, $08
+    db $06, $05, InputSelNextPage, $08
+    db $ff, InputSelRoomFine, $03, InputSelRoomGrid
+    db InputSelAux, InputSelRoomFine, InputSelRoomGrid, $ff
+    db $ff, InputSelSelf, InputSelRoomGrid, $ff
+    db CursorLinkNextPage, InputSelPrevPage, InputSelListFirst, $07
+    db InputSelNextPage, CursorLinkPrevPage, InputSelListFirst, $00
+    db CursorLinkNextPage, CursorLinkPrevPage, $0e, InputSelPrevPage
+    db CursorLinkNextPage, CursorLinkPrevPage
 jr_001_628b:
-    db $0f, $0d
-    db $18, $19, $10, $0e
-    db $18, $19, $11, $0f
-    db $18, $19, $12, $10
-    db $18, $19, $13, $11
-    db $18, $19, $ff
+    db $0f, InputSelListFirst
+    db CursorLinkNextPage, CursorLinkPrevPage, $10, $0e
+    db CursorLinkNextPage, CursorLinkPrevPage, $11, $0f
+    db CursorLinkNextPage, CursorLinkPrevPage, $12, $10
+    db CursorLinkNextPage, CursorLinkPrevPage, $13, $11
+    db CursorLinkNextPage, CursorLinkPrevPage, $ff
 jr_001_62a0:
     db $12
-    db $18, $19, $ff
+    db CursorLinkNextPage, CursorLinkPrevPage, $ff
 jr_001_62a4:
     db $12
 
@@ -76,7 +76,7 @@ jr_001_62bc:
     db $ff, $ff, $ff, $ff
     db $ff, $ff, $ff, $ff
     db $ff, $ff, $0e, $ff
-    db $ff, $ff, $0f, $0d
+    db $ff, $ff, $0f, InputSelListFirst
     db $ff, $ff, $10, $0e
     db $ff, $ff, $11, $0f
     db $ff, $ff, $12, $10

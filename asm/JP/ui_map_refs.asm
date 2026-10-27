@@ -1,9 +1,9 @@
 ; Original zero-based UI resource index.
 UiMapRefs:
-    dw UiMap0
-    dw UiMap1
-    dw UiMap2
-    dw UiMap3
-    dw UiMap4
-    dw UiMap5
-    dw UiMap6
+    dw UiMapCopyrightNotice
+    dw UiMapTitle
+    dw UiMapSaveSelection
+    dw UiMapGameHud
+    dw UiMapDeveloperLogo
+    dw UiMapBlackjackTable
+    dw UiMapBlankTextPanel

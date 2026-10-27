@@ -22,10 +22,10 @@ Call_003_556f:
     jr nz, C2PalCheckLampAge
 
     ld a, [wRoomId]
-    cp $38
+    cp RoomJoeOffice
     jr z, C2PalUseTimed
 
-    cp $3a
+    cp RoomJoeRearHallway
     jr z, C2PalUseTimed
 
     ld a, $49

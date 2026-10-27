@@ -32,12 +32,12 @@ EndNoRing:
     ld a, $78
     call WaitTicks
     ld a, $ae
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message2E: ONE OF THE THUGS / GRABS YOU ROUGHLY / BY THE COLLAR AND / SAYS, "DERE YOU / ARE![PAG...
     ld a, $3c
     call WaitTicks
     call C2NewsCue10
     ld a, $b9
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message39: YOU ALMOST ESCAPE.[PAGE] / SOMEHOW YOU SHOULDHAVE COVERED YOUR / TRACKS BETTER...[END]
 
 ; Resume text, mark the saved ending event, and run the exit effect.
 FailC2Deadline:
@@ -68,7 +68,7 @@ C2Fx6Msg94:
 Call_003_5694:
     call ResetObjScroll
     ld a, $94
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message14: SUDDENLY TWO MEN / BLOCK YOUR WAY.[END]
     ld a, FxGoons
     call BeginC2Fx
     ld a, $09
@@ -87,12 +87,12 @@ jr_003_56a6:
     ld a, $78
     call WaitTicks
     ld a, $33
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message33: "I FINALLY FOUND / YOU![PAGE] / SOMEONE LEFT A / CIGAR WRAPPER IN / DA SECRET OFFICE ...
     ld a, $3c
     call WaitTicks
     call C2NewsCue10
     ld a, $42
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message42: MAYBE YOU / SHOULD'VE DONE / SOMETHING ELSE![END]
     jr FailC2Deadline
 
 ; Check for conflicting desk items; failed cleanliness leads to Stogie's blackmail accusation.
@@ -106,17 +106,17 @@ jr_003_56c9:
 
     call ResetObjScroll
     ld a, $c4
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message44: SUDDENLY STOGIE / APPEARS IN FRONT / OF YOU AND GROWLS,[END]
     call StartStogieFx
     ld a, $78
     call WaitTicks
     ld a, $c7
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message47: "IT WAS YOU THAT / SNUCK INTO DA / BOSS' OFFICE, / RIGHT!?[PAGE] / YUP, THAT'S WHAT /...
     ld a, $3c
     call WaitTicks
     call C2NewsCue10
     ld a, $ca
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message4A: YOU SHOULD'VE BEENMORE CAREFUL...[END]
     jr FailC2Deadline
 
 ; Begin Stogie effect $10 and play audio nine after his appearance message.
@@ -141,17 +141,17 @@ jr_003_5701:
 
     call ResetObjScroll
     ld a, $c4
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message44: SUDDENLY STOGIE / APPEARS IN FRONT / OF YOU AND GROWLS,[END]
     call StartStogieFx
     ld a, $78
     call WaitTicks
     ld a, $ce
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message4E: "HEY ACE, DA BOSS / SENT ME...[PAGE] / NICE TRICK, TRYINGTO TURN DA BOSS / AGAINST VE...
     ld a, $3c
     call WaitTicks
     call C2NewsCue10
     ld a, $f0
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message70: IT APPEARS THE / EVIDENCE WASN'T / STRONG ENOUGH.[END]
     jp FailC2Deadline
 
 ; With both desk checks passed, retain the $52 comparison and show failure to get far enough from the mob war.
@@ -169,11 +169,11 @@ jr_003_5730:
     ld a, $09
     call PlayAudio
     ld a, $d1
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message51: THE STACCATO / BURSTS OF MACHINE / GUNS AND THE / THUNDER OF / EXPLOSIONS FILL / THE ...
     ld a, FxVegasNews2
     call BeginC2Fx
     ld a, $3c
     call WaitTicks
     ld a, $43
-    call ShowMsg3
+    call ShowMsg3 ; Message Text18Message43: UNFORTUNATELY, YOUDIDN'T RUN FAR / ENOUGH AWAY.[END]
     jp FailC2Deadline

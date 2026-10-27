@@ -167,10 +167,10 @@ MoveCursor:
 
 Jump_001_60b7:
     ld a, [wInputSel]
-    cp $17
+    cp InputSelRoomGrid
     jr z, CursorGridHitTest
 
-    cp $15
+    cp InputSelRoomFine
     jr nc, CursorFineHitTest
 
     ld a, [wJoyHeld]
@@ -195,10 +195,10 @@ Jump_001_60b7:
     ld hl, CursorLinks
     add hl, de
     ld a, [hl]
-    cp $18
+    cp CursorLinkNextPage
     jp z, GoNextList
 
-    cp $19
+    cp CursorLinkPrevPage
     jp z, GoPrevList
 
     cp $ff
@@ -209,7 +209,7 @@ Jump_001_60b7:
     ret
 
 
-; Classify the grid cursor position for selection $17.
+; Classify the room grid cursor position.
 CursorGridHitTest:
 jr_001_60fa:
     call StepCursorGrid
@@ -234,19 +234,19 @@ jr_001_6112:
     cp $90
     jr c, CursorGridTopMiddle
 
-    ld a, $0a
+    ld a, InputSelAux
     jr CursorGridSnap
 
 ; Choose the upper-middle grid selection.
 CursorGridTopMiddle:
 jr_001_611d:
-    ld a, $09
+    ld a, InputSelSelf
     jr CursorGridSnap
 
-; Choose selection $15 for the left grid area.
+; Return to the fine room selector in the left grid area.
 CursorGridLeftArea:
 jr_001_6121:
-    ld a, $15
+    ld a, InputSelRoomFine
 
 ; Store the classified selection and snap to its coordinate pair.
 CursorGridSnap:
@@ -299,7 +299,7 @@ jr_001_615f:
     ret
 
 CursorHitY:
-    db $09, $09, $09, $09, $09, $17, $17, $17, $17, $17, $17, $08, $08, $08, $08, $08
+    db InputSelSelf, InputSelSelf, InputSelSelf, InputSelSelf, InputSelSelf, InputSelRoomGrid, InputSelRoomGrid, InputSelRoomGrid, InputSelRoomGrid, InputSelRoomGrid, InputSelRoomGrid, $08, $08, $08, $08, $08
 
 ; Copy the selected coordinate pair to the candidate position.
 SnapCursor:

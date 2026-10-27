@@ -4,7 +4,7 @@ RefreshListMode:
 
 
 Call_000_3389:
-    ld a, $0c
+    ld a, InputSelPrevPage
     ld [wInputSel], a
     ld a, $04
     ld [wCursorX], a

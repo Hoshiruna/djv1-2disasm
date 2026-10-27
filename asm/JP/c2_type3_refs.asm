@@ -95,593 +95,593 @@ C2Type3Refs:
     dw C2Act3_5B
 
 C2Act3_00:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_01:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_02:
-    dw LookC2Bullet
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Bullet ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_03:
-    dw LookC2Cell
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Cell ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_04:
-    dw LookC2Chip
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Chip ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_05:
-    dw LookC2Towel
-    dw UseC2Item
-    dw PutC2Item
-    dw C2Sc3_08
+    dw LookC2Towel ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw C2Sc3_08 ; Selected action SelActionTake (class $03)
 
 C2Act3_06:
-    dw LookC2Key1
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key1 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_07:
-    dw LookBoxingClip
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookBoxingClip ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_08:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_09:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_0A:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_0B:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_0C:
-    dw ReadC2License1
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadC2License1 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_0D:
-    dw LookEmptyPack
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookEmptyPack ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_0E:
-    dw ReadStogieRing
-    dw UseC2Item
-    dw UseC2Ring
-    dw TakeC2Ring
+    dw ReadStogieRing ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw UseC2Ring ; Selected action SelActionPut (class $03)
+    dw TakeC2Ring ; Selected action SelActionTake (class $03)
 
 C2Act3_0F:
-    dw LookC2Pillow
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Pillow
+    dw LookC2Pillow ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Pillow ; Selected action SelActionTake (class $03)
 
 C2Act3_10:
-    dw ReadPayNote
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadPayNote ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_11:
-    dw ReadC2Timetable
-    dw OpenC2Timetable
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Timetable
-    dw CloseC2Timetable
+    dw ReadC2Timetable ; Selected action SelActionLook (class $04)
+    dw OpenC2Timetable ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Timetable ; Selected action SelActionTake (class $04)
+    dw CloseC2Timetable ; Selected action SelActionClose (class $04)
 
 C2Act3_12:
-    dw LookC2Plant1
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Plant1
+    dw LookC2Plant1 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Plant1 ; Selected action SelActionTake (class $03)
 
 C2Act3_13:
-    dw LookC2Pot
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Pot
+    dw LookC2Pot ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Pot ; Selected action SelActionTake (class $03)
 
 C2Act3_14:
-    dw LookC2Ashtray
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Ashtray
+    dw LookC2Ashtray ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Ashtray ; Selected action SelActionTake (class $03)
 
 C2Act3_15:
-    dw LookC2Plant2
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Plant2
+    dw LookC2Plant2 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Plant2 ; Selected action SelActionTake (class $03)
 
 C2Act3_16:
-    dw LookC2Plant3
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Plant3
+    dw LookC2Plant3 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Plant3 ; Selected action SelActionTake (class $03)
 
 C2Act3_17:
-    dw LookLiftButton
-    dw ItemCannotOpen
-    dw UseLift4Button
-    dw PutC2Item
-    dw TakeLiftButton
-    dw RejectC2Item
-    dw PressLift4
-    dw ItemNoAnswer
-    dw RejectC2Item
+    dw LookLiftButton ; Selected action SelActionLook (class $06)
+    dw ItemCannotOpen ; Selected action SelActionOpen (class $06)
+    dw UseLift4Button ; Selected action SelActionUse (class $06)
+    dw PutC2Item ; Selected action SelActionPut (class $06)
+    dw TakeLiftButton ; Selected action SelActionTake (class $06)
+    dw RejectC2Item ; Selected action SelActionClose (class $06)
+    dw PressLift4 ; Selected action SelActionHit (class $06)
+    dw ItemNoAnswer ; Selected action SelActionTalk (class $06)
+    dw RejectC2Item ; Selected action SelActionMove (class $06)
 
 C2Act3_18:
-    dw ReadC2Photo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Photo
+    dw ReadC2Photo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Photo ; Selected action SelActionTake (class $03)
 
 C2Act3_19:
-    dw ReadBondLetter
-    dw UseC2Item
-    dw PutC2Item
+    dw ReadBondLetter ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
 jr_007_5727:
-    dw TakeC2Item
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_1A:
-    dw ReadC2Pamphlet
-    dw OpenC2Pamphlet
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Pamphlet
-    dw CloseC2Pamphlet
+    dw ReadC2Pamphlet ; Selected action SelActionLook (class $04)
+    dw OpenC2Pamphlet ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Pamphlet ; Selected action SelActionTake (class $04)
+    dw CloseC2Pamphlet ; Selected action SelActionClose (class $04)
 
 C2Act3_1B:
-    dw ReadC2News3
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2News3
+    dw ReadC2News3 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2News3 ; Selected action SelActionTake (class $03)
 
 C2Act3_1C:
-    dw ReadC2News4
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2News4
+    dw ReadC2News4 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2News4 ; Selected action SelActionTake (class $03)
 
 C2Act3_1D:
-    dw ReadVinnyLetter
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadVinnyLetter ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_1E:
-    dw LookC2Bottle
-    dw ItemCannotOpen
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Bottle
-    dw RejectC2Item
-    dw BreakC2Bottle
-    dw ItemNoAnswer
-    dw RejectC2Item
+    dw LookC2Bottle ; Selected action SelActionLook (class $06)
+    dw ItemCannotOpen ; Selected action SelActionOpen (class $06)
+    dw UseC2Item ; Selected action SelActionUse (class $06)
+    dw PutC2Item ; Selected action SelActionPut (class $06)
+    dw TakeC2Bottle ; Selected action SelActionTake (class $06)
+    dw RejectC2Item ; Selected action SelActionClose (class $06)
+    dw BreakC2Bottle ; Selected action SelActionHit (class $06)
+    dw ItemNoAnswer ; Selected action SelActionTalk (class $06)
+    dw RejectC2Item ; Selected action SelActionMove (class $06)
 
 C2Act3_1F:
-    dw LookCrackedLamp
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeCrackedLamp
+    dw LookCrackedLamp ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeCrackedLamp ; Selected action SelActionTake (class $03)
 
 C2Act3_20:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_21:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_22:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_23:
-    dw LookC2Knife
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Knife ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_24:
-    dw LookC2Knife
-    dw OpenC2Knife
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
-    dw CloseC2Knife
+    dw LookC2Knife ; Selected action SelActionLook (class $04)
+    dw OpenC2Knife ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Item ; Selected action SelActionTake (class $04)
+    dw CloseC2Knife ; Selected action SelActionClose (class $04)
 
 C2Act3_25:
-    dw LookC2Key2
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key2 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_26:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_27:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_28:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_29:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_2A:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_2B:
-    dw LookC2Ammo
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Ammo ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_2C:
-    dw LookJuiceCan
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeJuiceCan
+    dw LookJuiceCan ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeJuiceCan ; Selected action SelActionTake (class $03)
 
 C2Act3_2D:
-    dw LookC2Key3
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key3 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_2E:
-    dw LookC2Duck
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Duck ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_2F:
-    dw LookSiegelDiary
-    dw OpenSiegelDiary
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
-    dw CloseSiegelDiary
+    dw LookSiegelDiary ; Selected action SelActionLook (class $04)
+    dw OpenSiegelDiary ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Item ; Selected action SelActionTake (class $04)
+    dw CloseSiegelDiary ; Selected action SelActionClose (class $04)
 
 C2Act3_30:
-    dw ReadSugarCard
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadSugarCard ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_31:
-    dw LookPencil
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookPencil ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_32:
-    dw LookC2Key4
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key4 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_33:
-    dw LookTissue
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeTissue
+    dw LookTissue ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeTissue ; Selected action SelActionTake (class $03)
 
 C2Act3_34:
-    dw LookPillow
-    dw UseC2Item
-    dw PutC2Item
-    dw TakePillow
+    dw LookPillow ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakePillow ; Selected action SelActionTake (class $03)
 
 C2Act3_35:
-    dw LookPerfume
-    dw UseC2Item
-    dw PutC2Item
-    dw TakePerfume
+    dw LookPerfume ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakePerfume ; Selected action SelActionTake (class $03)
 
 C2Act3_36:
-    dw ReadSugarNews
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeSugarNews
+    dw ReadSugarNews ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeSugarNews ; Selected action SelActionTake (class $03)
 
 C2Act3_37:
-    dw LookC2Dress
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Dress ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_38:
-    dw LookSugarClothes
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookSugarClothes ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_39:
-    dw ReadMcMNote
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadMcMNote ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_3A:
-    dw LookMcMUniform
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookMcMUniform ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_3B:
-    dw LookDeposits
-    dw OpenDeposits
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
-    dw CloseDeposits
+    dw LookDeposits ; Selected action SelActionLook (class $04)
+    dw OpenDeposits ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Item ; Selected action SelActionTake (class $04)
+    dw CloseDeposits ; Selected action SelActionClose (class $04)
 
 C2Act3_3C:
-    dw LookC2Key5
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key5 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_3D:
-    dw LookC2Money
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Money ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_3E:
-    dw LookBondLicense
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookBondLicense ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_3F:
-    dw LookClaimTicket
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookClaimTicket ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_40:
-    dw LookSoap
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookSoap ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_41:
-    dw LookC2Key6
-    dw UseC2Key
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Key6 ; Selected action SelActionLook (class $03)
+    dw UseC2Key ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_42:
-    dw LookMagnet
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeMagnet
+    dw LookMagnet ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeMagnet ; Selected action SelActionTake (class $03)
 
 C2Act3_43:
-    dw ReadFramePhoto
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeFramePhoto
+    dw ReadFramePhoto ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeFramePhoto ; Selected action SelActionTake (class $03)
 
 C2Act3_44:
-    dw LookC2Ledger
-    dw OpenC2Ledger
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
-    dw CloseC2Ledger
+    dw LookC2Ledger ; Selected action SelActionLook (class $04)
+    dw OpenC2Ledger ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Item ; Selected action SelActionTake (class $04)
+    dw CloseC2Ledger ; Selected action SelActionClose (class $04)
 
 C2Act3_45:
-    dw LookC2HatRack
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2HatRack
+    dw LookC2HatRack ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2HatRack ; Selected action SelActionTake (class $03)
 
 C2Act3_46:
-    dw LookPaperweight
-    dw ItemCannotOpen
-    dw UseC2Item
-    dw PutC2Item
-    dw TakePaperweight
-    dw NoC2ItemEffect
-    dw SplitPaperweight
-    dw ItemNoAnswer
-    dw RejectC2Item
+    dw LookPaperweight ; Selected action SelActionLook (class $06)
+    dw ItemCannotOpen ; Selected action SelActionOpen (class $06)
+    dw UseC2Item ; Selected action SelActionUse (class $06)
+    dw PutC2Item ; Selected action SelActionPut (class $06)
+    dw TakePaperweight ; Selected action SelActionTake (class $06)
+    dw NoC2ItemEffect ; Selected action SelActionClose (class $06)
+    dw SplitPaperweight ; Selected action SelActionHit (class $06)
+    dw ItemNoAnswer ; Selected action SelActionTalk (class $06)
+    dw RejectC2Item ; Selected action SelActionMove (class $06)
 
 C2Act3_47:
-    dw LookC2Dart
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Dart
+    dw LookC2Dart ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Dart ; Selected action SelActionTake (class $03)
 
 C2Act3_48:
-    dw LookDartBase
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeDartBase
+    dw LookDartBase ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeDartBase ; Selected action SelActionTake (class $03)
 
 C2Act3_49:
-    dw LookC2Opener
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Opener ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_4A:
-    dw LookOldSandwich
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookOldSandwich ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_4B:
-    dw LookDeskMat
-    dw ItemCannotOpen
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeDeskMat
-    dw RejectC2Item
+    dw LookDeskMat ; Selected action SelActionLook (class $04)
+    dw ItemCannotOpen ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeDeskMat ; Selected action SelActionTake (class $04)
+    dw RejectC2Item ; Selected action SelActionClose (class $04)
 
 C2Act3_4C:
-    dw LookFramedPhoto
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookFramedPhoto ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_4D:
-    dw ReadBondLetter
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadBondLetter ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_4E:
-    dw ReadCompanyList
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw ReadCompanyList ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_4F:
-    dw LookC2Banana
-    dw PeelC2Banana
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Banana
-    dw RejectC2Item
+    dw LookC2Banana ; Selected action SelActionLook (class $04)
+    dw PeelC2Banana ; Selected action SelActionOpen (class $04)
+    dw UseC2Item ; Selected action SelActionUse (class $04)
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Banana ; Selected action SelActionTake (class $04)
+    dw RejectC2Item ; Selected action SelActionClose (class $04)
 
 C2Act3_50:
-    dw LookBlackBook
-    dw OpenBlackBook
+    dw LookBlackBook ; Selected action SelActionLook (class $04)
+    dw OpenBlackBook ; Selected action SelActionOpen (class $04)
     ; Pointer to $5981; split bytes retain the interior label.
-    db LOW(UseC2Item)
+    db LOW(UseC2Item) ; Selected action SelActionUse (class $04)
 jr_007_590e:
     db HIGH(UseC2Item)
-    dw PutC2Item
-    dw TakeC2Item
-    dw CloseBlackBook
+    dw PutC2Item ; Selected action SelActionPut (class $04)
+    dw TakeC2Item ; Selected action SelActionTake (class $04)
+    dw CloseBlackBook ; Selected action SelActionClose (class $04)
 
 C2Act3_51:
-    dw LookTag1
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeTag1
+    dw LookTag1 ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeTag1 ; Selected action SelActionTake (class $03)
 
 C2Act3_52:
-    dw LookTag2
+    dw LookTag2 ; Selected action SelActionLook (class $03)
     ; Pointer to $5981; split bytes retain the interior label.
-    db LOW(UseC2Item)
+    db LOW(UseC2Item) ; Selected action SelActionUse (class $03)
 jr_007_5920:
     db HIGH(UseC2Item)
-    dw PutC2Item
-    dw TakeTag2
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeTag2 ; Selected action SelActionTake (class $03)
 
 C2Act3_53:
-    dw LookC2Peel
-    dw UseC2Item
-    dw PutC2Item
-    dw TakeC2Item
+    dw LookC2Peel ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw TakeC2Item ; Selected action SelActionTake (class $03)
 
 C2Act3_54:
-    dw ItemSilentAction
-    dw UseC2Item
-    dw PutC2Item
-    dw ItemSilentAction
+    dw ItemSilentAction ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw ItemSilentAction ; Selected action SelActionTake (class $03)
 
 C2Act3_55:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_56:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_57:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_58:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_59:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_5A:
-    dw LookC2AmmoAlt
-    dw UseC2Item
-    dw PutC2Item
-    dw AmmoNotNeeded
+    dw LookC2AmmoAlt ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw PutC2Item ; Selected action SelActionPut (class $03)
+    dw AmmoNotNeeded ; Selected action SelActionTake (class $03)
 
 C2Act3_5B:
-    dw ReadStogieRing
-    dw UseC2Item
-    dw UseC2Ring
-    dw TakeC2Ring2
+    dw ReadStogieRing ; Selected action SelActionLook (class $03)
+    dw UseC2Item ; Selected action SelActionUse (class $03)
+    dw UseC2Ring ; Selected action SelActionPut (class $03)
+    dw TakeC2Ring2 ; Selected action SelActionTake (class $03)

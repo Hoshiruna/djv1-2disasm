@@ -22,7 +22,7 @@ DropC1ItemObj:
     call SetObjVisible
     call RefreshObjs
     ld a, $58
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message58: もとの ところに もどした。[END]
     call ClearResult
     ld a, [wItemId]
     cp $2c
@@ -55,6 +55,6 @@ DropC1PropObj:
     call SetObjVisible
     call RefreshObjs
     ld a, $58
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message58: もとの ところに もどした。[END]
     call ClearResult
     ret

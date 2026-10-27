@@ -17,14 +17,15 @@ Call_000_31a4:
     ld c, a
     ld a, [wWorkSrc+1]
     ld b, a
-    ld hl, $0010
+    ld hl, OpSlotAlternate
     add hl, bc
     ld a, l
     ld [wWorkSrc], a
     ld a, h
     ld [wWorkSrc+1], a
 
-; Compact six source bytes into the regional work-list base, skipping $ff and preserving both scratch indices.
+; Compact six source bytes, skipping $ff; leave the destination tail untouched.
+; Preserve both scratch words. Callers clear the regional work list first.
 CopyWorkList:
 
 Call_000_31c9:
@@ -102,7 +103,7 @@ jr_000_3217:
     ld a, d
     ld d, a
     ldh a, [hChangePos]
-    cp $06
+    cp WorkListInputBytes
     ld a, d
     jr c, CopyWorkListScan
 

@@ -81,245 +81,246 @@ C1SceneRefs:
     dw C1View4D
 
 C1View00:
-    db $00, $01, $ff
+    db C1SceneStartStallDoorClosed, C1SceneStartStallDoorOpen, $ff
 
 C1View01:
-    db $02, $03, $ff
+    db C1SceneStartWashroomHallDoorClosed, C1SceneStartWashroomHallDoorOpen, $ff
 
 C1View02:
-    db $04, $06, $05, $07, $ff
+    db C1SceneWashroomHallBothDoorsClosed, C1SceneWashroomHallWomenDoorOpen, C1SceneWashroomHallBarDoorOpen, C1SceneWashroomHallBothDoorsOpen, $ff
 
 C1View03:
-    db $08, $0a, $09, $0b, $ff
+    db C1SceneWomenWashroomBothDoorsClosed, C1SceneWomenWashroomHallDoorOpen, C1SceneWomenWashroomStallDoorOpen, C1SceneWomenWashroomBothDoorsOpen, $ff
 
 C1View04:
-    db $0c, $0d, $ff
+    db C1SceneWomenStallLidClosed, C1SceneWomenStallLidOpen, $ff
 
 C1View05:
-    db $0e, $0f, $10, $11, $ff
+    db C1SceneBarBothDoorsClosed, C1SceneBarCellarDoorOpen, C1SceneBarFrontDoorOpen, C1SceneBarBothDoorsOpen, $ff
 
 C1View06:
-    db $12, $13, $ff
+    db C1SceneCellarRackPassageClosed, C1SceneCellarRackPassageOpen, $ff
 
 C1View07:
-    db $16, $14, $17, $15, $ff
+    db C1SceneRackPassageBothDoorsClosed, C1SceneRackPassageRackOpen, C1SceneRackPassageCasinoDoorOpen, C1SceneRackPassageBothDoorsOpen, $ff
 
 C1View08:
-    db $19, $18, $ff
+    db C1SceneCasinoDoorClosed, C1SceneCasinoDoorOpen, $ff
 
 C1View09:
-    db $1a, $1b, $ff
+    db C1SceneCasinoLiftEntranceDoorClosed, C1SceneCasinoLiftEntranceDoorOpen, $ff
 
 C1View0A:
-    db $1d, $1c, $ff
+    db C1SceneCasinoElevatorClosed, C1SceneCasinoLiftDoorOpen, $ff
 
 C1View0B:
-    db $20, $21, $22, $23, $ff
+    db C1SceneTopFloorRoomBothExitsClosed, C1SceneTopFloorRoomLiftDoorOpen, C1SceneTopFloorRoomWindowOpen, C1SceneTopFloorRoomBothExitsOpen, $ff
 
 C1View0C:
-    db $28, $29, $2a, $2b, $ff
+    db C1SceneCorpseOfficeWindowAndSafeClosed, C1SceneCorpseOfficeWindowOpen, C1SceneCorpseOfficeSafeOpen, C1SceneCorpseOfficeWindowAndSafeOpen, $ff
 
 C1View0D:
-    db $2c, $2d, $ff
+    db C1SceneSecretaryOfficeDoorClosed, C1SceneSecretaryOfficeDoorOpen, $ff
 
 C1View0E:
-    db $2e, $2f, $ff
+    db C1SceneUpstairsHallSecretaryDoorClosed, C1SceneUpstairsHallSecretaryDoorOpen, $ff
 
 C1View0F:
-    db $24, $25, $ff
+    db C1SceneFireEscape3WindowClosed, C1SceneFireEscape3WindowOpen, $ff
 
 C1View10:
-    db $26, $27, $ff
+    db C1SceneFireEscape2OfficeWindowClosed, C1SceneFireEscape2OfficeWindowOpen, $ff
 
 C1View11:
-    db $30, $33, $34, $3a, $32, $38, $39, $3e, $31, $36, $37, $3d, $35
+    db C1SceneJoeStreetAllClosed, C1SceneJoeStreetFrontDoorOpen, C1SceneJoeStreetManholeOpen, C1SceneJoeStreetFrontDoorManholeOpen, C1SceneJoeStreetTrunkOpen, C1SceneJoeStreetFrontDoorTrunkOpen, C1SceneJoeStreetManholeTrunkOpen, C1SceneJoeStreetFrontDoorManholeTrunkOpen, C1SceneJoeStreetCarDoorOpen, C1SceneJoeStreetFrontDoorCarDoorOpen, C1SceneJoeStreetManholeCarDoorOpen, C1SceneJoeStreetFrontDoorManholeCarDoorOpen, C1SceneJoeStreetTrunkCarDoorOpen
 jr_001_6692:
-    db $3b, $3c, $3f, $ff
+    db C1SceneJoeStreetFrontDoorTrunkCarDoorOpen, C1SceneJoeStreetManholeTrunkCarDoorOpen, C1SceneJoeStreetFrontDoorManholeTrunkCarDoorOpen, $ff
 
 C1View12:
-    db $45, $ff
+    db C1SceneNewsstandStreet, $ff
 
 C1View13:
-    db $47, $48, $ff
+    db C1SceneGunShopFrontDoorClosed, C1SceneGunShopFrontDoorOpen, $ff
 
 C1View14:
-    db $4b, $ff
+    db C1ScenePeoriaBlueCabStop, $ff
 
 C1View15:
-    db $4d, $ff
+    db C1ScenePeoriaYellowCabStop, $ff
 
 C1View16:
 jr_001_669f:
-    db $51, $52, $ff
+    db C1SceneJoeAlleyManholeClosed, C1SceneJoeAlleyManholeOpen, $ff
 
 C1View17:
-    db $4e, $4f, $ff
+    db C1ScenePoliceDoorClosed, C1ScenePoliceDoorOpen, $ff
 
 C1View18:
-    db $50, $ff
+    db C1SceneConstructionPit, $ff
 
 C1View19:
-    db $5c, $5e, $5d, $5f, $ff
+    db C1SceneStanfordFrontBlueCabDoorClosed, C1SceneStanfordFrontYellowCabDoorClosed, C1SceneStanfordFrontBlueCabDoorOpen, C1SceneStanfordFrontYellowCabDoorOpen, $ff
 
 C1View1A:
-    db $66, $68, $67, $69, $ff
+    db C1SceneBungalowFrontBlueCabDoorClosed, C1SceneBungalowFrontYellowCabDoorClosed, C1SceneBungalowFrontBlueCabDoorOpen, C1SceneBungalowFrontYellowCabDoorOpen, $ff
 
 C1View1B:
-    db $6b, $6d, $6c, $6e, $ff
+    db C1SceneOfficeBuildingFrontBlueCabDoorClosed, C1SceneOfficeBuildingFrontYellowCabDoorClosed, C1SceneOfficeBuildingFrontBlueCabDoorOpen, C1SceneOfficeBuildingFrontYellowCabDoorOpen, $ff
 
 C1View1C:
-    db $77, $78, $ff
+    db C1SceneEstateFrontBlueCab, C1SceneEstateFrontYellowCab, $ff
 
 C1View1D:
-    db $8b
+    db C1SceneUpperSewerManholeClosed
 jr_001_66ba:
-    db $8c, $ff
+    db C1SceneUpperSewerManholeOpen, $ff
 
 C1View1E:
-    db $54, $ff
+    db C1SceneRobbingMugger, $ff
 
 C1View1F:
-    db $53, $ff
+    db C1SceneBumEncounter, $ff
 
 C1View20:
-    db $55, $ff
+    db C1SceneArmedWoman, $ff
 
 C1View21:
-    db $56, $ff
+    db C1SceneFallenWoman, $ff
 
 C1View22:
-    db $43
+    db C1SceneCarTrunkClosed
 jr_001_66c5:
-    db $44, $ff
+    db C1SceneCarTrunkOpen, $ff
 
 C1View23:
-    db $41, $42, $ff
+    db C1SceneLuxuryCarDashboardClosed, C1SceneLuxuryCarDashboardOpen, $ff
 
 C1View24:
-    db $8d, $8e, $ff
+    db C1SceneAlligatorEncounter, C1SceneAlligatorShotView, $ff
 
 C1View25:
-    db $4a, $ff
+    db C1SceneGunShopInterior, $ff
 
 C1View26:
-    db $58, $ff
+    db C1SceneBlueCabInterior, $ff
 
 C1View27:
-    db $5a, $ff
+    db C1SceneYellowCabInterior, $ff
 
 C1View28:
-    db $60, $61, $ff
+    db C1SceneStanfordLobbyElevatorDoorClosed, C1SceneStanfordLobbyElevatorDoorOpen, $ff
 
 C1View29:
-    db $62, $63, $ff
+    db C1SceneStanfordElevatorClosed, C1SceneStanfordLiftAtLobbyOpen, $ff
 
 C1View2A:
-    db $65, $ff
+    db C1SceneStanfordPenthouseInterior, $ff
 
 C1View2B:
-    db $6a, $ff
+    db C1SceneBungalowInterior, $ff
 
 C1View2C:
-    db $6f, $ff
+    db C1SceneOfficeBuildingLobby, $ff
 
 C1View2D:
-    db $70, $71, $ff
+    db C1SceneDoctorEntranceDoorClosed, C1SceneDoctorEntranceDoorOpen, $ff
 
 C1View2E:
-    db $72, $ff
+    db C1SceneDoctorOfficeInterior, $ff
 
 C1View2F:
-    db $73, $74, $ff
+    db C1SceneAceOfficeDoorClosed, C1SceneAceOfficeDoorOpen, $ff
 
 C1View30:
-    db $75, $76, $ff
+    db C1SceneAceOfficeNoGunman, C1SceneAceOfficeGunmanVisible, $ff
 
 C1View31:
-    db $79, $ff
+    db C1SceneMansionFrontDoor, $ff
 
+; Offsets 0 and 3 share the original foyer scene; retain both state combinations.
 C1View32:
-    db $7b, $7a, $7c, $7b, $ff
+    db C1SceneMansionVestibuleShared, C1SceneMansionButlerKitchenClosed, C1SceneMansionVestibuleKitchenOpenNoButler, C1SceneMansionVestibuleShared, $ff
 
 C1View33:
-    db $8f, $98, $ff
+    db C1SceneHitman, C1SceneHitmanAlt, $ff
 
 C1View34:
-    db $7d, $ff
+    db C1SceneMansionKitchen, $ff
 
 C1View35:
-    db $7e, $7f, $80, $81, $ff
+    db C1SceneMansionUpperHallBothDoorsClosed, C1SceneMansionUpperHallMasterDoorOpen, C1SceneMansionUpperHallGuestDoorOpen, C1SceneMansionUpperHallBothDoorsOpen, $ff
 
 C1View36:
-    db $82, $83, $ff
+    db C1SceneMasterBedroomLinkDoorClosed, C1SceneMasterBedroomLinkDoorOpen, $ff
 
 C1View37:
-    db $84, $85, $ff
+    db C1SceneGuestBedroomLinkDoorClosed, C1SceneGuestBedroomLinkDoorOpen, $ff
 
 C1View38:
-    db $86, $ff
+    db C1SceneLiftSewer, $ff
 
 C1View39:
-    db $87, $ff
+    db C1SceneSewerJunction, $ff
 
 C1View3A:
-    db $88, $ff
+    db C1SceneRackLadderSewer, $ff
 
 C1View3B:
-    db $89, $ff
+    db C1SceneJoeStreetLowerSewer, $ff
 
 C1View3C:
-    db $8a, $ff
+    db C1SceneDeepestSewer, $ff
 
 C1View3D:
-    db $8b, $8c, $ff
+    db C1SceneUpperSewerManholeClosed, C1SceneUpperSewerManholeOpen, $ff
 
 C1View3E:
-    db $57, $ff
+    db C1SceneArmedWomanPortrait, $ff
 
 C1View3F:
-    db $1d, $1f, $ff
+    db C1SceneCasinoElevatorClosed, C1SceneHiddenOfficeLiftDoorOpen, $ff
 
 C1View40:
-    db $1d, $1e, $ff
+    db C1SceneCasinoElevatorClosed, C1SceneTopFloorLiftDoorOpen, $ff
 
 C1View41:
-    db $62, $64, $ff
+    db C1SceneStanfordElevatorClosed, C1SceneStanfordLiftAtPenthouseOpen, $ff
 
 C1View42:
-    db $58, $ff
+    db C1SceneBlueCabInterior, $ff
 
 C1View43:
-    db $5a, $ff
+    db C1SceneYellowCabInterior, $ff
 
 C1View44:
-    db $58, $ff
+    db C1SceneBlueCabInterior, $ff
 
 C1View45:
-    db $5a, $ff
+    db C1SceneYellowCabInterior, $ff
 
 C1View46:
-    db $58, $ff
+    db C1SceneBlueCabInterior, $ff
 
 C1View47:
-    db $5a, $ff
+    db C1SceneYellowCabInterior, $ff
 
 C1View48:
-    db $58, $ff
+    db C1SceneBlueCabInterior, $ff
 
 C1View49:
-    db $5a, $ff
+    db C1SceneYellowCabInterior, $ff
 
 C1View4A:
-    db $40, $ff
+    db C1SceneMuggerJoeStreet, $ff
 
 C1View4B:
-    db $46, $ff
+    db C1SceneMuggerNewsstand, $ff
 
 C1View4C:
-    db $49, $ff
+    db C1SceneMuggerGunShopStreet, $ff
 
 C1View4D:
-    db $4c, $ff
+    db C1SceneMuggerPeoria, $ff
 
 ; BuildC1Scene shifts each raw count right by one.
 C1StateCounts:

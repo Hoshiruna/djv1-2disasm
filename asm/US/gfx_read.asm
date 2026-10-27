@@ -1,14 +1,15 @@
 
-; Validate the format byte, preserve BC/DE, and read the graphics resource.
+; Accept $00-$03, $0c/$0d and their bit-4 variants; preserve BC/DE.
+; Bit 4 does not affect decoding. Invalid formats retain the original self-jump.
 ReadGfx:
 
 Call_000_050c:
     ld a, [hl]
     and $ef
-    cp $0c
+    cp GfxFormatLzUnsigned
     jr z, GfxReadAccepted
 
-    cp $0d
+    cp GfxFormatLzSigned
     jr z, GfxReadAccepted
 
     and $ec
@@ -56,7 +57,8 @@ Call_000_052b:
     inc bc
     ret
 
-; Read format and destination; select LZ, planar RLE, or count*16 raw bytes.
+; Destination = $8000 + tile*16; bit 0 maps tile $00-$7f to $9000-$97f0.
+; Tiles $80-$ff stay at $8800-$8ff0. This path leaves VBK unchanged.
 ReadGfxHead:
 
 
@@ -87,17 +89,17 @@ Jump_000_054a:
     or $10
     ld b, a
 
-; Select LZ, planar RLE, or raw tile copying.
+; Low nibble $0c/$0d selects LZ; otherwise bit 1 selects raw over planar RLE.
 GfxReadSelectDecoder:
 jr_000_054d:
     ld a, e
     and $0f
-    cp $0c
+    cp GfxFormatLzUnsigned
 
 Jump_000_0552:
     jr z, DecodeLzTiles
 
-    cp $0d
+    cp GfxFormatLzSigned
     jr z, DecodeLzTiles
 
     bit 1, e

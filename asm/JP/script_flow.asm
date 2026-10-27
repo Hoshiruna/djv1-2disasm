@@ -14,7 +14,7 @@ SelectSlot1:
 
 
 Call_000_1cb6:
-    ld a, $10
+    ld a, OpSlotAlternate
     ldh [hItemSlot], a
     xor a
     ldh [hItemSlot+1], a

@@ -5,25 +5,25 @@ CheckC1Rooms:
 
 Call_002_6d28:
     ld a, [wRoomId]
-    cp $1e
+    cp C1RoomIdAlleyMuggerEncounter
     jr z, C1Room1EEvent
 
-    cp $20
+    cp C1RoomIdArmedWomanEncounter
     jr z, C1Room20Event
 
-    cp $24
+    cp C1RoomIdAlligatorEncounter
     jr z, C1Room24Event
 
-    cp $4a
+    cp C1RoomIdMuggerJoeStreet
     jp z, C1Room4AFx
 
-    cp $4b
+    cp C1RoomIdMuggerNewsstand
     jp z, C1Room4AFx
 
-    cp $4c
+    cp C1RoomIdMuggerGunShopStreet
     jr z, C1Room4AFx
 
-    cp $4d
+    cp C1RoomIdMuggerPeoria
     jr z, C1Room4AFx
 
     call ClearResult
@@ -33,19 +33,19 @@ Call_002_6d28:
 ; Run the room-$1e effect, cash removal, and message sequence.
 C1Room1EEvent:
 jr_002_6d4d:
-    ld a, $06
+    ld a, C1FxIdImpact
     ld [wFxId], a
     call FinishC1Effect
     ld a, $e4
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage64: 「バカに してるのか!」[PAGE] / おとこは いきなり おれに / なぐりかかってきた。[PAGE] / おとこの ひだりパンチが おれの / がんめんへ もろに ...
     call ClearC1Cash
     ld a, [wStateResult]
     or $08
     ld [wStateResult], a
     ld a, $e5
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage65: いつつつっ・・・。[PAGE] / どのくらいのじかん きを / うしなって いたのだろうか・・・。[PAGE] / めを あけようとして みぎめに / いたみを かんじ...
     ld a, $e7
-    call ShowMsg1
+    call ShowMsg1 ; Message Text0FMessage67: ない!!! / コインが ぜんぶ![PAGE] / ・・・クソッ!! / なんてこった![END]
     call ResumeTextUI
     call SetResult
     ret
@@ -54,19 +54,19 @@ jr_002_6d4d:
 ; Run the room-$20 effects and set result bit six.
 C1Room20Event:
 jr_002_6d76:
-    ld a, $07
+    ld a, C1FxIdGunshot
     ld [wFxId], a
     call FinishC1Effect
-    ld a, $16
+    ld a, C1FxIdArmedWomanFires
     ld [wFxId], a
     call FinishC1Effect
     ld a, $e6
-    call ShowMsg2
-    ld a, $15
+    call ShowMsg2 ; Message Text0DMessage66: ・・・・・・! / いきなり おんなは バッグから / ピストルを とりだして うった。[END]
+    ld a, C1FxIdDefeat
     ld [wFxId], a
     call FinishC1Effect
     ld a, $62
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ld a, [wStateResult]
     or $40
     ld [wStateResult], a
@@ -78,12 +78,12 @@ jr_002_6d76:
 C1Room24Event:
 jr_002_6da4:
     ld a, $37
-    call ShowMsg1
-    ld a, $15
+    call ShowMsg1 ; Message Text0EMessage37: ギャーッ![PAGE] / ・・・・・・むざんにも ワニに / くわれてしまった。[END]
+    ld a, C1FxIdDefeat
     ld [wFxId], a
     call FinishC1Effect
     ld a, $62
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ld a, [wStateResult]
     or $40
     ld [wStateResult], a
@@ -96,16 +96,16 @@ C1Room4AFx:
 
 Jump_002_6dc2:
 jr_002_6dc2:
-    ld a, $07
+    ld a, C1FxIdGunshot
     ld [wFxId], a
     call FinishC1Effect
     ld a, $f0
-    call ShowMsg1
-    ld a, $15
+    call ShowMsg1 ; Message Text0FMessage70: おとこは とつぜん トリガーを / ひいた![PAGE] / ちくしょう!!! / やられてしまった・・・。[END]
+    ld a, C1FxIdDefeat
     ld [wFxId], a
     call FinishC1Effect
     ld a, $62
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message62: あなたは トイレの なかで / めざめてから てさぐりで / ここまできた・・・。[PAGE] / ・・・だが あなたは えいえんに / つちの したで ねむるハメに /...
     ld a, [wStateResult]
     or $40
     ld [wStateResult], a
@@ -124,7 +124,7 @@ jr_002_6df5:
     call SetResult
     ret
 
-; Handle first-slot type 0/value $12 for actions 1 and 5; clear result bit 0 before checking.
+; Handle first-slot type 0/value $12 for open and close; clear result bit 0 before checking.
 CheckC1Op12:
 
 
@@ -139,10 +139,10 @@ Call_002_6df9:
     ret nz
 
     ld a, [wSelAction]
-    cp $01
+    cp SelActionOpen
     jr z, C1SpigotOpenCheck
 
-    cp $05
+    cp SelActionClose
     jr z, C1SpigotCloseCheck
 
     ret
@@ -160,7 +160,7 @@ jr_002_6e14:
     jr z, C1SpigotSetOpen
 
     ld a, $01
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message01: [OBJECT_WRAM:37C5]は あいている。[END]
     call SetResult
     ret
 
@@ -169,7 +169,7 @@ jr_002_6e14:
 C1SpigotSetOpen:
 jr_002_6e2e:
     ld a, $00
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message00: [OBJECT_WRAM:37C5]を あけた。[END]
     ld a, C1SpigotClosed
     call ClearObjFlag
     ld a, C1SpigotOpen
@@ -191,7 +191,7 @@ jr_002_6e44:
     jr z, C1SpigotSetClosed
 
     ld a, $03
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message03: [OBJECT_WRAM:37C5]は しまっている。[END]
     call SetResult
     ret
 
@@ -200,7 +200,7 @@ jr_002_6e44:
 C1SpigotSetClosed:
 jr_002_6e5e:
     ld a, $02
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message02: [OBJECT_WRAM:37C5]を しめた。[END]
     ld a, C1SpigotOpen
     call ClearObjFlag
     ld a, C1SpigotClosed
@@ -209,7 +209,7 @@ jr_002_6e5e:
     call SetResult
     ret
 
-; Handle first-slot type 0/value $3f in scene $44 for action 5; clear result bit 0 before checking.
+; Handle first-slot type 0/value $3f in scene $44 for close; clear result bit 0 before checking.
 CheckC1Op3f:
 
 
@@ -228,7 +228,7 @@ Call_002_6e74:
     ret nz
 
     ld a, [wSelAction]
-    cp $05
+    cp SelActionClose
     ret nz
 
     ld a, $05

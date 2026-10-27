@@ -56,8 +56,8 @@ Jump_000_3085:
     ld a, [wFoundGroup]
     ld [wOpByte], a
     call RefreshListMode
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
-    ld a, $16
+    ld a, C1RoomIdJoeAlley
     call DrawRoomAt
     ret

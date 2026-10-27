@@ -52,7 +52,7 @@ Jump_000_2a31:
 C1UseCoinEmpty:
 jr_000_2a43:
     ld a, $72
-    call ShowMsg2
+    call ShowMsg2 ; Message Text10Message72: コインが ない・・・。[END]
     ret
 
 ; Read a cost, subtract it when available, and retain the room-specific success and insufficient-count flags.
@@ -68,7 +68,7 @@ SpendListCount:
 
     ld [wC1Coins], a
     ld a, [wRoomId]
-    cp $27
+    cp C1RoomIdYellowCabPeoria
     jr z, C1SpendCheckYellowDebt
 
     ld a, C1BlueCabDebt
@@ -111,10 +111,10 @@ jr_000_2a7e:
 C1SpendCoinsInsufficient:
 jr_000_2a92:
     ld a, [wRoomId]
-    cp $26
+    cp C1RoomIdBlueCabPeoria
     jr z, C1SpendBlueDebt
 
-    cp $27
+    cp C1RoomIdYellowCabPeoria
     jr z, C1SpendYellowDebt
 
     call ClearResult

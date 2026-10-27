@@ -6,7 +6,7 @@ ChooseListRow:
     cp $ff
     jr z, ListPickNoEntries
 
-    ld a, $0d
+    ld a, InputSelListFirst
     ld [wInputSel], a
 
 ; Wait for list input and redraw the selected cursor.
@@ -51,7 +51,7 @@ jr_001_6241:
     ld a, $19
     call PlayAudio
     ld a, [wInputSel]
-    sub $0d
+    sub InputSelListFirst
     ld [wListMarkRow], a
     call DrawListMark
     ld a, $10

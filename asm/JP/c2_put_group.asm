@@ -68,7 +68,7 @@ jr_003_50ec:
     jr nz, C2PutFindOpenSlot
 
     ld a, $f2
-    call ShowMsg1
+    call ShowMsg1 ; Message Text15Message72: すでに いっぱいで これいじょうは / はいらない。[END]
     ret
 
 

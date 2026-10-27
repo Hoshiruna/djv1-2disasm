@@ -49,7 +49,7 @@ jr_003_5ecf:
     ld a, [hl]
     call ClearStateView
     ld a, $66
-    call ShowMsg1
+    call ShowMsg1 ; Message Text14Message66: THE ELEVATOR DOOR / IS CLOSED.[END]
     ret
 
 
@@ -64,6 +64,8 @@ jr_003_5ef8:
 
 ; Room low seven bits select the paired state ID; bit seven selects ClearStateBit.
 C2TimerRooms:
-    db $02, RoomVegasLift1, $83, $0b, RoomVegasLift2, $0c, RoomVegasLift3, $8d, $0e, RoomVegasLift4, $8f, $90
+    db RoomVegasHall1, RoomVegasLift1, RoomVegasLobby + $80, RoomVegasHall2, RoomVegasLift2, RoomVegasHall3, RoomVegasLift3, RoomVegasHamper + $80, RoomVegasHall4, RoomVegasLift4, RoomVegasVentiniOffice + $80, RoomVegasMaloneOffice + $80
 C2TimerStates:
-    db $04, $04, $04, $09, $09, $0c, $0c, $0c, $0e, $0e, $0e, $0e
+    db C2StateLift1DoorOpen, C2StateLift1DoorOpen, C2StateLift1DoorOpen, C2StateLift2DoorOpen
+    db C2StateLift2DoorOpen, C2StateLift3DoorOpen, C2StateLift3DoorOpen, C2StateLift3DoorOpen
+    db C2StateLift4DoorOpen, C2StateLift4DoorOpen, C2StateLift4DoorOpen, C2StateLift4DoorOpen

@@ -23,7 +23,8 @@ Jump_000_0749:
     pop af
     reti
 
-; Set palette request bit 0 in hVideoFlags; preserve HL.
+; Request a live BG/OBJ palette upload by setting hVideoFlags bit 0; preserve HL.
+; This entry copies no colors and does not wait for VBlank.
 RequestPals:
 
 

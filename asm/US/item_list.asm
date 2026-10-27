@@ -83,11 +83,12 @@ Call_001_58ef:
     ld [hl], a
     ret
 
+; Case II type, target ID, operation-class triples; $ff ends the table.
 C2OpClasses:
-    db $00, $01, $01
-    db $00, $02, $01
-    db $00, $07, $01
-    db $00, $40, $01
+    db $00, C2TargetBathColdTap, $01
+    db $00, C2TargetBathHotTap, $01
+    db $00, C2TargetBedroomCurtain, $01
+    db $00, C2TargetTrainShade, $01
     db $00, $4e, $01
     db $00, $50, $06
     db $00, $5a, $01
@@ -107,31 +108,31 @@ C2OpClasses:
     db $00, $a4, $01
     db $00, $88, $01
     db $00, $89, $01
-    db $01, $09, $06
-    db $03, $11, $04
-    db $03, $17, $06
-    db $03, $1a, $04
-    db $03, $1e, $06
-    db $03, $24, $04
+    db $01, C2ContainerSugarWardrobe, $06
+    db $03, C2ItemTimetable, $04
+    db $03, C2ItemLiftButton, $06
+    db $03, C2ItemRailwayPamphlet, $04
+    db $03, C2Bottle, $06
+    db $03, C2Knife, $04
     db $03, $2f, $04
     db $03, $3b, $04
     db $03, $44, $04
-    db $03, $46, $06
-    db $03, $4b, $04
-    db $03, $4f, $04
+    db $03, C2Paperweight, $06
+    db $03, C2DeskMat, $04
+    db $03, C2Banana, $04
     db $03, $50, $04
-    db $04, $0a, $03
-    db $05, $06, $06
-    db $05, $15, $06
-    db $05, $19, $06
-    db $05, $39, $06
-    db $05, $46, $06
+    db $04, C2ItemFlashlight, $03
+    db $05, C2TargetCasinoFrontDoor, $06
+    db $05, C2TargetCleanersEntrance, $06
+    db $05, C2TargetVegasStationEntrance, $06
+    db $05, C2TargetChicagoStationEntrance, $06
+    db $05, C2TargetChicagoStationCab, $06
     db $05, $48, $06
-    db $05, $49, $06
-    db $05, $4a, $06
-    db $05, $4b, $06
-    db $05, $4c, $06
-    db $05, $53, $06
-    db $05, $65, $06
-    db $05, $68, $06
+    db $05, C2TargetCottageCab, $06
+    db $05, C2TargetJoeFrontCab, $06
+    db $05, C2TargetMorgueCab, $06
+    db $05, C2TargetAdisonBuildingEntrance, $06
+    db $05, C2TargetJoeBarFrontDoor, $06
+    db $05, C2TargetPoliceStationDoor, $06
+    db $05, C2TargetMorgueEntranceDoor, $06
     db $ff

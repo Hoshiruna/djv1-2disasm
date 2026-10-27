@@ -55,7 +55,7 @@ DrawAsciiGlyph:
 
 Jump_000_16fb:
     ld a, [wTextChar]
-    cp $d0
+    cp SingleRowGlyphDirectMin
 
 Jump_000_1700:
     jr nc, AsciiGlyphStoreTile
@@ -71,7 +71,7 @@ AsciiGlyphStoreTile:
 jr_000_170a:
     ld [wTextTile], a
     ld a, [wTextMode]
-    and $02
+    and TextModeDirectCoordinatesFlag
     jp z, DrawAsciiWindow
 
     ld a, [wTextX]
@@ -87,7 +87,7 @@ jr_000_170a:
     ld a, [wTextX]
     inc a
     ld [wTextX], a
-    and $e0
+    and TextMapColumnHighBits
     ret z
 
     jp AsciiNewline
@@ -110,7 +110,7 @@ QueueTextGlyph:
 
 Call_000_178f:
     ld a, [wTextMode]
-    bit 6, a
+    bit TextModeGlyphAttributesBit, a
     jr nz, AsciiGlyphCheckAttributes
 
     call QueueTileRect
@@ -121,16 +121,16 @@ Call_000_178f:
 AsciiGlyphCheckAttributes:
 jr_000_179a:
     ld a, [wTextMode]
-    bit 7, a
+    bit TextModeGlyphAltPaletteBit, a
     jr z, AsciiGlyphAttribute7
 
-    ld a, $06
+    ld a, TextGlyphAlternateAttribute
     jr AsciiGlyphQueueAttributes
 
 ; Use attribute seven when single-row text mode bit seven is clear.
 AsciiGlyphAttribute7:
 jr_000_17a5:
-    ld a, $07
+    ld a, TextGlyphDefaultAttribute
 
 ; Store the selected attribute and queue the single-row glyph with attributes.
 AsciiGlyphQueueAttributes:
@@ -264,7 +264,7 @@ jr_000_185b:
     ld [wTextCol], a
     ret
 
-; Advance one tile row, or enter the shared sprite newline continuation.
+; Advance one buffered tile row, or enter the shared direct-coordinate map newline.
 AsciiNewline:
 
 
@@ -272,7 +272,7 @@ Call_000_1861:
 Jump_000_1861:
     ld a, [wTextMode]
     and $02
-    jp nz, TextSpriteLine
+    jp nz, TextMapNewline
 
     ld a, [wTextRow]
     inc a

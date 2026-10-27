@@ -146,7 +146,7 @@ ClearC2RoomView:
     call PopRomBank
     jp ClearStateView
 
-; Clear the two additional train-room states in order; retain both cue and refresh calls.
+; Clear boarding-door then destination-door state; retain both cue and scene refresh calls.
 ClearTrainLinks:
 ClearC2ExtraView:
 
@@ -155,7 +155,7 @@ ClearC2ExtraView:
     ld a, $03
     call PushRomBank
     pop af
-    call TrainRoomStateA
+    call ReadTrainBoardingDoorState
 
 Call_000_21a8:
     call PopRomBank
@@ -164,7 +164,7 @@ Call_000_21a8:
     ld a, $03
     call PushRomBank
     pop af
-    call TrainRoomStateB
+    call ReadTrainDestinationDoorState
     call PopRomBank
     jp ClearStateView
 

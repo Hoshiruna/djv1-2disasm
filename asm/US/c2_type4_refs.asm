@@ -27,197 +27,197 @@ C2Type4Refs:
     dw C2Act4_17
 
 C2Act4_00:
-    dw LookC2Trench
-    dw OpenC2Pocket
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Trench
-    dw CloseC2Pocket
+    dw LookC2Trench ; Selected action SelActionLook (class $04)
+    dw OpenC2Pocket ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Trench ; Selected action SelActionTake (class $04)
+    dw CloseC2Pocket ; Selected action SelActionClose (class $04)
 
 C2Act4_01:
-    dw LookC2Pants
-    dw OpenC2Pocket
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pants
-    dw CloseC2Pocket
+    dw LookC2Pants ; Selected action SelActionLook (class $04)
+    dw OpenC2Pocket ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pants ; Selected action SelActionTake (class $04)
+    dw CloseC2Pocket ; Selected action SelActionClose (class $04)
 
 C2Act4_02:
-    dw LookC2Wallet1
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Wallet1 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_03:
-    dw ReadC2News1
-    dw OpenC2News1
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw ReadC2News1 ; Selected action SelActionLook (class $04)
+    dw OpenC2News1 ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_04:
-    dw LookC2Suitcase
-    dw OpenC2Suitcase
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Suitcase
-    dw CloseC2Suitcase
+    dw LookC2Suitcase ; Selected action SelActionLook (class $04)
+    dw OpenC2Suitcase ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Suitcase ; Selected action SelActionTake (class $04)
+    dw CloseC2Suitcase ; Selected action SelActionClose (class $04)
 
 C2Act4_05:
-    dw LookC2Laundry2
-    dw OpenC2Laundry2
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Laundry2 ; Selected action SelActionLook (class $04)
+    dw OpenC2Laundry2 ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_06:
-    dw LookC2Envelope1
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Envelope1 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_07:
-    dw LookC2Envelope2
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Envelope2 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_08:
-    dw LookC2Coat
-    dw OpenC2Coat
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Coat
-    dw CloseC2Pocket
+    dw LookC2Coat ; Selected action SelActionLook (class $04)
+    dw OpenC2Coat ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Coat ; Selected action SelActionTake (class $04)
+    dw CloseC2Pocket ; Selected action SelActionClose (class $04)
 
 C2Act4_09:
-    dw LookC2Gun
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Gun ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_0A:
-    dw LookC2Lamp
+    dw LookC2Lamp ; Selected action SelActionLook (class $03)
     ; Pointer to $686b; split bytes retain the interior label.
-    db LOW(UsePackOnTarget)
+    db LOW(UsePackOnTarget) ; Selected action SelActionUse (class $03)
 jr_007_67bc:
     db HIGH(UsePackOnTarget)
-    dw UseC2Pack
-    dw TakeC2Lamp
+    dw UseC2Pack ; Selected action SelActionPut (class $03)
+    dw TakeC2Lamp ; Selected action SelActionTake (class $03)
 
 C2Act4_0B:
-    dw LookC2Drawer
-    dw OpenC2Pack
-    dw UsePackOnTarget
+    dw LookC2Drawer ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
     ; Pointer to $6ea4; split bytes retain the interior label.
-    db LOW(UseC2Pack)
+    db LOW(UseC2Pack) ; Selected action SelActionPut (class $04)
 jr_007_67c8:
     db HIGH(UseC2Pack)
-    dw TakeC2Drawer
-    dw CloseC2Pack
+    dw TakeC2Drawer ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_0C:
-    dw LookC2Box1
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Box1 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_0D:
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
+    dw LookC2Trench ; Selected action SelActionLook (class $04)
+    dw LookC2Trench ; Selected action SelActionOpen (class $04)
+    dw LookC2Trench ; Selected action SelActionUse (class $04)
+    dw LookC2Trench ; Selected action SelActionPut (class $04)
+    dw LookC2Trench ; Selected action SelActionTake (class $04)
+    dw LookC2Trench ; Selected action SelActionClose (class $04)
 
 C2Act4_0E:
-    dw LookMoldyBox
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeMoldyBox
-    dw CloseC2Pack
+    dw LookMoldyBox ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeMoldyBox ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_0F:
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
-    dw LookC2Trench
+    dw LookC2Trench ; Selected action SelActionLook (class $04)
+    dw LookC2Trench ; Selected action SelActionOpen (class $04)
+    dw LookC2Trench ; Selected action SelActionUse (class $04)
+    dw LookC2Trench ; Selected action SelActionPut (class $04)
+    dw LookC2Trench ; Selected action SelActionTake (class $04)
+    dw LookC2Trench ; Selected action SelActionClose (class $04)
 
 C2Act4_10:
-    dw LookC2Vacuum
-    dw OpenC2Vacuum
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Vacuum ; Selected action SelActionLook (class $04)
+    dw OpenC2Vacuum ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_11:
-    dw LookC2VacBag
-    dw OpenC2VacBag
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw NoC2PackEffect
+    dw LookC2VacBag ; Selected action SelActionLook (class $04)
+    dw OpenC2VacBag ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw NoC2PackEffect ; Selected action SelActionClose (class $04)
 
 C2Act4_12:
-    dw LookC2Envelope3
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Envelope3 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_13:
-    dw LookC2Box2
-    dw OpenC2Box2
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Box2
-    dw CloseC2Box2
+    dw LookC2Box2 ; Selected action SelActionLook (class $04)
+    dw OpenC2Box2 ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Box2 ; Selected action SelActionTake (class $04)
+    dw CloseC2Box2 ; Selected action SelActionClose (class $04)
 
 C2Act4_14:
-    dw LookC2Wallet2
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Wallet2 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_15:
-    dw LookC2SoapBox
-    dw OpenC2SoapBox
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2SoapBox
-    dw CloseC2Pack
+    dw LookC2SoapBox ; Selected action SelActionLook (class $04)
+    dw OpenC2SoapBox ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2SoapBox ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_16:
-    dw LookC2Box3
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2Box3 ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)
 
 C2Act4_17:
-    dw LookC2PaperBag
-    dw OpenC2Pack
-    dw UsePackOnTarget
-    dw UseC2Pack
-    dw TakeC2Pack
-    dw CloseC2Pack
+    dw LookC2PaperBag ; Selected action SelActionLook (class $04)
+    dw OpenC2Pack ; Selected action SelActionOpen (class $04)
+    dw UsePackOnTarget ; Selected action SelActionUse (class $04)
+    dw UseC2Pack ; Selected action SelActionPut (class $04)
+    dw TakeC2Pack ; Selected action SelActionTake (class $04)
+    dw CloseC2Pack ; Selected action SelActionClose (class $04)

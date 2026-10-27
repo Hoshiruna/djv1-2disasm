@@ -40,7 +40,7 @@ jr_003_5901:
     ret
 
 C2TimedRooms:
-    db $38, $3a, $3b, $3c, $3d, $3e, $3f
+    db RoomJoeOffice, RoomJoeRearHallway, RoomJoeBar, RoomJoeCellar, RoomJoeChamber, RoomJoeCasino, RoomJoeUpstairsHallway
 
 C2TimedPals:
     db $47, $4a, $43, $44, $45, $46, $48

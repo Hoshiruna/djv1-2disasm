@@ -38,9 +38,9 @@ jr_001_45fd:
     ret
 
 C1StartBits:
-    db $07, $0a, $0b, $11, $13, $16, $17, $19, $1a, $1c, $1d, $1f, $21, $23, $24, $25
-    db $26, $27, $28, $29, $2a, $2b, $2c, $35, $37, $39, $3d, $41, $42, $43, $44, $45
-    db $46, $49, $4c
+    db C1StateBarStairsPassable, C1StateRackSewerLadderPassable, C1StateCasinoLiftPassagePassable, C1StateFireEscape3To2Passable, C1StateFireEscape2ToAlleyPassable, C1StateJoeStreetAlleyPassable, C1StateJoeStreetNewsstandPassable, C1StateJoeStreetPoliceFrontPassable, C1StateJoeStreetCarRearPassable, C1StateNewsstandGunShopPassable, C1StateGunShopPeoriaPassable, C1StatePeoriaCabStopsPassable, C1StateConstructionPitEntryPassable, C1DoorIdBlueCabPeoria, C1DoorIdBlueCabStanford, C1DoorIdBlueCabBungalow
+    db C1DoorIdBlueCabOfficeBuilding, C1DoorIdBlueCabEstate, C1DoorIdYellowCabPeoria, C1DoorIdYellowCabStanford, C1DoorIdYellowCabBungalow, C1DoorIdYellowCabOfficeBuilding, C1DoorIdYellowCabEstate, C1StateAceOfficeStairsPassable, C1StateDoctorOfficeHallPassable, C1StateEstateApproachPassable, C1StateMansionStairsPassable, C1StateJoeStreetSewerLadderPassable, C1StateJoeAlleySewerLadderPassable, C1StateJoeStreetSewerJunctionPassable, C1StateRackSewerJunctionPassable, C1StateLiftToRackSewerPassable
+    db C1StateDeepestSewerTunnelPassable, C1StateMansionFrontDoorOpen, C1DoorIdLiftSewerExit
 
 ; Clear presence for initial absent-object IDs until $ff; restore caller scratch.
 InitC1Absent:
@@ -84,4 +84,4 @@ jr_001_4652:
     ret
 
 C1StartAbsent:
-    db $00, $01, $02, $09, $14, $15, $18, $19, $ff
+    db C1ObjectStartWashroomMirror, C1ObjectWomenWashroomMirror, C1ObjectBarStreetWindow, C1ObjectPenthouseRoundMirror, C1ObjectGuestBedroomMirror, C1ObjectGunShopWindow, C1ObjectDoctorCabinet, C1ObjectAceCabinet, $ff

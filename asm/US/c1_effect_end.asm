@@ -28,7 +28,7 @@ RestoreC1FxView:
 Call_002_71eb:
     ld a, [wFxScene]
     ld [wSceneId], a
-    ld a, $06
+    ld a, SceneFxDiagonalStripes
     ld [wSceneFx], a
     call ShowScene
     call RefreshObjs

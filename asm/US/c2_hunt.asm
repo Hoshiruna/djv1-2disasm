@@ -13,7 +13,7 @@ Call_003_5cb3:
     cp RoomHamper
     ret c
 
-    cp $4b
+    cp RoomSecretOffice + 1
     ret nc
 
     ld a, [wC2HuntTick]
@@ -30,7 +30,7 @@ CaughtC2Hunt:
     ld a, $78
     call WaitTicks
     ld a, $9f
-    call ShowMsg2
+    call ShowMsg2 ; Message Text17Message1F: UH-OH! YOU HEAR / FOOTSTEPS![PAGE] / ONE OF THE THUGS / GRABS HOLD OF YOURCOLLAR AND ...
     call ResumeTextUI
     ld a, $05
     call WaitTicks
