@@ -1630,6 +1630,27 @@ DEF JpDakutenLowerOffset EQU $80
 DEF JpHandakutenLowerOffset EQU $70
 DEF JpDirectGlyphLimit EQU $10
 
+; Message-loop control bytes; regional names do not change glyph or name-record codes.
+DEF UsTextCtrlWaitEnd EQU $5f
+DEF UsTextCtrlEnd EQU $1f
+DEF UsTextCtrlWaitPage EQU $1b
+DEF UsTextCtrlPage EQU $1c
+DEF UsTextCtrlLine EQU $1d
+DEF UsTextCtrlName EQU $3c
+DEF UsTextCtrlNameAlt EQU $3d
+DEF UsTextCtrlNameIndirect EQU $3e
+DEF UsTextCtrlNum8 EQU $3f
+DEF UsTextCtrlNum16 EQU $54
+DEF UsTextCtrlSetX EQU $50
+DEF UsTextCtrlSetY EQU $51
+DEF UsTextCtrlMap0 EQU $52
+DEF UsTextCtrlMap1 EQU $53
+DEF UsTextCtrlSetFlag7 EQU $55
+DEF JpTextCtrlEnd EQU $ff
+DEF JpTextCtrlWaitEnd EQU $0f
+DEF JpTextGlyphMin EQU $30
+DEF JpTextControlTableLimit EQU $20
+
 ; Text row/scroll units; regional clear sizes retain the original 144/288-byte ranges.
 DEF TextBufferRowTiles EQU $12
 DEF TextWindowDefaultTileRows EQU $08

@@ -90,6 +90,7 @@ Call_000_111c:
     call SetTextMode1
     call InitTextBuffer
 
+; END enters page/finish handling; WAIT_END waits only for A release and returns.
 ; Read and handle regional text codes, preserving the original end and wait controls.
 ReadTextLoop:
 
@@ -97,10 +98,10 @@ Call_000_1122:
 jr_000_1122:
     call ReadTextByte
     ld [wTextChar], a
-    cp $5f
+    cp UsTextCtrlWaitEnd
     jr z, WaitTextRelease
 
-    cp $1f
+    cp UsTextCtrlEnd
     jr z, TextEndWaitWindow
 
     call DispatchTextCtrl
@@ -114,43 +115,43 @@ Call_000_1133:
 DispatchTextCtrl:
 
 Call_000_1135:
-    cp $1b
+    cp UsTextCtrlWaitPage
     jp z, WaitTextPage
 
-    cp $1c
+    cp UsTextCtrlPage
     jr z, TextPageControl
 
-    cp $1d
+    cp UsTextCtrlLine
     jp z, TextLineControl
 
-    cp $3c
+    cp UsTextCtrlName
     jp z, DrawTextName
 
-    cp $3d
+    cp UsTextCtrlNameAlt
     jp z, DrawTextName
 
-    cp $3e
+    cp UsTextCtrlNameIndirect
     jp z, DrawNameIndirect
 
-    cp $3f
+    cp UsTextCtrlNum8
     jp z, DrawTextNum8
 
-    cp $54
+    cp UsTextCtrlNum16
     jp z, DrawTextNum16
 
-    cp $50
+    cp UsTextCtrlSetX
     jp z, SetTextX
 
-    cp $51
+    cp UsTextCtrlSetY
     jp z, SetTextY
 
-    cp $52
+    cp UsTextCtrlMap0
     jp z, TextUseMap0
 
-    cp $53
+    cp UsTextCtrlMap1
     jp z, TextUseMap1
 
-    cp $55
+    cp UsTextCtrlSetFlag7
     jp z, SetTextFlag7
 
     jp DrawTextGlyph
@@ -176,7 +177,7 @@ Jump_000_1183:
 
 ; --- text_exit.asm ---
 
-; Submit maps, draw objects, and poll until A is released.
+; Wait only for held A to clear; this return skips FinishText, confirmation audio and wait-counter reset.
 WaitTextRelease:
 
 
@@ -334,7 +335,7 @@ Jump_000_1227:
     call EmitTextName
     jp PopRomBank
 
-; Draw the selected name until the regional terminator, retaining the Japan eight-character limit.
+; US names have no length cap: return only on $1f; JP additionally stops after eight codes.
 EmitTextName:
 
 
@@ -641,7 +642,7 @@ Jump_000_138e:
 
 ; --- text_pos.asm ---
 
-; Read the next byte into the text column or sprite X, according to text mode.
+; Read one operand into the buffered column or direct tile-map X, according to mode bit 1.
 SetTextX:
 
 
@@ -660,7 +661,7 @@ Jump_000_1397:
     ret
 
 
-; Set the sprite text X and start column from the stream.
+; Set direct tile-map X and its newline start position from the stream.
 TextSetSpriteX:
 jr_000_13ae:
     ld a, [wTextPtr]
@@ -676,7 +677,7 @@ Call_000_13c0:
 Jump_000_13c0:
     ret
 
-; Read the next byte into the text row or sprite Y, according to text mode.
+; Read one operand into the buffered row or direct tile-map Y, according to mode bit 1.
 SetTextY:
 
 
@@ -695,7 +696,7 @@ Jump_000_13c1:
     ret
 
 
-; Set the sprite text Y from the stream.
+; Set direct tile-map Y from the stream.
 TextSetSpriteY:
 jr_000_13d8:
     ld a, [wTextPtr]
@@ -809,7 +810,7 @@ Jump_000_1427:
 
 ; --- text_glyph.asm ---
 
-; Resolve the regional character glyph and draw at the text or sprite position.
+; Resolve the regional glyph and queue tile-map writes at buffered or direct coordinates.
 DrawTextGlyph:
 
 
@@ -894,7 +895,7 @@ jr_000_150d:
     call QueueMapRect
     ret
 
-; Draw the glyph in the text window, retain its buffer entry, and advance the column.
+; A new A press enables fast text; queue/store the glyph and retain the forced wC1Exit=$ff delay.
 DrawWindowGlyph:
 
 

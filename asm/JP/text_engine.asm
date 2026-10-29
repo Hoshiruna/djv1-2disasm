@@ -76,6 +76,7 @@ Call_000_10b2:
     call SetTextMode1
     call InitTextBuffer
 
+; END enters page/finish handling; WAIT_END waits only for A release and returns.
 ; Read one-byte text codes and retain the next byte without consuming it.
 ; Preserve the original end and wait controls.
 ReadTextLoop:
@@ -96,13 +97,13 @@ jr_000_10b8:
     ld a, [hl]
     ld [wTextNext], a
     ld a, [wTextChar]
-    cp $ff
+    cp JpTextCtrlEnd
     jr z, TextEndWaitWindow
 
-    cp $0f
+    cp JpTextCtrlWaitEnd
     jr z, WaitTextRelease
 
-    cp $30
+    cp JpTextGlyphMin
     jr c, JpTextDispatchControl
 
     call DrawTextGlyph
@@ -110,7 +111,7 @@ jr_000_10b8:
 
 ; --- text_exit.asm ---
 
-; Submit maps, draw objects, and poll until A is released.
+; Wait only for held A to clear; this return skips FinishText, confirmation audio and wait-counter reset.
 WaitTextRelease:
 
 Jump_000_10e4:
@@ -211,46 +212,48 @@ DispatchTextCtrl:
 
 Call_000_113d:
     ld a, [wTextChar]
-    cp $20
+    cp JpTextControlTableLimit
     ret nc
 
     rst RST_00
 
 ; Control bytes $00..$1f index this table.
+; FinishText entries return to the message loop; only its END/WAIT_END checks exit.
+; The main loop bypasses slot $0f, while $20..$2f return without a table lookup.
 JpTextControls:
-    dw DrawTextName
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw FinishText
-    dw DrawTextNum8
-    dw DrawTextNum16
-    dw SetTextX
-    dw SetTextY
-    dw FinishText
-    dw FinishText
-    dw TextLineControl
-    dw WaitTextPage
-    dw ResetTextPage
-    dw TextNewline
-    dw FinishText
-    dw FinishText
-    dw FinishText
-    dw FinishText
-    dw DrawNameIndirect
-    dw FinishText
-    dw TextUseMap0
-    dw TextUseMap1
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
-    dw DrawTextGlyph
+    dw DrawTextName ; $00, 1 operand byte
+    dw DrawTextGlyph ; $01
+    dw DrawTextGlyph ; $02
+    dw FinishText ; $03; finish state, then continue
+    dw DrawTextNum8 ; $04, 2 operand bytes
+    dw DrawTextNum16 ; $05, 2 operand bytes
+    dw SetTextX ; $06, 1 operand byte
+    dw SetTextY ; $07, 1 operand byte
+    dw FinishText ; $08; finish state, then continue
+    dw FinishText ; $09; finish state, then continue
+    dw TextLineControl ; $0a
+    dw WaitTextPage ; $0b
+    dw ResetTextPage ; $0c
+    dw TextNewline ; $0d
+    dw FinishText ; $0e; finish state, then continue
+    dw FinishText ; $0f; bypassed by main-loop WAIT_END
+    dw FinishText ; $10; finish state, then continue
+    dw FinishText ; $11; finish state, then continue
+    dw DrawNameIndirect ; $12, 2 operand bytes
+    dw FinishText ; $13; finish state, then continue
+    dw TextUseMap0 ; $14
+    dw TextUseMap1 ; $15
+    dw DrawTextGlyph ; $16
+    dw DrawTextGlyph ; $17
+    dw DrawTextGlyph ; $18
+    dw DrawTextGlyph ; $19
+    dw DrawTextGlyph ; $1a
+    dw DrawTextGlyph ; $1b
+    dw DrawTextGlyph ; $1c
+    dw DrawTextGlyph ; $1d
+    dw DrawTextGlyph ; $1e
 Jump_000_1182:
-    dw DrawTextGlyph
+    dw DrawTextGlyph ; $1f
 
 ; --- text_modes.asm ---
 
@@ -304,7 +307,7 @@ Jump_000_11a2:
 
 ; --- text_pos.asm ---
 
-; Read the next byte into the text column or sprite X, according to text mode.
+; Read one operand into the buffered column or direct tile-map X, according to mode bit 1.
 SetTextX:
 
 
@@ -323,7 +326,7 @@ Jump_000_11ab:
     ret
 
 
-; Set the sprite text X and start column from the stream.
+; Set direct tile-map X and its newline start position from the stream.
 TextSetSpriteX:
 jr_000_11c2:
     ld a, [wTextPtr]
@@ -336,7 +339,7 @@ jr_000_11c2:
     call AdvanceText1
     ret
 
-; Read the next byte into the text row or sprite Y, according to text mode.
+; Read one operand into the buffered row or direct tile-map Y, according to mode bit 1.
 SetTextY:
 
 
@@ -357,7 +360,7 @@ Call_000_11d8:
     ret
 
 
-; Set the sprite text Y from the stream.
+; Set direct tile-map Y from the stream.
 TextSetSpriteY:
 jr_000_11ec:
     ld a, [wTextPtr]
@@ -469,7 +472,7 @@ Call_000_125f:
 
     ret
 
-; Draw at most eight one-byte name codes, stopping at $ff.
+; Emit at most eight codes; the last lookahead can read the following record before the count stops.
 ; Retain the following byte in wTextNext without advancing wTextTmp past it.
 EmitTextName:
 
@@ -825,7 +828,7 @@ Call_000_1406:
 
 ; --- text_glyph.asm ---
 
-; Resolve the regional character glyph and draw at the text or sprite position.
+; Resolve the regional glyph and queue tile-map writes at buffered or direct coordinates.
 DrawTextGlyph:
 
 
@@ -890,7 +893,7 @@ JpGlyphTopA0:
     ld [wTextAux], a
     ld a, JpHandakutenGlyphTile
 
-; Store the selected upper glyph tile before choosing window or sprite output.
+; Store the upper glyph tile before choosing buffered or direct tile-map coordinates.
 JpGlyphStoreUpper:
 jr_000_145e:
     ld [wTextTile], a
@@ -930,7 +933,7 @@ jr_000_146b:
 
     jp TextNewline
 
-; Queue both glyph tiles at buffer-origin coordinates, store the upper tile, and advance the column.
+; A new A press enables fast text; queue both tiles, retain the upper tile and the forced exit delay.
 ; Queue the JP glyph using buffer-origin coordinates and retain its upper tile.
 DrawBufferedJpGlyph:
 DrawWindowGlyph:
