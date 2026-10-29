@@ -8,7 +8,7 @@ CheckC1Put:
     jr nz, C1PutDispatchSavedSlots
 
     ld a, [wItemId]
-    cp $00
+    cp C1ItemCoins
     jr nz, C1PutCheckBullet1
 
     ld a, [wC1Coins]
@@ -16,6 +16,7 @@ CheckC1Put:
     jr nz, C1PutCountRejected
 
 ; Show the empty-count reply and leave the nested action.
+; Zero and nonzero quantities select different replies, then enter C1PutEndNested.
 C1PutCountEmpty:
 jr_002_6a5a:
     ld a, $29
@@ -27,7 +28,7 @@ jr_002_6a5a:
 ; Check the first ammunition count for item eight.
 C1PutCheckBullet1:
 jr_002_6a66:
-    cp $08
+    cp C1ItemBullet1
     jr nz, C1PutCheckBullet2
 
     ld a, [wBullet1Count]
@@ -39,7 +40,7 @@ jr_002_6a66:
 ; Check the second ammunition count for item $2d.
 C1PutCheckBullet2:
 jr_002_6a73:
-    cp $2d
+    cp C1ItemBullet2
     jr nz, C1PutDispatchSavedSlots
 
     ld a, [wBullet2Count]
@@ -56,6 +57,7 @@ jr_002_6a7e:
     jr C1PutEndNested
 
 ; Save selection scratch values around the put dispatcher.
+; Only the low bytes are saved; this wrapper does not restore their high bytes.
 C1PutDispatchSavedSlots:
 jr_002_6a8a:
     ldh a, [hChangePos]
@@ -117,7 +119,7 @@ PutC1Group:
 
 
     ld a, [wAltSlot+1]
-    cp $04
+    cp C1DisposalDeepSewer
     jr nz, C1PutFindGroupSlot
 
     call SetResult
@@ -125,6 +127,7 @@ PutC1Group:
 
 
 ; Calculate the group offset before scanning its seven slots.
+; Offsets zero through six are payload bytes here; Case II uses a separate header layout.
 C1PutFindGroupSlot:
 jr_002_6ade:
     add a
@@ -154,7 +157,7 @@ jr_002_6ae5:
     ld a, e
     inc a
     ld e, a
-    cp $07
+    cp C1GroupStoreBytes
     jr c, C1PutGroupSlotLoop
 
     ld a, $76

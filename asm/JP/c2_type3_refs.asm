@@ -319,6 +319,7 @@ C2Act3_22:
     dw PutC2Item ; Selected action SelActionPut (class $03)
     dw TakeC2Item ; Selected action SelActionTake (class $03)
 
+; Loose CELL 23 retains the knife Look target; Take uses the shared pickup.
 C2Act3_23:
     dw LookC2Knife ; Selected action SelActionLook (class $03)
     dw UseC2Item ; Selected action SelActionUse (class $03)
@@ -638,6 +639,7 @@ C2Act3_53:
     dw PutC2Item ; Selected action SelActionPut (class $03)
     dw TakeC2Item ; Selected action SelActionTake (class $03)
 
+; COIN 54 has a cash-ten conversion entry, but its Look and Take pointers are silent exits.
 C2Act3_54:
     dw ItemSilentAction ; Selected action SelActionLook (class $03)
     dw UseC2Item ; Selected action SelActionUse (class $03)

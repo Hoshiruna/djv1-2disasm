@@ -42,12 +42,13 @@ jr_003_4ec1:
     ld hl, C2ListItemKinds+1
     add hl, bc
     ld a, [hl]
-    cp $00
+    cp C2ItemKindTenDollars
     jr z, C2ListMapCheckExisting
 
     dec a
 
-; Check whether the mapped item is already present.
+; Check whether the aggregate item is already registered.
+; New-item slot update: replace packed byte; decoded value and operation ID stay loose here.
 C2ListMapCheckExisting:
 jr_003_4ed5:
     push af
@@ -68,7 +69,7 @@ jr_003_4ed5:
     ret
 
 
-; Refresh the list for an already mapped item.
+; Refresh using the retained search group; set success after return even if the search missed.
 C2ListMapRefreshExisting:
 jr_003_4eed:
     pop af

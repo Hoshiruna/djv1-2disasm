@@ -13,7 +13,7 @@ Call_000_3a79:
     jr nz, C2ActionLookup
 
     ld a, [wListMax]
-    cp $0b
+    cp JpListFullGroupLimit
     jr c, C2ActionLookup
 
     ld a, $93

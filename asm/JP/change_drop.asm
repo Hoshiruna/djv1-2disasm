@@ -132,7 +132,7 @@ Jump_000_2611:
     ld a, b
     ldh [hChangePos+1], a
     ld a, c
-    cp $0a
+    cp PendingSelectedShiftEndOffset
     jr c, RemoveChangeShiftLoop
 
     ld a, $ff
@@ -309,7 +309,7 @@ jr_000_26f5:
     ld [bc], a
     inc bc
     ld a, l
-    cp $32
+    cp PendingSharedShiftSourceEndLow
     jr nz, ShiftChangesLoop
 
     dec hl

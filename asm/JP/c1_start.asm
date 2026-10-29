@@ -102,9 +102,9 @@ Call_001_6c0e:
     ld [wGun3Ammo], a
     ld [wBullet1Count], a
     ld [wBullet2Count], a
-    ld a, $07
+    ld a, C1CoinPickupAmount
     ld [wC1CoinQty], a
-    ld a, $06
+    ld a, C1AmmoCaseRounds
     ld [wC1AmmoQty], a
     ld a, $02
     ld [wChangeMode], a
@@ -131,7 +131,8 @@ Call_001_6c0e:
     ld hl, wGroupData
     ld d, $20
     call FillC1Bytes
-    ld a, $0a
+    ; Case I starts with the medicine tool in payload offset zero.
+    ld a, C1ItemMedicineTool
     ld [wGroupData], a
     xor a
     ld [wC1HeldItem], a

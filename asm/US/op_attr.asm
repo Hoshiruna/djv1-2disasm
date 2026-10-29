@@ -60,7 +60,7 @@ Call_000_1e0e:
     ld h, a
     add hl, bc
     ld a, [hl]
-    or $01
+    or OpAttrBit0Mask
     ld [hl], a
     ret
 
@@ -85,7 +85,7 @@ Call_000_1e1d:
 ClearAttr0Primary:
 jr_000_1e31:
     ld a, [wOpAttr]
-    and $fe
+    and OpAttrBit0ClearMask
     ld [wOpAttr], a
     ret
 
@@ -100,7 +100,7 @@ jr_000_1e3a:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $fe
+    and OpAttrBit0ClearMask
     ld [hl], a
     ret
 
@@ -117,7 +117,7 @@ Call_000_1e49:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $02
+    and OpAttrBit1Mask
     ret z
 
     call SetResult
@@ -137,7 +137,7 @@ Call_000_1e5e:
 Call_000_1e67:
     add hl, bc
     ld a, [hl]
-    or $02
+    or OpAttrBit1Mask
     ld [hl], a
     ret
 
@@ -152,7 +152,7 @@ ClearAttr1:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $fd
+    and OpAttrBit1ClearMask
     ld [hl], a
     ret
 
@@ -183,7 +183,7 @@ Call_000_1e88:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $04
+    and OpAttrBit2Mask
     ret z
 
     call SetResult
@@ -201,7 +201,7 @@ Call_000_1e9d:
     ld h, a
     add hl, bc
     ld a, [hl]
-    or $04
+    or OpAttrBit2Mask
     ld [hl], a
     ret
 
@@ -217,6 +217,6 @@ Call_000_1eac:
     ld h, a
     add hl, bc
     ld a, [hl]
-    and $fb
+    and OpAttrBit2ClearMask
     ld [hl], a
     ret

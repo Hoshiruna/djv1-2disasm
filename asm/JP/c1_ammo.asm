@@ -5,7 +5,7 @@ IncC1Count0:
 
 
     ld a, [wGun1Ammo]
-    cp $06
+    cp C1LoadedAmmoLimit
     jr nc, C1Gun1LoadFull
 
     ld a, [wBullet1Count]
@@ -34,6 +34,7 @@ Call_000_2e2e:
     ret
 
 ; Consume a loaded round when available and set the result; at zero, clear the result.
+; Successful-shot Z is the decrement zero flag; SetResult does not change it.
 DecGun1Ammo:
 DecC1Count0:
 
@@ -60,7 +61,7 @@ IncC1Count2:
 
 
     ld a, [wGun3Ammo]
-    cp $06
+    cp C1LoadedAmmoLimit
     jr nc, C1Gun3LoadFull
 
     ld a, [wBullet2Count]
@@ -108,7 +109,7 @@ jr_000_2e78:
     call ClearResult
     ret
 
-; Consume a loaded round when available and set the result; keep the pre-decrement count in A.
+; Consume a loaded round when available; successful shots return the result byte in A.
 DecGun3Ammo:
 DecC1Count2:
 
@@ -136,7 +137,7 @@ IncC1Count1:
 
 
     ld a, [wGun2Ammo]
-    cp $06
+    cp C1LoadedAmmoLimit
     jr nc, C1Gun2LoadFull
 
     ld a, [wBullet1Count]
@@ -162,7 +163,7 @@ jr_000_2eb1:
     call ClearResult
     ret
 
-; Consume a loaded round when available and set the result; keep the pre-decrement count in A.
+; Consume a loaded round when available; successful shots return the result byte in A.
 DecGun2Ammo:
 DecC1Count1:
 

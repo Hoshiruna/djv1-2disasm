@@ -204,6 +204,14 @@ DEF wListPick        EQU $c884
 ; List encoding scratch; unsupported types keep the previous byte.
 DEF wListCode        EQU $c8b7
 
+; Operation attribute bit positions; their gameplay meanings depend on operation type.
+DEF OpAttrBit0Mask EQU $01
+DEF OpAttrBit1Mask EQU $02
+DEF OpAttrBit2Mask EQU $04
+DEF OpAttrBit0ClearMask EQU $fe
+DEF OpAttrBit1ClearMask EQU $fd
+DEF OpAttrBit2ClearMask EQU $fb
+
 ; Operation preparation fields; the bitmap byte index reuses room scratch.
 DEF wOpClass         EQU $c8b1
 DEF wOpAttr          EQU $c8c7
@@ -787,6 +795,9 @@ DEF C2ItemGun EQU $09
 DEF C2ItemVacuum EQU $10
 DEF C2ItemVacuumBag EQU $11
 DEF C2Vacuum EQU $90
+
+; Case II type-five Adison cab grid target; its room-state ID has a separate name.
+DEF C2TargetAdisonCab EQU $48
 
 ; Type-five targets present in script matches without current physical records.
 DEF C2TargetJammedCabDoor EQU $47
@@ -2112,6 +2123,26 @@ DEF ListPackedValueMask EQU $1f
 DEF ListUnencodablePrefix EQU $ff
 DEF ListUnavailableNameBase EQU $ff
 
+; Stored-list search group and byte offsets; row rollover uses regional page rows.
+DEF ListSearchFirstGroup EQU $02
+DEF UsListSearchStartOffset EQU $0e
+DEF JpListSearchStartOffset EQU $10
+DEF UsListSearchEndOffset EQU $54
+DEF JpListSearchEndOffset EQU $58
+
+; List deletion byte-counter endpoints; full and head paths retain equality-before-copy.
+DEF UsListDropFullEndOffset EQU $54
+DEF JpListDropFullEndOffset EQU $58
+DEF UsListDropHeadEndOffset EQU $0e
+DEF JpListDropHeadEndOffset EQU $10
+
+; Pending removal: selected byte-offset bound and shared source-address low byte.
+DEF PendingSelectedShiftEndOffset EQU $0a
+DEF PendingSharedShiftSourceEndLow EQU $32
+
+; Ordinary selected keep accepts FF before testing this full last-index cutoff.
+DEF PendingKeepFullLastIndex EQU $03
+
 ; Pending flush scans four pairs and clears both index bytes plus those pairs.
 DEF PendingFlushEndOffset EQU $08
 DEF PendingFlushClearBytes EQU $0a
@@ -2131,6 +2162,17 @@ DEF UsWorkListClearBytes EQU $07
 DEF JpWorkListClearBytes EQU $08
 DEF C1GroupStoreBytes EQU $07
 DEF C2GroupStoreBytes EQU $06
+
+; Quick-list prefix length, requested feedback ticks and exact selected-list wait skip.
+DEF ListQuickSlots EQU $05
+DEF ListFeedbackWaitTicks EQU $3c
+DEF ListWaitSkipEnabled EQU $01
+
+; List end row indices and capacity group limits; row counts remain separate.
+DEF UsListLastRowIndex EQU $06
+DEF JpListLastRowIndex EQU $07
+DEF UsListFullGroupLimit EQU $0c
+DEF JpListFullGroupLimit EQU $0b
 
 ; Independent list row counts, group-copy length and Case II base-name adjustment.
 DEF UsListPageRows EQU $07
@@ -2351,6 +2393,16 @@ DEF wC1CoinQty EQU $c55f
 ; Bullet pickup amount shown by Case I indirect text; initialized to six.
 DEF wC1AmmoQty EQU $c560
 
+; Case I initial coin pickup and its two displayed quantities.
+DEF C1CoinPickupAmount EQU $07
+
+; Case I reserve-pickup amounts; the case quantity also seeds its text counter.
+DEF C1BulletPickupOne EQU $01
+DEF C1AmmoCaseRounds EQU $06
+
+; Case I loaded-round limit shared by all three gun counters.
+DEF C1LoadedAmmoLimit EQU $06
+
 ; Loaded ammunition for .38 in US; pistol 1 in JP; capped at six.
 DEF wGun1Ammo EQU $c55c
 
@@ -2362,6 +2414,125 @@ DEF wGun3Ammo EQU $c55e
 
 ; Case I coin inventory, type-3 item zero; byte arithmetic and slot prizes share it.
 DEF wC1Coins EQU $c53a
+
+; Case II remaining ROM content items; packed containers retain their $80 prefix.
+; Photo4C and the button-like magnet $42 keep separate identities from $18 and $17.
+DEF C2ItemHardingLicense EQU $0c
+DEF C2ItemSugarCard EQU $30
+DEF C2ItemMagnet EQU $42
+DEF C2ItemPhoto4C EQU $4c
+DEF C2ListItemWallet1 EQU $82
+DEF C2ListItemNewspaper1 EQU $83
+DEF C2ListItemBulletBox EQU $8c
+DEF C2ListItemVacuumBag EQU $91
+DEF C2ListItemEnvelope3 EQU $92
+DEF C2ListItemWallet2 EQU $94
+DEF C2ListItemBox3 EQU $96
+
+; Case I ROM content IDs; packed type-four values use $60, not the physical raw ID.
+; BULLET1 values $08/$43/$49 and bills $07/$54 retain separate item identities.
+DEF C1ItemSunglasses EQU $04
+DEF C1ItemBullet1 EQU $08
+DEF C1ItemKey2 EQU $0b
+DEF C1ItemPencil EQU $0c
+DEF C1ItemKey3 EQU $0d
+DEF C1ItemKey4 EQU $0f
+DEF C1ItemCosmetic EQU $14
+DEF C1ItemKey5 EQU $15
+DEF C1ItemSugar EQU $1f
+DEF C1ItemFlour EQU $20
+DEF C1ItemBallPen EQU $25
+DEF C1ItemGlasses EQU $26
+DEF C1ItemBullet2 EQU $2d
+DEF C1ItemGun2Bullet EQU $43
+DEF C1ItemAmmoCaseBullets EQU $49
+DEF C1ListItemWallet EQU $61
+DEF C1ListItemFolder EQU $63
+DEF C1ListItemBox EQU $64
+DEF C1ListItemEnvelope1 EQU $65
+DEF C1ListItemGun2 EQU $67
+DEF C1ListItemDiary EQU $68
+DEF C1ListItemAmmoCase EQU $69
+DEF C1ListItemEnvelope2 EQU $6a
+DEF C1ListItemEnvelope3 EQU $6d
+DEF C1ListItemCandyBox EQU $6e
+
+; Case II raw type-three items and packed type-four containers in the put allowlist.
+; Box0F retains its raw-ID suffix; its description target is shared with the trench.
+DEF C2ItemBoxingClipping EQU $07
+DEF C2ItemEmptyPack EQU $0d
+DEF C2ItemVinnyLetter EQU $1d
+DEF C2ItemPencil EQU $31
+DEF C2ItemBondwellLicense EQU $3e
+DEF C2ItemCompanyList EQU $4e
+DEF C2ListItemEnvelope2 EQU $87
+DEF C2ListItemLunchBox EQU $8d
+DEF C2ListItemMoldyBox EQU $8e
+DEF C2ListItemBox0F EQU $8f
+DEF C2ListItemPaperBag EQU $97
+
+; Case II packed type-four laundry values; raw IDs are $05 and $15.
+DEF C2ListItemDirtyLinens EQU $85
+DEF C2ListItemSoapBox EQU $95
+
+; Case II raw type-three laundry and detergent IDs.
+DEF C2ItemSugarLaundry EQU $38
+DEF C2ItemDetergent EQU $40
+
+; Case II raw type-three clothing IDs; C2Uniform marks the uniform being worn.
+DEF C2ItemDress EQU $37
+DEF C2ItemPoliceUniform EQU $3a
+
+; Case II raw type-three food IDs; content-owner and visibility IDs are separate.
+DEF C2ItemPekingDuck EQU $2e
+DEF C2ItemSandwich EQU $4a
+
+; Case II raw type-three counted item IDs; equal-text suffixes distinguish stored IDs.
+; Coin 54 retains the cash-ten category; categories and derived IDs are separate.
+DEF C2ItemTenDollars1 EQU $09
+DEF C2ItemOneDollar1 EQU $0a
+DEF C2ItemOneDollar2 EQU $0b
+DEF C2ItemTenDollars2 EQU $20
+DEF C2ItemTenDollars3 EQU $3d
+DEF C2ItemCoin EQU $54
+DEF C2ItemQuarter1 EQU $08
+DEF C2ItemQuarter2 EQU $21
+DEF C2ItemQuarter3 EQU $22
+DEF C2ItemBullet1 EQU $26
+DEF C2ItemBullet2 EQU $27
+DEF C2ItemBullet3 EQU $28
+DEF C2ItemBullet4 EQU $29
+DEF C2ItemBullet5 EQU $2a
+DEF C2ItemBullet6 EQU $2b
+DEF C2ItemBattery EQU $23
+
+; Raw type-three chamber entries in stored scan order; their first bitmap flag is set when empty.
+DEF C2ChamberRound1 EQU $55
+DEF C2ChamberRound2 EQU $56
+DEF C2ChamberRound3 EQU $57
+DEF C2ChamberRound4 EQU $58
+DEF C2ChamberRound5 EQU $59
+DEF C2ChamberRound6 EQU $5a
+
+; Case II aggregate list/flag IDs; separate from loose counted IDs and category IDs.
+DEF C2ListItemCash EQU $00
+DEF C2ListItemQuarters EQU $01
+DEF C2ListItemBullets EQU $02
+DEF C2ListItemCells EQU $03
+DEF C2ListItemChips EQU $04
+
+; Shared chip/cash availability threshold and the separately gated desert cash event.
+DEF C2FundsMinimumCash EQU $05
+DEF DesertCashGift EQU $0a
+DEF DesertCashRandomMask EQU $07
+DEF DesertCashRandomCutoff EQU $06
+
+; Counted-item categories; ten dollars and one dollar both derive item flag zero.
+DEF C2ItemKindTenDollars EQU $00
+DEF C2ItemKindOneDollar EQU $01
+DEF C2ItemKindQuarter EQU $02
+DEF C2ItemKindBullet EQU $03
+DEF C2ItemKindCell EQU $04
 
 ; Case II cash in dollars; a little-endian word.
 DEF wC2Cash EQU $c58a
@@ -2937,6 +3108,10 @@ DEF C2PayNote EQU $0010
 
 ; Case II packed ledger item ID; original RECORD1.
 DEF C2Ledger EQU $0044
+
+; Case II raw type-three document IDs; names match BANK SLIPS and RECORD2 slots.
+DEF C2ItemBankSlips EQU $3b
+DEF C2ItemRecord2 EQU $50
 
 ; Case II diary examined flag; opening sets it and closing retains it.
 DEF C2DiarySeen EQU $0071

@@ -130,7 +130,7 @@ ReadOpProp1:
 SkipOpAttr:
     ret
 
-; In Case II, copy the first byte of group value*8 into the selected attribute byte; Case I returns.
+; Case II reads group value*8 in HL without byte wrap; Case I leaves the cleared attribute.
 ReadOpGroup:
 
 
@@ -159,7 +159,7 @@ ReadOpGroup:
     ld [de], a
     ret
 
-; Read the two item bitmaps into attribute bits 0 and 1; the first lookup keeps the HRAM index high byte.
+; Read item maps into attribute bits 0/1; only the first read inherits hChangePos+1.
 ReadOpBits:
 
 
@@ -205,7 +205,7 @@ ReadOpBits:
     and b
     jr z, ReadOpBitsState
 
-    ld a, $01
+    ld a, OpAttrBit0Mask
     ld b, a
     ldh a, [hItemSlot]
     ld l, a
@@ -257,7 +257,7 @@ jr_001_56e0:
 ; Set operation attribute bit one for the selected item state.
 ReadOpBitsSetState:
 jr_001_5711:
-    ld a, $02
+    ld a, OpAttrBit1Mask
     push af
     ld bc, wOpAttr
     ldh a, [hItemSlot]
@@ -365,7 +365,7 @@ ReadOpState:
 ; Set operation attribute value four when the state bit is set.
 ReadOpStateSetAttr:
 jr_001_579c:
-    ld a, $04
+    ld a, OpAttrBit2Mask
     ld b, a
     ldh a, [hItemSlot]
     ld l, a

@@ -49,11 +49,11 @@ jr_003_4dba:
     add [hl]
     ld [hl], a
     call RefreshLists
-    ld a, $04
+    ld a, C2ListItemChips
     call ReadItemFlag
     ret nz
 
-    ld a, $04
+    ld a, C2ListItemChips
     ld [wArg0], a
     call AddItemList
     ret

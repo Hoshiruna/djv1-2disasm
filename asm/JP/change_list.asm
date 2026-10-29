@@ -167,6 +167,7 @@ C2ListKinds:
 
 ; Kind 2 returns raw bytes. Other kinds keep a byte only when both predicates clear.
 ; A holds their combined test; wStateResult retains the second reader result.
+; Case II counted payloads use their decoded loose ID, separately from aggregate IDs.
 FilterListItem:
 
     ld [wListRaw], a

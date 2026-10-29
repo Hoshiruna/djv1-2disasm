@@ -123,6 +123,7 @@ jr_003_5ba1:
     jr z, FriskPackedLetter
 
 ; Check for the original photo after no qualifying letter was found.
+; Stored-list letter $19 takes priority over envelope $86 plus clear first bit, then photo $18.
 CheckFriskPhoto:
 
 jr_003_5beb:
@@ -164,6 +165,7 @@ jr_003_5c14:
     jp PlayExitEffect
 
 ; Handle the original letter found through the packed list path.
+; After flush/AddChange, DropHeadValue compares only the first head byte; mismatch deletes row one.
 FriskPackedLetter:
 
 
@@ -185,6 +187,7 @@ jr_003_5c2e:
     jr TakeFriskLetter
 
 ; Remove the original letter found directly in the list.
+; DropFoundList uses saved search coordinates after the message/UI calls; it does not search again.
 FriskLooseLetter:
 
 jr_003_5c54:

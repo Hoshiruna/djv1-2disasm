@@ -8,6 +8,7 @@ MoveC2Grid:
     ld hl, DesertRooms
 
 ; Scan the desert-room grid for the current room.
+; Membership is bounded to 64 entries; the later byte-offset lookups have no separate bounds test.
 DesertFindCurrentRoom:
 jr_003_531d:
     cp [hl]
@@ -22,6 +23,7 @@ jr_003_531d:
 
 
 ; Apply the selected direction to the desert-room index.
+; Direction subtraction and destination addition wrap in A; both table offsets are zero-extended.
 DesertApplyStep:
 jr_003_5326:
     ld bc, wItemId
@@ -49,6 +51,7 @@ jr_003_5326:
 
 ; With item flag $00 set, no chips, and cash below five dollars, random low bits six or seven add ten to the cash low byte.
 TryDesertCash:
+; Zero identifies C2ListItemCash at both the item-flag read and later packed search.
     xor a
     call ReadItemFlag
     jr z, DesertCashReturn
@@ -58,25 +61,26 @@ TryDesertCash:
     jr nz, DesertCashReturn
 
     ld a, [wC2Cash]
-    sub $05
+    sub C2FundsMinimumCash
     ld a, [wC2Cash+1]
     sbc $00
     jr nc, DesertCashReturn
 
     call NextRandom
     ldh a, [hRandByte]
-    and $07
-    cp $06
+    and DesertCashRandomMask
+    cp DesertCashRandomCutoff
     jr c, DesertCashReturn
 
     ld a, [wC2Cash]
-    add $0a
+    add DesertCashGift
     ld [wC2Cash], a
     ld a, $3f
     call ShowMsg3 ; Message Text18Message3F: YOU FIND A $10 / BILL PLAYFULLY / BEING BLOWN ABOUT / BY THE WIND.[END]
     xor a
     ld [wFindListValue], a
     call FindListValue
+; Refresh the returned group even after a miss; no final success setter follows.
     ld a, [wFoundGroup]
     ld [wOpByte], a
     call RefreshListMode

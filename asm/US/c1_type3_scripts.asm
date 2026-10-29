@@ -19,11 +19,11 @@ C1Sc3_01:
     db $04
     dw C1TakeRefuse
     ; Set text name 1.
-    db $38, $07
+    db $38, C1CoinPickupAmount
     ; Show message 2.
     db $02, $15 ; Message Text11Message13: TAKE OUT / [NUM8_WRAM:38C5] COINS.[END]
     ; Add to Case I coins.
-    db $39, $07
+    db $39, C1CoinPickupAmount
     ; Set selected attribute bit 0.
     db $08
     ; Append selected item to list.
@@ -1366,6 +1366,7 @@ C1Sc3_18:
     db $ff
 
 ; Spend one coin for BULLET1, then check flag $8d to initialize or extend its count.
+; The listed flag chooses append versus refresh independently of the quantity byte.
 BuyC1Bullet1:
 
 C1Sc3_19:
@@ -1397,7 +1398,7 @@ C1Sc3_19:
     db $04
     dw C1BuyBullet1Add
     ; Add BULLET1 amount.
-    db $56, $01
+    db $56, C1BulletPickupOne
     ; Set object flag.
     db $17, C1Bullet1UseAllowed
     ; Set selected attribute bit 0.
@@ -1410,11 +1411,12 @@ C1Sc3_19:
     db $ff
 
 ; Add one round through the BULLET1 pickup routine and set the taken attribute.
+; SetAttr0 follows PickBullet1 redraw; writeback later reads the observed raw slot ID.
 C1BuyBullet1Add:
 
 C1Loc3_51:
     ; Pick BULLET1 amount.
-    db $3a, $01
+    db $3a, C1BulletPickupOne
     ; Set selected attribute bit 0.
     db $08
 
@@ -1486,6 +1488,7 @@ C1Loc3_54:
     db $ff
 
 ; Take six BULLET1 rounds; flag $8d selects the existing-count path.
+; The first-entry branch writes use-allowed before append and listed afterward.
 TakeC1SixBullets:
 
 C1Sc3_1B:
@@ -1502,7 +1505,7 @@ C1Sc3_1B:
     db $04
     dw C1AddSixBullets
     ; Add BULLET1 amount.
-    db $56, $06
+    db $56, C1AmmoCaseRounds
     ; Set object flag.
     db $17, C1Bullet1UseAllowed
     ; Set selected attribute bit 0.
@@ -1521,7 +1524,7 @@ C1AddSixBullets:
 
 C1Loc3_00:
     ; Pick BULLET1 amount.
-    db $3a, $06
+    db $3a, C1AmmoCaseRounds
     ; Set selected attribute bit 0.
     db $08
     ; Set object flag.

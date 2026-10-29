@@ -22,13 +22,13 @@ jr_001_621c:
 ; Check whether A confirmed the current list row.
 ListPickCheckConfirm:
 jr_001_622e:
-    bit 0, a
+    bit PADB_A, a
     jr nz, ListPickConfirm
 
 ; Check whether B canceled list selection.
 ListPickCheckCancel:
 jr_001_6232:
-    bit 1, a
+    bit PADB_B, a
     jr nz, ListPickCancel
 
     jr ListPickInputLoop
@@ -79,10 +79,10 @@ Call_001_626f:
 jr_001_626f:
     call PollJoy
     ld a, [wJoyPress]
-    bit 0, a
+    bit PADB_A, a
     ret nz
 
-    bit 1, a
+    bit PADB_B, a
     ret nz
 
     ld a, [wJoyPress]

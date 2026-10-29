@@ -1,5 +1,6 @@
 
 ; Prepare the selected type/value list, then copy all six scratch bytes into the operation slot.
+; This filtered slot snapshot is copied by KeepSelChange without another content-table read.
 ReadOpList:
 
 
@@ -89,45 +90,45 @@ C2OpClasses:
     db $00, C2TargetBathHotTap, $01
     db $00, C2TargetBedroomCurtain, $01
     db $00, C2TargetTrainShade, $01
-    db $00, $4e, $01
-    db $00, $50, $06
-    db $00, $5a, $01
-    db $00, $5b, $01
-    db $00, $5f, $01
-    db $00, $66, $01
-    db $00, $63, $06
-    db $00, $6b, $01
-    db $00, $70, $06
-    db $00, $73, $01
-    db $00, $80, $01
-    db $00, $81, $01
-    db $00, $92, $01
-    db $00, $94, $01
-    db $00, $9e, $01
-    db $00, $9f, $01
-    db $00, $a4, $01
-    db $00, $88, $01
-    db $00, $89, $01
+    db $00, C2TargetChicagoNewsstand, $01
+    db $00, C2TargetChicagoNewsDog, $06
+    db $00, C2TargetAdisonScratchedMailbox, $01
+    db $00, C2TargetAdisonDentedMailbox, $01
+    db $00, C2TargetAdisonCurtains, $01
+    db $00, C2TargetJoeBarCounter, $01
+    db $00, C2TargetJoeRearNailedBoards, $06
+    db $00, C2TargetJoeWineSpigot, $01
+    db $00, C2TargetJoeBoardedWindow, $06
+    db $00, C2TargetJoeOfficeShade, $01
+    db $00, C2TargetMorgueCounter, $01
+    db $00, C2TargetMorgueGate, $01
+    db $00, C2TargetCleanersCounter, $01
+    db $00, C2TargetCleanersOfficeDrape, $01
+    db $00, C2TargetVentiniThinBlinds, $01
+    db $00, C2TargetVentiniWhiteBlinds, $01
+    db $00, C2TargetMaloneSilkCurtain, $01
+    db $00, C2TargetMorgueDrawer1, $01
+    db $00, C2TargetMorgueDrawer2, $01
     db $01, C2ContainerSugarWardrobe, $06
     db $03, C2ItemTimetable, $04
     db $03, C2ItemLiftButton, $06
     db $03, C2ItemRailwayPamphlet, $04
     db $03, C2Bottle, $06
     db $03, C2Knife, $04
-    db $03, $2f, $04
-    db $03, $3b, $04
-    db $03, $44, $04
+    db $03, C2SiegelDiary, $04
+    db $03, C2ItemBankSlips, $04
+    db $03, C2Ledger, $04
     db $03, C2Paperweight, $06
     db $03, C2DeskMat, $04
     db $03, C2Banana, $04
-    db $03, $50, $04
+    db $03, C2ItemRecord2, $04
     db $04, C2ItemFlashlight, $03
     db $05, C2TargetCasinoFrontDoor, $06
     db $05, C2TargetCleanersEntrance, $06
     db $05, C2TargetVegasStationEntrance, $06
     db $05, C2TargetChicagoStationEntrance, $06
     db $05, C2TargetChicagoStationCab, $06
-    db $05, $48, $06
+    db $05, C2TargetAdisonCab, $06
     db $05, C2TargetCottageCab, $06
     db $05, C2TargetJoeFrontCab, $06
     db $05, C2TargetMorgueCab, $06

@@ -1,5 +1,5 @@
 
-; Select from list mode zero; map the Case I row to arg 3 or delegate Case II to bank 3.
+; Select from mode zero; a zero incoming mode retains the saved/group-search byte.
 PickListRoom:
 
 

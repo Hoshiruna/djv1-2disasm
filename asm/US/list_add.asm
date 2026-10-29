@@ -46,6 +46,7 @@ Jump_000_22b9:
     call StoreWorkGroup
 
 ; Set the selected attribute and check Case II list restrictions.
+; SetAttr0 changes the slot attribute; it does not directly set the loose-item bitmap.
 AppendSelListCheckCase:
 jr_000_22bf:
     call SetAttr0
@@ -117,10 +118,10 @@ Jump_000_2317:
 AppendSelListWaitForList:
 jr_000_2322:
     ld a, [wSkipListWait]
-    cp $01
+    cp ListWaitSkipEnabled
     ret z
 
-    ld a, $3c
+    ld a, ListFeedbackWaitTicks
     call WaitTicks
     ld a, $01
     ld [wChangeMode], a

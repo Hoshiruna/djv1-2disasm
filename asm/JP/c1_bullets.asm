@@ -1,5 +1,6 @@
 
 ; Add one script argument to the BULLET1 count with eight-bit wrap and write its name and packed selection.
+; The name write is wListName scratch; decoded IDs and wSelName are not rewritten.
 AddBullet1Arg:
 
 
@@ -8,17 +9,18 @@ Call_000_2d3f:
     ld hl, wBullet1Count
     add [hl]
     ld [hl], a
-    ld a, $08
+    ld a, C1ItemBullet1
     ld [wListName], a
     ld [wListPacked], a
     ret
 
 ; Add the argument to BULLET1, refresh its list group, hide the hit object, and set the result.
+; The returned search group is refreshed without a match check; success follows redraw.
 PickBullet1:
 
 
     call AddBullet1Arg
-    ld a, $08
+    ld a, C1ItemBullet1
     ld [wArg0], a
     ld [wFindListValue], a
     call FindListValue
@@ -39,7 +41,7 @@ Call_000_2d74:
     ld a, [wBullet2Count]
     inc a
     ld [wBullet2Count], a
-    ld a, $2d
+    ld a, C1ItemBullet2
     ld [wListName], a
     ld [wListPacked], a
     ret
@@ -49,7 +51,7 @@ PickBullet2:
 
 
     call AddBullet2
-    ld a, $2d
+    ld a, C1ItemBullet2
     ld [wArg0], a
     ld [wFindListValue], a
     call FindListValue
@@ -63,6 +65,7 @@ PickBullet2:
     ret
 
 ; Consume one BULLET1 and refresh its list group; at zero, clear flag $80, show message $77, and clear the result.
+; A positive decrement may reach zero; this path has no explicit reserve-entry deletion.
 UseBullet1:
 
 
@@ -72,7 +75,7 @@ UseBullet1:
 
     dec a
     ld [wBullet1Count], a
-    ld a, $08
+    ld a, C1ItemBullet1
     ld [wListName], a
     ld [wArg0], a
     ld [wFindListValue], a
@@ -104,7 +107,7 @@ UseBullet2:
 
     dec a
     ld [wBullet2Count], a
-    ld a, $2d
+    ld a, C1ItemBullet2
     ld [wListName], a
     ld [wArg0], a
     ld [wFindListValue], a

@@ -83,6 +83,7 @@ jr_003_40a8:
     call SetStateBit
     ret
 
+; Counter bytes, item flags and list-end row rely on the earlier StartC2Game clear.
 ; Initialize Case II scene, room, object, selection, and original case-specific state fields.
 InitC2Data:
 

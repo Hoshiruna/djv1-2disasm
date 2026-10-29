@@ -34,49 +34,50 @@ jr_005_5875:
     dw C1Ch1_11
 
 C1Ch1_00:
-    db $00, $01, $02, $03, $04, $61, $ff
+    db C1ItemCoins, C1ItemLighter, C1ItemGumCigs, C1ItemHandkerchief, C1ItemSunglasses
+    db C1ListItemWallet, $ff
 
 C1Ch1_01:
-    db $05, $06, $07, $ff
+    db C1ItemKey1, C1ItemAccessCard, C1ItemTwentyDollarBill, $ff
 
 C1Ch1_02:
-    db $08, $ff
+    db C1ItemBullet1, $ff
 
 C1Ch1_03:
-    db $0e, $ff
+    db C1ItemNote1, $ff
 
 C1Ch1_04:
-    db $0f, $ff
+    db C1ItemKey4, $ff
 
 C1Ch1_05:
-    db $10, $ff
+    db C1ItemPharmacyBill, $ff
 
 C1Ch1_06:
-    db $14, $54, $67, $ff
+    db C1ItemCosmetic, C1ItemTwentyDollarBillAlt, C1ListItemGun2, $ff
 
 C1Ch1_07:
-    db $43, $ff
+    db C1ItemGun2Bullet, $ff
 
 C1Ch1_08:
-    db $16, $ff
+    db C1ItemBookmark, $ff
 
 C1Ch1_09:
-    db $49, $ff
+    db C1ItemAmmoCaseBullets, $ff
 
 C1Ch1_0A:
-    db $1e, $ff
+    db C1ItemLetter1, $ff
 
 C1Ch1_0B:
-    db $1f, $ff
+    db C1ItemSugar, $ff
 
 C1Ch1_0C:
-    db $20, $ff
+    db C1ItemFlour, $ff
 
 C1Ch1_0D:
-    db $22, $ff
+    db C1ItemLetter2, $ff
 
 C1Ch1_0E:
-    db $23, $ff
+    db C1ItemCandy, $ff
 
 C1Ch1_0F:
     db $ff
@@ -85,7 +86,7 @@ C1Ch1_10:
     db $ff
 
 C1Ch1_11:
-    db $2d, $ff
+    db C1ItemBullet2, $ff
 
 ; Case I property-one value to terminated item-list pointer.
 C1Prop1ChangeLists:
@@ -105,40 +106,40 @@ C1Changes0:
     dw C1Ch0_0C
 
 C1Ch0_00:
-    db $0b, $ff
+    db C1ItemKey2, $ff
 
 C1Ch0_01:
-    db $0c, $0d, $ff
+    db C1ItemPencil, C1ItemKey3, $ff
 
 C1Ch0_02:
-    db $63, $64, $ff
+    db C1ListItemFolder, C1ListItemBox, $ff
 
 C1Ch0_03:
-    db $65, $ff
+    db C1ListItemEnvelope1, $ff
 
 C1Ch0_04:
-    db $11, $12, $13, $ff
+    db C1ItemNote2, C1ItemMap, C1ItemSnapshot, $ff
 
 C1Ch0_05:
-    db $15, $68, $ff
+    db C1ItemKey5, C1ListItemDiary, $ff
 
 C1Ch0_06:
-    db $17, $18, $19, $1a, $ff
+    db C1ItemFile1, C1ItemFile2, C1ItemFile3, C1ItemFile4, $ff
 
 C1Ch0_07:
-    db $69, $ff
+    db C1ListItemAmmoCase, $ff
 
 C1Ch0_08:
-    db $1b, $1c, $1d, $ff
+    db C1ItemFile5, C1ItemFile6, C1ItemFile7, $ff
 
 C1Ch0_09:
-    db $6a, $ff
+    db C1ListItemEnvelope2, $ff
 
 C1Ch0_0A:
-    db $21, $6e, $6d, $ff
+    db C1ItemTissue, C1ListItemCandyBox, C1ListItemEnvelope3, $ff
 
 C1Ch0_0B:
-    db $24, $25, $26, $ff
+    db C1ItemMemo, C1ItemBallPen, C1ItemGlasses, $ff
 
 C1Ch0_0C:
     db $ff
@@ -182,34 +183,34 @@ C2Ch0_00:
     db $ff
 
 C2Ch0_01:
-    db $10, $ff
+    db C2Paper1, $ff
 
 C2Ch0_02:
-    db $87, $ff
+    db C2ListItemEnvelope2, $ff
 
 C2Ch0_03:
-    db $30, $2f, $ff
+    db C2ItemSugarCard, C2SiegelDiary, $ff
 
 C2Ch0_05:
-    db $31, $ff
+    db C2ItemPencil, $ff
 
 C2Ch0_07:
-    db $32, $ff
+    db C2Key4, $ff
 
 C2Ch0_08:
-    db $3b, $ff
+    db C2ItemBankSlips, $ff
 
 C2Ch0_09:
-    db $3a, $37, $38, $90, $ff
+    db C2ItemPoliceUniform, C2ItemDress, C2ItemSugarLaundry, C2Vacuum, $ff
 
 C2Ch0_0A:
-    db $96, $ff
+    db C2ListItemBox3, $ff
 
 C2Ch0_0B:
-    db $41, $44, $49, $97, $ff
+    db C2Key6, C2Ledger, C2Opener, C2ListItemPaperBag, $ff
 
 C2Ch0_0C:
-    db $4c, $4d, $4e, $50, $4f, $53, $ff
+    db C2ItemPhoto4C, C2BondLetter, C2ItemCompanyList, C2ItemRecord2, C2Banana, C2Peel, $ff
 
 ; Case II property-four value to terminated item-list pointer.
 C2Prop4ChangeLists:
@@ -243,74 +244,76 @@ jr_005_595d:
     dw C2Ch1_17
 
 C2Ch1_00:
-    db $0d, $ff
+    db C2ItemEmptyPack, $ff
 
 C2Ch1_01:
-    db $82, $06, $ff
+    db C2ListItemWallet1, C2Key1, $ff
 
 C2Ch1_02:
-    db $83, $08, $09, $0a, $0b, $0c, $ff
+    db C2ListItemNewspaper1, C2ItemQuarter1, C2ItemTenDollars1, C2ItemOneDollar1, C2ItemOneDollar2
+    db C2ItemHardingLicense, $ff
 
 C2Ch1_03:
-    db $07, $ff
+    db C2ItemBoxingClipping, $ff
 
 C2Ch1_04:
-    db $85, $ff
+    db C2ListItemDirtyLinens, $ff
 
 C2Ch1_05:
-    db $18, $86, $ff
+    db C2Photo, C2Envelope1, $ff
 
 C2Ch1_06:
-    db $19, $ff
+    db C2FriskLetter, $ff
 
 C2Ch1_07:
-    db $1d, $ff
+    db C2ItemVinnyLetter, $ff
 
 C2Ch1_08:
-    db $89, $20, $21, $22, $ff
+    db C2Gun, C2ItemTenDollars2, C2ItemQuarter2, C2ItemQuarter3, $ff
 
 C2Ch1_09:
-    db $55, $56, $57, $58, $59, $5a, $ff
+    db C2ChamberRound1, C2ChamberRound2, C2ChamberRound3, C2ChamberRound4, C2ChamberRound5
+    db C2ChamberRound6, $ff
 
 C2Ch1_0F:
     db $ff
 
 C2Ch1_0A:
-    db $23, $ff
+    db C2ItemBattery, $ff
 
 C2Ch1_0B:
-    db $8c, $24, $25, $ff
+    db C2ListItemBulletBox, C2Knife, C2Key2, $ff
 
 C2Ch1_0C:
-    db $26, $27, $28, $29, $2a, $2b, $ff
+    db C2ItemBullet1, C2ItemBullet2, C2ItemBullet3, C2ItemBullet4, C2ItemBullet5, C2ItemBullet6, $ff
 
 C2Ch1_0D:
     db $ff
 
 C2Ch1_0E:
-    db $2e, $2d, $ff
+    db C2ItemPekingDuck, C2Key3, $ff
 
 C2Ch1_10:
-    db $91, $ff
+    db C2ListItemVacuumBag, $ff
 
 C2Ch1_11:
-    db $92, $ff
+    db C2ListItemEnvelope3, $ff
 
 C2Ch1_12:
-    db $39, $ff
+    db C2McMNote, $ff
 
 C2Ch1_13:
 jr_005_599a:
-    db $94, $3c, $ff
+    db C2ListItemWallet2, C2Key5, $ff
 
 C2Ch1_14:
-    db $3d, $3e, $3f, $ff
+    db C2ItemTenDollars3, C2ItemBondwellLicense, C2ClaimTicket, $ff
 
 C2Ch1_15:
-    db $40, $ff
+    db C2ItemDetergent, $ff
 
 C2Ch1_16:
-    db $42, $ff
+    db C2ItemMagnet, $ff
 
 C2Ch1_17:
-    db $4a, $ff
+    db C2ItemSandwich, $ff

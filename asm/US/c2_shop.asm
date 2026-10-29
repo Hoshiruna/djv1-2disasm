@@ -48,11 +48,11 @@ BuyC2Count2:
     add ShopCellQty
     ld [wC2Cells], a
     call RefreshLists
-    ld a, $03
+    ld a, C2ListItemCells
     call ReadItemFlag
     jr nz, ShopBoughtReply
 
-    ld a, $03
+    ld a, C2ListItemCells
     ld [wArg0], a
     call AddItemList
 
@@ -117,11 +117,11 @@ BuyC2Count1:
     add ShopBulletQty
     ld [wC2Bullets], a
     call RefreshLists
-    ld a, $02
+    ld a, C2ListItemBullets
     call ReadItemFlag
     jr nz, ShopBoughtReply
 
-    ld a, $02
+    ld a, C2ListItemBullets
     ld [wArg0], a
     call AddItemList
     jr ShopBoughtReply

@@ -146,7 +146,7 @@ MatchPackWasher:
 
 C2Loc4_02:
     ; Test packed item argument and branch on equality.
-    db $46, $85
+    db $46, C2ListItemDirtyLinens
     dw PutPackWasher
     ; Test packed item argument and branch on equality.
     db $46, C2Trench
@@ -1981,6 +1981,7 @@ C2Loc4_6C:
     db $ff
 
 ; Record the coat pocket inspection and use the common pocket-opening script.
+; The inspection flag is set before the shared already-open and pending-capacity checks.
 OpenC2Coat:
 
 C2Sc4_13:

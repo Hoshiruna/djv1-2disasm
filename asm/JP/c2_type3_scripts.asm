@@ -164,7 +164,7 @@ MatchChipTable:
 
 C2Loc3_02:
     ; Test packed item argument and branch on equality.
-    db $46, $04
+    db $46, C2ListItemChips
     dw PlayC2Blackjack
     ; Jump to script.
     db $07
@@ -175,7 +175,7 @@ UseItemDealer:
 
 C2Loc3_03:
     ; Test packed item argument and branch on equality.
-    db $46, $07
+    db $46, C2ItemBoxingClipping
     dw ShowRudyClip
     ; Test packed item argument and branch on equality.
     db $46, C2Bottle
@@ -192,7 +192,7 @@ jr_007_5a27:
     db $46, C2Dart
     dw DartDealerReply
     ; Test packed item argument and branch on equality.
-    db $46, $04
+    db $46, C2ListItemChips
     ; Target PlayC2Blackjack; retain the interior label.
     db LOW(PlayC2Blackjack)
 
@@ -340,7 +340,7 @@ MatchClerkItem:
 
 C2Loc3_0F:
     ; Test packed item argument and branch on equality.
-    db $46, $0c
+    db $46, C2ItemHardingLicense
     dw ShowClerkID
     ; Test packed item argument and branch on equality.
     db $46, C2MorgueTag1
@@ -608,7 +608,7 @@ MatchLiftButton:
 
 C2Loc3_20:
     ; Test packed item argument and branch on equality.
-    db $46, $42
+    db $46, C2ItemMagnet
     dw FitLiftButton
     ; Test packed item argument and branch on equality.
     db $46, C2ItemLiftButton
@@ -874,7 +874,7 @@ C2Loc3_2E:
     db $46, C2ItemTowel
     dw WipeTowelReply
     ; Test packed item argument and branch on equality.
-    db $46, $2e
+    db $46, C2ItemPekingDuck
     dw EatC2Duck
     ; Test packed item argument and branch on equality.
     db $46, C2Banana
@@ -892,7 +892,7 @@ jr_007_5bdb:
     db $46, C2ItemSugarPerfume
     dw DrinkPerfume
     ; Test packed item argument and branch on equality.
-    db $46, $37
+    db $46, C2ItemDress
 
 jr_007_5be8:
     dw TryC2Dress
@@ -906,10 +906,10 @@ jr_007_5be8:
     db $46, C2Opener
     dw NameSharpItem
     ; Test packed item argument and branch on equality.
-    db $46, $3a
+    db $46, C2ItemPoliceUniform
     dw WearC2Uniform
     ; Test packed item argument and branch on equality.
-    db $46, $4a
+    db $46, C2ItemSandwich
     dw EatOldFood
     ; Test packed item argument and branch on equality.
     db $46, C2Dart
@@ -1081,6 +1081,7 @@ C2Loc3_3A:
     db $00, $be ; Message Text13Message3E: うぐえーっ! / すえた においとともに すっぱい / えきが くちのなかに とびだした![END]
 
 ; Call the shared first-slot consumption script and end the action.
+; The wrapper also serves nametag and claim-ticket paths; retain its shared entry.
 ConsumeC2Food:
 
 C2Loc3_3B:
@@ -1091,6 +1092,7 @@ C2Loc3_3B:
     db $ff
 
 ; Remove slot zero from the list, clear attribute bit zero, set bit one, and return with slot one selected.
+; The drop uses saved group/row coordinates; SetAttr1 runs after redraw and end decrement.
 ConsumeSlot0Item:
 
 C2Loc3_3C:
@@ -1241,22 +1243,23 @@ MatchItemWasher:
 
 C2Loc3_46:
     ; Test packed item argument and branch on equality.
-    db $46, $3a
+    db $46, C2ItemPoliceUniform
     dw WashUniformCheck
     ; Test packed item argument and branch on equality.
-    db $46, $38
+    db $46, C2ItemSugarLaundry
     dw PutItemWasher
     ; Test packed item argument and branch on equality.
-    db $46, $37
+    db $46, C2ItemDress
     dw PutItemWasher
     ; Test packed item argument and branch on equality.
-    db $46, $40
+    db $46, C2ItemDetergent
     dw PutItemWasher
     ; Jump to script.
     db $07
     dw NoC2ItemEffect
 
 ; Allow placing the uniform in the washer only when it is not worn.
+; Passing this gate still reaches the native allowlist, which excludes uniform ID $3a.
 WashUniformCheck:
 
 C2Loc3_47:
@@ -1391,7 +1394,7 @@ MatchGunBullet:
 
 C2Loc3_4F:
     ; Test packed item argument and branch on equality.
-    db $46, $02
+    db $46, C2ListItemBullets
     dw LoadC2Gun
     ; Jump to script.
     db $07
@@ -1449,11 +1452,12 @@ C2Loc3_53:
     db $ff
 
 ; Accept the original D-cell item as the flashlight target tool.
+; Match the aggregate cell ID; loose CELL 23 is a different packed value.
 MatchLampCell:
 
 C2Loc3_54:
     ; Test packed item argument and branch on equality.
-    db $46, $03
+    db $46, C2ListItemCells
     dw CheckLampCell
     ; Jump to script.
     db $07
@@ -1536,7 +1540,7 @@ MatchSlotCoin:
 
 C2Loc3_58:
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw TrySlotCoin
     ; Jump to script.
     db $07
@@ -1648,10 +1652,10 @@ jr_007_5dbc:
     db $46, C2Bottle
     dw BottleConductor
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw PayTrainFare
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw RejectTrainCoin
     ; Jump to script.
     db $07
@@ -1830,10 +1834,10 @@ C2Loc3_69:
     db $46
 
 jr_007_5e37:
-    db $2e
+    db C2ItemPekingDuck
     dw FeedC2Hobo
     ; Test packed item argument and branch on equality.
-    db $46, $4a
+    db $46, C2ItemSandwich
     dw FeedC2Hobo
     ; Test packed item argument and branch on equality.
     db $46, C2Banana
@@ -1851,10 +1855,10 @@ jr_007_5e37:
     db $46, C2Dart
     dw DartHobo
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw GiveHoboDollar
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw GiveHoboQuarter
     ; Jump to script.
     db $07
@@ -1956,6 +1960,7 @@ jr_007_5e87:
     db $ff
 
 ; Check quarters and decrement one after the hobo money reply.
+; The test precedes the reply; the decrement rereads the count after that message.
 GiveHoboQuarter:
 
 C2Loc3_71:
@@ -1976,10 +1981,10 @@ UseItemC2Dog:
 
 C2Loc3_72:
     ; Test packed item argument and branch on equality.
-    db $46, $2e
+    db $46, C2ItemPekingDuck
     dw FeedC2Dog
     ; Test packed item argument and branch on equality.
-    db $46, $4a
+    db $46, C2ItemSandwich
     dw FeedC2Dog
     ; Test packed item argument and branch on equality.
     db $46, C2Banana
@@ -2075,13 +2080,13 @@ C2Loc3_78:
     db $46, C2Dart
     dw DartWoman
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw BuyC2Chips
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw CashierCoinReply
     ; Test packed item argument and branch on equality.
-    db $46, $04
+    db $46, C2ListItemChips
     dw SellC2Chips
     ; Copy first-slot name to text name 0.
     db $45
@@ -2214,10 +2219,10 @@ jr_007_5f29:
     db $46, C2Dart
     dw DartMan
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw NoDollarEffect
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw CheckQuarterUse
 
 ; Show the original useless-item reply.
@@ -2353,10 +2358,10 @@ C2Loc3_89:
     db $46, C2Dart
     dw DartNewsMan
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw PayNewsDollar
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw PayNewsQuarter
     ; Show message 1.
     db $01, $26 ; Message Text14Message26: 「ありがとうございます。 /  でも おかねを いただかないと /  しんぶんは おわたしできません。」[END]
@@ -2436,6 +2441,7 @@ C2Loc3_8F:
     db $ff
 
 ; With stock and no pending payment, check quarters, accept payment, then deduct one quarter.
+; The decrement rereads wC2Quarters after AcceptNewsPay returns.
 PayNewsQuarter:
 
 C2Loc3_90:
@@ -2492,10 +2498,10 @@ C2Loc3_91:
     db $46, C2Dart
     dw DartCabDriver
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw DriverDollarNone
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw DriverQuarterGift
 
 ; Show the regional driver gift reply.
@@ -2563,7 +2569,7 @@ MatchPencilUse:
 
 C2Loc3_97:
     ; Test packed item argument and branch on inequality.
-    db $56, $31
+    db $56, C2ItemPencil
     dw TiedItemFallback
     ; Show message 1.
     db $01, $c6 ; Message Text15Message46: しんが おれているので かけない。[END]
@@ -5121,25 +5127,25 @@ C2Loc3_D2:
     db $46, C2Coat
     dw StoreCoatCheck
     ; Test packed item argument and branch on equality.
-    db $46, $3a
+    db $46, C2ItemPoliceUniform
     dw StoreUniformCheck
     ; Test packed item argument and branch on equality.
     db $46, C2ItemLiftButton
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
-    db $46, $00
+    db $46, C2ListItemCash
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
-    db $46, $01
+    db $46, C2ListItemQuarters
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
-    db $46, $02
+    db $46, C2ListItemBullets
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
-    db $46, $03
+    db $46, C2ListItemCells
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
-    db $46, $04
+    db $46, C2ListItemChips
     dw DeskItemRefusal
     ; Test packed item argument and branch on equality.
     db $46, C2Paperweight
@@ -5231,6 +5237,7 @@ C2Loc3_D9:
     ; End script.
     db $ff
 
+; Fifteen counted raw IDs use this pickup; COIN 54 selects ItemSilentAction instead.
 ; Reject an item with selected attribute bit zero already set; otherwise use the shared pickup path.
 TakeC2Item:
 

@@ -22,7 +22,7 @@ jr_003_4cbe:
     jr nz, FindCabKey
 
     ld a, [wListPick]
-    sub $0d
+    sub InputSelListFirst
     ld [wListMarkRow], a
     call ClearListMarkCall
     call WaitFrame

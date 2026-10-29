@@ -13,7 +13,7 @@ Call_000_394a:
     jr nz, C2ActionLookup
 
     ld a, [wListMax]
-    cp $0c
+    cp UsListFullGroupLimit
     jr c, C2ActionLookup
 
     ld a, $93

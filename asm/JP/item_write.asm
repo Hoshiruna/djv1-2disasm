@@ -112,7 +112,7 @@ WriteOpProp4:
     ld [hl], a
     ret
 
-; In Case II, copy the selected attribute byte to the first byte of group value*8; Case I returns.
+; For a nonzero case, write the group header using value*8 in HL without byte wrap.
 WriteOpGroup:
 
 
@@ -142,6 +142,8 @@ WriteOpGroup:
     ret
 
 ; Write attribute bit 0 to the first item bitmap, then bit 1 to the second bitmap.
+; Each bitmap helper restores both HRAM indices; ID and bitmap-pointer scratch remain.
+; Type-three writes use wItemId independently of the current packed list byte.
 WriteOpBits:
 
 

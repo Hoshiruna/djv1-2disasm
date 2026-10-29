@@ -143,6 +143,7 @@ Jump_000_0931:
     cp CaseStartLoadedMarker
     jr z, ResumeC2Game
 
+; New-case counters, item flags and list-end row are zeroed here; the loaded branch skips this clear.
     ld hl, wObjPresent
     ld bc, $0180
     call ZeroBytes

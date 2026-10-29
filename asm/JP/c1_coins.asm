@@ -7,6 +7,7 @@ AddListCountArg:
     call ReadArg
 
 ; Add wArg0 to Case I coins with byte wrap, then clear wListName.
+; This writes coin-name scratch only; packed and decoded selection fields are retained.
 AddC1Coins:
 AddListCount:
 
@@ -49,6 +50,7 @@ Jump_000_2a31:
 
 
 ; Show the empty-coin reply when no coin can be consumed.
+; ClearResult precedes the message; this return has no post-message result reset.
 C1UseCoinEmpty:
 jr_000_2a43:
     ld a, $72
@@ -56,6 +58,7 @@ jr_000_2a43:
     ret
 
 ; Read a cost, subtract it when available, and retain the room-specific success and insufficient-count flags.
+; Successful payment reads yellow debt only in room $27; all other room bytes select blue debt.
 SpendC1Coins:
 SpendListCount:
 
